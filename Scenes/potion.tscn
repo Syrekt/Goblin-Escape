@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://4mgeqgtfe3po"]
+
+[ext_resource type="Script" path="res://Scripts/potion.gd" id="1_3gtcv"]
+[ext_resource type="Texture2D" uid="uid://dcj7qwryucp2k" path="res://Assets/Others/[Valley Friends] Potions.png" id="1_6nb2l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w3fvl"]
+radius = 7.0
+
+[node name="Potion" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_3gtcv")
+
+[node name="AnimatedSprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6nb2l")
+region_enabled = true
+region_rect = Rect2(48, 16, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_w3fvl")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
