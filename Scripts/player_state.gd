@@ -1,6 +1,7 @@
 class_name PlayerState extends State
 
 var player: Player
+var lock_stance_button:= false
 
 func _ready():
 	await owner.ready

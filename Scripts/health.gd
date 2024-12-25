@@ -1,12 +1,15 @@
 extends Node
 
-@export var max_health: int = 100
-var prv_health = max_health
-var cur_health = max_health
+@export var bar: TextureProgressBar
 
-signal health_changed(new_health)
+@export var max := 100
+var prv = max
+var cur = max
+
+signal health_depleted
 
 
-func take_damage(damage: int) -> void:
-	cur_health = clamp(cur_health - damage, 0, max_health)
-	emit_signal("health_changed", cur_health)
+func change_by(value: int) -> void:
+	cur = clamp(cur - value, 0, max)
+	TextureProgressBar.value = cur
+	if cur <= 0: emit_signal("health_depleted")
