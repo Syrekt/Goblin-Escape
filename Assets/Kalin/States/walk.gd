@@ -1,7 +1,9 @@
 extends PlayerState
 
 func enter(previous_state_path: String, data := {}) -> void:
+	player.set_facing(player.get_movement_dir())
 	player.animation_player.play("walk")
+	player.animation_player.advance(0)
 	lock_stance_button = true
 
 func physics_update(delta: float) -> void:
@@ -19,7 +21,7 @@ func update(delta: float) -> void:
 		finished.emit("crouch")
 	elif Input.is_action_just_pressed("up"):
 		finished.emit("rise")
-	elif not lock_stance_button and Input.is_action_just_pressed("stance"):
+	elif not lock_stance_button and Input.is_action_just_pressed("stance") or Input.is_action_just_pressed("attack"):
 		finished.emit("stance_walk")
-	elif is_equal_approx(Input.get_axis("left", "right"), 0.0):
+	elif is_equal_approx(player.get_movement_dir(), 0.0):
 		finished.emit("idle")

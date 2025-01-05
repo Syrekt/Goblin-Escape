@@ -11,5 +11,6 @@ signal health_depleted
 
 func change_by(value: int) -> void:
 	cur = clamp(cur - value, 0, max)
-	TextureProgressBar.value = cur
+	if get_node_or_null("TextureProgressBar"):
+		TextureProgressBar.value = cur
 	if cur <= 0: emit_signal("health_depleted")

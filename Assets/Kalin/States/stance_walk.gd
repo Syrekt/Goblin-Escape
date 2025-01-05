@@ -1,7 +1,8 @@
 extends PlayerState
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.animation_player.play("stance_walk")
+	player.set_facing(player.get_movement_dir())
+	player.animation_player.call_deferred("play", "stance_walk")
 	lock_stance_button = true;
 
 func physics_update(delta: float) -> void:

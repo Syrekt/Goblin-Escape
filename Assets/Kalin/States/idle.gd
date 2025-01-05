@@ -15,7 +15,7 @@ func update(_delta: float) -> void:
 		finished.emit("crouch")
 	elif Input.is_action_pressed("up"):
 		finished.emit("rise")
-	elif not lock_stance_button and Input.is_action_just_pressed("stance"):
+	elif not lock_stance_button and Input.is_action_just_pressed("stance") or Input.is_action_just_pressed("attack"):
 		finished.emit("stance_light")
 	elif player.get_movement_dir():
 		if Input.is_action_pressed("run"):

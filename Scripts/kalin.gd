@@ -1,6 +1,5 @@
 class_name Player extends CharacterBody2D
 
-@onready var animation_player := $AnimatedSprite2D
 
 @export var run_speed := 100.0 * 60.0
 @export var walk_speed := 50.0 * 60.0
@@ -11,17 +10,34 @@ class_name Player extends CharacterBody2D
 @export var run_stop_acc := 3.0
 @export var bash_stop_acc:= 4.0
 
+var damage := 1
+
 @onready var state_node := $StateMachine
 @onready var health = $Health
+@onready var crouching_mask = $ColliderCrouching
+@onready var standing_mask  = $ColliderStanding
+@onready var sprite = $Sprite2D
+@onready var animation_player = $AnimationPlayer
+@onready var combat_properties = $CombatProperties
+
+const main_menu = preload("res://Scenes/main_menu.tscn")
+var open_menu: Node = null
 
 var facing: int = 1
 
 #region Functions
-func set_facing(dir := 0):
+func set_crouch_mask(value: bool):
+	standing_mask.set_disabled(value)
+	crouching_mask.set_disabled(!value)
 
+func set_facing(dir: int):
+	if dir == 0: return
 	facing = dir
-	if(facing != 0):
-		animation_player.flip_h = facing == -1
+	for child in get_children():
+		if child is Sprite2D:
+			child.flip_h = facing == -1
+		elif child is CollisionShape2D or child is Node2D:
+			child.scale.x = facing
 
 func get_movement_dir():
 	return Input.get_axis("left", "right")
@@ -48,34 +64,46 @@ func move(delta):
 func fall(delta):
 	velocity.y += gravity * delta
 	move_and_slide()
-func take_damage(damage_dealer: Node, damage: int):
-	health.change_by(damage)
-	state_node.finished.emit("hurt")
+func take_damage(damage):
+	print("Player takes damage")
+	health.change_by(-damage)
+	state_node.state.finished.emit("hurt")
 #endregion
-#region Animation End
-func _on_animated_sprite_2d_animation_finished() -> void:
-	var state = $StateMachine.state
+#region Animation Ending
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	var state = state_node.state
 
 	match state.name:
 		"land":
 			state.finished.emit("idle")
 		"run_stop":
 			var dir_x = get_movement_dir()
-			set_facing(dir_x)
 			if dir_x == 0:
 				state.finished.emit("idle")
 			else:
+				set_facing(dir_x)
 				if Input.is_action_pressed("run"):
 					state.finished.emit("run")
 				else:
 					state.finished.emit("walk")
 		"stab", "slash", "bash":
 			state.finished.emit("stance_light")
+		"hurt":
+			state.finished.emit("stance_light")
 #endregion
 func _process(delta: float) -> void:
+	Debugger.printui([state_node.state.name])
 	if Input.is_action_pressed("restart"):
 		get_tree().reload_current_scene()
+	if Input.is_action_just_pressed("ui_cancel"):
+		if open_menu == null:
+			open_menu = main_menu.instantiate()
+			add_child(open_menu)
+		else:
+			open_menu.queue_free()
+			open_menu = null
+		print(open_menu)
 
 
-func _on_hurtbox_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	print(area)
