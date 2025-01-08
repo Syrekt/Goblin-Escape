@@ -55,8 +55,7 @@ func move(dir: int, delta: float) -> bool:
 
 func get_movement_dir():
 	return sign(velocity.x)
-func attack():
-	print("Enemy attack")
+
 
 func take_damage(damage):
 	print("Enemy takes damage")

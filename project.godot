@@ -21,6 +21,11 @@ SaveSystem="*res://addons/save_system/save_system.gd"
 Debugger="*res://Scenes/debugger.tscn"
 Combat="*res://Scripts/combat.gd"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/copilot/plugin.cfg", "res://addons/save_system/plugin.cfg")

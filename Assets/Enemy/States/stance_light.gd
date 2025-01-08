@@ -20,5 +20,4 @@ func update(delta):
 
 
 func _on_timer_timeout() -> void:
-	#enemy.state_node.state.finished.emit("stab")
-	pass
+	enemy.state_node.state.finished.emit("stab")

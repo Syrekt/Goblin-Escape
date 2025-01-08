@@ -10,6 +10,7 @@ var stunned := false
 func stun(time := 2.0):
 	stun_timer.start(time)
 	stunned = true
+	owner.state_node.state.finished.emit("stun")
 
 func _on_stun_timer_timeout() -> void:
 	stunned = false
