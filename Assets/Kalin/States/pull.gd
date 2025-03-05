@@ -5,7 +5,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	player.movable.grab()
 
 func physics_update(delta: float) -> void:
-	player.move(delta);
+	player.move(delta, true);
 	player.movable.velocity = player.velocity;
 
 func update(delta: float) -> void:

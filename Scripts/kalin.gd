@@ -5,11 +5,15 @@ class_name Player extends CharacterBody2D
 @export var walk_speed := 50.0 * 60.0
 @export var crouch_speed := 25.0 * 60.0
 @export var push_pull_speed := 25.0 * 60.0
+@export var slide_speed := 5.0 * 60.0
+@export var slide_dec := 7.0
 @export var gravity := 500.0
 @export var jump_impulse := 200.0
 @export var acceleration := 10.0
-@export var run_stop_acc := 3.0
-@export var bash_stop_acc:= 4.0
+@export var run_stop_dec := 3.0
+@export var bash_stop_dec:= 4.0
+@export var climb_xoff := -5
+@export var climb_yoff := -13
 
 var damage := 1
 
@@ -23,6 +27,7 @@ var damage := 1
 @onready var ray_movable = $MovableCheck
 @onready var ray_corner_check = $CornerCheck
 @onready var ray_corner_prevent = $CornerPrevent
+@onready var col_interaction = $Interactor
 var movable : Node2D = null
 
 
@@ -37,9 +42,6 @@ var ignore_corners = false
 #
 #var dialogue_resource : DialogueResource
 #var dialogue_start := "test_scene"
-
-func _ready() -> void:
-	print("Starting position : ", position)
 
 #region Functions
 func set_crouch_mask(value: bool):
@@ -58,10 +60,9 @@ func set_facing(dir: int):
 func get_movement_dir():
 	return Input.get_axis("left", "right")
 
-func move(delta):
+func move(delta, facing_locked = false, direction_locked = false):
 	var state_name = state_node.state.name
-	var dir_x = get_movement_dir()
-	var facing_locked = false
+	var dir_x = get_movement_dir() if !direction_locked else facing
 
 	match state_name:
 		"crouch_walk":
@@ -71,13 +72,14 @@ func move(delta):
 		"run":
 			velocity.x = move_toward(velocity.x, run_speed * dir_x * delta, acceleration)
 		"run_stop":
-			velocity.x = move_toward(velocity.x, 0, run_stop_acc)
+			velocity.x = move_toward(velocity.x, 0, run_stop_dec)
 		"bash":
-			velocity.x = move_toward(velocity.x, 0, bash_stop_acc)
+			velocity.x = move_toward(velocity.x, 0, bash_stop_dec)
 		"push", "pull":
-			facing_locked = true
 			Debugger.printui(["Push/pull movement"]);
 			velocity.x = move_toward(velocity.x, push_pull_speed * dir_x * delta, acceleration)
+		"slide":
+			velocity.x = move_toward(velocity.x, 0, slide_dec)
 
 	move_and_slide()
 	if(!facing_locked && velocity.x != 0): set_facing(sign(velocity.x))
@@ -86,9 +88,9 @@ func fall(delta):
 	velocity.y += gravity * delta
 	move_and_slide()
 
-func take_damage(damage):
+func take_damage(_damage):
 	print("Player takes damage")
-	health.change_by(-damage)
+	health.change_by(-_damage)
 	state_node.state.finished.emit("hurt")
 
 func check_movable():
@@ -123,11 +125,19 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"hurt":
 			state.finished.emit("stance_light")
 		"corner_climb":
-			position.x += 8*facing
-			position.y -= 55
+			position.x += 26*facing
+			position.y -= 36
 			state.finished.emit("idle")
+		"slide":
+			state.finished.emit("idle")
+			set_crouch_mask(false)
 #endregion
 #region Node Methods
+func _physics_process(delta: float) -> void:
+	var interactions = col_interaction.get_overlapping_areas()
+	for i in interactions:
+		i.action()
+
 func _process(delta: float) -> void:
 	Debugger.printui([state_node.state.name])
 	if Input.is_action_pressed("restart"):
@@ -143,8 +153,8 @@ func _process(delta: float) -> void:
 			open_menu = null
 		print(open_menu)
 
-	#if Input.is_action_just_pressed("ui_accept"):
-		#print("load dialogue")
+	if Input.is_action_just_pressed("ui_accept"):
+		print("load dialogue")
 		#DialogueManager.show_example_dialogue_balloon(load("res://Dialogues/test.dialogue"), "start")
 		#var resource = load("res://Dialogues/test.dialogue")
 		#var dialogue_line = await DialogueManager.get_next_dialogue_line(resource, "start")

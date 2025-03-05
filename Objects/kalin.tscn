@@ -1,4 +1,4 @@
-[gd_scene load_steps=250 format=3 uid="uid://d08scf611mrii"]
+[gd_scene load_steps=254 format=3 uid="uid://d08scf611mrii"]
 
 [ext_resource type="Script" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Texture2D" uid="uid://dcs3l0iefjo7w" path="res://Assets/Kalin/Sprites/Kalin-Fall.png" id="2_1j6vo"]
@@ -35,6 +35,7 @@
 [ext_resource type="Script" path="res://Assets/Kalin/States/crouch.gd" id="21_60gj1"]
 [ext_resource type="Texture2D" uid="uid://bxgpgvblnjqhg" path="res://Assets/Kalin/Sprites/Kalin-Walk.png" id="22_vnsvi"]
 [ext_resource type="Script" path="res://Assets/Kalin/States/walk.gd" id="28_1dko0"]
+[ext_resource type="Texture2D" uid="uid://bq334bamr3mgu" path="res://Assets/Kalin/Sprites/Kalin-Slide.png" id="29_qnnkd"]
 [ext_resource type="Script" path="res://Assets/Kalin/States/stance_light.gd" id="33_ao24u"]
 [ext_resource type="Script" path="res://Assets/Kalin/States/run_stop.gd" id="34_lbmmt"]
 [ext_resource type="Script" path="res://Assets/Kalin/States/stance_heavy.gd" id="36_uhi5y"]
@@ -52,12 +53,16 @@
 [ext_resource type="Script" path="res://Assets/Kalin/States/pull.gd" id="50_tcyto"]
 [ext_resource type="Script" path="res://Assets/Kalin/States/corner_grab.gd" id="51_t8vjn"]
 [ext_resource type="Script" path="res://Assets/Kalin/States/corner_climb.gd" id="52_4ckjm"]
+[ext_resource type="Script" path="res://Assets/Kalin/States/slide.gd" id="54_5dxkx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t6164"]
 height = 46.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pobex"]
 radius = 10.198
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1nk40"]
+size = Vector2(20, 30)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h07rh"]
 atlas = ExtResource("2_s11s3")
@@ -1573,6 +1578,113 @@ tracks/3/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_5syxg"]
+resource_name = "corner_climb"
+length = 1.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_xyrfg")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dxyog"]
+resource_name = "corner_grab"
+length = 0.1
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_xyrfg")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_qdaj2"]
 resource_name = "crouch"
 length = 1.1
@@ -1944,7 +2056,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(4, 0)]
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_mj8sq"]
@@ -2774,9 +2886,9 @@ tracks/3/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_5syxg"]
-resource_name = "corner_climb"
-length = 1.4
+[sub_resource type="Animation" id="Animation_1olko"]
+resource_name = "slide"
+length = 0.7
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -2785,10 +2897,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+"values": [0, 1, 2, 3, 4, 5, 6]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -2800,7 +2912,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_xyrfg")]
+"values": [ExtResource("29_qnnkd")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -2812,7 +2924,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [14]
+"values": [8]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -2824,61 +2936,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-16, -19)]
-}
-
-[sub_resource type="Animation" id="Animation_dxyog"]
-resource_name = "corner_grab"
-length = 0.1
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_xyrfg")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [14]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:offset")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-16, -19)]
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cuohi"]
@@ -2902,6 +2960,7 @@ _data = {
 "run": SubResource("Animation_obgsb"),
 "run_stop": SubResource("Animation_x4pkh"),
 "slash": SubResource("Animation_ada4r"),
+"slide": SubResource("Animation_1olko"),
 "stab": SubResource("Animation_sw71j"),
 "stance_defensive": SubResource("Animation_xnqfs"),
 "stance_heavy": SubResource("Animation_3m75v"),
@@ -2935,6 +2994,12 @@ visible = false
 position = Vector2(0, -10)
 shape = SubResource("CircleShape2D_pobex")
 disabled = true
+
+[node name="Interactor" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor"]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_1nk40")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -2986,6 +3051,9 @@ script = ExtResource("11_10o18")
 
 [node name="fall" type="Node" parent="StateMachine"]
 script = ExtResource("12_oysea")
+
+[node name="Timer" type="Timer" parent="StateMachine/fall"]
+one_shot = true
 
 [node name="land" type="Node" parent="StateMachine"]
 script = ExtResource("14_sgd03")
@@ -3052,6 +3120,9 @@ script = ExtResource("51_t8vjn")
 
 [node name="corner_climb" type="Node" parent="StateMachine"]
 script = ExtResource("52_4ckjm")
+
+[node name="slide" type="Node" parent="StateMachine"]
+script = ExtResource("54_5dxkx")
 
 [node name="MovableCheck" type="RayCast2D" parent="."]
 visible = false

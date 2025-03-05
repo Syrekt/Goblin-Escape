@@ -2,6 +2,7 @@ extends PlayerState
 
 func enter(previous_state_path: String, data := {}) -> void:
 	player.animation_player.call_deferred("play", "run")
+	player.set_floor_snap_length(2.0)
 
 func physics_update(delta: float) -> void:
 	player.move(delta)
@@ -10,7 +11,7 @@ func physics_update(delta: float) -> void:
 	if not Input.is_action_pressed("run") or player.get_movement_dir() != player.facing:
 		finished.emit("run_stop")
 	elif Input.is_action_pressed("down"):
-		finished.emit("crouch")
+		finished.emit("slide")
 	elif not player.is_on_floor():
 		finished.emit("fall")
 	elif Input.is_action_just_pressed("up"):
