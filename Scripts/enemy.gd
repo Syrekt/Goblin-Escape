@@ -31,7 +31,7 @@ func set_facing(dir: int):
 	facing = dir
 	for child in get_children():
 		if child is Sprite2D:
-			child.flip_h = facing == -1
+			child.flip_h = facing == 1
 		elif child is CollisionShape2D or child is Node2D:
 			child.scale.x = facing
 
@@ -77,14 +77,6 @@ func _physics_process(delta: float) -> void:
 		Debugger.printui([combat_properties.pushback_vector])
 		velocity = combat_properties.pushback_vector.lerp(Vector2.ZERO, combat_properties.pushback_elapsed_time / combat_properties.pushback_duration)
 		if combat_properties.pushback_timer <= 0: velocity = Vector2.ZERO
-		var etime = combat_properties.pushback_elapsed_time
-		var dtime = combat_properties.pushback_duration
-		var ptime = combat_properties.pushback_timer
-
-		print("velocity: "+str(velocity))
-		print("etime: "+str(etime))
-		print("dtime: "+str(dtime))
-		print("ptime: "+str(ptime))
 	else:
 		combat_properties.pushback_elapsed_time = 0.0
 

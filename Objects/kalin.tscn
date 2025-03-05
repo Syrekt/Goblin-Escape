@@ -1,10 +1,10 @@
-[gd_scene load_steps=244 format=3 uid="uid://d08scf611mrii"]
+[gd_scene load_steps=250 format=3 uid="uid://d08scf611mrii"]
 
 [ext_resource type="Script" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Texture2D" uid="uid://dcs3l0iefjo7w" path="res://Assets/Kalin/Sprites/Kalin-Fall.png" id="2_1j6vo"]
 [ext_resource type="Texture2D" uid="uid://boahl6r6b6lgx" path="res://Assets/Kalin/Sprites/Kalin-Crouch_Idle.png" id="2_6cw72"]
 [ext_resource type="Texture2D" uid="uid://b83foasp85e6b" path="res://Assets/Kalin/Sprites/Kalin-Bash.png" id="2_s11s3"]
-[ext_resource type="PackedScene" uid="uid://cpogcou30wxcj" path="res://Scenes/combat_properties.tscn" id="2_yetl5"]
+[ext_resource type="PackedScene" uid="uid://cpogcou30wxcj" path="res://UI/combat_properties.tscn" id="2_yetl5"]
 [ext_resource type="Texture2D" uid="uid://yymtfpkr47q8" path="res://Assets/Kalin/Sprites/Kalin_idle_unarmed.png" id="3_b6tj0"]
 [ext_resource type="Script" path="res://Assets/Kalin/States/run.gd" id="3_ejfka"]
 [ext_resource type="Texture2D" uid="uid://bwtgglpsavvyw" path="res://Assets/Kalin/Sprites/Kalin-Jump.png" id="3_fcid0"]
@@ -18,8 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://dl4uq2pkst8rp" path="res://Assets/Kalin/Sprites/Kalin-Light Attack.png" id="9_2a2iq"]
 [ext_resource type="Texture2D" uid="uid://d37lg6g726j1r" path="res://Assets/Kalin/Sprites/Kalin-Def Stance.png" id="9_3wuxq"]
 [ext_resource type="Texture2D" uid="uid://p3oh0wc2s34d" path="res://Assets/Kalin/Sprites/Kalin-Hurt.png" id="9_e3nxf"]
-[ext_resource type="PackedScene" uid="uid://ceetftx8qxgd0" path="res://Scenes/health.tscn" id="9_kqaha"]
-[ext_resource type="PackedScene" uid="uid://b02rwb4cvvhr4" path="res://Scenes/state_machine.tscn" id="9_ojhio"]
+[ext_resource type="PackedScene" path="res://UI/health.tscn" id="9_kqaha"]
+[ext_resource type="PackedScene" uid="uid://b02rwb4cvvhr4" path="res://Objects/state_machine.tscn" id="9_ojhio"]
 [ext_resource type="Script" path="res://Assets/Kalin/States/idle.gd" id="10_4yl4h"]
 [ext_resource type="Texture2D" uid="uid://bh7p7ow7bykv7" path="res://Assets/Kalin/Sprites/Kalin-Heavy Stance.png" id="10_8p6tu"]
 [ext_resource type="Texture2D" uid="uid://x5i4gyyapuxd" path="res://Assets/Kalin/Sprites/Kalin-Pull.png" id="10_qartl"]
@@ -45,8 +45,13 @@
 [ext_resource type="Script" path="res://Assets/Kalin/States/bash.gd" id="41_pdh0h"]
 [ext_resource type="Script" path="res://Assets/Kalin/States/stab.gd" id="41_sat24"]
 [ext_resource type="Texture2D" uid="uid://c4sgdo50jnun4" path="res://Assets/Kalin/Sprites/Kalin-Run.png" id="44_h06e0"]
-[ext_resource type="PackedScene" uid="uid://2s1ryg6qqqmc" path="res://Scenes/hitbox.tscn" id="45_42hh8"]
+[ext_resource type="PackedScene" path="res://Objects/hitbox.tscn" id="45_42hh8"]
 [ext_resource type="Texture2D" uid="uid://cywhcouoj6ral" path="res://Assets/Kalin/Sprites/Kalin-Stun.png" id="45_pat22"]
+[ext_resource type="Script" path="res://Assets/Kalin/States/push_idle.gd" id="48_mwqkq"]
+[ext_resource type="Script" path="res://Assets/Kalin/States/push.gd" id="49_ujutq"]
+[ext_resource type="Script" path="res://Assets/Kalin/States/pull.gd" id="50_tcyto"]
+[ext_resource type="Script" path="res://Assets/Kalin/States/corner_grab.gd" id="51_t8vjn"]
+[ext_resource type="Script" path="res://Assets/Kalin/States/corner_climb.gd" id="52_4ckjm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t6164"]
 height = 46.0
@@ -1939,114 +1944,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_5syxg"]
-resource_name = "ledge_climb"
-length = 1.4
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_xyrfg")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [14]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:offset")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-16, -19)]
-}
-
-[sub_resource type="Animation" id="Animation_dxyog"]
-resource_name = "ledge_grab"
-length = 0.1
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_xyrfg")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [14]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:offset")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-16, -19)]
+"values": [Vector2(4, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_mj8sq"]
@@ -2118,6 +2016,60 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("11_0xxw0")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dchdh"]
+resource_name = "push_idle"
+length = 0.1
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -2318,7 +2270,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_ada4r"]
 resource_name = "slash"
-length = 0.7
+length = 0.8
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -2327,10 +2279,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -2354,7 +2306,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [7]
+"values": [8]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -2822,11 +2774,120 @@ tracks/3/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_5syxg"]
+resource_name = "corner_climb"
+length = 1.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_xyrfg")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-16, -19)]
+}
+
+[sub_resource type="Animation" id="Animation_dxyog"]
+resource_name = "corner_grab"
+length = 0.1
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_xyrfg")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-16, -19)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cuohi"]
 _data = {
 "RESET": SubResource("Animation_5koc5"),
 "bash": SubResource("Animation_b8tlq"),
 "block": SubResource("Animation_bb84h"),
+"corner_climb": SubResource("Animation_5syxg"),
+"corner_grab": SubResource("Animation_dxyog"),
 "crouch": SubResource("Animation_qdaj2"),
 "crouch_walk": SubResource("Animation_us7aq"),
 "death": SubResource("Animation_s6n7c"),
@@ -2834,10 +2895,9 @@ _data = {
 "hurt": SubResource("Animation_kp5w5"),
 "idle": SubResource("Animation_dkbxi"),
 "land": SubResource("Animation_jxgp1"),
-"ledge_climb": SubResource("Animation_5syxg"),
-"ledge_grab": SubResource("Animation_dxyog"),
 "pull": SubResource("Animation_mj8sq"),
 "push": SubResource("Animation_xojyh"),
+"push_idle": SubResource("Animation_dchdh"),
 "rise": SubResource("Animation_rp60i"),
 "run": SubResource("Animation_obgsb"),
 "run_stop": SubResource("Animation_x4pkh"),
@@ -2861,27 +2921,41 @@ script = ExtResource("1_tpqnq")
 [node name="CombatProperties" parent="." instance=ExtResource("2_yetl5")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -32)
+position = Vector2(1, -32)
 texture = ExtResource("3_b6tj0")
 hframes = 6
 
 [node name="ColliderStanding" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -23)
 shape = SubResource("CapsuleShape2D_t6164")
 
 [node name="ColliderCrouching" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -10)
 shape = SubResource("CircleShape2D_pobex")
 disabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(0, -32)
+position = Vector2(0, -41)
 sprite_frames = SubResource("SpriteFrames_udw38")
-animation = &"slash"
+animation = &"pull"
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="FloorCheck" type="RayCast2D" parent="."]
+visible = false
+position = Vector2(0, -9)
 target_position = Vector2(0, 14)
+
+[node name="CornerCheck" type="RayCast2D" parent="."]
+position = Vector2(0, -47)
+target_position = Vector2(18, 0)
+collision_mask = 33
+
+[node name="CornerPrevent" type="RayCast2D" parent="."]
+position = Vector2(0, -63)
+target_position = Vector2(18, 0)
+collision_mask = 33
 
 [node name="Health" parent="." instance=ExtResource("9_kqaha")]
 
@@ -2893,6 +2967,7 @@ libraries = {
 
 [node name="StateMachine" parent="." instance=ExtResource("9_ojhio")]
 visible = false
+position = Vector2(-4, 2)
 
 [node name="idle" type="Node" parent="StateMachine"]
 script = ExtResource("10_4yl4h")
@@ -2953,8 +3028,8 @@ collision_mask = 8
 script = ExtResource("41_pdh0h")
 
 [node name="BashHitbox" parent="StateMachine/bash" instance=ExtResource("45_42hh8")]
-position = Vector2(4, -34)
-scale = Vector2(1.16, 2.52)
+position = Vector2(5, -34)
+scale = Vector2(1.15, 2.52)
 collision_mask = 8
 
 [node name="hurt" type="Node" parent="StateMachine"]
@@ -2962,6 +3037,27 @@ script = ExtResource("40_xirjq")
 
 [node name="death" type="Node" parent="StateMachine"]
 script = ExtResource("40_xirjq")
+
+[node name="push_idle" type="Node" parent="StateMachine"]
+script = ExtResource("48_mwqkq")
+
+[node name="push" type="Node" parent="StateMachine"]
+script = ExtResource("49_ujutq")
+
+[node name="pull" type="Node" parent="StateMachine"]
+script = ExtResource("50_tcyto")
+
+[node name="corner_grab" type="Node" parent="StateMachine"]
+script = ExtResource("51_t8vjn")
+
+[node name="corner_climb" type="Node" parent="StateMachine"]
+script = ExtResource("52_4ckjm")
+
+[node name="MovableCheck" type="RayCast2D" parent="."]
+visible = false
+position = Vector2(0, -32)
+target_position = Vector2(17, 0)
+collision_mask = 32
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="StateMachine/slash/SlashHitbox" to="StateMachine/slash" method="_on_slash_hitbox_body_entered"]

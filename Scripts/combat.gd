@@ -1,6 +1,6 @@
 extends Node
 
-func deal_damage(attacker: CharacterBody2D, defender: CharacterBody2D, knockback_force : int):
+func deal_damage(attacker: CharacterBody2D, defender: CharacterBody2D, pushback_force : int):
 	var defender_state = defender.state_node.state.name;
 	var defender_blocking = defender_state == "stance_defensive"
 
@@ -13,7 +13,7 @@ func deal_damage(attacker: CharacterBody2D, defender: CharacterBody2D, knockback
 			else:
 				print("Not blocking, deal damage")
 				defender.take_damage(attacker.damage)
-			defender.combat_properties.pushback_apply(attacker.global_position, knockback_force)
+			defender.combat_properties.pushback_apply(attacker.global_position, pushback_force)
 		"stab":
 			print("Stab target")
 			if defender_blocking:
@@ -22,10 +22,10 @@ func deal_damage(attacker: CharacterBody2D, defender: CharacterBody2D, knockback
 			else:
 				print("Not blocking, deal damage")
 				defender.take_damage(attacker.damage)
-			defender.combat_properties.pushback_apply(attacker.global_position, knockback_force)
+			defender.combat_properties.pushback_apply(attacker.global_position, pushback_force)
 		"bash":
 			print("Attack result: Bash target")
-			defender.combat_properties.pushback_apply(attacker.global_position, knockback_force)
+			defender.combat_properties.pushback_apply(attacker.global_position, pushback_force)
 			if not defender_blocking:
 				defender.take_damage(attacker.damage)
 		"_":

@@ -1,152 +1,154 @@
-[gd_scene load_steps=75 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene load_steps=77 format=3 uid="uid://iuj1jg31a55f"]
 
-[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_20v8q"]
-[ext_resource type="Texture2D" uid="uid://ujt17mgqs7s5" path="res://Assets/Enemy/Knight/_Hit.png" id="1_vymnb"]
-[ext_resource type="Texture2D" uid="uid://ixpn3d6slo6l" path="res://Assets/Enemy/Knight/_Idle_strip10.png" id="2_neevb"]
-[ext_resource type="Texture2D" uid="uid://cio1evkjdpaty" path="res://Assets/Enemy/Knight/_Run_strip10.png" id="3_ht88f"]
-[ext_resource type="Texture2D" uid="uid://dt5yvq6ny4w3t" path="res://Assets/Enemy/Knight/_AttackCombo.png" id="4_arssg"]
-[ext_resource type="PackedScene" uid="uid://ceetftx8qxgd0" path="res://Scenes/health.tscn" id="6_ap1gg"]
-[ext_resource type="PackedScene" uid="uid://cpogcou30wxcj" path="res://Scenes/combat_properties.tscn" id="7_7vmm3"]
-[ext_resource type="Shader" path="res://Scripts/flash.gdshader" id="8_orvuf"]
-[ext_resource type="PackedScene" uid="uid://b02rwb4cvvhr4" path="res://Scenes/state_machine.tscn" id="8_umdur"]
-[ext_resource type="Script" path="res://Assets/Enemy/States/patrol.gd" id="9_emd0q"]
-[ext_resource type="Script" path="res://Assets/Enemy/States/animation_state_enemy.gd" id="10_fmquk"]
-[ext_resource type="Texture2D" uid="uid://bvfkmeacsjvyg" path="res://Assets/Enemy/Knight/_Attack2_strip6.png" id="10_omxdc"]
-[ext_resource type="Texture2D" uid="uid://bgpolb2fe4p1t" path="res://Assets/Enemy/Knight/_AttackComboNoMovement.png" id="11_8ik60"]
-[ext_resource type="Texture2D" uid="uid://efonub8aeguf" path="res://Assets/Enemy/Knight/_CrouchAttack_strip4.png" id="12_sb67a"]
-[ext_resource type="Texture2D" uid="uid://bygjmjjcgula2" path="res://Assets/Enemy/Knight/_Crouch.png" id="13_c40nn"]
-[ext_resource type="Texture2D" uid="uid://41st4p54uine" path="res://Assets/Enemy/Knight/_DeathNoMovement_strip10.png" id="13_x5aek"]
-[ext_resource type="Texture2D" uid="uid://cdxqste3ksqh" path="res://Assets/Enemy/Knight/_Roll.png" id="14_6wiyj"]
-[ext_resource type="Script" path="res://Assets/Enemy/States/stance_heavy.gd" id="16_2nrsw"]
-[ext_resource type="Script" path="res://Assets/Enemy/States/hurt.gd" id="16_nqaxm"]
-[ext_resource type="PackedScene" uid="uid://2s1ryg6qqqmc" path="res://Scenes/hitbox.tscn" id="17_538n2"]
-[ext_resource type="Script" path="res://Assets/Enemy/States/stance_light.gd" id="17_tedhn"]
-[ext_resource type="Script" path="res://Assets/Enemy/States/stance_defensive.gd" id="18_0fxvv"]
-[ext_resource type="Script" path="res://Assets/Enemy/States/chase.gd" id="19_exjvs"]
-[ext_resource type="Script" path="res://Assets/Enemy/States/stun.gd" id="22_0mrsw"]
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_18den"]
+[ext_resource type="Texture2D" uid="uid://ujt17mgqs7s5" path="res://Assets/Enemy/Knight/_Hit.png" id="2_cjut3"]
+[ext_resource type="Texture2D" uid="uid://ixpn3d6slo6l" path="res://Assets/Enemy/Knight/_Idle_strip10.png" id="3_bx2m4"]
+[ext_resource type="Texture2D" uid="uid://cio1evkjdpaty" path="res://Assets/Enemy/Knight/_Run_strip10.png" id="4_qi40d"]
+[ext_resource type="Texture2D" uid="uid://dt5yvq6ny4w3t" path="res://Assets/Enemy/Knight/_AttackCombo.png" id="5_al5pi"]
+[ext_resource type="PackedScene" path="res://UI/health.tscn" id="6_u2r3n"]
+[ext_resource type="PackedScene" uid="uid://cpogcou30wxcj" path="res://UI/combat_properties.tscn" id="7_7ej0e"]
+[ext_resource type="Shader" path="res://Scripts/flash.gdshader" id="8_6eeyp"]
+[ext_resource type="Texture2D" uid="uid://bxfbcd2o3tqam" path="res://Assets/Enemy/Goblin/goblin-idle.png" id="9_3g55t"]
+[ext_resource type="Texture2D" uid="uid://efonub8aeguf" path="res://Assets/Enemy/Knight/_CrouchAttack_strip4.png" id="10_14m58"]
+[ext_resource type="Texture2D" uid="uid://c6nifh0i54h6f" path="res://Assets/Enemy/Goblin/goblin-bash.png" id="11_wrk2e"]
+[ext_resource type="Texture2D" uid="uid://ppmeb6xgbtin" path="res://Assets/Enemy/Goblin/goblin-death.png" id="12_to5id"]
+[ext_resource type="Texture2D" uid="uid://cnglwro36se85" path="res://Assets/Enemy/Goblin/goblin-hurt.png" id="13_uqw8j"]
+[ext_resource type="Texture2D" uid="uid://bpxyvituq5b37" path="res://Assets/Enemy/Goblin/goblin-walk.png" id="14_abbm1"]
+[ext_resource type="Texture2D" uid="uid://bhywg3kg1q3in" path="res://Assets/Enemy/Goblin/goblin-attack.png" id="15_mlxbl"]
+[ext_resource type="Texture2D" uid="uid://cdxqste3ksqh" path="res://Assets/Enemy/Knight/_Roll.png" id="16_ae1py"]
+[ext_resource type="PackedScene" uid="uid://b02rwb4cvvhr4" path="res://Objects/state_machine.tscn" id="17_n2jyc"]
+[ext_resource type="Script" path="res://Assets/Enemy/States/patrol.gd" id="18_pn3ih"]
+[ext_resource type="Script" path="res://Assets/Enemy/States/hurt.gd" id="19_xl5vi"]
+[ext_resource type="Script" path="res://Assets/Enemy/States/animation_state_enemy.gd" id="20_ujm0m"]
+[ext_resource type="PackedScene" path="res://Objects/hitbox.tscn" id="21_oeh1l"]
+[ext_resource type="Script" path="res://Assets/Enemy/States/stance_heavy.gd" id="22_7ej28"]
+[ext_resource type="Script" path="res://Assets/Enemy/States/stance_light.gd" id="23_j8fla"]
+[ext_resource type="Script" path="res://Assets/Enemy/States/stance_defensive.gd" id="24_lox44"]
+[ext_resource type="Script" path="res://Assets/Enemy/States/stun.gd" id="25_208af"]
+[ext_resource type="Script" path="res://Assets/Enemy/States/chase.gd" id="26_ug7pn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4lgsn"]
-atlas = ExtResource("1_vymnb")
+atlas = ExtResource("2_cjut3")
 region = Rect2(0, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uge08"]
-atlas = ExtResource("2_neevb")
+atlas = ExtResource("3_bx2m4")
 region = Rect2(0, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q241i"]
-atlas = ExtResource("2_neevb")
+atlas = ExtResource("3_bx2m4")
 region = Rect2(120, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_poh8a"]
-atlas = ExtResource("2_neevb")
+atlas = ExtResource("3_bx2m4")
 region = Rect2(240, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3oxdk"]
-atlas = ExtResource("2_neevb")
+atlas = ExtResource("3_bx2m4")
 region = Rect2(360, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ptjlt"]
-atlas = ExtResource("2_neevb")
+atlas = ExtResource("3_bx2m4")
 region = Rect2(480, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jm42s"]
-atlas = ExtResource("2_neevb")
+atlas = ExtResource("3_bx2m4")
 region = Rect2(600, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2m0d1"]
-atlas = ExtResource("2_neevb")
+atlas = ExtResource("3_bx2m4")
 region = Rect2(720, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rxcdp"]
-atlas = ExtResource("2_neevb")
+atlas = ExtResource("3_bx2m4")
 region = Rect2(840, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c47w4"]
-atlas = ExtResource("2_neevb")
+atlas = ExtResource("3_bx2m4")
 region = Rect2(960, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xvmp8"]
-atlas = ExtResource("2_neevb")
+atlas = ExtResource("3_bx2m4")
 region = Rect2(1080, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_216ag"]
-atlas = ExtResource("3_ht88f")
+atlas = ExtResource("4_qi40d")
 region = Rect2(0, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jrl72"]
-atlas = ExtResource("3_ht88f")
+atlas = ExtResource("4_qi40d")
 region = Rect2(120, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uci04"]
-atlas = ExtResource("3_ht88f")
+atlas = ExtResource("4_qi40d")
 region = Rect2(240, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_or3l6"]
-atlas = ExtResource("3_ht88f")
+atlas = ExtResource("4_qi40d")
 region = Rect2(360, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fohw0"]
-atlas = ExtResource("3_ht88f")
+atlas = ExtResource("4_qi40d")
 region = Rect2(480, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4o72w"]
-atlas = ExtResource("3_ht88f")
+atlas = ExtResource("4_qi40d")
 region = Rect2(600, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4vng5"]
-atlas = ExtResource("3_ht88f")
+atlas = ExtResource("4_qi40d")
 region = Rect2(720, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k3tbw"]
-atlas = ExtResource("3_ht88f")
+atlas = ExtResource("4_qi40d")
 region = Rect2(840, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1ro77"]
-atlas = ExtResource("3_ht88f")
+atlas = ExtResource("4_qi40d")
 region = Rect2(960, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ehn4f"]
-atlas = ExtResource("3_ht88f")
+atlas = ExtResource("4_qi40d")
 region = Rect2(1080, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0u2qf"]
-atlas = ExtResource("4_arssg")
+atlas = ExtResource("5_al5pi")
 region = Rect2(0, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p71nf"]
-atlas = ExtResource("4_arssg")
+atlas = ExtResource("5_al5pi")
 region = Rect2(120, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sk7wh"]
-atlas = ExtResource("4_arssg")
+atlas = ExtResource("5_al5pi")
 region = Rect2(240, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xgoi2"]
-atlas = ExtResource("4_arssg")
+atlas = ExtResource("5_al5pi")
 region = Rect2(360, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wqxh8"]
-atlas = ExtResource("4_arssg")
+atlas = ExtResource("5_al5pi")
 region = Rect2(480, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wgbkt"]
-atlas = ExtResource("4_arssg")
+atlas = ExtResource("5_al5pi")
 region = Rect2(600, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n0jy2"]
-atlas = ExtResource("4_arssg")
+atlas = ExtResource("5_al5pi")
 region = Rect2(720, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x521d"]
-atlas = ExtResource("4_arssg")
+atlas = ExtResource("5_al5pi")
 region = Rect2(840, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5dal3"]
-atlas = ExtResource("4_arssg")
+atlas = ExtResource("5_al5pi")
 region = Rect2(960, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_orl4g"]
-atlas = ExtResource("4_arssg")
+atlas = ExtResource("5_al5pi")
 region = Rect2(1080, 0, 120, 80)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tvv3n"]
@@ -273,7 +275,7 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wwe85"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xhuvx"]
-shader = ExtResource("8_orvuf")
+shader = ExtResource("8_6eeyp")
 shader_parameter/flash_intensity = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 
@@ -301,7 +303,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("10_omxdc")]
+"values": [ExtResource("9_3g55t")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -402,7 +404,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("12_sb67a")]
+"values": [ExtResource("10_14m58")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -442,7 +444,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [1]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -454,7 +456,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("13_c40nn")]
+"values": [ExtResource("11_wrk2e")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -466,11 +468,12 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [8]
 }
 
 [sub_resource type="Animation" id="Animation_iprve"]
 resource_name = "death"
+length = 1.3
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -479,10 +482,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -494,7 +497,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("13_x5aek")]
+"values": [ExtResource("12_to5id")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -506,187 +509,11 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [10]
+"values": [13]
 }
 
 [sub_resource type="Animation" id="Animation_kbkgb"]
 resource_name = "hurt"
-length = 0.5
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 0, 0, 0, 0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("1_vymnb")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-
-[sub_resource type="Animation" id="Animation_csflc"]
-resource_name = "idle"
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_neevb")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [10]
-}
-
-[sub_resource type="Animation" id="Animation_wj3eb"]
-resource_name = "run"
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_ht88f")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [10]
-}
-
-[sub_resource type="Animation" id="Animation_nd8hd"]
-resource_name = "slash"
-length = 0.5
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("11_8ik60")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [10]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../StateMachine/slash/SlashHitbox/Collider:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_p8gt6"]
-resource_name = "stab"
 length = 0.6
 step = 0.1
 tracks/0/type = "value"
@@ -696,10 +523,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4]
+"values": [0, 1, 2, 3, 4, 5]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -711,7 +538,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("10_omxdc")]
+"values": [ExtResource("13_uqw8j")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -725,6 +552,184 @@ tracks/2/keys = {
 "update": 1,
 "values": [6]
 }
+
+[sub_resource type="Animation" id="Animation_csflc"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_3g55t")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="Animation" id="Animation_wj3eb"]
+resource_name = "run"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("14_abbm1")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_nd8hd"]
+resource_name = "slash"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("15_mlxbl")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../StateMachine/slash/SlashHitbox/Collider:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_p8gt6"]
+resource_name = "stab"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("15_mlxbl")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
@@ -732,7 +737,7 @@ tracks/3/path = NodePath("../StateMachine/stab/StabHitbox/Collider:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.2, 0.3),
+"times": PackedFloat32Array(0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -764,7 +769,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("12_sb67a")]
+"values": [ExtResource("11_wrk2e")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -776,7 +781,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [8]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -814,10 +819,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 0, 0, 0, 0]
+"values": [3]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -829,7 +834,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("11_8ik60")]
+"values": [ExtResource("15_mlxbl")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -841,7 +846,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [10]
+"values": [7]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -879,10 +884,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 0, 0, 0, 0]
+"values": [3]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -894,7 +899,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("10_omxdc")]
+"values": [ExtResource("15_mlxbl")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -906,7 +911,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [6]
+"values": [7]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -959,7 +964,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("14_6wiyj")]
+"values": [ExtResource("16_ae1py")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1059,7 +1064,7 @@ size = Vector2(20, 32)
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 8
 collision_mask = 3
-script = ExtResource("1_20v8q")
+script = ExtResource("1_18den")
 metadata/_edit_lock_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -1069,38 +1074,43 @@ sprite_frames = SubResource("SpriteFrames_tvv3n")
 animation = &"stab"
 
 [node name="Collider" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_wwe85")
 metadata/_edit_lock_ = true
 
-[node name="Health" parent="." instance=ExtResource("6_ap1gg")]
+[node name="Health" parent="." instance=ExtResource("6_u2r3n")]
 
-[node name="CombatProperties" parent="." instance=ExtResource("7_7vmm3")]
+[node name="CombatProperties" parent="." instance=ExtResource("7_7ej0e")]
 
 [node name="RayDownRight" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(0, -26)
 target_position = Vector2(31, 32)
 metadata/_edit_lock_ = true
 
 [node name="RayRight" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(0, -16)
 target_position = Vector2(30, 0)
 metadata/_edit_lock_ = true
 
 [node name="RayDownLeft" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(0, -26)
 target_position = Vector2(-31, 32)
 metadata/_edit_lock_ = true
 
 [node name="RayLeft" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(0, -16)
 target_position = Vector2(-30, 0)
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_xhuvx")
-position = Vector2(0, -40)
-texture = ExtResource("10_omxdc")
+position = Vector2(0, -32)
+texture = ExtResource("9_3g55t")
 hframes = 6
 metadata/_edit_lock_ = true
 
@@ -1112,6 +1122,7 @@ libraries = {
 
 [node name="ChaseDetector" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 collision_layer = 0
 collision_mask = 2
 metadata/_edit_lock_ = true
@@ -1121,11 +1132,10 @@ position = Vector2(0, -16)
 scale = Vector2(10.4, 1.64)
 shape = SubResource("RectangleShape2D_qsl2l")
 
-[node name="StateMachine" parent="." instance=ExtResource("8_umdur")]
-visible = false
+[node name="StateMachine" parent="." instance=ExtResource("17_n2jyc")]
 
 [node name="patrol" type="Node" parent="StateMachine"]
-script = ExtResource("9_emd0q")
+script = ExtResource("18_pn3ih")
 
 [node name="PatrolTimer" type="Timer" parent="StateMachine/patrol"]
 one_shot = true
@@ -1135,15 +1145,16 @@ autostart = true
 one_shot = true
 
 [node name="hurt" type="Node" parent="StateMachine"]
-script = ExtResource("16_nqaxm")
+script = ExtResource("19_xl5vi")
 
 [node name="death" type="Node" parent="StateMachine"]
-script = ExtResource("10_fmquk")
+script = ExtResource("20_ujm0m")
 
 [node name="slash" type="Node2D" parent="StateMachine"]
-script = ExtResource("10_fmquk")
+visible = false
+script = ExtResource("20_ujm0m")
 
-[node name="SlashHitbox" parent="StateMachine/slash" instance=ExtResource("17_538n2")]
+[node name="SlashHitbox" parent="StateMachine/slash" instance=ExtResource("21_oeh1l")]
 collision_mask = 2
 
 [node name="Collider" parent="StateMachine/slash/SlashHitbox" index="0"]
@@ -1151,19 +1162,21 @@ position = Vector2(21, -20)
 metadata/_edit_lock_ = true
 
 [node name="stab" type="Node2D" parent="StateMachine"]
-script = ExtResource("10_fmquk")
+visible = false
+script = ExtResource("20_ujm0m")
 
-[node name="StabHitbox" parent="StateMachine/stab" instance=ExtResource("17_538n2")]
+[node name="StabHitbox" parent="StateMachine/stab" instance=ExtResource("21_oeh1l")]
 collision_mask = 2
 
 [node name="Collider" parent="StateMachine/stab/StabHitbox" index="0"]
-position = Vector2(19, -19)
+position = Vector2(28, -21)
 scale = Vector2(1.51745, 0.854787)
 
 [node name="bash" type="Node2D" parent="StateMachine"]
-script = ExtResource("10_fmquk")
+visible = false
+script = ExtResource("20_ujm0m")
 
-[node name="BashHitbox" parent="StateMachine/bash" instance=ExtResource("17_538n2")]
+[node name="BashHitbox" parent="StateMachine/bash" instance=ExtResource("21_oeh1l")]
 collision_mask = 2
 
 [node name="Collider" parent="StateMachine/bash/BashHitbox" index="0"]
@@ -1172,25 +1185,26 @@ scale = Vector2(1.04, 1)
 metadata/_edit_lock_ = true
 
 [node name="stance_heavy" type="Node" parent="StateMachine"]
-script = ExtResource("16_2nrsw")
+script = ExtResource("22_7ej28")
 
 [node name="Timer" type="Timer" parent="StateMachine/stance_heavy"]
 
 [node name="stance_light" type="Node" parent="StateMachine"]
-script = ExtResource("17_tedhn")
+script = ExtResource("23_j8fla")
 
 [node name="Timer" type="Timer" parent="StateMachine/stance_light"]
 
 [node name="stance_defensive" type="Node" parent="StateMachine"]
-script = ExtResource("18_0fxvv")
+script = ExtResource("24_lox44")
 
 [node name="Timer" type="Timer" parent="StateMachine/stance_defensive"]
 
 [node name="stun" type="Node" parent="StateMachine"]
-script = ExtResource("22_0mrsw")
+script = ExtResource("25_208af")
 
 [node name="chase" type="Node2D" parent="StateMachine"]
-script = ExtResource("19_exjvs")
+visible = false
+script = ExtResource("26_ug7pn")
 metadata/_edit_lock_ = true
 
 [node name="AttackDetector" type="Area2D" parent="StateMachine/chase"]

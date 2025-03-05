@@ -1,7 +1,7 @@
-extends Control
+extends CanvasLayer
 
 
-var confirmation_dialogue = preload("res://Scenes/confirmation_dialog.tscn")
+var confirmation_dialogue = preload("res://UI/confirmation_dialog.tscn")
 
 @onready var vbox = $VBoxContainer
 @onready var options = $OptionsMenu
@@ -16,7 +16,6 @@ func _process(delta: float) -> void:
 
 func _on_start_game_button_up() -> void:
 	get_tree().change_scene_to_file("res://Scenes/game.tscn")
-	queue_free()
 
 
 func _on_options_pressed() -> void:
@@ -43,3 +42,7 @@ func _on_option_button_item_selected(index: int) -> void:
 
 func _on_check_button_toggled(toggled_on: bool) -> void:
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN if toggled_on else DisplayServer.WINDOW_MODE_WINDOWED)
+
+
+
+	pass # Replace with function body.

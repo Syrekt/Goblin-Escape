@@ -1,10 +1,11 @@
 extends PlayerState
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.animation_player.play("run")
+	player.animation_player.call_deferred("play", "run")
 
 func physics_update(delta: float) -> void:
 	player.move(delta)
+	player.check_movable();
 
 	if not Input.is_action_pressed("run") or player.get_movement_dir() != player.facing:
 		finished.emit("run_stop")

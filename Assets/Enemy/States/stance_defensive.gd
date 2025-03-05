@@ -1,13 +1,18 @@
 extends EnemyState
 
 func enter(previous_state_path: String, data := {}) -> void:
-	enemy.animation_player.play("stance_defensive")
+	enemy.animation_player.call_deferred("play", "stance_defensive")
 	enemy.velocity.x = 0
 	$Timer.start(randf_range(1.0, 2.0))
 
+func exit():
+	print("timer stop")
+	$Timer.stop()
 
 func update(delta):
-	pass
+	if not %AttackDetector.has_overlapping_bodies():
+		enemy.state_node.state.finished.emit("patrol")
+	enemy.set_facing(sign(enemy.chase_target.position.x - enemy.position.x))
 
 
 func _on_timer_timeout() -> void:

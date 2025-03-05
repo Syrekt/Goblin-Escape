@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://daswj4m3e5g5s"]
+
+[ext_resource type="Script" path="res://Scripts/movable.gd" id="1_mkwwh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5nbmp"]
+size = Vector2(23, 30)
+
+[node name="Movable" type="CharacterBody2D"]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_mkwwh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5nbmp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

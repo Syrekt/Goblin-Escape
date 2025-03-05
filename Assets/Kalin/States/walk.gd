@@ -2,12 +2,13 @@ extends PlayerState
 
 func enter(previous_state_path: String, data := {}) -> void:
 	player.set_facing(player.get_movement_dir())
-	player.animation_player.play("walk")
+	player.animation_player.call_deferred("play", "walk")
 	player.animation_player.advance(0)
 	lock_stance_button = true
 
 func physics_update(delta: float) -> void:
 	player.move(delta)
+	player.check_movable();
 
 func update(delta: float) -> void:
 	if lock_stance_button:

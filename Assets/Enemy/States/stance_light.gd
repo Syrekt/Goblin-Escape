@@ -20,4 +20,5 @@ func update(delta):
 
 
 func _on_timer_timeout() -> void:
-	enemy.state_node.state.finished.emit("stab")
+	var next_states = ["stab", "stance_heavy", "stance_defensive"]
+	enemy.state_node.state.finished.emit(next_states.pick_random())

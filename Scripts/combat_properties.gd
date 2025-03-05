@@ -1,6 +1,5 @@
 extends Node
 
-
 #region Stun
 var stunned := false
 @onready var stun_timer = $StunTimer
