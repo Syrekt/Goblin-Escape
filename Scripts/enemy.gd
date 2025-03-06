@@ -57,14 +57,14 @@ func get_movement_dir():
 	return sign(velocity.x)
 
 
-func take_damage(damage):
+func take_damage(_damage):
 	print("Enemy takes damage")
-	health.change_by(-damage)
+	health.change_by(-_damage)
 	state_node.state.finished.emit("hurt")
 
 
 func _process(delta):
-	Debugger.printui(["Enemy state: ", state_node.state.name])
+	Debugger.printui("Enemy state: " + str(state_node.state.name))
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -74,7 +74,7 @@ func _physics_process(delta: float) -> void:
 	if combat_properties.pushback_timer > 0:
 		combat_properties.pushback_timer = move_toward(combat_properties.pushback_timer, 0, delta)
 		combat_properties.pushback_elapsed_time += delta
-		Debugger.printui([combat_properties.pushback_vector])
+		Debugger.printui(str(combat_properties.pushback_vector))
 		velocity = combat_properties.pushback_vector.lerp(Vector2.ZERO, combat_properties.pushback_elapsed_time / combat_properties.pushback_duration)
 		if combat_properties.pushback_timer <= 0: velocity = Vector2.ZERO
 	else:

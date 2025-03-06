@@ -46,4 +46,4 @@ script = ExtResource("4_gwty8")
 position = Vector2(21, 79)
 
 [node name="DialogueTrigger" parent="." instance=ExtResource("6_ssinu")]
-position = Vector2(-218, -109)
+position = Vector2(-153, -41)

@@ -38,6 +38,8 @@ var facing: int = 1
 
 var ignore_corners = false
 
+var interaction_target = null
+
 #const Balloon = preload("res://Dialogues/balloon.tscn")
 #
 #var dialogue_resource : DialogueResource
@@ -76,7 +78,7 @@ func move(delta, facing_locked = false, direction_locked = false):
 		"bash":
 			velocity.x = move_toward(velocity.x, 0, bash_stop_dec)
 		"push", "pull":
-			Debugger.printui(["Push/pull movement"]);
+			Debugger.printui("Push/pull movement");
 			velocity.x = move_toward(velocity.x, push_pull_speed * dir_x * delta, acceleration)
 		"slide":
 			velocity.x = move_toward(velocity.x, 0, slide_dec)
@@ -102,6 +104,9 @@ func check_movable():
 		movable = potential_movable
 		state_node.state.finished.emit("push_idle")
 
+func check_interactable() -> void:
+	if interaction_target != null:
+		interaction_target.process()
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -133,13 +138,30 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			set_crouch_mask(false)
 #endregion
 #region Node Methods
+func _ready() -> void:
+	var interaction_prompt = ""
+	var events = InputMap.action_get_events("interact")
+
+	if events.size() > 0:
+
+		for event in events:
+			print("event: "+str(event))
+			if event is InputEventKey:
+				print("event.keycode: "+str(event.keycode));
+				interaction_prompt = OS.get_keycode_string(event.physical_keycode)
+			elif event is InputEventJoypadButton:
+				interaction_prompt = "Gamepad Button " + str(event.button_index)
+			elif event is InputEventMouseButton:
+				interaction_prompt = "Mouse Button " + str(event.button_index)
+
+	print("interaction_prompt: "+str(interaction_prompt))
+	$InteractionPrompt.text = interaction_prompt
+
 func _physics_process(delta: float) -> void:
-	var interactions = col_interaction.get_overlapping_areas()
-	for i in interactions:
-		i.action()
+	check_interactable()
 
 func _process(delta: float) -> void:
-	Debugger.printui([state_node.state.name])
+	Debugger.printui(str(state_node.state.name))
 	if Input.is_action_pressed("restart"):
 		get_tree().reload_current_scene()
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -153,17 +175,18 @@ func _process(delta: float) -> void:
 			open_menu = null
 		print(open_menu)
 
-	if Input.is_action_just_pressed("ui_accept"):
-		print("load dialogue")
-		#DialogueManager.show_example_dialogue_balloon(load("res://Dialogues/test.dialogue"), "start")
-		#var resource = load("res://Dialogues/test.dialogue")
-		#var dialogue_line = await DialogueManager.get_next_dialogue_line(resource, "start")
-		#print(dialogue_line)
-		#var balloon := Balloon.instantiate()
-		#get_tree().current_scene.add_child(balloon)
-		#balloon.start(dialogue_resource, dialogue_start)
-
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	print(area)
 #endregion
+
+
+func _on_interactor_area_entered(area: Area2D) -> void:
+	interaction_target = area
+	$InteractionPrompt.visible = true
+
+
+func _on_interactor_area_exited(area: Area2D) -> void:
+	if interaction_target == area:
+		interaction_target = null
+		$InteractionPrompt.visible = false
