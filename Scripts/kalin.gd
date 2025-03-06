@@ -27,6 +27,7 @@ var damage := 1
 @onready var ray_movable = $MovableCheck
 @onready var ray_corner_check = $CornerCheck
 @onready var ray_corner_prevent = $CornerPrevent
+@onready var col_stand_check = $StandCheck
 @onready var col_interaction = $Interactor
 var movable : Node2D = null
 
@@ -107,6 +108,10 @@ func check_movable():
 func check_interactable() -> void:
 	if interaction_target != null:
 		interaction_target.process()
+func can_grab_corner() -> bool:
+	return !is_on_floor() && !is_on_ceiling() && !ignore_corners && ray_corner_check.is_colliding() && !ray_corner_prevent.is_colliding()
+func can_stand_up() -> bool:
+	return !col_stand_check.has_overlapping_bodies()
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -134,8 +139,11 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			position.y -= 36
 			state.finished.emit("idle")
 		"slide":
-			state.finished.emit("idle")
-			set_crouch_mask(false)
+			if can_stand_up():
+				state.finished.emit("idle")
+				set_crouch_mask(false)
+			else:
+				state.finished.emit("crouch")
 #endregion
 #region Node Methods
 func _ready() -> void:

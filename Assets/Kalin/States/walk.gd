@@ -14,7 +14,7 @@ func update(delta: float) -> void:
 	if lock_stance_button:
 		if not Input.is_action_pressed("stance"): lock_stance_button = false
 
-	if not player.is_on_floor():
+	if !player.is_on_floor():
 		finished.emit("fall")
 	elif Input.is_action_pressed("run"):
 		finished.emit("run")

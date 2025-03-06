@@ -272,7 +272,8 @@ animations = [{
 "speed": 9.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wwe85"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqw5a"]
+size = Vector2(20, 43)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xhuvx"]
 shader = ExtResource("8_6eeyp")
@@ -1065,19 +1066,17 @@ size = Vector2(20, 32)
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_18den")
-metadata/_edit_lock_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(4.135, -40.07)
+position = Vector2(4.135, -24.07)
 sprite_frames = SubResource("SpriteFrames_tvv3n")
 animation = &"stab"
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(0, -15)
-shape = SubResource("CapsuleShape2D_wwe85")
-metadata/_edit_lock_ = true
+position = Vector2(-1, -5.5)
+shape = SubResource("RectangleShape2D_cqw5a")
 
 [node name="Health" parent="." instance=ExtResource("6_u2r3n")]
 
@@ -1085,34 +1084,27 @@ metadata/_edit_lock_ = true
 
 [node name="RayDownRight" type="RayCast2D" parent="."]
 visible = false
-position = Vector2(0, -26)
+position = Vector2(0, -10)
 target_position = Vector2(31, 32)
-metadata/_edit_lock_ = true
 
 [node name="RayRight" type="RayCast2D" parent="."]
 visible = false
-position = Vector2(0, -16)
 target_position = Vector2(30, 0)
-metadata/_edit_lock_ = true
 
 [node name="RayDownLeft" type="RayCast2D" parent="."]
 visible = false
-position = Vector2(0, -26)
+position = Vector2(0, -10)
 target_position = Vector2(-31, 32)
-metadata/_edit_lock_ = true
 
 [node name="RayLeft" type="RayCast2D" parent="."]
 visible = false
-position = Vector2(0, -16)
 target_position = Vector2(-30, 0)
-metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_xhuvx")
-position = Vector2(0, -32)
+position = Vector2(0, -16)
 texture = ExtResource("9_3g55t")
 hframes = 6
-metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
@@ -1123,9 +1115,9 @@ libraries = {
 [node name="ChaseDetector" type="Area2D" parent="."]
 unique_name_in_owner = true
 visible = false
+position = Vector2(0, 16)
 collision_layer = 0
 collision_mask = 2
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseDetector"]
 position = Vector2(0, -16)
@@ -1133,6 +1125,8 @@ scale = Vector2(10.4, 1.64)
 shape = SubResource("RectangleShape2D_qsl2l")
 
 [node name="StateMachine" parent="." instance=ExtResource("17_n2jyc")]
+visible = false
+position = Vector2(0, 16)
 
 [node name="patrol" type="Node" parent="StateMachine"]
 script = ExtResource("18_pn3ih")
@@ -1151,7 +1145,6 @@ script = ExtResource("19_xl5vi")
 script = ExtResource("20_ujm0m")
 
 [node name="slash" type="Node2D" parent="StateMachine"]
-visible = false
 script = ExtResource("20_ujm0m")
 
 [node name="SlashHitbox" parent="StateMachine/slash" instance=ExtResource("21_oeh1l")]
@@ -1159,10 +1152,8 @@ collision_mask = 2
 
 [node name="Collider" parent="StateMachine/slash/SlashHitbox" index="0"]
 position = Vector2(21, -20)
-metadata/_edit_lock_ = true
 
 [node name="stab" type="Node2D" parent="StateMachine"]
-visible = false
 script = ExtResource("20_ujm0m")
 
 [node name="StabHitbox" parent="StateMachine/stab" instance=ExtResource("21_oeh1l")]
@@ -1173,7 +1164,6 @@ position = Vector2(28, -21)
 scale = Vector2(1.51745, 0.854787)
 
 [node name="bash" type="Node2D" parent="StateMachine"]
-visible = false
 script = ExtResource("20_ujm0m")
 
 [node name="BashHitbox" parent="StateMachine/bash" instance=ExtResource("21_oeh1l")]
@@ -1182,7 +1172,6 @@ collision_mask = 2
 [node name="Collider" parent="StateMachine/bash/BashHitbox" index="0"]
 position = Vector2(26, -20)
 scale = Vector2(1.04, 1)
-metadata/_edit_lock_ = true
 
 [node name="stance_heavy" type="Node" parent="StateMachine"]
 script = ExtResource("22_7ej28")
@@ -1203,9 +1192,7 @@ script = ExtResource("24_lox44")
 script = ExtResource("25_208af")
 
 [node name="chase" type="Node2D" parent="StateMachine"]
-visible = false
 script = ExtResource("26_ug7pn")
-metadata/_edit_lock_ = true
 
 [node name="AttackDetector" type="Area2D" parent="StateMachine/chase"]
 unique_name_in_owner = true
@@ -1216,7 +1203,6 @@ collision_mask = 2
 position = Vector2(0, -16)
 scale = Vector2(4.56, 1)
 shape = SubResource("RectangleShape2D_rha5u")
-metadata/_edit_lock_ = true
 
 [node name="StateSwitchTimer" type="Timer" parent="."]
 one_shot = true

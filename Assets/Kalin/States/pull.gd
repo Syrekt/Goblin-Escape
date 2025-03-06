@@ -9,11 +9,15 @@ func physics_update(delta: float) -> void:
 	player.movable.velocity = player.velocity;
 
 func update(delta: float) -> void:
-	if(Input.is_action_just_pressed("grab")):
+	#Drop the movable
+	if !player.movable.grabbed:
+		finished.emit("idle")
+
+	if Input.is_action_just_pressed("grab"):
 		finished.emit("idle");
 		player.movable.release()
 	var dir = Input.get_axis("left", "right")
-	if(dir == player.facing):
+	if dir == player.facing:
 		finished.emit("push")
-	elif(dir == 0):
+	elif dir == 0:
 		finished.emit("push_idle")

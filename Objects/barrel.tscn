@@ -4,18 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://k0ngf3ur3d1f" path="res://Assets/Others/spr_barrels_stage1_28.png" id="1_xxv5s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5nbmp"]
-size = Vector2(23, 53)
+size = Vector2(22, 48)
 
 [node name="Movable" type="CharacterBody2D"]
 collision_layer = 33
 collision_mask = 33
 script = ExtResource("1_cy03e")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -11.5)
-shape = SubResource("RectangleShape2D_5nbmp")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -11.5)
-scale = Vector2(1, 1.76667)
+position = Vector2(0, -24.5)
 texture = ExtResource("1_xxv5s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_5nbmp")

@@ -25,6 +25,13 @@ var chase_target : Node2D
 @onready var stab_hitbox  = $StateMachine/stab/StabHitbox/Collider
 @onready var bash_hitbox  = $StateMachine/bash/BashHitbox/Collider
 
+var line_of_sight: RayCast2D
+
+func _ready() -> void:
+	line_of_sight = RayCast2D.new()
+	add_child(line_of_sight)
+
+
 func set_facing(dir: int):
 	if dir == 0: pass
 
@@ -80,8 +87,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		combat_properties.pushback_elapsed_time = 0.0
 
-
 	move_and_slide()
+
+	line_of_sight.target_position = %Kalin.global_position
+	var collider_id = line_of_sight.get_collider()
+	if collider_id != null:
+		Debugger.printui("collider_id: "+str(collider_id.name))
 
 
 func _on_health_health_depleted() -> void:
