@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dt2kdbk1phbvt"]
 
-[ext_resource type="Script" path="res://Scripts/debugger.gd" id="1_7ngyv"]
+[ext_resource type="Script" uid="uid://csaf5p22rt716" path="res://Scripts/debugger.gd" id="1_7ngyv"]
 
 [node name="Debugger" type="CanvasLayer"]
 layer = 10

@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=4 uid="uid://dhjw1qmf2nvdh"]
 
 [ext_resource type="PackedScene" uid="uid://d08scf611mrii" path="res://Objects/kalin.tscn" id="1_v3ybc"]
-[ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_yp60x"]
-[ext_resource type="Script" path="res://Scripts/camera_2d.gd" id="4_gwty8"]
+[ext_resource type="Script" uid="uid://dytt7cafdt3c1" path="res://Scripts/game_manager.gd" id="1_yp60x"]
+[ext_resource type="Script" uid="uid://ettvx4a2msjv" path="res://Scripts/camera_2d.gd" id="4_gwty8"]
 [ext_resource type="PackedScene" uid="uid://c2unx5js38jr8" path="res://Objects/barrel.tscn" id="5_jdxuh"]
 [ext_resource type="PackedScene" uid="uid://bpj2k5beannxk" path="res://Objects/dialogue_trigger.tscn" id="6_ssinu"]
 [ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Objects/enemy.tscn" id="7_w7h1d"]

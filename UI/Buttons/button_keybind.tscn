@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://hvdtjmpwq6ji"]
 
-[ext_resource type="Script" path="res://UI/Buttons/button_keybind.gd" id="1_6efsq"]
+[ext_resource type="Script" uid="uid://bcbxftpiecqi0" path="res://UI/Buttons/button_keybind.gd" id="1_6efsq"]
 
 [node name="ButtonKeybind" type="Control" groups=["key_bind_buttons"]]
 layout_mode = 3

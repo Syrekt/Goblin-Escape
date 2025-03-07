@@ -1,12 +1,12 @@
 [gd_scene load_steps=257 format=3 uid="uid://d08scf611mrii"]
 
-[ext_resource type="Script" path="res://Scripts/kalin.gd" id="1_tpqnq"]
+[ext_resource type="Script" uid="uid://coi4g5fo3jf06" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Texture2D" uid="uid://dcs3l0iefjo7w" path="res://Assets/Kalin/Sprites/Kalin-Fall.png" id="2_1j6vo"]
 [ext_resource type="Texture2D" uid="uid://boahl6r6b6lgx" path="res://Assets/Kalin/Sprites/Kalin-Crouch_Idle.png" id="2_6cw72"]
 [ext_resource type="Texture2D" uid="uid://b83foasp85e6b" path="res://Assets/Kalin/Sprites/Kalin-Bash.png" id="2_s11s3"]
 [ext_resource type="PackedScene" uid="uid://cpogcou30wxcj" path="res://UI/combat_properties.tscn" id="2_yetl5"]
 [ext_resource type="Texture2D" uid="uid://yymtfpkr47q8" path="res://Assets/Kalin/Sprites/Kalin_idle_unarmed.png" id="3_b6tj0"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/run.gd" id="3_ejfka"]
+[ext_resource type="Script" uid="uid://bkcjynwpex7ka" path="res://Assets/Kalin/States/run.gd" id="3_ejfka"]
 [ext_resource type="Texture2D" uid="uid://bwtgglpsavvyw" path="res://Assets/Kalin/Sprites/Kalin-Jump.png" id="3_fcid0"]
 [ext_resource type="Texture2D" uid="uid://dowqrv0phpb5t" path="res://Assets/Kalin/Sprites/Kalin-Block.png" id="3_pq7gt"]
 [ext_resource type="Texture2D" uid="uid://cxr0adhrbpvo6" path="res://Assets/Kalin/Sprites/Kalin-Crouch_Walk.png" id="3_sa02y"]
@@ -18,43 +18,43 @@
 [ext_resource type="Texture2D" uid="uid://dl4uq2pkst8rp" path="res://Assets/Kalin/Sprites/Kalin-Light Attack.png" id="9_2a2iq"]
 [ext_resource type="Texture2D" uid="uid://d37lg6g726j1r" path="res://Assets/Kalin/Sprites/Kalin-Def Stance.png" id="9_3wuxq"]
 [ext_resource type="Texture2D" uid="uid://p3oh0wc2s34d" path="res://Assets/Kalin/Sprites/Kalin-Hurt.png" id="9_e3nxf"]
-[ext_resource type="PackedScene" path="res://UI/health.tscn" id="9_kqaha"]
+[ext_resource type="PackedScene" uid="uid://ceetftx8qxgd0" path="res://UI/health.tscn" id="9_kqaha"]
 [ext_resource type="PackedScene" uid="uid://b02rwb4cvvhr4" path="res://Objects/state_machine.tscn" id="9_ojhio"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/idle.gd" id="10_4yl4h"]
+[ext_resource type="Script" uid="uid://mtruxnn62ila" path="res://Assets/Kalin/States/idle.gd" id="10_4yl4h"]
 [ext_resource type="Texture2D" uid="uid://bh7p7ow7bykv7" path="res://Assets/Kalin/Sprites/Kalin-Heavy Stance.png" id="10_8p6tu"]
 [ext_resource type="Texture2D" uid="uid://x5i4gyyapuxd" path="res://Assets/Kalin/Sprites/Kalin-Pull.png" id="10_qartl"]
 [ext_resource type="Texture2D" uid="uid://cocmax1vh70kr" path="res://Assets/Kalin/Sprites/Kalin-Push.png" id="11_0xxw0"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/jump.gd" id="11_10o18"]
+[ext_resource type="Script" uid="uid://jcdm00a4m2ox" path="res://Assets/Kalin/States/jump.gd" id="11_10o18"]
 [ext_resource type="Texture2D" uid="uid://be86rbb20xfjs" path="res://Assets/Kalin/Sprites/Kalin-Light Stance.png" id="11_d86ow"]
 [ext_resource type="Texture2D" uid="uid://yicqhor234bv" path="res://Assets/Kalin/Sprites/Kalin-Light Walk.png" id="12_cbigf"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/fall.gd" id="12_oysea"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/land.gd" id="14_sgd03"]
+[ext_resource type="Script" uid="uid://bqbk0ddj34sqn" path="res://Assets/Kalin/States/fall.gd" id="12_oysea"]
+[ext_resource type="Script" uid="uid://c03gd0js6ef17" path="res://Assets/Kalin/States/land.gd" id="14_sgd03"]
 [ext_resource type="Texture2D" uid="uid://dslyx31hbng77" path="res://Assets/Kalin/Sprites/Kalin-Run_Stop.png" id="14_uklr6"]
 [ext_resource type="Texture2D" uid="uid://bse8dgihy05xu" path="res://Assets/Kalin/Sprites/Kalin-Wallslide.png" id="19_dyqvk"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/crouch_walk.gd" id="21_3t0vr"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/crouch.gd" id="21_60gj1"]
+[ext_resource type="Script" uid="uid://c7frkek8a6s60" path="res://Assets/Kalin/States/crouch_walk.gd" id="21_3t0vr"]
+[ext_resource type="Script" uid="uid://3xoy8rjyfmi3" path="res://Assets/Kalin/States/crouch.gd" id="21_60gj1"]
 [ext_resource type="Texture2D" uid="uid://bxgpgvblnjqhg" path="res://Assets/Kalin/Sprites/Kalin-Walk.png" id="22_vnsvi"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/walk.gd" id="28_1dko0"]
+[ext_resource type="Script" uid="uid://bgnnyj7i10wbg" path="res://Assets/Kalin/States/walk.gd" id="28_1dko0"]
 [ext_resource type="Texture2D" uid="uid://bq334bamr3mgu" path="res://Assets/Kalin/Sprites/Kalin-Slide.png" id="29_qnnkd"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/stance_light.gd" id="33_ao24u"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/run_stop.gd" id="34_lbmmt"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/stance_heavy.gd" id="36_uhi5y"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/stance_defensive.gd" id="38_823eb"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/slash.gd" id="39_af0aw"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/stance_walk.gd" id="39_rgkp8"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/animation_state_player.gd" id="40_xirjq"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/bash.gd" id="41_pdh0h"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/stab.gd" id="41_sat24"]
+[ext_resource type="Script" uid="uid://dkwpmjw6yg1bb" path="res://Assets/Kalin/States/stance_light.gd" id="33_ao24u"]
+[ext_resource type="Script" uid="uid://cde3iqq141b2n" path="res://Assets/Kalin/States/run_stop.gd" id="34_lbmmt"]
+[ext_resource type="Script" uid="uid://dhnnpcllpme4v" path="res://Assets/Kalin/States/stance_heavy.gd" id="36_uhi5y"]
+[ext_resource type="Script" uid="uid://4n2pywsn1qd6" path="res://Assets/Kalin/States/stance_defensive.gd" id="38_823eb"]
+[ext_resource type="Script" uid="uid://f4jufjbul03i" path="res://Assets/Kalin/States/slash.gd" id="39_af0aw"]
+[ext_resource type="Script" uid="uid://2w325nrhldrd" path="res://Assets/Kalin/States/stance_walk.gd" id="39_rgkp8"]
+[ext_resource type="Script" uid="uid://bwrdgmfgq5cw3" path="res://Assets/Kalin/States/animation_state_player.gd" id="40_xirjq"]
+[ext_resource type="Script" uid="uid://b203v085bx2rg" path="res://Assets/Kalin/States/bash.gd" id="41_pdh0h"]
+[ext_resource type="Script" uid="uid://bvi7mrhp8r1py" path="res://Assets/Kalin/States/stab.gd" id="41_sat24"]
 [ext_resource type="Texture2D" uid="uid://c4sgdo50jnun4" path="res://Assets/Kalin/Sprites/Kalin-Run.png" id="44_h06e0"]
-[ext_resource type="PackedScene" path="res://Objects/hitbox.tscn" id="45_42hh8"]
+[ext_resource type="PackedScene" uid="uid://2s1ryg6qqqmc" path="res://Objects/hitbox.tscn" id="45_42hh8"]
 [ext_resource type="Texture2D" uid="uid://cywhcouoj6ral" path="res://Assets/Kalin/Sprites/Kalin-Stun.png" id="45_pat22"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/push_idle.gd" id="48_mwqkq"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/push.gd" id="49_ujutq"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/pull.gd" id="50_tcyto"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/corner_grab.gd" id="51_t8vjn"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/corner_climb.gd" id="52_4ckjm"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/slide.gd" id="54_5dxkx"]
-[ext_resource type="Script" path="res://Assets/Kalin/States/interacting.gd" id="55_5lcso"]
+[ext_resource type="Script" uid="uid://7g1nk1glip7t" path="res://Assets/Kalin/States/push_idle.gd" id="48_mwqkq"]
+[ext_resource type="Script" uid="uid://fqf7yx6g1f1f" path="res://Assets/Kalin/States/push.gd" id="49_ujutq"]
+[ext_resource type="Script" uid="uid://c2g5e1h8b8lqc" path="res://Assets/Kalin/States/pull.gd" id="50_tcyto"]
+[ext_resource type="Script" uid="uid://dwq1nm237bc0m" path="res://Assets/Kalin/States/corner_grab.gd" id="51_t8vjn"]
+[ext_resource type="Script" uid="uid://cihngsdr3x7el" path="res://Assets/Kalin/States/corner_climb.gd" id="52_4ckjm"]
+[ext_resource type="Script" uid="uid://dla7rfv4p43jf" path="res://Assets/Kalin/States/slide.gd" id="54_5dxkx"]
+[ext_resource type="Script" uid="uid://cenw0nn0fohoa" path="res://Assets/Kalin/States/interacting.gd" id="55_5lcso"]
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://Assets/Others/main_theme.tres" id="56_ghu8e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6qte"]
@@ -2946,34 +2946,34 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cuohi"]
 _data = {
-"RESET": SubResource("Animation_5koc5"),
-"bash": SubResource("Animation_b8tlq"),
-"block": SubResource("Animation_bb84h"),
-"corner_climb": SubResource("Animation_5syxg"),
-"corner_grab": SubResource("Animation_dxyog"),
-"crouch": SubResource("Animation_qdaj2"),
-"crouch_walk": SubResource("Animation_us7aq"),
-"death": SubResource("Animation_s6n7c"),
-"fall": SubResource("Animation_sxpma"),
-"hurt": SubResource("Animation_kp5w5"),
-"idle": SubResource("Animation_dkbxi"),
-"land": SubResource("Animation_jxgp1"),
-"pull": SubResource("Animation_mj8sq"),
-"push": SubResource("Animation_xojyh"),
-"push_idle": SubResource("Animation_dchdh"),
-"rise": SubResource("Animation_rp60i"),
-"run": SubResource("Animation_obgsb"),
-"run_stop": SubResource("Animation_x4pkh"),
-"slash": SubResource("Animation_ada4r"),
-"slide": SubResource("Animation_1olko"),
-"stab": SubResource("Animation_sw71j"),
-"stance_defensive": SubResource("Animation_xnqfs"),
-"stance_heavy": SubResource("Animation_3m75v"),
-"stance_light": SubResource("Animation_0byfx"),
-"stance_walk": SubResource("Animation_udxs3"),
-"stun": SubResource("Animation_qr0re"),
-"walk": SubResource("Animation_ny4of"),
-"wallslide": SubResource("Animation_1pm5w")
+&"RESET": SubResource("Animation_5koc5"),
+&"bash": SubResource("Animation_b8tlq"),
+&"block": SubResource("Animation_bb84h"),
+&"corner_climb": SubResource("Animation_5syxg"),
+&"corner_grab": SubResource("Animation_dxyog"),
+&"crouch": SubResource("Animation_qdaj2"),
+&"crouch_walk": SubResource("Animation_us7aq"),
+&"death": SubResource("Animation_s6n7c"),
+&"fall": SubResource("Animation_sxpma"),
+&"hurt": SubResource("Animation_kp5w5"),
+&"idle": SubResource("Animation_dkbxi"),
+&"land": SubResource("Animation_jxgp1"),
+&"pull": SubResource("Animation_mj8sq"),
+&"push": SubResource("Animation_xojyh"),
+&"push_idle": SubResource("Animation_dchdh"),
+&"rise": SubResource("Animation_rp60i"),
+&"run": SubResource("Animation_obgsb"),
+&"run_stop": SubResource("Animation_x4pkh"),
+&"slash": SubResource("Animation_ada4r"),
+&"slide": SubResource("Animation_1olko"),
+&"stab": SubResource("Animation_sw71j"),
+&"stance_defensive": SubResource("Animation_xnqfs"),
+&"stance_heavy": SubResource("Animation_3m75v"),
+&"stance_light": SubResource("Animation_0byfx"),
+&"stance_walk": SubResource("Animation_udxs3"),
+&"stun": SubResource("Animation_qr0re"),
+&"walk": SubResource("Animation_ny4of"),
+&"wallslide": SubResource("Animation_1pm5w")
 }
 
 [node name="Kalin" type="CharacterBody2D"]
