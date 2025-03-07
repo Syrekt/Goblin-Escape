@@ -63,6 +63,9 @@ size = Vector2(16, 45.8333)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iccmv"]
 size = Vector2(16, 25.8333)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_avh81"]
+size = Vector2(16, 24)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nk40"]
 size = Vector2(20, 30)
 
@@ -2973,9 +2976,6 @@ _data = {
 "wallslide": SubResource("Animation_1pm5w")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_avh81"]
-size = Vector2(16, 24)
-
 [node name="Kalin" type="CharacterBody2D"]
 z_index = 5
 collision_layer = 2
@@ -2985,24 +2985,34 @@ script = ExtResource("1_tpqnq")
 [node name="CombatProperties" parent="." instance=ExtResource("2_yetl5")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1, -32)
+position = Vector2(1, 0)
 texture = ExtResource("3_b6tj0")
 hframes = 6
 
 [node name="ColliderStanding" type="CollisionShape2D" parent="."]
-position = Vector2(1, -27.5)
+visible = false
+position = Vector2(1, 4.5)
 scale = Vector2(1, 1.2)
 shape = SubResource("RectangleShape2D_y6qte")
-metadata/_edit_lock_ = true
 
 [node name="ColliderCrouching" type="CollisionShape2D" parent="."]
-position = Vector2(1, -15.5)
+visible = false
+position = Vector2(1, 16.5)
 scale = Vector2(1, 1.2)
 shape = SubResource("RectangleShape2D_iccmv")
 disabled = true
 
+[node name="StandCheck" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StandCheck"]
+position = Vector2(1, -7)
+shape = SubResource("RectangleShape2D_avh81")
+
 [node name="Interactor" type="Area2D" parent="."]
 visible = false
+position = Vector2(0, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor"]
 position = Vector2(0, -15)
@@ -3010,24 +3020,29 @@ shape = SubResource("RectangleShape2D_1nk40")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(0, -41)
+position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_udw38")
 animation = &"pull"
 
+[node name="MovableCheck" type="RayCast2D" parent="."]
+visible = false
+target_position = Vector2(17, 0)
+collision_mask = 32
+
 [node name="FloorCheck" type="RayCast2D" parent="."]
 visible = false
-position = Vector2(0, -9)
+position = Vector2(0, 23)
 target_position = Vector2(0, 14)
 
 [node name="CornerCheck" type="RayCast2D" parent="."]
 visible = false
-position = Vector2(0, -47)
+position = Vector2(0, -15)
 target_position = Vector2(18, 0)
 collision_mask = 33
 
 [node name="CornerPrevent" type="RayCast2D" parent="."]
 visible = false
-position = Vector2(0, -63)
+position = Vector2(0, -31)
 target_position = Vector2(18, 0)
 collision_mask = 33
 
@@ -3041,7 +3056,7 @@ libraries = {
 
 [node name="StateMachine" parent="." instance=ExtResource("9_ojhio")]
 visible = false
-position = Vector2(-4, 2)
+position = Vector2(-4, 34)
 
 [node name="idle" type="Node" parent="StateMachine"]
 script = ExtResource("10_4yl4h")
@@ -3136,28 +3151,15 @@ script = ExtResource("54_5dxkx")
 [node name="interacting" type="Node" parent="StateMachine"]
 script = ExtResource("55_5lcso")
 
-[node name="MovableCheck" type="RayCast2D" parent="."]
-visible = false
-position = Vector2(0, -32)
-target_position = Vector2(17, 0)
-collision_mask = 32
-
 [node name="InteractionPrompt" type="Label" parent="."]
-visible = false
 offset_left = -36.0
-offset_top = -85.0
+offset_top = -53.0
 offset_right = 36.0
-offset_bottom = -62.0
+offset_bottom = -25.0
 theme = ExtResource("56_ghu8e")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="StandCheck" type="Area2D" parent="."]
-position = Vector2(0, -36)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StandCheck"]
-position = Vector2(1, -7)
-shape = SubResource("RectangleShape2D_avh81")
+metadata/_edit_use_anchors_ = true
 
 [connection signal="area_entered" from="Interactor" to="." method="_on_interactor_area_entered"]
 [connection signal="area_exited" from="Interactor" to="." method="_on_interactor_area_exited"]

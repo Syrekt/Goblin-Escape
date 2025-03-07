@@ -31,7 +31,6 @@ func _ready() -> void:
 	line_of_sight = RayCast2D.new()
 	add_child(line_of_sight)
 
-
 func set_facing(dir: int):
 	if dir == 0: pass
 
@@ -43,21 +42,29 @@ func set_facing(dir: int):
 			child.scale.x = facing
 
 func move(dir: int, delta: float) -> bool:
-	if dir == 0: return false
-	if dir == 1:
-		if not ray_down_right.is_colliding() or ray_right.is_colliding():
-			velocity.x = 0
-			animation_player.play("idle")
-			return false
-	if dir == -1:
-		if not ray_down_left.is_colliding() or ray_left.is_colliding():
-			velocity.x = 0
-			animation_player.play("idle")
-			return false
+	if dir == 0:
+		animation_player.play("idle")
+		return false
+#	if dir == 1:
+#		if not ray_down_right.is_colliding() or ray_right.is_colliding():
+#			velocity.x = 0
+#			animation_player.play("idle")
+#			return false
+#	if dir == -1:
+#		if not ray_down_left.is_colliding() or ray_left.is_colliding():
+#			velocity.x = 0
+#			animation_player.play("idle")
+#			return false
 	velocity.x = dir * move_speed * delta
-	set_facing(sign(velocity.x))
-	animation_player.play("run")
-	return true
+	move_and_slide()
+
+	if velocity.x == 0:
+		animation_player.play("idle")
+	else:
+		set_facing(sign(velocity.x))
+		animation_player.play("run")
+
+	return velocity.x != 0
 
 
 func get_movement_dir():
@@ -86,14 +93,6 @@ func _physics_process(delta: float) -> void:
 		if combat_properties.pushback_timer <= 0: velocity = Vector2.ZERO
 	else:
 		combat_properties.pushback_elapsed_time = 0.0
-
-	move_and_slide()
-
-	line_of_sight.target_position = %Kalin.global_position
-	var collider_id = line_of_sight.get_collider()
-	if collider_id != null:
-		Debugger.printui("collider_id: "+str(collider_id.name))
-
 
 func _on_health_health_depleted() -> void:
 	state_node.state.finished.emit("death")

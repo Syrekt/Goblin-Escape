@@ -1125,7 +1125,6 @@ scale = Vector2(10.4, 1.64)
 shape = SubResource("RectangleShape2D_qsl2l")
 
 [node name="StateMachine" parent="." instance=ExtResource("17_n2jyc")]
-visible = false
 position = Vector2(0, 16)
 
 [node name="patrol" type="Node" parent="StateMachine"]
@@ -1201,7 +1200,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/chase/AttackDetector"]
 position = Vector2(0, -16)
-scale = Vector2(4.56, 1)
+scale = Vector2(3.07, 1)
 shape = SubResource("RectangleShape2D_rha5u")
 
 [node name="StateSwitchTimer" type="Timer" parent="."]
