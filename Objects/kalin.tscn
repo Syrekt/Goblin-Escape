@@ -1,4 +1,4 @@
-[gd_scene load_steps=257 format=3 uid="uid://d08scf611mrii"]
+[gd_scene load_steps=258 format=3 uid="uid://d08scf611mrii"]
 
 [ext_resource type="Script" uid="uid://coi4g5fo3jf06" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Texture2D" uid="uid://dcs3l0iefjo7w" path="res://Assets/Kalin/Sprites/Kalin-Fall.png" id="2_1j6vo"]
@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://bh7p7ow7bykv7" path="res://Assets/Kalin/Sprites/Kalin-Heavy Stance.png" id="10_8p6tu"]
 [ext_resource type="Texture2D" uid="uid://x5i4gyyapuxd" path="res://Assets/Kalin/Sprites/Kalin-Pull.png" id="10_qartl"]
 [ext_resource type="Texture2D" uid="uid://cocmax1vh70kr" path="res://Assets/Kalin/Sprites/Kalin-Push.png" id="11_0xxw0"]
-[ext_resource type="Script" uid="uid://jcdm00a4m2ox" path="res://Assets/Kalin/States/jump.gd" id="11_10o18"]
+[ext_resource type="Script" uid="uid://jcdm00a4m2ox" path="res://Assets/Kalin/States/rise.gd" id="11_10o18"]
 [ext_resource type="Texture2D" uid="uid://be86rbb20xfjs" path="res://Assets/Kalin/Sprites/Kalin-Light Stance.png" id="11_d86ow"]
 [ext_resource type="Texture2D" uid="uid://yicqhor234bv" path="res://Assets/Kalin/Sprites/Kalin-Light Walk.png" id="12_cbigf"]
 [ext_resource type="Script" uid="uid://bqbk0ddj34sqn" path="res://Assets/Kalin/States/fall.gd" id="12_oysea"]
@@ -56,6 +56,7 @@
 [ext_resource type="Script" uid="uid://dla7rfv4p43jf" path="res://Assets/Kalin/States/slide.gd" id="54_5dxkx"]
 [ext_resource type="Script" uid="uid://cenw0nn0fohoa" path="res://Assets/Kalin/States/interacting.gd" id="55_5lcso"]
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://Assets/Others/main_theme.tres" id="56_ghu8e"]
+[ext_resource type="Script" uid="uid://dpcphh4eavvle" path="res://Assets/Kalin/States/stun.gd" id="56_qqpcq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6qte"]
 size = Vector2(16, 45.8333)
@@ -3051,7 +3052,7 @@ collision_mask = 33
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_cuohi")
+&"": SubResource("AnimationLibrary_cuohi")
 }
 
 [node name="StateMachine" parent="." instance=ExtResource("9_ojhio")]
@@ -3151,7 +3152,11 @@ script = ExtResource("54_5dxkx")
 [node name="interacting" type="Node" parent="StateMachine"]
 script = ExtResource("55_5lcso")
 
+[node name="stun" type="Node" parent="StateMachine"]
+script = ExtResource("56_qqpcq")
+
 [node name="InteractionPrompt" type="Label" parent="."]
+visible = false
 offset_left = -36.0
 offset_top = -53.0
 offset_right = 36.0

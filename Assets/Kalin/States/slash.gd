@@ -6,9 +6,6 @@ extends PlayerState
 func enter(previous_state_path: String, data := {}) -> void:
 	player.animation_player.call_deferred("play", "slash")
 
-func physics_update(delta: float) -> void:
-	player.move(delta)
-
 func update(delta):
 	if not player.is_on_floor():
 		finished.emit("fall")

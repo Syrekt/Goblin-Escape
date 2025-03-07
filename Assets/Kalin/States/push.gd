@@ -4,18 +4,21 @@ func enter(previous_state_path: String, data := {}) -> void:
 	player.animation_player.call_deferred("play", "push")
 	player.movable.grab()
 
+
 func physics_update(delta: float) -> void:
-	player.move(delta, true);
-	player.movable.velocity = player.velocity;
+	player.facing_locked = true
+	player.movable.velocity.x = player.velocity.x;
 
 func update(delta: float) -> void:
 	#Drop the movable
 	if !player.movable.grabbed:
 		finished.emit("idle")
+		player.facing_locked = false
 
 	if Input.is_action_just_pressed("grab"):
 		finished.emit("idle");
 		player.movable.release()
+		player.facing_locked = false
 	var dir = Input.get_axis("left", "right")
 	if dir == -player.facing:
 		finished.emit("pull")

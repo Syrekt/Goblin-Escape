@@ -9,7 +9,7 @@ func deal_damage(attacker: CharacterBody2D, defender: CharacterBody2D, pushback_
 			print("Slash target")
 			if defender_blocking:
 				print("Attack result: Blocked by opponent")
-				Combat.stun(defender)
+				defender.combat_properties.stun(2.0)
 			else:
 				print("Not blocking, deal damage")
 				defender.take_damage(attacker.damage)

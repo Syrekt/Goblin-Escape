@@ -9,11 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://cpogcou30wxcj" path="res://UI/combat_properties.tscn" id="7_7ej0e"]
 [ext_resource type="Shader" uid="uid://dgty7bsbniivw" path="res://Scripts/flash.gdshader" id="8_6eeyp"]
 [ext_resource type="Texture2D" uid="uid://bxfbcd2o3tqam" path="res://Assets/Enemy/Goblin/goblin-idle.png" id="9_3g55t"]
-[ext_resource type="Texture2D" uid="uid://efonub8aeguf" path="res://Assets/Enemy/Knight/_CrouchAttack_strip4.png" id="10_14m58"]
 [ext_resource type="Texture2D" uid="uid://c6nifh0i54h6f" path="res://Assets/Enemy/Goblin/goblin-bash.png" id="11_wrk2e"]
 [ext_resource type="Texture2D" uid="uid://ppmeb6xgbtin" path="res://Assets/Enemy/Goblin/goblin-death.png" id="12_to5id"]
 [ext_resource type="Texture2D" uid="uid://cnglwro36se85" path="res://Assets/Enemy/Goblin/goblin-hurt.png" id="13_uqw8j"]
 [ext_resource type="Texture2D" uid="uid://bpxyvituq5b37" path="res://Assets/Enemy/Goblin/goblin-walk.png" id="14_abbm1"]
+[ext_resource type="Texture2D" uid="uid://chla4jvcboa4e" path="res://Assets/Enemy/Goblin/goblin-slash.png" id="15_4po4b"]
 [ext_resource type="Texture2D" uid="uid://bhywg3kg1q3in" path="res://Assets/Enemy/Goblin/goblin-attack.png" id="15_mlxbl"]
 [ext_resource type="Texture2D" uid="uid://cdxqste3ksqh" path="res://Assets/Enemy/Knight/_Roll.png" id="16_ae1py"]
 [ext_resource type="PackedScene" uid="uid://b02rwb4cvvhr4" path="res://Objects/state_machine.tscn" id="17_n2jyc"]
@@ -381,7 +381,6 @@ tracks/7/keys = {
 
 [sub_resource type="Animation" id="Animation_iufq0"]
 resource_name = "bash"
-length = 0.5
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -390,10 +389,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.390714, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -405,7 +404,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("10_14m58")]
+"values": [ExtResource("11_wrk2e")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -417,7 +416,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [10]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -426,7 +425,7 @@ tracks/3/path = NodePath("../StateMachine/bash/BashHitbox/Collider:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.1, 0.2),
+"times": PackedFloat32Array(0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -640,7 +639,6 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_nd8hd"]
 resource_name = "slash"
-length = 0.7
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -649,10 +647,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -664,7 +662,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("15_mlxbl")]
+"values": [ExtResource("15_4po4b")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -676,7 +674,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [7]
+"values": [10]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -782,7 +780,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [8]
+"values": [10]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -823,7 +821,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [3]
+"values": [1]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -835,7 +833,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("15_mlxbl")]
+"values": [ExtResource("15_4po4b")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -847,7 +845,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [7]
+"values": [10]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -888,7 +886,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [3]
+"values": [1]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -921,10 +919,10 @@ tracks/3/path = NodePath(".:material:shader_parameter/flash_intensity")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [1.0, 0.0]
+"values": [1.0, 0.0, 1.0, 0.0, 0.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -1082,34 +1080,24 @@ shape = SubResource("RectangleShape2D_cqw5a")
 
 [node name="CombatProperties" parent="." instance=ExtResource("7_7ej0e")]
 
-[node name="RayDownRight" type="RayCast2D" parent="."]
-visible = false
+[node name="FallCheck" type="RayCast2D" parent="."]
 position = Vector2(0, -10)
 target_position = Vector2(31, 32)
 
 [node name="RayRight" type="RayCast2D" parent="."]
-visible = false
 target_position = Vector2(30, 0)
-
-[node name="RayDownLeft" type="RayCast2D" parent="."]
-visible = false
-position = Vector2(0, -10)
-target_position = Vector2(-31, 32)
-
-[node name="RayLeft" type="RayCast2D" parent="."]
-visible = false
-target_position = Vector2(-30, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_xhuvx")
 position = Vector2(0, -16)
+scale = Vector2(-1, 1)
 texture = ExtResource("9_3g55t")
 hframes = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_uyvhu")
+&"": SubResource("AnimationLibrary_uyvhu")
 }
 
 [node name="ChaseDetector" type="Area2D" parent="."]
@@ -1125,6 +1113,7 @@ scale = Vector2(10.4, 1.64)
 shape = SubResource("RectangleShape2D_qsl2l")
 
 [node name="StateMachine" parent="." instance=ExtResource("17_n2jyc")]
+visible = false
 position = Vector2(0, 16)
 
 [node name="patrol" type="Node" parent="StateMachine"]

@@ -5,9 +5,6 @@ func enter(previous_state_path: String, data := {}) -> void:
 	player.animation_player.call_deferred("play", "stance_walk")
 	lock_stance_button = true;
 
-func physics_update(delta: float) -> void:
-	player.move(delta)
-
 func update(delta):
 	if lock_stance_button:
 		if not Input.is_action_pressed("stance"): lock_stance_button = false

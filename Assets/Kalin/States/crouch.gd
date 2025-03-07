@@ -9,7 +9,6 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	Debugger.printui("player.can_stand_up(): "+str(player.can_stand_up()));
-	player.move_and_slide()
 	if not player.is_on_floor():
 		finished.emit("fall")
 		player.set_crouch_mask(false)

@@ -9,11 +9,17 @@ class_name Player extends CharacterBody2D
 @export var slide_dec := 7.0
 @export var gravity := 500.0
 @export var jump_impulse := 200.0
-@export var acceleration := 10.0
+@export var def_acc := 10.0
 @export var run_stop_dec := 3.0
 @export var bash_stop_dec:= 4.0
 @export var climb_xoff := -5
 @export var climb_yoff := -13
+
+var move_speed			:= 0.0
+var facing_locked		:= false
+var direction_locked	:= false
+var x_movement_locked	:= false
+var y_movement_locked	:= false
 
 var damage := 1
 
@@ -63,29 +69,7 @@ func set_facing(dir: int):
 func get_movement_dir():
 	return Input.get_axis("left", "right")
 
-func move(delta, facing_locked = false, direction_locked = false):
-	var state_name = state_node.state.name
-	var dir_x = get_movement_dir() if !direction_locked else facing
 
-	match state_name:
-		"crouch_walk":
-			velocity.x = move_toward(velocity.x, crouch_speed * dir_x * delta, acceleration)
-		"walk", "stance_walk":
-			velocity.x = move_toward(velocity.x, walk_speed * dir_x * delta, acceleration)
-		"run":
-			velocity.x = move_toward(velocity.x, run_speed * dir_x * delta, acceleration)
-		"run_stop":
-			velocity.x = move_toward(velocity.x, 0, run_stop_dec)
-		"bash":
-			velocity.x = move_toward(velocity.x, 0, bash_stop_dec)
-		"push", "pull":
-			Debugger.printui("Push/pull movement");
-			velocity.x = move_toward(velocity.x, push_pull_speed * dir_x * delta, acceleration)
-		"slide":
-			velocity.x = move_toward(velocity.x, 0, slide_dec)
-
-	move_and_slide()
-	if(!facing_locked && velocity.x != 0): set_facing(sign(velocity.x))
 
 func fall(delta):
 	velocity.y += gravity * delta
@@ -166,6 +150,56 @@ func _ready() -> void:
 	$InteractionPrompt.text = interaction_prompt
 
 func _physics_process(delta: float) -> void:
+	#region X Movement
+	var state_name = state_node.state.name
+	var dir_x = get_movement_dir() if !direction_locked else facing
+	if dir_x == 0: move_speed = 0
+	var accelaration = def_acc
+
+	match state_name:
+		"crouch_walk":
+			move_speed = crouch_speed
+		"walk", "stance_walk":
+			move_speed = walk_speed
+		"run":
+			move_speed = run_speed
+		"push", "pull":
+			move_speed = push_pull_speed
+		"run_stop":
+			move_speed = walk_speed
+			accelaration = run_stop_dec
+		"bash":
+			accelaration = bash_stop_dec
+		"slide", "stun":
+			accelaration = slide_dec
+		"land":
+			move_speed = 0;
+			accelaration = slide_dec
+
+	if combat_properties.pushback_vector.x != 0:
+		move_speed += combat_properties.pushback_vector.x
+		combat_properties.pushback_vector.x = move_toward(combat_properties.pushback_vector.x, 0, combat_properties.pushback_dec)
+		Debugger.printui("move_speed: "+str(move_speed))
+
+	Debugger.printui("dir_x: "+str(dir_x))
+	velocity.x = move_toward(velocity.x, move_speed * dir_x * delta, accelaration)
+	#endregion
+	#region Y Movement
+	if !is_on_floor():
+		match state_name:
+			"corner_climb", "corner_grab":
+				velocity.y = 0
+			_:
+				velocity.y += gravity * delta
+
+	#endregion
+
+	move_and_slide()
+	if combat_properties.pushback_vector.x != 0:
+		set_facing(sign(-velocity.x))
+	else:
+		if(!facing_locked && velocity.x != 0): set_facing(sign(velocity.x))
+
 	check_interactable()
 
 func _process(delta: float) -> void:
@@ -183,12 +217,17 @@ func _process(delta: float) -> void:
 			open_menu = null
 		print(open_menu)
 
+	if Input.is_action_just_pressed("debug1"):
+		print("Pushback")
+		combat_properties.pushback_apply(Vector2(global_position.x + 100.0*facing, global_position.y), 30.0 * 60.0)
+		print("global_position.x + 100.0*facing: "+str(global_position.x + 100.0*facing));
+	Debugger.printui("combat_properties.pushback_vector: "+str(combat_properties.pushback_vector.x));
 
+
+#endregion
+#region Signals
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	print(area)
-#endregion
-
-
 func _on_interactor_area_entered(area: Area2D) -> void:
 	interaction_target = area
 	$InteractionPrompt.visible = true
@@ -198,3 +237,4 @@ func _on_interactor_area_exited(area: Area2D) -> void:
 	if interaction_target == area:
 		interaction_target = null
 		$InteractionPrompt.visible = false
+#endregion

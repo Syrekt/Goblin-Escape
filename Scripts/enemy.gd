@@ -15,10 +15,7 @@ var chase_target : Node2D
 @onready var state_node		    = $StateMachine
 @onready var health			    = $Health
 @onready var combat_properties  = $CombatProperties
-@onready var ray_right		    = $RayRight
-@onready var ray_left  		    = $RayLeft
-@onready var ray_down_right		= $RayDownRight
-@onready var ray_down_left		= $RayDownLeft
+@onready var ray_fall_check		= $FallCheck
 @onready var state_switch_timer = $StateSwitchTimer
 
 @onready var slash_hitbox = $StateMachine/slash/SlashHitbox/Collider
@@ -30,6 +27,7 @@ var line_of_sight: RayCast2D
 func _ready() -> void:
 	line_of_sight = RayCast2D.new()
 	add_child(line_of_sight)
+	$Sprite2D.scale.x = 1
 
 func set_facing(dir: int):
 	if dir == 0: pass
@@ -38,25 +36,19 @@ func set_facing(dir: int):
 	for child in get_children():
 		if child is Sprite2D:
 			child.flip_h = facing == 1
-		elif child is CollisionShape2D or child is Node2D:
+		elif child is CollisionShape2D || child is Node2D || child is RayCast2D:
 			child.scale.x = facing
 
 func move(dir: int, delta: float) -> bool:
 	if dir == 0:
 		animation_player.play("idle")
 		return false
-#	if dir == 1:
-#		if not ray_down_right.is_colliding() or ray_right.is_colliding():
-#			velocity.x = 0
-#			animation_player.play("idle")
-#			return false
-#	if dir == -1:
-#		if not ray_down_left.is_colliding() or ray_left.is_colliding():
-#			velocity.x = 0
-#			animation_player.play("idle")
-#			return false
 	velocity.x = dir * move_speed * delta
+
 	move_and_slide()
+
+	if is_on_wall() || !ray_fall_check.is_colliding():
+		velocity.x = 0;
 
 	if velocity.x == 0:
 		animation_player.play("idle")

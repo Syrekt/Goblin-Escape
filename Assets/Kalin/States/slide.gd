@@ -9,4 +9,3 @@ func enter(previous_state_path: String, data := {}) -> void:
 func physics_update(delta: float) -> void:
 	if !player.is_on_floor():
 		finished.emit("fall")
-	player.move(delta)
