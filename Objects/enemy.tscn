@@ -1072,7 +1072,7 @@ position = Vector2(4.135, -24.07)
 sprite_frames = SubResource("SpriteFrames_tvv3n")
 animation = &"stab"
 
-[node name="Collider" type="CollisionShape2D" parent="."]
+[node name="Collider" type="CollisionShape2D" parent="." groups=["Flip"]]
 visible = false
 position = Vector2(-1, -5.5)
 shape = SubResource("RectangleShape2D_cqw5a")
@@ -1083,14 +1083,14 @@ max = 3
 
 [node name="CombatProperties" parent="." instance=ExtResource("7_7ej0e")]
 
-[node name="FallCheck" type="RayCast2D" parent="."]
+[node name="FallCheck" type="RayCast2D" parent="." groups=["Flip"]]
 position = Vector2(0, -10)
 target_position = Vector2(31, 32)
 
-[node name="RayRight" type="RayCast2D" parent="."]
+[node name="RayRight" type="RayCast2D" parent="." groups=["Flip"]]
 target_position = Vector2(30, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
 material = SubResource("ShaderMaterial_xhuvx")
 position = Vector2(0, -16)
 scale = Vector2(-1, 1)
@@ -1116,7 +1116,6 @@ scale = Vector2(10.4, 1.64)
 shape = SubResource("RectangleShape2D_qsl2l")
 
 [node name="StateMachine" parent="." instance=ExtResource("17_n2jyc")]
-visible = false
 position = Vector2(0, 16)
 
 [node name="patrol" type="Node" parent="StateMachine"]
@@ -1138,7 +1137,7 @@ script = ExtResource("20_4po4b")
 [node name="slash" type="Node2D" parent="StateMachine"]
 script = ExtResource("20_ujm0m")
 
-[node name="SlashHitbox" parent="StateMachine/slash" instance=ExtResource("21_oeh1l")]
+[node name="SlashHitbox" parent="StateMachine/slash" groups=["Flip"] instance=ExtResource("21_oeh1l")]
 collision_mask = 2
 
 [node name="Collider" parent="StateMachine/slash/SlashHitbox" index="0"]
@@ -1147,7 +1146,7 @@ position = Vector2(21, -20)
 [node name="stab" type="Node2D" parent="StateMachine"]
 script = ExtResource("20_ujm0m")
 
-[node name="StabHitbox" parent="StateMachine/stab" instance=ExtResource("21_oeh1l")]
+[node name="StabHitbox" parent="StateMachine/stab" groups=["Flip"] instance=ExtResource("21_oeh1l")]
 collision_mask = 2
 
 [node name="Collider" parent="StateMachine/stab/StabHitbox" index="0"]
@@ -1157,7 +1156,7 @@ scale = Vector2(1.51745, 0.854787)
 [node name="bash" type="Node2D" parent="StateMachine"]
 script = ExtResource("20_ujm0m")
 
-[node name="BashHitbox" parent="StateMachine/bash" instance=ExtResource("21_oeh1l")]
+[node name="BashHitbox" parent="StateMachine/bash" groups=["Flip"] instance=ExtResource("21_oeh1l")]
 collision_mask = 2
 
 [node name="Collider" parent="StateMachine/bash/BashHitbox" index="0"]
@@ -1183,6 +1182,7 @@ script = ExtResource("24_lox44")
 script = ExtResource("25_208af")
 
 [node name="chase" type="Node2D" parent="StateMachine"]
+visible = false
 script = ExtResource("26_ug7pn")
 
 [node name="AttackDetector" type="Area2D" parent="StateMachine/chase"]

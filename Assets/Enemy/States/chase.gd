@@ -19,11 +19,8 @@ func update(delta):
 	if collider_id != null:
 		enemy.state_node.state.finished.emit("patrol")
 
-	Debugger.printui("Chase dir: "+ str(chase_dir))
 	if !%ChaseDetector.has_overlapping_bodies():
-		print("Lost player")
 		chase_target = null
 		enemy.state_node.state.finished.emit("patrol")
 	elif %AttackDetector.has_overlapping_bodies():
-		print("Detected player")
 		enemy.state_node.state.finished.emit("stance_light")

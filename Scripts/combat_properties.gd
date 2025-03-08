@@ -22,9 +22,7 @@ var pushback_elapsed_time := 0.0
 
 func pushback_apply(source_position: Vector2, strength: float) -> void:
 	pushback_vector = (owner.global_position - source_position).normalized() * strength
-	Debugger.printui("pushback_vector: "+str(pushback_vector))
 	pushback_timer = pushback_duration
-	Debugger.printui("pushback_timer: "+str(pushback_timer))
 func pushback_reset() -> void:
 	pushback_timer = 0;
 	pushback_elapsed_time = 0;

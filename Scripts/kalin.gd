@@ -12,8 +12,6 @@ class_name Player extends CharacterBody2D
 @export var def_acc := 10.0
 @export var run_stop_dec := 3.0
 @export var bash_stop_dec:= 4.0
-@export var climb_xoff := -5
-@export var climb_yoff := -13
 
 var move_speed			:= 0.0
 var facing_locked		:= false
@@ -99,10 +97,11 @@ func can_grab_corner() -> bool:
 func can_stand_up() -> bool:
 	return !col_stand_check.has_overlapping_bodies()
 func update_animation(anim: String) -> void:
-	animation_player.play(&"RESET");
-	animation_player.advance(0)
-	animation_player.play(anim)
-	animation_player.advance(0)
+	if animation_player.current_animation != anim:
+		animation_player.play(&"RESET");
+		animation_player.advance(0)
+		animation_player.play(anim)
+		animation_player.advance(0)
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -144,16 +143,13 @@ func _ready() -> void:
 	if events.size() > 0:
 
 		for event in events:
-			print("event: "+str(event))
 			if event is InputEventKey:
-				print("event.keycode: "+str(event.keycode));
 				interaction_prompt = OS.get_keycode_string(event.physical_keycode)
 			elif event is InputEventJoypadButton:
 				interaction_prompt = "Gamepad Button " + str(event.button_index)
 			elif event is InputEventMouseButton:
 				interaction_prompt = "Mouse Button " + str(event.button_index)
 
-	print("interaction_prompt: "+str(interaction_prompt))
 	$InteractionPrompt.text = interaction_prompt
 
 func _physics_process(delta: float) -> void:
@@ -184,6 +180,10 @@ func _physics_process(delta: float) -> void:
 		"slash", "stab":
 			move_speed = 0;
 			accelaration = slide_dec
+		"corner_grab":
+			move_speed = 0
+			velocity.x = 0
+			velocity.y = 0
 
 	if cp.pushback_timer > 0:
 		cp.pushback_timer = move_toward(cp.pushback_timer, 0, delta)
@@ -195,8 +195,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, move_speed * delta, accelaration)
 		cp.pushback_reset()
 
-	Debugger.printui("cp.pushback_vector.x: "+str(cp.pushback_vector.x));
-	Debugger.printui("dir_x: "+str(dir_x))
 	#endregion
 	#region Y Movement
 	if !is_on_floor():
@@ -238,7 +236,6 @@ func _process(delta: float) -> void:
 		print("Pushback")
 		cp.pushback_apply(Vector2(global_position.x + 100.0*facing, global_position.y), cp.pushback_force)
 		print("global_position.x + 100.0*facing: "+str(global_position.x + 100.0*facing));
-	Debugger.printui("combat_properties.pushback_vector: "+str(combat_properties.pushback_vector.x));
 
 
 #endregion

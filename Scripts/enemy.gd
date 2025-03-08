@@ -39,11 +39,11 @@ func set_facing(dir: int):
 	if dir == 0: pass
 
 	facing = dir
-	for child in get_children():
-		if child is Sprite2D:
-			child.flip_h = facing == 1
-		elif child is CollisionShape2D || child is Node2D || child is RayCast2D:
-			child.scale.x = facing
+	for node in get_tree().get_nodes_in_group("Flip"):
+		if node is Sprite2D:
+			node.flip_h = facing == 1
+		else:
+			node.scale.x = facing
 
 func get_movement_dir():
 	return sign(velocity.x)
@@ -54,10 +54,6 @@ func take_damage(_damage):
 	health.change_by(-_damage)
 	state_node.state.finished.emit("hurt")
 
-
-func _process(delta):
-	Debugger.printui("Enemy state: " + str(state_node.state.name))
-	Debugger.printui("bar.value: "+str(health.bar.value));
 
 func move(speed: float, direction: int) -> bool:
 	velocity.x = speed * direction * get_process_delta_time()

@@ -6,10 +6,11 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	player.check_movable();
+	var floor_angle = player.get_floor_angle()
 
 	if not Input.is_action_pressed("run") or player.get_movement_dir() != player.facing:
 		finished.emit("run_stop")
-	elif Input.is_action_pressed("down"):
+	elif Input.is_action_pressed("down") && floor_angle == 0:
 		finished.emit("slide")
 	elif !player.is_on_floor():
 		finished.emit("fall")

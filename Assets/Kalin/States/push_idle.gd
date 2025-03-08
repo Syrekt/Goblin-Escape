@@ -17,7 +17,6 @@ func update(delta: float) -> void:
 		finished.emit("idle");
 		player.movable.release()
 	var dir = Input.get_axis("left", "right")
-	Debugger.printui("dir	: "+str(dir));
 	if dir == player.facing:
 		finished.emit("push")
 	elif dir == -player.facing:

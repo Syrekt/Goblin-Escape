@@ -1453,6 +1453,18 @@ tracks/7/keys = {
 "update": 1,
 "values": [ExtResource("1_tpqnq")]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../AnimationPlayer:speed_scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
 
 [sub_resource type="Animation" id="Animation_b8tlq"]
 resource_name = "bash"
@@ -2385,6 +2397,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../AnimationPlayer:speed_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.25]
+}
 
 [sub_resource type="Animation" id="Animation_ada4r"]
 resource_name = "slash"
@@ -3014,6 +3038,8 @@ shape = SubResource("RectangleShape2D_avh81")
 [node name="Interactor" type="Area2D" parent="."]
 visible = false
 position = Vector2(0, 32)
+collision_layer = 64
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor"]
 position = Vector2(0, -15)
@@ -3036,7 +3062,6 @@ position = Vector2(0, 23)
 target_position = Vector2(0, 14)
 
 [node name="CornerCheck" type="RayCast2D" parent="."]
-visible = false
 position = Vector2(0, -15)
 target_position = Vector2(18, 0)
 collision_mask = 33
@@ -3048,7 +3073,6 @@ target_position = Vector2(18, 0)
 collision_mask = 33
 
 [node name="Health" parent="." instance=ExtResource("9_kqaha")]
-visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
@@ -3143,6 +3167,7 @@ script = ExtResource("50_tcyto")
 
 [node name="corner_grab" type="Node" parent="StateMachine"]
 script = ExtResource("51_t8vjn")
+snap_offset = Vector2(-17, 3)
 
 [node name="corner_climb" type="Node" parent="StateMachine"]
 script = ExtResource("52_4ckjm")

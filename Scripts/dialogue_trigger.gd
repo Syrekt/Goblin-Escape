@@ -35,8 +35,6 @@ func activate() -> void:
 
 
 func process() -> void:
-	Debugger.printui("Check dialogue trigger");
-	Debugger.printui("active: "+str(active))
 	if auto:
 		auto_process()
 	else:

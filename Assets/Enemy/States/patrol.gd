@@ -8,7 +8,6 @@ func patrol(delta: float):
 	if move:
 		var moving = enemy.move(enemy.patrol_move_speed, patrol_dir)
 
-		Debugger.printui("moving: "+str(moving))
 		if moving:
 			enemy.animation_player.play("run")
 		else:
@@ -17,16 +16,12 @@ func patrol(delta: float):
 			$PatrolTimer.stop()
 			$IdleTimer.start()
 	else:
+		enemy.animation_player.play("idle")
 		enemy.move(0, 0)
 
 func enter(previous_state_path: String, data := {}) -> void:
 	enemy.velocity.x = 0.0
 	enemy.state_switch_timer.start(randf_range(0.5, 1.0))
-
-func update(delta: float) -> void:
-	Debugger.printui("move: "+str(move))
-	Debugger.printui("patrol_dir: "+str(patrol_dir))
-
 
 func physics_update(delta: float) -> void:
 	if enemy.state_switch_timer.time_left > 0:

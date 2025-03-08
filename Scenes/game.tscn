@@ -32,7 +32,7 @@ script = ExtResource("1_yp60x")
 
 [node name="Kalin" parent="." instance=ExtResource("1_v3ybc")]
 unique_name_in_owner = true
-position = Vector2(534, 63)
+position = Vector2(381, -6)
 
 [node name="Camera2D" type="Camera2D" parent="Kalin"]
 position = Vector2(0, -39)
@@ -51,4 +51,4 @@ position = Vector2(109, 49)
 position = Vector2(-153, -41)
 
 [node name="Enemy" parent="." instance=ExtResource("7_w7h1d")]
-position = Vector2(424, 94)
+position = Vector2(715, 86)

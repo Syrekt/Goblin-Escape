@@ -1,14 +1,17 @@
 extends PlayerState
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.call_deferred("update_animation", "walk")
-	player.animation_player.advance(0)
 	lock_stance_button = true
 
 func physics_update(delta: float) -> void:
 	player.check_movable();
 
 func update(delta: float) -> void:
+	if player.velocity.x == 0:
+		player.update_animation("idle")
+	else:
+		player.update_animation("walk")
+
 	if lock_stance_button:
 		if not Input.is_action_pressed("stance"): lock_stance_button = false
 
