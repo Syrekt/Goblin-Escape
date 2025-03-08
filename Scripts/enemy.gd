@@ -13,6 +13,8 @@ var chase_target : Node2D
 var direction_locked := false
 var facing_locked := false
 
+var states_locked := false
+
 @onready var animation_player   = $AnimationPlayer
 @onready var sprite			    = $Sprite2D
 @onready var state_node		    = $StateMachine
@@ -55,10 +57,16 @@ func take_damage(_damage):
 
 func _process(delta):
 	Debugger.printui("Enemy state: " + str(state_node.state.name))
+	Debugger.printui("bar.value: "+str(health.bar.value));
 
 func move(speed: float, direction: int) -> bool:
 	velocity.x = speed * direction * get_process_delta_time()
 	return !is_on_wall() && velocity.x != 0
+func update_animation(anim: String) -> void:
+	animation_player.play(&"RESET");
+	animation_player.advance(0)
+	animation_player.play(anim)
+	animation_player.advance(0)
 func _physics_process(delta: float) -> void:
 	#region X Movement
 	var dir_x = get_movement_dir() if !direction_locked else facing
@@ -74,7 +82,7 @@ func _physics_process(delta: float) -> void:
 
 	#endregion
 	#region Y Movement
-	if !is_on_floor():
+	if !is_on_floor() && state_node.state.name != "death":
 		velocity.y += gravity * delta
 	#endregion
 	#region Finalize
@@ -88,6 +96,7 @@ func _physics_process(delta: float) -> void:
 	#endregion
 
 func _on_health_health_depleted() -> void:
+	print("Death")
 	state_node.state.finished.emit("death")
 
 
@@ -98,6 +107,11 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	match state_name:
 		"slash", "stab", "bash":
 			state.finished.emit("stance_light")
+		"death":
+			if is_on_floor():
+				set_collision_layer_value(4, false)
+				set_collision_mask_value(1, false)
+				set_collision_mask_value(2, false)
 
 
 func _on_slash_hitbox_body_entered(body: Node2D) -> void:

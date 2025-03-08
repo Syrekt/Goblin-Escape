@@ -6,7 +6,7 @@ extends PlayerState
 var enemy_ignore_list := []
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.animation_player.call_deferred("play", "bash")
+	player.call_deferred("update_animation", "bash")
 	enemy_ignore_list = []
 
 func update(delta):

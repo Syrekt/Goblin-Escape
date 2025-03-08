@@ -4,7 +4,8 @@ extends PlayerState
 @onready var hitbox_collider = hitbox.get_node("Collider")
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.animation_player.call_deferred("play", "slash")
+	player.call_deferred("update_animation", "slash")
+	player.velocity.x = 0;
 
 func update(delta):
 	if not player.is_on_floor():

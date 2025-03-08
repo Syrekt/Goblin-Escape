@@ -3,7 +3,7 @@ extends PlayerState
 var input_direction_x := 0
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.animation_player.call_deferred("play", "crouch_walk")
+	player.call_deferred("update_animation", "crouch_walk")
 	player.set_crouch_mask(true)
 
 func physics_update(delta: float) -> void:

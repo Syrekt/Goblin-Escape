@@ -4,7 +4,7 @@ extends PlayerState
 
 func enter(previous_state_path: String, data := {}) -> void:
 	player.direction_locked = true
-	player.animation_player.call_deferred("play", "fall")
+	player.call_deferred("update_animation", "fall")
 	timer.start(0.3)
 
 func physics_update(delta: float) -> void:

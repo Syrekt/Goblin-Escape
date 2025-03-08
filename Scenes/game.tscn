@@ -52,7 +52,3 @@ position = Vector2(-153, -41)
 
 [node name="Enemy" parent="." instance=ExtResource("7_w7h1d")]
 position = Vector2(424, 94)
-move_speed = null
-patrol_move_speed = null
-gravity = null
-damage = null

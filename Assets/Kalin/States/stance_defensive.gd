@@ -1,7 +1,7 @@
 extends PlayerState
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.animation_player.call_deferred("play", "stance_defensive")
+	player.call_deferred("update_animation", "stance_defensive")
 
 func physics_update(delta: float) -> void:
 	if not player.is_on_floor():

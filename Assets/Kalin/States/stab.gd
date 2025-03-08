@@ -4,7 +4,8 @@ extends PlayerState
 @onready var hitbox_collider = hitbox.get_node("Collider")
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.animation_player.call_deferred("play", "stab")
+	player.call_deferred("update_animation", "stab")
+	player.velocity.x = 0;
 
 func update(delta):
 	if not player.is_on_floor():
@@ -15,5 +16,4 @@ func exit():
 
 
 func _on_stab_hitbox_body_entered(body: Node2D) -> void:
-	print("body: "+str(body.name));
 	Combat.deal_damage(player, body, 75)

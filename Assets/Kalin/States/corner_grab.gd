@@ -5,7 +5,7 @@ var just_entered := false
 func enter(previous_path_string: String, data := {}) -> void:
 	#player.position.x += player.facing*player.climb_xoff
 	player.position.y += player.climb_yoff
-	player.animation_player.call_deferred("play", "corner_grab")
+	player.call_deferred("update_animation", "corner_grab")
 	just_entered = true
 
 func physics_update(delta: float) -> void:

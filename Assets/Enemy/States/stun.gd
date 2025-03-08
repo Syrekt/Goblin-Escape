@@ -1,7 +1,7 @@
 extends EnemyState
 
 func enter(previous_state_path: String, data := {}) -> void:
-	enemy.animation_player.call_deferred("play", "stun")
+	enemy.call_deferred("update_animation", "stun")
 
 func _enter():
 	enemy.velocity.x = lerp(enemy.velocity.x, 0, 0.1)

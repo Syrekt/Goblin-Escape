@@ -3048,6 +3048,7 @@ target_position = Vector2(18, 0)
 collision_mask = 33
 
 [node name="Health" parent="." instance=ExtResource("9_kqaha")]
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")

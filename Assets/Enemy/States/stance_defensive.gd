@@ -1,12 +1,11 @@
 extends EnemyState
 
 func enter(previous_state_path: String, data := {}) -> void:
-	enemy.animation_player.call_deferred("play", "stance_defensive")
+	enemy.call_deferred("update_animation", "stance_defensive")
 	enemy.velocity.x = 0
 	$Timer.start(randf_range(1.0, 2.0))
 
 func exit():
-	print("timer stop")
 	$Timer.stop()
 
 func update(delta):

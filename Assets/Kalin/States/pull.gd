@@ -1,7 +1,7 @@
 extends PlayerState
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.animation_player.call_deferred("play", "pull")
+	player.call_deferred("update_animation", "pull")
 	player.movable.grab()
 
 func physics_update(delta: float) -> void:

@@ -2,7 +2,7 @@ extends PlayerState
 
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.animation_player.call_deferred("play", "stance_light")
+	player.call_deferred("update_animation", "stance_light")
 	player.velocity.x = 0
 	lock_stance_button = true;
 

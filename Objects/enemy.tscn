@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene load_steps=78 format=3 uid="uid://iuj1jg31a55f"]
 
 [ext_resource type="Script" uid="uid://bhcr3m01slk8a" path="res://Scripts/enemy.gd" id="1_18den"]
 [ext_resource type="Texture2D" uid="uid://ujt17mgqs7s5" path="res://Assets/Enemy/Knight/_Hit.png" id="2_cjut3"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://b02rwb4cvvhr4" path="res://Objects/state_machine.tscn" id="17_n2jyc"]
 [ext_resource type="Script" uid="uid://j4axxy1utgo5" path="res://Assets/Enemy/States/patrol.gd" id="18_pn3ih"]
 [ext_resource type="Script" uid="uid://bhwnkjtvdjwgs" path="res://Assets/Enemy/States/hurt.gd" id="19_xl5vi"]
+[ext_resource type="Script" uid="uid://3m1a1sihw7qa" path="res://Assets/Enemy/States/death.gd" id="20_4po4b"]
 [ext_resource type="Script" uid="uid://3lerje1i52sl" path="res://Assets/Enemy/States/animation_state_enemy.gd" id="20_ujm0m"]
 [ext_resource type="PackedScene" uid="uid://2s1ryg6qqqmc" path="res://Objects/hitbox.tscn" id="21_oeh1l"]
 [ext_resource type="Script" uid="uid://bk738pl78o133" path="res://Assets/Enemy/States/stance_heavy.gd" id="22_7ej28"]
@@ -1077,6 +1078,8 @@ position = Vector2(-1, -5.5)
 shape = SubResource("RectangleShape2D_cqw5a")
 
 [node name="Health" parent="." instance=ExtResource("6_u2r3n")]
+position = Vector2(-23, 17)
+max = 3
 
 [node name="CombatProperties" parent="." instance=ExtResource("7_7ej0e")]
 
@@ -1130,7 +1133,7 @@ one_shot = true
 script = ExtResource("19_xl5vi")
 
 [node name="death" type="Node" parent="StateMachine"]
-script = ExtResource("20_ujm0m")
+script = ExtResource("20_4po4b")
 
 [node name="slash" type="Node2D" parent="StateMachine"]
 script = ExtResource("20_ujm0m")

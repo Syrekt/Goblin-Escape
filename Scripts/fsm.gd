@@ -28,7 +28,11 @@ func _physics_process(delta: float) -> void:
 
 
 func _transition_to_next_state(target_state_path: String, data: Dictionary = {}) -> void:
-	print(owner.name, " -> ", target_state_path)
+	if "states_locked" in owner && owner.states_locked:
+		print("States are locked, exiting state transition.")
+		return
+
+	#print(owner.name, " -> ", target_state_path)
 	if not has_node(target_state_path):
 		printerr(owner.name + ": Trying to transition to state " + target_state_path + " but it does not exist.")
 		return
