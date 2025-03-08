@@ -35,6 +35,7 @@ var damage := 1
 @onready var ray_corner_prevent = $CornerPrevent
 @onready var col_stand_check = $StandCheck
 @onready var col_interaction = $Interactor
+@onready var cp = combat_properties
 var movable : Node2D = null
 
 
@@ -153,20 +154,19 @@ func _physics_process(delta: float) -> void:
 	#region X Movement
 	var state_name = state_node.state.name
 	var dir_x = get_movement_dir() if !direction_locked else facing
-	if dir_x == 0: move_speed = 0
 	var accelaration = def_acc
 
 	match state_name:
 		"crouch_walk":
-			move_speed = crouch_speed
+			move_speed = crouch_speed * dir_x
 		"walk", "stance_walk":
-			move_speed = walk_speed
+			move_speed = walk_speed * dir_x
 		"run":
-			move_speed = run_speed
+			move_speed = run_speed * dir_x
 		"push", "pull":
-			move_speed = push_pull_speed
+			move_speed = push_pull_speed * dir_x
 		"run_stop":
-			move_speed = walk_speed
+			move_speed = walk_speed * dir_x
 			accelaration = run_stop_dec
 		"bash":
 			accelaration = bash_stop_dec
@@ -176,13 +176,18 @@ func _physics_process(delta: float) -> void:
 			move_speed = 0;
 			accelaration = slide_dec
 
-	if combat_properties.pushback_vector.x != 0:
-		move_speed += combat_properties.pushback_vector.x
-		combat_properties.pushback_vector.x = move_toward(combat_properties.pushback_vector.x, 0, combat_properties.pushback_dec)
-		Debugger.printui("move_speed: "+str(move_speed))
+	if cp.pushback_timer > 0:
+		cp.pushback_timer = move_toward(cp.pushback_timer, 0, delta)
+		cp.pushback_elapsed_time += delta
+		if cp.pushback_timer <= 0: velocity.x = 0
 
+		velocity.x = lerpf(cp.pushback_vector.x, 0, cp.pushback_elapsed_time / cp.pushback_duration)
+	else:
+		velocity.x = move_toward(velocity.x, move_speed * delta, accelaration)
+		cp.pushback_reset()
+
+	Debugger.printui("cp.pushback_vector.x: "+str(cp.pushback_vector.x));
 	Debugger.printui("dir_x: "+str(dir_x))
-	velocity.x = move_toward(velocity.x, move_speed * dir_x * delta, accelaration)
 	#endregion
 	#region Y Movement
 	if !is_on_floor():
@@ -193,14 +198,17 @@ func _physics_process(delta: float) -> void:
 				velocity.y += gravity * delta
 
 	#endregion
-
+	#region Finalize
 	move_and_slide()
-	if combat_properties.pushback_vector.x != 0:
-		set_facing(sign(-velocity.x))
+	if cp.pushback_timer > 0:
+			set_facing(-sign(cp.pushback_vector.x))
 	else:
-		if(!facing_locked && velocity.x != 0): set_facing(sign(velocity.x))
+		if(!facing_locked && velocity.x != 0):
+			set_facing(sign(velocity.x))
 
 	check_interactable()
+
+	#endregion
 
 func _process(delta: float) -> void:
 	Debugger.printui(str(state_node.state.name))
@@ -219,7 +227,7 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("debug1"):
 		print("Pushback")
-		combat_properties.pushback_apply(Vector2(global_position.x + 100.0*facing, global_position.y), 30.0 * 60.0)
+		cp.pushback_apply(Vector2(global_position.x + 100.0*facing, global_position.y), cp.pushback_force)
 		print("global_position.x + 100.0*facing: "+str(global_position.x + 100.0*facing));
 	Debugger.printui("combat_properties.pushback_vector: "+str(combat_properties.pushback_vector.x));
 

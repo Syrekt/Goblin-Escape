@@ -6,15 +6,18 @@ var move = true
 
 func patrol(delta: float):
 	if move:
-		var moving = enemy.move(patrol_dir, delta)
+		var moving = enemy.move(enemy.patrol_move_speed, patrol_dir)
 
 		Debugger.printui("moving: "+str(moving))
-		if !moving:
+		if moving:
+			enemy.animation_player.play("run")
+		else:
+			enemy.animation_player.play("idle")
 			move = false
 			$PatrolTimer.stop()
 			$IdleTimer.start()
 	else:
-		enemy.move(0, delta)
+		enemy.move(0, 0)
 
 func enter(previous_state_path: String, data := {}) -> void:
 	enemy.velocity.x = 0.0

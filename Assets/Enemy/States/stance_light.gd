@@ -2,7 +2,7 @@ extends EnemyState
 
 func enter(previous_state_path: String, data := {}) -> void:
 	enemy.animation_player.call_deferred("play", "stance_light")
-	enemy.velocity.x = 0
+	enemy.move(0, 0)
 	$Timer.start(randf_range(1.0, 2.0))
 	enemy.slash_hitbox.call_deferred("set_disabled", true)
 	enemy.stab_hitbox.call_deferred("set_disabled", true)
