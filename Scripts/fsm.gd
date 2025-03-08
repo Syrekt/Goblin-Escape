@@ -1,6 +1,7 @@
 class_name FSM extends Node
 
 @export var initial_state: State = null
+var last_state: State = null
 
 @onready var state: State = (func get_initial_state() -> State:
 	return initial_state if initial_state != null else get_child(0)
@@ -32,12 +33,13 @@ func _transition_to_next_state(target_state_path: String, data: Dictionary = {})
 		print("States are locked, exiting state transition.")
 		return
 
-	#print(owner.name, " -> ", target_state_path)
+	print(owner.name, " -> ", target_state_path)
 	if not has_node(target_state_path):
 		printerr(owner.name + ": Trying to transition to state " + target_state_path + " but it does not exist.")
 		return
 
 	var previous_state_path := state.name
+	last_state = state
 	state.exit()
 	state = get_node(target_state_path)
 	state.enter(previous_state_path, data)

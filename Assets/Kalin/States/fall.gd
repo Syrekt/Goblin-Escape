@@ -15,5 +15,5 @@ func physics_update(delta: float) -> void:
 			finished.emit("idle")
 			player.direction_locked = false
 
-	if player.can_grab_corner():
+	if player.can_grab_corner() && player.ray_corner_grab_check.is_colliding():
 		finished.emit("corner_grab")

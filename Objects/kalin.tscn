@@ -1,4 +1,4 @@
-[gd_scene load_steps=258 format=3 uid="uid://d08scf611mrii"]
+[gd_scene load_steps=262 format=3 uid="uid://d08scf611mrii"]
 
 [ext_resource type="Script" uid="uid://coi4g5fo3jf06" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Texture2D" uid="uid://dcs3l0iefjo7w" path="res://Assets/Kalin/Sprites/Kalin-Fall.png" id="2_1j6vo"]
@@ -59,13 +59,22 @@
 [ext_resource type="Script" uid="uid://dpcphh4eavvle" path="res://Assets/Kalin/States/stun.gd" id="56_qqpcq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6qte"]
-size = Vector2(16, 45.8333)
+size = Vector2(15, 45.8333)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iccmv"]
-size = Vector2(16, 25.8333)
+size = Vector2(15, 25.8333)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_avh81"]
-size = Vector2(16, 24)
+size = Vector2(15, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnkvj"]
+size = Vector2(15, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8idp1"]
+size = Vector2(15, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qqpcq"]
+size = Vector2(20, 43)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nk40"]
 size = Vector2(20, 30)
@@ -2969,12 +2978,66 @@ tracks/3/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_qqpcq"]
+resource_name = "corner_climb_quick"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(3.72529e-08, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_xyrfg")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cuohi"]
 _data = {
 &"RESET": SubResource("Animation_5koc5"),
 &"bash": SubResource("Animation_b8tlq"),
 &"block": SubResource("Animation_bb84h"),
 &"corner_climb": SubResource("Animation_5syxg"),
+&"corner_climb_quick": SubResource("Animation_qqpcq"),
 &"corner_grab": SubResource("Animation_dxyog"),
 &"crouch": SubResource("Animation_qdaj2"),
 &"crouch_walk": SubResource("Animation_us7aq"),
@@ -3006,6 +3069,7 @@ z_index = 5
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_tpqnq")
+snap_offset = Vector2(-17, 3)
 
 [node name="CombatProperties" parent="." instance=ExtResource("2_yetl5")]
 
@@ -3016,13 +3080,13 @@ hframes = 6
 
 [node name="ColliderStanding" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(1, 4.5)
+position = Vector2(0, 4.5)
 scale = Vector2(1, 1.2)
 shape = SubResource("RectangleShape2D_y6qte")
 
 [node name="ColliderCrouching" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(1, 16.5)
+position = Vector2(0, 16.5)
 scale = Vector2(1, 1.2)
 shape = SubResource("RectangleShape2D_iccmv")
 disabled = true
@@ -3030,10 +3094,45 @@ disabled = true
 [node name="StandCheck" type="Area2D" parent="."]
 visible = false
 position = Vector2(0, -4)
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StandCheck"]
-position = Vector2(1, -7)
+position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_avh81")
+
+[node name="MovableCheck" type="RayCast2D" parent="."]
+visible = false
+target_position = Vector2(17, 0)
+collision_mask = 32
+
+[node name="CornerGrabCheck" type="RayCast2D" parent="."]
+position = Vector2(0, -15)
+target_position = Vector2(14, 1.90735e-06)
+collision_mask = 33
+
+[node name="CornerAutoClimb" type="RayCast2D" parent="."]
+target_position = Vector2(14, 1.90735e-06)
+collision_mask = 33
+
+[node name="CornerGrabPrevent" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="TopCollider" type="CollisionShape2D" parent="CornerGrabPrevent"]
+position = Vector2(7.5, -24.5)
+shape = SubResource("RectangleShape2D_lnkvj")
+
+[node name="BottomCollider" type="CollisionShape2D" parent="CornerGrabPrevent"]
+position = Vector2(0, 37.5)
+shape = SubResource("RectangleShape2D_8idp1")
+disabled = true
+
+[node name="CornerClimbCheck" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerClimbCheck"]
+position = Vector2(10, -52.5)
+shape = SubResource("RectangleShape2D_qqpcq")
 
 [node name="Interactor" type="Area2D" parent="."]
 visible = false
@@ -3050,27 +3149,6 @@ visible = false
 position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_udw38")
 animation = &"pull"
-
-[node name="MovableCheck" type="RayCast2D" parent="."]
-visible = false
-target_position = Vector2(17, 0)
-collision_mask = 32
-
-[node name="FloorCheck" type="RayCast2D" parent="."]
-visible = false
-position = Vector2(0, 23)
-target_position = Vector2(0, 14)
-
-[node name="CornerCheck" type="RayCast2D" parent="."]
-position = Vector2(0, -15)
-target_position = Vector2(18, 0)
-collision_mask = 33
-
-[node name="CornerPrevent" type="RayCast2D" parent="."]
-visible = false
-position = Vector2(0, -31)
-target_position = Vector2(18, 0)
-collision_mask = 33
 
 [node name="Health" parent="." instance=ExtResource("9_kqaha")]
 
@@ -3167,7 +3245,6 @@ script = ExtResource("50_tcyto")
 
 [node name="corner_grab" type="Node" parent="StateMachine"]
 script = ExtResource("51_t8vjn")
-snap_offset = Vector2(-17, 3)
 
 [node name="corner_climb" type="Node" parent="StateMachine"]
 script = ExtResource("52_4ckjm")

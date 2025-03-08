@@ -12,6 +12,7 @@ class_name Player extends CharacterBody2D
 @export var def_acc := 10.0
 @export var run_stop_dec := 3.0
 @export var bash_stop_dec:= 4.0
+@export var snap_offset := Vector2(-5, -13)
 
 var move_speed			:= 0.0
 var facing_locked		:= false
@@ -22,6 +23,8 @@ var y_movement_locked	:= false
 var states_locked := false
 var damage := 1
 
+var corner_quick_climb := false
+
 @onready var state_node := $StateMachine
 @onready var health = $Health
 @onready var crouching_mask = $ColliderCrouching
@@ -30,11 +33,13 @@ var damage := 1
 @onready var animation_player = $AnimationPlayer
 @onready var combat_properties = $CombatProperties
 @onready var ray_movable = $MovableCheck
-@onready var ray_corner_check = $CornerCheck
-@onready var ray_corner_prevent = $CornerPrevent
+@onready var ray_corner_grab_check = $CornerGrabCheck
+@onready var ray_auto_climb = $CornerAutoClimb
+@onready var col_corner_grab_prevent = $CornerGrabPrevent
 @onready var col_stand_check = $StandCheck
 @onready var col_interaction = $Interactor
 @onready var cp = combat_properties
+@onready var camera = $Camera2D
 var movable : Node2D = null
 
 
@@ -92,8 +97,19 @@ func check_movable():
 func check_interactable() -> void:
 	if interaction_target != null:
 		interaction_target.process()
-func can_grab_corner() -> bool:
-	return !is_on_floor() && !is_on_ceiling() && !ignore_corners && ray_corner_check.is_colliding() && !ray_corner_prevent.is_colliding()
+func can_grab_corner(rising:= false) -> bool:
+	var grab_prevent =  col_corner_grab_prevent.has_overlapping_bodies()
+	var grab_trigger = ray_corner_grab_check.is_colliding()
+	Debugger.printui("grab_prevent: "+str(grab_prevent))
+	Debugger.printui("grab_trigger: "+str(grab_trigger))
+
+
+
+	if col_corner_grab_prevent.has_overlapping_bodies(): return false
+	if is_on_floor(): return false
+	if is_on_ceiling(): return false
+	if ignore_corners: return false
+	return true
 func can_stand_up() -> bool:
 	return !col_stand_check.has_overlapping_bodies()
 func update_animation(anim: String) -> void:
@@ -102,6 +118,8 @@ func update_animation(anim: String) -> void:
 		animation_player.advance(0)
 		animation_player.play(anim)
 		animation_player.advance(0)
+func snap_to_corner(ledge_position: Vector2) -> void:
+	global_position = ledge_position + Vector2(snap_offset.x * facing, snap_offset.y)
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -124,9 +142,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			state.finished.emit("stance_light")
 		"hurt":
 			state.finished.emit("stance_light")
-		"corner_climb":
-			position.x += 26*facing
-			position.y -= 36
+		"corner_climb", "corner_climb_quick":
 			state.finished.emit("idle")
 		"slide":
 			if can_stand_up():
@@ -153,6 +169,7 @@ func _ready() -> void:
 	$InteractionPrompt.text = interaction_prompt
 
 func _physics_process(delta: float) -> void:
+	Debugger.printui("can_grab_corner(): "+str(can_grab_corner()));
 	#region X Movement
 	var state_name = state_node.state.name
 	var dir_x = get_movement_dir() if !direction_locked else facing
@@ -180,10 +197,11 @@ func _physics_process(delta: float) -> void:
 		"slash", "stab":
 			move_speed = 0;
 			accelaration = slide_dec
-		"corner_grab":
+		"corner_grab", "corner_climb":
 			move_speed = 0
 			velocity.x = 0
 			velocity.y = 0
+
 
 	if cp.pushback_timer > 0:
 		cp.pushback_timer = move_toward(cp.pushback_timer, 0, delta)
