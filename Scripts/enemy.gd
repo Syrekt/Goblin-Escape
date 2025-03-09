@@ -9,9 +9,10 @@ const RUN_SPEED = 300.0 * 60
 @export var damage := 1
 
 var facing := 1
-var chase_target : Node2D
+var chase_target : Node2D = null
 var direction_locked := false
 var facing_locked := false
+var anim_speed := 1.0
 
 var states_locked := false
 
@@ -70,11 +71,12 @@ func move(speed: float, direction: int) -> bool:
 
 	velocity.x = speed * direction * get_process_delta_time()
 	return !is_on_wall() && ray_fall_check.is_colliding() && velocity.x != 0
-func update_animation(anim: String) -> void:
-	animation_player.play(&"RESET");
-	animation_player.advance(0)
-	animation_player.play(anim)
-	animation_player.advance(0)
+func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
+	if animation_player.current_animation != anim:
+		animation_player.play(&"RESET");
+		animation_player.advance(0)
+		animation_player.play(anim, -1, speed, from_end)
+		animation_player.advance(0)
 func _physics_process(delta: float) -> void:
 	if player_proximity.has_overlapping_bodies():
 		Debugger.printui("Overlapping player")

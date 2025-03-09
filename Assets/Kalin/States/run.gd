@@ -3,6 +3,7 @@ extends PlayerState
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", "run")
 	player.set_floor_snap_length(2.0)
+	player.set_facing(player.get_movement_dir())
 
 func physics_update(delta: float) -> void:
 	player.check_movable();

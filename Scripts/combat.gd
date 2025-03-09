@@ -19,6 +19,8 @@ func deal_damage(attacker: CharacterBody2D, defender: CharacterBody2D, pushback_
 			if defender_blocking:
 				print("Attack result: Stun target")
 				attacker.combat_properties.stun(2.0)
+				if defender is Player:
+					defender.stamina.spend(1)
 			elif defender.combat_properties.stunned:
 				defender.take_damage(attacker.damage * 2)
 			else:
@@ -28,7 +30,7 @@ func deal_damage(attacker: CharacterBody2D, defender: CharacterBody2D, pushback_
 		"bash":
 			print("Attack result: Bash target")
 			if attacker is Enemy && attacker.push_player:
-				defender.combat_properties.pushback_apply(attacker.global_position, pushback_force*3)
+				defender.combat_properties.pushback_apply(attacker.global_position, pushback_force*5)
 				defender.take_damage(0)
 				attacker.push_player = false
 			else:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene load_steps=43 format=3 uid="uid://iuj1jg31a55f"]
 
 [ext_resource type="Script" uid="uid://bhcr3m01slk8a" path="res://Scripts/enemy.gd" id="1_18den"]
 [ext_resource type="PackedScene" uid="uid://cpogcou30wxcj" path="res://UI/combat_properties.tscn" id="7_7ej0e"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://chla4jvcboa4e" path="res://Assets/Enemy/Goblin/goblin-slash.png" id="15_4po4b"]
 [ext_resource type="Texture2D" uid="uid://bhywg3kg1q3in" path="res://Assets/Enemy/Goblin/goblin-attack.png" id="15_mlxbl"]
 [ext_resource type="PackedScene" uid="uid://b02rwb4cvvhr4" path="res://Objects/state_machine.tscn" id="17_n2jyc"]
+[ext_resource type="Script" uid="uid://dj1baauawjtyy" path="res://Assets/Enemy/States/bash.gd" id="17_ru5w7"]
 [ext_resource type="Script" uid="uid://j4axxy1utgo5" path="res://Assets/Enemy/States/patrol.gd" id="18_pn3ih"]
 [ext_resource type="Script" uid="uid://bhwnkjtvdjwgs" path="res://Assets/Enemy/States/hurt.gd" id="19_xl5vi"]
 [ext_resource type="Script" uid="uid://3m1a1sihw7qa" path="res://Assets/Enemy/States/death.gd" id="20_4po4b"]
@@ -845,7 +846,7 @@ position = Vector2(26.14, -24.45)
 scale = Vector2(2.632, 1.355)
 
 [node name="bash" type="Node2D" parent="StateMachine"]
-script = ExtResource("20_ujm0m")
+script = ExtResource("17_ru5w7")
 
 [node name="BashHitbox" parent="StateMachine/bash" groups=["Flip"] instance=ExtResource("21_oeh1l")]
 collision_mask = 2
@@ -900,8 +901,8 @@ texture_progress = ExtResource("26_ifl3v")
 
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="ChaseDetector" to="." method="_on_detector_body_entered"]
-[connection signal="body_exited" from="ChaseDetector" to="." method="_on_detector_body_exited"]
+[connection signal="body_entered" from="ChaseDetector" to="StateMachine/patrol" method="_on_chase_detector_body_entered"]
+[connection signal="body_exited" from="ChaseDetector" to="StateMachine/patrol" method="_on_chase_detector_body_exited"]
 [connection signal="timeout" from="StateMachine/patrol/PatrolTimer" to="StateMachine/patrol" method="_on_patrol_timer_timeout"]
 [connection signal="timeout" from="StateMachine/patrol/IdleTimer" to="StateMachine/patrol" method="_on_idle_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/slash/SlashHitbox" to="." method="_on_slash_hitbox_body_entered"]

@@ -29,14 +29,16 @@ func physics_update(delta: float) -> void:
 
 	patrol(delta)
 	
-	if %ChaseDetector.has_overlapping_bodies():
-		#Check ray for obstacles
-		var body = %ChaseDetector.get_overlapping_bodies()[0]
+	if enemy.chase_target:
+		var body = enemy.chase_target
 		enemy.line_of_sight.target_position = enemy.line_of_sight.to_local(body.global_position)
-		var collider_id = enemy.line_of_sight.get_collider()
-		if collider_id == null:
-			enemy.chase_target = body
-			enemy.state_node.state.finished.emit("chase")
+		if enemy.line_of_sight.is_colliding():
+			enemy.chase_target.combat_target = null
+			enemy.chase_target = null
+		else:
+			finished.emit("chase")
+
+
 
 func _on_idle_timer_timeout() -> void:
 	patrol_dir *= -1
@@ -48,3 +50,18 @@ func _on_patrol_timer_timeout() -> void:
 	enemy.velocity.x = 0
 	move = false
 	$IdleTimer.start()
+
+
+func _on_chase_detector_body_entered(body: Node2D) -> void:
+	#Check ray for obstacles
+	enemy.line_of_sight.target_position = enemy.line_of_sight.to_local(body.global_position)
+	if !enemy.line_of_sight.is_colliding():
+		print("body: "+str(body.name))
+		enemy.chase_target = body
+		body.combat_target = enemy
+
+
+func _on_chase_detector_body_exited(body: Node2D) -> void:
+	if body == enemy.chase_target:
+		enemy.chase_target.combat_target = null
+		enemy.chase_target = null

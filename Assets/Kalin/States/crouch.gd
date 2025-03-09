@@ -12,8 +12,7 @@ func physics_update(delta: float) -> void:
 		finished.emit("fall")
 		player.set_crouch_mask(false)
 	elif !Input.is_action_pressed("down") && player.can_stand_up():
-		finished.emit("idle")
-		player.set_crouch_mask(false)
+		player.stand_up()
 	elif Input.is_action_just_pressed("up"):
 		print("drop from platform")
 	elif not is_equal_approx(player.get_movement_dir(), 0.0):

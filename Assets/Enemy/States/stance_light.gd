@@ -18,7 +18,8 @@ func exit():
 func update(delta):
 	if !%AttackDetector.has_overlapping_bodies():
 		finished.emit("patrol")
-	enemy.set_facing(sign(enemy.chase_target.global_position.x - enemy.global_position.x))
+	if enemy.chase_target:
+		enemy.set_facing(sign(enemy.chase_target.global_position.x - enemy.global_position.x))
 	if enemy.player_proximity.has_overlapping_bodies():
 		enemy.push_player = true
 		finished.emit("bash")

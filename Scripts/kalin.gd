@@ -30,6 +30,7 @@ class_name Player extends CharacterBody2D
 @onready var ray_auto_climb = $CornerAutoClimb
 @onready var col_corner_grab_prevent = $CornerGrabPrevent
 @onready var col_stand_check = $StandCheck
+@onready var col_auto_climb_bottom = $BottomAutoClimb
 @onready var col_interaction = $Interactor
 @onready var cp = combat_properties
 @onready var camera = $Camera2D
@@ -42,18 +43,20 @@ const BASH_COST = 2
 
 
 const ingame_menu = preload("res://UI/ingame_menu.tscn")
-var open_menu: Node = null
+var open_menu : Node = null
 
 var move_speed := 0.0
 var facing := 1
-var ignore_corners = false
+var ignore_corners := false
 
-var interaction_target = null
+var interaction_target : Area2D = null
 
 var states_locked := false
 var damage := 1
 
 var corner_quick_climb := false
+
+var combat_target : CharacterBody2D = null
 
 signal health_depleted
 
@@ -85,12 +88,11 @@ func fall(delta):
 	velocity.y += gravity * delta
 	move_and_slide()
 
-func take_damage(_damage):
+func take_damage(_damage : int):
 	if state_node.state.name == "death":
 		return
 
-	print("Player takes damage: " + str(_damage))
-	health.value -= damage
+	health.value -= _damage
 	if health.value <= 0:
 		emit_signal("health_depleted")
 	else:
@@ -98,10 +100,10 @@ func take_damage(_damage):
 
 func check_movable():
 	var potential_movable = null
-	if(ray_movable.is_colliding): 
+	if ray_movable.is_colliding(): 
 		potential_movable = ray_movable.get_collider();
 
-	if(Input.is_action_just_pressed("grab") and potential_movable != null):
+	if Input.is_action_just_pressed("grab") and potential_movable != null:
 		movable = potential_movable
 		state_node.state.finished.emit("push_idle")
 
@@ -125,12 +127,16 @@ func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 	if animation_player.current_animation != anim:
 		animation_player.play(&"RESET");
 		animation_player.advance(0)
-		print("speed: "+str(speed))
-		print("from_end: "+str(from_end))
 		animation_player.play(anim, -1, speed, from_end)
 		animation_player.advance(0)
 func snap_to_corner(ledge_position: Vector2) -> void:
 	global_position = ledge_position + Vector2(snap_offset.x * facing, snap_offset.y)
+func stand_up() -> void:
+	state_node.state.finished.emit("idle")
+	set_crouch_mask(false)
+func quick_climb() -> void:
+	corner_quick_climb = true
+	state_node.state.finished.emit("corner_climb")
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -140,15 +146,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"land":
 			state.finished.emit("idle")
 		"run_stop":
-			var dir_x = get_movement_dir()
-			if dir_x == 0:
-				state.finished.emit("idle")
-			else:
-				set_facing(dir_x)
-				if Input.is_action_pressed("run"):
-					state.finished.emit("run")
-				else:
-					state.finished.emit("walk")
+			state.finished.emit("idle")
 		"stab", "slash", "bash":
 			state.finished.emit("stance_light")
 		"hurt":
@@ -157,8 +155,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			state.finished.emit("idle")
 		"slide":
 			if can_stand_up():
-				state.finished.emit("idle")
-				set_crouch_mask(false)
+				stand_up()
 			else:
 				state.finished.emit("crouch")
 #endregion
@@ -183,12 +180,13 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	#region X Movement
 	var state_name = state_node.state.name
+	#Don't use input direction for facing if direction_locked
 	var dir_x = int(get_movement_dir()) if !direction_locked else facing
 	var accelaration = def_acc
 
 	match state_name:
 		"idle":
-			move_speed = 0
+			move_speed = walk_speed * dir_x
 		"crouch_walk":
 			move_speed = crouch_speed * dir_x
 		"walk", "stance_walk":
@@ -198,7 +196,8 @@ func _physics_process(delta: float) -> void:
 		"push", "pull":
 			move_speed = push_pull_speed * dir_x
 		"run_stop":
-			move_speed = walk_speed * dir_x
+			#Make sure that player can't start moving again if it's stopped by an obstacle in this state
+			move_speed = walk_speed * dir_x if velocity.x == 0.0 else 0.0
 			accelaration = run_stop_dec
 		"bash":
 			accelaration = bash_stop_dec
@@ -215,6 +214,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = 0
 			velocity.y = 0
 		"hurt":
+			velocity.x = 0
 			move_speed = 0
 			accelaration = slide_dec
 		"death":
@@ -256,6 +256,10 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	Debugger.printui(str(state_node.state.name))
+	if combat_target:
+		camera.position = (combat_target.global_position - global_position)/2;
+	else:
+		camera.position = Vector2(0, -40)
 	if Input.is_action_pressed("restart"):
 		get_tree().reload_current_scene()
 	if Input.is_action_just_pressed("ui_cancel"):
