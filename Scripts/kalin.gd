@@ -13,20 +13,13 @@ class_name Player extends CharacterBody2D
 @export var run_stop_dec := 3.0
 @export var bash_stop_dec:= 4.0
 @export var snap_offset := Vector2(-5, -13)
+@export var facing_locked		:= false
+@export var direction_locked	:= false
 
-var move_speed			:= 0.0
-var facing_locked		:= false
-var direction_locked	:= false
-var x_movement_locked	:= false
-var y_movement_locked	:= false
-
-var states_locked := false
-var damage := 1
-
-var corner_quick_climb := false
 
 @onready var state_node := $StateMachine
-@onready var health = $Health
+@onready var health = $CanvasLayer/Control/HBoxContainer/Health
+@onready var stamina = $CanvasLayer/Control/HBoxContainer/Stamina
 @onready var crouching_mask = $ColliderCrouching
 @onready var standing_mask  = $ColliderStanding
 @onready var sprite = $Sprite2D
@@ -43,14 +36,26 @@ var corner_quick_climb := false
 var movable : Node2D = null
 
 
+const SLASH_COST = 2
+const STAB_COST = 1
+const BASH_COST = 2
+
+
 const ingame_menu = preload("res://UI/ingame_menu.tscn")
 var open_menu: Node = null
 
-var facing: int = 1
-
+var move_speed := 0.0
+var facing := 1
 var ignore_corners = false
 
 var interaction_target = null
+
+var states_locked := false
+var damage := 1
+
+var corner_quick_climb := false
+
+signal health_depleted
 
 #const Balloon = preload("res://Dialogues/balloon.tscn")
 #
@@ -81,9 +86,15 @@ func fall(delta):
 	move_and_slide()
 
 func take_damage(_damage):
-	print("Player takes damage")
-	health.change_by(-_damage)
-	state_node.state.finished.emit("hurt")
+	if state_node.state.name == "death":
+		return
+
+	print("Player takes damage: " + str(_damage))
+	health.value -= damage
+	if health.value <= 0:
+		emit_signal("health_depleted")
+	else:
+		state_node.state.finished.emit("hurt")
 
 func check_movable():
 	var potential_movable = null
@@ -100,8 +111,6 @@ func check_interactable() -> void:
 func can_grab_corner(rising:= false) -> bool:
 	var grab_prevent =  col_corner_grab_prevent.has_overlapping_bodies()
 	var grab_trigger = ray_corner_grab_check.is_colliding()
-	Debugger.printui("grab_prevent: "+str(grab_prevent))
-	Debugger.printui("grab_trigger: "+str(grab_trigger))
 
 
 
@@ -112,11 +121,13 @@ func can_grab_corner(rising:= false) -> bool:
 	return true
 func can_stand_up() -> bool:
 	return !col_stand_check.has_overlapping_bodies()
-func update_animation(anim: String) -> void:
+func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 	if animation_player.current_animation != anim:
 		animation_player.play(&"RESET");
 		animation_player.advance(0)
-		animation_player.play(anim)
+		print("speed: "+str(speed))
+		print("from_end: "+str(from_end))
+		animation_player.play(anim, -1, speed, from_end)
 		animation_player.advance(0)
 func snap_to_corner(ledge_position: Vector2) -> void:
 	global_position = ledge_position + Vector2(snap_offset.x * facing, snap_offset.y)
@@ -153,6 +164,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 #endregion
 #region Node Methods
 func _ready() -> void:
+	$CanvasLayer.visible = true
 	var interaction_prompt = ""
 	var events = InputMap.action_get_events("interact")
 
@@ -169,13 +181,14 @@ func _ready() -> void:
 	$InteractionPrompt.text = interaction_prompt
 
 func _physics_process(delta: float) -> void:
-	Debugger.printui("can_grab_corner(): "+str(can_grab_corner()));
 	#region X Movement
 	var state_name = state_node.state.name
-	var dir_x = get_movement_dir() if !direction_locked else facing
+	var dir_x = int(get_movement_dir()) if !direction_locked else facing
 	var accelaration = def_acc
 
 	match state_name:
+		"idle":
+			move_speed = 0
 		"crouch_walk":
 			move_speed = crouch_speed * dir_x
 		"walk", "stance_walk":
@@ -201,14 +214,20 @@ func _physics_process(delta: float) -> void:
 			move_speed = 0
 			velocity.x = 0
 			velocity.y = 0
+		"hurt":
+			move_speed = 0
+			accelaration = slide_dec
+		"death":
+			move_speed = 0
+			velocity.x = 0
 
 
 	if cp.pushback_timer > 0:
+		velocity.x = lerpf(cp.pushback_vector.x, 0, cp.pushback_elapsed_time / cp.pushback_duration)
+
 		cp.pushback_timer = move_toward(cp.pushback_timer, 0, delta)
 		cp.pushback_elapsed_time += delta
 		if cp.pushback_timer <= 0: velocity.x = 0
-
-		velocity.x = lerpf(cp.pushback_vector.x, 0, cp.pushback_elapsed_time / cp.pushback_duration)
 	else:
 		velocity.x = move_toward(velocity.x, move_speed * delta, accelaration)
 		cp.pushback_reset()
@@ -251,9 +270,8 @@ func _process(delta: float) -> void:
 		print(open_menu)
 
 	if Input.is_action_just_pressed("debug1"):
-		print("Pushback")
-		cp.pushback_apply(Vector2(global_position.x + 100.0*facing, global_position.y), cp.pushback_force)
-		print("global_position.x + 100.0*facing: "+str(global_position.x + 100.0*facing));
+		print("Stun")
+		get_node("/root/Game/Enemy").cp.stun()
 
 
 #endregion
@@ -269,4 +287,6 @@ func _on_interactor_area_exited(area: Area2D) -> void:
 	if interaction_target == area:
 		interaction_target = null
 		$InteractionPrompt.visible = false
+func _on_health_depleted() -> void:
+	state_node.state.finished.emit("death")
 #endregion

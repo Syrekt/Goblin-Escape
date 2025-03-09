@@ -10,5 +10,7 @@ func exit():
 	enemy.animation_player.speed_scale = 1.0
 
 func physics_update(delta: float) -> void:
-	if enemy.combat_properties.pushback_timer <= 0:
-		enemy.state_node.state.finished.emit("stance_light")
+	if !%AttackDetector.has_overlapping_bodies():
+		finished.emit("patrol")
+	elif enemy.combat_properties.pushback_timer <= 0:
+		finished.emit("stance_light")

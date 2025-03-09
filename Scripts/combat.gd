@@ -19,15 +19,22 @@ func deal_damage(attacker: CharacterBody2D, defender: CharacterBody2D, pushback_
 			if defender_blocking:
 				print("Attack result: Stun target")
 				attacker.combat_properties.stun(2.0)
+			elif defender.combat_properties.stunned:
+				defender.take_damage(attacker.damage * 2)
 			else:
 				print("Not blocking, deal damage")
 				defender.take_damage(attacker.damage)
 			defender.combat_properties.pushback_apply(attacker.global_position, pushback_force)
 		"bash":
 			print("Attack result: Bash target")
-			defender.combat_properties.pushback_apply(attacker.global_position, pushback_force)
-			if not defender_blocking:
-				defender.take_damage(attacker.damage)
+			if attacker is Enemy && attacker.push_player:
+				defender.combat_properties.pushback_apply(attacker.global_position, pushback_force*3)
+				defender.take_damage(0)
+				attacker.push_player = false
+			else:
+				defender.combat_properties.pushback_apply(attacker.global_position, pushback_force)
+				if !defender_blocking:
+					defender.take_damage(attacker.damage)
 		"_":
 			defender.take_damage(attacker.damage)
 	print("Attacker name: "+str(attacker.name));

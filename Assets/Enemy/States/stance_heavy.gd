@@ -12,6 +12,8 @@ func update(delta):
 	if not %AttackDetector.has_overlapping_bodies():
 		enemy.state_node.state.finished.emit("patrol")
 	enemy.set_facing(sign(enemy.chase_target.position.x - enemy.position.x))
+	if enemy.player_proximity.has_overlapping_bodies():
+		finished.emit("slash")
 
 
 func _on_timer_timeout() -> void:

@@ -7,5 +7,5 @@ func _enter():
 	enemy.velocity.x = lerp(enemy.velocity.x, 0, 0.1)
 
 func update(delta: float) -> void:
-	if not enemy.combat_properties.stunned:
-		enemy.state_node.state.finished.emit("stance_light")
+	if !enemy.combat_properties.stunned:
+		finished.emit("stance_light")

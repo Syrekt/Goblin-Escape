@@ -6,5 +6,6 @@
 script = ExtResource("1_sdfi0")
 
 [node name="StunTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]

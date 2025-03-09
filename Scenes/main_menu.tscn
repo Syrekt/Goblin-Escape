@@ -138,6 +138,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_6iveg")
 layout_mode = 2
 item_count = 2
 popup/item_0/text = "1280x720"
+popup/item_0/id = 0
 popup/item_1/text = "1920x1080"
 popup/item_1/id = 1
 

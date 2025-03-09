@@ -12,7 +12,7 @@ func physics_update(delta: float) -> void:
 		finished.emit("stance_light")
 	elif Input.is_action_pressed("down"):
 		finished.emit("stance_defensive")
-	elif Input.is_action_pressed("attack"):
+	elif Input.is_action_pressed("attack") && player.stamina.spend(player.SLASH_COST):
 		finished.emit("slash")
 	elif not is_equal_approx(player.get_movement_dir(), 0.0):
 		finished.emit("stance_walk")

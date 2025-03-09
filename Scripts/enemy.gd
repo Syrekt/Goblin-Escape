@@ -15,6 +15,10 @@ var facing_locked := false
 
 var states_locked := false
 
+var push_player := false
+
+signal health_depleted
+
 @onready var animation_player   = $AnimationPlayer
 @onready var sprite			    = $Sprite2D
 @onready var state_node		    = $StateMachine
@@ -22,13 +26,14 @@ var states_locked := false
 @onready var combat_properties  = $CombatProperties
 @onready var ray_fall_check		= $FallCheck
 @onready var state_switch_timer = $StateSwitchTimer
+@onready var player_proximity = $PlayerProximity
 
 @onready var slash_hitbox = $StateMachine/slash/SlashHitbox/Collider
 @onready var stab_hitbox  = $StateMachine/stab/StabHitbox/Collider
 @onready var bash_hitbox  = $StateMachine/bash/BashHitbox/Collider
 @onready var cp	= combat_properties
 
-var line_of_sight: RayCast2D
+var line_of_sight: RayCast2D = null
 
 func _ready() -> void:
 	line_of_sight = RayCast2D.new()
@@ -50,29 +55,38 @@ func get_movement_dir():
 
 
 func take_damage(_damage):
-	print("Enemy takes damage")
-	health.change_by(-_damage)
-	state_node.state.finished.emit("hurt")
+	print("Enemy takes damage: "+str(_damage))
+	health.value -= _damage
+	print("health.value: "+str(health.value));
+	if health.value <= 0:
+		emit_signal("health_depleted")
+	else:
+		state_node.state.finished.emit("hurt")
 
 
 func move(speed: float, direction: int) -> bool:
+	#Update the ray direction towards the direction we want to move
+	ray_fall_check.scale.x = direction
+
 	velocity.x = speed * direction * get_process_delta_time()
-	return !is_on_wall() && velocity.x != 0
+	return !is_on_wall() && ray_fall_check.is_colliding() && velocity.x != 0
 func update_animation(anim: String) -> void:
 	animation_player.play(&"RESET");
 	animation_player.advance(0)
 	animation_player.play(anim)
 	animation_player.advance(0)
 func _physics_process(delta: float) -> void:
+	if player_proximity.has_overlapping_bodies():
+		Debugger.printui("Overlapping player")
 	#region X Movement
 	var dir_x = get_movement_dir() if !direction_locked else facing
 
 	if cp.pushback_timer > 0:
+		velocity.x = lerpf(cp.pushback_vector.x, 0, cp.pushback_elapsed_time / cp.pushback_duration)
+
 		cp.pushback_timer = move_toward(cp.pushback_timer, 0, delta)
 		cp.pushback_elapsed_time += delta
 		if cp.pushback_timer <= 0: velocity.x = 0
-
-		velocity.x = lerpf(cp.pushback_vector.x, 0, cp.pushback_elapsed_time / cp.pushback_duration)
 	else:
 		cp.pushback_reset()
 
@@ -91,8 +105,7 @@ func _physics_process(delta: float) -> void:
 
 	#endregion
 
-func _on_health_health_depleted() -> void:
-	print("Death")
+func _on_health_depleted() -> void:
 	state_node.state.finished.emit("death")
 
 

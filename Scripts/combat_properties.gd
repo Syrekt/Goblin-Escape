@@ -4,18 +4,19 @@ extends Node
 var stunned := false
 @onready var stun_timer = $StunTimer
 
-@export var stun_time : float
-
 func stun(time := 2.0):
 	stun_timer.start(time)
 	stunned = true
 	owner.state_node.state.finished.emit("stun")
 
+func _on_stun_timer_timeout() -> void:
+	stunned = false
+
 #endregion
 #region Pushback
 var pushback_vector := Vector2.ZERO
 @export var pushback_duration := 0.3
-var pushback_timer := 0.0
+@onready var pushback_timer := 0.0
 var pushback_elapsed_time := 0.0
 @export var pushback_force := 100.0 #Used to test the system, not used in combat system
 
