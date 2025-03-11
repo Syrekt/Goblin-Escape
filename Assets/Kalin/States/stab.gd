@@ -6,6 +6,7 @@ extends PlayerState
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", "stab")
 	player.velocity.x = 0;
+	player.play_sfx(player.sfx_stab)
 
 func update(delta):
 	if not player.is_on_floor():

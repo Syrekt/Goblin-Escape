@@ -34,6 +34,7 @@ class_name Player extends CharacterBody2D
 @onready var col_interaction = $Interactor
 @onready var cp = combat_properties
 @onready var camera = $Camera2D
+@onready var audio_emitter = $SFX
 var movable : Node2D = null
 
 
@@ -57,6 +58,10 @@ var damage := 1
 var corner_quick_climb := false
 
 var combat_target : CharacterBody2D = null
+
+var sfx_stab = load("res://Assets/SFX/Sword Woosh 12.wav")
+
+var state_on_attack_frame := false
 
 signal health_depleted
 
@@ -137,6 +142,9 @@ func stand_up() -> void:
 func quick_climb() -> void:
 	corner_quick_climb = true
 	state_node.state.finished.emit("corner_climb")
+func play_sfx(sfx) -> void:
+	audio_emitter.stream = sfx
+	audio_emitter.play()
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

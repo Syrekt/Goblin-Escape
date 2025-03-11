@@ -33,6 +33,9 @@ signal health_depleted
 @onready var stab_hitbox  = $StateMachine/stab/StabHitbox/Collider
 @onready var bash_hitbox  = $StateMachine/bash/BashHitbox/Collider
 @onready var cp	= combat_properties
+@onready var audio_emitter = $SFX
+
+var sfx_death = load("res://Assets/SFX/Goblin Death.wav")
 
 var line_of_sight: RayCast2D = null
 
@@ -77,6 +80,7 @@ func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 		animation_player.advance(0)
 		animation_player.play(anim, -1, speed, from_end)
 		animation_player.advance(0)
+#region Node Methods
 func _physics_process(delta: float) -> void:
 	if player_proximity.has_overlapping_bodies():
 		Debugger.printui("Overlapping player")
@@ -106,7 +110,7 @@ func _physics_process(delta: float) -> void:
 			set_facing(sign(velocity.x))
 
 	#endregion
-
+#endregion
 func _on_health_depleted() -> void:
 	state_node.state.finished.emit("death")
 

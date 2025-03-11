@@ -22,6 +22,7 @@ Debugger="*res://Objects/debugger.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 InputHelper="*res://addons/input_helper/input_helper.gd"
 Combat="*res://Scripts/combat.gd"
+Ge="*res://Scripts/GE.gd"
 
 [debug]
 

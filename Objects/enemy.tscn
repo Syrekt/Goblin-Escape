@@ -757,12 +757,15 @@ size = Vector2(20, 32)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 8
+collision_mask = 9
 script = ExtResource("1_18den")
 
 [node name="Collider" type="CollisionShape2D" parent="." groups=["Flip"]]
 visible = false
 position = Vector2(-1, -5.5)
 shape = SubResource("RectangleShape2D_cqw5a")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
 
 [node name="PlayerProximity" type="Area2D" parent="."]
 visible = false
