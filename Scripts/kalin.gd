@@ -146,8 +146,11 @@ func play_sfx(sfx) -> void:
 func combat_perform_attack(hitbox: Area2D, whiff_sfx: AudioStreamWAV, hit_sfx: AudioStreamWAV, knockback_force: int) -> void:
 	if hitbox.has_overlapping_bodies():
 		var body = hitbox.get_overlapping_bodies()[0]
-		Combat.deal_damage(self, body, knockback_force)
-		if hit_sfx: play_sfx(hit_sfx)
+		var defender_hp = Combat.deal_damage(self, body, knockback_force)
+		var path = "res://Assets/SFX/Kalin/Finishers"
+		var files = DirAccess.get_files_at(path)
+		if defender_hp <= 0:	Ge.play_audio_from_string_array(audio_emitter, 0, path, files)
+		elif hit_sfx:			play_sfx(hit_sfx)
 	else:
 		if whiff_sfx: play_sfx(whiff_sfx)
 
@@ -305,7 +308,6 @@ func _process(delta: float) -> void:
 		tween.tween_property(%Sprite2D, "modulate", Color.RED, 0.1)
 		tween.tween_property(%Sprite2D, "modulate", Color.WHITE, 0.1)
 		#%Sprite2D.self_modulate = Color(1.0, 0.0, 0.0)
-	Debugger.printui("%Sprite2D.modulate: "+str(%Sprite2D.modulate));
 #endregion
 
 #region Signals

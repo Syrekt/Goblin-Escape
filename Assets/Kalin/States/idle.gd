@@ -19,7 +19,7 @@ func update(_delta: float) -> void:
 	elif !lock_stance_button && Input.is_action_just_pressed("stance") || Input.is_action_just_pressed("attack"):
 		finished.emit("stance_light")
 	elif player.velocity.x != 0:
-		if Input.is_action_pressed("run"):
+		if Input.is_action_pressed("run") && %Stamina.has_enough(1.0):
 			finished.emit("run")
 		else:
 			finished.emit("walk")

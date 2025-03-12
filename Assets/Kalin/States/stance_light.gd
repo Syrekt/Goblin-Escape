@@ -22,7 +22,7 @@ func update(delta: float) -> void:
 	elif Input.is_action_pressed("attack") && player.stamina.spend(player.STAB_COST):
 		finished.emit("stab")
 	elif !is_equal_approx(player.get_movement_dir(), 0.0):
-		if Input.is_action_pressed("run"):
+		if Input.is_action_pressed("run") && %Stamina.has_enough(1.0):
 			finished.emit("run")
 		else:
 			finished.emit("stance_walk")

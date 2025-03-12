@@ -1,6 +1,6 @@
 extends Node
 
-func deal_damage(attacker: CharacterBody2D, defender: CharacterBody2D, pushback_force : int):
+func deal_damage(attacker: CharacterBody2D, defender: CharacterBody2D, pushback_force : int) -> int:
 	var defender_state = defender.state_node.state.name;
 	var defender_blocking = defender_state == "stance_defensive"
 
@@ -20,7 +20,8 @@ func deal_damage(attacker: CharacterBody2D, defender: CharacterBody2D, pushback_
 				print("Attack result: Stun target")
 				attacker.combat_properties.stun(2.0)
 				if defender is Player:
-					defender.stamina.spend(1)
+					if !defender.stamina.spend(1):
+						defender.combat_properties.stun(2.0)
 			elif defender.combat_properties.stunned:
 				defender.take_damage(attacker.damage * 2)
 			else:
@@ -41,3 +42,4 @@ func deal_damage(attacker: CharacterBody2D, defender: CharacterBody2D, pushback_
 			defender.take_damage(attacker.damage)
 	print("Attacker name: "+str(attacker.name));
 	print("Defender name: "+str(defender.name));
+	return defender.health.value

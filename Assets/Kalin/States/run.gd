@@ -5,6 +5,10 @@ func enter(previous_state_path: String, data := {}) -> void:
 	player.set_floor_snap_length(2.0)
 	player.set_facing(player.get_movement_dir())
 
+func update(delta: float) -> void:
+	if !%Stamina.spend(0.01):
+		finished.emit("run_stop")
+
 func physics_update(delta: float) -> void:
 	player.check_movable();
 	var floor_angle = player.get_floor_angle()

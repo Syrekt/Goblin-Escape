@@ -5,17 +5,14 @@ func enter(previous_state_path: String, data := {}) -> void:
 	lock_stance_button = true
 
 
-func physics_update(delta: float) -> void:
-	player.check_movable();
 
 func update(delta: float) -> void:
-
 	if lock_stance_button:
 		if !Input.is_action_pressed("stance"): lock_stance_button = false
 
 	if !player.is_on_floor():
 		finished.emit("fall")
-	elif Input.is_action_pressed("run"):
+	elif Input.is_action_pressed("run") && %Stamina.has_enough(1.0):
 		finished.emit("run")
 	elif Input.is_action_pressed("down"):
 		finished.emit("crouch")
@@ -25,3 +22,6 @@ func update(delta: float) -> void:
 		finished.emit("stance_walk")
 	elif player.velocity.x == 0:
 		finished.emit("idle")
+
+func physics_update(delta: float) -> void:
+	player.check_movable();

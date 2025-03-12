@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://dhjw1qmf2nvdh"]
+[gd_scene load_steps=9 format=4 uid="uid://dhjw1qmf2nvdh"]
 
 [ext_resource type="PackedScene" uid="uid://d08scf611mrii" path="res://Objects/kalin.tscn" id="1_v3ybc"]
 [ext_resource type="Script" uid="uid://dytt7cafdt3c1" path="res://Scripts/game_manager.gd" id="1_yp60x"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bpj2k5beannxk" path="res://Objects/dialogue_trigger.tscn" id="6_ssinu"]
 [ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Objects/enemy.tscn" id="7_w7h1d"]
 [ext_resource type="TileSet" uid="uid://d16iprr3bwurc" path="res://Assets/Others/cave_tile.tres" id="8_k6cow"]
+[ext_resource type="AudioStream" uid="uid://dkgt8hqnqcgaj" path="res://Assets/BGM/juanjo_sound - Do we need a reason.wav" id="8_v158k"]
 
 [node name="Game" type="Node2D"]
 
@@ -31,7 +32,7 @@ unique_name_in_owner = true
 script = ExtResource("1_yp60x")
 
 [node name="Enemy" parent="." instance=ExtResource("7_w7h1d")]
-position = Vector2(547, 76)
+position = Vector2(232, 80)
 
 [node name="Kalin" parent="." instance=ExtResource("1_v3ybc")]
 unique_name_in_owner = true
@@ -56,3 +57,7 @@ position = Vector2(-153, -41)
 
 [node name="Movable2" parent="." instance=ExtResource("5_jdxuh")]
 position = Vector2(142, 157)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_v158k")
+volume_db = -10.778

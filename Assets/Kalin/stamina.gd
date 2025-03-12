@@ -7,24 +7,30 @@ var tween : Tween = null
 func _process(delta: float) -> void:
 	if timer.time_left == 0:
 		value = move_toward(value, max_value, recovery_speed*delta)
-	Debugger.printui("tween: "+str(tween))
-	if tween:
-		Debugger.printui("tween.is_running(): "+str(tween.is_running()));
 
-func spend(amount) -> bool:
+func spend(amount: float) -> bool:
 	if value >= amount:
 		value -= amount
 		timer.start()
 		return true
 	else:
-		owner.animation_player.play("not_enough_stamina")
-		#if tween: tween.stop()
-		if tween && tween.is_running(): return false
-
-		tween = create_tween().bind_node(self)
-		tween.tween_property(%Sprite2D, "modulate", Color.ORANGE, 0.1)
-		tween.tween_property(%Sprite2D, "modulate", Color.WHITE, 0.1)
-		tween.tween_property(%Sprite2D, "modulate", Color.ORANGE, 0.1)
-		tween.tween_property(%Sprite2D, "modulate", Color.WHITE, 0.1)
-
+		blink()
 		return false
+
+func has_enough(amount: float) -> bool:
+	if value < amount: blink()
+	return value >= amount
+
+func blink() -> void:
+	if tween && tween.is_running(): return 
+
+	tween = create_tween().bind_node(self)
+	tween.tween_property(%Sprite2D, "modulate", Color.ORANGE, 0.1)
+	tween.tween_property(%Sprite2D, "modulate", Color.WHITE, 0.1)
+	tween.tween_property(%Sprite2D, "modulate", Color.ORANGE, 0.1)
+	tween.tween_property(%Sprite2D, "modulate", Color.WHITE, 0.1)
+
+	tween.tween_property(self, "modulate", Color.RED, 0.1)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
+	tween.tween_property(self, "modulate", Color.RED, 0.1)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.1)

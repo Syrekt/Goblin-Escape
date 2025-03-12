@@ -893,6 +893,7 @@ shape = SubResource("RectangleShape2D_rha5u")
 one_shot = true
 
 [node name="Health" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
 visible = false
 offset_left = -26.0
 offset_top = 19.0
