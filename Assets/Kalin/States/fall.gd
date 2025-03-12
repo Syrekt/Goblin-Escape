@@ -1,14 +1,19 @@
 extends PlayerState
 
-@onready var timer = $Timer
+@onready var land_animation_timer = $LandAnimationTimer
+@onready var fall_damage_timer = $FallDamageTimer
 
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", "fall")
-	timer.start(0.3)
+	land_animation_timer.start(0.3)
+	fall_damage_timer.start(0.6)
 
 func physics_update(delta: float) -> void:
+	Debugger.printui("fall_damage_timer.time_left: "+str(fall_damage_timer.time_left));
 	if player.is_on_floor():
-		if timer.is_stopped():
+		if fall_damage_timer.is_stopped():
+			finished.emit("land_hurt")
+		elif land_animation_timer.is_stopped():
 			finished.emit("land")
 		else:
 			finished.emit("idle")

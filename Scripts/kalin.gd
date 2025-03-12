@@ -91,14 +91,14 @@ func fall(delta):
 	velocity.y += gravity * delta
 	move_and_slide()
 
-func take_damage(_damage : int):
+func take_damage(_damage: int, allow_hurt := true):
 	if state_node.state.name == "death":
 		return
 
 	health.value -= _damage
 	if health.value <= 0:
 		emit_signal("health_depleted")
-	else:
+	elif allow_hurt:
 		state_node.state.finished.emit("hurt")
 
 func check_movable():
@@ -158,7 +158,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	var state = state_node.state
 
 	match state.name:
-		"land":
+		"land", "land_hurt":
 			state.finished.emit("idle")
 		"run_stop":
 			state.finished.emit("idle")
@@ -297,8 +297,7 @@ func _process(delta: float) -> void:
 		print(open_menu)
 
 	if Input.is_action_just_pressed("debug1"):
-		print("Stun")
-		get_node("/root/Game/Enemy").cp.stun()
+		animation_player.play("hurt_overlay")
 	#endregion
 #endregion
 
