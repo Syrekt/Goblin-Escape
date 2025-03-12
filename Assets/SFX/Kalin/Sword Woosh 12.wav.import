@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c50be1pxoc3bn"
-path="res://.godot/imported/Sword Woosh 12.wav-f932bd612d5767306e5d42dff3f11ef1.sample"
+path="res://.godot/imported/Sword Woosh 12.wav-eae69706fcf28062fc6219027dab0a79.sample"
 
 [deps]
 
-source_file="res://Assets/SFX/Sword Woosh 12.wav"
-dest_files=["res://.godot/imported/Sword Woosh 12.wav-f932bd612d5767306e5d42dff3f11ef1.sample"]
+source_file="res://Assets/SFX/Kalin/Sword Woosh 12.wav"
+dest_files=["res://.godot/imported/Sword Woosh 12.wav-eae69706fcf28062fc6219027dab0a79.sample"]
 
 [params]
 

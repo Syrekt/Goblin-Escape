@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bxyrvx4tj1h3e"
-path="res://.godot/imported/Heavy sword woosh 8.wav-57ac4d696d029314a2a13bd83ac85fce.sample"
+path="res://.godot/imported/Heavy sword woosh 8.wav-ce23b0859804f02677d1c8a1e5f53536.sample"
 
 [deps]
 
-source_file="res://Assets/SFX/Heavy sword woosh 8.wav"
-dest_files=["res://.godot/imported/Heavy sword woosh 8.wav-57ac4d696d029314a2a13bd83ac85fce.sample"]
+source_file="res://Assets/SFX/Kalin/Heavy sword woosh 8.wav"
+dest_files=["res://.godot/imported/Heavy sword woosh 8.wav-ce23b0859804f02677d1c8a1e5f53536.sample"]
 
 [params]
 

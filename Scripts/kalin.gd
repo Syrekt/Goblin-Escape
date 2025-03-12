@@ -59,8 +59,6 @@ var corner_quick_climb := false
 
 var combat_target : CharacterBody2D = null
 
-var sfx_stab = load("res://Assets/SFX/Sword Woosh 12.wav")
-
 var state_on_attack_frame := false
 
 signal health_depleted
@@ -145,6 +143,14 @@ func quick_climb() -> void:
 func play_sfx(sfx) -> void:
 	audio_emitter.stream = sfx
 	audio_emitter.play()
+func combat_perform_attack(hitbox: Area2D, whiff_sfx: AudioStreamWAV, hit_sfx: AudioStreamWAV, knockback_force: int) -> void:
+	if hitbox.has_overlapping_bodies():
+		var body = hitbox.get_overlapping_bodies()[0]
+		Combat.deal_damage(self, body, knockback_force)
+		if hit_sfx: play_sfx(hit_sfx)
+	else:
+		if whiff_sfx: play_sfx(whiff_sfx)
+
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

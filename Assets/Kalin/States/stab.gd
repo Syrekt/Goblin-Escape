@@ -1,20 +1,18 @@
 extends PlayerState
 
 @onready var hitbox = get_child(0)
-@onready var hitbox_collider = hitbox.get_node("Collider")
+@onready var sfx_stab_hit = load("res://Assets/SFX/Kalin/stab1.wav")
+@onready var sfx_stab_whiff = load("res://Assets/SFX/Kalin/Sword Woosh 12.wav")
+
+signal attack_frame
 
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", "stab")
-	player.velocity.x = 0;
-	player.play_sfx(player.sfx_stab)
 
 func update(delta):
-	if not player.is_on_floor():
+	if !player.is_on_floor():
 		finished.emit("fall")
 
-func exit():
-	hitbox_collider.set_disabled(true)
-
-
-func _on_stab_hitbox_body_entered(body: Node2D) -> void:
-	Combat.deal_damage(player, body, 75)
+func _on_attack_frame() -> void:
+	print("stab hit")
+	player.combat_perform_attack(hitbox, sfx_stab_whiff, sfx_stab_hit, 75)

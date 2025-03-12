@@ -35,8 +35,6 @@ signal health_depleted
 @onready var cp	= combat_properties
 @onready var audio_emitter = $SFX
 
-var sfx_death = load("res://Assets/SFX/Goblin Death.wav")
-
 var line_of_sight: RayCast2D = null
 
 func _ready() -> void:
