@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://v77psk6rln3o"
+path="res://.godot/imported/Squire Soft1.wav-35e94d0f1f9af66df7c40d063c97a943.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Kalin/Squire Soft1.wav"
+dest_files=["res://.godot/imported/Squire Soft1.wav-35e94d0f1f9af66df7c40d063c97a943.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

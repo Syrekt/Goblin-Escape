@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://d08scf611mrii"]
+[gd_scene load_steps=99 format=3 uid="uid://d08scf611mrii"]
 
 [ext_resource type="Script" uid="uid://coi4g5fo3jf06" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Texture2D" uid="uid://dcs3l0iefjo7w" path="res://Assets/Kalin/Sprites/Kalin-Fall.png" id="2_1j6vo"]
@@ -28,6 +28,7 @@
 [ext_resource type="Script" uid="uid://bqbk0ddj34sqn" path="res://Assets/Kalin/States/fall.gd" id="12_oysea"]
 [ext_resource type="Script" uid="uid://c03gd0js6ef17" path="res://Assets/Kalin/States/land.gd" id="14_sgd03"]
 [ext_resource type="Texture2D" uid="uid://dslyx31hbng77" path="res://Assets/Kalin/Sprites/Kalin-Run_Stop.png" id="14_uklr6"]
+[ext_resource type="AudioStream" uid="uid://v77psk6rln3o" path="res://Assets/SFX/Kalin/Squire Soft1.wav" id="15_2ksh1"]
 [ext_resource type="Texture2D" uid="uid://bse8dgihy05xu" path="res://Assets/Kalin/Sprites/Kalin-Wallslide.png" id="19_dyqvk"]
 [ext_resource type="Script" uid="uid://c7frkek8a6s60" path="res://Assets/Kalin/States/crouch_walk.gd" id="21_3t0vr"]
 [ext_resource type="Script" uid="uid://3xoy8rjyfmi3" path="res://Assets/Kalin/States/crouch.gd" id="21_60gj1"]
@@ -1148,6 +1149,21 @@ tracks/4/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/5/type = "audio"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../SFX")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0406,
+"stream": ExtResource("15_2ksh1")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/5/use_blend = true
 
 [sub_resource type="Animation" id="Animation_obgsb"]
 resource_name = "run"
@@ -2099,19 +2115,19 @@ script = ExtResource("21_60gj1")
 [node name="crouch_walk" type="Node" parent="StateMachine"]
 script = ExtResource("21_3t0vr")
 
-[node name="stance_heavy" type="Node" parent="StateMachine"]
+[node name="stance_heavy" type="Node" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("36_uhi5y")
 
-[node name="stance_light" type="Node" parent="StateMachine"]
+[node name="stance_light" type="Node" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("33_ao24u")
 
-[node name="stance_defensive" type="Node" parent="StateMachine"]
+[node name="stance_defensive" type="Node" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("38_823eb")
 
-[node name="stance_walk" type="Node" parent="StateMachine"]
+[node name="stance_walk" type="Node" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("39_rgkp8")
 
-[node name="slash" type="Node2D" parent="StateMachine"]
+[node name="slash" type="Node2D" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("39_af0aw")
 
 [node name="SlashHitbox" parent="StateMachine/slash" instance=ExtResource("45_42hh8")]
@@ -2123,7 +2139,7 @@ monitorable = false
 [node name="Collider" parent="StateMachine/slash/SlashHitbox" index="0"]
 disabled = false
 
-[node name="stab" type="Node2D" parent="StateMachine"]
+[node name="stab" type="Node2D" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("41_sat24")
 
 [node name="StabHitbox" parent="StateMachine/stab" instance=ExtResource("45_42hh8")]
@@ -2135,7 +2151,7 @@ monitorable = false
 [node name="Collider" parent="StateMachine/stab/StabHitbox" index="0"]
 disabled = false
 
-[node name="bash" type="Node2D" parent="StateMachine"]
+[node name="bash" type="Node2D" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("41_pdh0h")
 
 [node name="BashHitbox" parent="StateMachine/bash" instance=ExtResource("45_42hh8")]
@@ -2147,10 +2163,10 @@ monitorable = false
 [node name="Collider" parent="StateMachine/bash/BashHitbox" index="0"]
 scale = Vector2(1, 1)
 
-[node name="hurt" type="Node" parent="StateMachine"]
+[node name="hurt" type="Node" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("40_xirjq")
 
-[node name="death" type="Node" parent="StateMachine"]
+[node name="death" type="Node" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("40_xirjq")
 
 [node name="push_idle" type="Node" parent="StateMachine"]

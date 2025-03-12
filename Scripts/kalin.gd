@@ -152,6 +152,7 @@ func combat_perform_attack(hitbox: Area2D, whiff_sfx: AudioStreamWAV, hit_sfx: A
 		if whiff_sfx: play_sfx(whiff_sfx)
 
 #endregion
+
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	var state = state_node.state
@@ -173,7 +174,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			else:
 				state.finished.emit("crouch")
 #endregion
-#region Node Methods
+
+#region Init
 func _ready() -> void:
 	$CanvasLayer.visible = true
 	var interaction_prompt = ""
@@ -190,7 +192,8 @@ func _ready() -> void:
 				interaction_prompt = "Mouse Button " + str(event.button_index)
 
 	$InteractionPrompt.text = interaction_prompt
-
+#endregion
+#region Physics
 func _physics_process(delta: float) -> void:
 	#region X Movement
 	var state_name = state_node.state.name
@@ -267,15 +270,21 @@ func _physics_process(delta: float) -> void:
 	check_interactable()
 
 	#endregion
-
+#endregion
+#region Process
 func _process(delta: float) -> void:
 	Debugger.printui(str(state_node.state.name))
-	if combat_target:
+	#region Camera combat position
+	var in_combat_state = state_node.state.is_in_group("combat_state")
+	if in_combat_state && combat_target:
 		camera.position = (combat_target.global_position - global_position)/2;
+		if combat_target.state_node.state.name == "death": combat_target = null
 	else:
 		camera.position = Vector2(0, -40)
+	#endregion
 	if Input.is_action_pressed("restart"):
 		get_tree().reload_current_scene()
+	#region Open menu
 	if Input.is_action_just_pressed("ui_cancel"):
 		if open_menu == null:
 			open_menu = ingame_menu.instantiate()
@@ -290,9 +299,9 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("debug1"):
 		print("Stun")
 		get_node("/root/Game/Enemy").cp.stun()
-
-
+	#endregion
 #endregion
+
 #region Signals
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	print(area)
