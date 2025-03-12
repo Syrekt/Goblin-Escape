@@ -4,7 +4,7 @@ var just_entered := false
 
 func enter(previous_path_string: String, data := {}) -> void:
 	player.snap_to_corner(player.ray_corner_grab_check.get_collision_point())
-	player.call_deferred("update_animation", "corner_grab")
+	player.call_deferred("update_animation", name)
 
 func update(delta: float) -> void:
 	if Input.is_action_just_pressed("up"):

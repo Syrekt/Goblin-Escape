@@ -4,7 +4,7 @@ extends PlayerState
 @onready var fall_damage_timer = $FallDamageTimer
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.call_deferred("update_animation", "fall")
+	player.call_deferred("update_animation", name)
 	land_animation_timer.start(0.3)
 	fall_damage_timer.start(0.6)
 

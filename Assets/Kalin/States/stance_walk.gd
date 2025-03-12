@@ -2,9 +2,9 @@ extends PlayerState
 
 func enter(previous_state_path: String, data := {}) -> void:
 	if player.get_movement_dir() == -player.facing:
-		player.call_deferred("update_animation", "stance_walk", -1)
+		player.call_deferred("update_animation", name, -1)
 	else:
-		player.call_deferred("update_animation", "stance_walk")
+		player.call_deferred("update_animation", name)
 	player.velocity.x = 0;
 
 	lock_stance_button = true;

@@ -7,7 +7,7 @@ extends PlayerState
 signal attack_frame
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.call_deferred("update_animation", "stab")
+	player.call_deferred("update_animation", name)
 
 func update(delta):
 	if !player.is_on_floor():

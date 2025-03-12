@@ -1,7 +1,7 @@
 extends PlayerState
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.call_deferred("update_animation", "run")
+	player.call_deferred("update_animation", name)
 	player.set_floor_snap_length(2.0)
 	player.set_facing(player.get_movement_dir())
 

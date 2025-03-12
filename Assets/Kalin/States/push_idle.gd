@@ -1,7 +1,7 @@
 extends PlayerState
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.call_deferred("update_animation", "push_idle")
+	player.call_deferred("update_animation", name)
 	player.movable.grab()
 	#Make sure player is not stuck in object
 	player.position.x -= player.facing

@@ -9,7 +9,7 @@ extends PlayerState
 signal attack_frame
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.call_deferred("update_animation", "slash")
+	player.call_deferred("update_animation", name)
 	player.velocity.x = 0;
 
 func update(delta):

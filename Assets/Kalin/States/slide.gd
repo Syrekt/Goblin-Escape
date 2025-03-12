@@ -2,7 +2,7 @@ extends PlayerState
 
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.call_deferred("update_animation", "slide")
+	player.call_deferred("update_animation", name)
 	player.velocity.x = player.slide_speed * player.facing
 	player.set_crouch_mask(true)
 

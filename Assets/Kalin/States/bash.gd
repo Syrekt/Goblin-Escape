@@ -8,7 +8,7 @@ extends PlayerState
 var enemy_ignore_list := []
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.call_deferred("update_animation", "bash")
+	player.call_deferred("update_animation", name)
 	enemy_ignore_list = []
 	player.set_collision_mask_value(4, true)
 	player.play_sfx(sfx_bash)
