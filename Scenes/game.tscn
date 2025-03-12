@@ -35,7 +35,7 @@ position = Vector2(547, 76)
 
 [node name="Kalin" parent="." instance=ExtResource("1_v3ybc")]
 unique_name_in_owner = true
-position = Vector2(89, -92)
+position = Vector2(91, 78)
 
 [node name="Camera2D" type="Camera2D" parent="Kalin"]
 position = Vector2(0, -40)

@@ -296,9 +296,16 @@ func _process(delta: float) -> void:
 			open_menu = null
 		print(open_menu)
 
-	if Input.is_action_just_pressed("debug1"):
-		animation_player.play("hurt_overlay")
 	#endregion
+	if Input.is_action_just_pressed("debug1"):
+		print("debug1")
+		var tween: Tween = create_tween().bind_node(self)
+		tween.tween_property(%Sprite2D, "modulate", Color.RED, 0.1)
+		tween.tween_property(%Sprite2D, "modulate", Color.WHITE, 0.1)
+		tween.tween_property(%Sprite2D, "modulate", Color.RED, 0.1)
+		tween.tween_property(%Sprite2D, "modulate", Color.WHITE, 0.1)
+		#%Sprite2D.self_modulate = Color(1.0, 0.0, 0.0)
+	Debugger.printui("%Sprite2D.modulate: "+str(%Sprite2D.modulate));
 #endregion
 
 #region Signals
