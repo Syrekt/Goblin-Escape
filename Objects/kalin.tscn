@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://d08scf611mrii"]
+[gd_scene load_steps=103 format=3 uid="uid://d08scf611mrii"]
 
 [ext_resource type="Script" uid="uid://coi4g5fo3jf06" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Texture2D" uid="uid://dcs3l0iefjo7w" path="res://Assets/Kalin/Sprites/Kalin-Fall.png" id="2_1j6vo"]
@@ -35,6 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://bxgpgvblnjqhg" path="res://Assets/Kalin/Sprites/Kalin-Walk.png" id="22_vnsvi"]
 [ext_resource type="Script" uid="uid://bgnnyj7i10wbg" path="res://Assets/Kalin/States/walk.gd" id="28_1dko0"]
 [ext_resource type="Texture2D" uid="uid://bq334bamr3mgu" path="res://Assets/Kalin/Sprites/Kalin-Slide.png" id="29_qnnkd"]
+[ext_resource type="Shader" uid="uid://bsdpqn4qet7eo" path="res://Shaders/glow_shader.gdshader" id="29_xmisc"]
 [ext_resource type="Script" uid="uid://dkwpmjw6yg1bb" path="res://Assets/Kalin/States/stance_light.gd" id="33_ao24u"]
 [ext_resource type="Script" uid="uid://cde3iqq141b2n" path="res://Assets/Kalin/States/run_stop.gd" id="34_lbmmt"]
 [ext_resource type="Script" uid="uid://dhnnpcllpme4v" path="res://Assets/Kalin/States/stance_heavy.gd" id="36_uhi5y"]
@@ -61,6 +62,15 @@
 [ext_resource type="Texture2D" uid="uid://yh6p23n7un5u" path="res://Assets/Others/Sliders/cur_health.png" id="58_8idp1"]
 [ext_resource type="Texture2D" uid="uid://cdns6sfhw5j85" path="res://Assets/Others/Sliders/cur_stamina.png" id="59_8idp1"]
 [ext_resource type="Script" uid="uid://c3rllm222ckui" path="res://Assets/Kalin/stamina.gd" id="60_2ksh1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s52bw"]
+shader = ExtResource("29_xmisc")
+shader_parameter/color1 = Color(0, 0, 0, 1)
+shader_parameter/color2 = Color(0, 0, 0, 1)
+shader_parameter/threshold = 0.0
+shader_parameter/intensity = 0.0
+shader_parameter/opacity = 0.0
+shader_parameter/glow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_5koc5"]
 length = 0.001
@@ -139,19 +149,19 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("../CanvasLayer/Control/HBoxContainer/Stamina:modulate")
+tracks/6/path = NodePath("..:facing_locked")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [false]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("..:facing_locked")
+tracks/7/path = NodePath("..:direction_locked")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -163,26 +173,38 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("..:direction_locked")
+tracks/8/path = NodePath("../StateMachine/bash/BashHitbox/Collider:disabled")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("../StateMachine/bash/BashHitbox/Collider:disabled")
+tracks/9/path = NodePath(".:material")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [SubResource("ShaderMaterial_s52bw")]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../CanvasLayer/Control/HBoxContainer/Stamina:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_b8tlq"]
@@ -871,34 +893,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_8idp1"]
-resource_name = "not_enough_stamina"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(0.980392, 0.698039, 0.184314, 1), Color(1, 1, 1, 1), Color(0.980392, 0.698039, 0.184314, 1), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../CanvasLayer/Control/HBoxContainer/Stamina:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(0.980392, 0, 0.184314, 1), Color(1, 1, 1, 1), Color(0.980392, 0, 0.184314, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_mj8sq"]
@@ -2009,6 +2003,23 @@ tracks/5/keys = {
 "values": [Color(1, 0.346577, 0.280009, 1), Color(1, 0.346577, 0.280009, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_s52bw"]
+resource_name = "not_enough_stamina"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../CanvasLayer/Control/HBoxContainer/Stamina:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cuohi"]
 _data = {
 &"RESET": SubResource("Animation_5koc5"),
@@ -2025,7 +2036,7 @@ _data = {
 &"idle": SubResource("Animation_dkbxi"),
 &"land": SubResource("Animation_jxgp1"),
 &"land_hurt": SubResource("Animation_2ksh1"),
-&"not_enough_stamina": SubResource("Animation_8idp1"),
+&"not_enough_stamina": SubResource("Animation_s52bw"),
 &"pull": SubResource("Animation_mj8sq"),
 &"push": SubResource("Animation_xojyh"),
 &"push_idle": SubResource("Animation_dchdh"),
@@ -2085,6 +2096,7 @@ current = true
 [node name="CombatProperties" parent="." instance=ExtResource("2_yetl5")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_s52bw")
 position = Vector2(1, 0)
 texture = ExtResource("3_b6tj0")
 hframes = 6
