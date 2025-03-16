@@ -8,17 +8,16 @@ func enter(previous_state_path: String, data := {}) -> void:
 		player.call_deferred("update_animation", name)
 
 func update(delta):
-	var can_quick_climb = player.velocity.y < -50.0
 	if player.can_grab_corner():
-		if can_quick_climb && player.ray_auto_climb.is_colliding():
-			player.quick_climb()
 		if player.ray_corner_grab_check.is_colliding():
 			if player.col_auto_climb_bottom.has_overlapping_bodies():
 				player.quick_climb()
-			elif Input.is_action_pressed("up"):
-				finished.emit("corner_climb")
 			else:
 				finished.emit("corner_grab")
+		elif player.can_quick_climb():
+			var collider = player.ray_auto_climb.get_collider()
+			print("collider: "+str(collider))
+			player.quick_climb()
 
 	if player.velocity.y >= 0 && player.is_on_floor():
 		finished.emit("idle")

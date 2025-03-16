@@ -29,6 +29,7 @@ class_name Player extends CharacterBody2D
 @onready var ray_corner_grab_check = $CornerGrabCheck
 @onready var ray_auto_climb = $CornerAutoClimb
 @onready var col_corner_grab_prevent = $CornerGrabPrevent
+@onready var col_quick_climb_prevent = $QuickClimbPrevent
 @onready var col_stand_check = $StandCheck
 @onready var col_auto_climb_bottom = $BottomAutoClimb
 @onready var col_interaction = $Interactor
@@ -122,12 +123,13 @@ func can_grab_corner(rising:= false) -> bool:
 	var grab_trigger = ray_corner_grab_check.is_colliding()
 
 
-
 	if col_corner_grab_prevent.has_overlapping_bodies(): return false
 	if is_on_floor(): return false
 	if is_on_ceiling(): return false
 	if ignore_corners: return false
 	return true
+func can_quick_climb() -> bool:
+	return velocity.y < -50.0 && !col_quick_climb_prevent.has_overlapping_bodies() && ray_auto_climb.is_colliding()
 func can_stand_up() -> bool:
 	return !col_stand_check.has_overlapping_bodies()
 func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
@@ -137,7 +139,6 @@ func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 		animation_player.play(anim, -1, speed, from_end)
 		animation_player.advance(0)
 func snap_to_corner(ledge_position: Vector2) -> void:
-	print("Snapping from: "+str(state_node.state.name));
 	global_position = ledge_position + Vector2(snap_offset.x * facing, snap_offset.y)
 func stand_up() -> void:
 	state_node.state.finished.emit("idle")
@@ -226,7 +227,7 @@ func _physics_process(delta: float) -> void:
 			accelaration = bash_stop_dec
 		"slide", "stun":
 			accelaration = slide_dec
-		"land":
+		"land", "land_hurt":
 			move_speed = 0;
 			accelaration = slide_dec
 		"slash", "stab":
@@ -280,6 +281,12 @@ func _physics_process(delta: float) -> void:
 #region Process
 func _process(delta: float) -> void:
 	Debugger.printui(str(state_node.state.name))
+	var ccq = col_quick_climb_prevent.has_overlapping_bodies()
+	Debugger.printui("Overlapping: "+str(ccq))
+	if ray_auto_climb.is_colliding():
+		var collider = ray_auto_climb.get_collider()
+		Debugger.printui("collider.collision_point: "+str(ray_auto_climb.get_collision_point()));
+		Debugger.printui("collider: "+str(collider))
 	#region Camera combat position
 	var in_combat_state = state_node.state.is_in_group("combat_state")
 	if in_combat_state && combat_target:
