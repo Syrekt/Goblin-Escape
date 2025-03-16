@@ -3,6 +3,7 @@ extends PlayerState
 var just_entered := false
 
 func enter(previous_path_string: String, data := {}) -> void:
+	print("previous_path_string: "+str(previous_path_string))
 	player.snap_to_corner(player.ray_corner_grab_check.get_collision_point())
 	player.call_deferred("update_animation", name)
 

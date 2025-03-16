@@ -15,4 +15,4 @@ func update(delta):
 
 func _on_attack_frame() -> void:
 	print("stab hit")
-	player.combat_perform_attack(hitbox, sfx_stab_whiff, sfx_stab_hit, 75)
+	player.combat_perform_attack(hitbox, player.stab_damage, sfx_stab_whiff, sfx_stab_hit, 75)

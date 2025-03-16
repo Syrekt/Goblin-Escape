@@ -1,9 +1,12 @@
-[gd_scene load_steps=43 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene load_steps=46 format=3 uid="uid://iuj1jg31a55f"]
 
 [ext_resource type="Script" uid="uid://bhcr3m01slk8a" path="res://Scripts/enemy.gd" id="1_18den"]
+[ext_resource type="AudioStream" uid="uid://bx6vdt8wts4xf" path="res://Assets/SFX/Kalin/kick_short_whoosh_12.wav" id="6_ifl3v"]
 [ext_resource type="PackedScene" uid="uid://cpogcou30wxcj" path="res://UI/combat_properties.tscn" id="7_7ej0e"]
 [ext_resource type="Shader" uid="uid://dgty7bsbniivw" path="res://Scripts/flash.gdshader" id="8_6eeyp"]
 [ext_resource type="Texture2D" uid="uid://bxfbcd2o3tqam" path="res://Assets/Enemy/Goblin/goblin-idle.png" id="9_3g55t"]
+[ext_resource type="AudioStream" uid="uid://fgclj6nvftu7" path="res://Assets/SFX/Kalin/Sword Woosh 1.wav" id="10_u0rn5"]
+[ext_resource type="AudioStream" uid="uid://c50be1pxoc3bn" path="res://Assets/SFX/Kalin/Sword Woosh 12.wav" id="11_ifl3v"]
 [ext_resource type="Texture2D" uid="uid://c6nifh0i54h6f" path="res://Assets/Enemy/Goblin/goblin-bash.png" id="11_wrk2e"]
 [ext_resource type="Texture2D" uid="uid://ppmeb6xgbtin" path="res://Assets/Enemy/Goblin/goblin-death.png" id="12_to5id"]
 [ext_resource type="Texture2D" uid="uid://cnglwro36se85" path="res://Assets/Enemy/Goblin/goblin-hurt.png" id="13_uqw8j"]
@@ -185,6 +188,21 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../SFX")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.1605,
+"stream": ExtResource("6_ifl3v")
+}],
+"times": PackedFloat32Array(0.4)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_3i20h"]
 resource_name = "block"
@@ -443,6 +461,25 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../SFX")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.51969,
+"start_offset": 0.0,
+"stream": ExtResource("10_u0rn5")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("11_ifl3v")
+}],
+"times": PackedFloat32Array(0.4, 0.8)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_p8gt6"]
 resource_name = "stab"
@@ -496,6 +533,21 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../SFX")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("11_ifl3v")
+}],
+"times": PackedFloat32Array(0.4)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_w27ub"]
 resource_name = "stance_defensive"

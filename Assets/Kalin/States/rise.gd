@@ -8,7 +8,6 @@ func enter(previous_state_path: String, data := {}) -> void:
 		player.call_deferred("update_animation", name)
 
 func update(delta):
-	Debugger.printui("velocity.y: "+str(player.velocity.y));
 	var can_quick_climb = player.velocity.y < -50.0
 	if player.can_grab_corner():
 		if can_quick_climb && player.ray_auto_climb.is_colliding():

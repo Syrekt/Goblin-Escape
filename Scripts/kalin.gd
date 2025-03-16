@@ -34,13 +34,16 @@ class_name Player extends CharacterBody2D
 @onready var col_interaction = $Interactor
 @onready var cp = combat_properties
 @onready var camera = $Camera2D
-@onready var audio_emitter = $SFX
+@onready var audio_emitter = $MainAudioStreamer
 var movable : Node2D = null
 
 
-const SLASH_COST = 2
-const STAB_COST = 1
-const BASH_COST = 2
+const SLASH_COST	:= 2
+const STAB_COST		:= 1
+const BASH_COST 	:= 2
+var slash_damage	:= 2
+var stab_damage		:= 1
+var bash_damage 	:= 1
 
 
 const ingame_menu = preload("res://UI/ingame_menu.tscn")
@@ -99,6 +102,7 @@ func take_damage(_damage: int, allow_hurt := true):
 	if health.value <= 0:
 		emit_signal("health_depleted")
 	elif allow_hurt:
+		Ge.play_audio_from_string_array(audio_emitter, -2, "res://Assets/SFX/Kalin/Hurt")
 		state_node.state.finished.emit("hurt")
 
 func check_movable():
@@ -133,6 +137,7 @@ func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 		animation_player.play(anim, -1, speed, from_end)
 		animation_player.advance(0)
 func snap_to_corner(ledge_position: Vector2) -> void:
+	print("Snapping from: "+str(state_node.state.name));
 	global_position = ledge_position + Vector2(snap_offset.x * facing, snap_offset.y)
 func stand_up() -> void:
 	state_node.state.finished.emit("idle")
@@ -143,13 +148,11 @@ func quick_climb() -> void:
 func play_sfx(sfx) -> void:
 	audio_emitter.stream = sfx
 	audio_emitter.play()
-func combat_perform_attack(hitbox: Area2D, whiff_sfx: AudioStreamWAV, hit_sfx: AudioStreamWAV, knockback_force: int) -> void:
+func combat_perform_attack(hitbox: Area2D, _damage: int, whiff_sfx: AudioStreamWAV, hit_sfx: AudioStreamWAV, knockback_force: int) -> void:
 	if hitbox.has_overlapping_bodies():
 		var body = hitbox.get_overlapping_bodies()[0]
-		var defender_hp = Combat.deal_damage(self, body, knockback_force)
-		var path = "res://Assets/SFX/Kalin/Finishers"
-		var files = DirAccess.get_files_at(path)
-		if defender_hp <= 0:	Ge.play_audio_from_string_array(audio_emitter, 0, path, files)
+		var defender_hp = Combat.deal_damage(self, _damage, body, knockback_force)
+		if defender_hp <= 0: Ge.play_audio_from_string_array(audio_emitter, 0, "res://Assets/SFX/Kalin/Finishers")
 		elif hit_sfx:			play_sfx(hit_sfx)
 	else:
 		if whiff_sfx: play_sfx(whiff_sfx)
@@ -302,12 +305,7 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
-		var tween: Tween = create_tween().bind_node(self)
-		tween.tween_property(%Sprite2D, "modulate", Color.RED, 0.1)
-		tween.tween_property(%Sprite2D, "modulate", Color.WHITE, 0.1)
-		tween.tween_property(%Sprite2D, "modulate", Color.RED, 0.1)
-		tween.tween_property(%Sprite2D, "modulate", Color.WHITE, 0.1)
-		#%Sprite2D.self_modulate = Color(1.0, 0.0, 0.0)
+		take_damage(1)
 #endregion
 
 #region Signals

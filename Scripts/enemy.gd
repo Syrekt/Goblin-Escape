@@ -63,6 +63,7 @@ func take_damage(_damage):
 	if health.value <= 0:
 		emit_signal("health_depleted")
 	else:
+		Ge.play_audio_from_string_array(audio_emitter, 0, "res://Assets/SFX/Goblin/Hurt/")
 		state_node.state.finished.emit("hurt")
 
 
@@ -80,8 +81,6 @@ func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 		animation_player.advance(0)
 #region Node Methods
 func _physics_process(delta: float) -> void:
-	if player_proximity.has_overlapping_bodies():
-		Debugger.printui("Overlapping player")
 	#region X Movement
 	var dir_x = get_movement_dir() if !direction_locked else facing
 
@@ -128,10 +127,10 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_slash_hitbox_body_entered(body: Node2D) -> void:
-	Combat.deal_damage(self, body, 50.0)
+	Combat.deal_damage(self, 2, body, 50)
 
 func _on_stab_hitbox_body_entered(body: Node2D) -> void:
-	Combat.deal_damage(self, body, 50.0)
+	Combat.deal_damage(self, 1, body, 50)
 
 func _on_bash_hitbox_body_entered(body: Node2D) -> void:
-	Combat.deal_damage(self, body, 100.0)
+	Combat.deal_damage(self, 1, body, 100)

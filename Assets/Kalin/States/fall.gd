@@ -9,7 +9,6 @@ func enter(previous_state_path: String, data := {}) -> void:
 	fall_damage_timer.start(0.6)
 
 func physics_update(delta: float) -> void:
-	Debugger.printui("fall_damage_timer.time_left: "+str(fall_damage_timer.time_left));
 	if player.is_on_floor():
 		if fall_damage_timer.is_stopped():
 			finished.emit("land_hurt")

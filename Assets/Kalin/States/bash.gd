@@ -24,6 +24,6 @@ func exit():
 func _on_bash_hitbox_body_entered(body: Node2D) -> void:
 	if enemy_ignore_list.has(body): return
 
-	Combat.deal_damage(player, body, 300)
+	Combat.deal_damage(player, player.bash_damage, body, 300)
 	enemy_ignore_list.append(body)
 	player.play_sfx(sfx_bash_hit)

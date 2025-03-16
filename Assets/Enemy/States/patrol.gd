@@ -55,8 +55,8 @@ func _on_patrol_timer_timeout() -> void:
 func _on_chase_detector_body_entered(body: Node2D) -> void:
 	#Check ray for obstacles
 	enemy.line_of_sight.target_position = enemy.line_of_sight.to_local(body.global_position)
+	await get_tree().process_frame
 	if !enemy.line_of_sight.is_colliding():
-		print("body: "+str(body.name))
 		enemy.chase_target = body
 		body.combat_target = enemy
 
