@@ -26,4 +26,7 @@ func update(delta):
 		chase_target = null
 		enemy.state_node.state.finished.emit("patrol")
 	elif %AttackDetector.has_overlapping_bodies():
+		if chase_target.state_node.state.name == "death":
+			#TODO Add sound and orgasm state
+			chase_target.sex_begin(enemy, "sex_goblin1")
 		enemy.state_node.state.finished.emit("stance_light")

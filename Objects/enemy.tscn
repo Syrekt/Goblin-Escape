@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene load_steps=47 format=3 uid="uid://iuj1jg31a55f"]
 
 [ext_resource type="Script" uid="uid://bhcr3m01slk8a" path="res://Scripts/enemy.gd" id="1_18den"]
 [ext_resource type="AudioStream" uid="uid://bx6vdt8wts4xf" path="res://Assets/SFX/Kalin/kick_short_whoosh_12.wav" id="6_ifl3v"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://bmsypgid81p62" path="res://Assets/Enemy/States/stance_light.gd" id="23_j8fla"]
 [ext_resource type="Script" uid="uid://cst0ispd68osy" path="res://Assets/Enemy/States/stance_defensive.gd" id="24_lox44"]
 [ext_resource type="Script" uid="uid://brsvx5cdthjao" path="res://Assets/Enemy/States/stun.gd" id="25_208af"]
+[ext_resource type="Script" uid="uid://b1b47ke4rhvlv" path="res://Assets/Enemy/States/sex.gd" id="26_4po4b"]
 [ext_resource type="Texture2D" uid="uid://yh6p23n7un5u" path="res://Assets/Others/Sliders/cur_health.png" id="26_ifl3v"]
 [ext_resource type="Script" uid="uid://d2dnfu2yrmil" path="res://Assets/Enemy/States/chase.gd" id="26_ug7pn"]
 
@@ -940,6 +941,9 @@ collision_mask = 2
 position = Vector2(0, -16)
 scale = Vector2(3.07, 1)
 shape = SubResource("RectangleShape2D_rha5u")
+
+[node name="sex" type="Node" parent="StateMachine"]
+script = ExtResource("26_4po4b")
 
 [node name="StateSwitchTimer" type="Timer" parent="."]
 one_shot = true

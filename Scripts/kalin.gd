@@ -72,7 +72,7 @@ signal health_depleted
 #var dialogue_resource : DialogueResource
 #var dialogue_start := "test_scene"
 
-#region Functions
+#region Methods
 func set_crouch_mask(value: bool):
 	standing_mask.set_disabled(value)
 	crouching_mask.set_disabled(!value)
@@ -85,27 +85,23 @@ func set_facing(dir: int):
 			child.flip_h = facing == -1
 		elif child is CollisionShape2D or child is Node2D or child is RayCast2D:
 			child.scale.x = facing
-
 func get_movement_dir():
 	return Input.get_axis("left", "right")
-
-
-
 func fall(delta):
 	velocity.y += gravity * delta
 	move_and_slide()
-
-func take_damage(_damage: int, allow_hurt := true):
+func take_damage(_damage: int, play_hurt_animation := true):
 	if state_node.state.name == "death":
 		return
 
+	Ge.play_audio_from_string_array(audio_emitter, -2, "res://Assets/SFX/Kalin/Hurt")
 	health.value -= _damage
 	if health.value <= 0:
 		emit_signal("health_depleted")
-	elif allow_hurt:
-		Ge.play_audio_from_string_array(audio_emitter, -2, "res://Assets/SFX/Kalin/Hurt")
+	elif play_hurt_animation:
 		state_node.state.finished.emit("hurt")
-
+func heal(amount: int) -> void:
+	health.value += amount
 func check_movable():
 	var potential_movable = null
 	if ray_movable.is_colliding(): 
@@ -121,7 +117,6 @@ func check_interactable() -> void:
 func can_grab_corner(rising:= false) -> bool:
 	var grab_prevent =  col_corner_grab_prevent.has_overlapping_bodies()
 	var grab_trigger = ray_corner_grab_check.is_colliding()
-
 
 	if col_corner_grab_prevent.has_overlapping_bodies(): return false
 	if is_on_floor(): return false
@@ -157,18 +152,23 @@ func combat_perform_attack(hitbox: Area2D, _damage: int, whiff_sfx: AudioStreamW
 		elif hit_sfx:			play_sfx(hit_sfx)
 	else:
 		if whiff_sfx: play_sfx(whiff_sfx)
+func sex_begin(participants: Array, _position: String) -> void:
+	state_node.state.finished.emit("sex")
+	call_deferred("update_animation", _position)
 
+	for participant in participants:
+		participant.state_node.state.finished.emit("sex")
 #endregion
-
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	var state = state_node.state
 
 	match state.name:
-		"land", "land_hurt":
+		"land", "land_hurt", "run_stop":
 			state.finished.emit("idle")
-		"run_stop":
+		"recover":
 			state.finished.emit("idle")
+			heal(1)
 		"stab", "slash", "bash":
 			state.finished.emit("stance_light")
 		"hurt":
@@ -180,8 +180,14 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 				stand_up()
 			else:
 				state.finished.emit("crouch")
+	#If there is no match case for state, look for animation name
+	#Sex
+	match anim_name:
+		"sex_goblin1":
+			call_deferred("update_animation", "orgasm_goblin1")
+		"orgasm_goblin1":
+			state_node.state.finished.emit("death")
 #endregion
-
 #region Init
 func _ready() -> void:
 	$CanvasLayer.visible = true
@@ -241,7 +247,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = 0
 			move_speed = 0
 			accelaration = slide_dec
-		"death":
+		"death", "recover":
 			move_speed = 0
 			velocity.x = 0
 
@@ -312,17 +318,14 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
-		take_damage(1)
+		take_damage(5)
 #endregion
-
 #region Signals
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	print(area)
 func _on_interactor_area_entered(area: Area2D) -> void:
 	interaction_target = area
 	$InteractionPrompt.visible = true
-
-
 func _on_interactor_area_exited(area: Area2D) -> void:
 	if interaction_target == area:
 		interaction_target = null
