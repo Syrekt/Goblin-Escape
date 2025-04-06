@@ -37,6 +37,7 @@ class_name Player extends CharacterBody2D
 @onready var camera = $Camera2D
 @onready var audio_emitter = $MainAudioStreamer
 var movable : Node2D = null
+var noise = preload("res://Objects/noise.tscn")
 
 
 const SLASH_COST	:= 2
@@ -53,6 +54,7 @@ var open_menu : Node = null
 var move_speed := 0.0
 var facing := 1
 var ignore_corners := false
+var stealth := false
 
 var interaction_target : Area2D = null
 
@@ -65,7 +67,9 @@ var combat_target : CharacterBody2D = null
 
 var state_on_attack_frame := false
 
+var unconscious := false
 var sex_participants : Array
+
 
 signal health_depleted
 
@@ -157,11 +161,19 @@ func combat_perform_attack(hitbox: Area2D, _damage: int, whiff_sfx: AudioStreamW
 func sex_begin(participants: Array, _position: String) -> void:
 	sex_participants = participants.duplicate()
 	print("sex_participants: "+str(sex_participants))
+	for participant in sex_participants:
+		participant.state_node.state.finished.emit("sex")
 	state_node.state.finished.emit("sex")
 	call_deferred("update_animation", _position)
 
 	#for participant in participants:
 	#	participant.state_node.state.finished.emit("sex")
+func emit_noise(offset : Vector2, amount : float) -> void:
+	var _noise = noise.instantiate()
+	get_tree().current_scene.add_child(_noise)
+
+	_noise.amount_max = amount
+	_noise.position = position + offset
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -180,10 +192,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"corner_climb", "corner_climb_quick":
 			state.finished.emit("idle")
 		"slide":
-			if can_stand_up():
-				stand_up()
-			else:
-				state.finished.emit("crouch")
+			state.finished.emit("crouch")
 		"orgasm":
 			state_node.state.finished.emit("post_sex")
 			for participant in sex_participants:

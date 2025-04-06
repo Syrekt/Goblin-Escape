@@ -37,7 +37,8 @@ position = Vector2(91, 78)
 
 [node name="Camera2D" type="Camera2D" parent="Kalin"]
 position = Vector2(0, -40)
-zoom = Vector2(4, 4)
+offset = Vector2(0, 48)
+zoom = Vector2(3, 3)
 limit_bottom = 120
 limit_smoothed = true
 position_smoothing_enabled = true
@@ -60,4 +61,4 @@ stream = ExtResource("8_v158k")
 volume_db = -10.778
 
 [node name="Enemy" parent="." instance=ExtResource("8_h4fw4")]
-position = Vector2(204, 62)
+position = Vector2(-204, -59)

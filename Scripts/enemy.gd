@@ -37,11 +37,7 @@ signal health_depleted
 
 var line_of_sight: RayCast2D = null
 
-func _ready() -> void:
-	line_of_sight = RayCast2D.new()
-	add_child(line_of_sight)
-	$Sprite2D.scale.x = 1
-
+#region Methods
 func set_facing(dir: int):
 	if dir == 0: pass
 
@@ -51,11 +47,8 @@ func set_facing(dir: int):
 			node.flip_h = facing == 1
 		else:
 			node.scale.x = facing
-
 func get_movement_dir():
 	return sign(velocity.x)
-
-
 func take_damage(_damage):
 	print("Enemy takes damage: "+str(_damage))
 	health.value -= _damage
@@ -65,8 +58,6 @@ func take_damage(_damage):
 	else:
 		Ge.play_audio_from_string_array(audio_emitter, 0, "res://Assets/SFX/Goblin/Hurt/")
 		state_node.state.finished.emit("hurt")
-
-
 func move(speed: float, direction: int) -> bool:
 	#Update the ray direction towards the direction we want to move
 	ray_fall_check.scale.x = direction
@@ -79,7 +70,12 @@ func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 		animation_player.advance(0)
 		animation_player.play(anim, -1, speed, from_end)
 		animation_player.advance(0)
-#region Node Methods
+#endregion
+#region Node Process
+func _ready() -> void:
+	line_of_sight = RayCast2D.new()
+	add_child(line_of_sight)
+	$Sprite2D.scale.x = 1
 func _physics_process(delta: float) -> void:
 	#region X Movement
 	var dir_x = get_movement_dir() if !direction_locked else facing
@@ -108,10 +104,9 @@ func _physics_process(delta: float) -> void:
 
 	#endregion
 #endregion
+#region Signals
 func _on_health_depleted() -> void:
 	state_node.state.finished.emit("death")
-
-
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	var state = state_node.state
 	var state_name = state.name
@@ -124,8 +119,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 				set_collision_layer_value(4, false)
 				set_collision_mask_value(1, false)
 				set_collision_mask_value(2, false)
-
-
 func _on_slash_hitbox_body_entered(body: Node2D) -> void:
 	Combat.deal_damage(self, 2, body, 50)
 
@@ -134,3 +127,4 @@ func _on_stab_hitbox_body_entered(body: Node2D) -> void:
 
 func _on_bash_hitbox_body_entered(body: Node2D) -> void:
 	Combat.deal_damage(self, 1, body, 100)
+#endregion

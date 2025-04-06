@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=3 uid="uid://d08scf611mrii"]
+[gd_scene load_steps=112 format=3 uid="uid://d08scf611mrii"]
 
 [ext_resource type="Script" uid="uid://coi4g5fo3jf06" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Texture2D" uid="uid://dcs3l0iefjo7w" path="res://Assets/Kalin/Sprites/Kalin-Fall.png" id="2_1j6vo"]
@@ -1519,6 +1519,23 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Sprite2D/..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [Vector2(0, 32), 20.0],
+"method": &"emit_noise"
+}, {
+"args": [Vector2(0, 32), 20.0],
+"method": &"emit_noise"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_x4pkh"]
 resource_name = "run_stop"
@@ -2262,6 +2279,23 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Sprite2D/..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1, 0.643812),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [Vector2(0, 32), 10.0],
+"method": &"emit_noise"
+}, {
+"args": [Vector2(0, 32), 10.0],
+"method": &"emit_noise"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_1pm5w"]
 resource_name = "wallslide"
@@ -2375,6 +2409,9 @@ size = Vector2(20, 43)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nk40"]
 size = Vector2(20, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfvac"]
+size = Vector2(105, 32)
 
 [node name="Kalin" type="CharacterBody2D"]
 z_index = 5
@@ -2570,8 +2607,16 @@ monitorable = false
 [node name="hurt" type="Node" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("40_xirjq")
 
-[node name="death" type="Node" parent="StateMachine" groups=["combat_state"]]
+[node name="death" type="Node2D" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("50_1fn32")
+
+[node name="SexParticipantCollider" type="Area2D" parent="StateMachine/death"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/death/SexParticipantCollider"]
+position = Vector2(16.5, -18)
+shape = SubResource("RectangleShape2D_cfvac")
 
 [node name="RecoveryTimer" type="Timer" parent="StateMachine/death"]
 wait_time = 4.0
