@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ds7af8tnix0pc"
+path="res://.godot/imported/Sex Female Moan Soft.wav-24e4586f11eab37d8d14d1e91a8b375e.sample"
+
+[deps]
+
+source_file="res://Assets/Sex/Sex Female Moan Soft.wav"
+dest_files=["res://.godot/imported/Sex Female Moan Soft.wav-24e4586f11eab37d8d14d1e91a8b375e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

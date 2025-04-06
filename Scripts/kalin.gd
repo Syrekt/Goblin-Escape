@@ -65,6 +65,8 @@ var combat_target : CharacterBody2D = null
 
 var state_on_attack_frame := false
 
+var sex_participants : Array
+
 signal health_depleted
 
 #const Balloon = preload("res://Dialogues/balloon.tscn")
@@ -153,11 +155,13 @@ func combat_perform_attack(hitbox: Area2D, _damage: int, whiff_sfx: AudioStreamW
 	else:
 		if whiff_sfx: play_sfx(whiff_sfx)
 func sex_begin(participants: Array, _position: String) -> void:
+	sex_participants = participants.duplicate()
+	print("sex_participants: "+str(sex_participants))
 	state_node.state.finished.emit("sex")
 	call_deferred("update_animation", _position)
 
-	for participant in participants:
-		participant.state_node.state.finished.emit("sex")
+	#for participant in participants:
+	#	participant.state_node.state.finished.emit("sex")
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -180,13 +184,12 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 				stand_up()
 			else:
 				state.finished.emit("crouch")
-	#If there is no match case for state, look for animation name
-	#Sex
-	match anim_name:
-		"sex_goblin1":
-			call_deferred("update_animation", "orgasm_goblin1")
-		"orgasm_goblin1":
-			state_node.state.finished.emit("death")
+		"orgasm":
+			state_node.state.finished.emit("post_sex")
+			for participant in sex_participants:
+				participant.state_node.state.finished.emit("patrol")
+		"post_sex":
+			state_node.state.finished.emit("recover")
 #endregion
 #region Init
 func _ready() -> void:
