@@ -28,7 +28,7 @@ signal health_depleted
 @onready var combat_properties  = $CombatProperties
 @onready var ray_fall_check		= $FallCheck
 @onready var state_switch_timer = $StateSwitchTimer
-@onready var player_proximity = $PlayerProximity
+@onready var player_proximity	= $PlayerProximity
 
 @onready var slash_hitbox = $StateMachine/slash/SlashHitbox/Collider
 @onready var stab_hitbox  = $StateMachine/stab/StabHitbox/Collider
@@ -71,6 +71,28 @@ func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 		animation_player.advance(0)
 		animation_player.play(anim, -1, speed, from_end)
 		animation_player.advance(0)
+func hear_noise(noise_location : Vector2) -> void:
+	if !$NoiseIgnoreTimer.is_stopped():
+		return
+
+	match state_node.state.name:
+		"idle":
+			state_node.state.finished.emit("triggered")
+		"triggered":
+			%Emote.play("alarmed")
+			state_node.state.finished.emit("patrol")
+
+	$NoiseIgnoreTimer.start()
+func detect_target() -> void:
+	Debugger.printui("chase_target: "+str(chase_target))
+	if chase_target:
+		var body = chase_target
+		line_of_sight.target_position = line_of_sight.to_local(body.global_position)
+		if line_of_sight.is_colliding():
+			chase_target.combat_target = null
+			chase_target = null
+		else:
+			state_node.state.finished.emit("chase")
 #endregion
 #region Node Process
 func _ready() -> void:
@@ -128,4 +150,15 @@ func _on_stab_hitbox_body_entered(body: Node2D) -> void:
 
 func _on_bash_hitbox_body_entered(body: Node2D) -> void:
 	Combat.deal_damage(self, 1, body, 100)
+func _on_chase_detector_body_entered(body:Node2D) -> void:
+	#Check ray for obstacles
+	line_of_sight.target_position = line_of_sight.to_local(body.global_position)
+	await get_tree().process_frame
+	if !line_of_sight.is_colliding():
+		chase_target = body
+		body.combat_target = self
+func _on_chase_detector_body_exited(body:Node2D) -> void:
+	if body == chase_target:
+		chase_target.combat_target = null
+		chase_target = null
 #endregion

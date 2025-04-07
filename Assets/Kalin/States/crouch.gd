@@ -21,3 +21,5 @@ func physics_update(delta: float) -> void:
 		print("drop from platform")
 	elif !is_equal_approx(player.get_movement_dir(), 0.0):
 		finished.emit("crouch_walk")
+	elif !player.col_corner_hang.has_overlapping_bodies():
+		finished.emit("corner_hang")

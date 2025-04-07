@@ -5,7 +5,6 @@ var amount_max : float
 
 @onready var collider = $Area2D
 @onready var shape = $Area2D/Shape
-@onready var sprite = $Sprite2D
 
 
 func _process(delta: float) -> void:
@@ -13,13 +12,11 @@ func _process(delta: float) -> void:
 	if amount_cur >= amount_max:
 		queue_free()
 	shape.scale = Vector2(amount_cur, amount_cur)
-	sprite.scale = Vector2(amount_cur, amount_cur)
 	queue_redraw()
 
 	if collider.has_overlapping_bodies():
 		for body in collider.get_overlapping_bodies():
-			#TODO Add an enemy reaction to the sound
-			pass 
+			body.hear_noise(global_position)
 
 
 

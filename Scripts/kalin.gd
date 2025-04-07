@@ -1,29 +1,30 @@
 class_name Player extends CharacterBody2D
 
 
-@export var run_speed := 100.0 * 60.0
-@export var walk_speed := 50.0 * 60.0
-@export var crouch_speed := 25.0 * 60.0
+@export var run_speed		:= 100.0 * 60.0
+@export var walk_speed		:= 50.0 * 60.0
+@export var crouch_speed	:= 25.0 * 60.0
 @export var push_pull_speed := 25.0 * 60.0
-@export var slide_speed := 5.0 * 60.0
-@export var slide_dec := 7.0
-@export var gravity := 500.0
-@export var jump_impulse := 200.0
-@export var def_acc := 10.0
-@export var run_stop_dec := 3.0
-@export var bash_stop_dec:= 4.0
-@export var snap_offset := Vector2(-5, -13)
+@export var slide_speed		:= 5.0 * 60.0
+@export var slide_dec		:= 7.0
+@export var gravity			:= 500.0
+@export var jump_impulse	:= 200.0
+@export var def_acc			:= 10.0
+@export var run_stop_dec	:= 3.0
+@export var bash_stop_dec	:= 4.0
+@export var snap_offset		:= Vector2(-5, -13)
 @export var facing_locked		:= false
 @export var direction_locked	:= false
+@export var unconscious		:= false
 
 
 @onready var state_node := $StateMachine
-@onready var health = $CanvasLayer/Control/HBoxContainer/Health
-@onready var stamina = $CanvasLayer/Control/HBoxContainer/Stamina
-@onready var crouching_mask = $ColliderCrouching
-@onready var standing_mask  = $ColliderStanding
-@onready var sprite = $Sprite2D
-@onready var animation_player = $AnimationPlayer
+@onready var health : TextureProgressBar = $CanvasLayer/Control/HBoxContainer/Health
+@onready var stamina : TextureProgressBar = $CanvasLayer/Control/HBoxContainer/Stamina
+@onready var crouching_mask : CollisionShape2D = $ColliderCrouching
+@onready var standing_mask  : CollisionShape2D = $ColliderStanding
+@onready var sprite : Sprite2D = $Sprite2D
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var combat_properties = $CombatProperties
 @onready var ray_movable : RayCast2D = $MovableCheck
 @onready var ray_corner_grab_check : RayCast2D = $CornerGrabCheck
@@ -68,7 +69,6 @@ var combat_target : CharacterBody2D = null
 
 var state_on_attack_frame := false
 
-var unconscious := false
 var sex_participants : Array
 
 
@@ -255,14 +255,13 @@ func _physics_process(delta: float) -> void:
 			move_speed = 0;
 			accelaration = slide_dec
 		"corner_grab", "corner_climb", "corner_hang":
-			Debugger.printui("velocity: "+str(velocity))
 			move_speed = 0
 			velocity = Vector2.ZERO
 		"hurt":
 			velocity.x = 0
 			move_speed = 0
 			accelaration = slide_dec
-		"death", "recover":
+		"death", "sex", "recover":
 			move_speed = 0
 			velocity.x = 0
 
@@ -301,13 +300,11 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
+	Debugger.printui("unconscious: "+str(unconscious))
 	Debugger.printui(str(state_node.state.name))
 	var ccq = col_quick_climb_prevent.has_overlapping_bodies()
-	Debugger.printui("Overlapping: "+str(ccq))
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
-		Debugger.printui("collider.collision_point: "+str(ray_auto_climb.get_collision_point()));
-		Debugger.printui("collider: "+str(collider))
 	#region Camera combat position
 	var in_combat_state = state_node.state.is_in_group("combat_state")
 	if in_combat_state && combat_target:

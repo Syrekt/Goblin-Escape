@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4v22r7swgph6"
-path="res://.godot/imported/sex_goblin1.webp-150719d2fcd29998ad67c77d568e7d4e.ctex"
+uid="uid://f1kmjq3olwet"
+path="res://.godot/imported/kalin_lying.png-27ddd317a063ce0f2eb35cd41afd4767.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sex/sex_goblin1.webp"
-dest_files=["res://.godot/imported/sex_goblin1.webp-150719d2fcd29998ad67c77d568e7d4e.ctex"]
+source_file="res://Assets/Sex/kalin_lying.png"
+dest_files=["res://.godot/imported/kalin_lying.png-27ddd317a063ce0f2eb35cd41afd4767.ctex"]
 
 [params]
 

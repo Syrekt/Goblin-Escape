@@ -1,6 +1,6 @@
 extends EnemyState
 
-var chase_dir = 0;
+var chase_dir := 0;
 var chase_target: Node2D
 
 func enter(previous_state_path: String, data := {}) -> void:

@@ -6,8 +6,6 @@ extends PlayerState
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
 	recovery_timer.start()
-	player.unconscious = true
-	print("participant_collider: "+str(participant_collider))
 	player.velocity.x = 0
 
 func update(delta: float) -> void:

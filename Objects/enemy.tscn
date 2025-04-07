@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene load_steps=50 format=3 uid="uid://iuj1jg31a55f"]
 
 [ext_resource type="Script" uid="uid://bhcr3m01slk8a" path="res://Scripts/enemy.gd" id="1_18den"]
 [ext_resource type="AudioStream" uid="uid://bx6vdt8wts4xf" path="res://Assets/SFX/Kalin/kick_short_whoosh_12.wav" id="6_ifl3v"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://chla4jvcboa4e" path="res://Assets/Enemy/Goblin/goblin-slash.png" id="15_4po4b"]
 [ext_resource type="Texture2D" uid="uid://bhywg3kg1q3in" path="res://Assets/Enemy/Goblin/goblin-attack.png" id="15_mlxbl"]
 [ext_resource type="Script" uid="uid://cp0i8c1llur63" path="res://Assets/Enemy/States/idle.gd" id="15_ywhtk"]
+[ext_resource type="Script" uid="uid://dfiqyt2s88kmb" path="res://Assets/Enemy/States/triggered.gd" id="16_vd4fl"]
 [ext_resource type="PackedScene" uid="uid://b02rwb4cvvhr4" path="res://Objects/state_machine.tscn" id="17_n2jyc"]
 [ext_resource type="Script" uid="uid://dj1baauawjtyy" path="res://Assets/Enemy/States/bash.gd" id="17_ru5w7"]
 [ext_resource type="Script" uid="uid://j4axxy1utgo5" path="res://Assets/Enemy/States/patrol.gd" id="18_pn3ih"]
@@ -28,6 +29,7 @@
 [ext_resource type="Script" uid="uid://b1b47ke4rhvlv" path="res://Assets/Enemy/States/sex.gd" id="26_4po4b"]
 [ext_resource type="Texture2D" uid="uid://yh6p23n7un5u" path="res://Assets/Others/Sliders/cur_health.png" id="26_ifl3v"]
 [ext_resource type="Script" uid="uid://d2dnfu2yrmil" path="res://Assets/Enemy/States/chase.gd" id="26_ug7pn"]
+[ext_resource type="PackedScene" uid="uid://b23mtnfp7xuec" path="res://Objects/emote.tscn" id="30_tjqy8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cqw5a"]
 size = Vector2(20, 43)
@@ -879,6 +881,17 @@ autostart = true
 [node name="IdleTimer" type="Timer" parent="StateMachine/patrol"]
 one_shot = true
 
+[node name="triggered" type="Node" parent="StateMachine"]
+script = ExtResource("16_vd4fl")
+
+[node name="DirectionTimer" type="Timer" parent="StateMachine/triggered"]
+wait_time = 2.0
+one_shot = true
+
+[node name="IgnoreTimer" type="Timer" parent="StateMachine/triggered"]
+wait_time = 10.0
+one_shot = true
+
 [node name="hurt" type="Node" parent="StateMachine"]
 script = ExtResource("19_xl5vi")
 
@@ -952,6 +965,10 @@ script = ExtResource("26_4po4b")
 [node name="StateSwitchTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="NoiseIgnoreTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [node name="Health" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -963,9 +980,16 @@ max_value = 3.0
 value = 3.0
 texture_progress = ExtResource("26_ifl3v")
 
+[node name="Emote" parent="." instance=ExtResource("30_tjqy8")]
+unique_name_in_owner = true
+visible = false
+position = Vector2(2, -47)
+
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="ChaseDetector" to="." method="_on_chase_detector_body_entered"]
 [connection signal="body_entered" from="ChaseDetector" to="StateMachine/patrol" method="_on_chase_detector_body_entered"]
+[connection signal="body_exited" from="ChaseDetector" to="." method="_on_chase_detector_body_exited"]
 [connection signal="body_exited" from="ChaseDetector" to="StateMachine/patrol" method="_on_chase_detector_body_exited"]
 [connection signal="timeout" from="StateMachine/patrol/PatrolTimer" to="StateMachine/patrol" method="_on_patrol_timer_timeout"]
 [connection signal="timeout" from="StateMachine/patrol/IdleTimer" to="StateMachine/patrol" method="_on_idle_timer_timeout"]
