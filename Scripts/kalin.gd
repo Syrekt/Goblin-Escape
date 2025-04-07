@@ -25,14 +25,15 @@ class_name Player extends CharacterBody2D
 @onready var sprite = $Sprite2D
 @onready var animation_player = $AnimationPlayer
 @onready var combat_properties = $CombatProperties
-@onready var ray_movable = $MovableCheck
-@onready var ray_corner_grab_check = $CornerGrabCheck
-@onready var ray_auto_climb = $CornerAutoClimb
-@onready var col_corner_grab_prevent = $CornerGrabPrevent
-@onready var col_quick_climb_prevent = $QuickClimbPrevent
-@onready var col_stand_check = $StandCheck
-@onready var col_auto_climb_bottom = $BottomAutoClimb
-@onready var col_interaction = $Interactor
+@onready var ray_movable : RayCast2D = $MovableCheck
+@onready var ray_corner_grab_check : RayCast2D = $CornerGrabCheck
+@onready var ray_auto_climb : RayCast2D = $CornerAutoClimb
+@onready var col_corner_grab_prevent : Area2D = $CornerGrabPrevent
+@onready var col_quick_climb_prevent : Area2D = $QuickClimbPrevent
+@onready var col_stand_check : Area2D = $StandCheck
+@onready var col_auto_climb_bottom : Area2D = $BottomAutoClimb
+@onready var col_interaction : Area2D = $Interactor
+@onready var col_corner_hang : Area2D = $CornerHangCheck
 @onready var cp = combat_properties
 @onready var camera = $Camera2D
 @onready var audio_emitter = $MainAudioStreamer
@@ -199,6 +200,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 				participant.state_node.state.finished.emit("patrol")
 		"post_sex":
 			state_node.state.finished.emit("recover")
+		"corner_hang":
+			state_node.state.finished.emit("corner_grab")
 #endregion
 #region Init
 func _ready() -> void:
@@ -251,10 +254,10 @@ func _physics_process(delta: float) -> void:
 		"slash", "stab":
 			move_speed = 0;
 			accelaration = slide_dec
-		"corner_grab", "corner_climb":
+		"corner_grab", "corner_climb", "corner_hang":
+			Debugger.printui("velocity: "+str(velocity))
 			move_speed = 0
-			velocity.x = 0
-			velocity.y = 0
+			velocity = Vector2.ZERO
 		"hurt":
 			velocity.x = 0
 			move_speed = 0
@@ -278,7 +281,7 @@ func _physics_process(delta: float) -> void:
 	#region Y Movement
 	if !is_on_floor():
 		match state_name:
-			"corner_climb", "corner_grab":
+			"corner_climb", "corner_grab", "corner_hang":
 				velocity.y = 0
 			_:
 				velocity.y += gravity * delta

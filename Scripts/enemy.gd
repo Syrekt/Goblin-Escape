@@ -7,6 +7,7 @@ const RUN_SPEED = 300.0 * 60
 @export var patrol_move_speed := 100 * 60
 @export var gravity := 500.0;
 @export var damage := 1
+@export var patrolling := false
 
 var facing := 1
 var chase_target : Node2D = null

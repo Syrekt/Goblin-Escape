@@ -24,3 +24,5 @@ func physics_update(delta: float) -> void:
 		else:
 			finished.emit("idle")
 			player.set_crouch_mask(false)
+	elif !player.col_corner_hang.has_overlapping_bodies():
+		finished.emit("corner_hang")
