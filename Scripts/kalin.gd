@@ -155,7 +155,7 @@ func combat_perform_attack(hitbox: Area2D, _damage: int, whiff_sfx: AudioStreamW
 	if hitbox.has_overlapping_bodies():
 		var body = hitbox.get_overlapping_bodies()[0]
 		var defender_hp = Combat.deal_damage(self, _damage, body, knockback_force)
-		if defender_hp <= 0: Ge.play_audio_from_string_array(audio_emitter, 0, "res://Assets/SFX/Kalin/Finishers")
+		if defender_hp <= 0:	Ge.play_audio_from_string_array(audio_emitter, 0, "res://Assets/SFX/Kalin/Finishers")
 		elif hit_sfx:			play_sfx(hit_sfx)
 	else:
 		if whiff_sfx: play_sfx(whiff_sfx)
@@ -166,9 +166,6 @@ func sex_begin(participants: Array, _position: String) -> void:
 		participant.state_node.state.finished.emit("sex")
 	state_node.state.finished.emit("sex")
 	call_deferred("update_animation", _position)
-
-	#for participant in participants:
-	#	participant.state_node.state.finished.emit("sex")
 func emit_noise(offset : Vector2, amount : float) -> void:
 	var _noise = noise.instantiate()
 	get_tree().current_scene.add_child(_noise)

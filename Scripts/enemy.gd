@@ -9,7 +9,7 @@ const RUN_SPEED = 300.0 * 60
 @export var damage := 1
 @export var patrolling := false
 
-var facing := 1
+@export var facing := 1
 var chase_target : Node2D = null
 var direction_locked := false
 var facing_locked := false
@@ -99,7 +99,9 @@ func _ready() -> void:
 	line_of_sight = RayCast2D.new()
 	add_child(line_of_sight)
 	$Sprite2D.scale.x = 1
+	set_facing(facing)
 func _physics_process(delta: float) -> void:
+	Debugger.printui("state_node.state.name: "+str(state_node.state.name));
 	#region X Movement
 	var dir_x = get_movement_dir() if !direction_locked else facing
 

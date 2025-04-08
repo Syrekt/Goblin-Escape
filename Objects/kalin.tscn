@@ -2554,6 +2554,7 @@ size = Vector2(105, 32)
 z_index = 5
 collision_layer = 2
 script = ExtResource("1_tpqnq")
+slide_speed = 200.0
 snap_offset = Vector2(-17, 3)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
