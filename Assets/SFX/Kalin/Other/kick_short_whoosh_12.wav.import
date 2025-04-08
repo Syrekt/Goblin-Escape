@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bx6vdt8wts4xf"
-path="res://.godot/imported/kick_short_whoosh_12.wav-5a752ea3520acab317c841f009745e9f.sample"
+path="res://.godot/imported/kick_short_whoosh_12.wav-9c2b5623213c5fcce815bfe0e27d7501.sample"
 
 [deps]
 
-source_file="res://Assets/SFX/Kalin/kick_short_whoosh_12.wav"
-dest_files=["res://.godot/imported/kick_short_whoosh_12.wav-5a752ea3520acab317c841f009745e9f.sample"]
+source_file="res://Assets/SFX/Kalin/Other/kick_short_whoosh_12.wav"
+dest_files=["res://.godot/imported/kick_short_whoosh_12.wav-9c2b5623213c5fcce815bfe0e27d7501.sample"]
 
 [params]
 

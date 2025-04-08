@@ -23,6 +23,10 @@ func update(delta):
 	if enemy.player_proximity.has_overlapping_bodies():
 		enemy.push_player = true
 		finished.emit("bash")
+	if enemy.chase_target.combat_properties.stunned:
+		finished.emit("slash")
+	if enemy.chase_target.state_node.state.name == "stance_heavy":
+		finished.emit("stab")
 
 
 func _on_timer_timeout() -> void:

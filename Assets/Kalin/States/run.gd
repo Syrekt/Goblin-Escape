@@ -24,3 +24,6 @@ func physics_update(delta: float) -> void:
 		finished.emit("rise")
 	elif is_equal_approx(Input.get_axis("left", "right"), 0.0):
 		finished.emit("idle")
+
+func play_footsteps() -> void:
+	Ge.play_audio_from_string_array(%AnimationAudioStreamer, 1, "res://Assets/SFX/Kalin/Footsteps Soft/")

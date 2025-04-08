@@ -99,7 +99,7 @@ func get_movement_dir():
 func fall(delta):
 	velocity.y += gravity * delta
 	move_and_slide()
-func take_damage(_damage: int, play_hurt_animation := true):
+func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := true):
 	if state_node.state.name == "death":
 		return
 
@@ -107,6 +107,8 @@ func take_damage(_damage: int, play_hurt_animation := true):
 	health.value -= _damage
 	if health.value <= 0:
 		emit_signal("health_depleted")
+		if _source:
+			_source.state_node.state.finished.emit("laugh")
 	elif play_hurt_animation:
 		state_node.state.finished.emit("hurt")
 func heal(amount: int) -> void:
@@ -331,7 +333,7 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
-		take_damage(5)
+		take_damage(4)
 #endregion
 #region Signals
 func _on_hurtbox_area_entered(area: Area2D) -> void:

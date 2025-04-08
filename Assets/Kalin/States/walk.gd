@@ -25,3 +25,6 @@ func update(delta: float) -> void:
 
 func physics_update(delta: float) -> void:
 	player.check_movable();
+
+func play_footsteps() -> void:
+	Ge.play_audio_from_string_array(%AnimationAudioStreamer, -10, "res://Assets/SFX/Kalin/Footsteps Soft/")

@@ -30,7 +30,7 @@
 [ext_resource type="Script" uid="uid://c03gd0js6ef17" path="res://Assets/Kalin/States/land.gd" id="14_sgd03"]
 [ext_resource type="Texture2D" uid="uid://bctysgntlwrpo" path="res://Assets/Sex/kalin+goblin-orgasm.png" id="14_ujrye"]
 [ext_resource type="Texture2D" uid="uid://dslyx31hbng77" path="res://Assets/Kalin/Sprites/Kalin-Run_Stop.png" id="14_uklr6"]
-[ext_resource type="AudioStream" uid="uid://v77psk6rln3o" path="res://Assets/SFX/Kalin/Squire Soft1.wav" id="15_2ksh1"]
+[ext_resource type="AudioStream" uid="uid://v77psk6rln3o" path="res://Assets/SFX/Kalin/Other/Squire Soft1.wav" id="15_2ksh1"]
 [ext_resource type="Texture2D" uid="uid://f1kmjq3olwet" path="res://Assets/Sex/kalin_lying.png" id="15_wxg5w"]
 [ext_resource type="Texture2D" uid="uid://bse8dgihy05xu" path="res://Assets/Kalin/Sprites/Kalin-Wallslide.png" id="19_dyqvk"]
 [ext_resource type="Script" uid="uid://c7frkek8a6s60" path="res://Assets/Kalin/States/crouch_walk.gd" id="21_3t0vr"]
@@ -1670,6 +1670,23 @@ tracks/4/keys = {
 "method": &"emit_noise"
 }]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Sprite2D/../StateMachine/run")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footsteps"
+}, {
+"args": [],
+"method": &"play_footsteps"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_x4pkh"]
 resource_name = "run_stop"
@@ -2420,7 +2437,7 @@ tracks/4/path = NodePath("%Sprite2D/..")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.1, 0.643812),
+"times": PackedFloat32Array(0.1, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [Vector2(0, 32), 10.0],
@@ -2428,6 +2445,23 @@ tracks/4/keys = {
 }, {
 "args": [Vector2(0, 32), 10.0],
 "method": &"emit_noise"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Sprite2D/../StateMachine/walk")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footsteps"
+}, {
+"args": [],
+"method": &"play_footsteps"
 }]
 }
 
@@ -2573,8 +2607,10 @@ libraries = {
 }
 
 [node name="AnimationAudioStreamer" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
 
 [node name="MainAudioStreamer" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 current = true
@@ -2777,7 +2813,11 @@ position = Vector2(16.5, -18)
 shape = SubResource("RectangleShape2D_cfvac")
 
 [node name="RecoveryTimer" type="Timer" parent="StateMachine/death"]
-wait_time = 4.0
+wait_time = 6.0
+one_shot = true
+
+[node name="SexTimer" type="Timer" parent="StateMachine/death"]
+wait_time = 2.0
 one_shot = true
 
 [node name="recover" type="Node" parent="StateMachine"]

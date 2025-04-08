@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dwsbix038kwga"
-path="res://.godot/imported/Squire Hurt3.wav-6be5a245be57e16d518efd0775b0c98b.sample"
+path="res://.godot/imported/Squire Hurt3.wav-9ca3f7ab9692279c0ed05c51d05739a8.sample"
 
 [deps]
 
-source_file="res://Assets/SFX/Kalin/Squire Hurt3.wav"
-dest_files=["res://.godot/imported/Squire Hurt3.wav-6be5a245be57e16d518efd0775b0c98b.sample"]
+source_file="res://Assets/SFX/Kalin/Other/Squire Hurt3.wav"
+dest_files=["res://.godot/imported/Squire Hurt3.wav-9ca3f7ab9692279c0ed05c51d05739a8.sample"]
 
 [params]
 

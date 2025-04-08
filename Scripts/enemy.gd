@@ -50,7 +50,7 @@ func set_facing(dir: int):
 			node.scale.x = facing
 func get_movement_dir():
 	return sign(velocity.x)
-func take_damage(_damage):
+func take_damage(_damage, _source: Node2D):
 	print("Enemy takes damage: "+str(_damage))
 	health.value -= _damage
 	print("health.value: "+str(health.value));
@@ -84,7 +84,6 @@ func hear_noise(noise_location : Vector2) -> void:
 
 	$NoiseIgnoreTimer.start()
 func detect_target() -> void:
-	Debugger.printui("chase_target: "+str(chase_target))
 	if chase_target:
 		var body = chase_target
 		line_of_sight.target_position = line_of_sight.to_local(body.global_position)
@@ -93,6 +92,20 @@ func detect_target() -> void:
 			chase_target = null
 		else:
 			state_node.state.finished.emit("chase")
+#endregion
+#region Animation end
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	var state = state_node.state
+	var state_name = state.name
+
+	match state_name:
+		"slash", "stab", "bash":
+			state.finished.emit("stance_light")
+		"death":
+			if is_on_floor():
+				set_collision_layer_value(4, false)
+				set_collision_mask_value(1, false)
+				set_collision_mask_value(2, false)
 #endregion
 #region Node Process
 func _ready() -> void:
@@ -132,18 +145,6 @@ func _physics_process(delta: float) -> void:
 #region Signals
 func _on_health_depleted() -> void:
 	state_node.state.finished.emit("death")
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	var state = state_node.state
-	var state_name = state.name
-
-	match state_name:
-		"slash", "stab", "bash":
-			state.finished.emit("stance_light")
-		"death":
-			if is_on_floor():
-				set_collision_layer_value(4, false)
-				set_collision_mask_value(1, false)
-				set_collision_mask_value(2, false)
 func _on_slash_hitbox_body_entered(body: Node2D) -> void:
 	Combat.deal_damage(self, 2, body, 50)
 

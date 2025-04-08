@@ -1,11 +1,11 @@
-[gd_scene load_steps=50 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene load_steps=52 format=3 uid="uid://iuj1jg31a55f"]
 
 [ext_resource type="Script" uid="uid://bhcr3m01slk8a" path="res://Scripts/enemy.gd" id="1_18den"]
-[ext_resource type="AudioStream" uid="uid://bx6vdt8wts4xf" path="res://Assets/SFX/Kalin/kick_short_whoosh_12.wav" id="6_ifl3v"]
+[ext_resource type="AudioStream" uid="uid://bx6vdt8wts4xf" path="res://Assets/SFX/Kalin/Other/kick_short_whoosh_12.wav" id="6_ifl3v"]
 [ext_resource type="PackedScene" uid="uid://cpogcou30wxcj" path="res://UI/combat_properties.tscn" id="7_7ej0e"]
 [ext_resource type="Shader" uid="uid://dgty7bsbniivw" path="res://Scripts/flash.gdshader" id="8_6eeyp"]
 [ext_resource type="Texture2D" uid="uid://bxfbcd2o3tqam" path="res://Assets/Enemy/Goblin/goblin-idle.png" id="9_3g55t"]
-[ext_resource type="AudioStream" uid="uid://fgclj6nvftu7" path="res://Assets/SFX/Kalin/Sword Woosh 1.wav" id="10_u0rn5"]
+[ext_resource type="AudioStream" uid="uid://fgclj6nvftu7" path="res://Assets/SFX/Kalin/Other/Sword Woosh 1.wav" id="10_u0rn5"]
 [ext_resource type="AudioStream" uid="uid://c50be1pxoc3bn" path="res://Assets/SFX/Kalin/Sword Woosh 12.wav" id="11_ifl3v"]
 [ext_resource type="Texture2D" uid="uid://c6nifh0i54h6f" path="res://Assets/Enemy/Goblin/goblin-bash.png" id="11_wrk2e"]
 [ext_resource type="Texture2D" uid="uid://ppmeb6xgbtin" path="res://Assets/Enemy/Goblin/goblin-death.png" id="12_to5id"]
@@ -29,18 +29,8 @@
 [ext_resource type="Script" uid="uid://b1b47ke4rhvlv" path="res://Assets/Enemy/States/sex.gd" id="26_4po4b"]
 [ext_resource type="Texture2D" uid="uid://yh6p23n7un5u" path="res://Assets/Others/Sliders/cur_health.png" id="26_ifl3v"]
 [ext_resource type="Script" uid="uid://d2dnfu2yrmil" path="res://Assets/Enemy/States/chase.gd" id="26_ug7pn"]
+[ext_resource type="Script" uid="uid://cctffwfexml1k" path="res://Assets/Enemy/States/laugh.gd" id="29_vd4fl"]
 [ext_resource type="PackedScene" uid="uid://b23mtnfp7xuec" path="res://Objects/emote.tscn" id="30_tjqy8"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqw5a"]
-size = Vector2(20, 43)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvv27"]
-size = Vector2(42, 38)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xhuvx"]
-shader = ExtResource("8_6eeyp")
-shader_parameter/flash_intensity = 0.0
-shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_p3exd"]
 length = 0.001
@@ -789,6 +779,61 @@ tracks/2/keys = {
 "values": [6]
 }
 
+[sub_resource type="Animation" id="Animation_vd4fl"]
+resource_name = "laugh"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_3g55t")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../StateMachine/laugh")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_laugh"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uyvhu"]
 _data = {
 &"RESET": SubResource("Animation_p3exd"),
@@ -797,6 +842,7 @@ _data = {
 &"death": SubResource("Animation_iprve"),
 &"hurt": SubResource("Animation_kbkgb"),
 &"idle": SubResource("Animation_csflc"),
+&"laugh": SubResource("Animation_vd4fl"),
 &"run": SubResource("Animation_wj3eb"),
 &"slash": SubResource("Animation_nd8hd"),
 &"stab": SubResource("Animation_p8gt6"),
@@ -806,8 +852,19 @@ _data = {
 &"stun": SubResource("Animation_ifl3v")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqw5a"]
+size = Vector2(20, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvv27"]
+size = Vector2(42, 38)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xhuvx"]
+shader = ExtResource("8_6eeyp")
+shader_parameter/flash_intensity = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qsl2l"]
-size = Vector2(13.1731, 20)
+size = Vector2(15, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rha5u"]
 size = Vector2(20, 32)
@@ -816,6 +873,12 @@ size = Vector2(20, 32)
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("1_18den")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+&"": SubResource("AnimationLibrary_uyvhu")
+}
 
 [node name="Collider" type="CollisionShape2D" parent="." groups=["Flip"]]
 visible = false
@@ -847,12 +910,6 @@ scale = Vector2(-1, 1)
 texture = ExtResource("9_3g55t")
 hframes = 6
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D")
-libraries = {
-&"": SubResource("AnimationLibrary_uyvhu")
-}
-
 [node name="ChaseDetector" type="Area2D" parent="." groups=["Flip"]]
 unique_name_in_owner = true
 position = Vector2(0, 16)
@@ -860,7 +917,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseDetector"]
-position = Vector2(68.5, -16)
+position = Vector2(77.9999, -16)
 scale = Vector2(10.4, 1.64)
 shape = SubResource("RectangleShape2D_qsl2l")
 
@@ -961,6 +1018,9 @@ shape = SubResource("RectangleShape2D_rha5u")
 
 [node name="sex" type="Node" parent="StateMachine"]
 script = ExtResource("26_4po4b")
+
+[node name="laugh" type="Node" parent="StateMachine"]
+script = ExtResource("29_vd4fl")
 
 [node name="StateSwitchTimer" type="Timer" parent="."]
 one_shot = true
