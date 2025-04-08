@@ -37,7 +37,7 @@ func deal_damage(attacker: CharacterBody2D, damage: int, defender: CharacterBody
 			else:
 				defender.combat_properties.pushback_apply(attacker.global_position, pushback_force)
 				if !defender_blocking:
-					defender.take_damage(damage)
+					defender.take_damage(0)
 		"_":
 			defender.take_damage(damage)
 	print("Attacker name: "+str(attacker.name));

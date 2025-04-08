@@ -853,7 +853,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_uyvhu")
 }
 
-[node name="ChaseDetector" type="Area2D" parent="."]
+[node name="ChaseDetector" type="Area2D" parent="." groups=["Flip"]]
 unique_name_in_owner = true
 position = Vector2(0, 16)
 collision_layer = 0
