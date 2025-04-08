@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://d08scf611mrii"]
+[gd_scene load_steps=118 format=3 uid="uid://d08scf611mrii"]
 
 [ext_resource type="Script" uid="uid://coi4g5fo3jf06" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Texture2D" uid="uid://dcs3l0iefjo7w" path="res://Assets/Kalin/Sprites/Kalin-Fall.png" id="2_1j6vo"]
@@ -42,6 +42,7 @@
 [ext_resource type="AudioStream" uid="uid://ds7af8tnix0pc" path="res://Assets/Sex/Sex Female Moan Soft.wav" id="31_cfvac"]
 [ext_resource type="Script" uid="uid://dkwpmjw6yg1bb" path="res://Assets/Kalin/States/stance_light.gd" id="33_ao24u"]
 [ext_resource type="Script" uid="uid://cde3iqq141b2n" path="res://Assets/Kalin/States/run_stop.gd" id="34_lbmmt"]
+[ext_resource type="Shader" uid="uid://bxgu8io4cdpn7" path="res://Shaders/outline.gdshader" id="34_wxg5w"]
 [ext_resource type="Script" uid="uid://dhnnpcllpme4v" path="res://Assets/Kalin/States/stance_heavy.gd" id="36_uhi5y"]
 [ext_resource type="Script" uid="uid://e32mry71dwy0" path="res://Assets/Kalin/States/land_hurt.gd" id="37_xmisc"]
 [ext_resource type="Script" uid="uid://4n2pywsn1qd6" path="res://Assets/Kalin/States/stance_defensive.gd" id="38_823eb"]
@@ -2523,6 +2524,14 @@ _data = {
 &"wallslide": SubResource("Animation_1pm5w")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bs037"]
+shader = ExtResource("34_wxg5w")
+shader_parameter/color = Color(0, 0, 0, 0)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6qte"]
 size = Vector2(15, 45.8333)
 
@@ -2574,6 +2583,7 @@ current = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_bs037")
 position = Vector2(1, 0)
 texture = ExtResource("3_b6tj0")
 hframes = 6

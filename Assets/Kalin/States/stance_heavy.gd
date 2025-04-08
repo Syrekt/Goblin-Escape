@@ -3,6 +3,9 @@ extends PlayerState
 var charge_up := 0.0
 var tween : Tween = null
 
+@export var color_charged_up : Color = Color(0.8, 0.8, 0.5, 1)
+var c_normal = Color(0, 0, 0, 0)
+
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
 func exit() -> void:
@@ -10,6 +13,7 @@ func exit() -> void:
 	if tween: tween.kill()
 	tween = null
 	charge_up = 0
+	%Sprite2D.material.set_shader_parameter("color", Color(0, 0, 0, 0))
 
 func physics_update(delta: float) -> void:
 	#Charge up the attack
@@ -20,9 +24,8 @@ func physics_update(delta: float) -> void:
 	if charge_up == 100 && !tween:
 		print("Start tweening")
 		tween = create_tween().bind_node(self)
-		var c = Color(0.3, 0.3, 0.8, 1)
-		tween.tween_property(%Sprite2D, "modulate", c, 0.1)
-		tween.tween_property(%Sprite2D, "modulate", Color.WHITE, 0.1)
+		tween.tween_property(%Sprite2D.material, "shader_parameter/color", color_charged_up, 0.2)
+		tween.tween_property(%Sprite2D.material, "shader_parameter/color", c_normal, 0.2)
 
 	Debugger.printui("charge_up: "+str(charge_up))
 
@@ -35,6 +38,8 @@ func physics_update(delta: float) -> void:
 	elif Input.is_action_pressed("down"):
 		finished.emit("stance_defensive")
 	elif Input.is_action_just_released("attack") && player.stamina.spend(player.SLASH_COST):
-		finished.emit("slash")
+		finished.emit("slash", {
+				"charge_up" : charge_up
+			})
 	elif !is_equal_approx(player.get_movement_dir(), 0.0):
 		finished.emit("stance_walk")

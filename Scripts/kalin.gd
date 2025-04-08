@@ -1,18 +1,20 @@
 class_name Player extends CharacterBody2D
 
 
-@export var run_speed		:= 100.0 * 60.0
-@export var walk_speed		:= 50.0 * 60.0
-@export var crouch_speed	:= 25.0 * 60.0
-@export var push_pull_speed := 25.0 * 60.0
-@export var slide_speed		:= 5.0 * 60.0
-@export var slide_dec		:= 7.0
-@export var gravity			:= 500.0
-@export var jump_impulse	:= 200.0
-@export var def_acc			:= 10.0
-@export var run_stop_dec	:= 3.0
-@export var bash_stop_dec	:= 4.0
-@export var snap_offset		:= Vector2(-5, -13)
+@export var run_speed			:= 100.0 * 60.0
+@export var walk_speed			:= 50.0 * 60.0
+@export var stance_walk_speed	:= 30.0 * 60.0
+@export var crouch_speed		:= 30.0 * 60.0
+@export var push_pull_speed 	:= 25.0 * 60.0
+@export var slide_speed			:= 5.0 * 60.0
+@export var slide_dec			:= 7.0
+@export var gravity				:= 500.0
+@export var jump_impulse		:= 200.0
+@export var def_acc				:= 10.0
+@export var run_stop_dec		:= 3.0
+@export var bash_stop_dec		:= 4.0
+
+@export var snap_offset			:= Vector2(-5, -13)
 @export var facing_locked		:= false
 @export var direction_locked	:= false
 @export var unconscious		:= false
@@ -231,8 +233,10 @@ func _physics_process(delta: float) -> void:
 			move_speed = walk_speed * dir_x
 		"crouch_walk":
 			move_speed = crouch_speed * dir_x
-		"walk", "stance_walk":
+		"walk":
 			move_speed = walk_speed * dir_x
+		"stance_walk":
+			move_speed = stance_walk_speed * dir_x
 		"run":
 			move_speed = run_speed * dir_x
 		"push", "pull":
