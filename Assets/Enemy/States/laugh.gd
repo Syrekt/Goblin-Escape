@@ -8,6 +8,8 @@ func enter(previous_state_path : String, data := {}):
 	audio_emitter = AudioStreamPlayer2D.new()
 	get_tree().current_scene.add_child(audio_emitter)
 
+	%Emote.play("lewd")
+
 func exit() -> void:
 	audio_emitter.queue_free()
 

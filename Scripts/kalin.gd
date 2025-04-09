@@ -37,6 +37,7 @@ class_name Player extends CharacterBody2D
 @onready var col_auto_climb_bottom : Area2D = $BottomAutoClimb
 @onready var col_interaction : Area2D = $Interactor
 @onready var col_corner_hang : Area2D = $CornerHangCheck
+@onready var col_corner_climb_prevent : Area2D = $CornerClimbPrevent
 @onready var cp = combat_properties
 @onready var camera = $Camera2D
 @onready var audio_emitter = $MainAudioStreamer
@@ -103,7 +104,6 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 	if state_node.state.name == "death":
 		return
 
-	Ge.play_audio_from_string_array(audio_emitter, -2, "res://Assets/SFX/Kalin/Hurt")
 	health.value -= _damage
 	if health.value <= 0:
 		emit_signal("health_depleted")
@@ -111,6 +111,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 			_source.state_node.state.finished.emit("laugh")
 	elif play_hurt_animation:
 		state_node.state.finished.emit("hurt")
+		Ge.play_audio_from_string_array(audio_emitter, -2, "res://Assets/SFX/Kalin/Hurt")
 func heal(amount: int) -> void:
 	health.value += amount
 func check_movable():
@@ -135,7 +136,7 @@ func can_grab_corner(rising:= false) -> bool:
 	if ignore_corners: return false
 	return true
 func can_quick_climb() -> bool:
-	return velocity.y < -50.0 && !col_quick_climb_prevent.has_overlapping_bodies() && ray_auto_climb.is_colliding()
+	return velocity.y < -50.0 && !col_quick_climb_prevent.has_overlapping_bodies() && !col_corner_climb_prevent.has_overlapping_bodies() && ray_auto_climb.is_colliding()
 func can_stand_up() -> bool:
 	return !col_stand_check.has_overlapping_bodies()
 func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
@@ -290,6 +291,8 @@ func _physics_process(delta: float) -> void:
 
 	#endregion
 	#region Finalize
+	floor_max_angle = 1
+	Debugger.printui("floor_max_angle: "+str(floor_max_angle))
 	move_and_slide()
 	if cp.pushback_timer > 0:
 			set_facing(-sign(cp.pushback_vector.x))
@@ -311,10 +314,10 @@ func _process(delta: float) -> void:
 	#region Camera combat position
 	var in_combat_state = state_node.state.is_in_group("combat_state")
 	if in_combat_state && combat_target:
-		camera.position = (combat_target.global_position - global_position)/2;
+		camera.position.x = (combat_target.global_position.x - global_position.x)/2;
 		if combat_target.state_node.state.name == "death": combat_target = null
 	else:
-		camera.position = Vector2(0, -40)
+		camera.position.x = 0
 	#endregion
 	if Input.is_action_pressed("restart"):
 		get_tree().reload_current_scene()

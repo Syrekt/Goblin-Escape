@@ -34,6 +34,8 @@ func deal_damage(attacker: CharacterBody2D, damage: int, defender: CharacterBody
 				defender.combat_properties.pushback_apply(attacker.global_position, pushback_force*5)
 				defender.take_damage(0, attacker)
 				attacker.push_player = false
+			elif attacker is Player && !defender.in_combat:
+				defender.combat_properties.stun(2.0)
 			else:
 				defender.combat_properties.pushback_apply(attacker.global_position, pushback_force)
 				if !defender_blocking:

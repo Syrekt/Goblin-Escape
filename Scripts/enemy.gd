@@ -8,6 +8,7 @@ const RUN_SPEED = 300.0 * 60
 @export var gravity := 500.0;
 @export var damage := 1
 @export var patrolling := false
+@export var in_combat := false
 
 @export var facing := 1
 var chase_target : Node2D = null
@@ -27,7 +28,6 @@ signal health_depleted
 @onready var health			    = $Health
 @onready var combat_properties  = $CombatProperties
 @onready var ray_fall_check		= $FallCheck
-@onready var state_switch_timer = $StateSwitchTimer
 @onready var player_proximity	= $PlayerProximity
 
 @onready var slash_hitbox = $StateMachine/slash/SlashHitbox/Collider
@@ -64,7 +64,9 @@ func move(speed: float, direction: int) -> bool:
 	ray_fall_check.scale.x = direction
 
 	velocity.x = speed * direction * get_process_delta_time()
-	return !is_on_wall() && ray_fall_check.is_colliding() && velocity.x != 0
+	Debugger.printui("is_on_wall(): "+str(is_on_wall()));
+	Debugger.printui("ray_fall_check.is_colliding(): "+str(ray_fall_check.is_colliding()));
+	return ray_fall_check.is_colliding() && velocity.x != 0
 func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 	if animation_player.current_animation != anim:
 		animation_player.play(&"RESET");
@@ -114,7 +116,8 @@ func _ready() -> void:
 	$Sprite2D.scale.x = 1
 	set_facing(facing)
 func _physics_process(delta: float) -> void:
-	Debugger.printui("state_node.state.name: "+str(state_node.state.name));
+	Debugger.printui("in_combat: "+str(in_combat))
+	Debugger.printui("state: "+str(state_node.state.name));
 	#region X Movement
 	var dir_x = get_movement_dir() if !direction_locked else facing
 

@@ -10,23 +10,25 @@ func enter(previous_state_path: String, data := {}) -> void:
 		$Timer.start(1.0)
 	else:
 		$Timer.start(2.0)
+	if !%AttackDetector.has_overlapping_bodies():
+		finished.emit("patrol")
 
 func exit():
 	$Timer.stop()
 
 
 func update(delta):
-	if !%AttackDetector.has_overlapping_bodies():
-		finished.emit("patrol")
 	if enemy.chase_target:
 		enemy.set_facing(sign(enemy.chase_target.global_position.x - enemy.global_position.x))
+		if enemy.chase_target.combat_properties.stunned:
+			finished.emit("slash")
+		if enemy.chase_target.state_node.state.name == "stance_heavy":
+			finished.emit("stab")
+	else:
+		finished.emit("patrol")
 	if enemy.player_proximity.has_overlapping_bodies():
 		enemy.push_player = true
 		finished.emit("bash")
-	if enemy.chase_target.combat_properties.stunned:
-		finished.emit("slash")
-	if enemy.chase_target.state_node.state.name == "stance_heavy":
-		finished.emit("stab")
 
 
 func _on_timer_timeout() -> void:

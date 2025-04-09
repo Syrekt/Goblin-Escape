@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcj7qwryucp2k"
-path="res://.godot/imported/[Valley Friends] Potions.png-53894c217d604077965c61221df5a28d.ctex"
+uid="uid://bcdf38iftarix"
+path="res://.godot/imported/[Valley Friends] Potions-export42.png-9469204e4c531c9a36761312e6bdc42a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Others/[Valley Friends] Potions.png"
-dest_files=["res://.godot/imported/[Valley Friends] Potions.png-53894c217d604077965c61221df5a28d.ctex"]
+source_file="res://Assets/Others/Potions/[Valley Friends] Potions-export42.png"
+dest_files=["res://.godot/imported/[Valley Friends] Potions-export42.png-9469204e4c531c9a36761312e6bdc42a.ctex"]
 
 [params]
 

@@ -8,9 +8,18 @@ var move = true
 #region Process
 func enter(previous_state_path: String, data := {}) -> void:
 	enemy.velocity.x = 0.0
-	enemy.state_switch_timer.start(randf_range(0.5, 1.0))
-func physics_update(delta: float) -> void:
-	if !enemy.state_switch_timer.is_stopped():
+	$IdleTimer.start()
+	$PatrolTimer.start()
+	$PatrolEndTimer.start()
+func exit() -> void:
+	$IdleTimer.stop()
+	$PatrolTimer.stop()
+	$PatrolEndTimer.stop()
+func update(delta : float) -> void:
+	if $PatrolEndTimer.is_stopped():
+		%Emote.play("confused")
+		finished.emit("idle")
+		enemy.velocity = Vector2.ZERO
 		return
 
 	Debugger.printui("enemy.chase_target: "+str(enemy.chase_target));
@@ -26,6 +35,9 @@ func physics_update(delta: float) -> void:
 func patrol(delta: float):
 	if move:
 		var moving = enemy.move(enemy.patrol_move_speed, patrol_dir)
+		Debugger.printui("moving: "+str(moving))
+		Debugger.printui("enemy.velocity.x: "+str(enemy.velocity.x));
+		Debugger.printui("patrol_dir: "+str(patrol_dir))
 
 		if moving:
 			enemy.update_animation("run")
