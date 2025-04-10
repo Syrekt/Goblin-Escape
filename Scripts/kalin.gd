@@ -146,6 +146,7 @@ func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 		animation_player.advance(0)
 		animation_player.play(anim, -1, speed, from_end)
 		animation_player.advance(0)
+		%Sprite2D.material.set_shader_parameter("number_of_images", Vector2(%Sprite2D.hframes, %Sprite2D.vframes))
 func snap_to_corner(ledge_position: Vector2) -> void:
 	global_position = ledge_position + Vector2(snap_offset.x * facing, snap_offset.y)
 func stand_up() -> void:
@@ -318,12 +319,6 @@ func _physics_process(delta: float) -> void:
 #region Process
 func _process(delta: float) -> void:
 	var s = %Sprite2D
-	Debugger.printui("s.flip_h: "+str(s.flip_h));
-	Debugger.printui("s.frame_coords: "+str(s.frame_coords));
-	Debugger.printui("s.offset: "+str(s.offset));
-	Debugger.printui("s.hframes: "+str(s.hframes));
-	Debugger.printui("s.vframes: "+str(s.vframes));
-	Debugger.printui("unconscious: "+str(unconscious))
 	Debugger.printui(str(state_node.state.name))
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
