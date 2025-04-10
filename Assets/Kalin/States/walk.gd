@@ -8,17 +8,17 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func update(delta: float) -> void:
 	if lock_stance_button:
-		if !Input.is_action_pressed("stance"): lock_stance_button = false
+		if !player.pressed("stance"): lock_stance_button = false
 
 	if !player.is_on_floor():
 		finished.emit("fall")
-	elif Input.is_action_pressed("run") && %Stamina.has_enough(1.0):
+	elif player.pressed("run") && %Stamina.has_enough(1.0):
 		finished.emit("run")
-	elif Input.is_action_pressed("down"):
+	elif player.pressed("down"):
 		finished.emit("crouch")
-	elif Input.is_action_just_pressed("up"):
+	elif player.just_pressed("up"):
 		finished.emit("rise")
-	elif not lock_stance_button and Input.is_action_just_pressed("stance") or Input.is_action_just_pressed("attack"):
+	elif not lock_stance_button and player.just_pressed("stance") or player.just_pressed("attack"):
 		finished.emit("stance_walk")
 	elif player.velocity.x == 0:
 		finished.emit("idle")

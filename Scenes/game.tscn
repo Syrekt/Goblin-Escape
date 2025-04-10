@@ -1,14 +1,16 @@
-[gd_scene load_steps=10 format=4 uid="uid://dhjw1qmf2nvdh"]
+[gd_scene load_steps=12 format=4 uid="uid://dhjw1qmf2nvdh"]
 
 [ext_resource type="PackedScene" uid="uid://d08scf611mrii" path="res://Objects/kalin.tscn" id="1_v3ybc"]
 [ext_resource type="Script" uid="uid://dytt7cafdt3c1" path="res://Scripts/game_manager.gd" id="1_yp60x"]
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Assets/Map/FP_CastlePrison/castle_prison.tres" id="2_h4fw4"]
+[ext_resource type="TileSet" uid="uid://3mok4qm6wli2" path="res://Assets/Map/Props/dungeon_props.tres" id="3_o5yvi"]
 [ext_resource type="Script" uid="uid://ettvx4a2msjv" path="res://Scripts/camera_2d.gd" id="4_gwty8"]
-[ext_resource type="PackedScene" uid="uid://c2unx5js38jr8" path="res://Objects/barrel.tscn" id="5_jdxuh"]
+[ext_resource type="PackedScene" uid="uid://c2unx5js38jr8" path="res://Objects/Movable/barrel.tscn" id="5_jdxuh"]
 [ext_resource type="PackedScene" uid="uid://bpj2k5beannxk" path="res://Objects/dialogue_trigger.tscn" id="6_ssinu"]
 [ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Objects/enemy.tscn" id="8_h4fw4"]
 [ext_resource type="TileSet" uid="uid://d16iprr3bwurc" path="res://Assets/Others/cave_tile.tres" id="8_k6cow"]
 [ext_resource type="AudioStream" uid="uid://dkgt8hqnqcgaj" path="res://Assets/BGM/juanjo_sound - Do we need a reason.wav" id="8_v158k"]
+[ext_resource type="PackedScene" uid="uid://buypvi0ambrlq" path="res://Objects/Movable/chest_small.tscn" id="10_ldgsr"]
 
 [node name="Game" type="Node2D"]
 
@@ -61,6 +63,10 @@ tile_set = ExtResource("2_h4fw4")
 z_index = 10
 tile_set = ExtResource("2_h4fw4")
 
+[node name="props" type="TileMapLayer" parent="Tilemaps"]
+tile_map_data = PackedByteArray("AAAVABUAAAACAAEAAAAVABYAAAACAAIAAAAWABYAAAADAAIAAAA=")
+tile_set = ExtResource("3_o5yvi")
+
 [node name="GameManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_yp60x")
@@ -91,4 +97,7 @@ stream = ExtResource("8_v158k")
 volume_db = -10.778
 
 [node name="Enemy" parent="." instance=ExtResource("8_h4fw4")]
-position = Vector2(406, 331)
+position = Vector2(852, 321)
+
+[node name="Movable2" parent="." instance=ExtResource("10_ldgsr")]
+position = Vector2(617, 327)

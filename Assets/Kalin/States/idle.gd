@@ -8,18 +8,18 @@ func enter(previous_state_path: String, data := {}) -> void:
 func update(_delta: float) -> void:
 	player.check_movable();
 	if lock_stance_button:
-		if not Input.is_action_pressed("stance"): lock_stance_button = false
+		if not player.pressed("stance"): lock_stance_button = false
 
 	if !player.is_on_floor():
 		finished.emit("fall")
-	elif Input.is_action_pressed("down"):
+	elif player.pressed("down"):
 		finished.emit("crouch")
-	elif Input.is_action_pressed("up"):
+	elif player.pressed("up"):
 		finished.emit("rise")
-	elif !lock_stance_button && Input.is_action_just_pressed("stance") || Input.is_action_just_pressed("attack"):
+	elif !lock_stance_button && player.just_pressed("stance") || player.just_pressed("attack"):
 		finished.emit("stance_light")
 	elif player.velocity.x != 0:
-		if Input.is_action_pressed("run") && %Stamina.has_enough(1.0):
+		if player.pressed("run") && %Stamina.has_enough(1.0):
 			finished.emit("run")
 		else:
 			finished.emit("walk")

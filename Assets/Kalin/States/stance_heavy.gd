@@ -17,7 +17,7 @@ func exit() -> void:
 
 func physics_update(delta: float) -> void:
 	#Charge up the attack
-	if Input.is_action_pressed("attack"):
+	if player.pressed("attack"):
 		charge_up = move_toward(charge_up, 100, 2)
 
 		Debugger.printui("tween: "+str(tween));
@@ -31,13 +31,13 @@ func physics_update(delta: float) -> void:
 
 	if !player.is_on_floor():
 		finished.emit("fall")
-	elif Input.is_action_pressed("stance"):
+	elif player.pressed("stance"):
 		finished.emit("idle")
-	elif !Input.is_action_pressed("up"):
+	elif !player.pressed("up"):
 		finished.emit("stance_light")
-	elif Input.is_action_pressed("down"):
+	elif player.pressed("down"):
 		finished.emit("stance_defensive")
-	elif Input.is_action_just_released("attack") && player.stamina.spend(player.SLASH_COST):
+	elif player.just_released("attack") && player.stamina.spend(player.SLASH_COST):
 		finished.emit("slash", {
 				"charge_up" : charge_up
 			})

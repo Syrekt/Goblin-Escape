@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=3 uid="uid://d08scf611mrii"]
+[gd_scene load_steps=121 format=3 uid="uid://d08scf611mrii"]
 
 [ext_resource type="Script" uid="uid://coi4g5fo3jf06" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Texture2D" uid="uid://dcs3l0iefjo7w" path="res://Assets/Kalin/Sprites/Kalin-Fall.png" id="2_1j6vo"]
@@ -72,7 +72,8 @@
 [ext_resource type="Script" uid="uid://c3rllm222ckui" path="res://Assets/Kalin/stamina.gd" id="60_2ksh1"]
 [ext_resource type="Script" uid="uid://42mhp8ajoulq" path="res://Assets/Kalin/States/orgasm.gd" id="61_c6www"]
 [ext_resource type="Texture2D" uid="uid://c4tusp4o5tj8f" path="res://Assets/Others/Potions/[Valley Friends] Potions-export1.png" id="72_iwmgu"]
-[ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://Assets/Others/theme_button.tres" id="73_qdj7c"]
+[ext_resource type="Theme" uid="uid://d3ajvsrrbu1s5" path="res://UI/inventory.tres" id="72_qdj7c"]
+[ext_resource type="Texture2D" uid="uid://fyevcw0t8yc" path="res://Assets/Others/panel_bg.png" id="73_qdj7c"]
 
 [sub_resource type="Animation" id="Animation_5koc5"]
 length = 0.001
@@ -2650,16 +2651,17 @@ current = true
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_bs037")
-position = Vector2(1, 0)
 texture = ExtResource("3_b6tj0")
 hframes = 6
 
 [node name="ColliderStanding" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 4.5)
 scale = Vector2(1, 1.2)
 shape = SubResource("RectangleShape2D_y6qte")
 
 [node name="ColliderCrouching" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 16.5)
 scale = Vector2(1, 1.2)
 shape = SubResource("RectangleShape2D_iccmv")
@@ -2691,6 +2693,7 @@ position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_avh81")
 
 [node name="CornerGrabPrevent" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="TopCollider" type="CollisionShape2D" parent="CornerGrabPrevent"]
@@ -2715,6 +2718,7 @@ position = Vector2(0, 37.5)
 shape = SubResource("RectangleShape2D_8idp1")
 
 [node name="CornerClimbPrevent" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CornerClimbPrevent"]
@@ -2897,6 +2901,7 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -2941,32 +2946,56 @@ recovery_speed = 2.0
 one_shot = true
 autostart = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 49.0
-offset_top = 53.0
-offset_right = 175.0
-offset_bottom = 162.0
+[node name="Inventory" type="PanelContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+offset_left = 172.0
+offset_top = 140.0
+offset_right = 302.0
+offset_bottom = 246.0
+focus_mode = 2
+theme = ExtResource("72_qdj7c")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/ScrollContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Inventory"]
+layout_mode = 2
+texture = ExtResource("73_qdj7c")
+region_rect = Rect2(0, 0, 44, 44)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Inventory"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Inventory/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Inventory/MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/ScrollContainer/HBoxContainer"]
+[node name="InventoryItem" type="HBoxContainer" parent="CanvasLayer/Inventory/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("72_iwmgu")
-stretch_mode = 2
+focus_neighbor_bottom = NodePath("../InventoryItem2")
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Control/ScrollContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="CanvasLayer/Inventory/MarginContainer/ScrollContainer/VBoxContainer/InventoryItem"]
 layout_mode = 2
+text = "Potion"
+icon = ExtResource("72_iwmgu")
+alignment = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/ScrollContainer/HBoxContainer"]
-custom_minimum_size = Vector2(62.18, 0)
+[node name="InventoryItem2" type="HBoxContainer" parent="CanvasLayer/Inventory/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("73_qdj7c")
-text = "Potion
-"
-fit_content = true
+focus_neighbor_top = NodePath("../InventoryItem")
+
+[node name="Button" type="Button" parent="CanvasLayer/Inventory/MarginContainer/ScrollContainer/VBoxContainer/InventoryItem2"]
+layout_mode = 2
+text = "Potion"
+icon = ExtResource("72_iwmgu")
+alignment = 0
 
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

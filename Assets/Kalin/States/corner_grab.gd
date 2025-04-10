@@ -8,8 +8,8 @@ func enter(previous_path_string: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
 
 func update(delta: float) -> void:
-	if Input.is_action_pressed("up"):
+	if player.pressed("up"):
 		finished.emit("corner_climb")
-	if Input.is_action_just_pressed("down"):
+	if player.just_pressed("down"):
 		player.ignore_corners = true;
 		finished.emit("fall")

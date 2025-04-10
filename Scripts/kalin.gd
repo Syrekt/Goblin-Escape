@@ -95,7 +95,8 @@ func set_facing(dir: int):
 			child.flip_h = facing == -1
 		elif child is CollisionShape2D or child is Node2D or child is RayCast2D:
 			child.scale.x = facing
-func get_movement_dir():
+func get_movement_dir() -> float:
+	if %Inventory.visible: return 0.0
 	return Input.get_axis("left", "right")
 func fall(delta):
 	velocity.y += gravity * delta
@@ -119,7 +120,7 @@ func check_movable():
 	if ray_movable.is_colliding(): 
 		potential_movable = ray_movable.get_collider();
 
-	if Input.is_action_just_pressed("grab") and potential_movable != null:
+	if just_pressed("grab") and potential_movable != null:
 		movable = potential_movable
 		state_node.state.finished.emit("push_idle")
 
@@ -177,6 +178,16 @@ func emit_noise(offset : Vector2, amount : float) -> void:
 
 	_noise.amount_max = amount
 	_noise.position = position + offset
+func toggle_inventory():
+	%Inventory.visible = !%Inventory.visible
+	if %Inventory.visible:
+		$CanvasLayer/Inventory/MarginContainer/ScrollContainer/VBoxContainer/InventoryItem/Button.grab_focus()
+func pressed(input : String) -> bool:
+	if %Inventory.visible: return false
+	return Input.is_action_pressed(input)
+func just_pressed(input : String) -> bool:
+	if %Inventory.visible: return false
+	return Input.is_action_just_pressed(input)
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -306,9 +317,14 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
+	var s = %Sprite2D
+	Debugger.printui("s.flip_h: "+str(s.flip_h));
+	Debugger.printui("s.frame_coords: "+str(s.frame_coords));
+	Debugger.printui("s.offset: "+str(s.offset));
+	Debugger.printui("s.hframes: "+str(s.hframes));
+	Debugger.printui("s.vframes: "+str(s.vframes));
 	Debugger.printui("unconscious: "+str(unconscious))
 	Debugger.printui(str(state_node.state.name))
-	var ccq = col_quick_climb_prevent.has_overlapping_bodies()
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
 	#region Camera combat position
@@ -321,7 +337,7 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_pressed("restart"):
 		get_tree().reload_current_scene()
-	#region Open menu
+	#region Open menu & Inventory
 	if Input.is_action_just_pressed("ui_cancel"):
 		if open_menu == null:
 			open_menu = ingame_menu.instantiate()
@@ -331,7 +347,8 @@ func _process(delta: float) -> void:
 			get_tree().paused = false;
 			open_menu.queue_free()
 			open_menu = null
-		print(open_menu)
+	if Input.is_action_just_pressed("inventory"):
+		toggle_inventory()
 
 	#endregion
 	if Input.is_action_just_pressed("debug1"):

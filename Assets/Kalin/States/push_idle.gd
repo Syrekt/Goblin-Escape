@@ -11,7 +11,7 @@ func physics_update(delta: float) -> void:
 
 
 func update(delta: float) -> void:
-	if Input.is_action_just_pressed("grab"):
+	if player.just_pressed("grab"):
 		finished.emit("idle");
 		player.movable.release()
 	var dir = Input.get_axis("left", "right")
