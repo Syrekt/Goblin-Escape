@@ -20,9 +20,6 @@ func _process(delta: float) -> void:
 	if timer.time_left == 0:
 		value = move_toward(value, max_value, recovery_speed*delta)
 
-	Debugger.printui("recovery_speed: "+str(recovery_speed))
-	Debugger.printui("final_recovery_speed: "+str(final_recovery_speed))
-
 	if final_recovery_speed > recovery_speed:
 		if !tint_under_tween:
 			tint_under_tween = create_tween().bind_node(self)
