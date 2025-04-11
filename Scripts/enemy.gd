@@ -64,8 +64,6 @@ func move(speed: float, direction: int) -> bool:
 	ray_fall_check.scale.x = direction
 
 	velocity.x = speed * direction * get_process_delta_time()
-	Debugger.printui("is_on_wall(): "+str(is_on_wall()));
-	Debugger.printui("ray_fall_check.is_colliding(): "+str(ray_fall_check.is_colliding()));
 	return ray_fall_check.is_colliding() && velocity.x != 0
 func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 	if animation_player.current_animation != anim:
@@ -116,8 +114,6 @@ func _ready() -> void:
 	$Sprite2D.scale.x = 1
 	set_facing(facing)
 func _physics_process(delta: float) -> void:
-	Debugger.printui("in_combat: "+str(in_combat))
-	Debugger.printui("state: "+str(state_node.state.name));
 	#region X Movement
 	var dir_x = get_movement_dir() if !direction_locked else facing
 

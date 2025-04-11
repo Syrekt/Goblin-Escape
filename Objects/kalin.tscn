@@ -2905,7 +2905,6 @@ metadata/_edit_use_anchors_ = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -2941,6 +2940,7 @@ step = 0.01
 value = 3.0
 texture_under = ExtResource("57_lnkvj")
 texture_progress = ExtResource("59_8idp1")
+tint_progress = Color(0.999732, 0.936424, 0.920197, 1)
 script = ExtResource("60_2ksh1")
 recovery_speed = 2.0
 
@@ -2948,8 +2948,16 @@ recovery_speed = 2.0
 one_shot = true
 autostart = true
 
+[node name="BuffContainer" type="HBoxContainer" parent="CanvasLayer/HUD/HBoxContainer/Stamina"]
+layout_mode = 0
+offset_top = 7.0
+offset_right = 116.0
+offset_bottom = 23.0
+scale = Vector2(0.5, 0.5)
+
 [node name="InventoryPanel" type="PanelContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 offset_left = 172.0
 offset_top = 140.0
 offset_right = 398.0
@@ -2984,8 +2992,9 @@ size_flags_horizontal = 3
 
 [node name="DescriptionPanel" type="PanelContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 offset_left = 398.0
-offset_top = 142.0
+offset_top = 140.0
 offset_right = 642.0
 offset_bottom = 304.0
 theme = ExtResource("72_qdj7c")

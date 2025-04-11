@@ -4,9 +4,6 @@ var stamina : TextureProgressBar
 
 
 func _on_pressed() -> void:
-	print("owner: "+str(owner))
-	print("Button pressed")
-	print("name: "+str(text))
 	match text:
 		"Health Potion":
 			print("Drink health potion")

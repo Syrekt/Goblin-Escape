@@ -7,6 +7,7 @@ extends TextureProgressBar
 var buff_scene = preload("res://Objects/buff.tscn")
 
 var tween : Tween = null
+var tint_under_tween : Tween = null
 
 func _process(delta: float) -> void:
 	var final_recovery_speed = recovery_speed
@@ -21,6 +22,17 @@ func _process(delta: float) -> void:
 
 	Debugger.printui("recovery_speed: "+str(recovery_speed))
 	Debugger.printui("final_recovery_speed: "+str(final_recovery_speed))
+
+	if final_recovery_speed > recovery_speed:
+		if !tint_under_tween:
+			tint_under_tween = create_tween().bind_node(self)
+			tint_under_tween.set_loops(-1)
+			tint_under_tween.tween_property(self, "tint_under", Color.GREEN, 1.0)
+			tint_under_tween.tween_property(self, "tint_under", Color.WHITE, 1.0)
+	elif tint_under_tween:
+		tint_under_tween.kill()
+		tint_under_tween = null
+
 
 func spend(amount: float) -> bool:
 	if value >= amount:
@@ -51,5 +63,5 @@ func blink() -> void:
 
 func add_buff(_value : float, _time : float) -> void:
 	var buff = buff_scene.instantiate()
-	buff.setup(_value, _time)
 	add_child(buff)
+	buff.setup(_value, _time)

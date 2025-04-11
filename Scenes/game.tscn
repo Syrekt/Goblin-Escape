@@ -87,7 +87,7 @@ script = ExtResource("4_gwty8")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [node name="Movable" parent="." instance=ExtResource("5_jdxuh")]
-position = Vector2(235, 309)
+position = Vector2(268, 336)
 
 [node name="DialogueTrigger" parent="." instance=ExtResource("6_ssinu")]
 position = Vector2(-153, -41)

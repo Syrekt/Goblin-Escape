@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Movable extends CharacterBody2D
 
 @export var gravity := 300 * 60
 @export var y_acc := 5
@@ -7,6 +7,7 @@ var grabbed = false
 
 func grab() -> void:
 	grabbed = true
+	velocity = Vector2.ZERO
 
 func release() -> void:
 	velocity = Vector2.ZERO

@@ -186,6 +186,9 @@ func pressed(input : String) -> bool:
 func just_pressed(input : String) -> bool:
 	if %InventoryPanel.visible: return false
 	return Input.is_action_just_pressed(input)
+func just_released(input : String) -> bool:
+	if %InventoryPanel.visible: return false
+	return Input.is_action_just_released(input)
 func pickup_item(item : InventoryItem):
 	print("Pickup item: " + str(item.name))
 	for slot in %InventoryPanel.inventory.items:
@@ -258,6 +261,8 @@ func _physics_process(delta: float) -> void:
 			move_speed = stance_walk_speed * dir_x
 		"run":
 			move_speed = run_speed * dir_x
+		"push_idle":
+			move_speed = 0
 		"push", "pull":
 			move_speed = push_pull_speed * dir_x
 		"run_stop":
@@ -308,7 +313,6 @@ func _physics_process(delta: float) -> void:
 	#endregion
 	#region Finalize
 	floor_max_angle = 1
-	Debugger.printui("floor_max_angle: "+str(floor_max_angle))
 	move_and_slide()
 	if cp.pushback_timer > 0:
 			set_facing(-sign(cp.pushback_vector.x))
