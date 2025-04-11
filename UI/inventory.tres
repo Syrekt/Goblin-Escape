@@ -1,26 +1,24 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://d3ajvsrrbu1s5"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://d3ajvsrrbu1s5"]
 
 [ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Assets/Others/Ohrenstead.ttf" id="1_5s48r"]
-[ext_resource type="Texture2D" uid="uid://bpge6nsa5vqiq" path="res://Assets/Others/button_normal.png" id="2_a0y0o"]
-[ext_resource type="Texture2D" uid="uid://cxdtwv3bf6wmu" path="res://Assets/Others/button_pressed.png" id="3_j80nw"]
-[ext_resource type="Texture2D" uid="uid://bjowu5bqsapub" path="res://Assets/Others/button_hover.png" id="4_kmv5a"]
+[ext_resource type="Texture2D" uid="uid://cf2ysgl11vuva" path="res://Inventory/inventory_button_focus.png" id="2_i1q7w"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nv13i"]
-texture = ExtResource("2_a0y0o")
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wbxtx"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jwmfk"]
-texture = ExtResource("3_j80nw")
+texture = ExtResource("2_i1q7w")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4a6d8"]
-texture = ExtResource("4_kmv5a")
+texture = ExtResource("2_i1q7w")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5s48r"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vfl3u"]
 
 [resource]
+Button/font_sizes/font_size = 32
 Button/fonts/font = ExtResource("1_5s48r")
-Button/styles/disabled = SubResource("StyleBoxTexture_nv13i")
+Button/styles/disabled = SubResource("StyleBoxEmpty_wbxtx")
 Button/styles/focus = SubResource("StyleBoxTexture_jwmfk")
 Button/styles/hover = SubResource("StyleBoxTexture_4a6d8")
 Button/styles/normal = SubResource("StyleBoxEmpty_5s48r")
@@ -31,4 +29,5 @@ MarginContainer/constants/margin_bottom = 12
 MarginContainer/constants/margin_left = 12
 MarginContainer/constants/margin_right = 12
 MarginContainer/constants/margin_top = 12
+RichTextLabel/font_sizes/normal_font_size = 32
 RichTextLabel/fonts/normal_font = ExtResource("1_5s48r")

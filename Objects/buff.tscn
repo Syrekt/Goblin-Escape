@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxsu0pg7ly8qp"]
+
+[ext_resource type="Script" uid="uid://cpv5kddk2hlvd" path="res://Scripts/buff.gd" id="1_qst0f"]
+
+[node name="Buff" type="Node"]
+script = ExtResource("1_qst0f")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

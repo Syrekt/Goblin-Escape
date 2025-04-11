@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://c0yvh55kikql2"]
+
+[ext_resource type="Texture2D" uid="uid://dqe7ro1rxvges" path="res://Inventory/Potions/[Valley Friends] Potions-export26.png" id="1_ql0kk"]
+[ext_resource type="Script" uid="uid://nrl1858h0shp" path="res://Inventory/inv_item.gd" id="2_ql0kk"]
+
+[resource]
+script = ExtResource("2_ql0kk")
+name = "Health Potion"
+icon = ExtResource("1_ql0kk")
+description = "Fully heals"
+metadata/_custom_type_script = "uid://nrl1858h0shp"

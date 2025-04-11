@@ -1,9 +1,9 @@
-[gd_scene load_steps=122 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=124 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://coi4g5fo3jf06" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Texture2D" uid="uid://dcs3l0iefjo7w" path="res://Assets/Kalin/Sprites/Kalin-Fall.png" id="2_1j6vo"]
 [ext_resource type="Texture2D" uid="uid://boahl6r6b6lgx" path="res://Assets/Kalin/Sprites/Kalin-Crouch_Idle.png" id="2_6cw72"]
-[ext_resource type="Resource" uid="uid://buieik1hf8xh2" path="res://Inventory/player_inventory.tres" id="2_73qvi"]
+[ext_resource type="Resource" uid="uid://bo52lohjr4ls7" path="res://Inventory/player_inventory.tres" id="2_73qvi"]
 [ext_resource type="Texture2D" uid="uid://b83foasp85e6b" path="res://Assets/Kalin/Sprites/Kalin-Bash.png" id="2_s11s3"]
 [ext_resource type="PackedScene" uid="uid://cpogcou30wxcj" path="res://UI/combat_properties.tscn" id="2_yetl5"]
 [ext_resource type="Texture2D" uid="uid://yymtfpkr47q8" path="res://Assets/Kalin/Sprites/Kalin_idle_unarmed.png" id="3_b6tj0"]
@@ -72,9 +72,11 @@
 [ext_resource type="Script" uid="uid://cytac4sg8onjk" path="res://Assets/Kalin/States/corner_hang.gd" id="59_osr06"]
 [ext_resource type="Script" uid="uid://c3rllm222ckui" path="res://Assets/Kalin/stamina.gd" id="60_2ksh1"]
 [ext_resource type="Script" uid="uid://42mhp8ajoulq" path="res://Assets/Kalin/States/orgasm.gd" id="61_c6www"]
+[ext_resource type="Texture2D" uid="uid://c4tusp4o5tj8f" path="res://Inventory/Potions/[Valley Friends] Potions-export1.png" id="72_iwmgu"]
 [ext_resource type="Theme" uid="uid://d3ajvsrrbu1s5" path="res://UI/inventory.tres" id="72_qdj7c"]
 [ext_resource type="Texture2D" uid="uid://fyevcw0t8yc" path="res://Assets/Others/panel_bg.png" id="73_qdj7c"]
-[ext_resource type="Script" uid="uid://drm2busxe3db8" path="res://Inventory/inventory_ui.gd" id="73_ugwbb"]
+[ext_resource type="Script" uid="uid://drm2busxe3db8" path="res://Objects/inventory_ui.gd" id="73_ugwbb"]
+[ext_resource type="Script" uid="uid://b2yucn604m7hu" path="res://Inventory/inventory_slot.gd" id="74_sprrr"]
 
 [sub_resource type="Animation" id="Animation_5koc5"]
 length = 0.001
@@ -2952,8 +2954,8 @@ autostart = true
 unique_name_in_owner = true
 offset_left = 172.0
 offset_top = 140.0
-offset_right = 398.0
-offset_bottom = 435.0
+offset_right = 302.0
+offset_bottom = 246.0
 focus_mode = 2
 theme = ExtResource("72_qdj7c")
 script = ExtResource("73_ugwbb")
@@ -2969,28 +2971,35 @@ patch_margin_right = 5
 patch_margin_bottom = 5
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
-metadata/_edit_lock_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/InventoryPanel"]
 layout_mode = 2
-metadata/_edit_lock_ = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/InventoryPanel/MarginContainer"]
 layout_mode = 2
 
-[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer/InventoryPanel/MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/InventoryPanel/MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DescriptionPanel" type="PanelContainer" parent="CanvasLayer"]
-unique_name_in_owner = true
-offset_left = 398.0
-offset_top = 142.0
-offset_right = 642.0
-offset_bottom = 304.0
+[node name="InventorySlot" type="HBoxContainer" parent="CanvasLayer/InventoryPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("74_sprrr")
+
+[node name="Button" type="Button" parent="CanvasLayer/InventoryPanel/MarginContainer/ScrollContainer/VBoxContainer/InventorySlot"]
+layout_mode = 2
+text = "Potion"
+icon = ExtResource("72_iwmgu")
+alignment = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+offset_left = 302.0
+offset_top = 140.0
+offset_right = 432.0
+offset_bottom = 246.0
 theme = ExtResource("72_qdj7c")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/DescriptionPanel"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/PanelContainer"]
 layout_mode = 2
 texture = ExtResource("73_qdj7c")
 region_rect = Rect2(0, 0, 44, 44)
@@ -3000,17 +3009,15 @@ patch_margin_right = 5
 patch_margin_bottom = 5
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
-metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/DescriptionPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer"]
 layout_mode = 2
-metadata/_edit_lock_ = true
 
-[node name="DescriptionText" type="RichTextLabel" parent="CanvasLayer/DescriptionPanel/MarginContainer"]
-unique_name_in_owner = true
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/PanelContainer/MarginContainer"]
 layout_mode = 2
 bbcode_enabled = true
 text = "[color=red]This is the description text[/color]"
+autowrap_mode = 1
 
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
@@ -3019,6 +3026,7 @@ text = "[color=red]This is the description text[/color]"
 [connection signal="attack_frame" from="StateMachine/slash" to="StateMachine/slash" method="_on_attack_frame"]
 [connection signal="attack_frame" from="StateMachine/stab" to="StateMachine/stab" method="_on_attack_frame"]
 [connection signal="body_entered" from="StateMachine/bash/BashHitbox" to="StateMachine/bash" method="_on_bash_hitbox_body_entered"]
+[connection signal="pressed" from="CanvasLayer/InventoryPanel/MarginContainer/ScrollContainer/VBoxContainer/InventorySlot/Button" to="CanvasLayer/InventoryPanel/MarginContainer/ScrollContainer/VBoxContainer/InventorySlot" method="_on_button_pressed"]
 
 [editable path="StateMachine/slash/SlashHitbox"]
 [editable path="StateMachine/stab/StabHitbox"]

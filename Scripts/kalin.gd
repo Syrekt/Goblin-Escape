@@ -19,10 +19,9 @@ class_name Player extends CharacterBody2D
 @export var direction_locked	:= false
 @export var unconscious		:= false
 
-
 @onready var state_node := $StateMachine
-@onready var health : TextureProgressBar = $CanvasLayer/Control/HBoxContainer/Health
-@onready var stamina : TextureProgressBar = $CanvasLayer/Control/HBoxContainer/Stamina
+@onready var health : TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Health
+@onready var stamina : TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Stamina
 @onready var crouching_mask : CollisionShape2D = $ColliderCrouching
 @onready var standing_mask  : CollisionShape2D = $ColliderStanding
 @onready var sprite : Sprite2D = $Sprite2D
@@ -96,7 +95,7 @@ func set_facing(dir: int):
 		elif child is CollisionShape2D or child is Node2D or child is RayCast2D:
 			child.scale.x = facing
 func get_movement_dir() -> float:
-	if %Inventory.visible: return 0.0
+	if %InventoryPanel.visible: return 0.0
 	return Input.get_axis("left", "right")
 func fall(delta):
 	velocity.y += gravity * delta
@@ -180,15 +179,19 @@ func emit_noise(offset : Vector2, amount : float) -> void:
 	_noise.amount_max = amount
 	_noise.position = position + offset
 func toggle_inventory():
-	%Inventory.visible = !%Inventory.visible
-	if %Inventory.visible:
-		$CanvasLayer/Inventory/MarginContainer/ScrollContainer/VBoxContainer/InventoryItem/Button.grab_focus()
+	%InventoryPanel.toggle()
 func pressed(input : String) -> bool:
-	if %Inventory.visible: return false
+	if %InventoryPanel.visible: return false
 	return Input.is_action_pressed(input)
 func just_pressed(input : String) -> bool:
-	if %Inventory.visible: return false
+	if %InventoryPanel.visible: return false
 	return Input.is_action_just_pressed(input)
+func pickup_item(item : InventoryItem):
+	print("Pickup item: " + str(item.name))
+	for slot in %InventoryPanel.inventory.items:
+		if !slot:
+			print("slot: "+str(slot))
+			slot = item
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -220,6 +223,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 #region Init
 func _ready() -> void:
 	$CanvasLayer.visible = true
+	$CanvasLayer/HUD.visible = true
 	var interaction_prompt = ""
 	var events = InputMap.action_get_events("interact")
 
@@ -348,7 +352,7 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
-		take_damage(4)
+		pickup_item(load("res://Inventory/water.tres"))
 #endregion
 #region Signals
 func _on_hurtbox_area_entered(area: Area2D) -> void:
