@@ -189,12 +189,6 @@ func just_pressed(input : String) -> bool:
 func just_released(input : String) -> bool:
 	if %InventoryPanel.visible: return false
 	return Input.is_action_just_released(input)
-func pickup_item(item : InventoryItem):
-	print("Pickup item: " + str(item.name))
-	for slot in %InventoryPanel.inventory.items:
-		if !slot:
-			print("slot: "+str(slot))
-			slot = item
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -356,7 +350,10 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
-		pickup_item(load("res://Inventory/water.tres"))
+		if randi_range(0, 1) == 1:
+			%InventoryPanel.pickup_item(load("res://Inventory/water.tres"))
+		else:
+			%InventoryPanel.pickup_item(load("res://Inventory/health_potion.tres"))
 #endregion
 #region Signals
 func _on_hurtbox_area_entered(area: Area2D) -> void:
