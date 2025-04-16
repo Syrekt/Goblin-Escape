@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene load_steps=53 format=3 uid="uid://iuj1jg31a55f"]
 
 [ext_resource type="Script" uid="uid://bhcr3m01slk8a" path="res://Scripts/enemy.gd" id="1_18den"]
 [ext_resource type="AudioStream" uid="uid://bx6vdt8wts4xf" path="res://Assets/SFX/Kalin/Other/kick_short_whoosh_12.wav" id="6_ifl3v"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://fgclj6nvftu7" path="res://Assets/SFX/Kalin/Other/Sword Woosh 1.wav" id="10_u0rn5"]
 [ext_resource type="AudioStream" uid="uid://c50be1pxoc3bn" path="res://Assets/SFX/Kalin/Sword Woosh 12.wav" id="11_ifl3v"]
 [ext_resource type="Texture2D" uid="uid://c6nifh0i54h6f" path="res://Assets/Enemy/Goblin/goblin-bash.png" id="11_wrk2e"]
+[ext_resource type="Texture2D" uid="uid://6tgko0bjud38" path="res://Assets/Enemy/Goblin/goblin_stun.png" id="12_goln1"]
 [ext_resource type="Texture2D" uid="uid://ppmeb6xgbtin" path="res://Assets/Enemy/Goblin/goblin-death.png" id="12_to5id"]
 [ext_resource type="Texture2D" uid="uid://cnglwro36se85" path="res://Assets/Enemy/Goblin/goblin-hurt.png" id="13_uqw8j"]
 [ext_resource type="Texture2D" uid="uid://bpxyvituq5b37" path="res://Assets/Enemy/Goblin/goblin-walk.png" id="14_abbm1"]
@@ -867,7 +868,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_ifl3v"]
 resource_name = "stun"
-length = 0.3
+loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -876,10 +877,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -891,7 +892,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("13_uqw8j")]
+"values": [ExtResource("12_goln1")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -903,7 +904,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [6]
+"values": [10]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -981,6 +982,7 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_lvv27")
 
 [node name="CombatProperties" parent="." instance=ExtResource("7_7ej0e")]
+pushback_duration = 0.5
 
 [node name="FallCheck" type="RayCast2D" parent="."]
 visible = false

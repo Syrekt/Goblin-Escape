@@ -105,6 +105,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 		return
 
 	health.value -= _damage
+	combat_properties.stunned = false
 	if health.value <= 0:
 		emit_signal("health_depleted")
 		if _source:
@@ -160,11 +161,23 @@ func play_sfx(sfx) -> void:
 func combat_perform_attack(hitbox: Area2D, _damage: int, whiff_sfx: AudioStreamWAV, hit_sfx: AudioStreamWAV, knockback_force: int) -> void:
 	if hitbox.has_overlapping_bodies():
 		var body = hitbox.get_overlapping_bodies()[0]
-		var defender_hp = Combat.deal_damage(self, _damage, body, knockback_force)
-		if defender_hp <= 0:	Ge.play_audio_from_string_array(audio_emitter, 0, "res://Assets/SFX/Kalin/Finishers")
-		elif hit_sfx:			play_sfx(hit_sfx)
+		var was_stunned : bool = body.combat_properties.stunned
+		print("was_stunned: "+str(was_stunned))
+
+		var result : int = Combat.deal_damage(self, _damage, body, knockback_force)
+		match result:
+			Combat.RESULT_STUN:
+				Ge.play_audio(audio_emitter, 1, "res://Assets/SFX/Kalin/block_break2.wav")
+			Combat.RESULT_WHIFF:
+				play_sfx(whiff_sfx)
+			Combat.RESULT_HIT:
+				play_sfx(hit_sfx)
+			Combat.RESULT_BLOCK:
+				Ge.play_audio_from_string_array(audio_emitter, 0, "res://Assets/SFX/Sword hit shield")
+			Combat.RESULT_DEAD:
+				Ge.play_audio_from_string_array(audio_emitter, 0, "res://Assets/SFX/Kalin/Finishers")
 	else:
-		if whiff_sfx: play_sfx(whiff_sfx)
+		play_sfx(whiff_sfx)
 func sex_begin(participants: Array, _position: String) -> void:
 	sex_participants = participants.duplicate()
 	print("sex_participants: "+str(sex_participants))

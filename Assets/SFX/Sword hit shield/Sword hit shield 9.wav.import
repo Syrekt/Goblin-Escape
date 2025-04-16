@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cbao8imsxmwl5"
+path="res://.godot/imported/Sword hit shield 9.wav-c3d5a6d541023caed4f29c48e666b999.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Sword hit shield/Sword hit shield 9.wav"
+dest_files=["res://.godot/imported/Sword hit shield 9.wav-c3d5a6d541023caed4f29c48e666b999.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

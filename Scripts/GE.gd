@@ -14,7 +14,7 @@ func play_audio_from_string_array(emitter: AudioStreamPlayer2D, volume: float, p
 	emitter.volume_db = volume
 	emitter.stream = load(path + "/" + sound)
 	emitter.play()
-func play_audio(emitter: AudioStreamPlayer2D, volume: int, audio: AudioStream) -> void:
+func play_audio(emitter: AudioStreamPlayer2D, volume: int, audio_path: String) -> void:
 	emitter.volume_db = volume
-	emitter.stream = audio
+	emitter.stream = load(audio_path)
 	emitter.play()

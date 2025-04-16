@@ -15,6 +15,8 @@ func update(delta):
 	if enemy.player_proximity.has_overlapping_bodies():
 		enemy.push_player = true
 		finished.emit("bash")
+	elif enemy.chase_target.velocity.x != 0:
+		finished.emit("stab")
 
 
 func _on_timer_timeout() -> void:

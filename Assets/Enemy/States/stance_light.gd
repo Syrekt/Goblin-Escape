@@ -22,7 +22,9 @@ func update(delta):
 		enemy.set_facing(sign(enemy.chase_target.global_position.x - enemy.global_position.x))
 		if enemy.chase_target.combat_properties.stunned:
 			finished.emit("slash")
-		if enemy.chase_target.state_node.state.name == "stance_heavy":
+		elif enemy.chase_target.state_node.state.name == "stance_heavy":
+			finished.emit("stab")
+		elif enemy.chase_target.velocity.x != 0:
 			finished.emit("stab")
 	else:
 		finished.emit("patrol")

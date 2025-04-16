@@ -97,7 +97,7 @@ stream = ExtResource("8_v158k")
 volume_db = -10.778
 
 [node name="Enemy" parent="." instance=ExtResource("8_h4fw4")]
-position = Vector2(852, 321)
+position = Vector2(413, 334)
 
 [node name="Movable2" parent="." instance=ExtResource("10_ldgsr")]
 position = Vector2(617, 327)
