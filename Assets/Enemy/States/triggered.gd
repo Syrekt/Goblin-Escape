@@ -16,4 +16,5 @@ func update(delta : float) -> void:
 	if ignore_timer.is_stopped():
 		%Emote.play("confused")
 		finished.emit("idle")
-	enemy.detect_target()
+	if enemy.chase_target && !enemy.target_obstructed():
+		finished.emit("chase")

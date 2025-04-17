@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene load_steps=54 format=3 uid="uid://iuj1jg31a55f"]
 
 [ext_resource type="Script" uid="uid://bhcr3m01slk8a" path="res://Scripts/enemy.gd" id="1_18den"]
 [ext_resource type="AudioStream" uid="uid://bx6vdt8wts4xf" path="res://Assets/SFX/Kalin/Other/kick_short_whoosh_12.wav" id="6_ifl3v"]
@@ -32,6 +32,7 @@
 [ext_resource type="Script" uid="uid://d2dnfu2yrmil" path="res://Assets/Enemy/States/chase.gd" id="26_ug7pn"]
 [ext_resource type="Script" uid="uid://cctffwfexml1k" path="res://Assets/Enemy/States/laugh.gd" id="29_vd4fl"]
 [ext_resource type="PackedScene" uid="uid://b23mtnfp7xuec" path="res://Objects/emote.tscn" id="30_tjqy8"]
+[ext_resource type="Script" uid="uid://btr4jhp2hi3jr" path="res://Assets/Enemy/States/leave_player.gd" id="31_0glxa"]
 
 [sub_resource type="Animation" id="Animation_p3exd"]
 length = 0.001
@@ -955,6 +956,7 @@ size = Vector2(15, 20)
 size = Vector2(20, 32)
 
 [node name="Enemy" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("1_18den")
@@ -989,6 +991,9 @@ visible = false
 position = Vector2(0, -10)
 target_position = Vector2(17, 27)
 
+[node name="WallCheck" type="RayCast2D" parent="."]
+target_position = Vector2(24, 0)
+
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
 material = SubResource("ShaderMaterial_xhuvx")
 position = Vector2(0, -16)
@@ -1014,15 +1019,15 @@ position = Vector2(0, 16)
 [node name="idle" type="Node" parent="StateMachine"]
 script = ExtResource("15_ywhtk")
 
+[node name="IdleTimer" type="Timer" parent="StateMachine/idle"]
+one_shot = true
+
 [node name="patrol" type="Node" parent="StateMachine"]
 script = ExtResource("18_pn3ih")
 
 [node name="PatrolTimer" type="Timer" parent="StateMachine/patrol"]
 one_shot = true
 autostart = true
-
-[node name="IdleTimer" type="Timer" parent="StateMachine/patrol"]
-one_shot = true
 
 [node name="PatrolEndTimer" type="Timer" parent="StateMachine/patrol"]
 wait_time = 8.0
@@ -1112,6 +1117,13 @@ script = ExtResource("26_4po4b")
 [node name="laugh" type="Node" parent="StateMachine"]
 script = ExtResource("29_vd4fl")
 
+[node name="leave_player" type="Node" parent="StateMachine"]
+script = ExtResource("31_0glxa")
+
+[node name="Timer" type="Timer" parent="StateMachine/leave_player"]
+wait_time = 4.0
+one_shot = true
+
 [node name="NoiseIgnoreTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
@@ -1138,8 +1150,8 @@ position = Vector2(2, -47)
 [connection signal="body_entered" from="ChaseDetector" to="StateMachine/patrol" method="_on_chase_detector_body_entered"]
 [connection signal="body_exited" from="ChaseDetector" to="." method="_on_chase_detector_body_exited"]
 [connection signal="body_exited" from="ChaseDetector" to="StateMachine/patrol" method="_on_chase_detector_body_exited"]
+[connection signal="timeout" from="StateMachine/idle/IdleTimer" to="StateMachine/idle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/patrol/PatrolTimer" to="StateMachine/patrol" method="_on_patrol_timer_timeout"]
-[connection signal="timeout" from="StateMachine/patrol/IdleTimer" to="StateMachine/patrol" method="_on_idle_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/slash/SlashHitbox" to="." method="_on_slash_hitbox_body_entered"]
 [connection signal="body_entered" from="StateMachine/stab/StabHitbox" to="." method="_on_stab_hitbox_body_entered"]
 [connection signal="body_entered" from="StateMachine/bash/BashHitbox" to="." method="_on_bash_hitbox_body_entered"]
@@ -1148,6 +1160,7 @@ position = Vector2(2, -47)
 [connection signal="timeout" from="StateMachine/stance_defensive/Timer" to="StateMachine/stance_defensive" method="_on_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/chase/AttackDetector" to="StateMachine/chase" method="_on_attack_detector_body_entered"]
 [connection signal="body_exited" from="StateMachine/chase/AttackDetector" to="." method="_on_attack_detector_body_exited"]
+[connection signal="timeout" from="StateMachine/leave_player/Timer" to="StateMachine/leave_player" method="_on_timer_timeout"]
 
 [editable path="StateMachine/slash/SlashHitbox"]
 [editable path="StateMachine/stab/StabHitbox"]

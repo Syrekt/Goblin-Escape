@@ -9,8 +9,8 @@ func exit():
 	$Timer.stop()
 
 func update(delta):
-	if not %AttackDetector.has_overlapping_bodies():
-		enemy.state_node.state.finished.emit("patrol")
+	if !%AttackDetector.has_overlapping_bodies():
+		enemy.lost_target()
 	enemy.set_facing(sign(enemy.chase_target.position.x - enemy.position.x))
 	if enemy.player_proximity.has_overlapping_bodies():
 		enemy.push_player = true

@@ -11,7 +11,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	else:
 		$Timer.start(2.0)
 	if !%AttackDetector.has_overlapping_bodies():
-		finished.emit("patrol")
+		enemy.lost_target()
 
 func exit():
 	$Timer.stop()
@@ -27,7 +27,7 @@ func update(delta):
 		elif enemy.chase_target.velocity.x != 0:
 			finished.emit("stab")
 	else:
-		finished.emit("patrol")
+		enemy.lost_target()
 	if enemy.player_proximity.has_overlapping_bodies():
 		enemy.push_player = true
 		finished.emit("bash")

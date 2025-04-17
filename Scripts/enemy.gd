@@ -7,8 +7,9 @@ const RUN_SPEED = 300.0 * 60
 @export var patrol_move_speed := 100 * 60
 @export var gravity := 500.0;
 @export var damage := 1
-@export var patrolling := false
 @export var in_combat := false
+
+var patrol_amount := 0
 
 @export var facing := 1
 var chase_target : Node2D = null
@@ -28,6 +29,7 @@ signal health_depleted
 @onready var health			    = $Health
 @onready var combat_properties  = $CombatProperties
 @onready var ray_fall_check		= $FallCheck
+@onready var ray_wall_check		= $WallCheck
 @onready var player_proximity	= $PlayerProximity
 
 @onready var slash_hitbox = $StateMachine/slash/SlashHitbox/Collider
@@ -62,9 +64,10 @@ func take_damage(_damage, _source: Node2D):
 func move(speed: float, direction: int) -> bool:
 	#Update the ray direction towards the direction we want to move
 	ray_fall_check.scale.x = direction
+	ray_wall_check.scale.x = direction
 
 	velocity.x = speed * direction * get_process_delta_time()
-	return ray_fall_check.is_colliding() && velocity.x != 0
+	return ray_fall_check.is_colliding() && !ray_wall_check.is_colliding() && velocity.x != 0
 func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 	if animation_player.current_animation != anim:
 		animation_player.play(&"RESET");
@@ -79,19 +82,17 @@ func hear_noise(noise_location : Vector2) -> void:
 		"idle":
 			state_node.state.finished.emit("triggered")
 		"triggered":
-			%Emote.play("alarmed")
-			state_node.state.finished.emit("patrol")
+			lost_target()
 
 	$NoiseIgnoreTimer.start()
-func detect_target() -> void:
-	if chase_target:
-		var body = chase_target
-		line_of_sight.target_position = line_of_sight.to_local(body.global_position)
-		if line_of_sight.is_colliding():
-			chase_target.combat_target = null
-			chase_target = null
-		else:
-			state_node.state.finished.emit("chase")
+func target_obstructed() -> bool:
+	line_of_sight.target_position = line_of_sight.to_local(chase_target.global_position)
+	return line_of_sight.is_colliding()
+func lost_target() -> void:
+	#CHANGES STATE
+	%Emote.play("consfused")
+	patrol_amount = 4
+	state_node.state.finished.emit("patrol")
 #endregion
 #region Animation end
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -153,12 +154,13 @@ func _on_stab_hitbox_body_entered(body: Node2D) -> void:
 func _on_bash_hitbox_body_entered(body: Node2D) -> void:
 	Combat.deal_damage(self, 1, body, 100)
 func _on_chase_detector_body_entered(body:Node2D) -> void:
+	chase_target = body
 	#Check ray for obstacles
-	line_of_sight.target_position = line_of_sight.to_local(body.global_position)
-	await get_tree().process_frame
-	if !line_of_sight.is_colliding():
-		chase_target = body
-		body.combat_target = self
+	#line_of_sight.target_position = line_of_sight.to_local(body.global_position)
+	#await get_tree().process_frame
+	#if !line_of_sight.is_colliding():
+		#chase_target = body
+		#body.combat_target = self
 func _on_chase_detector_body_exited(body:Node2D) -> void:
 	if body == chase_target:
 		chase_target.combat_target = null

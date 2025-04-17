@@ -17,7 +17,8 @@ class_name Player extends CharacterBody2D
 @export var snap_offset			:= Vector2(-5, -13)
 @export var facing_locked		:= false
 @export var direction_locked	:= false
-@export var unconscious		:= false
+@export var dead := false # Health == 0
+@export var unconscious		:= false # Post sex situations where health isn't 0
 
 @onready var state_node := $StateMachine
 @onready var health : TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Health
@@ -224,7 +225,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"orgasm":
 			state_node.state.finished.emit("post_sex")
 			for participant in sex_participants:
-				participant.state_node.state.finished.emit("patrol")
+				participant.state_node.state.finished.emit("leave_player")
 		"post_sex":
 			state_node.state.finished.emit("recover")
 		"corner_hang":
@@ -335,6 +336,7 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	var s = %Sprite2D
 	Debugger.printui(str(state_node.state.name))
+	Debugger.printui("unconscious: "+str(unconscious))
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
 	#region Camera combat position
@@ -363,10 +365,11 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
-		if randi_range(0, 1) == 1:
-			%InventoryPanel.pickup_item(load("res://Inventory/water.tres"))
-		else:
-			%InventoryPanel.pickup_item(load("res://Inventory/health_potion.tres"))
+		take_damage(4)
+		#if randi_range(0, 1) == 1:
+		#	%InventoryPanel.pickup_item(load("res://Inventory/water.tres"))
+		#else:
+		#	%InventoryPanel.pickup_item(load("res://Inventory/health_potion.tres"))
 #endregion
 #region Signals
 func _on_hurtbox_area_entered(area: Area2D) -> void:

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://24ijy2g2jylp"]
+
+[ext_resource type="Texture2D" uid="uid://bg7vbl65hih4o" path="res://Assets/Map/Props/spr_broken wall.png" id="1_c7xb2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1eomc"]
+size = Vector2(29, 80)
+
+[node name="HidingSpot" type="Area2D"]
+z_index = -1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_1eomc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_c7xb2")
