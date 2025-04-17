@@ -101,19 +101,33 @@ func get_movement_dir() -> float:
 func fall(delta):
 	velocity.y += gravity * delta
 	move_and_slide()
-func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := true):
+func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := true, attack := {}):
 	if state_node.state.name == "death":
 		return
 
-	health.value -= _damage
 	combat_properties.stunned = false
-	if health.value <= 0:
-		emit_signal("health_depleted")
-		if _source:
-			_source.state_node.state.finished.emit("laugh")
-	elif play_hurt_animation:
-		state_node.state.finished.emit("hurt")
-		Ge.play_audio_from_string_array(audio_emitter, -2, "res://Assets/SFX/Kalin/Hurt")
+	var defending = state_node.state.name == "stance_defensive"
+	var break_defense = attack.get("break_defense", false)
+
+	if defending && break_defense:
+		combat_properties.stun(2.0)
+		state_node.state.finished.emit("stunned")
+		return
+
+	if defending && !%Stamina.spend(_damage):
+		defending = false
+
+	if defending:
+		state_node.state.finished.emit("block")
+	else:
+		health.value -= _damage
+		if health.value <= 0:
+			emit_signal("health_depleted")
+			if _source:
+				_source.state_node.state.finished.emit("laugh")
+		elif play_hurt_animation:
+			state_node.state.finished.emit("hurt")
+			Ge.play_audio_from_string_array(audio_emitter, -2, "res://Assets/SFX/Kalin/Hurt")
 func heal(amount: int) -> void:
 	health.value += amount
 func check_movable():
@@ -214,7 +228,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"recover":
 			state.finished.emit("idle")
 			heal(1)
-		"stab", "slash", "bash":
+		"stab", "slash", "bash", "block":
 			state.finished.emit("stance_light")
 		"hurt":
 			state.finished.emit("stance_light")
@@ -308,7 +322,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, move_speed * delta, accelaration)
 		cp.pushback_reset()
-
 	#endregion
 	#region Y Movement
 	if !is_on_floor():

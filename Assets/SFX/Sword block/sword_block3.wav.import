@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b1vn48x1sjmth"
+path="res://.godot/imported/sword_block3.wav-b83469bf032c3093d850091bfbb2c82a.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Sword block/sword_block3.wav"
+dest_files=["res://.godot/imported/sword_block3.wav-b83469bf032c3093d850091bfbb2c82a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -12,6 +12,6 @@ func exit():
 func physics_update(delta: float) -> void:
 	if enemy.combat_properties.pushback_timer <= 0:
 		if !%AttackDetector.has_overlapping_bodies():
-			enemy.lost_target()
+			finished.emit("chase")
 		else:
 			finished.emit("stance_light")

@@ -11,4 +11,5 @@ func play(anim : String) -> void:
 	visible = true
 
 func _on_animated_sprite_2d_animation_finished() -> void:
+	print("Emoji animation finished")
 	visible = false

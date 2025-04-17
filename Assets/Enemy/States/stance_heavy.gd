@@ -1,9 +1,16 @@
 extends EnemyState
 
+var instant := false
+
 func enter(previous_state_path: String, data := {}) -> void:
+	instant = data.get("instant", true)
 	enemy.call_deferred("update_animation", "stance_heavy")
 	enemy.velocity.x = 0
-	$Timer.start(randf_range(1.0, 2.0))
+	#Skip if instant
+	if instant:
+		$Timer.start(0.1)
+	else:
+		$Timer.start(randf_range(1.0, 2.0))
 
 func exit():
 	$Timer.stop()

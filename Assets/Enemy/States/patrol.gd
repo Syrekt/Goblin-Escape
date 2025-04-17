@@ -18,9 +18,8 @@ func update(delta : float) -> void:
 			finished.emit("leave_player")
 		elif !enemy.target_obstructed():
 			finished.emit("chase")
-	else:
-		if !enemy.move(enemy.patrol_move_speed, patrol_dir):
-			finished.emit("idle")
+	elif !enemy.move(enemy.patrol_move_speed, patrol_dir):
+		finished.emit("idle")
 
 func _on_patrol_timer_timeout() -> void:
 	finished.emit("idle")

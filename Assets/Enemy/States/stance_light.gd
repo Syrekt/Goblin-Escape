@@ -11,7 +11,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	else:
 		$Timer.start(2.0)
 	if !%AttackDetector.has_overlapping_bodies():
-		enemy.lost_target()
+		finished.emit("chase")
 
 func exit():
 	$Timer.stop()

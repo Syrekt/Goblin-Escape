@@ -1,5 +1,11 @@
 extends Node
 
+#Direct hit
+#Shield break and hit
+#Shield hit and stun
+#Direct hit and kill
+
+
 const RESULT_WHIFF := 0
 const RESULT_HIT := 1
 const RESULT_BLOCK := 2
@@ -31,7 +37,7 @@ func deal_damage(attacker: CharacterBody2D, damage: int, defender: CharacterBody
 				if defender is Player:
 					if !defender.stamina.spend(1):
 						defender.combat_properties.stun(2.0)
-				result = RESULT_STUN
+				result = RESULT_BLOCK
 			elif defender.combat_properties.stunned:
 				defender.take_damage(damage * 2, attacker)
 				result = RESULT_HIT

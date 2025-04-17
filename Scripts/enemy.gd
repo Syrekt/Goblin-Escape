@@ -52,7 +52,7 @@ func set_facing(dir: int):
 			node.scale.x = facing
 func get_movement_dir():
 	return sign(velocity.x)
-func take_damage(_damage, _source: Node2D):
+func take_damage(_damage : int, _source: Node2D):
 	print("Enemy takes damage: "+str(_damage))
 	health.value -= _damage
 	print("health.value: "+str(health.value));
@@ -90,9 +90,10 @@ func target_obstructed() -> bool:
 	return line_of_sight.is_colliding()
 func lost_target() -> void:
 	#CHANGES STATE
-	%Emote.play("consfused")
+	print("lost target")
+	%Emote.play("confused")
 	patrol_amount = 4
-	state_node.state.finished.emit("patrol")
+	state_node.state.finished.emit("idle")
 #endregion
 #region Animation end
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -145,22 +146,8 @@ func _physics_process(delta: float) -> void:
 #region Signals
 func _on_health_depleted() -> void:
 	state_node.state.finished.emit("death")
-func _on_slash_hitbox_body_entered(body: Node2D) -> void:
-	Combat.deal_damage(self, 2, body, 50)
-
-func _on_stab_hitbox_body_entered(body: Node2D) -> void:
-	Combat.deal_damage(self, 1, body, 50)
-
-func _on_bash_hitbox_body_entered(body: Node2D) -> void:
-	Combat.deal_damage(self, 1, body, 100)
 func _on_chase_detector_body_entered(body:Node2D) -> void:
 	chase_target = body
-	#Check ray for obstacles
-	#line_of_sight.target_position = line_of_sight.to_local(body.global_position)
-	#await get_tree().process_frame
-	#if !line_of_sight.is_colliding():
-		#chase_target = body
-		#body.combat_target = self
 func _on_chase_detector_body_exited(body:Node2D) -> void:
 	if body == chase_target:
 		chase_target.combat_target = null

@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene load_steps=55 format=3 uid="uid://iuj1jg31a55f"]
 
 [ext_resource type="Script" uid="uid://bhcr3m01slk8a" path="res://Scripts/enemy.gd" id="1_18den"]
 [ext_resource type="AudioStream" uid="uid://bx6vdt8wts4xf" path="res://Assets/SFX/Kalin/Other/kick_short_whoosh_12.wav" id="6_ifl3v"]
@@ -21,9 +21,10 @@
 [ext_resource type="Script" uid="uid://j4axxy1utgo5" path="res://Assets/Enemy/States/patrol.gd" id="18_pn3ih"]
 [ext_resource type="Script" uid="uid://bhwnkjtvdjwgs" path="res://Assets/Enemy/States/hurt.gd" id="19_xl5vi"]
 [ext_resource type="Script" uid="uid://3m1a1sihw7qa" path="res://Assets/Enemy/States/death.gd" id="20_4po4b"]
-[ext_resource type="Script" uid="uid://3lerje1i52sl" path="res://Assets/Enemy/States/animation_state_enemy.gd" id="20_ujm0m"]
 [ext_resource type="PackedScene" uid="uid://2s1ryg6qqqmc" path="res://Objects/hitbox.tscn" id="21_oeh1l"]
+[ext_resource type="Script" uid="uid://bnsshl0mlmfvb" path="res://Assets/Enemy/States/slash.gd" id="21_wgea4"]
 [ext_resource type="Script" uid="uid://bk738pl78o133" path="res://Assets/Enemy/States/stance_heavy.gd" id="22_7ej28"]
+[ext_resource type="Script" uid="uid://3v1xy6c3ig5r" path="res://Assets/Enemy/States/stab.gd" id="23_404n7"]
 [ext_resource type="Script" uid="uid://bmsypgid81p62" path="res://Assets/Enemy/States/stance_light.gd" id="23_j8fla"]
 [ext_resource type="Script" uid="uid://cst0ispd68osy" path="res://Assets/Enemy/States/stance_defensive.gd" id="24_lox44"]
 [ext_resource type="Script" uid="uid://brsvx5cdthjao" path="res://Assets/Enemy/States/stun.gd" id="25_208af"]
@@ -1051,7 +1052,7 @@ script = ExtResource("19_xl5vi")
 script = ExtResource("20_4po4b")
 
 [node name="slash" type="Node2D" parent="StateMachine"]
-script = ExtResource("20_ujm0m")
+script = ExtResource("21_wgea4")
 
 [node name="SlashHitbox" parent="StateMachine/slash" groups=["Flip"] instance=ExtResource("21_oeh1l")]
 collision_mask = 2
@@ -1061,7 +1062,7 @@ position = Vector2(20.045, -20)
 scale = Vector2(2, 1)
 
 [node name="stab" type="Node2D" parent="StateMachine"]
-script = ExtResource("20_ujm0m")
+script = ExtResource("23_404n7")
 
 [node name="StabHitbox" parent="StateMachine/stab" groups=["Flip"] instance=ExtResource("21_oeh1l")]
 collision_mask = 2
@@ -1152,9 +1153,9 @@ position = Vector2(2, -47)
 [connection signal="body_exited" from="ChaseDetector" to="StateMachine/patrol" method="_on_chase_detector_body_exited"]
 [connection signal="timeout" from="StateMachine/idle/IdleTimer" to="StateMachine/idle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/patrol/PatrolTimer" to="StateMachine/patrol" method="_on_patrol_timer_timeout"]
-[connection signal="body_entered" from="StateMachine/slash/SlashHitbox" to="." method="_on_slash_hitbox_body_entered"]
-[connection signal="body_entered" from="StateMachine/stab/StabHitbox" to="." method="_on_stab_hitbox_body_entered"]
-[connection signal="body_entered" from="StateMachine/bash/BashHitbox" to="." method="_on_bash_hitbox_body_entered"]
+[connection signal="body_entered" from="StateMachine/slash/SlashHitbox" to="StateMachine/slash" method="_on_slash_hitbox_body_entered"]
+[connection signal="body_entered" from="StateMachine/stab/StabHitbox" to="StateMachine/stab" method="_on_stab_hitbox_body_entered"]
+[connection signal="body_entered" from="StateMachine/bash/BashHitbox" to="StateMachine/bash" method="_on_bash_hitbox_body_entered"]
 [connection signal="timeout" from="StateMachine/stance_heavy/Timer" to="StateMachine/stance_heavy" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/stance_light/Timer" to="StateMachine/stance_light" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/stance_defensive/Timer" to="StateMachine/stance_defensive" method="_on_timer_timeout"]

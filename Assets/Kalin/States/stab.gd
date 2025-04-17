@@ -15,4 +15,15 @@ func update(delta):
 
 func _on_attack_frame() -> void:
 	print("stab hit")
-	player.combat_perform_attack(hitbox, player.stab_damage, sfx_stab_whiff, sfx_stab_hit, 75)
+	#player.combat_perform_attack(hitbox, player.stab_damage, sfx_stab_whiff, sfx_stab_hit, 75)
+	if hitbox.has_overlapping_bodies():
+		var defender : Enemy = hitbox.get_overlapping_bodies()[0]
+		var defender_state = defender.state_node.state.name
+		if defender_state == "stance_defensive":
+			player.combat_properties.stun(2.0)
+			Ge.play_audio_from_string_array(player.audio_emitter, 0, "res://Assets/SFX/Sword hit shield")
+		else:
+			defender.take_damage(player.stab_damage, player)
+			player.play_sfx(sfx_stab_hit)
+	else:
+		player.play_sfx(player.sfx_stab_whiff)

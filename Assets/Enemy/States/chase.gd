@@ -5,9 +5,7 @@ var chase_dir := 0;
 func update(delta):
 	#Quit state
 	if !enemy.chase_target || enemy.target_obstructed():
-		%Emote.play("confused")
-		enemy.patrol_amount = 4
-		finished.emit("idle")
+		enemy.lost_target()
 		return
 
 	#If can move, play run animation, idle otherwise

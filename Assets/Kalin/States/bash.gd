@@ -1,5 +1,7 @@
 extends PlayerState
 
+@export var pushback_force := 300
+
 @onready var hitbox = get_child(0)
 @onready var hitbox_collider = hitbox.get_node("Collider")
 @onready var sfx_bash_hit = load("res://Assets/SFX/Kalin/punch1.wav")
@@ -21,9 +23,24 @@ func exit():
 	player.set_collision_mask_value(4, false)
 
 
+func play_footsteps() -> void:
+	Ge.play_audio_from_string_array(%AnimationAudioStreamer, 1, "res://Assets/SFX/Kalin/Footsteps Soft/")
+
 func _on_bash_hitbox_body_entered(body: Node2D) -> void:
 	if enemy_ignore_list.has(body): return
-
-	Combat.deal_damage(player, player.bash_damage, body, 300)
 	enemy_ignore_list.append(body)
-	player.play_sfx(sfx_bash_hit)
+
+	#player.play_sfx(sfx_bash_hit)
+	#Combat.deal_damage(player, player.bash_damage, body, 300)
+	if hitbox.has_overlapping_bodies():
+		var defender : Enemy = hitbox.get_overlapping_bodies()[0]
+		var defender_state = defender.state_node.state.name
+		player.play_sfx(sfx_bash_hit)
+
+		defender.combat_properties.pushback_apply(player.global_position, pushback_force)
+		if !defender.in_combat:
+			defender.stun(2.0)
+		elif !defender_state == "stance_defensive":
+			defender.take_damage(player.bash_damage, player)
+		else:
+			Ge.play_audio_from_string_array(player.audio_emitter, 0, "res://Assets/SFX/Sword hit shield")
