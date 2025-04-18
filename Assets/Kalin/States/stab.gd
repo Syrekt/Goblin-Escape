@@ -4,6 +4,8 @@ extends PlayerState
 @onready var sfx_stab_hit = load("res://Assets/SFX/Kalin/stab1.wav")
 @onready var sfx_stab_whiff = load("res://Assets/SFX/Kalin/Sword Woosh 12.wav")
 
+@export var pushback_force := 100
+
 signal attack_frame
 
 func enter(previous_state_path: String, data := {}) -> void:
@@ -23,6 +25,7 @@ func _on_attack_frame() -> void:
 			player.combat_properties.stun(2.0)
 			Ge.play_audio_from_string_array(player.audio_emitter, 0, "res://Assets/SFX/Sword hit shield")
 		else:
+			defender.combat_properties.pushback_apply(player.global_position, pushback_force)
 			defender.take_damage(player.stab_damage, player)
 			player.play_sfx(sfx_stab_hit)
 	else:
