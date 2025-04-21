@@ -17,7 +17,6 @@ func update(delta):
 
 func _on_attack_frame() -> void:
 	print("stab hit")
-	#player.combat_perform_attack(hitbox, player.stab_damage, sfx_stab_whiff, sfx_stab_hit, 75)
 	if hitbox.has_overlapping_bodies():
 		var defender : Enemy = hitbox.get_overlapping_bodies()[0]
 		var defender_state = defender.state_node.state.name
@@ -29,4 +28,4 @@ func _on_attack_frame() -> void:
 			defender.take_damage(player.stab_damage, player)
 			player.play_sfx(sfx_stab_hit)
 	else:
-		player.play_sfx(player.sfx_stab_whiff)
+		player.play_sfx(sfx_stab_whiff)

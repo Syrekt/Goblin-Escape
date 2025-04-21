@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4vewnv73flk4"]
+
+[ext_resource type="Script" uid="uid://xy0q654a6bmd" path="res://Scripts/movable.gd" id="1_b23wp"]
+[ext_resource type="Texture2D" uid="uid://bv7mju8hk7yy2" path="res://Assets/Map/Props/spr_statue1.png" id="2_berpd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5nbmp"]
+size = Vector2(30, 64)
+
+[node name="Movable" type="CharacterBody2D"]
+collision_layer = 33
+collision_mask = 33
+script = ExtResource("1_b23wp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_berpd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5nbmp")

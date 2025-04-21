@@ -13,7 +13,7 @@ func exit() -> void:
 	if tween: tween.kill()
 	tween = null
 	charge_up = 0
-	%Sprite2D.material.set_shader_parameter("color", Color(0, 0, 0, 0))
+	%Sprite2D.material.set_shader_parameter("outline_color", Color(0, 0, 0, 0))
 
 func physics_update(delta: float) -> void:
 	#Charge up the attack
@@ -24,8 +24,8 @@ func physics_update(delta: float) -> void:
 	if charge_up == 100 && !tween:
 		print("Start tweening")
 		tween = create_tween().bind_node(self)
-		tween.tween_property(%Sprite2D.material, "shader_parameter/color", color_charged_up, 0.2)
-		tween.tween_property(%Sprite2D.material, "shader_parameter/color", c_normal, 0.2)
+		tween.tween_property(%Sprite2D.material, "shader_parameter/outline_color", color_charged_up, 0.2)
+		tween.tween_property(%Sprite2D.material, "shader_parameter/outline_color", c_normal, 0.2)
 
 	Debugger.printui("charge_up: "+str(charge_up))
 

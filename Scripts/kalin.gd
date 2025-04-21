@@ -19,6 +19,7 @@ class_name Player extends CharacterBody2D
 @export var direction_locked	:= false
 @export var dead := false # Health == 0
 @export var unconscious		:= false # Post sex situations where health isn't 0
+@export var invisible := false
 
 @onready var state_node := $StateMachine
 @onready var health : TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Health
@@ -41,6 +42,7 @@ class_name Player extends CharacterBody2D
 @onready var cp = combat_properties
 @onready var camera = $Camera2D
 @onready var audio_emitter = $MainAudioStreamer
+
 var movable : Node2D = null
 var noise = preload("res://Objects/noise.tscn")
 
@@ -217,6 +219,9 @@ func just_pressed(input : String) -> bool:
 func just_released(input : String) -> bool:
 	if %InventoryPanel.visible: return false
 	return Input.is_action_just_released(input)
+func hide_out(hiding_spot : Area2D) -> void:
+	global_position = hiding_spot.global_position
+	state_node.state.finished.emit("hide")
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -244,6 +249,10 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			state_node.state.finished.emit("recover")
 		"corner_hang":
 			state_node.state.finished.emit("corner_grab")
+		"hide":
+			state_node.state.finished.emit("hidden")
+		"unhide":
+			state_node.state.finished.emit("idle")
 #endregion
 #region Init
 func _ready() -> void:
@@ -349,7 +358,7 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	var s = %Sprite2D
 	Debugger.printui(str(state_node.state.name))
-	Debugger.printui("unconscious: "+str(unconscious))
+	Debugger.printui("invisible: "+str(invisible))
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
 	#region Camera combat position

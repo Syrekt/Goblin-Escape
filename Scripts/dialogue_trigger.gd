@@ -7,8 +7,11 @@ extends Area2D
 @export var repeat := false
 @export var auto := false
 
+var player : CharacterBody2D = null
+
 var active = false
 var balloon = null
+var waiting_player_exit := false #Waits for player to enter the area again after showing the text
 
 func _ready():
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended);
@@ -16,11 +19,12 @@ func _ready():
 
 #region States
 func auto_process() -> void:
-	if !active:
+	if !active && player && !waiting_player_exit:
+		waiting_player_exit = true
 		activate()
 
 func manual_process() -> void:
-	if !active && Input.is_action_just_pressed("interact"):
+	if !active && player && Input.is_action_just_pressed("interact"):
 		activate()
 
 func activate() -> void:
@@ -34,7 +38,7 @@ func activate() -> void:
 	active = true;
 
 
-func process() -> void:
+func _process(delta: float) -> void:
 	if auto:
 		auto_process()
 	else:
@@ -47,3 +51,12 @@ func _on_dialogue_ended(resource: DialogueResource) -> void:
 	if !repeat:
 		queue_free()
 #engregion
+
+
+func _on_body_entered(body: Node2D) -> void:
+	player = body
+
+
+func _on_body_exited(body: Node2D) -> void:
+	player = null
+	waiting_player_exit = false

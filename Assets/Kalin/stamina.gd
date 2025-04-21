@@ -48,10 +48,10 @@ func blink() -> void:
 	if tween && tween.is_running(): return 
 
 	tween = create_tween().bind_node(self)
-	tween.tween_property(%Sprite2D, "modulate", Color.ORANGE, 0.1)
-	tween.tween_property(%Sprite2D, "modulate", Color.WHITE, 0.1)
-	tween.tween_property(%Sprite2D, "modulate", Color.ORANGE, 0.1)
-	tween.tween_property(%Sprite2D, "modulate", Color.WHITE, 0.1)
+	tween.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color.ORANGE, 0.1)
+	tween.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color(0, 0, 0, 0), 0.1)
+	tween.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color.ORANGE, 0.1)
+	tween.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color(0, 0, 0, 0), 0.1)
 
 	tween.tween_property(self, "modulate", Color.RED, 0.1)
 	tween.tween_property(self, "modulate", Color.WHITE, 0.1)

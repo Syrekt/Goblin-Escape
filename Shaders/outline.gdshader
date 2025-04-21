@@ -1,11 +1,21 @@
 shader_type canvas_item;
 
-uniform vec4 color : source_color = vec4(1.0);
+uniform vec4 outline_color : source_color = vec4(0.0);
 uniform float width : hint_range(0, 10) = 1.0;
 uniform int pattern : hint_range(0, 2) = 0; // diamond, circle, square
 uniform bool inside = false;
 uniform bool add_margins = true; // only useful when inside is false
 uniform vec2 number_of_images = vec2(1.0); // number of horizontal and vertical images in the sprite sheet
+uniform vec4 tint_color : source_color = vec4(1.0, 1.0, 1.0, 0.0);
+uniform float alpha : hint_range(0.0, 1.0) = 1.0;
+
+vec3 overlay(vec3 base, vec3 blend){
+	return mix(
+		2.0 * base * blend,
+		1.0 - 2.0 * (1.0 - base) * (1.0 - blend),
+		step(0.5, base)
+	);
+}
 
 void vertex() {
 	if (add_margins) {
@@ -59,7 +69,27 @@ void fragment() {
 	}
 
 	if ((COLOR.a > 0.0) == inside && hasContraryNeighbour(uv, TEXTURE_PIXEL_SIZE, image_top_left, image_bottom_right, TEXTURE)) {
-		COLOR.rgb = inside ? mix(COLOR.rgb, color.rgb, color.a) : color.rgb;
-		COLOR.a += (1.0 - COLOR.a) * color.a;
+		COLOR.rgb = inside ? mix(COLOR.rgb, outline_color.rgb, outline_color.a) : outline_color.rgb;
+		COLOR.a += (1.0 - COLOR.a) * outline_color.a;
+	}
+
+	// Check if this is an outline pixel
+	bool is_outline = (COLOR.a > 0.0) == inside && hasContraryNeighbour(uv, TEXTURE_PIXEL_SIZE, image_top_left, image_bottom_right, TEXTURE);
+
+	if (is_outline) {
+		COLOR.rgb = inside ? mix(COLOR.rgb, outline_color.rgb, outline_color.a) : outline_color.rgb;
+		COLOR.a += (1.0 - COLOR.a) * outline_color.a;
+	}
+
+	// Apply tint to all visible pixels (except alpha = 0)
+	if (COLOR.a > 0.0) {
+		//COLOR.rgb *= tint_color.rgb;
+		//float original_modulation = 1.0 - tint_factor;
+		//COLOR.rgb = mix(COLOR.rgb * original_modulation, tint_color.rgb * tint_factor, tint_factor);
+		//COLOR.a *= fade;
+		vec3 overlay_result = overlay(COLOR.rgb, tint_color.rgb);
+		COLOR.rgb = mix(COLOR.rgb, overlay_result, tint_color.a);
+		COLOR.a *= alpha;
 	}
 }
+
