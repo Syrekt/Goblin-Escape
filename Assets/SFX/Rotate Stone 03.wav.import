@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b2ppvcuribru0"
+path="res://.godot/imported/Rotate Stone 03.wav-e920b1cd66b85cfae776f32d8ff82bfb.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Rotate Stone 03.wav"
+dest_files=["res://.godot/imported/Rotate Stone 03.wav-e920b1cd66b85cfae776f32d8ff82bfb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

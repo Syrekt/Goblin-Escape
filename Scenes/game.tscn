@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://dhjw1qmf2nvdh"]
+[gd_scene load_steps=14 format=4 uid="uid://dhjw1qmf2nvdh"]
 
 [ext_resource type="PackedScene" uid="uid://h2hwfpjw4rte" path="res://Objects/kalin.tscn" id="1_v3ybc"]
 [ext_resource type="Script" uid="uid://dytt7cafdt3c1" path="res://Scripts/game_manager.gd" id="1_yp60x"]
@@ -10,7 +10,9 @@
 [ext_resource type="AudioStream" uid="uid://dkgt8hqnqcgaj" path="res://Assets/BGM/juanjo_sound - Do we need a reason.wav" id="8_v158k"]
 [ext_resource type="PackedScene" uid="uid://b4vewnv73flk4" path="res://Objects/Movable/statue.tscn" id="10_ldgsr"]
 [ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Objects/enemy.tscn" id="11_o5yvi"]
+[ext_resource type="PackedScene" uid="uid://dk84lu71fcjkl" path="res://Objects/item_pickup.tscn" id="12_rfjv2"]
 [ext_resource type="PackedScene" uid="uid://24ijy2g2jylp" path="res://Objects/hiding_spot.tscn" id="12_rku1e"]
+[ext_resource type="Resource" uid="uid://c0yvh55kikql2" path="res://Inventory/health_potion.tres" id="13_rfjv2"]
 
 [node name="Game" type="Node2D"]
 
@@ -101,3 +103,7 @@ position = Vector2(573, 329)
 
 [node name="Enemy" parent="." instance=ExtResource("11_o5yvi")]
 position = Vector2(926, 315)
+
+[node name="ItemPickup" parent="." instance=ExtResource("12_rfjv2")]
+position = Vector2(257, 335)
+item = ExtResource("13_rfjv2")

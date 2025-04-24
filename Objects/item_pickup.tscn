@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://dk84lu71fcjkl"]
+
+[ext_resource type="Script" uid="uid://cliq1akrpj5ng" path="res://Scripts/item_pickup.gd" id="1_apof6"]
+[ext_resource type="Texture2D" uid="uid://c4tusp4o5tj8f" path="res://Inventory/Potions/[Valley Friends] Potions-export1.png" id="1_lpi7f"]
+[ext_resource type="Texture2D" uid="uid://dqe7ro1rxvges" path="res://Inventory/Potions/[Valley Friends] Potions-export26.png" id="2_h7vxs"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3t7gt"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_h7vxs")
+}],
+"loop": true,
+"name": &"health_potion",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lpi7f")
+}],
+"loop": true,
+"name": &"water_potion",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_apof6"]
+
+[node name="ItemPickup" type="Area2D"]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("1_apof6")
+pickup_sound = "res://Assets/SFX/Notes Scrunched In Wallet.wav"
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="SpriteOld" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_3t7gt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_apof6")

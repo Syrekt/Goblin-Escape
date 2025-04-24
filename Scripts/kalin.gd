@@ -41,6 +41,7 @@ class_name Player extends CharacterBody2D
 @onready var cp = combat_properties
 @onready var camera = $Camera2D
 @onready var audio_emitter = $MainAudioStreamer
+@onready var inventory = $CanvasLayer/InventoryPanel
 
 var movable : Node2D = null
 var noise = preload("res://Objects/noise.tscn")
@@ -99,7 +100,7 @@ func set_facing(dir: int):
 		else:
 			node.scale.x = facing
 func get_movement_dir() -> float:
-	if %InventoryPanel.visible: return 0.0
+	if inventory.visible: return 0.0
 	return Input.get_axis("left", "right")
 func fall(delta):
 	velocity.y += gravity * delta
@@ -213,15 +214,15 @@ func emit_noise(offset : Vector2, amount : float) -> void:
 	_noise.amount_max = amount
 	_noise.position = position + offset
 func toggle_inventory():
-	%InventoryPanel.toggle()
+	inventory.toggle()
 func pressed(input : String) -> bool:
-	if %InventoryPanel.visible: return false
+	if inventory.visible: return false
 	return Input.is_action_pressed(input)
 func just_pressed(input : String) -> bool:
-	if %InventoryPanel.visible: return false
+	if inventory.visible: return false
 	return Input.is_action_just_pressed(input)
 func just_released(input : String) -> bool:
-	if %InventoryPanel.visible: return false
+	if inventory.visible: return false
 	return Input.is_action_just_released(input)
 func hide_out(hiding_spot : Area2D) -> void:
 	global_position = hiding_spot.global_position
@@ -349,7 +350,6 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	var s = %Sprite2D
 	Debugger.printui(str(state_node.state.name))
-	Debugger.printui("$Interactor.has_overlapping_areas(): "+str($Interactor.has_overlapping_bodies()));
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
 	#region Camera combat position
@@ -380,9 +380,9 @@ func _process(delta: float) -> void:
 		print("debug1")
 		take_damage(4)
 		#if randi_range(0, 1) == 1:
-		#	%InventoryPanel.pickup_item(load("res://Inventory/water.tres"))
+		#	inventory.pickup_item(load("res://Inventory/water.tres"))
 		#else:
-		#	%InventoryPanel.pickup_item(load("res://Inventory/health_potion.tres"))
+		#	inventory.pickup_item(load("res://Inventory/health_potion.tres"))
 
 	check_interactable()
 func _unhandled_input(event: InputEvent) -> void:
