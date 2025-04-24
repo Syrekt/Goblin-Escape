@@ -1,0 +1,51 @@
+extends AnimatedSprite2D
+
+enum keyboard {
+	A = 16,
+	B = 17,
+	C = 18,
+	D = 19,
+	E = 20,
+	F = 21,
+	G = 22,
+	H = 23,
+	I = 24,
+	J = 25,
+	K = 26,
+	L = 27,
+	M = 28,
+	N = 29,
+	O = 30,
+	P = 31,
+	Q = 32,
+	R = 33,
+	S = 34,
+	T = 35,
+	U = 36,
+	V = 37,
+	W = 38,
+	X = 39,
+	Y = 40,
+	Z = 41,
+}
+
+func _show(input_type: String) -> void:
+	var interaction_prompt = ""
+	var events = InputMap.action_get_events("interact")
+
+	if events.size() > 0:
+		for event in events:
+			if event is InputEventKey:
+				interaction_prompt = OS.get_keycode_string(event.physical_keycode)
+				if input_type == "keyboard":
+					play("keyboard")
+					frame = keyboard[interaction_prompt]
+			elif event is InputEventJoypadButton:
+				print("Gamepad Button " + str(event.button_index))
+				if input_type == "gamepad":
+					play("xbox")
+					frame = event.button_index
+
+	visible = true
+func _hide() -> void:
+	visible = false

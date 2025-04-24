@@ -24,7 +24,7 @@ func update(delta):
 			finished.emit("slash")
 		elif enemy.chase_target.state_node.state.name == "stance_heavy":
 			finished.emit("stab")
-		elif enemy.chase_target.velocity.x != 0:
+		elif abs(enemy.chase_target.velocity.x) == enemy.chase_target.stance_walk_speed:
 			finished.emit("stab")
 	else:
 		enemy.lost_target()

@@ -6,10 +6,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e3ohb"]
 
 [node name="DialogueTrigger" type="Area2D"]
-collision_layer = 0
-collision_mask = 64
+collision_layer = 64
+collision_mask = 0
 script = ExtResource("1_g3r42")
 dialogue_resource = ExtResource("2_ac1q6")
+repeat = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_e3ohb")

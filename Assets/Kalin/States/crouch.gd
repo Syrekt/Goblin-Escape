@@ -7,9 +7,6 @@ func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
 	player.set_crouch_mask(true)
 	player.velocity = Vector2.ZERO
-	player.stealth = true;
-func exit() -> void:
-	player.stealth = false
 
 func physics_update(delta: float) -> void:
 	if !player.is_on_floor():

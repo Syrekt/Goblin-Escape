@@ -17,9 +17,8 @@ class_name Player extends CharacterBody2D
 @export var snap_offset			:= Vector2(-5, -13)
 @export var facing_locked		:= false
 @export var direction_locked	:= false
-@export var dead := false # Health == 0
-@export var unconscious		:= false # Post sex situations where health isn't 0
-@export var invisible := false
+@export var dead				:= false # Health == 0
+@export var unconscious			:= false # Post sex situations where health isn't 0
 
 @onready var state_node := $StateMachine
 @onready var health : TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Health
@@ -61,7 +60,7 @@ var open_menu : Node = null
 var move_speed := 0.0
 var facing := 1
 var ignore_corners := false
-var stealth := false
+var invisible := false
 
 var interaction_target : Area2D = null
 
@@ -75,6 +74,8 @@ var combat_target : CharacterBody2D = null
 var state_on_attack_frame := false
 
 var sex_participants : Array
+
+var last_input_type := "keyboard"
 
 
 signal health_depleted
@@ -92,11 +93,11 @@ func set_crouch_mask(value: bool):
 func set_facing(dir: int):
 	if dir == 0: return
 	facing = dir
-	for child in get_children():
-		if child is Sprite2D:
-			child.flip_h = facing == -1
-		elif child is CollisionShape2D or child is Node2D or child is RayCast2D:
-			child.scale.x = facing
+	for node in get_tree().get_nodes_in_group("Flip"):
+		if node is Sprite2D:
+			node.flip_h = facing == -1
+		else:
+			node.scale.x = facing
 func get_movement_dir() -> float:
 	if %InventoryPanel.visible: return 0.0
 	return Input.get_axis("left", "right")
@@ -104,8 +105,11 @@ func fall(delta):
 	velocity.y += gravity * delta
 	move_and_slide()
 func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := true, attack := {}):
-	if state_node.state.name == "death":
+	var state_name = state_node.state.name
+	if state_name == "death":
 		return
+	if state_name == "hiding" || state_name == "hidding" || state_name == "unhide":
+		%Sprite2D.material.set_shader_parameter("tint_color", Color(0, 0, 0, 0))
 
 	combat_properties.stunned = false
 	var defending = state_node.state.name == "stance_defensive"
@@ -142,9 +146,9 @@ func check_movable():
 		state_node.state.finished.emit("push_idle")
 
 func check_interactable() -> void:
-	if interaction_target != null:
-		interaction_target.process()
-func can_grab_corner(rising:= false) -> bool:
+	if interaction_target:
+		interaction_target.update(self)
+func can_grab_corner(rising := false) -> bool:
 	var grab_prevent =  col_corner_grab_prevent.has_overlapping_bodies()
 	var grab_trigger = ray_corner_grab_check.is_colliding()
 
@@ -221,7 +225,7 @@ func just_released(input : String) -> bool:
 	return Input.is_action_just_released(input)
 func hide_out(hiding_spot : Area2D) -> void:
 	global_position = hiding_spot.global_position
-	state_node.state.finished.emit("hide")
+	state_node.state.finished.emit("hiding")
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -249,7 +253,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			state_node.state.finished.emit("recover")
 		"corner_hang":
 			state_node.state.finished.emit("corner_grab")
-		"hide":
+		"hiding":
 			state_node.state.finished.emit("hidden")
 		"unhide":
 			state_node.state.finished.emit("idle")
@@ -258,20 +262,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func _ready() -> void:
 	$CanvasLayer.visible = true
 	$CanvasLayer/HUD.visible = true
-	var interaction_prompt = ""
-	var events = InputMap.action_get_events("interact")
-
-	if events.size() > 0:
-
-		for event in events:
-			if event is InputEventKey:
-				interaction_prompt = OS.get_keycode_string(event.physical_keycode)
-			elif event is InputEventJoypadButton:
-				interaction_prompt = "Gamepad Button " + str(event.button_index)
-			elif event is InputEventMouseButton:
-				interaction_prompt = "Mouse Button " + str(event.button_index)
-
-	$InteractionPrompt.text = interaction_prompt
 #endregion
 #region Physics
 func _physics_process(delta: float) -> void:
@@ -320,6 +310,9 @@ func _physics_process(delta: float) -> void:
 		"death", "sex", "recover":
 			move_speed = 0
 			velocity.x = 0
+		"hiding", "hidden", "unhide":
+			move_speed = 0
+			velocity = Vector2.ZERO
 
 
 	if cp.pushback_timer > 0:
@@ -350,15 +343,13 @@ func _physics_process(delta: float) -> void:
 		if(!facing_locked && velocity.x != 0):
 			set_facing(sign(velocity.x))
 
-	check_interactable()
-
 	#endregion
 #endregion
 #region Process
 func _process(delta: float) -> void:
 	var s = %Sprite2D
 	Debugger.printui(str(state_node.state.name))
-	Debugger.printui("invisible: "+str(invisible))
+	Debugger.printui("$Interactor.has_overlapping_areas(): "+str($Interactor.has_overlapping_bodies()));
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
 	#region Camera combat position
@@ -392,17 +383,27 @@ func _process(delta: float) -> void:
 		#	%InventoryPanel.pickup_item(load("res://Inventory/water.tres"))
 		#else:
 		#	%InventoryPanel.pickup_item(load("res://Inventory/health_potion.tres"))
+
+	check_interactable()
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventJoypadButton || event is InputEventJoypadMotion:
+		last_input_type = "gamepad"
+	elif event is InputEventKey || event is InputEventMouse:
+		last_input_type = "keyboard"
 #endregion
 #region Signals
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	print(area)
 func _on_interactor_area_entered(area: Area2D) -> void:
+	print("interactor area entered")
 	interaction_target = area
-	$InteractionPrompt.visible = true
+	$InteractionPrompt._show(last_input_type)
 func _on_interactor_area_exited(area: Area2D) -> void:
+	print("interactor area exited")
 	if interaction_target == area:
+		interaction_target.waiting_player_exit = false
 		interaction_target = null
-		$InteractionPrompt.visible = false
+		$InteractionPrompt._hide()
 func _on_health_depleted() -> void:
 	state_node.state.finished.emit("death")
 #endregion

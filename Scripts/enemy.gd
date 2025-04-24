@@ -94,6 +94,7 @@ func lost_target() -> void:
 	%Emote.play("confused")
 	patrol_amount = 4
 	state_node.state.finished.emit("idle")
+	chase_target = null
 #endregion
 #region Animation end
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -134,6 +135,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity * delta
 	#endregion
 	#region Finalize
+	floor_max_angle = 1
 	move_and_slide()
 	if cp.pushback_vector.x != 0:
 			set_facing(-sign(cp.pushback_vector.x))
@@ -147,7 +149,10 @@ func _physics_process(delta: float) -> void:
 func _on_health_depleted() -> void:
 	state_node.state.finished.emit("death")
 func _on_chase_detector_body_entered(body:Node2D) -> void:
-	chase_target = body
+	if !body.invisible:
+		chase_target = body
+		if !chase_target.combat_target:
+			chase_target.combat_target = self
 func _on_chase_detector_body_exited(body:Node2D) -> void:
 	if body == chase_target:
 		chase_target.combat_target = null
