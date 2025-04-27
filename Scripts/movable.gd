@@ -3,7 +3,8 @@ class_name Movable extends CharacterBody2D
 @export var gravity := 300 * 60
 @export var y_acc := 5
 
-var grabbed = false
+var grabbed := false
+var falling := false
 
 func grab() -> void:
 	grabbed = true
@@ -21,3 +22,4 @@ func _physics_process(delta: float) -> void:
 		velocity.y = move_toward(velocity.y, gravity * delta, y_acc)
 
 	move_and_slide()
+	falling = velocity.y != 0

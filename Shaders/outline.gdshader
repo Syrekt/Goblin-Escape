@@ -92,4 +92,3 @@ void fragment() {
 		COLOR.a *= alpha;
 	}
 }
-

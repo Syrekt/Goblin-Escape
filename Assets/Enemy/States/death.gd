@@ -8,4 +8,4 @@ func enter(previous_state_path: String, data := {}) -> void:
 	var children = enemy.get_children()
 	for child in children:
 		if child is Area2D:
-			child.monitoring = false
+			child.set_deferred("monitoring", false)

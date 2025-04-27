@@ -3,7 +3,7 @@ extends EnemyState
 func enter(previous_state_path : String, data = {}) -> void:
 	enemy.call_deferred("update_animation", name)
 	enemy.velocity.x = 0
-	if enemy.patrol_amount:
+	if enemy.patrol_amount || enemy.patrolling:
 		$IdleTimer.start()
 func exit() -> void:
 	$IdleTimer.stop()
@@ -13,7 +13,6 @@ func update(delta : float) -> void:
 		finished.emit("chase")
 
 func _on_idle_timer_timeout() -> void:
-	print("Patrol on timeout")
-	enemy.patrol_amount -= 1
-	print("enemy.patrol_amount: "+str(enemy.patrol_amount));
+	if enemy.patrol_amount > 0:
+		enemy.patrol_amount -= 1
 	finished.emit("patrol")

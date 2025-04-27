@@ -94,7 +94,8 @@ func set_crouch_mask(value: bool):
 func set_facing(dir: int):
 	if dir == 0: return
 	facing = dir
-	for node in get_tree().get_nodes_in_group("Flip"):
+	var local_nodes = find_children("*", "Node", true).filter(func(n): return n.is_in_group("Flip"))
+	for node in local_nodes:
 		if node is Sprite2D:
 			node.flip_h = facing == -1
 		else:
@@ -142,7 +143,7 @@ func check_movable():
 	if ray_movable.is_colliding(): 
 		potential_movable = ray_movable.get_collider();
 
-	if just_pressed("grab") and potential_movable != null:
+	if just_pressed("grab") && potential_movable != null && !potential_movable.falling:
 		movable = potential_movable
 		state_node.state.finished.emit("push_idle")
 

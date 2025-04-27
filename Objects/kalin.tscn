@@ -3807,7 +3807,7 @@ script = ExtResource("39_af0aw")
 [node name="SlashHitbox" parent="StateMachine/slash" instance=ExtResource("45_42hh8")]
 position = Vector2(41, -37)
 scale = Vector2(2.84, 3.72)
-collision_mask = 8
+collision_mask = 136
 monitorable = false
 
 [node name="Collider" parent="StateMachine/slash/SlashHitbox" index="0"]
@@ -3819,7 +3819,7 @@ script = ExtResource("41_sat24")
 [node name="StabHitbox" parent="StateMachine/stab" instance=ExtResource("45_42hh8")]
 position = Vector2(48, -39)
 scale = Vector2(3.8, 1)
-collision_mask = 8
+collision_mask = 136
 monitorable = false
 
 [node name="Collider" parent="StateMachine/stab/StabHitbox" index="0"]
@@ -3831,7 +3831,7 @@ script = ExtResource("41_pdh0h")
 [node name="BashHitbox" parent="StateMachine/bash" instance=ExtResource("45_42hh8")]
 position = Vector2(11.935, -34)
 scale = Vector2(1.47, 2.52)
-collision_mask = 8
+collision_mask = 136
 monitorable = false
 
 [node name="hurt" type="Node" parent="StateMachine" groups=["combat_state"]]

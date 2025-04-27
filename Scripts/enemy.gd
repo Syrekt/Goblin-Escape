@@ -8,6 +8,7 @@ const RUN_SPEED = 300.0 * 60
 @export var gravity := 500.0;
 @export var damage := 1
 @export var in_combat := false
+@export var patrolling := false
 
 var patrol_amount := 0
 
@@ -45,7 +46,8 @@ func set_facing(dir: int):
 	if dir == 0: pass
 
 	facing = dir
-	for node in get_tree().get_nodes_in_group("Flip"):
+	var local_nodes = find_children("*", "Node", true).filter(func(n): return n.is_in_group("Flip"))
+	for node in local_nodes:
 		if node is Sprite2D:
 			node.flip_h = facing == 1
 		else:
@@ -157,4 +159,8 @@ func _on_chase_detector_body_exited(body:Node2D) -> void:
 	if body == chase_target:
 		chase_target.combat_target = null
 		chase_target = null
+func _on_crush_check_body_entered(body:Node2D) -> void:
+	if body is Movable:
+		call_deferred("set_collision_mask_value", 1, false)
+		state_node.state.finished.emit("death")
 #endregion

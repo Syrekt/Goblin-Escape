@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://boirdbjhxe6k1"
+path="res://.godot/imported/WOOD_Breaking 02.mp3-56549bbc379fe46bff237091289a1c87.mp3str"
+
+[deps]
+
+source_file="res://Assets/SFX/Hit on wood/WOOD_Breaking 02.mp3"
+dest_files=["res://.godot/imported/WOOD_Breaking 02.mp3-56549bbc379fe46bff237091289a1c87.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

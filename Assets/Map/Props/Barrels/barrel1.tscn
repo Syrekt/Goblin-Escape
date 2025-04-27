@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://77kn2jsxuuba"]
+
+[ext_resource type="Texture2D" uid="uid://ctgp5oblt3v1c" path="res://Assets/Map/Props/Barrels/spr_barrels_stage1_1.png" id="1_aa7es"]
+[ext_resource type="Script" uid="uid://2psqd5pwfxyk" path="res://Scripts/map_object.gd" id="1_q5k47"]
+[ext_resource type="Texture2D" uid="uid://deayt7aymn1cg" path="res://Assets/Map/Props/Barrels/spr_barrels_stage2_1.png" id="2_q5k47"]
+[ext_resource type="Texture2D" uid="uid://h15ou5mqnw8c" path="res://Assets/Map/Props/Barrels/spr_barrels_stage3_1.png" id="3_ow2u2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5srt2"]
+size = Vector2(16, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2stkb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_aa7es")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_q5k47")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_q5k47")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ow2u2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ow2u2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Barrel1" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_q5k47")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5srt2")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2stkb")
+
+[node name="AudioEmitter" type="AudioStreamPlayer2D" parent="."]
