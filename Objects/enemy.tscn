@@ -1025,7 +1025,6 @@ position = Vector2(0, 16)
 script = ExtResource("15_ywhtk")
 
 [node name="IdleTimer" type="Timer" parent="StateMachine/idle"]
-wait_time = 4.0
 one_shot = true
 
 [node name="patrol" type="Node" parent="StateMachine"]

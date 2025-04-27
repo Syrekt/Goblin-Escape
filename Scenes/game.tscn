@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://dhjw1qmf2nvdh"]
+[gd_scene load_steps=17 format=4 uid="uid://dhjw1qmf2nvdh"]
 
 [ext_resource type="PackedScene" uid="uid://h2hwfpjw4rte" path="res://Objects/kalin.tscn" id="1_v3ybc"]
 [ext_resource type="Script" uid="uid://dytt7cafdt3c1" path="res://Scripts/game_manager.gd" id="1_yp60x"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://24ijy2g2jylp" path="res://Objects/hiding_spot.tscn" id="12_rku1e"]
 [ext_resource type="Resource" uid="uid://c0yvh55kikql2" path="res://Inventory/health_potion.tres" id="13_rfjv2"]
 [ext_resource type="PackedScene" uid="uid://77kn2jsxuuba" path="res://Assets/Map/Props/Barrels/barrel1.tscn" id="14_1phco"]
+[ext_resource type="Resource" uid="uid://cgja8j6c7wx70" path="res://Inventory/Keys/key1.tres" id="15_nnt18"]
+[ext_resource type="Texture2D" uid="uid://dbwq4w0xphbic" path="res://Inventory/Keys/key items3.png" id="16_ewbju"]
 
 [node name="Game" type="Node2D"]
 
@@ -114,3 +116,12 @@ item = ExtResource("13_rfjv2")
 position = Vector2(341, 347)
 destructable = true
 collidable = true
+
+[node name="ItemPickup2" parent="." instance=ExtResource("12_rfjv2")]
+position = Vector2(895, 346)
+item = ExtResource("15_nnt18")
+
+[node name="Sprite" parent="ItemPickup2" index="0"]
+texture = ExtResource("16_ewbju")
+
+[editable path="ItemPickup2"]
