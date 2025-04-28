@@ -1,4 +1,4 @@
-[gd_scene load_steps=221 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=223 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://coi4g5fo3jf06" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Texture2D" uid="uid://dcs3l0iefjo7w" path="res://Assets/Kalin/Sprites/Kalin-Fall.png" id="2_1j6vo"]
@@ -58,6 +58,7 @@
 [ext_resource type="Texture2D" uid="uid://cywhcouoj6ral" path="res://Assets/Kalin/Sprites/Kalin-Stun.png" id="45_pat22"]
 [ext_resource type="Resource" uid="uid://buieik1hf8xh2" path="res://Inventory/player_inventory.tres" id="46_1q8gn"]
 [ext_resource type="Script" uid="uid://7g1nk1glip7t" path="res://Assets/Kalin/States/push_idle.gd" id="48_mwqkq"]
+[ext_resource type="PackedScene" uid="uid://bf7nobsdrpasm" path="res://UI/Buttons/stat_panel.tscn" id="48_t42fh"]
 [ext_resource type="Script" uid="uid://cahuc4po87bew" path="res://Assets/Kalin/States/block.gd" id="49_sprrr"]
 [ext_resource type="Script" uid="uid://fqf7yx6g1f1f" path="res://Assets/Kalin/States/push.gd" id="49_ujutq"]
 [ext_resource type="Script" uid="uid://ckgc63224e6or" path="res://Assets/Kalin/States/death.gd" id="50_1fn32"]
@@ -3477,6 +3478,8 @@ size = Vector2(20, 57.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nk40"]
 size = Vector2(20, 30)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t42fh"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfvac"]
 size = Vector2(105, 32)
 
@@ -3747,6 +3750,57 @@ unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
 text = "[color=red]This is the description text[/color]"
+
+[node name="CharacterPanel" type="PanelContainer" parent="CanvasLayer"]
+offset_left = 315.0
+offset_top = 127.0
+offset_right = 525.0
+offset_bottom = 298.0
+theme = ExtResource("56_ghu8e")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/CharacterPanel"]
+layout_mode = 2
+texture = ExtResource("73_qdj7c")
+region_rect = Rect2(0, 0, 44, 44)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CharacterPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CharacterPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 28
+
+[node name="Strength" parent="CanvasLayer/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+layout_mode = 2
+
+[node name="Dexterity" parent="CanvasLayer/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+layout_mode = 2
+
+[node name="Endurance" parent="CanvasLayer/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+layout_mode = 2
+
+[node name="Vitality" parent="CanvasLayer/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/CharacterPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_t42fh")
+
+[node name="StatPoints" type="Label" parent="CanvasLayer/CharacterPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Stat Points"
 
 [node name="StateMachine" parent="." groups=["Flip"] instance=ExtResource("9_ojhio")]
 visible = false

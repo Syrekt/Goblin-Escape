@@ -20,6 +20,12 @@ class_name Player extends CharacterBody2D
 @export var dead				:= false # Health == 0
 @export var unconscious			:= false # Post sex situations where health isn't 0
 
+var available_stat_points := 5
+@export var vitality := 0
+@export var strength := 0
+@export var dexterity := 0
+@export var endurance := 0
+
 @onready var state_node := $StateMachine
 @onready var health : TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Health
 @onready var stamina : TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Stamina
@@ -350,6 +356,7 @@ func _physics_process(delta: float) -> void:
 #region Process
 func _process(delta: float) -> void:
 	var s = %Sprite2D
+	%StatPoints.text = "Stat Points: " + str(available_stat_points)
 	Debugger.printui(str(state_node.state.name))
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()

@@ -8,7 +8,6 @@ var friend : Enemy
 var animation_names
 
 func enter(previous_state_path: String, data := {}) -> void:
-	print("Chatting")
 	friend = enemy.friend
 	enemy.call_deferred("update_animation", "idle")
 	enemy.velocity.x = 0
@@ -17,7 +16,6 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 	var frames = enemy.emote_emitter.sprite.sprite_frames
 	animation_names = frames.get_animation_names()
-	print("animation_names: "+str(animation_names))
 func exit() -> void:
 	enemy.friend = null
 	enemy.chatting = false
