@@ -4,7 +4,7 @@ var chase_dir := 0;
 
 func update(delta):
 	#Quit state
-	if !enemy.chase_target || enemy.target_obstructed():
+	if !enemy.chase_target || enemy.target_obstructed(enemy.chase_target):
 		enemy.lost_target()
 		return
 

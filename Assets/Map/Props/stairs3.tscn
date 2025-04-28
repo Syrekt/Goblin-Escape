@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bia57lqipv702"]
+
+[ext_resource type="Texture2D" uid="uid://dx25dmahp2sdi" path="res://Assets/Map/FP_CastlePrison/mainlevbuild.png" id="1_6nvtt"]
+
+[node name="Stairs3" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6nvtt")
+region_enabled = true
+region_rect = Rect2(544, 522, 48, 50)
+
+[node name="Shape" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-24, -21, 24, 12, 24, 27, -24, -6)
+one_way_collision = true

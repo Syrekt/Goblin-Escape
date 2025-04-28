@@ -9,6 +9,10 @@ const RUN_SPEED = 300.0 * 60
 @export var damage := 1
 @export var in_combat := false
 @export var patrolling := false
+#Only one enemy should have friend and chatting values
+#The one with the assigned values will control the conversation and behavior
+@export var chatting := false
+@export var friend : CharacterBody2D
 
 var patrol_amount := 0
 
@@ -38,6 +42,7 @@ signal health_depleted
 @onready var bash_hitbox  = $StateMachine/bash/BashHitbox/Collider
 @onready var cp	= combat_properties
 @onready var audio_emitter = $SFX
+@onready var emote_emitter = $Emote
 
 var line_of_sight: RayCast2D = null
 
@@ -80,20 +85,21 @@ func hear_noise(noise_location : Vector2) -> void:
 	if !$NoiseIgnoreTimer.is_stopped():
 		return
 
+	friend = null
 	match state_node.state.name:
-		"idle":
+		"idle", "chat_lead":
 			state_node.state.finished.emit("triggered")
 		"triggered":
 			lost_target()
 
 	$NoiseIgnoreTimer.start()
-func target_obstructed() -> bool:
-	line_of_sight.target_position = line_of_sight.to_local(chase_target.global_position)
+func target_obstructed(target: CharacterBody2D) -> bool:
+	line_of_sight.target_position = line_of_sight.to_local(target.global_position)
 	return line_of_sight.is_colliding()
 func lost_target() -> void:
 	#CHANGES STATE
 	print("lost target")
-	%Emote.play("confused")
+	emote_emitter.play("confused")
 	patrol_amount = 4
 	state_node.state.finished.emit("idle")
 	chase_target = null
@@ -115,6 +121,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 #region Node Process
 func _ready() -> void:
 	line_of_sight = RayCast2D.new()
+	line_of_sight.collide_with_bodies = true
 	add_child(line_of_sight)
 	$Sprite2D.scale.x = 1
 	set_facing(facing)

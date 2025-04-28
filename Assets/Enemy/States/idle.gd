@@ -9,7 +9,12 @@ func exit() -> void:
 	$IdleTimer.stop()
 
 func update(delta : float) -> void:
-	if enemy.chase_target && !enemy.target_obstructed():
+	if enemy.chatting:
+		if enemy.friend:
+			finished.emit("chat_lead")
+		else:
+			finished.emit("chat_secondary")
+	if enemy.chase_target && !enemy.target_obstructed(enemy.chase_target):
 		finished.emit("chase")
 
 func _on_idle_timer_timeout() -> void:

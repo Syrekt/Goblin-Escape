@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene load_steps=57 format=3 uid="uid://iuj1jg31a55f"]
 
 [ext_resource type="Script" uid="uid://bhcr3m01slk8a" path="res://Scripts/enemy.gd" id="1_18den"]
 [ext_resource type="AudioStream" uid="uid://bx6vdt8wts4xf" path="res://Assets/SFX/Kalin/Other/kick_short_whoosh_12.wav" id="6_ifl3v"]
@@ -34,6 +34,7 @@
 [ext_resource type="Script" uid="uid://cctffwfexml1k" path="res://Assets/Enemy/States/laugh.gd" id="29_vd4fl"]
 [ext_resource type="PackedScene" uid="uid://b23mtnfp7xuec" path="res://Objects/emote.tscn" id="30_tjqy8"]
 [ext_resource type="Script" uid="uid://btr4jhp2hi3jr" path="res://Assets/Enemy/States/leave_player.gd" id="31_0glxa"]
+[ext_resource type="Script" uid="uid://cod1srgspwwqu" path="res://Assets/Enemy/States/chat_lead.gd" id="33_404n7"]
 
 [sub_resource type="Animation" id="Animation_p3exd"]
 length = 0.001
@@ -972,10 +973,12 @@ libraries = {
 }
 
 [node name="Collider" type="CollisionShape2D" parent="." groups=["Flip"]]
+visible = false
 position = Vector2(-1, -5.5)
 shape = SubResource("RectangleShape2D_cqw5a")
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
+max_distance = 512.0
 
 [node name="PlayerProximity" type="Area2D" parent="."]
 visible = false
@@ -1129,6 +1132,19 @@ script = ExtResource("31_0glxa")
 wait_time = 4.0
 one_shot = true
 
+[node name="chat_lead" type="Node" parent="StateMachine"]
+script = ExtResource("33_404n7")
+
+[node name="LeadTimer" type="Timer" parent="StateMachine/chat_lead"]
+wait_time = 4.0
+one_shot = true
+
+[node name="SecondaryTimer" type="Timer" parent="StateMachine/chat_lead"]
+wait_time = 4.0
+one_shot = true
+
+[node name="chat_secondary" type="Node" parent="StateMachine"]
+
 [node name="NoiseIgnoreTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
@@ -1150,6 +1166,7 @@ visible = false
 position = Vector2(2, -47)
 
 [node name="CrushCheck" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CrushCheck"]
 position = Vector2(-1, -24)
@@ -1172,6 +1189,8 @@ shape = SubResource("RectangleShape2D_wgea4")
 [connection signal="body_entered" from="StateMachine/chase/AttackDetector" to="StateMachine/chase" method="_on_attack_detector_body_entered"]
 [connection signal="body_exited" from="StateMachine/chase/AttackDetector" to="." method="_on_attack_detector_body_exited"]
 [connection signal="timeout" from="StateMachine/leave_player/Timer" to="StateMachine/leave_player" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/chat_lead/LeadTimer" to="StateMachine/chat_lead" method="_on_lead_timer_timeout"]
+[connection signal="timeout" from="StateMachine/chat_lead/SecondaryTimer" to="StateMachine/chat_lead" method="_on_secondary_timer_timeout"]
 [connection signal="body_entered" from="CrushCheck" to="." method="_on_crush_check_body_entered"]
 
 [editable path="StateMachine/slash/SlashHitbox"]
