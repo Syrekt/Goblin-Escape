@@ -32,8 +32,6 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	timer.paused = velocity.x == 0
 	audio_emitter.stream_paused = timer.paused
-	Debugger.printui("timer.paused: "+str(timer.paused));
-	Debugger.printui("timer.time_left: "+str(timer.time_left));
 
 
 func _on_timer_timeout() -> void:

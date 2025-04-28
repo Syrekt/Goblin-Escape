@@ -14,6 +14,7 @@ func update(delta):
 		enemy.update_animation("run")
 	else:
 		enemy.update_animation("idle")
+		enemy.velocity.x = 0
 
 	#React to player
 	if enemy.chase_target.unconscious:
