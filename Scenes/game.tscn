@@ -13,9 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://dk84lu71fcjkl" path="res://Objects/item_pickup.tscn" id="12_rfjv2"]
 [ext_resource type="PackedScene" uid="uid://24ijy2g2jylp" path="res://Objects/hiding_spot.tscn" id="12_rku1e"]
 [ext_resource type="Resource" uid="uid://c0yvh55kikql2" path="res://Inventory/health_potion.tres" id="13_rfjv2"]
-[ext_resource type="PackedScene" uid="uid://77kn2jsxuuba" path="res://Assets/Map/Props/Barrels/barrel1.tscn" id="14_1phco"]
 [ext_resource type="Resource" uid="uid://cgja8j6c7wx70" path="res://Inventory/key1.tres" id="15_nnt18"]
 [ext_resource type="Texture2D" uid="uid://dbwq4w0xphbic" path="res://Inventory/Keys/key items3.png" id="16_ewbju"]
+[ext_resource type="PackedScene" uid="uid://cwfcttxnm8ov1" path="res://Assets/Map/Props/gate.tscn" id="17_85qyi"]
 [ext_resource type="PackedScene" uid="uid://dfoplvp3api4g" path="res://Assets/Map/Props/stairs1.tscn" id="17_ewbju"]
 
 [node name="Game" type="Node2D"]
@@ -79,7 +79,7 @@ script = ExtResource("1_yp60x")
 
 [node name="Kalin" parent="." instance=ExtResource("1_v3ybc")]
 unique_name_in_owner = true
-position = Vector2(89, 219)
+position = Vector2(291, 313)
 
 [node name="Camera2D" type="Camera2D" parent="Kalin"]
 position = Vector2(0, -40)
@@ -110,13 +110,8 @@ patrolling = true
 position = Vector2(257, 335)
 item = ExtResource("13_rfjv2")
 
-[node name="Barrel1" parent="." instance=ExtResource("14_1phco")]
-position = Vector2(341, 347)
-destructable = true
-collidable = true
-
 [node name="ItemPickup2" parent="." instance=ExtResource("12_rfjv2")]
-position = Vector2(895, 346)
+position = Vector2(327, 343)
 item = ExtResource("15_nnt18")
 
 [node name="Sprite" parent="ItemPickup2" index="0"]
@@ -135,5 +130,8 @@ position = Vector2(168, 326)
 
 [node name="Stairs3" parent="Stairs" instance=ExtResource("17_ewbju")]
 position = Vector2(216, 359)
+
+[node name="Gate" parent="." instance=ExtResource("17_85qyi")]
+position = Vector2(390, 332)
 
 [editable path="ItemPickup2"]

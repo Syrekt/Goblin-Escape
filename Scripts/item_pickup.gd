@@ -14,6 +14,6 @@ func _ready() -> void:
 func update(player: Player) -> void:
 	if Input.is_action_just_pressed("interact"):
 		print("Pickup item: " + item.name)
-		player.inventory.pickup_item(item)
+		player.inventory_panel.inventory.item_add(item)
 		Ge.play_audio_free(0, pickup_sound)
 		queue_free()

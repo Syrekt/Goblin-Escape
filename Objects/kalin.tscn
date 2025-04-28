@@ -1,4 +1,4 @@
-[gd_scene load_steps=220 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=221 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://coi4g5fo3jf06" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Texture2D" uid="uid://dcs3l0iefjo7w" path="res://Assets/Kalin/Sprites/Kalin-Fall.png" id="2_1j6vo"]
@@ -56,6 +56,7 @@
 [ext_resource type="Texture2D" uid="uid://c4sgdo50jnun4" path="res://Assets/Kalin/Sprites/Kalin-Run.png" id="44_h06e0"]
 [ext_resource type="PackedScene" uid="uid://2s1ryg6qqqmc" path="res://Objects/hitbox.tscn" id="45_42hh8"]
 [ext_resource type="Texture2D" uid="uid://cywhcouoj6ral" path="res://Assets/Kalin/Sprites/Kalin-Stun.png" id="45_pat22"]
+[ext_resource type="Resource" uid="uid://buieik1hf8xh2" path="res://Inventory/player_inventory.tres" id="46_1q8gn"]
 [ext_resource type="Script" uid="uid://7g1nk1glip7t" path="res://Assets/Kalin/States/push_idle.gd" id="48_mwqkq"]
 [ext_resource type="Script" uid="uid://cahuc4po87bew" path="res://Assets/Kalin/States/block.gd" id="49_sprrr"]
 [ext_resource type="Script" uid="uid://fqf7yx6g1f1f" path="res://Assets/Kalin/States/push.gd" id="49_ujutq"]
@@ -3691,6 +3692,7 @@ offset_bottom = 435.0
 focus_mode = 2
 theme = ExtResource("72_qdj7c")
 script = ExtResource("73_ugwbb")
+inventory = ExtResource("46_1q8gn")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/InventoryPanel"]
 layout_mode = 2

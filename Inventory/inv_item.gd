@@ -5,3 +5,5 @@ class_name InventoryItem extends Resource
 @export var amount := 1
 @export var consumable := true
 @export_multiline var description : String
+
+var inventory : Inventory

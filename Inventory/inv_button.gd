@@ -16,11 +16,10 @@ func _process(delta: float) -> void:
 func use() -> bool:
 	if !item.consumable: return false
 	#returns destroyed
-	item.amount -= 1
-	if item.amount <= 0:
-		queue_free()
-		return true
-	return false
+
+	item.inventory.item_reduce(item)
+
+	return item.amount <= 0
 
 func _on_pressed() -> void:
 	match text:
@@ -30,4 +29,5 @@ func _on_pressed() -> void:
 		"Water":
 			print("Drink water")
 			%Stamina.add_buff(0.5, 10.0)
-	use();
+	if use():
+		queue_free()

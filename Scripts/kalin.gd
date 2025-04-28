@@ -41,7 +41,7 @@ class_name Player extends CharacterBody2D
 @onready var cp = combat_properties
 @onready var camera = $Camera2D
 @onready var audio_emitter = $MainAudioStreamer
-@onready var inventory = $CanvasLayer/InventoryPanel
+@onready var inventory_panel = $CanvasLayer/InventoryPanel
 
 var movable : Node2D = null
 var noise = preload("res://Objects/noise.tscn")
@@ -101,7 +101,7 @@ func set_facing(dir: int):
 		else:
 			node.scale.x = facing
 func get_movement_dir() -> float:
-	if inventory.visible: return 0.0
+	if inventory_panel.visible: return 0.0
 	return Input.get_axis("left", "right")
 func fall(delta):
 	velocity.y += gravity * delta
@@ -215,15 +215,15 @@ func emit_noise(offset : Vector2, amount : float) -> void:
 	_noise.amount_max = amount
 	_noise.position = position + offset
 func toggle_inventory():
-	inventory.toggle()
+	inventory_panel.toggle()
 func pressed(input : String) -> bool:
-	if inventory.visible: return false
+	if inventory_panel.visible: return false
 	return Input.is_action_pressed(input)
 func just_pressed(input : String) -> bool:
-	if inventory.visible: return false
+	if inventory_panel.visible: return false
 	return Input.is_action_just_pressed(input)
 func just_released(input : String) -> bool:
-	if inventory.visible: return false
+	if inventory_panel.visible: return false
 	return Input.is_action_just_released(input)
 func hide_out(hiding_spot : Area2D) -> void:
 	global_position = hiding_spot.global_position
