@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://xy0q654a6bmd" path="res://Scripts/movable.gd" id="1_mkwwh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5nbmp"]
-size = Vector2(23, 30)
+size = Vector2(26, 65)
 
 [node name="Movable" type="CharacterBody2D"]
 collision_layer = 33
@@ -14,3 +14,9 @@ script = ExtResource("1_mkwwh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5nbmp")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

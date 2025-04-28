@@ -26,3 +26,9 @@ func play_audio_free(volume: int, audio_path: String) -> void:
 	player.stream = load(audio_path)
 	player.finished.connect(player.queue_free)
 	player.play()
+func EmitNoise(position: Vector2, amount: float) -> void:
+	var noise = load("res://Objects/noise.tscn").instantiate()
+	get_tree().current_scene.add_child(noise)
+
+	noise.amount_max = amount
+	noise.position = position

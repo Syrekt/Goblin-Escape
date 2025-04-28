@@ -14,6 +14,7 @@ func _process(delta: float) -> void:
 	$Label.text = str(item.amount)
 
 func use() -> bool:
+	if !item.consumable: return false
 	#returns destroyed
 	item.amount -= 1
 	if item.amount <= 0:

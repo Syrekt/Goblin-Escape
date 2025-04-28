@@ -15,7 +15,13 @@ func physics_update(delta: float) -> void:
 	elif !player.pressed("down") && player.can_stand_up():
 		player.stand_up()
 	elif player.just_pressed("up"):
-		print("drop from platform")
+		if player.get_slide_collision_count() > 0:
+			var collider = player.get_slide_collision(0).get_collider()
+			print("collider: "+str(collider))
+			if collider.has_node("Shape"):
+				var shape = collider.get_node("Shape")
+				if shape.one_way_collision:
+					player.global_position.y += 4
 	elif !is_equal_approx(player.get_movement_dir(), 0.0):
 		finished.emit("crouch_walk")
 	elif !player.col_corner_hang.has_overlapping_bodies():

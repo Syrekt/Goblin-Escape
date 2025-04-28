@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://24ijy2g2jylp"]
 
 [ext_resource type="Script" uid="uid://dkkjikarfslbq" path="res://Scripts/hiding_spot.gd" id="1_1eomc"]
-[ext_resource type="Texture2D" uid="uid://bg7vbl65hih4o" path="res://Assets/Map/Props/spr_broken wall.png" id="1_c7xb2"]
+[ext_resource type="Texture2D" uid="uid://bg7vbl65hih4o" path="res://Assets/Map/Props/spr_broken_wall1.png" id="1_c7xb2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1eomc"]
 size = Vector2(29, 80)

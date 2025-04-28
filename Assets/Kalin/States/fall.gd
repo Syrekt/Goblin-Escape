@@ -18,8 +18,12 @@ func physics_update(delta: float) -> void:
 			finished.emit("idle")
 
 	if player.can_grab_corner() && player.ray_corner_grab_check.is_colliding():
-		if player.col_auto_climb_bottom.has_overlapping_bodies():
-			player.snap_to_corner(player.ray_corner_grab_check.get_collision_point())
-			player.quick_climb()
-		else:
-			finished.emit("corner_grab")
+		var collider = player.ray_corner_grab_check.get_collider()
+		print("collider: "+str(collider))
+		print("Collider has shape: "+str(collider.has_node("Shape")));
+		if !collider.has_node("Shape"):
+			if player.col_auto_climb_bottom.has_overlapping_bodies():
+				player.snap_to_corner(player.ray_corner_grab_check.get_collision_point())
+				player.quick_climb()
+			else:
+				finished.emit("corner_grab")
