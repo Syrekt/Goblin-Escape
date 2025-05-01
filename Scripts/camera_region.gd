@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var boundary = $Boundary
+@onready var boundary : CollisionShape2D = $CollisionShape2D
 
 var limit_top : int
 var limit_bottom : int
@@ -10,6 +10,7 @@ var limit_right : int
 
 func _ready() -> void:
 	var shape : Shape2D = boundary.shape
+	boundary.visible = false
 	var rect = shape.get_rect()
 	var size = rect.size
 	var pos = rect.position

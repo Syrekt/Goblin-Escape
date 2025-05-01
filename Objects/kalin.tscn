@@ -3609,28 +3609,6 @@ collision_mask = 64
 position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_1nk40")
 
-[node name="InteractionPromptnewold" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(0, -39)
-texture = ExtResource("71_a00wu")
-hframes = 8
-vframes = 7
-frame = 44
-region_enabled = true
-region_rect = Rect2(0, 113, 128, 111)
-metadata/_edit_use_anchors_ = true
-
-[node name="InteractionPromptOld" type="Label" parent="."]
-visible = false
-offset_left = -36.0
-offset_top = -53.0
-offset_right = 36.0
-offset_bottom = -25.0
-theme = ExtResource("56_ghu8e")
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
@@ -3685,7 +3663,7 @@ offset_right = 116.0
 offset_bottom = 23.0
 scale = Vector2(0.5, 0.5)
 
-[node name="InventoryPanel" type="PanelContainer" parent="CanvasLayer"]
+[node name="InventoryPanel" type="PanelContainer" parent="CanvasLayer" groups=["UIPanel"]]
 unique_name_in_owner = true
 visible = false
 offset_left = 172.0
@@ -3751,7 +3729,8 @@ layout_mode = 2
 bbcode_enabled = true
 text = "[color=red]This is the description text[/color]"
 
-[node name="CharacterPanel" type="PanelContainer" parent="CanvasLayer"]
+[node name="CharacterPanel" type="PanelContainer" parent="CanvasLayer" groups=["UIPanel"]]
+visible = false
 offset_left = 315.0
 offset_top = 127.0
 offset_right = 525.0

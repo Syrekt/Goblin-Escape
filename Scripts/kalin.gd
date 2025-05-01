@@ -48,6 +48,7 @@ var available_stat_points := 5
 @onready var camera = $Camera2D
 @onready var audio_emitter = $MainAudioStreamer
 @onready var inventory_panel = $CanvasLayer/InventoryPanel
+@onready var character_panel = $CanvasLayer/CharacterPanel
 
 var movable : Node2D = null
 var noise = preload("res://Objects/noise.tscn")
@@ -68,6 +69,7 @@ var move_speed := 0.0
 var facing := 1
 var ignore_corners := false
 var invisible := false
+var movement_disabled := false
 
 var interaction_target : Area2D = null
 
@@ -82,7 +84,6 @@ var state_on_attack_frame := false
 
 var sex_participants : Array
 
-var last_input_type := "keyboard"
 
 
 signal health_depleted
@@ -107,7 +108,7 @@ func set_facing(dir: int):
 		else:
 			node.scale.x = facing
 func get_movement_dir() -> float:
-	if inventory_panel.visible: return 0.0
+	if movement_disabled: return 0.0
 	return Input.get_axis("left", "right")
 func fall(delta):
 	velocity.y += gravity * delta
@@ -222,14 +223,24 @@ func emit_noise(offset : Vector2, amount : float) -> void:
 	_noise.position = position + offset
 func toggle_inventory():
 	inventory_panel.toggle()
+func toggle_character_panel():
+	character_panel.visible = !character_panel.visible
+func check_movement_disabled() -> bool:
+	var ui_nodes = get_tree().get_nodes_in_group("UIPanel")
+	for node in ui_nodes:
+		if node.visible:
+			$InteractionPrompt.supress = true
+			return true
+	$InteractionPrompt.supress = false
+	return false
 func pressed(input : String) -> bool:
-	if inventory_panel.visible: return false
+	if movement_disabled: return false
 	return Input.is_action_pressed(input)
 func just_pressed(input : String) -> bool:
-	if inventory_panel.visible: return false
+	if movement_disabled: return false
 	return Input.is_action_just_pressed(input)
 func just_released(input : String) -> bool:
-	if inventory_panel.visible: return false
+	if movement_disabled: return false
 	return Input.is_action_just_released(input)
 func hide_out(hiding_spot : Area2D) -> void:
 	global_position = hiding_spot.global_position
@@ -358,6 +369,7 @@ func _process(delta: float) -> void:
 	var s = %Sprite2D
 	%StatPoints.text = "Stat Points: " + str(available_stat_points)
 	Debugger.printui(str(state_node.state.name))
+	movement_disabled = check_movement_disabled()
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
 	#region Camera combat position
@@ -382,6 +394,8 @@ func _process(delta: float) -> void:
 			open_menu = null
 	if Input.is_action_just_pressed("inventory"):
 		toggle_inventory()
+	if Input.is_action_just_pressed("character"):
+		toggle_character_panel()
 
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
@@ -393,11 +407,6 @@ func _process(delta: float) -> void:
 		#	inventory.pickup_item(load("res://Inventory/health_potion.tres"))
 
 	check_interactable()
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventJoypadButton || event is InputEventJoypadMotion:
-		last_input_type = "gamepad"
-	elif event is InputEventKey || event is InputEventMouse:
-		last_input_type = "keyboard"
 #endregion
 #region Signals
 func _on_hurtbox_area_entered(area: Area2D) -> void:
@@ -405,7 +414,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 func _on_interactor_area_entered(area: Area2D) -> void:
 	print("interactor area entered")
 	interaction_target = area
-	$InteractionPrompt._show(last_input_type)
+	$InteractionPrompt._show()
 func _on_interactor_area_exited(area: Area2D) -> void:
 	print("interactor area exited")
 	if interaction_target == area:

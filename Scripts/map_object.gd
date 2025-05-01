@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name MapObject extends CharacterBody2D
 
 @onready var sprite : AnimatedSprite2D = $Sprite
 

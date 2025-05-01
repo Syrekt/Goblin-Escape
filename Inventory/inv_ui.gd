@@ -7,6 +7,7 @@ extends PanelContainer
 @export var inventory : Inventory
 
 var item_list : Array
+var player : Player
 
 
 #region Methods
@@ -20,6 +21,7 @@ func _process(delta: float) -> void:
 func toggle() -> void:
 	visible = !visible
 	%DescriptionPanel.visible = visible
+
 	if visible:
 		for item in item_list:
 			if item:

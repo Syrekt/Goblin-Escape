@@ -29,7 +29,23 @@ enum keyboard {
 	Z = 41,
 }
 
-func _show(input_type: String) -> void:
+var last_input_type := "keyboard"
+
+var supress := false
+var _draw := false
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventJoypadButton || event is InputEventJoypadMotion:
+		last_input_type = "gamepad"
+	elif event is InputEventKey || event is InputEventMouse:
+		last_input_type = "keyboard"
+func _process(delta: float) -> void:
+	if _draw:
+		visible = !supress
+	else:
+		visible = false
+
+func _show() -> void:
 	var interaction_prompt = ""
 	var events = InputMap.action_get_events("interact")
 
@@ -37,15 +53,15 @@ func _show(input_type: String) -> void:
 		for event in events:
 			if event is InputEventKey:
 				interaction_prompt = OS.get_keycode_string(event.physical_keycode)
-				if input_type == "keyboard":
+				if last_input_type == "keyboard":
 					play("keyboard")
 					frame = keyboard[interaction_prompt]
 			elif event is InputEventJoypadButton:
 				print("Gamepad Button " + str(event.button_index))
-				if input_type == "gamepad":
+				if last_input_type == "gamepad":
 					play("xbox")
 					frame = event.button_index
 
-	visible = true
+	_draw = true
 func _hide() -> void:
-	visible = false
+	_draw = false
