@@ -19,13 +19,13 @@ func update(delta : float) -> void:
 			print("Target in sight, chase target")
 			finished.emit("chase")
 	elif !enemy.move(enemy.patrol_move_speed, patrol_dir):
-		print("Can't move, switch to idle")
+		#print("Can't move, switch to idle")
 		finished.emit("idle")
 	else:
 		enemy.update_animation("run")
 
 func _on_patrol_timer_timeout() -> void:
-	print("patrol timer timeout, switch to idle")
+	#print("patrol timer timeout, switch to idle")
 	finished.emit("idle")
 	#Idea
 	#if enemy.patrol_amount == 0:
