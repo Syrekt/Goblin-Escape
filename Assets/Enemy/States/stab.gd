@@ -1,7 +1,10 @@
 extends EnemyState
 
 func enter(previous_state_path: String, data := {}) -> void:
-	enemy.call_deferred("update_animation", name)
+	if enemy.counter_attack:
+		enemy.call_deferred("update_animation", name, 2)
+	else:
+		enemy.call_deferred("update_animation", name)
 
 func _on_stab_hitbox_body_entered(defender:Player) -> void:
 	defender.take_damage(1, enemy)

@@ -23,13 +23,14 @@ func update(delta):
 		if enemy.chase_target.combat_properties.stunned:
 			finished.emit("slash")
 		elif enemy.chase_target.state_node.state.name == "stance_heavy":
+			enemy.counter_attack = true
 			finished.emit("stab")
 		elif abs(enemy.chase_target.velocity.x) == enemy.chase_target.stance_walk_speed:
 			finished.emit("stab")
 	else:
 		enemy.lost_target()
 	if enemy.player_proximity.has_overlapping_bodies():
-		enemy.push_player = true
+		enemy.counter_attack = true
 		finished.emit("bash")
 
 

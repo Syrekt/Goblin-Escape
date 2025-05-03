@@ -35,7 +35,6 @@ func update(player : Player) -> void:
 #region Signals
 func _on_dialogue_ended(resource: DialogueResource) -> void:
 	active = false
-	balloon.queue_free()
 	if !repeat:
 		queue_free()
 #engregion

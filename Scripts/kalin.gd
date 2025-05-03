@@ -117,8 +117,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 	var state_name = state_node.state.name
 	if state_name == "death":
 		return
-	if state_name == "hiding" || state_name == "hidding" || state_name == "unhide":
-		%Sprite2D.material.set_shader_parameter("tint_color", Color(0, 0, 0, 0))
+	%Sprite2D.material.set_shader_parameter("tint_color", Color(0, 0, 0, 0))
 
 	combat_properties.stunned = false
 	var defending = state_node.state.name == "stance_defensive"

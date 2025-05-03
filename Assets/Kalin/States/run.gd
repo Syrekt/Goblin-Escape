@@ -6,7 +6,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	player.set_facing(player.get_movement_dir())
 
 func update(delta: float) -> void:
-	if !%Stamina.spend(0.01):
+	if player.combat_target && !%Stamina.spend(0.01):
 		finished.emit("run_stop")
 
 func physics_update(delta: float) -> void:

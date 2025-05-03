@@ -23,7 +23,7 @@ func physics_update(delta: float) -> void:
 		Debugger.printui("tween: "+str(tween));
 	if charge_up == 100 && !tween:
 		print("Start tweening")
-		tween = create_tween().bind_node(self)
+		tween = create_tween().bind_node(self).set_loops(-1)
 		tween.tween_property(%Sprite2D.material, "shader_parameter/outline_color", color_charged_up, 0.2)
 		tween.tween_property(%Sprite2D.material, "shader_parameter/outline_color", c_normal, 0.2)
 

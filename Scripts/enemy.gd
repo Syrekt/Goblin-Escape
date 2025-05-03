@@ -24,7 +24,7 @@ var anim_speed := 1.0
 
 var states_locked := false
 
-var push_player := false
+var counter_attack := false
 
 signal health_depleted
 

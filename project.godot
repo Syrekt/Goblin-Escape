@@ -46,7 +46,7 @@ movie_writer/movie_file="C:/Users/Administrator/Videos/Godot/gd.avi"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/copilot/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/save_system/plugin.cfg")
+enabled=PackedStringArray("res://addons/cameraregion2d/plugin.cfg", "res://addons/copilot/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/save_system/plugin.cfg")
 
 [global_group]
 
