@@ -20,24 +20,27 @@ func _ready() -> void:
 		area.set_collision_layer_value(1, false)
 		area.set_collision_mask_value(1, false)
 		area.set_collision_mask_value(2, true)
+
 		var pcam : PhantomCamera2D = pcam_list[i]
 		pcam.tween_resource.transition = transition_type
 		pcam.tween_resource.ease = ease_type
 		pcam.snap_to_pixel = snap_to_pixel
 		pcam.follow_damping = follow_damping
 		pcam.follow_damping_value = follow_damping_value
+		pcam.draw_limits = true
 		pcam.follow_mode = pcam.FollowMode.SIMPLE
 		pcam.follow_target = %Kalin
+		pcam.limit_target = area.get_child(0).get_path()
 
 func _on_body_entered(body: Node2D, pcam: PhantomCamera2D) -> void:
-	print("Area body entered")
+	print("Area body entered: " + str(pcam))
 	if body is Player:
 		pcam.set_follow_target(body)
 		pcam.set_priority(20)
 		body.pcam = pcam
 
 func _on_body_exited(body: Node2D, pcam: PhantomCamera2D) -> void:
-	print("Area body exited")
+	print("Area body exited: " + str(pcam))
 	if body is Player:
 		pcam.set_priority(0)
 		pcam.set_follow_target(null)

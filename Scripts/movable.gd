@@ -18,6 +18,9 @@ func release() -> void:
 	velocity = Vector2.ZERO
 	grabbed = false
 
+func _ready() -> void:
+	audio_emitter.play()
+	audio_emitter.stream_paused = true
 
 func _physics_process(delta: float) -> void:
 	if !is_on_floor():

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dx25dmahp2sdi" path="res://Assets/Map/FP_CastlePrison/mainlevbuild.png" id="1_qe5bt"]
 
-[node name="Stairs4" type="CharacterBody2D"]
+[node name="Stairs4" type="CharacterBody2D" groups=["OneWayColliders"]]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_qe5bt")
