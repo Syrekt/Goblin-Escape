@@ -46,6 +46,8 @@ signal health_depleted
 
 var line_of_sight: RayCast2D = null
 
+signal heard_noise(id: Enemy)
+
 #region Methods
 func set_facing(dir: int):
 	if dir == 0: pass
@@ -85,6 +87,7 @@ func hear_noise(noise_location : Vector2) -> void:
 	if !$NoiseIgnoreTimer.is_stopped():
 		return
 
+	heard_noise.emit(self)
 	friend = null
 	match state_node.state.name:
 		"idle", "chat_lead":
@@ -125,6 +128,7 @@ func _ready() -> void:
 	add_child(line_of_sight)
 	$Sprite2D.scale.x = 1
 	set_facing(facing)
+	heard_noise.connect(%Kalin.enemy_heard_noise)
 func _physics_process(delta: float) -> void:
 	#region X Movement
 	var dir_x = get_movement_dir() if !direction_locked else facing

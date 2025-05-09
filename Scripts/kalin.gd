@@ -37,6 +37,7 @@ var available_stat_points := 5
 @onready var ray_movable : RayCast2D = $MovableCheck
 @onready var ray_corner_grab_check : RayCast2D = $CornerGrabCheck
 @onready var ray_auto_climb : RayCast2D = $CornerAutoClimb
+@onready var ray_behind : RayCast2D = $RayBehind
 @onready var col_corner_grab_prevent : Area2D = $CornerGrabPrevent
 @onready var col_quick_climb_prevent : Area2D = $QuickClimbPrevent
 @onready var col_stand_check : Area2D = $StandCheck
@@ -45,15 +46,19 @@ var available_stat_points := 5
 @onready var col_corner_hang : Area2D = $CornerHangCheck
 @onready var col_corner_climb_prevent : Area2D = $CornerClimbPrevent
 @onready var cp = combat_properties
-@onready var camera = $Camera2D
-@onready var audio_emitter = $MainAudioStreamer
+@onready var camera : Camera2D = $Camera2D
+@onready var audio_emitter : AudioStreamPlayer2D = $MainAudioStreamer
 @onready var inventory_panel = $CanvasLayer/InventoryPanel
 @onready var character_panel = $CanvasLayer/CharacterPanel
+@onready var thought_container = %ThoughtContainer
 
+var pcam : PhantomCamera2D
 var movable : Node2D = null
 var noise = preload("res://Objects/noise.tscn")
 
 
+var in_combat_state := false
+var has_sword		:= false #false for release
 const SLASH_COST	:= 2
 const STAB_COST		:= 1
 const BASH_COST 	:= 2
@@ -140,7 +145,10 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 			if _source:
 				_source.state_node.state.finished.emit("laugh")
 		elif play_hurt_animation:
-			state_node.state.finished.emit("hurt")
+			if has_sword:
+				state_node.state.finished.emit("hurt")
+			else:
+				state_node.state.finished.emit("hurt_no_sword")
 			Ge.play_audio_from_string_array(audio_emitter, -2, "res://Assets/SFX/Kalin/Hurt")
 func heal(amount: int) -> void:
 	health.value += amount
@@ -244,6 +252,11 @@ func just_released(input : String) -> bool:
 func hide_out(hiding_spot : Area2D) -> void:
 	global_position = hiding_spot.global_position
 	state_node.state.finished.emit("hiding")
+func think(text: String) -> void:
+	thought_container.push(text)
+func enemy_heard_noise(enemy: Enemy) -> void:
+	if !in_combat_state:
+		think("I should be careful")
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -259,6 +272,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			state.finished.emit("stance_light")
 		"hurt":
 			state.finished.emit("stance_light")
+		"hurt_no_sword":
+			state.finished.emit("idle")
 		"corner_climb", "corner_climb_quick":
 			state.finished.emit("idle")
 		"slide":
@@ -372,12 +387,22 @@ func _process(delta: float) -> void:
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
 	#region Camera combat position
-	var in_combat_state = state_node.state.is_in_group("combat_state")
+	in_combat_state = state_node.state.is_in_group("combat_state")
 	if in_combat_state && combat_target:
-		camera.position.x = (combat_target.global_position.x - global_position.x)/2;
+		if pcam:
+			pcam.follow_mode = pcam.FollowMode.GROUP
+			pcam.set_follow_targets([self, combat_target])
+			pcam.draw_limits = false
+		else:
+			camera.position.x = (combat_target.global_position.x - global_position.x)/2;
 		if combat_target.state_node.state.name == "death": combat_target = null
 	else:
-		camera.position.x = 0
+		if pcam && pcam.follow_mode == pcam.FollowMode.GROUP:
+			pcam.follow_mode = pcam.FollowMode.SIMPLE
+			pcam.erase_follow_targets(combat_target)
+			pcam.draw_limits = true
+		else:
+			camera.position.x = 0
 	#endregion
 	if Input.is_action_pressed("restart"):
 		get_tree().reload_current_scene()

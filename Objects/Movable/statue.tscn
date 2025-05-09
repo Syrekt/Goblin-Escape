@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://c0h56exwry3fu" path="res://Assets/SFX/Raise Stone Pillar Long.wav" id="3_berpd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5nbmp"]
-size = Vector2(30, 64)
+size = Vector2(30, 63)
 
 [node name="Statue" type="CharacterBody2D"]
 collision_layer = 33
@@ -17,6 +17,7 @@ noise_offset = Vector2(0, 20)
 texture = ExtResource("2_berpd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_5nbmp")
 
 [node name="Timer" type="Timer" parent="."]

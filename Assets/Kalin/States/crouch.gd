@@ -14,7 +14,7 @@ func physics_update(delta: float) -> void:
 		player.set_crouch_mask(false)
 	elif !player.pressed("down") && player.can_stand_up():
 		player.stand_up()
-	elif player.just_pressed("up"):
+	elif player.just_pressed("jump"):
 		if player.get_slide_collision_count() > 0:
 			var collider = player.get_slide_collision(0).get_collider()
 			print("collider: "+str(collider))

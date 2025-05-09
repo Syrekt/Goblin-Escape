@@ -19,7 +19,7 @@ func play_audio(emitter: AudioStreamPlayer2D, volume: int, audio_path: String) -
 	emitter.stream = load(audio_path)
 	emitter.play()
 func play_audio_free(volume: int, audio_path: String) -> void:
-	var player = AudioStreamPlayer2D.new()
+	var player = AudioStreamPlayer.new()
 	add_sibling(player)
 
 	player.volume_db = volume

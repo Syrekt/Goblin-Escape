@@ -50,10 +50,10 @@ func set_text_for_key() -> void:
 	print(action_keycode)
 
 
-func _on_button_toggled(button_pressed: bool) -> void:
-	if button_pressed:
+func _on_button_toggled(_button_pressed: bool) -> void:
+	if _button_pressed:
 		button.text = "Press any key..."
-		set_process_unhandled_key_input(button_pressed)
+		set_process_unhandled_key_input(_button_pressed)
 
 		for i in get_tree().get_nodes_in_group("key_bind_buttons"):
 			if i.action_name != self.action_name:

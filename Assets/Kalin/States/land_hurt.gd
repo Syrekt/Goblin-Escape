@@ -12,5 +12,6 @@ func enter(previous_state_path: String, data := {}) -> void:
 	tween.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color(0, 0, 0, 0), 0.1)
 
 func exit() -> void:
-	tween.kill()
-	tween = null
+	if tween:
+		tween.kill()
+		tween = null

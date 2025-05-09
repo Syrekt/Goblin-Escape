@@ -33,14 +33,17 @@ func _on_bash_hitbox_body_entered(body: Node2D) -> void:
 	#player.play_sfx(sfx_bash_hit)
 	#Combat.deal_damage(player, player.bash_damage, body, 300)
 	if hitbox.has_overlapping_bodies():
-		var defender : Enemy = hitbox.get_overlapping_bodies()[0]
-		var defender_state = defender.state_node.state.name
-		player.play_sfx(sfx_bash_hit)
+		var defender = hitbox.get_overlapping_bodies()[0]
+		if defender is Enemy:
+			var defender_state = defender.state_node.state.name
+			player.play_sfx(sfx_bash_hit)
 
-		defender.combat_properties.pushback_apply(player.global_position, pushback_force)
-		if !defender.in_combat:
-			defender.stun(2.0)
-		elif !defender_state == "stance_defensive":
-			defender.take_damage(player.bash_damage, player)
-		else:
-			Ge.play_audio_from_string_array(player.audio_emitter, 0, "res://Assets/SFX/Sword hit shield")
+			defender.combat_properties.pushback_apply(player.global_position, pushback_force)
+			if !defender.in_combat:
+				defender.stun(2.0)
+			elif !defender_state == "stance_defensive":
+				defender.take_damage(player.bash_damage, player)
+			else:
+				Ge.play_audio_from_string_array(player.audio_emitter, 0, "res://Assets/SFX/Sword hit shield")
+	else:
+		player.play_sfx(sfx_bash)

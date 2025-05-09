@@ -14,9 +14,9 @@ func update(_delta: float) -> void:
 		finished.emit("fall")
 	elif player.pressed("down"):
 		finished.emit("crouch")
-	elif player.pressed("up"):
+	elif player.just_pressed("jump"):
 		finished.emit("rise")
-	elif !lock_stance_button && player.just_pressed("stance") || player.just_pressed("attack"):
+	elif player.has_sword && !lock_stance_button && (player.just_pressed("stance") || player.just_pressed("attack")):
 		finished.emit("stance_light")
 	elif player.velocity.x != 0:
 		if player.pressed("run") && %Stamina.has_enough(1.0):

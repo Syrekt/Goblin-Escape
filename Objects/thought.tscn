@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dj11vgm24locj"]
+
+[ext_resource type="Script" uid="uid://byxhm37twn184" path="res://Scripts/thought.gd" id="1_kgof5"]
+[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://Assets/Others/main_theme.tres" id="1_wd0ya"]
+
+[node name="Thought" type="RichTextLabel"]
+offset_right = 196.0
+offset_bottom = 14.0
+theme = ExtResource("1_wd0ya")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/line_separation = 0
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "I'm hungry"
+fit_content = true
+scroll_active = false
+script = ExtResource("1_kgof5")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.168627)

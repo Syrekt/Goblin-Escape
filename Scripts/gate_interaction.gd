@@ -6,3 +6,5 @@ func update(player: Player) -> void:
 		if player.inventory_panel.inventory.has_item(owner.key):
 			player.inventory_panel.inventory.item_reduce(owner.key)
 			owner.closed = false
+		else:
+			player.think("I need a key")

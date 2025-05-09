@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bw13g4kr8fx7r"
+path="res://.godot/imported/barricade.dialogue-8d70a3aabe89d61f094788296c0ff86c.tres"
+
+[deps]
+
+source_file="res://Dialogues/barricade.dialogue"
+dest_files=["res://.godot/imported/barricade.dialogue-8d70a3aabe89d61f094788296c0ff86c.tres"]
+
+[params]
+
+defaults=true

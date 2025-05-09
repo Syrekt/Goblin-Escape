@@ -48,10 +48,9 @@ func deal_damage(attacker: CharacterBody2D, damage: int, defender: CharacterBody
 			defender.combat_properties.pushback_apply(attacker.global_position, pushback_force)
 		"bash":
 			print("Attack result: Bash target")
-			if attacker is Enemy && attacker.push_player:
+			if attacker is Enemy && attacker.counter_attack:
 				defender.combat_properties.pushback_apply(attacker.global_position, pushback_force*5)
 				defender.take_damage(0, attacker)
-				attacker.push_player = false
 				result = RESULT_HIT
 			elif attacker is Player && !defender.in_combat:
 				defender.combat_properties.stun(2.0)

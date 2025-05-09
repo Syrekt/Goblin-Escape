@@ -1,0 +1,4 @@
+~ start
+Kalin: Looks like someone tried to barricade the path.
+Kalin: [[I can't pass through here, I need a weapon to break it.|I need a weapon to break the barricade.]]
+=> END

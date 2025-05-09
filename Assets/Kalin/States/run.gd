@@ -19,7 +19,7 @@ func physics_update(delta: float) -> void:
 		finished.emit("slide")
 	elif !player.is_on_floor():
 		finished.emit("fall")
-	elif player.just_pressed("up"):
+	elif player.just_pressed("jump"):
 		player.velocity.x = 10.0 * player.facing
 		finished.emit("rise")
 	elif is_equal_approx(Input.get_axis("left", "right"), 0.0):

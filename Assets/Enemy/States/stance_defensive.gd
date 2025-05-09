@@ -16,7 +16,7 @@ func update(delta):
 			enemy.lost_target()
 	enemy.set_facing(sign(enemy.chase_target.position.x - enemy.position.x))
 	if enemy.player_proximity.has_overlapping_bodies():
-		enemy.push_player = true
+		enemy.counter_attack = true
 		finished.emit("bash")
 	elif enemy.chase_target.velocity.x != 0:
 		finished.emit("stab")
