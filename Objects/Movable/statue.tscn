@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://xy0q654a6bmd" path="res://Scripts/movable.gd" id="1_b23wp"]
 [ext_resource type="Texture2D" uid="uid://bv7mju8hk7yy2" path="res://Assets/Map/Props/spr_statue1.png" id="2_berpd"]
-[ext_resource type="AudioStream" uid="uid://c0h56exwry3fu" path="res://Assets/SFX/Raise Stone Pillar Long.wav" id="3_berpd"]
+[ext_resource type="AudioStream" uid="uid://27ohyoxbt18f" path="res://Assets/SFX/stone_slide1.wav" id="3_berpd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5nbmp"]
 size = Vector2(30, 63)
@@ -26,5 +26,6 @@ autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_berpd")
+max_distance = 72.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

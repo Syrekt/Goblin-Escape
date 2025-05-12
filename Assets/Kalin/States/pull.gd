@@ -17,7 +17,7 @@ func update(delta: float) -> void:
 	if !player.movable.grabbed:
 		finished.emit("idle")
 
-	if player.just_pressed("grab"):
+	if player.just_pressed("grab") || player.velocity.y != 0:
 		finished.emit("idle");
 		player.movable.release()
 	var dir = Input.get_axis("left", "right")

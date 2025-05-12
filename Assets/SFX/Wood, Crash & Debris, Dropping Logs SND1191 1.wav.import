@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://7carfvfvn4t5"
+path="res://.godot/imported/Wood, Crash & Debris, Dropping Logs SND1191 1.wav-da0b5a8b54b61548ff6aca7e58233e2a.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Wood, Crash & Debris, Dropping Logs SND1191 1.wav"
+dest_files=["res://.godot/imported/Wood, Crash & Debris, Dropping Logs SND1191 1.wav-da0b5a8b54b61548ff6aca7e58233e2a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

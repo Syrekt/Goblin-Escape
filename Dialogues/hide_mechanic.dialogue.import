@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cljfpxn0ejlg5"
+path="res://.godot/imported/hide_mechanic.dialogue-47a49164465c6deadff5c02a3d8b441c.tres"
+
+[deps]
+
+source_file="res://Dialogues/hide_mechanic.dialogue"
+dest_files=["res://.godot/imported/hide_mechanic.dialogue-47a49164465c6deadff5c02a3d8b441c.tres"]
+
+[params]
+
+defaults=true

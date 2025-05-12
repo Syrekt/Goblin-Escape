@@ -1,12 +1,14 @@
 extends PlayerState
 
-@onready var land_animation_timer = $LandAnimationTimer
-@onready var fall_damage_timer = $FallDamageTimer
+@onready var land_animation_timer := $LandAnimationTimer
+@onready var fall_damage_timer := $FallDamageTimer
+@onready var grab_timer := $GrabTimer
 
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
 	land_animation_timer.start(0.3)
 	fall_damage_timer.start(0.6)
+	grab_timer.start(0.1)
 
 func physics_update(delta: float) -> void:
 	if player.is_on_floor():
@@ -17,7 +19,7 @@ func physics_update(delta: float) -> void:
 		else:
 			finished.emit("idle")
 
-	if player.can_grab_corner() && player.ray_corner_grab_check.is_colliding():
+	if grab_timer.is_stopped() && player.can_grab_corner() && player.ray_corner_grab_check.is_colliding():
 		var collider = player.ray_corner_grab_check.get_collider()
 		if !collider.is_in_group("OneWayColliders"):
 			if player.col_auto_climb_bottom.has_overlapping_bodies():

@@ -18,10 +18,6 @@ func release() -> void:
 	velocity = Vector2.ZERO
 	grabbed = false
 
-func _ready() -> void:
-	audio_emitter.play()
-	audio_emitter.stream_paused = true
-
 func _physics_process(delta: float) -> void:
 	if !is_on_floor():
 		if grabbed:
@@ -31,10 +27,12 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if falling && is_on_floor_only():
 		Ge.EmitNoise(global_position + noise_offset, 20)
+		Ge.play_audio(audio_emitter, 0, "res://Assets/SFX/stone_drop.wav")
 	falling = velocity.y != 0
 func _process(delta: float) -> void:
 	timer.paused = velocity.x == 0
-	audio_emitter.stream_paused = timer.paused
+	if !timer.paused && !audio_emitter.playing:
+		audio_emitter.play()
 
 
 func _on_timer_timeout() -> void:
