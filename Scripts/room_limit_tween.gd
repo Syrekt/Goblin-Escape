@@ -7,8 +7,8 @@ extends Node2D
 @export var follow_damping : bool
 @export var follow_damping_value : Vector2
 
-@export var area_list : Array[Area2D]
 @export var pcam_list : Array[PhantomCamera2D]
+@export var area_list : Array[Area2D]
 
 
 func _ready() -> void:

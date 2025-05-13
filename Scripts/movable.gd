@@ -3,6 +3,7 @@ class_name Movable extends CharacterBody2D
 @onready var timer : Timer = $Timer
 @onready var audio_emitter : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
+@export var drop_sfx : String = "res://Assets/SFX/stone_drop.wav"
 @export var gravity := 300 * 60
 @export var y_acc := 5
 @export var noise_offset : Vector2
@@ -27,7 +28,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if falling && is_on_floor_only():
 		Ge.EmitNoise(global_position + noise_offset, 20)
-		Ge.play_audio(audio_emitter, 0, "res://Assets/SFX/stone_drop.wav")
+		Ge.play_audio(audio_emitter, 0, drop_sfx)
 	falling = velocity.y != 0
 func _process(delta: float) -> void:
 	timer.paused = velocity.x == 0

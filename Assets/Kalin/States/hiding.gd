@@ -6,7 +6,7 @@ func enter(previous_state_path : String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
 	player.invisible = true
 	z_index_prv = player.z_index
-	player.z_index = 0
+	player.z_index = player.hiding_spot.z_index + 1
 
 func exit() -> void:
 	player.invisible = false

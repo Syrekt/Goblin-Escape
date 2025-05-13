@@ -43,6 +43,7 @@ signal health_depleted
 @onready var cp	= combat_properties
 @onready var audio_emitter = $SFX
 @onready var emote_emitter = $Emote
+@onready var face_location = $FaceMarker
 
 var line_of_sight: RayCast2D = null
 
@@ -125,6 +126,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func _ready() -> void:
 	line_of_sight = RayCast2D.new()
 	line_of_sight.collide_with_bodies = true
+	line_of_sight.position = face_location.position
 	add_child(line_of_sight)
 	$Sprite2D.scale.x = 1
 	set_facing(facing)

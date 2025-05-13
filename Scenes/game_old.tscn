@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="8_cwurv"]
 [ext_resource type="AudioStream" uid="uid://dkgt8hqnqcgaj" path="res://Assets/BGM/juanjo_sound - Do we need a reason.wav" id="8_v158k"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="9_mucmn"]
-[ext_resource type="PackedScene" uid="uid://b4vewnv73flk4" path="res://Objects/Movable/statue.tscn" id="10_ldgsr"]
+[ext_resource type="PackedScene" uid="uid://b4vewnv73flk4" path="res://Assets/Map/Props/Movable/statue.tscn" id="10_ldgsr"]
 [ext_resource type="PackedScene" uid="uid://dk84lu71fcjkl" path="res://Objects/item_pickup.tscn" id="12_rfjv2"]
 [ext_resource type="Resource" uid="uid://cymrd15m31gph" path="res://Dialogues/EmptyRoom1.dialogue" id="12_rku1e"]
 [ext_resource type="PackedScene" uid="uid://bj1frlho00hma" path="res://Assets/Map/Props/stairs2.tscn" id="13_1phco"]
@@ -95,15 +95,15 @@ ease = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ese38"]
 size = Vector2(1040, 352)
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("area_list", "pcam_list")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("pcam_list", "area_list")]
 script = ExtResource("1_81klo")
 snap_to_pixel = true
 transition_type = 7
 ease_type = 1
 follow_damping = true
 follow_damping_value = Vector2(0.2, 0.2)
-area_list = [NodePath("Tilemaps/Starting Room/Starting Room Area"), NodePath("Tilemaps/Passage 1/Passage 1 Area"), NodePath("Tilemaps/Stealth Room 1/Stealth Room 1 Area"), NodePath("Tilemaps/Health Potion Room 1/Health Potion Room 1 Area"), NodePath("Tilemaps/Sword Room/Sword Room Area"), NodePath("Tilemaps/Stealth Room 3/Stealth Room 3 Area"), NodePath("Tilemaps/Key Room/Key Room Area"), NodePath("Tilemaps/Passage 4/Passage 4 Area")]
 pcam_list = [NodePath("Tilemaps/Starting Room/Starting Room Cam"), NodePath("Tilemaps/Passage 1/Passage 1 Cam"), NodePath("Tilemaps/Stealth Room 1/Stealth Room 1 Cam"), NodePath("Tilemaps/Health Potion Room 1/Health Potion Room 1 Cam"), NodePath("Tilemaps/Sword Room/Sword Room Cam"), NodePath("Tilemaps/Stealth Room 3/Stealth Room 3 Cam"), NodePath("Tilemaps/Key Room/Key Room Cam"), NodePath("Tilemaps/Passage 4/Passage 4 Cam")]
+area_list = [NodePath("Tilemaps/Starting Room/Starting Room Area"), NodePath("Tilemaps/Passage 1/Passage 1 Area"), NodePath("Tilemaps/Stealth Room 1/Stealth Room 1 Area"), NodePath("Tilemaps/Health Potion Room 1/Health Potion Room 1 Area"), NodePath("Tilemaps/Sword Room/Sword Room Area"), NodePath("Tilemaps/Stealth Room 3/Stealth Room 3 Area"), NodePath("Tilemaps/Key Room/Key Room Area"), NodePath("Tilemaps/Passage 4/Passage 4 Area")]
 
 [node name="Kalin" parent="." instance=ExtResource("1_v3ybc")]
 unique_name_in_owner = true

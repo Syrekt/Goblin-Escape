@@ -1035,7 +1035,7 @@ one_shot = true
 script = ExtResource("18_pn3ih")
 
 [node name="PatrolTimer" type="Timer" parent="StateMachine/patrol"]
-wait_time = 2.0
+wait_time = 4.0
 one_shot = true
 autostart = true
 
@@ -1173,6 +1173,9 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CrushCheck"]
 position = Vector2(-1, -24)
 shape = SubResource("RectangleShape2D_wgea4")
+
+[node name="FaceMarker" type="Marker2D" parent="."]
+position = Vector2(0, -22)
 
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

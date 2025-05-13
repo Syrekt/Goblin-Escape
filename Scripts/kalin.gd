@@ -55,6 +55,7 @@ var available_stat_points := 5
 var pcam : PhantomCamera2D
 var movable : Node2D = null
 var noise = preload("res://Objects/noise.tscn")
+var hiding_spot : Interaction
 
 
 var in_combat_state := false
@@ -249,7 +250,9 @@ func just_pressed(input : String) -> bool:
 func just_released(input : String) -> bool:
 	if movement_disabled: return false
 	return Input.is_action_just_released(input)
-func hide_out(hiding_spot : Area2D) -> void:
+func hide_out(_hiding_spot : Area2D) -> void:
+	hiding_spot = _hiding_spot
+
 	global_position = hiding_spot.global_position
 	state_node.state.finished.emit("hiding")
 func think(text: String) -> void:

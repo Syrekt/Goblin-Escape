@@ -1,6 +1,8 @@
 class_name MapObject extends CharacterBody2D
 
 @onready var sprite : AnimatedSprite2D = $Sprite
+@onready var drop_marker : Marker2D = $DropMarker
+@onready var audio_emitter : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 @export var destructable := false
 @export var collidable := false
@@ -9,6 +11,7 @@ class_name MapObject extends CharacterBody2D
 @export var y_acc := 5
 
 var damage_taken := 0
+var falling := false
 
 func _ready() -> void:
 	if collidable:
@@ -17,6 +20,10 @@ func _ready() -> void:
 		set_collision_layer_value(8, true)
 
 func _physics_process(delta: float) -> void:
+	falling = velocity.y != 0
+	if falling && is_on_floor_only():
+		Ge.EmitNoise(global_position + drop_marker.position, 20)
+		Ge.play_audio(audio_emitter, 0, "res://Assets/SFX/Hit on wood/")
 	if !is_on_floor():
 		velocity.y = move_toward(velocity.y, gravity * delta, y_acc)
 	move_and_slide()
