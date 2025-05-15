@@ -13,8 +13,13 @@ func update(delta : float) -> void:
 	if direction_timer.is_stopped():
 		enemy.set_facing(-enemy.facing)
 		direction_timer.start()
+
 	if ignore_timer.is_stopped():
 		enemy.emote_emitter.play("confused")
+		enemy.patrolling = true
 		finished.emit("idle")
+		return
+
 	if enemy.chase_target && !enemy.target_obstructed(enemy.chase_target):
 		finished.emit("chase")
+		return

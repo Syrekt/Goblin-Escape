@@ -4,6 +4,17 @@ Press jump to jump.
 => END
 
 ~ fall_damage
-Kalin: I can hurt myself if I fall from this heigth.
-Kalin: I can use this statue to shorten the fall.
+Kalin: I will hurt myself if I fall from this heigth.
+Kalin: I can hand from ledges to shorten the fall.
 => END
+
+~ hiding
+Kalin: Damn it, I where is my sword?
+Kalin: I guess I've dropped it while I was running away from that group of bandits...
+Kalin: I can't fight without a weapon, I'll have to hide until I find one.
+Kalin: I guess I can hide inside the cavities on the wall... it's risky, but I have no choice.
+=> END
+
+~ combat
+Kalin: Finally, these fuckers don't stand a chance against me.
+do Ge.show_combat_tutorial.emit()

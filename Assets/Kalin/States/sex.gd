@@ -12,8 +12,8 @@ func enter(previous_state_path: String, data := {}) -> void:
 	slap_emitter = AudioStreamPlayer2D.new()
 	moan_emitter = AudioStreamPlayer2D.new()
 
-	get_tree().current_scene.add_child(slap_emitter)
-	get_tree().current_scene.add_child(moan_emitter)
+	owner.add_child(slap_emitter)
+	owner.add_child(moan_emitter)
 
 func exit() -> void:
 	slap_emitter.queue_free()
@@ -27,6 +27,6 @@ func count_animation() -> void:
 	if animation_counter >= animation_counter_max:
 		finished.emit("orgasm")
 func play_random_slap_sound() -> void:
-	Ge.play_audio_from_string_array(slap_emitter, 1, "res://Assets/Sex/Slap/")
+	Ge.play_audio_from_string_array(slap_emitter, 0, "res://Assets/Sex/Slap/")
 func play_random_moan_sound() -> void:
-	Ge.play_audio_from_string_array(moan_emitter, 1, "res://Assets/Sex/Moan/")
+	Ge.play_audio_from_string_array(moan_emitter, 0, "res://Assets/Sex/Moan/")

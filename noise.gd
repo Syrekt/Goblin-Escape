@@ -2,12 +2,19 @@ extends Node2D
 
 var amount_cur := 0.0
 var amount_max : float
+var is_ready := false
+var source : CharacterBody2D
 
 @onready var collider = $Area2D
 @onready var shape = $Area2D/Shape
 
 
 func _process(delta: float) -> void:
+	if !is_ready:
+		await get_tree().process_frame
+		is_ready = true
+		return
+
 	amount_cur = move_toward(amount_cur, amount_max, 0.3)
 	if amount_cur >= amount_max:
 		queue_free()
@@ -16,7 +23,7 @@ func _process(delta: float) -> void:
 
 	if collider.has_overlapping_bodies():
 		for body in collider.get_overlapping_bodies():
-			body.hear_noise(global_position)
+			body.hear_noise(self)
 
 
 

@@ -12,7 +12,7 @@ func exit() -> void:
 		player.pcam.follow_offset = Vector2.ZERO
 
 func update(delta: float) -> void:
-	if player.pressed("up"):
+	if player.pressed("up") || player.pressed("jump"):
 		finished.emit("corner_climb")
 	if player.just_pressed("down"):
 		player.ignore_corners = true;

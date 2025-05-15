@@ -1,19 +1,22 @@
 extends PlayerState
 
 @onready var land_animation_timer := $LandAnimationTimer
-@onready var fall_damage_timer := $FallDamageTimer
 @onready var grab_timer := $GrabTimer
+
+var fall_start_y : float
 
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
 	land_animation_timer.start(0.3)
-	fall_damage_timer.start(0.6)
 	grab_timer.start(0.1)
+	fall_start_y = player.global_position.y
 
 func physics_update(delta: float) -> void:
 	if player.is_on_floor():
-		if fall_damage_timer.is_stopped():
-			finished.emit("land_hurt")
+		var fall_damage = round((player.global_position.y - fall_start_y)/128)
+		print("fall_damage: "+str(fall_damage))
+		if fall_damage > 0:
+			finished.emit("land_hurt", {"fall_damage" : fall_damage})
 		elif land_animation_timer.is_stopped():
 			finished.emit("land")
 		else:
@@ -27,3 +30,7 @@ func physics_update(delta: float) -> void:
 				player.quick_climb()
 			else:
 				finished.emit("corner_grab")
+	
+	if player.ladder:
+		if Input.is_action_pressed("up") || Input.is_action_pressed("down"):
+			finished.emit("ladder_climb")

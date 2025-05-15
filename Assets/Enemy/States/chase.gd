@@ -22,5 +22,6 @@ func update(delta):
 	elif %AttackDetector.has_overlapping_bodies():
 		if enemy.chase_target.dead || enemy.chase_target.unconscious:
 			enemy.update_animation("idle")
+			enemy.velocity.x = 0
 		else:
-			finished.emit("stance_light")
+			finished.emit("stance_defensive")

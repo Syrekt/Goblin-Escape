@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://2prh5eduxlje"]
+
+[ext_resource type="Script" uid="uid://basn50vsd1u7p" path="res://Scripts/condition_checker.gd" id="1_cum3g"]
+
+[node name="ConditionChecker" type="Node2D"]
+script = ExtResource("1_cum3g")

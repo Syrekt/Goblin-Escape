@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cx6tcje3rwlkx"]
+[gd_scene load_steps=6 format=3 uid="uid://cx6tcje3rwlkx"]
 
 [ext_resource type="Texture2D" uid="uid://dmunr874241aw" path="res://Assets/Map/Props/spr_crates1.png" id="1_4n3rg"]
 [ext_resource type="Script" uid="uid://2psqd5pwfxyk" path="res://Scripts/map_object.gd" id="4_1d6uj"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4n3rg"]
+polygon = PackedVector2Array(-16, -14, -12, -17, 14, -16, 16, -14, 16, 13, 12, 16, -16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2stkb"]
 animations = [{
@@ -29,13 +32,16 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5srt2"]
 size = Vector2(30, 30)
 
-[node name="Crate" type="CharacterBody2D"]
+[node name="Crate1" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("4_1d6uj")
 destructable = true
 collidable = true
 gravity = null
 y_acc = null
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_4n3rg")
 
 [node name="DropMarker" type="Marker2D" parent="."]
 position = Vector2(0, 16)

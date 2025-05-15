@@ -1,6 +1,6 @@
 extends TextureProgressBar
 
-@export var recovery_speed := 1.0
+@export var regeneration_speed := 1.0
 
 @onready var timer = $Timer
 
@@ -10,17 +10,17 @@ var tween : Tween = null
 var tint_under_tween : Tween = null
 
 func _process(delta: float) -> void:
-	var final_recovery_speed = recovery_speed
+	var final_regeneration_speed = regeneration_speed
 
 	var arr : Array = get_children()
 	for child in arr:
 		if child is Buff:
-			final_recovery_speed += child.value
+			final_regeneration_speed += child.value
 
 	if timer.time_left == 0:
-		value = move_toward(value, max_value, recovery_speed*delta)
+		value = move_toward(value, max_value, regeneration_speed*delta)
 
-	if final_recovery_speed > recovery_speed:
+	if final_regeneration_speed > regeneration_speed:
 		if !tint_under_tween:
 			tint_under_tween = create_tween().bind_node(self)
 			tint_under_tween.set_loops(-1)

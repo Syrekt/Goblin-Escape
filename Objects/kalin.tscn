@@ -1,6 +1,8 @@
-[gd_scene load_steps=226 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=234 format=3 uid="uid://h2hwfpjw4rte"]
 
-[ext_resource type="Script" uid="uid://coi4g5fo3jf06" path="res://Scripts/kalin.gd" id="1_tpqnq"]
+[ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
+[ext_resource type="Script" uid="uid://ettvx4a2msjv" path="res://Scripts/camera_2d.gd" id="2_0g2co"]
 [ext_resource type="Texture2D" uid="uid://dcs3l0iefjo7w" path="res://Assets/Kalin/Sprites/Kalin-Fall.png" id="2_1j6vo"]
 [ext_resource type="Texture2D" uid="uid://boahl6r6b6lgx" path="res://Assets/Kalin/Sprites/Kalin-Crouch_Idle.png" id="2_6cw72"]
 [ext_resource type="Texture2D" uid="uid://b83foasp85e6b" path="res://Assets/Kalin/Sprites/Kalin-Bash.png" id="2_s11s3"]
@@ -51,19 +53,24 @@
 [ext_resource type="Script" uid="uid://4n2pywsn1qd6" path="res://Assets/Kalin/States/stance_defensive.gd" id="38_823eb"]
 [ext_resource type="Script" uid="uid://f4jufjbul03i" path="res://Assets/Kalin/States/slash.gd" id="39_af0aw"]
 [ext_resource type="Script" uid="uid://2w325nrhldrd" path="res://Assets/Kalin/States/stance_walk.gd" id="39_rgkp8"]
+[ext_resource type="PackedScene" uid="uid://b23mtnfp7xuec" path="res://Objects/emote.tscn" id="40_2d1nf"]
 [ext_resource type="Script" uid="uid://bwrdgmfgq5cw3" path="res://Assets/Kalin/States/animation_state_player.gd" id="40_xirjq"]
 [ext_resource type="Script" uid="uid://b203v085bx2rg" path="res://Assets/Kalin/States/bash.gd" id="41_pdh0h"]
 [ext_resource type="Script" uid="uid://bvi7mrhp8r1py" path="res://Assets/Kalin/States/stab.gd" id="41_sat24"]
+[ext_resource type="Script" uid="uid://clti5tx0txok1" path="res://Scripts/player_health.gd" id="43_uhoyi"]
 [ext_resource type="Texture2D" uid="uid://c4sgdo50jnun4" path="res://Assets/Kalin/Sprites/Kalin-Run.png" id="44_h06e0"]
 [ext_resource type="PackedScene" uid="uid://2s1ryg6qqqmc" path="res://Objects/hitbox.tscn" id="45_42hh8"]
 [ext_resource type="Texture2D" uid="uid://cywhcouoj6ral" path="res://Assets/Kalin/Sprites/Kalin-Stun.png" id="45_pat22"]
 [ext_resource type="Resource" uid="uid://buieik1hf8xh2" path="res://Inventory/player_inventory.tres" id="46_1q8gn"]
 [ext_resource type="Script" uid="uid://7g1nk1glip7t" path="res://Assets/Kalin/States/push_idle.gd" id="48_mwqkq"]
 [ext_resource type="PackedScene" uid="uid://bf7nobsdrpasm" path="res://UI/Buttons/stat_panel.tscn" id="48_t42fh"]
+[ext_resource type="Texture2D" uid="uid://dqt7xyqy7n62e" path="res://Assets/Others/Sliders/experience_frame.png" id="48_vt74v"]
+[ext_resource type="Texture2D" uid="uid://c8hla1g24y7u7" path="res://Assets/Others/Sliders/experience.png" id="49_083qx"]
 [ext_resource type="Script" uid="uid://csoiaj7ta1d2b" path="res://Scripts/thought_container.gd" id="49_b2c13"]
 [ext_resource type="Script" uid="uid://cahuc4po87bew" path="res://Assets/Kalin/States/block.gd" id="49_sprrr"]
 [ext_resource type="Script" uid="uid://fqf7yx6g1f1f" path="res://Assets/Kalin/States/push.gd" id="49_ujutq"]
 [ext_resource type="Script" uid="uid://ckgc63224e6or" path="res://Assets/Kalin/States/death.gd" id="50_1fn32"]
+[ext_resource type="Script" uid="uid://000pldstjcvg" path="res://Scripts/experience.gd" id="50_083qx"]
 [ext_resource type="Script" uid="uid://c2g5e1h8b8lqc" path="res://Assets/Kalin/States/pull.gd" id="50_tcyto"]
 [ext_resource type="Script" uid="uid://dwq1nm237bc0m" path="res://Assets/Kalin/States/corner_grab.gd" id="51_t8vjn"]
 [ext_resource type="Script" uid="uid://cihngsdr3x7el" path="res://Assets/Kalin/States/corner_climb.gd" id="52_4ckjm"]
@@ -86,6 +93,7 @@
 [ext_resource type="Script" uid="uid://cqgh8iyg4ujbk" path="res://Objects/interaction_prompt.gd" id="72_rp7vf"]
 [ext_resource type="Texture2D" uid="uid://fyevcw0t8yc" path="res://Assets/Others/panel_bg.png" id="73_qdj7c"]
 [ext_resource type="Script" uid="uid://drm2busxe3db8" path="res://Inventory/inv_ui.gd" id="73_ugwbb"]
+[ext_resource type="Script" uid="uid://dwwirxo8vr8kq" path="res://Assets/Kalin/States/ladder_climb.gd" id="88_7e6uh"]
 
 [sub_resource type="Animation" id="Animation_5koc5"]
 length = 0.001
@@ -453,10 +461,10 @@ tracks/2/path = NodePath(".:hframes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [14, 14]
+"values": [14]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -585,50 +593,50 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath(".:hframes")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [14, 14]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_xyrfg")]
-}
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:offset")
+tracks/2/path = NodePath(".:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("4_xyrfg"), ExtResource("4_xyrfg")]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:hframes")
+tracks/3/path = NodePath(".:offset")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [14]
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_qdaj2"]
@@ -3566,12 +3574,23 @@ size = Vector2(20, 30)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfvac"]
 size = Vector2(105, 32)
 
-[node name="Kalin" type="CharacterBody2D"]
+[node name="Kalin" type="CharacterBody2D" groups=["Persistent"]]
 z_index = 2
 collision_layer = 2
 script = ExtResource("1_tpqnq")
 slide_speed = 200.0
 snap_offset = Vector2(-17, 3)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+editor_draw_limits = true
+script = ExtResource("2_0g2co")
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_mode = 3
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("2_0bx81")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
@@ -3602,6 +3621,10 @@ position = Vector2(0, -42)
 sprite_frames = SubResource("SpriteFrames_go1w5")
 animation = &"xbox"
 script = ExtResource("72_rp7vf")
+
+[node name="Emote" parent="." instance=ExtResource("40_2d1nf")]
+visible = false
+position = Vector2(0, -36)
 
 [node name="ColliderStanding" type="CollisionShape2D" parent="." groups=["Flip"]]
 visible = false
@@ -3699,7 +3722,6 @@ shape = SubResource("RectangleShape2D_1nk40")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -3718,26 +3740,33 @@ scale = Vector2(4, 4)
 layout_mode = 0
 offset_right = 108.0
 offset_bottom = 41.0
+theme_override_constants/separation = 0
 
 [node name="Health" type="TextureProgressBar" parent="CanvasLayer/HUD/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-max_value = 5.0
-value = 5.0
+max_value = 10.0
+step = 0.0
+value = 10.0
 texture_under = ExtResource("57_lnkvj")
 texture_progress = ExtResource("58_8idp1")
+script = ExtResource("43_uhoyi")
+
+[node name="VSplitContainer" type="VSplitContainer" parent="CanvasLayer/HUD/HBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="Stamina" type="TextureProgressBar" parent="CanvasLayer/HUD/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 3.0
-step = 0.01
+step = 0.0
 value = 3.0
 texture_under = ExtResource("57_lnkvj")
 texture_progress = ExtResource("59_8idp1")
 tint_progress = Color(0.999732, 0.936424, 0.920197, 1)
 script = ExtResource("60_2ksh1")
-recovery_speed = 2.0
 
 [node name="Timer" type="Timer" parent="CanvasLayer/HUD/HBoxContainer/Stamina"]
 one_shot = true
@@ -3749,6 +3778,20 @@ offset_top = 7.0
 offset_right = 116.0
 offset_bottom = 23.0
 scale = Vector2(0.5, 0.5)
+
+[node name="Experience" type="TextureProgressBar" parent="CanvasLayer/HUD/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+step = 0.0
+value = 100.0
+texture_under = ExtResource("48_vt74v")
+texture_progress = ExtResource("49_083qx")
+script = ExtResource("50_083qx")
+
+[node name="VSplitContainer2" type="VSplitContainer" parent="CanvasLayer/HUD/HBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="InventoryPanel" type="PanelContainer" parent="CanvasLayer" groups=["UIPanel"]]
 unique_name_in_owner = true
@@ -3901,9 +3944,6 @@ script = ExtResource("12_oysea")
 [node name="LandAnimationTimer" type="Timer" parent="StateMachine/fall"]
 one_shot = true
 
-[node name="FallDamageTimer" type="Timer" parent="StateMachine/fall"]
-one_shot = true
-
 [node name="GrabTimer" type="Timer" parent="StateMachine/fall"]
 one_shot = true
 
@@ -4039,6 +4079,9 @@ script = ExtResource("68_73qvi")
 
 [node name="unhide" type="Node" parent="StateMachine"]
 script = ExtResource("70_egy32")
+
+[node name="ladder_climb" type="Node" parent="StateMachine"]
+script = ExtResource("88_7e6uh")
 
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

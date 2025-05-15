@@ -954,11 +954,11 @@ shader_parameter/flash_color = Color(1, 1, 1, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qsl2l"]
 size = Vector2(15, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rha5u"]
-size = Vector2(20, 32)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wgea4"]
 size = Vector2(18, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rha5u"]
+size = Vector2(20, 32)
 
 [node name="Enemy" type="CharacterBody2D"]
 z_index = 1
@@ -992,14 +992,19 @@ shape = SubResource("RectangleShape2D_lvv27")
 [node name="CombatProperties" parent="." instance=ExtResource("7_7ej0e")]
 pushback_duration = 0.5
 
-[node name="FallCheck" type="RayCast2D" parent="."]
-visible = false
+[node name="FallCheckRight" type="RayCast2D" parent="."]
 position = Vector2(0, -10)
 target_position = Vector2(17, 27)
 
-[node name="WallCheck" type="RayCast2D" parent="."]
-visible = false
+[node name="FallCheckLeft" type="RayCast2D" parent="."]
+position = Vector2(0, -10)
+target_position = Vector2(-17, 27)
+
+[node name="WallCheckRight" type="RayCast2D" parent="."]
 target_position = Vector2(24, 0)
+
+[node name="WallCheckLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-24, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
 material = SubResource("ShaderMaterial_xhuvx")
@@ -1019,6 +1024,36 @@ collision_mask = 2
 position = Vector2(77.9999, -16)
 scale = Vector2(10.4, 1.64)
 shape = SubResource("RectangleShape2D_qsl2l")
+
+[node name="NoiseIgnoreTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Health" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = -26.0
+offset_top = 19.0
+offset_right = 26.0
+offset_bottom = 59.0
+max_value = 6.0
+value = 6.0
+texture_progress = ExtResource("26_ifl3v")
+
+[node name="Emote" parent="." instance=ExtResource("30_tjqy8")]
+unique_name_in_owner = true
+visible = false
+position = Vector2(2, -47)
+
+[node name="CrushCheck" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrushCheck"]
+position = Vector2(-1, -24)
+shape = SubResource("RectangleShape2D_wgea4")
+
+[node name="FaceMarker" type="Marker2D" parent="."]
+position = Vector2(0, -22)
 
 [node name="StateMachine" parent="." instance=ExtResource("17_n2jyc")]
 visible = false
@@ -1094,16 +1129,19 @@ scale = Vector2(1.905, 1)
 script = ExtResource("22_7ej28")
 
 [node name="Timer" type="Timer" parent="StateMachine/stance_heavy"]
+wait_time = 0.5
 
 [node name="stance_light" type="Node" parent="StateMachine"]
 script = ExtResource("23_j8fla")
 
 [node name="Timer" type="Timer" parent="StateMachine/stance_light"]
+wait_time = 0.5
 
 [node name="stance_defensive" type="Node" parent="StateMachine"]
 script = ExtResource("24_lox44")
 
 [node name="Timer" type="Timer" parent="StateMachine/stance_defensive"]
+wait_time = 0.5
 
 [node name="stun" type="Node" parent="StateMachine"]
 script = ExtResource("25_208af")
@@ -1147,42 +1185,13 @@ one_shot = true
 
 [node name="chat_secondary" type="Node" parent="StateMachine"]
 
-[node name="NoiseIgnoreTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
-[node name="Health" type="TextureProgressBar" parent="."]
-unique_name_in_owner = true
-visible = false
-offset_left = -26.0
-offset_top = 19.0
-offset_right = 26.0
-offset_bottom = 59.0
-max_value = 3.0
-value = 3.0
-texture_progress = ExtResource("26_ifl3v")
-
-[node name="Emote" parent="." instance=ExtResource("30_tjqy8")]
-unique_name_in_owner = true
-visible = false
-position = Vector2(2, -47)
-
-[node name="CrushCheck" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CrushCheck"]
-position = Vector2(-1, -24)
-shape = SubResource("RectangleShape2D_wgea4")
-
-[node name="FaceMarker" type="Marker2D" parent="."]
-position = Vector2(0, -22)
-
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="ChaseDetector" to="." method="_on_chase_detector_body_entered"]
 [connection signal="body_entered" from="ChaseDetector" to="StateMachine/patrol" method="_on_chase_detector_body_entered"]
 [connection signal="body_exited" from="ChaseDetector" to="." method="_on_chase_detector_body_exited"]
 [connection signal="body_exited" from="ChaseDetector" to="StateMachine/patrol" method="_on_chase_detector_body_exited"]
+[connection signal="body_entered" from="CrushCheck" to="." method="_on_crush_check_body_entered"]
 [connection signal="timeout" from="StateMachine/idle/IdleTimer" to="StateMachine/idle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/patrol/PatrolTimer" to="StateMachine/patrol" method="_on_patrol_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/slash/SlashHitbox" to="StateMachine/slash" method="_on_slash_hitbox_body_entered"]
@@ -1196,7 +1205,6 @@ position = Vector2(0, -22)
 [connection signal="timeout" from="StateMachine/leave_player/Timer" to="StateMachine/leave_player" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/chat_lead/LeadTimer" to="StateMachine/chat_lead" method="_on_lead_timer_timeout"]
 [connection signal="timeout" from="StateMachine/chat_lead/SecondaryTimer" to="StateMachine/chat_lead" method="_on_secondary_timer_timeout"]
-[connection signal="body_entered" from="CrushCheck" to="." method="_on_crush_check_body_entered"]
 
 [editable path="StateMachine/slash/SlashHitbox"]
 [editable path="StateMachine/stab/StabHitbox"]

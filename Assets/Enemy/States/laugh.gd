@@ -6,7 +6,6 @@ func enter(previous_state_path : String, data := {}):
 	enemy.call_deferred("update_animation", name)
 
 	audio_emitter = AudioStreamPlayer2D.new()
-	get_tree().current_scene.add_child(audio_emitter)
 
 	enemy.emote_emitter.play("lewd")
 

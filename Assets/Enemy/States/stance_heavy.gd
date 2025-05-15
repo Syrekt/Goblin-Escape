@@ -10,7 +10,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	if instant:
 		$Timer.start(0.1)
 	else:
-		$Timer.start(randf_range(1.0, 2.0))
+		$Timer.start()
 
 func exit():
 	$Timer.stop()
@@ -21,6 +21,11 @@ func update(delta):
 			finished.emit("chase")
 		else:
 			enemy.lost_target()
+			return
+
+	if enemy.health.value <= 0:
+		finished.emit("laugh")
+
 	enemy.set_facing(sign(enemy.chase_target.position.x - enemy.position.x))
 	if enemy.player_proximity.has_overlapping_bodies():
 		finished.emit("slash")

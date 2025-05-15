@@ -3,6 +3,8 @@ class_name Enemy extends CharacterBody2D
 
 const RUN_SPEED = 300.0 * 60
 
+@export var debug := false
+
 @export var move_speed := 100 * 60
 @export var patrol_move_speed := 100 * 60
 @export var gravity := 500.0;
@@ -33,8 +35,6 @@ signal health_depleted
 @onready var state_node		    = $StateMachine
 @onready var health			    = $Health
 @onready var combat_properties  = $CombatProperties
-@onready var ray_fall_check		= $FallCheck
-@onready var ray_wall_check		= $WallCheck
 @onready var player_proximity	= $PlayerProximity
 
 @onready var slash_hitbox = $StateMachine/slash/SlashHitbox/Collider
@@ -44,6 +44,7 @@ signal health_depleted
 @onready var audio_emitter = $SFX
 @onready var emote_emitter = $Emote
 @onready var face_location = $FaceMarker
+@onready var player : Player = get_node("/root/Game/Kalin")
 
 var line_of_sight: RayCast2D = null
 
@@ -71,24 +72,31 @@ func take_damage(_damage : int, _source: Node2D):
 	else:
 		Ge.play_audio_from_string_array(audio_emitter, 0, "res://Assets/SFX/Goblin/Hurt/")
 		state_node.state.finished.emit("hurt")
+func next_step_free(direction : int) -> bool:
+	if direction == 1:
+		return !$WallCheckRight.is_colliding() && $FallCheckRight.is_colliding()
+	else:
+		return !$WallCheckLeft.is_colliding() && $FallCheckLeft.is_colliding()
 func move(speed: float, direction: int) -> bool:
-	#Update the ray direction towards the direction we want to move
-	ray_fall_check.scale.x = direction
-	ray_wall_check.scale.x = direction
+	if !next_step_free(direction):
+		return false
 
+	#Update the ray direction towards the direction we want to move
 	velocity.x = speed * direction * get_process_delta_time()
-	return ray_fall_check.is_colliding() && !ray_wall_check.is_colliding() && velocity.x != 0
+
+	return velocity.x != 0
 func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 	if animation_player.current_animation != anim:
 		animation_player.play(&"RESET");
 		animation_player.advance(0)
 		animation_player.play(anim, -1, speed, from_end)
 		animation_player.advance(0)
-func hear_noise(noise_location : Vector2) -> void:
+func hear_noise(noise: Node2D) -> void:
 	if !$NoiseIgnoreTimer.is_stopped():
 		return
 
-	heard_noise.emit(self)
+	if noise.source is Player:
+		heard_noise.emit(self)
 	friend = null
 	match state_node.state.name:
 		"idle", "chat_lead":
@@ -130,8 +138,16 @@ func _ready() -> void:
 	add_child(line_of_sight)
 	$Sprite2D.scale.x = 1
 	set_facing(facing)
-	heard_noise.connect(%Kalin.enemy_heard_noise)
+	heard_noise.connect(player.enemy_heard_noise)
 func _physics_process(delta: float) -> void:
+	if debug:
+		Debugger.printui("$WallCheckLeft.is_colliding(): "+str($WallCheckLeft.is_colliding()));
+		Debugger.printui("$WallCheckRight.is_colliding(): "+str($WallCheckRight.is_colliding()));
+		Debugger.printui("$FallCheckLeft.is_colliding(): "+str($FallCheckLeft.is_colliding()));
+		Debugger.printui("$FallCheckRight.is_colliding(): "+str($FallCheckRight.is_colliding()));
+		Debugger.printui("patrolling: "+str(patrolling))
+		Debugger.printui("patrol_amount: "+str(patrol_amount))
+		Debugger.printui("state_node.state.name: "+str(state_node.state.name));
 	#region X Movement
 	var dir_x = get_movement_dir() if !direction_locked else facing
 

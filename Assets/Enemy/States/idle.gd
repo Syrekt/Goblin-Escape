@@ -3,6 +3,7 @@ extends EnemyState
 func enter(previous_state_path : String, data = {}) -> void:
 	enemy.call_deferred("update_animation", name)
 	enemy.velocity.x = 0
+	#Can patrol even if patrolling is set to false, will idle after patrol_amount == 0
 	if enemy.patrol_amount || enemy.patrolling:
 		$IdleTimer.start()
 func exit() -> void:

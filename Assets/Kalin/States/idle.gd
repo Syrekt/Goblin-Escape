@@ -23,3 +23,6 @@ func update(_delta: float) -> void:
 			finished.emit("run")
 		else:
 			finished.emit("walk")
+	elif player.ladder:
+		if Input.is_action_pressed("up"):
+			finished.emit("ladder_climb")

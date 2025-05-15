@@ -14,8 +14,6 @@ func update(delta: float) -> void:
 	if recovery_timer.is_stopped():
 		finished.emit("recover")
 
-	Debugger.printui("recovery_timer.time_left: "+str(recovery_timer.time_left));
-	Debugger.printui("sex_timer.time_left: "+str(sex_timer.time_left));
 	if sex_timer.is_stopped():
 		if participant_collider.has_overlapping_bodies():
 			for body in participant_collider.get_overlapping_bodies():

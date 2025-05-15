@@ -20,6 +20,7 @@ class_name Player extends CharacterBody2D
 @export var dead				:= false # Health == 0
 @export var unconscious			:= false # Post sex situations where health isn't 0
 
+var level := 0
 var available_stat_points := 5
 @export var vitality := 0
 @export var strength := 0
@@ -29,6 +30,7 @@ var available_stat_points := 5
 @onready var state_node := $StateMachine
 @onready var health : TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Health
 @onready var stamina : TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Stamina
+@onready var experience : TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Experience
 @onready var crouching_mask : CollisionShape2D = $ColliderCrouching
 @onready var standing_mask  : CollisionShape2D = $ColliderStanding
 @onready var sprite : Sprite2D = $Sprite2D
@@ -51,15 +53,17 @@ var available_stat_points := 5
 @onready var inventory_panel = $CanvasLayer/InventoryPanel
 @onready var character_panel = $CanvasLayer/CharacterPanel
 @onready var thought_container = %ThoughtContainer
+@onready var emote = $Emote
 
 var pcam : PhantomCamera2D
 var movable : Node2D = null
 var noise = preload("res://Objects/noise.tscn")
 var hiding_spot : Interaction
+var ladder : Area2D
 
 
+@export var has_sword := false #false for release
 var in_combat_state := false
-var has_sword		:= false #false for release
 const SLASH_COST	:= 2
 const STAB_COST		:= 1
 const BASH_COST 	:= 2
@@ -141,10 +145,8 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 		state_node.state.finished.emit("block")
 	else:
 		health.value -= _damage
-		if health.value <= 0:
+		if health.value <= 0.1:
 			emit_signal("health_depleted")
-			if _source:
-				_source.state_node.state.finished.emit("laugh")
 		elif play_hurt_animation:
 			if has_sword:
 				state_node.state.finished.emit("hurt")
@@ -183,6 +185,9 @@ func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 		animation_player.play(&"RESET");
 		animation_player.advance(0)
 		animation_player.play(anim, -1, speed, from_end)
+		#animation_player.stop()
+		#animation_player.seek(0.0, true)
+		#animation_player.play(anim, -1, speed, from_end)
 		animation_player.advance(0)
 		%Sprite2D.material.set_shader_parameter("number_of_images", Vector2(%Sprite2D.hframes, %Sprite2D.vframes))
 func snap_to_corner(ledge_position: Vector2) -> void:
@@ -225,10 +230,11 @@ func sex_begin(participants: Array, _position: String) -> void:
 	call_deferred("update_animation", _position)
 func emit_noise(offset : Vector2, amount : float) -> void:
 	var _noise = noise.instantiate()
-	get_tree().current_scene.add_child(_noise)
 
 	_noise.amount_max = amount
-	_noise.position = position + offset
+	_noise.global_position = global_position + offset
+
+	add_sibling(_noise)
 func toggle_inventory():
 	inventory_panel.toggle()
 func toggle_character_panel():
@@ -253,13 +259,36 @@ func just_released(input : String) -> bool:
 func hide_out(_hiding_spot : Area2D) -> void:
 	hiding_spot = _hiding_spot
 
-	global_position = hiding_spot.global_position
+	#global_position = hiding_spot.global_position
 	state_node.state.finished.emit("hiding")
+	var tween : Tween = create_tween().bind_node(self)
+	tween.tween_property(self, "global_position", _hiding_spot.global_position, 0.2).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+
 func think(text: String) -> void:
 	thought_container.push(text)
+	emote.play("talking")
 func enemy_heard_noise(enemy: Enemy) -> void:
 	if !in_combat_state:
 		think("I should be careful")
+func save() -> Dictionary:
+	var save_dict = {
+		"filename"	: get_scene_file_path(),
+		"parent"	: get_parent().get_path(),
+		"pos_x"	: position.x,
+		"pos_y"	: position.y,
+
+		"available_stat_points" : available_stat_points,
+		"level"		: level,
+		"vitality"	: vitality,
+		"strength" 	: strength,
+		"dexterity"	: dexterity,
+		"endurance"	: endurance,
+
+		"hp_cur"	: health.value,
+		"hp_max"	: health.max_value,
+		"has_sword" : has_sword,
+	}
+	return save_dict
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -366,6 +395,8 @@ func _physics_process(delta: float) -> void:
 		match state_name:
 			"corner_climb", "corner_grab", "corner_hang":
 				velocity.y = 0
+			"ladder_climb":
+				pass
 			_:
 				velocity.y += gravity * delta
 
@@ -383,6 +414,10 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
+	if just_pressed("quick save"):
+		Ge.save_game()
+	if just_pressed("quick load"):
+		Ge.load_game()
 	var s = %Sprite2D
 	%StatPoints.text = "Stat Points: " + str(available_stat_points)
 	Debugger.printui(str(state_node.state.name))

@@ -1,13 +1,11 @@
-[gd_scene load_steps=43 format=4 uid="uid://can1cxqnsjntr"]
+[gd_scene load_steps=41 format=4 uid="uid://can1cxqnsjntr"]
 
 [ext_resource type="Script" uid="uid://drax23314hg08" path="res://Scripts/room_limit_tween.gd" id="1_81klo"]
 [ext_resource type="PackedScene" uid="uid://h2hwfpjw4rte" path="res://Objects/kalin.tscn" id="1_v3ybc"]
 [ext_resource type="Script" uid="uid://dytt7cafdt3c1" path="res://Scripts/game_manager.gd" id="1_yp60x"]
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Assets/Map/FP_CastlePrison/castle_prison.tres" id="2_h4fw4"]
-[ext_resource type="Script" uid="uid://ettvx4a2msjv" path="res://Scripts/camera_2d.gd" id="4_gwty8"]
 [ext_resource type="PackedScene" uid="uid://bpj2k5beannxk" path="res://Objects/dialogue_trigger.tscn" id="6_ssinu"]
 [ext_resource type="PackedScene" uid="uid://hk23fmyof4sb" path="res://Objects/sword.tscn" id="7_22asu"]
-[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="7_tgy6u"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="8_cwurv"]
 [ext_resource type="AudioStream" uid="uid://dkgt8hqnqcgaj" path="res://Assets/BGM/juanjo_sound - Do we need a reason.wav" id="8_v158k"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="9_mucmn"]
@@ -109,20 +107,6 @@ area_list = [NodePath("Tilemaps/Starting Room/Starting Room Area"), NodePath("Ti
 unique_name_in_owner = true
 position = Vector2(4166, 935)
 
-[node name="Camera2D" type="Camera2D" parent="Kalin"]
-physics_interpolation_mode = 1
-zoom = Vector2(3, 3)
-process_callback = 0
-limit_smoothed = true
-position_smoothing_speed = 10.0
-script = ExtResource("4_gwty8")
-
-[node name="PhantomCameraHost" type="Node" parent="Kalin/Camera2D"]
-process_priority = 300
-process_physics_priority = 300
-script = ExtResource("7_tgy6u")
-metadata/_custom_type_script = "uid://bd046eokvcnu2"
-
 [node name="Tilemaps" type="Node" parent="."]
 
 [node name="bg1" type="TileMapLayer" parent="Tilemaps"]
@@ -148,6 +132,7 @@ follow_target = NodePath("../../../Kalin")
 zoom = Vector2(3, 3)
 tween_resource = SubResource("Resource_8m3t6")
 tween_on_load = false
+draw_limits = true
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="Starting Room Area" type="Area2D" parent="Tilemaps/Starting Room"]
@@ -183,6 +168,7 @@ position = Vector2(2864, 832)
 script = ExtResource("8_cwurv")
 zoom = Vector2(3, 3)
 tween_resource = SubResource("Resource_81klo")
+draw_limits = true
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="Passage 1 Area" type="Area2D" parent="Tilemaps/Passage 1"]
@@ -206,6 +192,7 @@ follow_target = NodePath("../../../Kalin")
 zoom = Vector2(3, 3)
 tween_resource = SubResource("Resource_8m3t6")
 follow_damping_value = Vector2(0.2, 0.2)
+draw_limits = true
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="Stealth Room 1 Area" type="Area2D" parent="Tilemaps/Stealth Room 1"]
@@ -257,6 +244,7 @@ follow_mode = 2
 follow_target = NodePath("../../../Kalin")
 zoom = Vector2(3, 3)
 tween_resource = SubResource("Resource_ese38")
+draw_limits = true
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="Health Potion Room 1 Area" type="Area2D" parent="Tilemaps/Health Potion Room 1"]
@@ -297,6 +285,7 @@ follow_mode = 2
 follow_target = NodePath("../../../Kalin")
 zoom = Vector2(3, 3)
 tween_resource = SubResource("Resource_oeip8")
+draw_limits = true
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="Sword Room Area" type="Area2D" parent="Tilemaps/Sword Room"]
@@ -319,6 +308,7 @@ follow_mode = 2
 follow_target = NodePath("../../../Kalin")
 zoom = Vector2(3, 3)
 tween_resource = SubResource("Resource_xe308")
+draw_limits = true
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="Stealth Room 3 Area" type="Area2D" parent="Tilemaps/Stealth Room 3"]
@@ -337,6 +327,7 @@ tile_set = ExtResource("2_h4fw4")
 script = ExtResource("8_cwurv")
 zoom = Vector2(3, 3)
 tween_resource = SubResource("Resource_22asu")
+draw_limits = true
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="Key Room Area" type="Area2D" parent="Tilemaps/Key Room"]
@@ -353,6 +344,7 @@ shape = SubResource("RectangleShape2D_fkdbe")
 script = ExtResource("8_cwurv")
 zoom = Vector2(3, 3)
 tween_resource = SubResource("Resource_fkdbe")
+draw_limits = true
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="Passage 4 Area" type="Area2D" parent="Tilemaps/Passage 4"]

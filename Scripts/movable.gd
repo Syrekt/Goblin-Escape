@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	if falling && is_on_floor_only():
-		Ge.EmitNoise(global_position + noise_offset, 20)
+		Ge.EmitNoise(self, global_position + noise_offset, 20)
 		Ge.play_audio(audio_emitter, 0, drop_sfx)
 	falling = velocity.y != 0
 func _process(delta: float) -> void:
@@ -37,4 +37,4 @@ func _process(delta: float) -> void:
 
 
 func _on_timer_timeout() -> void:
-	Ge.EmitNoise(global_position + noise_offset, 20)
+	Ge.EmitNoise(self, global_position + noise_offset, 20)
