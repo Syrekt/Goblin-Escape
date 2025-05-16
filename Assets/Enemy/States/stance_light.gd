@@ -1,16 +1,4 @@
-extends EnemyState
-
-
-func enter(previous_state_path: String, data := {}) -> void:
-	enemy.call_deferred("update_animation", "stance_light")
-	enemy.move(0, 0)
-	$Timer.start(0.5)
-	if !%AttackDetector.has_overlapping_bodies():
-		finished.emit("chase")
-
-func exit():
-	$Timer.stop()
-
+extends EnemyCombatState
 
 func update(delta):
 	if enemy.chase_target:
@@ -32,7 +20,3 @@ func update(delta):
 	if enemy.player_proximity.has_overlapping_bodies():
 		enemy.counter_attack = true
 		finished.emit("bash")
-
-
-func _on_timer_timeout() -> void:
-	finished.emit("stab")

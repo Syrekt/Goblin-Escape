@@ -1,4 +1,4 @@
-[gd_scene load_steps=234 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=241 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -58,24 +58,30 @@
 [ext_resource type="Script" uid="uid://b203v085bx2rg" path="res://Assets/Kalin/States/bash.gd" id="41_pdh0h"]
 [ext_resource type="Script" uid="uid://bvi7mrhp8r1py" path="res://Assets/Kalin/States/stab.gd" id="41_sat24"]
 [ext_resource type="Script" uid="uid://clti5tx0txok1" path="res://Scripts/player_health.gd" id="43_uhoyi"]
+[ext_resource type="Texture2D" uid="uid://cdf5u0hk86v0o" path="res://Assets/Others/smoke_test.png" id="44_3q7yy"]
 [ext_resource type="Texture2D" uid="uid://c4sgdo50jnun4" path="res://Assets/Kalin/Sprites/Kalin-Run.png" id="44_h06e0"]
 [ext_resource type="PackedScene" uid="uid://2s1ryg6qqqmc" path="res://Objects/hitbox.tscn" id="45_42hh8"]
 [ext_resource type="Texture2D" uid="uid://cywhcouoj6ral" path="res://Assets/Kalin/Sprites/Kalin-Stun.png" id="45_pat22"]
 [ext_resource type="Resource" uid="uid://buieik1hf8xh2" path="res://Inventory/player_inventory.tres" id="46_1q8gn"]
+[ext_resource type="Texture2D" uid="uid://blmckxe1r5wjg" path="res://Assets/Others/Sliders/arousal.png" id="47_i87jo"]
 [ext_resource type="Script" uid="uid://7g1nk1glip7t" path="res://Assets/Kalin/States/push_idle.gd" id="48_mwqkq"]
 [ext_resource type="PackedScene" uid="uid://bf7nobsdrpasm" path="res://UI/Buttons/stat_panel.tscn" id="48_t42fh"]
 [ext_resource type="Texture2D" uid="uid://dqt7xyqy7n62e" path="res://Assets/Others/Sliders/experience_frame.png" id="48_vt74v"]
+[ext_resource type="Script" uid="uid://bkhxntb5d6xm5" path="res://Scripts/arousal.gd" id="48_yekxk"]
 [ext_resource type="Texture2D" uid="uid://c8hla1g24y7u7" path="res://Assets/Others/Sliders/experience.png" id="49_083qx"]
 [ext_resource type="Script" uid="uid://csoiaj7ta1d2b" path="res://Scripts/thought_container.gd" id="49_b2c13"]
 [ext_resource type="Script" uid="uid://cahuc4po87bew" path="res://Assets/Kalin/States/block.gd" id="49_sprrr"]
 [ext_resource type="Script" uid="uid://fqf7yx6g1f1f" path="res://Assets/Kalin/States/push.gd" id="49_ujutq"]
+[ext_resource type="Texture2D" uid="uid://7l40v0sl8k6q" path="res://Assets/Others/Sliders/stamina_frame.png" id="49_yekxk"]
 [ext_resource type="Script" uid="uid://ckgc63224e6or" path="res://Assets/Kalin/States/death.gd" id="50_1fn32"]
 [ext_resource type="Script" uid="uid://000pldstjcvg" path="res://Scripts/experience.gd" id="50_083qx"]
 [ext_resource type="Script" uid="uid://c2g5e1h8b8lqc" path="res://Assets/Kalin/States/pull.gd" id="50_tcyto"]
 [ext_resource type="Script" uid="uid://dwq1nm237bc0m" path="res://Assets/Kalin/States/corner_grab.gd" id="51_t8vjn"]
 [ext_resource type="Script" uid="uid://cihngsdr3x7el" path="res://Assets/Kalin/States/corner_climb.gd" id="52_4ckjm"]
+[ext_resource type="Texture2D" uid="uid://cjeyai1dtsq0a" path="res://Assets/Others/Sliders/smell.png" id="54_5dltv"]
 [ext_resource type="Script" uid="uid://dla7rfv4p43jf" path="res://Assets/Kalin/States/slide.gd" id="54_5dxkx"]
 [ext_resource type="Script" uid="uid://cenw0nn0fohoa" path="res://Assets/Kalin/States/interacting.gd" id="55_5lcso"]
+[ext_resource type="Script" uid="uid://b6xjst2veilw0" path="res://Scripts/smell.gd" id="55_h4isg"]
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://Assets/Others/main_theme.tres" id="56_ghu8e"]
 [ext_resource type="Script" uid="uid://dpcphh4eavvle" path="res://Assets/Kalin/States/stun.gd" id="56_qqpcq"]
 [ext_resource type="Texture2D" uid="uid://cn50pdxbrvllo" path="res://Assets/Others/Sliders/health_frame.png" id="57_lnkvj"]
@@ -2907,6 +2913,20 @@ _data = {
 &"wallslide": SubResource("Animation_1pm5w")
 }
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oq5iy"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(20.24, 20.59, 1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = 180.0
+angle_max = 180.0
+gravity = Vector3(0, -2, 0)
+linear_accel_min = -2.43
+linear_accel_max = 2.0
+scale_min = 0.5
+scale_max = 1.5
+color = Color(0.6282, 0.396, 0.72, 0.447059)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bs037"]
 shader = ExtResource("34_wxg5w")
 shader_parameter/outline_color = Color(0, 0, 0, 0)
@@ -3609,6 +3629,11 @@ current = true
 
 [node name="CombatProperties" parent="." instance=ExtResource("2_yetl5")]
 
+[node name="SmellParticles" type="GPUParticles2D" parent="."]
+texture = ExtResource("44_3q7yy")
+lifetime = 5.0
+process_material = SubResource("ParticleProcessMaterial_oq5iy")
+
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_bs037")
@@ -3720,6 +3745,7 @@ position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_1nk40")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -3742,7 +3768,7 @@ offset_right = 108.0
 offset_bottom = 41.0
 theme_override_constants/separation = 0
 
-[node name="Health" type="TextureProgressBar" parent="CanvasLayer/HUD/HBoxContainer"]
+[node name="Health" type="TextureProgressBar" parent="CanvasLayer/HUD/HBoxContainer" groups=["Persistent"]]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 10.0
@@ -3752,20 +3778,14 @@ texture_under = ExtResource("57_lnkvj")
 texture_progress = ExtResource("58_8idp1")
 script = ExtResource("43_uhoyi")
 
-[node name="VSplitContainer" type="VSplitContainer" parent="CanvasLayer/HUD/HBoxContainer"]
-custom_minimum_size = Vector2(0, 2)
-layout_mode = 2
-theme_override_constants/separation = 10
-
 [node name="Stamina" type="TextureProgressBar" parent="CanvasLayer/HUD/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-max_value = 3.0
+max_value = 5.0
 step = 0.0
-value = 3.0
-texture_under = ExtResource("57_lnkvj")
+value = 5.0
+texture_under = ExtResource("49_yekxk")
 texture_progress = ExtResource("59_8idp1")
-tint_progress = Color(0.999732, 0.936424, 0.920197, 1)
 script = ExtResource("60_2ksh1")
 
 [node name="Timer" type="Timer" parent="CanvasLayer/HUD/HBoxContainer/Stamina"]
@@ -3779,14 +3799,28 @@ offset_right = 116.0
 offset_bottom = 23.0
 scale = Vector2(0.5, 0.5)
 
-[node name="Experience" type="TextureProgressBar" parent="CanvasLayer/HUD/HBoxContainer"]
+[node name="Experience" type="TextureProgressBar" parent="CanvasLayer/HUD/HBoxContainer" groups=["Persistent"]]
 unique_name_in_owner = true
 layout_mode = 2
 step = 0.0
-value = 100.0
 texture_under = ExtResource("48_vt74v")
 texture_progress = ExtResource("49_083qx")
 script = ExtResource("50_083qx")
+
+[node name="Arousal" type="TextureProgressBar" parent="CanvasLayer/HUD/HBoxContainer" groups=["Persistent"]]
+unique_name_in_owner = true
+layout_mode = 2
+step = 0.0
+texture_under = ExtResource("48_vt74v")
+texture_progress = ExtResource("47_i87jo")
+script = ExtResource("48_yekxk")
+
+[node name="Smell" type="TextureProgressBar" parent="CanvasLayer/HUD/HBoxContainer"]
+layout_mode = 2
+step = 0.0
+texture_under = ExtResource("48_vt74v")
+texture_progress = ExtResource("54_5dltv")
+script = ExtResource("55_h4isg")
 
 [node name="VSplitContainer2" type="VSplitContainer" parent="CanvasLayer/HUD/HBoxContainer"]
 custom_minimum_size = Vector2(0, 2)
@@ -3968,7 +4002,12 @@ script = ExtResource("33_ao24u")
 [node name="stance_defensive" type="Node" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("38_823eb")
 
-[node name="block" type="Node" parent="StateMachine"]
+[node name="ParryTimer" type="Timer" parent="StateMachine/stance_defensive"]
+unique_name_in_owner = true
+wait_time = 0.7
+one_shot = true
+
+[node name="block" type="Node" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("49_sprrr")
 
 [node name="stance_walk" type="Node" parent="StateMachine" groups=["combat_state"]]

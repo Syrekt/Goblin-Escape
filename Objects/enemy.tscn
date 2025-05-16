@@ -960,11 +960,12 @@ size = Vector2(18, 11)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rha5u"]
 size = Vector2(20, 32)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("main_stance")]
 z_index = 1
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("1_18den")
+main_stance = NodePath("StateMachine/stance_light")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
@@ -1036,8 +1037,8 @@ offset_left = -26.0
 offset_top = 19.0
 offset_right = 26.0
 offset_bottom = 59.0
-max_value = 6.0
-value = 6.0
+max_value = 5.0
+value = 5.0
 texture_progress = ExtResource("26_ifl3v")
 
 [node name="Emote" parent="." instance=ExtResource("30_tjqy8")]
@@ -1125,23 +1126,39 @@ collision_mask = 2
 position = Vector2(19.125, -20)
 scale = Vector2(1.905, 1)
 
-[node name="stance_heavy" type="Node" parent="StateMachine"]
+[node name="stance_heavy" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state")]
 script = ExtResource("22_7ej28")
+attack_state = NodePath("../slash")
 
-[node name="Timer" type="Timer" parent="StateMachine/stance_heavy"]
+[node name="StanceTimer" type="Timer" parent="StateMachine/stance_heavy"]
+one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="StateMachine/stance_heavy"]
 wait_time = 0.5
+one_shot = true
 
-[node name="stance_light" type="Node" parent="StateMachine"]
+[node name="stance_light" type="Node" parent="StateMachine" node_paths=PackedStringArray("transitions", "attack_state")]
 script = ExtResource("23_j8fla")
+transitions = [NodePath("../stance_heavy"), NodePath("../stance_defensive")]
+attack_state = NodePath("../stab")
 
-[node name="Timer" type="Timer" parent="StateMachine/stance_light"]
-wait_time = 0.5
+[node name="StanceTimer" type="Timer" parent="StateMachine/stance_light"]
+one_shot = true
 
-[node name="stance_defensive" type="Node" parent="StateMachine"]
+[node name="AttackTimer" type="Timer" parent="StateMachine/stance_light"]
+wait_time = 0.75
+one_shot = true
+
+[node name="stance_defensive" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state")]
 script = ExtResource("24_lox44")
+attack_state = NodePath("../bash")
 
-[node name="Timer" type="Timer" parent="StateMachine/stance_defensive"]
+[node name="StanceTimer" type="Timer" parent="StateMachine/stance_defensive"]
+one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="StateMachine/stance_defensive"]
 wait_time = 0.5
+one_shot = true
 
 [node name="stun" type="Node" parent="StateMachine"]
 script = ExtResource("25_208af")
@@ -1197,9 +1214,12 @@ one_shot = true
 [connection signal="body_entered" from="StateMachine/slash/SlashHitbox" to="StateMachine/slash" method="_on_slash_hitbox_body_entered"]
 [connection signal="body_entered" from="StateMachine/stab/StabHitbox" to="StateMachine/stab" method="_on_stab_hitbox_body_entered"]
 [connection signal="body_entered" from="StateMachine/bash/BashHitbox" to="StateMachine/bash" method="_on_bash_hitbox_body_entered"]
-[connection signal="timeout" from="StateMachine/stance_heavy/Timer" to="StateMachine/stance_heavy" method="_on_timer_timeout"]
-[connection signal="timeout" from="StateMachine/stance_light/Timer" to="StateMachine/stance_light" method="_on_timer_timeout"]
-[connection signal="timeout" from="StateMachine/stance_defensive/Timer" to="StateMachine/stance_defensive" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/stance_heavy/StanceTimer" to="StateMachine/stance_heavy" method="_on_stance_timer_timeout"]
+[connection signal="timeout" from="StateMachine/stance_heavy/AttackTimer" to="StateMachine/stance_heavy" method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="StateMachine/stance_light/StanceTimer" to="StateMachine/stance_light" method="_on_stance_timer_timeout"]
+[connection signal="timeout" from="StateMachine/stance_light/AttackTimer" to="StateMachine/stance_light" method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="StateMachine/stance_defensive/StanceTimer" to="StateMachine/stance_defensive" method="_on_stance_timer_timeout"]
+[connection signal="timeout" from="StateMachine/stance_defensive/AttackTimer" to="StateMachine/stance_defensive" method="_on_attack_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/chase/AttackDetector" to="StateMachine/chase" method="_on_attack_detector_body_entered"]
 [connection signal="body_exited" from="StateMachine/chase/AttackDetector" to="." method="_on_attack_detector_body_exited"]
 [connection signal="timeout" from="StateMachine/leave_player/Timer" to="StateMachine/leave_player" method="_on_timer_timeout"]

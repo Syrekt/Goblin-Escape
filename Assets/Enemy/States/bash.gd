@@ -5,6 +5,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 		enemy.call_deferred("update_animation", name, 2)
 	else:
 		enemy.call_deferred("update_animation", name)
+	enemy.velocity.x = 0
 
 func exit() -> void:
 	enemy.counter_attack = false
@@ -25,7 +26,7 @@ func _on_bash_hitbox_body_entered(defender:Player) -> void:
 				enemy.combat_properties.pushback_apply(defender.global_position, 100)
 			else:
 				defender.combat_properties.pushback_apply(enemy.global_position, 100)
-		if !defender_state == "stance_defensive":
+
 			defender.take_damage(1, enemy)
 			if defender.health.value <= 0:
 				finished.emit("laugh")

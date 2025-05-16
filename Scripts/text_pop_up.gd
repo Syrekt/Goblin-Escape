@@ -4,12 +4,12 @@ extends Node2D
 
 @onready var label : RichTextLabel = $Label
 
-func _ready() -> void:
+func tween_begin(color1: Color, color2: Color) -> void:
 	var tween = create_tween().bind_node(self)
-	tween.tween_property(label, "modulate", Color(1, 0, 0, 1), 0.1)
-	tween.tween_property(label, "modulate", Color(1, 1, 1, 1), 0.1)
-	tween.tween_property(label, "modulate", Color(1, 0, 0, 1), 0.1)
-	tween.tween_property(label, "modulate", Color(1, 1, 1, 1), 0.1)
+	tween.tween_property(label, "modulate", color1, 0.1)
+	tween.tween_property(label, "modulate", color2, 0.1)
+	tween.tween_property(label, "modulate", color1, 0.1)
+	tween.tween_property(label, "modulate", color2, 0.1)
 	tween.tween_property(label, "modulate:a", 0.0, 2)
 	tween.tween_callback(queue_free)
 

@@ -11,6 +11,7 @@ const RUN_SPEED = 300.0 * 60
 @export var damage := 1
 @export var in_combat := false
 @export var patrolling := false
+@export var main_stance : EnemyState
 #Only one enemy should have friend and chatting values
 #The one with the assigned values will control the conversation and behavior
 @export var chatting := false
@@ -28,6 +29,8 @@ var states_locked := false
 
 var counter_attack := false
 
+var attack_type_taken : Array[String]
+
 signal health_depleted
 
 @onready var animation_player   = $AnimationPlayer
@@ -44,7 +47,7 @@ signal health_depleted
 @onready var audio_emitter = $SFX
 @onready var emote_emitter = $Emote
 @onready var face_location = $FaceMarker
-@onready var player : Player = get_node("/root/Game/Kalin")
+@onready var player : CharacterBody2D = get_node("/root/Game/Kalin")
 
 var line_of_sight: RayCast2D = null
 
@@ -72,11 +75,17 @@ func take_damage(_damage : int, _source: Node2D):
 	else:
 		Ge.play_audio_from_string_array(audio_emitter, 0, "res://Assets/SFX/Goblin/Hurt/")
 		state_node.state.finished.emit("hurt")
+	
+	var attack_type = _source.state_node.state.name
+	attack_type_taken.append(attack_type)
+	print("attack_type_taken: "+str(attack_type_taken))
 func next_step_free(direction : int) -> bool:
 	if direction == 1:
 		return !$WallCheckRight.is_colliding() && $FallCheckRight.is_colliding()
-	else:
+	elif direction == -1:
 		return !$WallCheckLeft.is_colliding() && $FallCheckLeft.is_colliding()
+	else:
+		return true
 func move(speed: float, direction: int) -> bool:
 	if !next_step_free(direction):
 		return false
@@ -115,6 +124,12 @@ func lost_target() -> void:
 	patrol_amount = 4
 	state_node.state.finished.emit("idle")
 	chase_target = null
+func save() -> Dictionary:
+	var save_dict = {
+		"pos_x" : global_position.x,
+		"pos_y" : global_position.y,
+	}
+	return save_dict
 #endregion
 #region Animation end
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -123,7 +138,21 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 	match state_name:
 		"slash", "stab", "bash":
-			state.finished.emit("stance_light")
+			state.finished.emit(main_stance.name)
+		"hurt":
+			var n = randi() % 3
+			print("n: "+str(n))
+			if n:
+				var attack_to_counter = attack_type_taken.pick_random()
+				match attack_to_counter:
+					"slash":
+						state.finished.emit("stance_light")
+					"stab":
+						state.finished.emit("stance_defensive")
+					"bash":
+						state.finished.emit("stance_heavy")
+			else:
+				state.finished.emit(main_stance.name)
 		"death":
 			if is_on_floor():
 				set_collision_layer_value(4, false)
@@ -178,7 +207,9 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Signals
 func _on_health_depleted() -> void:
+	print("health depleted")
 	state_node.state.finished.emit("death")
+	player.experience.add(10)
 func _on_chase_detector_body_entered(body:Node2D) -> void:
 	if !body.invisible:
 		chase_target = body

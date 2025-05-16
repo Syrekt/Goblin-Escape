@@ -8,11 +8,12 @@ z_index = 3
 script = ExtResource("1_7e1b5")
 
 [node name="Label" type="RichTextLabel" parent="."]
-offset_left = -93.0
+offset_left = -96.0
 offset_top = -16.0
-offset_right = 94.0
-offset_bottom = -2.0
+offset_right = 96.0
 theme = ExtResource("2_1hwjk")
 bbcode_enabled = true
+text = "[img]res://Assets/Others/smoke_test.png[/img] testset "
+scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1

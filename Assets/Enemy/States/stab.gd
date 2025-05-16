@@ -6,6 +6,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 		Ge.play_audio_free(4, "res://Assets/SFX/sfx_counter_attack1.wav")
 	else:
 		enemy.call_deferred("update_animation", name)
+	enemy.velocity.x = 0
 func exit() -> void:
 	enemy.counter_attack = false
 

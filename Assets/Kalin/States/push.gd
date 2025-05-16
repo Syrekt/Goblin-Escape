@@ -12,8 +12,8 @@ func update(delta: float) -> void:
 		finished.emit("idle")
 		return
 
-	%Stamina.spend(0.01)
-	if !%Stamina.has_enough(0.01):
+	player.stamina.spend(0.01, 0.1)
+	if !player.stamina.has_enough(0.01):
 		player.velocity.x = 0
 		finished.emit("push_idle")
 

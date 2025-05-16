@@ -31,10 +31,11 @@ func _process(delta: float) -> void:
 		tint_under_tween = null
 
 
-func spend(amount: float) -> bool:
+func spend(amount: float, smell := 0.0) -> bool:
 	if value >= amount:
 		value -= amount
 		timer.start()
+		owner.smell.get_dirty(smell)
 		return true
 	else:
 		blink()

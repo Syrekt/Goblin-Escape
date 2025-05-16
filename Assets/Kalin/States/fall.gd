@@ -13,7 +13,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	if player.is_on_floor():
-		var fall_damage = round((player.global_position.y - fall_start_y)/128)
+		var fall_damage = round((player.global_position.y - fall_start_y)/164)
 		print("fall_damage: "+str(fall_damage))
 		if fall_damage > 0:
 			finished.emit("land_hurt", {"fall_damage" : fall_damage})

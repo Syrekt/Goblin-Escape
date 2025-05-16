@@ -1,5 +1,7 @@
 extends Node
 
+var loading := false
+
 signal show_combat_tutorial
 
 func _ready() -> void:
@@ -59,7 +61,14 @@ func save_game() -> void:
 			continue
 
 		# Call the node's save function.
-		var node_data = node.call("save")
+		var node_data = node.save()
+		for prop in node.get_property_list():
+			if prop.name == "save_list":
+				for _node in node.save_list:
+					print("_node.name: "+str(_node.name));
+					node_data[_node.name] = _node.save()
+		node_data["filename"] = node.get_scene_file_path()
+		node_data["parent"] = node.get_parent().get_path()
 
 		# JSON provides a static method to serialized JSON string.
 		var json_string = JSON.stringify(node_data)
@@ -69,10 +78,14 @@ func save_game() -> void:
 
 	print("Game saved")
 func load_game() -> void:
+	print("Loading...")
+
+	loading = true
 	get_tree().paused = true
+
 	var loading_screen = get_node("/root/Game/CanvasLayer/LoadingScreen")
 	loading_screen.show()
-	print("Loading...")
+
 	if not FileAccess.file_exists("user://savegame.ge"):
 		return # Error! We don't have a save to load.
 
@@ -114,4 +127,13 @@ func load_game() -> void:
 			if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y":
 				continue
 			new_object.set(i, node_data[i])
+	loading = false
 	print("Game loaded.")
+
+var popup_scene = preload("res://Objects/text_pop_up.tscn")
+func popup_text(position: Vector2, text: String, color1 := Color.WHITE, color2 := Color.WHITE) -> void:
+	var popup = popup_scene.instantiate()
+	get_tree().current_scene.add_child(popup)
+	popup.global_position = position - Vector2(0, 20)
+	popup.label.text = text
+	popup.tween_begin(color1, color2)

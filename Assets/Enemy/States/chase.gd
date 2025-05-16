@@ -24,4 +24,4 @@ func update(delta):
 			enemy.update_animation("idle")
 			enemy.velocity.x = 0
 		else:
-			finished.emit("stance_defensive")
+			finished.emit(enemy.main_stance.name)

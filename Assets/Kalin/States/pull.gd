@@ -8,8 +8,8 @@ func physics_update(delta: float) -> void:
 	player.movable.velocity = player.velocity;
 
 func update(delta: float) -> void:
-	%Stamina.spend(0.01)
-	if !%Stamina.has_enough(0.01):
+	player.stamina.spend(0.01, 0.1)
+	if !player.stamina.has_enough(0.01):
 		player.velocity.x = 0
 		finished.emit("push_idle")
 

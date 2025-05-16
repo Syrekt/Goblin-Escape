@@ -106,6 +106,7 @@ area_list = [NodePath("Tilemaps/Starting Room/Starting Room Area"), NodePath("Ti
 [node name="Kalin" parent="." instance=ExtResource("1_v3ybc")]
 unique_name_in_owner = true
 position = Vector2(4166, 935)
+save_list = Array[NodePath]([])
 
 [node name="Tilemaps" type="Node" parent="."]
 

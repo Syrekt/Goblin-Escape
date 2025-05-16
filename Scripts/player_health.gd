@@ -39,3 +39,9 @@ func add_buff(_value : float, _time : float) -> void:
 	var buff = buff_scene.instantiate()
 	add_child(buff)
 	buff.setup(_value, _time)
+func save() -> Dictionary:
+	var save_dict = {
+		"value"	: value,
+		"max_value"	: max_value
+	}
+	return save_dict

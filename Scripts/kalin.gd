@@ -1,6 +1,6 @@
 class_name Player extends CharacterBody2D
 
-
+#region Movement
 @export var run_speed			:= 100.0 * 60.0
 @export var walk_speed			:= 50.0 * 60.0
 @export var stance_walk_speed	:= 30.0 * 60.0
@@ -17,20 +17,29 @@ class_name Player extends CharacterBody2D
 @export var snap_offset			:= Vector2(-5, -13)
 @export var facing_locked		:= false
 @export var direction_locked	:= false
-@export var dead				:= false # Health == 0
-@export var unconscious			:= false # Post sex situations where health isn't 0
 
+var move_speed := 0.0
+var facing := 1
+var ignore_corners := false
+var invisible := false
+var movement_disabled := false
+#endregion
+#region Stats & EXP
 var level := 0
 var available_stat_points := 5
 @export var vitality := 0
 @export var strength := 0
 @export var dexterity := 0
 @export var endurance := 0
-
+#endregion
+#region Node pointers
 @onready var state_node := $StateMachine
-@onready var health : TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Health
-@onready var stamina : TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Stamina
+@onready var health		: TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Health
+@onready var stamina	: TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Stamina
 @onready var experience : TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Experience
+@onready var smell		: TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Smell
+@onready var smell_particles : GPUParticles2D = $SmellParticles
+@onready var arousal	: TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Arousal
 @onready var crouching_mask : CollisionShape2D = $ColliderCrouching
 @onready var standing_mask  : CollisionShape2D = $ColliderStanding
 @onready var sprite : Sprite2D = $Sprite2D
@@ -54,14 +63,8 @@ var available_stat_points := 5
 @onready var character_panel = $CanvasLayer/CharacterPanel
 @onready var thought_container = %ThoughtContainer
 @onready var emote = $Emote
-
-var pcam : PhantomCamera2D
-var movable : Node2D = null
-var noise = preload("res://Objects/noise.tscn")
-var hiding_spot : Interaction
-var ladder : Area2D
-
-
+#endregion
+#region Combat
 @export var has_sword := false #false for release
 var in_combat_state := false
 const SLASH_COST	:= 2
@@ -70,39 +73,26 @@ const BASH_COST 	:= 2
 var slash_damage	:= 2
 var stab_damage		:= 1
 var bash_damage 	:= 1
-
-
+var damage			:= 1
+var combat_target : CharacterBody2D = null
+#endregion
+#region Others
+@export var dead				:= false # Health == 0
+@export var unconscious			:= false # Post sex situations where health isn't 0
+var states_locked := false
+@export var save_list : Array[NodePath]
+var pcam : PhantomCamera2D
+var movable : Node2D = null
+var noise = preload("res://Objects/noise.tscn")
+var hiding_spot : Interaction
+var ladder : Area2D
 const ingame_menu = preload("res://UI/ingame_menu.tscn")
 var open_menu : Node = null
-
-var move_speed := 0.0
-var facing := 1
-var ignore_corners := false
-var invisible := false
-var movement_disabled := false
-
 var interaction_target : Area2D = null
-
-var states_locked := false
-var damage := 1
-
 var corner_quick_climb := false
-
-var combat_target : CharacterBody2D = null
-
-var state_on_attack_frame := false
-
 var sex_participants : Array
-
-
-
+#endregion
 signal health_depleted
-
-#const Balloon = preload("res://Dialogues/balloon.tscn")
-#
-#var dialogue_resource : DialogueResource
-#var dialogue_start := "test_scene"
-
 #region Methods
 func set_crouch_mask(value: bool):
 	standing_mask.set_disabled(value)
@@ -131,19 +121,27 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 
 	combat_properties.stunned = false
 	var defending = state_node.state.name == "stance_defensive"
-	var break_defense = attack.get("break_defense", false)
 
-	if defending && break_defense:
-		combat_properties.stun(2.0)
-		state_node.state.finished.emit("stunned")
-		return
-
-	if defending && !%Stamina.spend(_damage):
+	if defending && !stamina.spend(_damage, 1.0):
 		defending = false
 
-	if defending:
-		state_node.state.finished.emit("block")
-	else:
+	#See if attack has broken our defense
+	var defended = defending
+	if _source && defending:
+		var incoming_attack = _source.state_node.state.name
+		match incoming_attack:
+			"stab":
+				state_node.state.finished.emit("block")
+				if !%ParryTimer.is_stopped():
+					_source.combat_properties.stun(2.0)
+			"slash":
+				combat_properties.stun(2.0)
+				play_hurt_animation = false
+				defended = false
+			"bash":
+				state_node.state.finished.emit("hurt")
+
+	if !defended:
 		health.value -= _damage
 		if health.value <= 0.1:
 			emit_signal("health_depleted")
@@ -272,8 +270,6 @@ func enemy_heard_noise(enemy: Enemy) -> void:
 		think("I should be careful")
 func save() -> Dictionary:
 	var save_dict = {
-		"filename"	: get_scene_file_path(),
-		"parent"	: get_parent().get_path(),
 		"pos_x"	: position.x,
 		"pos_y"	: position.y,
 
@@ -284,8 +280,6 @@ func save() -> Dictionary:
 		"dexterity"	: dexterity,
 		"endurance"	: endurance,
 
-		"hp_cur"	: health.value,
-		"hp_max"	: health.max_value,
 		"has_sword" : has_sword,
 	}
 	return save_dict
