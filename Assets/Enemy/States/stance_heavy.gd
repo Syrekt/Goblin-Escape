@@ -5,6 +5,7 @@ func update(delta):
 		if enemy.chase_target:
 			finished.emit("chase")
 		else:
+			print("no chase target in heavy")
 			enemy.lost_target()
 			return
 

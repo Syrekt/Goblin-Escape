@@ -26,11 +26,14 @@ func play_audio_from_string_array(emitter: AudioStreamPlayer2D, volume: float, p
 	emitter.volume_db = volume
 	emitter.stream = load(path + "/" + sound)
 	emitter.play()
+## emits audio from emitter
 func play_audio(emitter: AudioStreamPlayer2D, volume: int, audio_path: String) -> void:
 	emitter.volume_db = volume
 	emitter.stream = load(audio_path)
 	emitter.play()
+## Plays non-directional audio
 func play_audio_free(volume: int, audio_path: String) -> void:
+	## Plays a non-directional sound
 	var player = AudioStreamPlayer.new()
 	add_sibling(player)
 
@@ -137,3 +140,7 @@ func popup_text(position: Vector2, text: String, color1 := Color.WHITE, color2 :
 	popup.global_position = position - Vector2(0, 20)
 	popup.label.text = text
 	popup.tween_begin(color1, color2)
+func slow_mo() -> void:
+	var tween = create_tween().bind_node(self)
+	tween.tween_property(Engine, "time_scale", 0.5, 0.0)
+	tween.tween_property(Engine, "time_scale", 1, 1.0)

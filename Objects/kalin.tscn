@@ -1,4 +1,4 @@
-[gd_scene load_steps=241 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=247 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -99,7 +99,13 @@
 [ext_resource type="Script" uid="uid://cqgh8iyg4ujbk" path="res://Objects/interaction_prompt.gd" id="72_rp7vf"]
 [ext_resource type="Texture2D" uid="uid://fyevcw0t8yc" path="res://Assets/Others/panel_bg.png" id="73_qdj7c"]
 [ext_resource type="Script" uid="uid://drm2busxe3db8" path="res://Inventory/inv_ui.gd" id="73_ugwbb"]
+[ext_resource type="AudioStream" uid="uid://cky5m7018jb2l" path="res://Assets/SFX/Kalin/HIT 01.wav" id="81_lsbl4"]
+[ext_resource type="AudioStream" uid="uid://bs6xrkccvjvu7" path="res://Assets/SFX/Kalin/Heavy sword woosh 11.wav" id="82_8nsgr"]
+[ext_resource type="AudioStream" uid="uid://bdqasi1uw1jm5" path="res://Assets/SFX/Kalin/stab1.wav" id="85_exvqe"]
+[ext_resource type="AudioStream" uid="uid://c50be1pxoc3bn" path="res://Assets/SFX/Kalin/Sword Woosh 12.wav" id="86_cbw7l"]
 [ext_resource type="Script" uid="uid://dwwirxo8vr8kq" path="res://Assets/Kalin/States/ladder_climb.gd" id="88_7e6uh"]
+[ext_resource type="AudioStream" uid="uid://bweqdmfleyo7t" path="res://Assets/SFX/Kalin/punch1.wav" id="88_47a0d"]
+[ext_resource type="AudioStream" uid="uid://b7dlcnc8e25ui" path="res://Assets/SFX/Kalin/kick_long_whoosh_19.wav" id="89_586st"]
 
 [sub_resource type="Animation" id="Animation_5koc5"]
 length = 0.001
@@ -3597,6 +3603,7 @@ size = Vector2(105, 32)
 [node name="Kalin" type="CharacterBody2D" groups=["Persistent"]]
 z_index = 2
 collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_tpqnq")
 slide_speed = 200.0
 snap_offset = Vector2(-17, 3)
@@ -3630,6 +3637,7 @@ current = true
 [node name="CombatProperties" parent="." instance=ExtResource("2_yetl5")]
 
 [node name="SmellParticles" type="GPUParticles2D" parent="."]
+visible = false
 texture = ExtResource("44_3q7yy")
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_oq5iy")
@@ -4003,7 +4011,6 @@ script = ExtResource("33_ao24u")
 script = ExtResource("38_823eb")
 
 [node name="ParryTimer" type="Timer" parent="StateMachine/stance_defensive"]
-unique_name_in_owner = true
 wait_time = 0.7
 one_shot = true
 
@@ -4015,6 +4022,8 @@ script = ExtResource("39_rgkp8")
 
 [node name="slash" type="Node2D" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("39_af0aw")
+sfx_hit = ExtResource("81_lsbl4")
+sfx_whiff = ExtResource("82_8nsgr")
 
 [node name="SlashHitbox" parent="StateMachine/slash" instance=ExtResource("45_42hh8")]
 position = Vector2(41, -37)
@@ -4027,6 +4036,9 @@ disabled = false
 
 [node name="stab" type="Node2D" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("41_sat24")
+sfx_hit = ExtResource("85_exvqe")
+sfx_whiff = ExtResource("86_cbw7l")
+pushback_force = 0
 
 [node name="StabHitbox" parent="StateMachine/stab" instance=ExtResource("45_42hh8")]
 position = Vector2(48, -39)
@@ -4039,6 +4051,9 @@ disabled = false
 
 [node name="bash" type="Node2D" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("41_pdh0h")
+sfx_hit = ExtResource("88_47a0d")
+sfx_whiff = ExtResource("89_586st")
+pushback_force = 300
 
 [node name="BashHitbox" parent="StateMachine/bash" instance=ExtResource("45_42hh8")]
 position = Vector2(11.935, -34)
@@ -4098,7 +4113,7 @@ script = ExtResource("54_5dxkx")
 [node name="interacting" type="Node" parent="StateMachine"]
 script = ExtResource("55_5lcso")
 
-[node name="stun" type="Node" parent="StateMachine"]
+[node name="stun" type="Node" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("56_qqpcq")
 
 [node name="sex" type="Node" parent="StateMachine"]

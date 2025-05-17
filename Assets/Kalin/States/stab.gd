@@ -1,25 +1,15 @@
-extends PlayerState
-
-@onready var hitbox = get_child(0)
-@onready var sfx_stab_hit = load("res://Assets/SFX/Kalin/stab1.wav")
-@onready var sfx_stab_whiff = load("res://Assets/SFX/Kalin/Sword Woosh 12.wav")
-
-@export var pushback_force := 100
-
-var thought_scene = preload("res://Objects/thought.tscn")
-
-signal attack_frame
+extends PlayerAttackState
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.call_deferred("update_animation", name)
+	_enter()
 
-func update(delta):
-	if !player.is_on_floor():
-		finished.emit("fall")
+func update(delta: float) -> void:
+	_update(delta)
 
 func _on_attack_frame() -> void:
-	print("stab hit")
 	if hitbox.has_overlapping_bodies():
+		#Allow buffering next attack on hit
+		can_buffer_next_attack = true
 		var defender = hitbox.get_overlapping_bodies()[0]
 		if defender is Enemy:
 			var defender_state = defender.state_node.state.name
@@ -27,12 +17,11 @@ func _on_attack_frame() -> void:
 				player.combat_properties.stun(2.0)
 				Ge.play_audio_from_string_array(player.audio_emitter, 0, "res://Assets/SFX/Sword hit shield")
 			else:
-				#defender.combat_properties.pushback_apply(player.global_position, pushback_force)
+				defender.combat_properties.pushback_apply(player.global_position, pushback_force)
 				defender.take_damage(player.stab_damage, player)
-				player.play_sfx(sfx_stab_hit)
+				player.play_sfx(sfx_hit)
 		else:
 			defender.take_damage(0, player)
-			var thought_container = player.find_child("ThoughtContainer")
-			thought_container.push("I should hit it harder")
+			player.think("I should hit harder")
 	else:
-		player.play_sfx(sfx_stab_whiff)
+		player.play_sfx(sfx_whiff)

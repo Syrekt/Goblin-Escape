@@ -63,6 +63,7 @@ var available_stat_points := 5
 @onready var character_panel = $CanvasLayer/CharacterPanel
 @onready var thought_container = %ThoughtContainer
 @onready var emote = $Emote
+@onready var parry_timer = $StateMachine/stance_defensive/ParryTimer
 #endregion
 #region Combat
 @export var has_sword := false #false for release
@@ -74,7 +75,8 @@ var slash_damage	:= 2
 var stab_damage		:= 1
 var bash_damage 	:= 1
 var damage			:= 1
-var combat_target : CharacterBody2D = null
+var combat_target	: CharacterBody2D = null
+var buffered_state  : String
 #endregion
 #region Others
 @export var dead				:= false # Health == 0
@@ -122,8 +124,10 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 	combat_properties.stunned = false
 	var defending = state_node.state.name == "stance_defensive"
 
-	if defending && !stamina.spend(_damage, 1.0):
-		defending = false
+	var parry_active = !parry_timer.is_stopped()
+	if defending:
+		if !parry_active && !stamina.spend(_damage, 1.0):
+			defending = false
 
 	#See if attack has broken our defense
 	var defended = defending
@@ -132,8 +136,10 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 		match incoming_attack:
 			"stab":
 				state_node.state.finished.emit("block")
-				if !%ParryTimer.is_stopped():
+				if parry_active:
 					_source.combat_properties.stun(2.0)
+					Ge.slow_mo()
+					play_sfx(load("res://Assets/SFX/parry1.wav"))
 			"slash":
 				combat_properties.stun(2.0)
 				play_hurt_animation = false
@@ -283,6 +289,24 @@ func save() -> Dictionary:
 		"has_sword" : has_sword,
 	}
 	return save_dict
+func check_buffered_state() -> bool:
+	var state_to_switch : String
+	if buffered_state:
+		match buffered_state:
+			"slash":
+				if stamina.spend(SLASH_COST):
+					state_to_switch = "slash"
+			"stab":
+				if stamina.spend(STAB_COST):
+					state_to_switch = "stab"
+			"bash":
+				if stamina.spend(BASH_COST):
+					state_to_switch = "bash"
+	buffered_state = ""
+	if state_to_switch:
+		state_node.state.finished.emit(state_to_switch)
+		return true
+	return false
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -295,7 +319,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			state.finished.emit("idle")
 			heal(1)
 		"stab", "slash", "bash", "block":
-			state.finished.emit("stance_light")
+			if !check_buffered_state():
+				state.finished.emit("stance_light")
 		"hurt":
 			state.finished.emit("stance_light")
 		"hurt_no_sword":
@@ -319,8 +344,9 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 #endregion
 #region Init
 func _ready() -> void:
-	$CanvasLayer.visible = true
-	$CanvasLayer/HUD.visible = true
+	$CanvasLayer.show()
+	$CanvasLayer/HUD.show()
+	$SmellParticles.show()
 #endregion
 #region Physics
 func _physics_process(delta: float) -> void:

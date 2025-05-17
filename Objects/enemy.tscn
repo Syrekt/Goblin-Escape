@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene load_steps=58 format=3 uid="uid://iuj1jg31a55f"]
 
 [ext_resource type="Script" uid="uid://bhcr3m01slk8a" path="res://Scripts/enemy.gd" id="1_18den"]
 [ext_resource type="AudioStream" uid="uid://bx6vdt8wts4xf" path="res://Assets/SFX/Kalin/Other/kick_short_whoosh_12.wav" id="6_ifl3v"]
@@ -954,6 +954,9 @@ shader_parameter/flash_color = Color(1, 1, 1, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qsl2l"]
 size = Vector2(15, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_404n7"]
+size = Vector2(313, 46)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wgea4"]
 size = Vector2(18, 11)
 
@@ -974,7 +977,6 @@ libraries = {
 }
 
 [node name="Collider" type="CollisionShape2D" parent="." groups=["Flip"]]
-visible = false
 position = Vector2(-1, -5.5)
 shape = SubResource("RectangleShape2D_cqw5a")
 
@@ -1015,7 +1017,6 @@ texture = ExtResource("9_3g55t")
 hframes = 6
 
 [node name="ChaseDetector" type="Area2D" parent="." groups=["Flip"]]
-unique_name_in_owner = true
 visible = false
 position = Vector2(0, 16)
 collision_layer = 0
@@ -1025,6 +1026,16 @@ collision_mask = 2
 position = Vector2(77.9999, -16)
 scale = Vector2(10.4, 1.64)
 shape = SubResource("RectangleShape2D_qsl2l")
+
+[node name="ChaseRange" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, 16)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseRange"]
+position = Vector2(-0.5, -23)
+shape = SubResource("RectangleShape2D_404n7")
 
 [node name="NoiseIgnoreTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -1205,9 +1216,7 @@ one_shot = true
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="ChaseDetector" to="." method="_on_chase_detector_body_entered"]
-[connection signal="body_entered" from="ChaseDetector" to="StateMachine/patrol" method="_on_chase_detector_body_entered"]
-[connection signal="body_exited" from="ChaseDetector" to="." method="_on_chase_detector_body_exited"]
-[connection signal="body_exited" from="ChaseDetector" to="StateMachine/patrol" method="_on_chase_detector_body_exited"]
+[connection signal="body_exited" from="ChaseRange" to="." method="_on_chase_range_body_exited"]
 [connection signal="body_entered" from="CrushCheck" to="." method="_on_crush_check_body_entered"]
 [connection signal="timeout" from="StateMachine/idle/IdleTimer" to="StateMachine/idle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/patrol/PatrolTimer" to="StateMachine/patrol" method="_on_patrol_timer_timeout"]

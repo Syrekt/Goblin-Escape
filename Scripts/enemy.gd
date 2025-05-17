@@ -55,6 +55,7 @@ signal heard_noise(id: Enemy)
 
 #region Methods
 func set_facing(dir: int):
+	dir = sign(dir)
 	if dir == 0: pass
 
 	facing = dir
@@ -67,18 +68,20 @@ func set_facing(dir: int):
 func get_movement_dir():
 	return sign(velocity.x)
 func take_damage(_damage : int, _source: Node2D):
-	print("Enemy takes damage: "+str(_damage))
 	health.value -= _damage
-	print("health.value: "+str(health.value));
 	if health.value <= 0:
 		emit_signal("health_depleted")
 	else:
 		Ge.play_audio_from_string_array(audio_emitter, 0, "res://Assets/SFX/Goblin/Hurt/")
 		state_node.state.finished.emit("hurt")
 	
-	var attack_type = _source.state_node.state.name
-	attack_type_taken.append(attack_type)
-	print("attack_type_taken: "+str(attack_type_taken))
+	if _source:
+		update_los(_source)
+		var attack_type = _source.state_node.state.name
+		attack_type_taken.append(attack_type)
+		if _source is Player:
+			chase_target = _source
+		set_facing(_source.global_position.x - global_position.x)
 func next_step_free(direction : int) -> bool:
 	if direction == 1:
 		return !$WallCheckRight.is_colliding() && $FallCheckRight.is_colliding()
@@ -107,16 +110,17 @@ func hear_noise(noise: Node2D) -> void:
 	if noise.source is Player:
 		heard_noise.emit(self)
 	friend = null
-	match state_node.state.name:
+	if !chase_target: match state_node.state.name:
 		"idle", "chat_lead":
 			state_node.state.finished.emit("triggered")
 		"triggered":
+			print("lose target from triggered")
 			lost_target()
 
 	$NoiseIgnoreTimer.start()
-func target_obstructed(target: CharacterBody2D) -> bool:
-	line_of_sight.target_position = line_of_sight.to_local(target.global_position)
-	return line_of_sight.is_colliding()
+func update_los(target: CharacterBody2D) -> void:
+	var pos = target.global_position
+	line_of_sight.target_position = line_of_sight.to_local(pos)
 func lost_target() -> void:
 	#CHANGES STATE
 	print("lost target")
@@ -169,6 +173,8 @@ func _ready() -> void:
 	set_facing(facing)
 	heard_noise.connect(player.enemy_heard_noise)
 func _physics_process(delta: float) -> void:
+	if chase_target:
+		update_los(chase_target)
 	if debug:
 		Debugger.printui("$WallCheckLeft.is_colliding(): "+str($WallCheckLeft.is_colliding()));
 		Debugger.printui("$WallCheckRight.is_colliding(): "+str($WallCheckRight.is_colliding()));
@@ -177,6 +183,7 @@ func _physics_process(delta: float) -> void:
 		Debugger.printui("patrolling: "+str(patrolling))
 		Debugger.printui("patrol_amount: "+str(patrol_amount))
 		Debugger.printui("state_node.state.name: "+str(state_node.state.name));
+		Debugger.printui("chase_target: "+str(chase_target))
 	#region X Movement
 	var dir_x = get_movement_dir() if !direction_locked else facing
 
@@ -215,7 +222,7 @@ func _on_chase_detector_body_entered(body:Node2D) -> void:
 		chase_target = body
 		if !chase_target.combat_target:
 			chase_target.combat_target = self
-func _on_chase_detector_body_exited(body:Node2D) -> void:
+func _on_chase_range_body_exited(body:Node2D) -> void:
 	if body == chase_target:
 		chase_target.combat_target = null
 		chase_target = null

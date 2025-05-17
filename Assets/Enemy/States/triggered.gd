@@ -20,6 +20,6 @@ func update(delta : float) -> void:
 		finished.emit("idle")
 		return
 
-	if enemy.chase_target && !enemy.target_obstructed(enemy.chase_target):
+	if enemy.chase_target && !enemy.line_of_sight.is_colliding():
 		finished.emit("chase")
 		return

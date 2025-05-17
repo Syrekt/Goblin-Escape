@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://g8c28gqf1w6x"
-path="res://.godot/imported/stone_drop.wav-7dd0a6ad87ff7723665f318fba96b7ea.sample"
+uid="uid://dcgnvbegyii2c"
+path="res://.godot/imported/parry1.wav-3b3e394dabd73b90c471cba6aca2a7f3.sample"
 
 [deps]
 
-source_file="res://Assets/SFX/stone_drop.wav"
-dest_files=["res://.godot/imported/stone_drop.wav-7dd0a6ad87ff7723665f318fba96b7ea.sample"]
+source_file="res://Assets/SFX/parry1.wav"
+dest_files=["res://.godot/imported/parry1.wav-3b3e394dabd73b90c471cba6aca2a7f3.sample"]
 
 [params]
 

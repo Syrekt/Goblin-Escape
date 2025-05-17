@@ -3,7 +3,7 @@ class_name Movable extends CharacterBody2D
 @onready var timer : Timer = $Timer
 @onready var audio_emitter : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
-@export var drop_sfx : String = "res://Assets/SFX/stone_drop.wav"
+@export var drop_sfx : String = "res://Assets/SFX/stone_drop2.wav"
 @export var gravity := 300 * 60
 @export var y_acc := 5
 @export var noise_offset : Vector2

@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 		is_ready = true
 		return
 
-	amount_cur = move_toward(amount_cur, amount_max, 0.3)
+	amount_cur = move_toward(amount_cur, amount_max, 0.3 * 60 * delta)
 	if amount_cur >= amount_max:
 		queue_free()
 	shape.scale = Vector2(amount_cur, amount_cur)

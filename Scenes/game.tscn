@@ -247,8 +247,7 @@ repeat = false
 position = Vector2(590.306, 175.349)
 
 [node name="Enemy" parent="Regions/Start Room/Node" instance=ExtResource("14_nnt18")]
-position = Vector2(800, 208)
-facing = -1
+position = Vector2(784, 192)
 
 [node name="ItemPickup" parent="Regions/Start Room/Node" instance=ExtResource("17_iivbl")]
 position = Vector2(640, 192)

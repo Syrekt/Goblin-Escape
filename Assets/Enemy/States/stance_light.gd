@@ -11,6 +11,7 @@ func update(delta):
 		elif abs(enemy.chase_target.velocity.x) == enemy.chase_target.stance_walk_speed:
 			finished.emit("stab")
 	else:
+		print("no chase target in light")
 		enemy.lost_target()
 		return false
 

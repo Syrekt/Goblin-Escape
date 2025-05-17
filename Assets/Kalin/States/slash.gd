@@ -1,28 +1,17 @@
-extends PlayerState
+extends PlayerAttackState
 
-@export var pushback_force := 100
-
-@onready var hitbox : Area2D = get_child(0)
-@onready var sfx_slash_hit = load("res://Assets/SFX/Kalin/HIT 01.wav")
-@onready var sfx_slash_whiff = load("res://Assets/SFX/Kalin/Heavy sword woosh 11.wav")
-
-var charge_up := 0.0
-
-signal attack_frame
+var charge_up := 0.0 # Used for slash
 
 func enter(previous_state_path: String, data := {}) -> void:
-	player.call_deferred("update_animation", name)
-	player.velocity.x = 0;
-	charge_up = data.charge_up
+	_enter()
+	charge_up = data.get("charge_up", 0)
 
-func update(delta):
-	if !player.is_on_floor():
-		finished.emit("fall")
+func update(delta: float) -> void:
+	_update(delta)
 
 func _on_attack_frame() -> void:
 	print("On attack frame")
 	var damage = player.slash_damage * 2 if charge_up == 100 else player.slash_damage
-	#player.combat_perform_attack(hitbox, damage, sfx_slash_whiff, sfx_slash_hit, pushback_force)
 	if hitbox.has_overlapping_bodies():
 		for defender in hitbox.get_overlapping_bodies():
 			if defender is Enemy:
@@ -32,9 +21,9 @@ func _on_attack_frame() -> void:
 					Ge.play_audio(player.audio_emitter, 1, "res://Assets/SFX/Kalin/block_break2.wav")
 				else:
 					defender.take_damage(damage, player)
-					player.play_sfx(sfx_slash_hit)
+					player.play_sfx(sfx_hit)
 				defender.combat_properties.pushback_apply(player.global_position, pushback_force)
 			else:
 				defender.take_damage(damage, player)
 	else:
-		player.play_sfx(sfx_slash_whiff)
+		player.play_sfx(sfx_whiff)
