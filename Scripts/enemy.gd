@@ -20,7 +20,9 @@ const RUN_SPEED = 300.0 * 60
 var patrol_amount := 0
 
 @export var facing := 1
-var chase_target : Node2D = null
+var player_in_range := false
+var chase_target : Node2D
+var aware := false # Extra awersion, can detect player in dark
 var direction_locked := false
 var facing_locked := false
 var anim_speed := 1.0
@@ -39,6 +41,7 @@ signal health_depleted
 @onready var health			    = $Health
 @onready var combat_properties  = $CombatProperties
 @onready var player_proximity	= $PlayerProximity
+@onready var awareness_timer	: Timer = $AwarenessTimer
 
 @onready var slash_hitbox = $StateMachine/slash/SlashHitbox/Collider
 @onready var stab_hitbox  = $StateMachine/stab/StabHitbox/Collider
@@ -69,6 +72,7 @@ func get_movement_dir():
 	return sign(velocity.x)
 func take_damage(_damage : int, _source: Node2D):
 	health.value -= _damage
+	awareness_timer.start()
 	if health.value <= 0:
 		emit_signal("health_depleted")
 	else:
@@ -81,7 +85,8 @@ func take_damage(_damage : int, _source: Node2D):
 		attack_type_taken.append(attack_type)
 		if _source is Player:
 			chase_target = _source
-		set_facing(_source.global_position.x - global_position.x)
+		if health.value > 0:
+			set_facing(_source.global_position.x - global_position.x)
 func next_step_free(direction : int) -> bool:
 	if direction == 1:
 		return !$WallCheckRight.is_colliding() && $FallCheckRight.is_colliding()
@@ -123,7 +128,6 @@ func update_los(target: CharacterBody2D) -> void:
 	line_of_sight.target_position = line_of_sight.to_local(pos)
 func lost_target() -> void:
 	#CHANGES STATE
-	print("lost target")
 	emote_emitter.play("confused")
 	patrol_amount = 4
 	state_node.state.finished.emit("idle")
@@ -173,9 +177,19 @@ func _ready() -> void:
 	set_facing(facing)
 	heard_noise.connect(player.enemy_heard_noise)
 func _physics_process(delta: float) -> void:
-	if chase_target:
-		update_los(chase_target)
+	aware = awareness_timer.time_left > 0
+	if player_in_range && (!player.invisible || aware):
+		update_los(player)
+		if line_of_sight.is_colliding():
+			chase_target = null
+		else:
+			chase_target = player
+			if !chase_target.combat_target:
+				chase_target.combat_target = self
+	else:
+		chase_target = null
 	if debug:
+		Debugger.printui("aware: "+str(aware))
 		Debugger.printui("$WallCheckLeft.is_colliding(): "+str($WallCheckLeft.is_colliding()));
 		Debugger.printui("$WallCheckRight.is_colliding(): "+str($WallCheckRight.is_colliding()));
 		Debugger.printui("$FallCheckLeft.is_colliding(): "+str($FallCheckLeft.is_colliding()));
@@ -187,6 +201,7 @@ func _physics_process(delta: float) -> void:
 	#region X Movement
 	var dir_x = get_movement_dir() if !direction_locked else facing
 
+	if health.value <= 0: cp.pushback_reset()
 	if cp.pushback_timer > 0:
 		velocity.x = lerpf(cp.pushback_vector.x, 0, cp.pushback_elapsed_time / cp.pushback_duration)
 
@@ -218,16 +233,13 @@ func _on_health_depleted() -> void:
 	state_node.state.finished.emit("death")
 	player.experience.add(10)
 func _on_chase_detector_body_entered(body:Node2D) -> void:
-	if !body.invisible:
-		chase_target = body
-		if !chase_target.combat_target:
-			chase_target.combat_target = self
+	player_in_range = true
 func _on_chase_range_body_exited(body:Node2D) -> void:
-	if body == chase_target:
-		chase_target.combat_target = null
-		chase_target = null
+	player_in_range = false
 func _on_crush_check_body_entered(body:Node2D) -> void:
 	if body is Movable:
 		call_deferred("set_collision_mask_value", 1, false)
 		state_node.state.finished.emit("death")
+func _on_awareness_timer_timeout() -> void:
+	aware = false
 #endregion

@@ -10,6 +10,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	
 	if !%AttackDetector.has_overlapping_bodies():
 		finished.emit("chase")
+		return
 
 	var is_main_stance = enemy.main_stance == self
 	if is_main_stance:
@@ -26,7 +27,9 @@ func exit():
 
 func _on_stance_timer_timeout() -> void:
 	print("Stance timer owner name: "+str($StanceTimer.owner.name));
+	print("$StanceTimer: "+str($StanceTimer.name));
 	finished.emit(transitions.pick_random().name)
 func _on_attack_timer_timeout() -> void:
 	print("Attach timer owner name: "+str($AttackTimer.owner.name));
+	print("$AttackTimer: "+str($AttackTimer.name));
 	finished.emit(attack_state.name)

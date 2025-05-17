@@ -4,7 +4,7 @@ var chase_dir := 0;
 
 func update(delta):
 	#Quit state
-	if !enemy.chase_target || enemy.line_of_sight.is_colliding():
+	if !enemy.chase_target:
 		print("lose target from chase")
 		enemy.lost_target()
 		return

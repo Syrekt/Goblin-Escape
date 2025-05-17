@@ -15,6 +15,8 @@ func _on_attack_frame() -> void:
 	if hitbox.has_overlapping_bodies():
 		for defender in hitbox.get_overlapping_bodies():
 			if defender is Enemy:
+				if !defender.chase_target:
+					damage *= 2
 				var defender_state = defender.state_node.state.name
 				if defender_state == "stance_defensive":
 					defender.combat_properties.stun(2.0)

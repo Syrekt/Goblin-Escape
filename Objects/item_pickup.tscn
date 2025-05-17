@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dk84lu71fcjkl"]
 
 [ext_resource type="Script" uid="uid://cliq1akrpj5ng" path="res://Scripts/item_pickup.gd" id="1_apof6"]
-[ext_resource type="Texture2D" uid="uid://c4tusp4o5tj8f" path="res://Inventory/Sprites/[Valley Friends] Potions-export1.png" id="1_lpi7f"]
-[ext_resource type="Texture2D" uid="uid://dqe7ro1rxvges" path="res://Inventory/Sprites/[Valley Friends] Potions-export26.png" id="2_h7vxs"]
+[ext_resource type="Texture2D" uid="uid://c4tusp4o5tj8f" path="res://Inventory/Sprites/ Potions-export1.png" id="1_lpi7f"]
+[ext_resource type="Texture2D" uid="uid://dqe7ro1rxvges" path="res://Inventory/Sprites/ Potions-export26.png" id="2_h7vxs"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3t7gt"]
 animations = [{

@@ -1,4 +1,4 @@
-[gd_scene load_steps=251 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=253 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -2921,6 +2921,11 @@ _data = {
 &"wallslide": SubResource("Animation_1pm5w")
 }
 
+[sub_resource type="Curve" id="Curve_exvqe"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_cbw7l"]
+curve = SubResource("Curve_exvqe")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oq5iy"]
 particle_flag_disable_z = true
 emission_shape_scale = Vector3(20.24, 20.59, 1)
@@ -2934,6 +2939,7 @@ linear_accel_max = 2.0
 scale_min = 0.5
 scale_max = 1.5
 color = Color(0.6282, 0.396, 0.72, 0.447059)
+alpha_curve = SubResource("CurveTexture_cbw7l")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bs037"]
 shader = ExtResource("34_wxg5w")
@@ -3643,7 +3649,6 @@ current = true
 [node name="CombatProperties" parent="." instance=ExtResource("2_yetl5")]
 
 [node name="SmellParticles" type="GPUParticles2D" parent="."]
-visible = false
 texture = ExtResource("44_3q7yy")
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_oq5iy")

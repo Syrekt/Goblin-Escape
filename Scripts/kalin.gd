@@ -79,7 +79,6 @@ var bash_damage 	:= 1
 var damage			:= 1
 var combat_target	: CharacterBody2D = null
 var buffered_state  : String
-var in_shadow		:= false
 #endregion
 #region Others
 @export var dead				:= false # Health == 0
@@ -412,6 +411,7 @@ func _physics_process(delta: float) -> void:
 			velocity = Vector2.ZERO
 
 
+	if health.value <= 0: cp.pushback_reset()
 	if cp.pushback_timer > 0:
 		velocity.x = lerpf(cp.pushback_vector.x, 0, cp.pushback_elapsed_time / cp.pushback_duration)
 
@@ -444,19 +444,17 @@ func _physics_process(delta: float) -> void:
 
 	#endregion
 	#region Light raycast
-	var _in_shadow := false
+	var in_shadow := false
 	if light_source:
 		ray_light.target_position = ray_light.to_local(light_source.global_position)
-		_in_shadow = ray_light.is_colliding()
+		in_shadow = ray_light.is_colliding()
 	else:
-		_in_shadow = true
-	if _in_shadow != in_shadow:
-		if _in_shadow:
+		in_shadow = true
+	if in_shadow != invisible:
+		if in_shadow:
 			enter_shadow.emit()
 		else:
 			leave_shadow.emit()
-	Debugger.printui("in_shadow: "+str(in_shadow))
-	Debugger.printui("_in_shadow: "+str(_in_shadow))
 	#endregion
 #endregion
 #region Process
@@ -473,6 +471,7 @@ func _process(delta: float) -> void:
 		var collider = ray_auto_climb.get_collider()
 	#region Camera combat position
 	in_combat_state = state_node.state.is_in_group("combat_state")
+	Debugger.printui("combat_target: "+str(combat_target))
 	if in_combat_state && combat_target:
 		if pcam:
 			pcam.follow_mode = pcam.FollowMode.GROUP
@@ -481,6 +480,7 @@ func _process(delta: float) -> void:
 		else:
 			camera.position.x = (combat_target.global_position.x - global_position.x)/2;
 		if combat_target.state_node.state.name == "death": combat_target = null
+		elif !combat_target.chase_target: combat_target = null
 	else:
 		if pcam && pcam.follow_mode == pcam.FollowMode.GROUP:
 			pcam.follow_mode = pcam.FollowMode.SIMPLE
@@ -521,11 +521,9 @@ func _process(delta: float) -> void:
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	print(area)
 func _on_interactor_area_entered(area: Area2D) -> void:
-	print("interactor area entered")
 	interaction_target = area
 	$InteractionPrompt._show()
 func _on_interactor_area_exited(area: Area2D) -> void:
-	print("interactor area exited")
 	if interaction_target == area:
 		interaction_target.waiting_player_exit = false
 		interaction_target = null
@@ -533,13 +531,11 @@ func _on_interactor_area_exited(area: Area2D) -> void:
 func _on_health_depleted() -> void:
 	state_node.state.finished.emit("death")
 func _on_enter_shadow() -> void:
-	in_shadow = true
+	invisible = true
 	var tween = create_tween().bind_node(self)
-	tween.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color(0.1, 0.1, 0.1, 1.0), 0.2)
-	print("Enter shadow")
+	tween.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color(0.1, 0.1, 0.1, 0.5), 0.2)
 func _on_leave_shadow() -> void:
-	in_shadow = false
+	invisible = false
 	var tween = create_tween().bind_node(self)
 	tween.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color(0.0, 0.0, 0.0, 0.0), 0.2)
-	print("Leave shadow")
 #endregion

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://c0yvh55kikql2"]
 
-[ext_resource type="Texture2D" uid="uid://cgofr5ib1n3gq" path="res://Inventory/Sprites/spr_Potions1.png" id="1_ql0kk"]
+[ext_resource type="Texture2D" uid="uid://c72jyub2opmw8" path="res://Inventory/Sprites/ Potions-export19.png" id="1_ql0kk"]
 [ext_resource type="Script" uid="uid://nrl1858h0shp" path="res://Inventory/inv_item.gd" id="2_ql0kk"]
 
 [resource]

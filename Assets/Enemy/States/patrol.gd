@@ -15,7 +15,7 @@ func exit() -> void:
 	$PatrolTimer.stop()
 func update(delta : float) -> void:
 	#Decide if we are going to leave the player alone or chase
-	if enemy.chase_target && !enemy.line_of_sight.is_colliding():
+	if enemy.chase_target:
 		if enemy.chase_target.unconscious:
 			finished.emit("leave_player")
 		else:

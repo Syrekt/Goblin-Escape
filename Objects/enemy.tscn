@@ -294,6 +294,17 @@ tracks/2/keys = {
 "update": 1,
 "values": [13]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
 
 [sub_resource type="Animation" id="Animation_kbkgb"]
 resource_name = "hurt"
@@ -1067,6 +1078,10 @@ shape = SubResource("RectangleShape2D_wgea4")
 [node name="FaceMarker" type="Marker2D" parent="."]
 position = Vector2(0, -22)
 
+[node name="AwarenessTimer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
 [node name="StateMachine" parent="." instance=ExtResource("17_n2jyc")]
 visible = false
 position = Vector2(0, 16)
@@ -1101,13 +1116,13 @@ one_shot = true
 wait_time = 10.0
 one_shot = true
 
-[node name="hurt" type="Node" parent="StateMachine"]
+[node name="hurt" type="Node" parent="StateMachine" groups=["CombatStance"]]
 script = ExtResource("19_xl5vi")
 
 [node name="death" type="Node" parent="StateMachine"]
 script = ExtResource("20_4po4b")
 
-[node name="slash" type="Node2D" parent="StateMachine"]
+[node name="slash" type="Node2D" parent="StateMachine" groups=["CombatStance"]]
 script = ExtResource("21_wgea4")
 
 [node name="SlashHitbox" parent="StateMachine/slash" groups=["Flip"] instance=ExtResource("21_oeh1l")]
@@ -1117,7 +1132,7 @@ collision_mask = 2
 position = Vector2(20.045, -20)
 scale = Vector2(2, 1)
 
-[node name="stab" type="Node2D" parent="StateMachine"]
+[node name="stab" type="Node2D" parent="StateMachine" groups=["CombatStance"]]
 script = ExtResource("23_404n7")
 
 [node name="StabHitbox" parent="StateMachine/stab" groups=["Flip"] instance=ExtResource("21_oeh1l")]
@@ -1127,7 +1142,7 @@ collision_mask = 2
 position = Vector2(26.14, -24.45)
 scale = Vector2(2.632, 1.355)
 
-[node name="bash" type="Node2D" parent="StateMachine"]
+[node name="bash" type="Node2D" parent="StateMachine" groups=["CombatStance"]]
 script = ExtResource("17_ru5w7")
 
 [node name="BashHitbox" parent="StateMachine/bash" groups=["Flip"] instance=ExtResource("21_oeh1l")]
@@ -1137,7 +1152,7 @@ collision_mask = 2
 position = Vector2(19.125, -20)
 scale = Vector2(1.905, 1)
 
-[node name="stance_heavy" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state")]
+[node name="stance_heavy" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state") groups=["CombatStance"]]
 script = ExtResource("22_7ej28")
 attack_state = NodePath("../slash")
 
@@ -1148,7 +1163,7 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
-[node name="stance_light" type="Node" parent="StateMachine" node_paths=PackedStringArray("transitions", "attack_state")]
+[node name="stance_light" type="Node" parent="StateMachine" node_paths=PackedStringArray("transitions", "attack_state") groups=["CombatStance"]]
 script = ExtResource("23_j8fla")
 transitions = [NodePath("../stance_heavy"), NodePath("../stance_defensive")]
 attack_state = NodePath("../stab")
@@ -1160,7 +1175,7 @@ one_shot = true
 wait_time = 0.75
 one_shot = true
 
-[node name="stance_defensive" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state")]
+[node name="stance_defensive" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state") groups=["CombatStance"]]
 script = ExtResource("24_lox44")
 attack_state = NodePath("../bash")
 
@@ -1174,7 +1189,7 @@ one_shot = true
 [node name="stun" type="Node" parent="StateMachine"]
 script = ExtResource("25_208af")
 
-[node name="chase" type="Node2D" parent="StateMachine"]
+[node name="chase" type="Node2D" parent="StateMachine" groups=["CombatStance"]]
 script = ExtResource("26_ug7pn")
 
 [node name="AttackDetector" type="Area2D" parent="StateMachine/chase"]
@@ -1218,6 +1233,7 @@ one_shot = true
 [connection signal="body_entered" from="ChaseDetector" to="." method="_on_chase_detector_body_entered"]
 [connection signal="body_exited" from="ChaseRange" to="." method="_on_chase_range_body_exited"]
 [connection signal="body_entered" from="CrushCheck" to="." method="_on_crush_check_body_entered"]
+[connection signal="timeout" from="AwarenessTimer" to="." method="_on_awareness_timer_timeout"]
 [connection signal="timeout" from="StateMachine/idle/IdleTimer" to="StateMachine/idle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/patrol/PatrolTimer" to="StateMachine/patrol" method="_on_patrol_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/slash/SlashHitbox" to="StateMachine/slash" method="_on_slash_hitbox_body_entered"]

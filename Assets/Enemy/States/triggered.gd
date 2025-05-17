@@ -8,6 +8,7 @@ func enter(previous_state_path : String, data = {}) -> void:
 	enemy.set_facing(-enemy.facing)
 	ignore_timer.start()
 	direction_timer.start()
+	enemy.awareness_timer.start()
 
 func update(delta : float) -> void:
 	if direction_timer.is_stopped():

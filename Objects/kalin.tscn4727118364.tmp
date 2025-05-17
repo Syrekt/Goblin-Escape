@@ -72,7 +72,7 @@
 [ext_resource type="Script" uid="uid://cytac4sg8onjk" path="res://Assets/Kalin/States/corner_hang.gd" id="59_osr06"]
 [ext_resource type="Script" uid="uid://c3rllm222ckui" path="res://Assets/Kalin/stamina.gd" id="60_2ksh1"]
 [ext_resource type="Script" uid="uid://42mhp8ajoulq" path="res://Assets/Kalin/States/orgasm.gd" id="61_c6www"]
-[ext_resource type="Texture2D" uid="uid://c4tusp4o5tj8f" path="res://Inventory/Potions/[Valley Friends] Potions-export1.png" id="72_iwmgu"]
+[ext_resource type="Texture2D" uid="uid://c4tusp4o5tj8f" path="res://Inventory/Potions/ Potions-export1.png" id="72_iwmgu"]
 [ext_resource type="Theme" uid="uid://d3ajvsrrbu1s5" path="res://UI/inventory.tres" id="72_qdj7c"]
 [ext_resource type="Texture2D" uid="uid://fyevcw0t8yc" path="res://Assets/Others/panel_bg.png" id="73_qdj7c"]
 [ext_resource type="Script" uid="uid://drm2busxe3db8" path="res://Objects/inventory_ui.gd" id="73_ugwbb"]
