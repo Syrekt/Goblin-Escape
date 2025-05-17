@@ -23,6 +23,8 @@ var facing := 1
 var ignore_corners := false
 var invisible := false
 var movement_disabled := false
+
+var noise_muffle := 0.0
 #endregion
 #region Stats & EXP
 var level := 0
@@ -77,6 +79,7 @@ var bash_damage 	:= 1
 var damage			:= 1
 var combat_target	: CharacterBody2D = null
 var buffered_state  : String
+var in_shadow		:= false
 #endregion
 #region Others
 @export var dead				:= false # Health == 0
@@ -93,8 +96,12 @@ var open_menu : Node = null
 var interaction_target : Area2D = null
 var corner_quick_climb := false
 var sex_participants : Array
+var light_source : Area2D
+var ray_light : RayCast2D
 #endregion
 signal health_depleted
+signal enter_shadow
+signal leave_shadow
 #region Methods
 func set_crouch_mask(value: bool):
 	standing_mask.set_disabled(value)
@@ -235,7 +242,7 @@ func sex_begin(participants: Array, _position: String) -> void:
 func emit_noise(offset : Vector2, amount : float) -> void:
 	var _noise = noise.instantiate()
 
-	_noise.amount_max = amount
+	_noise.amount_max = amount - noise_muffle
 	_noise.global_position = global_position + offset
 
 	add_sibling(_noise)
@@ -347,6 +354,11 @@ func _ready() -> void:
 	$CanvasLayer.show()
 	$CanvasLayer/HUD.show()
 	$SmellParticles.show()
+	ray_light = RayCast2D.new()
+	ray_light.collide_with_bodies = true
+	add_child(ray_light)
+	enter_shadow.connect(_on_enter_shadow)
+	leave_shadow.connect(_on_leave_shadow)
 #endregion
 #region Physics
 func _physics_process(delta: float) -> void:
@@ -421,7 +433,7 @@ func _physics_process(delta: float) -> void:
 				velocity.y += gravity * delta
 
 	#endregion
-	#region Finalize
+	#region Finalize movement
 	floor_max_angle = 1
 	move_and_slide()
 	if cp.pushback_timer > 0:
@@ -430,6 +442,21 @@ func _physics_process(delta: float) -> void:
 		if(!facing_locked && velocity.x != 0):
 			set_facing(sign(velocity.x))
 
+	#endregion
+	#region Light raycast
+	var _in_shadow := false
+	if light_source:
+		ray_light.target_position = ray_light.to_local(light_source.global_position)
+		_in_shadow = ray_light.is_colliding()
+	else:
+		_in_shadow = true
+	if _in_shadow != in_shadow:
+		if _in_shadow:
+			enter_shadow.emit()
+		else:
+			leave_shadow.emit()
+	Debugger.printui("in_shadow: "+str(in_shadow))
+	Debugger.printui("_in_shadow: "+str(_in_shadow))
 	#endregion
 #endregion
 #region Process
@@ -505,4 +532,14 @@ func _on_interactor_area_exited(area: Area2D) -> void:
 		$InteractionPrompt._hide()
 func _on_health_depleted() -> void:
 	state_node.state.finished.emit("death")
+func _on_enter_shadow() -> void:
+	in_shadow = true
+	var tween = create_tween().bind_node(self)
+	tween.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color(0.1, 0.1, 0.1, 1.0), 0.2)
+	print("Enter shadow")
+func _on_leave_shadow() -> void:
+	in_shadow = false
+	var tween = create_tween().bind_node(self)
+	tween.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color(0.0, 0.0, 0.0, 0.0), 0.2)
+	print("Leave shadow")
 #endregion

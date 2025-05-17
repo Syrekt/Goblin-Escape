@@ -18,8 +18,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.909804, 0.745098, 0.372549, 1)
-metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = -1
@@ -50,25 +50,23 @@ scale = Vector2(3, 3)
 theme = ExtResource("3_2kr8p")
 alignment = 1
 
-[node name="StartGame" type="MenuButton" parent="VBoxContainer"]
+[node name="StartGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-toggle_mode = false
+focus_neighbor_bottom = NodePath("../Options")
 text = "Start Game"
-flat = false
 
-[node name="Options" type="MenuButton" parent="VBoxContainer"]
+[node name="Options" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-toggle_mode = false
+focus_neighbor_top = NodePath("../StartGame")
+focus_neighbor_bottom = NodePath("../ExitGame")
 text = "Options"
-flat = false
 
-[node name="ExitGame" type="MenuButton" parent="VBoxContainer"]
+[node name="ExitGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-toggle_mode = false
 text = "Quit"
-flat = false
 
 [node name="OptionsMenu" type="TabContainer" parent="."]
+visible = false
 anchors_preset = -1
 anchor_left = 0.251
 anchor_top = 0.139

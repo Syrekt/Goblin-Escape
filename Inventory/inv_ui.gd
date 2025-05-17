@@ -3,6 +3,7 @@ extends PanelContainer
 @onready var vbox : VBoxContainer = $MarginContainer/ScrollContainer/ButtonContainer
 @onready var slots : Array = $MarginContainer/ScrollContainer/ButtonContainer.get_children()
 @onready var button_scene = preload("res://Inventory/inv_button.tscn")
+@onready var ui_focus : ColorRect = get_node("../UIFocus")
 
 @export var inventory : Inventory
 
@@ -23,12 +24,14 @@ func toggle() -> void:
 	%DescriptionPanel.visible = visible
 
 	if visible:
+		ui_focus.fade_in()
 		for item in item_list:
 			if item:
 				create_button(item)
 		if vbox.get_child_count() > 0:
 			vbox.get_child(0).grab_focus()
 	else:
+		ui_focus.fade_out()
 		for child in vbox.get_children():
 			child.queue_free()
 func create_button(item : InventoryItem) -> void:

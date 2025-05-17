@@ -1,4 +1,4 @@
-[gd_scene load_steps=247 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=251 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -59,6 +59,7 @@
 [ext_resource type="Script" uid="uid://bvi7mrhp8r1py" path="res://Assets/Kalin/States/stab.gd" id="41_sat24"]
 [ext_resource type="Script" uid="uid://clti5tx0txok1" path="res://Scripts/player_health.gd" id="43_uhoyi"]
 [ext_resource type="Texture2D" uid="uid://cdf5u0hk86v0o" path="res://Assets/Others/smoke_test.png" id="44_3q7yy"]
+[ext_resource type="Script" uid="uid://cpautywrye7vy" path="res://Scripts/ui_focus.gd" id="44_8nsgr"]
 [ext_resource type="Texture2D" uid="uid://c4sgdo50jnun4" path="res://Assets/Kalin/Sprites/Kalin-Run.png" id="44_h06e0"]
 [ext_resource type="PackedScene" uid="uid://2s1ryg6qqqmc" path="res://Objects/hitbox.tscn" id="45_42hh8"]
 [ext_resource type="Texture2D" uid="uid://cywhcouoj6ral" path="res://Assets/Kalin/Sprites/Kalin-Stun.png" id="45_pat22"]
@@ -91,6 +92,7 @@
 [ext_resource type="Script" uid="uid://cytac4sg8onjk" path="res://Assets/Kalin/States/corner_hang.gd" id="59_osr06"]
 [ext_resource type="Script" uid="uid://c3rllm222ckui" path="res://Assets/Kalin/stamina.gd" id="60_2ksh1"]
 [ext_resource type="Script" uid="uid://42mhp8ajoulq" path="res://Assets/Kalin/States/orgasm.gd" id="61_c6www"]
+[ext_resource type="Texture2D" uid="uid://cc7xateo6lu7f" path="res://Assets/UI/inventory_bg.png" id="61_exvqe"]
 [ext_resource type="Script" uid="uid://bys0lif7s6ub7" path="res://Assets/Kalin/States/hiding.gd" id="68_73qvi"]
 [ext_resource type="Script" uid="uid://dx8nksauci2pa" path="res://Assets/Kalin/States/hide.gd" id="68_y0qhg"]
 [ext_resource type="Script" uid="uid://c67j1elfon2jo" path="res://Assets/Kalin/States/unhide.gd" id="70_egy32"]
@@ -3595,6 +3597,10 @@ size = Vector2(20, 57.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nk40"]
 size = Vector2(20, 30)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_exvqe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cbw7l"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t42fh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfvac"]
@@ -3755,6 +3761,17 @@ shape = SubResource("RectangleShape2D_1nk40")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 visible = false
 
+[node name="UIFocus" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06, 0.06, 0.06, 0)
+script = ExtResource("44_8nsgr")
+transparency = 0.3
+
 [node name="HUD" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 8
@@ -3786,6 +3803,11 @@ texture_under = ExtResource("57_lnkvj")
 texture_progress = ExtResource("58_8idp1")
 script = ExtResource("43_uhoyi")
 
+[node name="VSplitContainer3" type="VSplitContainer" parent="CanvasLayer/HUD/HBoxContainer"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+theme_override_constants/separation = 10
+
 [node name="Stamina" type="TextureProgressBar" parent="CanvasLayer/HUD/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -3806,6 +3828,11 @@ offset_top = 7.0
 offset_right = 116.0
 offset_bottom = 23.0
 scale = Vector2(0.5, 0.5)
+
+[node name="VSplitContainer2" type="VSplitContainer" parent="CanvasLayer/HUD/HBoxContainer"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="Experience" type="TextureProgressBar" parent="CanvasLayer/HUD/HBoxContainer" groups=["Persistent"]]
 unique_name_in_owner = true
@@ -3830,26 +3857,21 @@ texture_under = ExtResource("48_vt74v")
 texture_progress = ExtResource("54_5dltv")
 script = ExtResource("55_h4isg")
 
-[node name="VSplitContainer2" type="VSplitContainer" parent="CanvasLayer/HUD/HBoxContainer"]
-custom_minimum_size = Vector2(0, 2)
-layout_mode = 2
-theme_override_constants/separation = 10
-
 [node name="InventoryPanel" type="PanelContainer" parent="CanvasLayer" groups=["UIPanel"]]
 unique_name_in_owner = true
 visible = false
-offset_left = 172.0
-offset_top = 140.0
-offset_right = 398.0
-offset_bottom = 435.0
+offset_top = 91.0
+offset_right = 226.0
+offset_bottom = 512.0
 focus_mode = 2
 theme = ExtResource("72_qdj7c")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_exvqe")
 script = ExtResource("73_ugwbb")
 inventory = ExtResource("46_1q8gn")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/InventoryPanel"]
 layout_mode = 2
-texture = ExtResource("73_qdj7c")
+texture = ExtResource("61_exvqe")
 region_rect = Rect2(0, 0, 44, 44)
 patch_margin_left = 5
 patch_margin_top = 5
@@ -3873,15 +3895,23 @@ size_flags_horizontal = 3
 [node name="DescriptionPanel" type="PanelContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
 visible = false
-offset_left = 398.0
-offset_top = 140.0
-offset_right = 642.0
-offset_bottom = 304.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -208.0
+offset_right = 160.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 0
 theme = ExtResource("72_qdj7c")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_cbw7l")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/DescriptionPanel"]
 layout_mode = 2
-texture = ExtResource("73_qdj7c")
+texture = ExtResource("61_exvqe")
 region_rect = Rect2(0, 0, 44, 44)
 patch_margin_left = 5
 patch_margin_top = 5
@@ -4041,8 +4071,8 @@ sfx_whiff = ExtResource("86_cbw7l")
 pushback_force = 0
 
 [node name="StabHitbox" parent="StateMachine/stab" instance=ExtResource("45_42hh8")]
-position = Vector2(48, -39)
-scale = Vector2(3.8, 1)
+position = Vector2(45, -41)
+scale = Vector2(3.2721, 0.904796)
 collision_mask = 136
 monitorable = false
 
