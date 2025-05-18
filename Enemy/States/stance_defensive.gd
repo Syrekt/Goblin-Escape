@@ -1,6 +1,10 @@
 extends EnemyCombatState
 
 func update(delta):
+	if !enemy.chase_target:
+		enemy.lost_target()
+		return
+
 	if !%AttackDetector.has_overlapping_bodies():
 		if enemy.chase_target:
 			finished.emit("chase")
@@ -12,7 +16,7 @@ func update(delta):
 	if enemy.health.value <= 0:
 		finished.emit("laugh")
 
-	enemy.set_facing(sign(enemy.chase_target.position.x - enemy.position.x))
+	enemy.set_facing(sign(enemy.chase_target.global_position.x - enemy.global_position.x))
 	if enemy.player_proximity.has_overlapping_bodies():
 		enemy.counter_attack = true
 		finished.emit("bash")

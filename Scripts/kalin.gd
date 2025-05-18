@@ -66,6 +66,7 @@ var available_stat_points := 5
 @onready var thought_container = %ThoughtContainer
 @onready var emote = $Emote
 @onready var parry_timer = $StateMachine/stance_defensive/ParryTimer
+@onready var vignette = $CanvasLayer/StealthVignette
 #endregion
 #region Combat
 @export var has_sword := false #false for release
@@ -137,7 +138,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 
 	#See if attack has broken our defense
 	var defended = defending
-	if _source:
+	if !defending && _source:
 		var incoming_dir = sign(_source.global_position.x - global_position.x)
 		Ge.make_bleed(global_position, -incoming_dir)
 	if _source && defending:
@@ -534,10 +535,14 @@ func _on_health_depleted() -> void:
 	state_node.state.finished.emit("death")
 func _on_enter_shadow() -> void:
 	invisible = true
-	var tween = create_tween().bind_node(self)
-	tween.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color(0.1, 0.1, 0.1, 0.5), 0.2)
+	var tween1 = create_tween().bind_node(self)
+	tween1.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color(0.1, 0.1, 0.1, 0.5), 0.2)
+	var tween2 = create_tween().bind_node(self)
+	tween2.tween_property(vignette.material, "shader_parameter/alpha", 0.2, 0.2)
 func _on_leave_shadow() -> void:
 	invisible = false
-	var tween = create_tween().bind_node(self)
-	tween.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color(0.0, 0.0, 0.0, 0.0), 0.2)
+	var tween1 = create_tween().bind_node(self)
+	tween1.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color(0.0, 0.0, 0.0, 0.0), 0.2)
+	var tween2 = create_tween().bind_node(self)
+	tween2.tween_property(vignette.material, "shader_parameter/alpha", 0.0, 0.2)
 #endregion

@@ -1,36 +1,71 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqoy45uj81eut"]
+[gd_scene load_steps=13 format=3 uid="uid://cqoy45uj81eut"]
 
 [ext_resource type="Script" uid="uid://2psqd5pwfxyk" path="res://Scripts/map_object.gd" id="1_bm0ij"]
-[ext_resource type="Texture2D" uid="uid://08rm37jmicet" path="res://Map/Props/spr_barricade1.png" id="2_bm0ij"]
+[ext_resource type="Texture2D" uid="uid://cpditann4xk3h" path="res://Map/Props/spr_barricade1_strip5.png" id="2_psc5i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5srt2"]
-size = Vector2(15, 80)
+size = Vector2(15, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37a8e"]
+atlas = ExtResource("2_psc5i")
+region = Rect2(0, 0, 76, 103)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkmxf"]
+atlas = ExtResource("2_psc5i")
+region = Rect2(76, 0, 76, 103)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ukt6"]
+atlas = ExtResource("2_psc5i")
+region = Rect2(152, 0, 76, 103)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_va654"]
+atlas = ExtResource("2_psc5i")
+region = Rect2(228, 0, 76, 103)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yj46t"]
+atlas = ExtResource("2_psc5i")
+region = Rect2(304, 0, 76, 103)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2stkb"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_bm0ij")
+"texture": SubResource("AtlasTexture_37a8e")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_bm0ij")
+"texture": SubResource("AtlasTexture_kkmxf")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_bm0ij")
+"texture": SubResource("AtlasTexture_kkmxf")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_bm0ij")
+"texture": SubResource("AtlasTexture_3ukt6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_bm0ij")
+"texture": SubResource("AtlasTexture_3ukt6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_bm0ij")
+"texture": SubResource("AtlasTexture_va654")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_va654")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yj46t")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_psc5i"]
+polygon = PackedVector2Array(-25, -4, -7, 3, -5, 3, -5, -3, -19, -10, -25, -10)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_37a8e"]
+polygon = PackedVector2Array(-19, -10, -6, 3, -6, 8, -11, 8, -25, -5, -25, -10)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kkmxf"]
+polygon = PackedVector2Array(-24, -26, -16, -26, -16, -27, -9, -27, -9, -28, -5, -28, -5, -34, -13, -34, -13, -33, -20, -33, -20, -32, -24, -32)
 
 [node name="Barricade" type="CharacterBody2D"]
 collision_layer = 0
@@ -39,7 +74,7 @@ destructable = true
 collidable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3.5, -8)
+position = Vector2(-14, -16.5)
 shape = SubResource("RectangleShape2D_5srt2")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -51,3 +86,13 @@ position = Vector2(0, 10)
 
 [node name="DropMarker" type="Marker2D" parent="."]
 position = Vector2(0, 35)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_psc5i")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+position = Vector2(1, -14)
+occluder = SubResource("OccluderPolygon2D_37a8e")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_kkmxf")

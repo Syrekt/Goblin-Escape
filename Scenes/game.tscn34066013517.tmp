@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c2unx5js38jr8" path="res://Objects/barrel.tscn" id="5_jdxuh"]
 [ext_resource type="PackedScene" uid="uid://bpj2k5beannxk" path="res://Objects/dialogue_trigger.tscn" id="6_ssinu"]
 [ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Objects/enemy.tscn" id="7_w7h1d"]
-[ext_resource type="TileSet" uid="uid://d16iprr3bwurc" path="res://Assets/Others/cave_tile.tres" id="8_k6cow"]
+[ext_resource type="TileSet" uid="uid://d16iprr3bwurc" path="res://Others/cave_tile.tres" id="8_k6cow"]
 
 [node name="Game" type="Node2D"]
 

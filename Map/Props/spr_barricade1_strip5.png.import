@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdw4luub3vp4k"
-path="res://.godot/imported/ Potions-sheet_export.png-947bd7564cd5d8d4d3b1f32b6035f2ac.ctex"
+uid="uid://cpditann4xk3h"
+path="res://.godot/imported/spr_barricade1_strip5.png-be30c9a106e1c16fae24e662a0525ae6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Others/ Potions-sheet_export.png"
-dest_files=["res://.godot/imported/ Potions-sheet_export.png-947bd7564cd5d8d4d3b1f32b6035f2ac.ctex"]
+source_file="res://Map/Props/spr_barricade1_strip5.png"
+dest_files=["res://.godot/imported/spr_barricade1_strip5.png-be30c9a106e1c16fae24e662a0525ae6.ctex"]
 
 [params]
 

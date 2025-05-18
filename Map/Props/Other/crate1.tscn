@@ -1,28 +1,54 @@
-[gd_scene load_steps=6 format=3 uid="uid://cx6tcje3rwlkx"]
+[gd_scene load_steps=11 format=3 uid="uid://cx6tcje3rwlkx"]
 
-[ext_resource type="Texture2D" uid="uid://dmunr874241aw" path="res://Map/Props/spr_crates1.png" id="1_4n3rg"]
+[ext_resource type="Texture2D" uid="uid://d4mhe71q2jbdl" path="res://Map/Props/spr_crates1_strip5.png" id="2_catkl"]
 [ext_resource type="Script" uid="uid://2psqd5pwfxyk" path="res://Scripts/map_object.gd" id="4_1d6uj"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4n3rg"]
 polygon = PackedVector2Array(-16, -14, -12, -17, 14, -16, 16, -14, 16, 13, 12, 16, -16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ose3r"]
+atlas = ExtResource("2_catkl")
+region = Rect2(0, 0, 52, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nd0e"]
+atlas = ExtResource("2_catkl")
+region = Rect2(52, 0, 52, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0hfb"]
+atlas = ExtResource("2_catkl")
+region = Rect2(104, 0, 52, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48phx"]
+atlas = ExtResource("2_catkl")
+region = Rect2(156, 0, 52, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ud1ah"]
+atlas = ExtResource("2_catkl")
+region = Rect2(208, 0, 52, 40)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_2stkb"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_4n3rg")
+"texture": SubResource("AtlasTexture_ose3r")
 }, {
 "duration": 1.0,
-"texture": ExtResource("1_4n3rg")
+"texture": SubResource("AtlasTexture_7nd0e")
 }, {
 "duration": 1.0,
-"texture": ExtResource("1_4n3rg")
+"texture": SubResource("AtlasTexture_7nd0e")
 }, {
 "duration": 1.0,
-"texture": ExtResource("1_4n3rg")
+"texture": SubResource("AtlasTexture_a0hfb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("1_4n3rg")
+"texture": SubResource("AtlasTexture_a0hfb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48phx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ud1ah")
 }],
 "loop": true,
 "name": &"default",
@@ -37,8 +63,6 @@ collision_layer = 0
 script = ExtResource("4_1d6uj")
 destructable = true
 collidable = true
-gravity = null
-y_acc = null
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_4n3rg")

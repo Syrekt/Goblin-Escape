@@ -3,6 +3,7 @@ class_name MapObject extends CharacterBody2D
 @onready var sprite : AnimatedSprite2D = $Sprite
 @onready var drop_marker : Marker2D = $DropMarker
 @onready var audio_emitter : AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var light_occuler : LightOccluder2D = $LightOccluder2D
 
 @export var destructable := false
 @export var collidable := false
@@ -29,12 +30,16 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func take_damage(damage: int, source) -> void:
+	if damage > 0:
+		Ge.play_particle(load("res://Particles/crate_particles.tscn"), global_position)
 	damage_taken = damage_taken + damage
-	print("damage_taken: "+str(damage_taken))
 	var frame_count = sprite.sprite_frames.get_frame_count(sprite.animation)
-	if damage_taken >= frame_count:
+	if damage_taken >= frame_count-1:
 		Ge.play_audio_free(0, "res://SFX/wood break.mp3")
-		queue_free()
+		sprite.frame = sprite.sprite_frames.get_frame_count("default")
+		set_collision_layer_value(1, false)
+		set_collision_layer_value(8, false)
+		if light_occuler: light_occuler.queue_free()
 	else:
 		Ge.play_audio_from_string_array(source.audio_emitter, 0, "res://SFX/Hit on wood/")
 		sprite.frame = damage_taken

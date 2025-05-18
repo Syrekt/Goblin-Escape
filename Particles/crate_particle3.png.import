@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdw4luub3vp4k"
-path="res://.godot/imported/ Potions-sheet_export.png-947bd7564cd5d8d4d3b1f32b6035f2ac.ctex"
+uid="uid://0y2p8ifa1sy2"
+path="res://.godot/imported/crate_particle3.png-ec0b8855104e37a131d9cccd848c54bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Others/ Potions-sheet_export.png"
-dest_files=["res://.godot/imported/ Potions-sheet_export.png-947bd7564cd5d8d4d3b1f32b6035f2ac.ctex"]
+source_file="res://Particles/crate_particle3.png"
+dest_files=["res://.godot/imported/crate_particle3.png-ec0b8855104e37a131d9cccd848c54bc.ctex"]
 
 [params]
 

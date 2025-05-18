@@ -34,7 +34,7 @@ animations = [{
 collision_layer = 64
 collision_mask = 0
 script = ExtResource("1_apof6")
-pickup_sound = "res://Assets/SFX/Notes Scrunched In Wallet.wav"
+pickup_sound = "res://SFX/Notes Scrunched In Wallet.wav"
 
 [node name="Sprite" type="Sprite2D" parent="."]
 

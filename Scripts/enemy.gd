@@ -72,7 +72,7 @@ func get_movement_dir():
 	return sign(velocity.x)
 func take_damage(_damage : int, _source: Node2D):
 	health.value -= _damage
-	awareness_timer.start()
+	aware = true
 	if health.value <= 0:
 		emit_signal("health_depleted")
 	else:
@@ -178,8 +178,8 @@ func _ready() -> void:
 	set_facing(facing)
 	heard_noise.connect(player.enemy_heard_noise)
 func _physics_process(delta: float) -> void:
-	aware = awareness_timer.time_left > 0
 	if player_in_range && (!player.invisible || aware):
+		aware = true
 		update_los(player)
 		if line_of_sight.is_colliding():
 			print("line of sight blocked to chase target")
@@ -192,18 +192,17 @@ func _physics_process(delta: float) -> void:
 	elif chase_target:
 		print("player isn't in range or invisible, aware: "+str(aware))
 		chase_target = null
-		awareness_timer.start()
 	if debug:
+		Debugger.printui("player_in_range: "+str(player_in_range))
 		Debugger.printui("chase_target: "+str(chase_target))
 		Debugger.printui("aware: "+str(aware))
-		Debugger.printui("$WallCheckLeft.is_colliding(): "+str($WallCheckLeft.is_colliding()));
-		Debugger.printui("$WallCheckRight.is_colliding(): "+str($WallCheckRight.is_colliding()));
-		Debugger.printui("$FallCheckLeft.is_colliding(): "+str($FallCheckLeft.is_colliding()));
-		Debugger.printui("$FallCheckRight.is_colliding(): "+str($FallCheckRight.is_colliding()));
-		Debugger.printui("patrolling: "+str(patrolling))
-		Debugger.printui("patrol_amount: "+str(patrol_amount))
-		Debugger.printui("state_node.state.name: "+str(state_node.state.name));
-		Debugger.printui("chase_target: "+str(chase_target))
+		#Debugger.printui("$WallCheckLeft.is_colliding(): "+str($WallCheckLeft.is_colliding()));
+		#Debugger.printui("$WallCheckRight.is_colliding(): "+str($WallCheckRight.is_colliding()));
+		#Debugger.printui("$FallCheckLeft.is_colliding(): "+str($FallCheckLeft.is_colliding()));
+		#Debugger.printui("$FallCheckRight.is_colliding(): "+str($FallCheckRight.is_colliding()));
+		#Debugger.printui("patrolling: "+str(patrolling))
+		#Debugger.printui("patrol_amount: "+str(patrol_amount))
+		#Debugger.printui("state_node.state.name: "+str(state_node.state.name));
 	#region X Movement
 	var dir_x = get_movement_dir() if !direction_locked else facing
 
@@ -240,8 +239,10 @@ func _on_health_depleted() -> void:
 	player.experience.add(10)
 func _on_chase_detector_body_entered(body:Node2D) -> void:
 	player_in_range = true
+	awareness_timer.stop()
 func _on_chase_range_body_exited(body:Node2D) -> void:
 	player_in_range = false
+	awareness_timer.start()
 func _on_crush_check_body_entered(body:Node2D) -> void:
 	if body is Movable:
 		call_deferred("set_collision_mask_value", 1, false)

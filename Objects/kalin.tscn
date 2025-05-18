@@ -1,4 +1,4 @@
-[gd_scene load_steps=253 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=255 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -62,6 +62,7 @@
 [ext_resource type="Script" uid="uid://cpautywrye7vy" path="res://Scripts/ui_focus.gd" id="44_8nsgr"]
 [ext_resource type="Texture2D" uid="uid://c4sgdo50jnun4" path="res://Kalin/Sprites/Kalin-Run.png" id="44_h06e0"]
 [ext_resource type="PackedScene" uid="uid://2s1ryg6qqqmc" path="res://Objects/hitbox.tscn" id="45_42hh8"]
+[ext_resource type="Shader" uid="uid://cld42ccrm5l65" path="res://Scripts/vignette.gdshader" id="45_cbw7l"]
 [ext_resource type="Texture2D" uid="uid://cywhcouoj6ral" path="res://Kalin/Sprites/Kalin-Stun.png" id="45_pat22"]
 [ext_resource type="Resource" uid="uid://buieik1hf8xh2" path="res://Inventory/player_inventory.tres" id="46_1q8gn"]
 [ext_resource type="Texture2D" uid="uid://blmckxe1r5wjg" path="res://UI/Sliders/arousal.png" id="47_i87jo"]
@@ -3603,6 +3604,12 @@ size = Vector2(20, 57.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nk40"]
 size = Vector2(20, 30)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_47a0d"]
+shader = ExtResource("45_cbw7l")
+shader_parameter/alpha = 0.2
+shader_parameter/inner_radius = 0.515
+shader_parameter/outer_radius = 0.995
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_exvqe"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cbw7l"]
@@ -3671,11 +3678,13 @@ visible = false
 position = Vector2(0, -36)
 
 [node name="ColliderStanding" type="CollisionShape2D" parent="." groups=["Flip"]]
+visible = false
 position = Vector2(0, 4.5)
 scale = Vector2(1, 1.2)
 shape = SubResource("RectangleShape2D_y6qte")
 
 [node name="ColliderCrouching" type="CollisionShape2D" parent="." groups=["Flip"]]
+visible = false
 position = Vector2(0, 16.5)
 scale = Vector2(1, 1.2)
 shape = SubResource("RectangleShape2D_iccmv")
@@ -3774,6 +3783,14 @@ grow_vertical = 2
 color = Color(0.06, 0.06, 0.06, 0)
 script = ExtResource("44_8nsgr")
 transparency = 0.3
+
+[node name="StealthVignette" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_47a0d")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
 layout_mode = 3
