@@ -142,5 +142,14 @@ func popup_text(position: Vector2, text: String, color1 := Color.WHITE, color2 :
 	popup.tween_begin(color1, color2)
 func slow_mo() -> void:
 	var tween = create_tween().bind_node(self)
-	tween.tween_property(Engine, "time_scale", 0.5, 0.0)
-	tween.tween_property(Engine, "time_scale", 1, 1.0)
+	tween.tween_property(Engine, "time_scale", 0.75, 0.0)
+	tween.tween_property(Engine, "time_scale", 1, 0.75)
+var bleed_burst_scene = load("res://Particles/blood_spurt.tscn")
+func make_bleed(position: Vector2, dir: int) -> void:
+	var bleed_burst : GPUParticles2D = bleed_burst_scene.instantiate()
+	bleed_burst.global_position = position
+	bleed_burst.scale.x = dir
+	bleed_burst.emitting = true
+
+	add_child(bleed_burst)
+

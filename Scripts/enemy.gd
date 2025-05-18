@@ -76,17 +76,19 @@ func take_damage(_damage : int, _source: Node2D):
 	if health.value <= 0:
 		emit_signal("health_depleted")
 	else:
-		Ge.play_audio_from_string_array(audio_emitter, 0, "res://Assets/SFX/Goblin/Hurt/")
+		Ge.play_audio_from_string_array(audio_emitter, 0, "res://SFX/Goblin/Hurt/")
 		state_node.state.finished.emit("hurt")
 	
 	if _source:
+		var incoming_dir = sign(_source.global_position.x - global_position.x)
+		Ge.make_bleed(global_position, -incoming_dir)
 		update_los(_source)
 		var attack_type = _source.state_node.state.name
 		attack_type_taken.append(attack_type)
 		if _source is Player:
 			chase_target = _source
 		if health.value > 0:
-			set_facing(_source.global_position.x - global_position.x)
+			set_facing(incoming_dir)
 func next_step_free(direction : int) -> bool:
 	if direction == 1:
 		return !$WallCheckRight.is_colliding() && $FallCheckRight.is_colliding()
@@ -131,7 +133,6 @@ func lost_target() -> void:
 	emote_emitter.play("confused")
 	patrol_amount = 4
 	state_node.state.finished.emit("idle")
-	chase_target = null
 func save() -> Dictionary:
 	var save_dict = {
 		"pos_x" : global_position.x,
@@ -181,14 +182,19 @@ func _physics_process(delta: float) -> void:
 	if player_in_range && (!player.invisible || aware):
 		update_los(player)
 		if line_of_sight.is_colliding():
+			print("line of sight blocked to chase target")
 			chase_target = null
+			awareness_timer.start()
 		else:
 			chase_target = player
 			if !chase_target.combat_target:
 				chase_target.combat_target = self
-	else:
+	elif chase_target:
+		print("player isn't in range or invisible, aware: "+str(aware))
 		chase_target = null
+		awareness_timer.start()
 	if debug:
+		Debugger.printui("chase_target: "+str(chase_target))
 		Debugger.printui("aware: "+str(aware))
 		Debugger.printui("$WallCheckLeft.is_colliding(): "+str($WallCheckLeft.is_colliding()));
 		Debugger.printui("$WallCheckRight.is_colliding(): "+str($WallCheckRight.is_colliding()));
@@ -241,5 +247,6 @@ func _on_crush_check_body_entered(body:Node2D) -> void:
 		call_deferred("set_collision_mask_value", 1, false)
 		state_node.state.finished.emit("death")
 func _on_awareness_timer_timeout() -> void:
+	print("Lost awareness")
 	aware = false
 #endregion

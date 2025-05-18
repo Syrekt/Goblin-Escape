@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwhqmb4i01200"]
+
+[ext_resource type="Script" uid="uid://dkdivqgbq8iov" path="res://Scripts/ladder.gd" id="1_n1hyw"]
+[ext_resource type="Texture2D" uid="uid://g2s0upyk82rk" path="res://Others/Ladders.png" id="1_qbc8e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1hyw"]
+size = Vector2(12, 57)
+
+[node name="Ladder" type="Area2D"]
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_n1hyw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_qbc8e")
+region_enabled = true
+region_rect = Rect2(4, 18, 12, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_n1hyw")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_left = -6.0
+offset_top = -15.0
+offset_right = 6.0
+offset_bottom = 15.0
+texture = ExtResource("1_qbc8e")
+region_rect = Rect2(4, 18, 12, 30)
+patch_margin_top = 5
+patch_margin_bottom = 4
+axis_stretch_vertical = 1

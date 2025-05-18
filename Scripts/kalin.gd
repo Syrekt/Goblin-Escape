@@ -137,6 +137,9 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 
 	#See if attack has broken our defense
 	var defended = defending
+	if _source:
+		var incoming_dir = sign(_source.global_position.x - global_position.x)
+		Ge.make_bleed(global_position, -incoming_dir)
 	if _source && defending:
 		var incoming_attack = _source.state_node.state.name
 		match incoming_attack:
@@ -145,7 +148,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 				if parry_active:
 					_source.combat_properties.stun(2.0)
 					Ge.slow_mo()
-					play_sfx(load("res://Assets/SFX/parry1.wav"))
+					play_sfx(load("res://SFX/parry1.wav"))
 			"slash":
 				combat_properties.stun(2.0)
 				play_hurt_animation = false
@@ -162,7 +165,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 				state_node.state.finished.emit("hurt")
 			else:
 				state_node.state.finished.emit("hurt_no_sword")
-			Ge.play_audio_from_string_array(audio_emitter, -2, "res://Assets/SFX/Kalin/Hurt")
+			Ge.play_audio_from_string_array(audio_emitter, -2, "res://SFX/Kalin/Hurt")
 func heal(amount: int) -> void:
 	health.value += amount
 func check_movable():
@@ -220,15 +223,15 @@ func combat_perform_attack(hitbox: Area2D, _damage: int, whiff_sfx: AudioStreamW
 		var result : int = Combat.deal_damage(self, _damage, body, knockback_force)
 		match result:
 			Combat.RESULT_STUN:
-				Ge.play_audio(audio_emitter, 1, "res://Assets/SFX/Kalin/block_break2.wav")
+				Ge.play_audio(audio_emitter, 1, "res://SFX/Kalin/block_break2.wav")
 			Combat.RESULT_WHIFF:
 				play_sfx(whiff_sfx)
 			Combat.RESULT_HIT:
 				play_sfx(hit_sfx)
 			Combat.RESULT_BLOCK:
-				Ge.play_audio_from_string_array(audio_emitter, 0, "res://Assets/SFX/Sword hit shield")
+				Ge.play_audio_from_string_array(audio_emitter, 0, "res://SFX/Sword hit shield")
 			Combat.RESULT_DEAD:
-				Ge.play_audio_from_string_array(audio_emitter, 0, "res://Assets/SFX/Kalin/Finishers")
+				Ge.play_audio_from_string_array(audio_emitter, 0, "res://SFX/Kalin/Finishers")
 	else:
 		play_sfx(whiff_sfx)
 func sex_begin(participants: Array, _position: String) -> void:
@@ -471,7 +474,6 @@ func _process(delta: float) -> void:
 		var collider = ray_auto_climb.get_collider()
 	#region Camera combat position
 	in_combat_state = state_node.state.is_in_group("combat_state")
-	Debugger.printui("combat_target: "+str(combat_target))
 	if in_combat_state && combat_target:
 		if pcam:
 			pcam.follow_mode = pcam.FollowMode.GROUP

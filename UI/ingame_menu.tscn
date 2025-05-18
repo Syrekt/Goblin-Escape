@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://odampnuj1yqg"]
 
 [ext_resource type="Script" uid="uid://br83n515qy8j2" path="res://Scripts/ingame_menu.gd" id="1_cv5li"]
-[ext_resource type="Texture2D" uid="uid://cx2kdkmk8hhg6" path="res://Assets/Others/Goblin Escape - Title.png" id="2_4kmue"]
-[ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://Assets/Others/theme_button.tres" id="3_17mr3"]
+[ext_resource type="Texture2D" uid="uid://cx2kdkmk8hhg6" path="res://UI/Goblin Escape - Title.png" id="2_4kmue"]
+[ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://UI/theme_button.tres" id="3_17mr3"]
 [ext_resource type="PackedScene" uid="uid://hvdtjmpwq6ji" path="res://UI/Buttons/button_keybind.tscn" id="4_43cud"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_klbse"]

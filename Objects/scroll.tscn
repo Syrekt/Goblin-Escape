@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://dvnalqik5wysn" path="res://Scripts/scroll.gd" id="1_r6cjm"]
 [ext_resource type="Texture2D" uid="uid://biod40131ri15" path="res://UI/Full Sheet.png" id="1_shj22"]
-[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://Assets/Others/main_theme.tres" id="3_0nkf5"]
+[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="3_0nkf5"]
 [ext_resource type="Texture2D" uid="uid://cdbaknodlx4a2" path="res://UI/Super GUI Bundle 3 Paper Pack v1.0/Books/Book 1/Static Book/0.png" id="4_x5qcj"]
 [ext_resource type="Texture2D" uid="uid://bwph1b63ujc3r" path="res://UI/buttons_keyboard.png" id="5_4fvkn"]
 [ext_resource type="Texture2D" uid="uid://dur7wi36882os" path="res://UI/buttons_playstation.png" id="6_4km0l"]
 [ext_resource type="Texture2D" uid="uid://cn6iy5klsxb2e" path="res://UI/buttons_xbox.png" id="7_ri57v"]
-[ext_resource type="Script" uid="uid://cqgh8iyg4ujbk" path="res://Objects/interaction_prompt.gd" id="8_fg11j"]
+[ext_resource type="Script" uid="uid://cqgh8iyg4ujbk" path="res://Scripts/interaction_prompt.gd" id="8_fg11j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6cjm"]
 

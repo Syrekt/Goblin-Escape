@@ -1,0 +1,46 @@
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://crosqd2uoimhi"]
+
+[ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Others/Ohrenstead.ttf" id="1_kgf2r"]
+[ext_resource type="Texture2D" uid="uid://bjowu5bqsapub" path="res://UI/button_hover.png" id="2_hv2ae"]
+[ext_resource type="Texture2D" uid="uid://bpge6nsa5vqiq" path="res://UI/button_normal.png" id="3_sukla"]
+[ext_resource type="Texture2D" uid="uid://cxdtwv3bf6wmu" path="res://UI/button_pressed.png" id="4_86jsb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b30vn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nlykb"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8xby3"]
+texture = ExtResource("2_hv2ae")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v0qww"]
+texture = ExtResource("3_sukla")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7iji0"]
+texture = ExtResource("4_86jsb")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1cpqq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dt138"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bi30w"]
+texture = ExtResource("2_hv2ae")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g00hn"]
+texture = ExtResource("3_sukla")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wu7ve"]
+texture = ExtResource("4_86jsb")
+
+[resource]
+Button/fonts/font = ExtResource("1_kgf2r")
+Button/styles/disabled = SubResource("StyleBoxEmpty_b30vn")
+Button/styles/focus = SubResource("StyleBoxEmpty_nlykb")
+Button/styles/hover = SubResource("StyleBoxTexture_8xby3")
+Button/styles/normal = SubResource("StyleBoxTexture_v0qww")
+Button/styles/pressed = SubResource("StyleBoxTexture_7iji0")
+MenuButton/styles/disabled = SubResource("StyleBoxEmpty_1cpqq")
+MenuButton/styles/focus = SubResource("StyleBoxEmpty_dt138")
+MenuButton/styles/hover = SubResource("StyleBoxTexture_bi30w")
+MenuButton/styles/normal = SubResource("StyleBoxTexture_g00hn")
+MenuButton/styles/pressed = SubResource("StyleBoxTexture_wu7ve")
+RichTextLabel/fonts/normal_font = ExtResource("1_kgf2r")

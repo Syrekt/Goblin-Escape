@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://b0purjtq0ryuq"]
+
+[ext_resource type="Texture2D" uid="uid://cpv0rrvlg87w8" path="res://Particles/Blood-Circle.png" id="1_5i7ub"]
+[ext_resource type="Script" uid="uid://dasnov0bfbkrt" path="res://Particles/blood_spurt.gd" id="2_kbykq"]
+
+[sub_resource type="Curve" id="Curve_5i7ub"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.503759, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_kbykq"]
+curve = SubResource("Curve_5i7ub")
+
+[sub_resource type="Curve" id="Curve_ugron"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_f3ndi"]
+_data = [Vector2(0, 0.387755), 0.0, 0.0, 0, 0, Vector2(1, 0.408163), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ohw6m"]
+curve_x = SubResource("Curve_ugron")
+curve_y = SubResource("Curve_f3ndi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ohw6m"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 12.23, 1)
+directional_velocity_min = 20.0
+directional_velocity_max = 289.13
+directional_velocity_curve = SubResource("CurveXYZTexture_ohw6m")
+radial_velocity_min = 15.0
+radial_velocity_max = 100.0
+damping_min = 100.0
+damping_max = 100.0
+scale_min = 0.0
+scale_max = 0.6
+alpha_curve = SubResource("CurveTexture_kbykq")
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.21
+turbulence_influence_min = 0.293
+turbulence_influence_max = 0.293
+turbulence_initial_displacement_min = 70.3
+turbulence_initial_displacement_max = 70.3
+
+[node name="BloodSpurt" type="GPUParticles2D"]
+emitting = false
+amount = 125
+texture = ExtResource("1_5i7ub")
+one_shot = true
+explosiveness = 0.8
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_ohw6m")
+script = ExtResource("2_kbykq")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

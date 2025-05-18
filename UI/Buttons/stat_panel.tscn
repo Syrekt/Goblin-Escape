@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bf7nobsdrpasm"]
 
-[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://Assets/Others/main_theme.tres" id="1_qmd1x"]
+[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="1_qmd1x"]
 [ext_resource type="Script" uid="uid://bkwqrxfebqxun" path="res://Scripts/stat_panel.gd" id="2_pc5kx"]
-[ext_resource type="Texture2D" uid="uid://c0dcoth0u6wbm" path="res://Assets/Others/arrow_button4.png" id="3_tfpey"]
-[ext_resource type="Texture2D" uid="uid://bp6xxlabmlpm1" path="res://Assets/Others/arrow_button3.png" id="4_i4h3f"]
+[ext_resource type="Texture2D" uid="uid://c0dcoth0u6wbm" path="res://UI/arrow_button4.png" id="3_tfpey"]
+[ext_resource type="Texture2D" uid="uid://bp6xxlabmlpm1" path="res://UI/arrow_button3.png" id="4_i4h3f"]
 
 [node name="StatPanel" type="Control"]
 layout_mode = 3

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://hk23fmyof4sb"]
 
 [ext_resource type="Script" uid="uid://d0d1qbrfkah8p" path="res://Scripts/sword.gd" id="1_ufrhb"]
-[ext_resource type="Texture2D" uid="uid://5510tkqdtl8q" path="res://Assets/Others/sword.png" id="2_7fsec"]
+[ext_resource type="Texture2D" uid="uid://5510tkqdtl8q" path="res://Others/sword.png" id="2_7fsec"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7tyvg"]
 

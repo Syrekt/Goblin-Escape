@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://cwfcttxnm8ov1"]
+
+[ext_resource type="Script" uid="uid://d1ppg7n1ukrb5" path="res://Scripts/gate.gd" id="1_egbxd"]
+[ext_resource type="Texture2D" uid="uid://dayld2wf34ts8" path="res://Map/Props/gate2.png" id="2_5wntd"]
+[ext_resource type="Resource" uid="uid://cgja8j6c7wx70" path="res://Inventory/key1.tres" id="2_nmmnp"]
+[ext_resource type="Texture2D" uid="uid://c7g050lmul5yc" path="res://Map/Props/gate1.png" id="3_nmmnp"]
+[ext_resource type="Script" uid="uid://c1125my8d6cmi" path="res://Scripts/gate_interaction.gd" id="5_nmmnp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8hmfk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5wntd")
+}],
+"loop": false,
+"name": &"closed",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_nmmnp")
+}],
+"loop": false,
+"name": &"open",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qwxob"]
+size = Vector2(27, 98)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njdb7"]
+size = Vector2(20, 49)
+
+[node name="Gate" type="Node2D"]
+scale = Vector2(-1, 1)
+script = ExtResource("1_egbxd")
+key = ExtResource("2_nmmnp")
+
+[node name="AudioEmitter" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8hmfk")
+animation = &"closed"
+
+[node name="Collider" type="CharacterBody2D" parent="."]
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Collider"]
+position = Vector2(-2.5, -3)
+shape = SubResource("RectangleShape2D_qwxob")
+
+[node name="Interaction" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 0
+monitoring = false
+script = ExtResource("5_nmmnp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
+position = Vector2(21, 21.5)
+shape = SubResource("RectangleShape2D_njdb7")

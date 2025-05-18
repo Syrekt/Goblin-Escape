@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2ypdenbly4av"]
 
 [ext_resource type="Script" uid="uid://xi813gde6qkq" path="res://Scripts/text_pop_up.gd" id="1_7e1b5"]
-[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://Assets/Others/main_theme.tres" id="2_1hwjk"]
+[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="2_1hwjk"]
 
 [node name="TextPopUp" type="Node2D"]
 z_index = 3

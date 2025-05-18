@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=8 format=3 uid="uid://d3ajvsrrbu1s5"]
 
-[ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Assets/Others/Ohrenstead.ttf" id="1_5s48r"]
+[ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Others/Ohrenstead.ttf" id="1_5s48r"]
 [ext_resource type="Texture2D" uid="uid://cf2ysgl11vuva" path="res://Inventory/Sprites/inventory_button_focus.png" id="2_i1q7w"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wbxtx"]

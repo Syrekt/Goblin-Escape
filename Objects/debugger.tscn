@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dt2kdbk1phbvt"]
 
 [ext_resource type="Script" uid="uid://csaf5p22rt716" path="res://Scripts/debugger.gd" id="1_7ngyv"]
-[ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Assets/Others/Ohrenstead.ttf" id="2_ilfxo"]
+[ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Others/Ohrenstead.ttf" id="2_ilfxo"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5xf11"]
 line_spacing = 0.0

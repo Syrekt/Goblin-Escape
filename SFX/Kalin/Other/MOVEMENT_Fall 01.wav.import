@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cd18rgk3kgpwk"
+path="res://.godot/imported/MOVEMENT_Fall 01.wav-1cbedae3a400b8c23708c27bf1531c6a.sample"
+
+[deps]
+
+source_file="res://SFX/Kalin/Other/MOVEMENT_Fall 01.wav"
+dest_files=["res://.godot/imported/MOVEMENT_Fall 01.wav-1cbedae3a400b8c23708c27bf1531c6a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

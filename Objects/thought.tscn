@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dj11vgm24locj"]
 
 [ext_resource type="Script" uid="uid://byxhm37twn184" path="res://Scripts/thought.gd" id="1_kgof5"]
-[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://Assets/Others/main_theme.tres" id="1_wd0ya"]
+[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="1_wd0ya"]
 
 [node name="Thought" type="RichTextLabel"]
 offset_right = 196.0

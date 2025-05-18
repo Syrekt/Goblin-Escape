@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dfjm7ltmbs6a6"
+path="res://.godot/imported/Fight, Bodyfall, Rolling Fall, Tumble, Leather, Stone SND122314.wav-c67d9a134d08fbe2eb6948db22e8238d.sample"
+
+[deps]
+
+source_file="res://SFX/Fight, Bodyfall, Rolling Fall, Tumble, Leather, Stone SND122314.wav"
+dest_files=["res://.godot/imported/Fight, Bodyfall, Rolling Fall, Tumble, Leather, Stone SND122314.wav-c67d9a134d08fbe2eb6948db22e8238d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
