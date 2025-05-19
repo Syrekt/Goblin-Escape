@@ -10,7 +10,3 @@ func _on_slash_hitbox_body_entered(defender:Player) -> void:
 	defender.take_damage(2, enemy, true)
 	defender.combat_properties.pushback_apply(enemy.global_position, 50)
 
-	if defender.health.value <= 0:
-		finished.emit("laugh")
-	#Combat.deal_damage(enemy, 1, enemy.chase_target, 50)
-

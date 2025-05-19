@@ -20,6 +20,7 @@ func _on_attack_frame() -> void:
 				defender.combat_properties.pushback_apply(player.global_position, pushback_force)
 				defender.take_damage(player.stab_damage, player)
 				player.play_sfx(sfx_hit)
+				Ge.slow_mo(0, 0.05)
 		else:
 			defender.take_damage(0, player)
 			player.think("I should hit harder")

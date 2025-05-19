@@ -33,5 +33,6 @@ func _on_bash_hitbox_body_entered(defender: Node2D) -> void:
 			defender.combat_properties.stun(2.0)
 		elif !defender_state == "stance_defensive":
 			defender.take_damage(player.bash_damage, player)
+			Ge.slow_mo(0, 0.05)
 		else:
 			Ge.play_audio_from_string_array(player.audio_emitter, 0, "res://SFX/Sword hit shield")

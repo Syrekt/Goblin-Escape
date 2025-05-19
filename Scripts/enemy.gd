@@ -30,6 +30,7 @@ var anim_speed := 1.0
 var states_locked := false
 
 var counter_attack := false
+var dealth_finishing_blow := false
 
 var attack_type_taken : Array[String]
 
@@ -70,7 +71,7 @@ func set_facing(dir: int):
 			node.scale.x = facing
 func get_movement_dir():
 	return sign(velocity.x)
-func take_damage(_damage : int, _source: Node2D):
+func take_damage(_damage : int, _source: Node2D, critical := false):
 	health.value -= _damage
 	aware = true
 	if health.value <= 0:
@@ -81,7 +82,11 @@ func take_damage(_damage : int, _source: Node2D):
 	
 	if _source:
 		var incoming_dir = sign(_source.global_position.x - global_position.x)
-		Ge.make_bleed(global_position, -incoming_dir)
+		print("critical: "+str(critical))
+		if critical:
+			Ge.bleed_gush(global_position, -incoming_dir)
+		else:
+			Ge.bleed_spurt(global_position, -incoming_dir)
 		update_los(_source)
 		var attack_type = _source.state_node.state.name
 		attack_type_taken.append(attack_type)
@@ -242,7 +247,8 @@ func _on_chase_detector_body_entered(body:Node2D) -> void:
 	awareness_timer.stop()
 func _on_chase_range_body_exited(body:Node2D) -> void:
 	player_in_range = false
-	awareness_timer.start()
+	if awareness_timer.is_inside_tree():
+		awareness_timer.start()
 func _on_crush_check_body_entered(body:Node2D) -> void:
 	if body is Movable:
 		call_deferred("set_collision_mask_value", 1, false)

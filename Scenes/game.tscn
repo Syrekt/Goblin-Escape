@@ -195,7 +195,7 @@ tile_map_data = PackedByteArray("AADUACAAAQARABoAAADUACEAAQARABsAAADUACIAAQARABw
 tile_set = ExtResource("2_h4fw4")
 
 [node name="Kalin" parent="." instance=ExtResource("1_v3ybc")]
-position = Vector2(621, 190)
+position = Vector2(796, 191)
 has_sword = true
 
 [node name="Regions" type="Node" parent="."]
@@ -249,13 +249,10 @@ position = Vector2(590.306, 175.349)
 
 [node name="Enemy" parent="Regions/Start Room/Node" instance=ExtResource("14_nnt18")]
 position = Vector2(848, 208)
-facing = -1
+metadata/_edit_lock_ = true
 
 [node name="Light" parent="Regions/Start Room/Node" instance=ExtResource("16_cwurv")]
-position = Vector2(695, 193)
-
-[node name="Barricade" parent="Regions/Start Room/Node" instance=ExtResource("22_fkdbe")]
-position = Vector2(680, 192)
+position = Vector2(623, 138)
 
 [node name="ItemPickup" parent="Regions/Start Room" instance=ExtResource("17_iivbl")]
 position = Vector2(730, 202)

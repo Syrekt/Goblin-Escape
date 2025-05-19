@@ -28,5 +28,3 @@ func _on_bash_hitbox_body_entered(defender:Player) -> void:
 				defender.combat_properties.pushback_apply(enemy.global_position, 100)
 
 			defender.take_damage(1, enemy)
-			if defender.health.value <= 0:
-				finished.emit("laugh")

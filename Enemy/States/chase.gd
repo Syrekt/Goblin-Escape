@@ -9,6 +9,22 @@ func update(delta):
 		enemy.lost_target()
 		return
 
+	#region React to player
+	if enemy.chase_target.dead:
+		finished.emit("laugh")
+		return
+	if enemy.chase_target.unconscious:
+		finished.emit("leave_player")
+		return
+	elif %AttackDetector.has_overlapping_bodies():
+		if enemy.chase_target.dead || enemy.chase_target.unconscious:
+			enemy.update_animation("idle")
+			enemy.velocity.x = 0
+		else:
+			finished.emit(enemy.main_stance.name)
+		return
+	#endregion
+
 	#If can move, play run animation, idle otherwise
 	chase_dir = sign(enemy.chase_target.position.x - enemy.position.x)
 	if enemy.move(enemy.move_speed, chase_dir):
@@ -17,12 +33,3 @@ func update(delta):
 		enemy.update_animation("idle")
 		enemy.velocity.x = 0
 
-	#React to player
-	if enemy.chase_target.unconscious:
-		finished.emit("leave_player")
-	elif %AttackDetector.has_overlapping_bodies():
-		if enemy.chase_target.dead || enemy.chase_target.unconscious:
-			enemy.update_animation("idle")
-			enemy.velocity.x = 0
-		else:
-			finished.emit(enemy.main_stance.name)

@@ -15,6 +15,7 @@ func _on_attack_frame() -> void:
 	if hitbox.has_overlapping_bodies():
 		for defender in hitbox.get_overlapping_bodies():
 			if defender is Enemy:
+				Ge.slow_mo(0, 0.05)
 				if !defender.chase_target:
 					damage *= 2
 				var defender_state = defender.state_node.state.name
@@ -22,7 +23,7 @@ func _on_attack_frame() -> void:
 					defender.combat_properties.stun(2.0)
 					Ge.play_audio(player.audio_emitter, 1, "res://SFX/Kalin/block_break2.wav")
 				else:
-					defender.take_damage(damage, player)
+					defender.take_damage(damage, player, true)
 					player.play_sfx(sfx_hit)
 				defender.combat_properties.pushback_apply(player.global_position, pushback_force)
 			else:

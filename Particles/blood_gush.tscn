@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://l2d324v6j7tb"]
+
+[ext_resource type="Texture2D" uid="uid://cpv0rrvlg87w8" path="res://Particles/Blood-Circle.png" id="1_ngmwh"]
+[ext_resource type="Material" uid="uid://chx8numfgdt1h" path="res://Particles/blood_gush.tres" id="2_mifbc"]
+[ext_resource type="Script" uid="uid://dasnov0bfbkrt" path="res://Particles/blood_spurt.gd" id="2_tlp13"]
+
+[node name="BloodSpurt" type="GPUParticles2D"]
+emitting = false
+amount = 375
+texture = ExtResource("1_ngmwh")
+lifetime = 1.71
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+trail_sections = 4
+process_material = ExtResource("2_mifbc")
+script = ExtResource("2_tlp13")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

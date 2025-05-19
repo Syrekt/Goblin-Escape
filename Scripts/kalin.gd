@@ -140,7 +140,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 	var defended = defending
 	if !defending && _source:
 		var incoming_dir = sign(_source.global_position.x - global_position.x)
-		Ge.make_bleed(global_position, -incoming_dir)
+		Ge.bleed_spurt(global_position, -incoming_dir)
 	if _source && defending:
 		var incoming_attack = _source.state_node.state.name
 		match incoming_attack:
@@ -148,7 +148,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 				state_node.state.finished.emit("block")
 				if parry_active:
 					_source.combat_properties.stun(2.0)
-					Ge.slow_mo()
+					Ge.slow_mo(0.25, 0.25)
 					play_sfx(load("res://SFX/parry1.wav"))
 			"slash":
 				combat_properties.stun(2.0)
@@ -158,9 +158,12 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 				state_node.state.finished.emit("hurt")
 
 	if !defended:
+		Ge.slow_mo(0, 0.1)
 		health.value -= _damage
 		if health.value <= 0.1:
 			emit_signal("health_depleted")
+			if _source:
+				_source.dealth_finishing_blow = true
 		elif play_hurt_animation:
 			if has_sword:
 				state_node.state.finished.emit("hurt")
@@ -425,6 +428,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, move_speed * delta, accelaration)
 		cp.pushback_reset()
+	Debugger.printui("velocity.x: "+str(velocity.x));
+	Debugger.printui("stance_walk_speed: "+str(stance_walk_speed * delta));
 	#endregion
 	#region Y Movement
 	if !is_on_floor():

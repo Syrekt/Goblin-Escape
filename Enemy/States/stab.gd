@@ -13,5 +13,3 @@ func exit() -> void:
 func _on_stab_hitbox_body_entered(defender:Player) -> void:
 	defender.take_damage(1, enemy)
 	defender.combat_properties.pushback_apply(enemy.global_position, 50)
-	if defender.health.value <= 0:
-		finished.emit("laugh")

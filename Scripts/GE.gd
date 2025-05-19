@@ -140,18 +140,26 @@ func popup_text(position: Vector2, text: String, color1 := Color.WHITE, color2 :
 	popup.global_position = position - Vector2(0, 20)
 	popup.label.text = text
 	popup.tween_begin(color1, color2)
-func slow_mo() -> void:
+func slow_mo(amount: float, time: float) -> void:
 	var tween = create_tween().bind_node(self)
-	tween.tween_property(Engine, "time_scale", 0.25, 0.0)
-	tween.tween_property(Engine, "time_scale", 1, 0.25)
+	tween.tween_property(Engine, "time_scale", amount, 0.0)
+	tween.tween_property(Engine, "time_scale", 1, time)
 var bleed_burst_scene = load("res://Particles/blood_spurt.tscn")
-func make_bleed(position: Vector2, dir: int) -> void:
-	var bleed_burst : GPUParticles2D = bleed_burst_scene.instantiate()
-	bleed_burst.global_position = position
-	bleed_burst.scale.x = dir
-	bleed_burst.emitting = true
+func bleed_spurt(position: Vector2, dir: int) -> void:
+	var part : GPUParticles2D = bleed_burst_scene.instantiate()
+	part.global_position = position
+	part.scale.x = dir
+	part.emitting = true
 
-	add_child(bleed_burst)
+	add_child(part)
+var bleed_gush_scene = load("res://Particles/blood_gush.tscn")
+func bleed_gush(position: Vector2, dir: int) -> void:
+	var part : GPUParticles2D = bleed_gush_scene.instantiate()
+	part.global_position = position
+	part.scale.x = dir
+	part.emitting = true
+
+	add_child(part)
 func play_particle(res: Resource, position: Vector2, dir := 1) -> void:
 	var particle_controller : Node2D = res.instantiate()
 	particle_controller.global_position = position
