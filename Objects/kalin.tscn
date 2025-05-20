@@ -1,4 +1,4 @@
-[gd_scene load_steps=257 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=259 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -65,8 +65,11 @@
 [ext_resource type="Shader" uid="uid://cld42ccrm5l65" path="res://Scripts/vignette.gdshader" id="45_cbw7l"]
 [ext_resource type="Texture2D" uid="uid://cywhcouoj6ral" path="res://Kalin/Sprites/Kalin-Stun.png" id="45_pat22"]
 [ext_resource type="Resource" uid="uid://buieik1hf8xh2" path="res://Inventory/player_inventory.tres" id="46_1q8gn"]
+[ext_resource type="Texture2D" uid="uid://bp5grpvcbv7uq" path="res://UI/spr_healthbar1_empty.png" id="46_586st"]
+[ext_resource type="Texture2D" uid="uid://cnjxqb8coj4wg" path="res://UI/spr_healthbar_light.png" id="47_80r2e"]
 [ext_resource type="Texture2D" uid="uid://blmckxe1r5wjg" path="res://UI/Sliders/arousal.png" id="47_i87jo"]
 [ext_resource type="Script" uid="uid://7g1nk1glip7t" path="res://Kalin/States/push_idle.gd" id="48_mwqkq"]
+[ext_resource type="Texture2D" uid="uid://bysj6ond8blq7" path="res://UI/spr_healthbar_full.png" id="48_rbk27"]
 [ext_resource type="PackedScene" uid="uid://bf7nobsdrpasm" path="res://UI/Buttons/stat_panel.tscn" id="48_t42fh"]
 [ext_resource type="Texture2D" uid="uid://dqt7xyqy7n62e" path="res://UI/Sliders/experience_frame.png" id="48_vt74v"]
 [ext_resource type="Script" uid="uid://bkhxntb5d6xm5" path="res://Scripts/arousal.gd" id="48_yekxk"]
@@ -74,21 +77,20 @@
 [ext_resource type="Script" uid="uid://csoiaj7ta1d2b" path="res://Scripts/thought_container.gd" id="49_b2c13"]
 [ext_resource type="Script" uid="uid://cahuc4po87bew" path="res://Kalin/States/block.gd" id="49_sprrr"]
 [ext_resource type="Script" uid="uid://fqf7yx6g1f1f" path="res://Kalin/States/push.gd" id="49_ujutq"]
-[ext_resource type="Texture2D" uid="uid://7l40v0sl8k6q" path="res://UI/Sliders/stamina_frame.png" id="49_yekxk"]
 [ext_resource type="Script" uid="uid://ckgc63224e6or" path="res://Kalin/States/death.gd" id="50_1fn32"]
 [ext_resource type="Script" uid="uid://000pldstjcvg" path="res://Scripts/experience.gd" id="50_083qx"]
 [ext_resource type="Script" uid="uid://c2g5e1h8b8lqc" path="res://Kalin/States/pull.gd" id="50_tcyto"]
+[ext_resource type="Texture2D" uid="uid://1kum1inwfs80" path="res://UI/spr_staminabar_empty.png" id="50_yofsr"]
+[ext_resource type="Texture2D" uid="uid://8p0fqlomu0b8" path="res://UI/spr_staminabar_light.png" id="51_1yslh"]
 [ext_resource type="Script" uid="uid://dwq1nm237bc0m" path="res://Kalin/States/corner_grab.gd" id="51_t8vjn"]
 [ext_resource type="Script" uid="uid://cihngsdr3x7el" path="res://Kalin/States/corner_climb.gd" id="52_4ckjm"]
+[ext_resource type="Texture2D" uid="uid://by7w3x2yria11" path="res://UI/spr_staminabar_full.png" id="52_5atg1"]
 [ext_resource type="Texture2D" uid="uid://cjeyai1dtsq0a" path="res://UI/Sliders/smell.png" id="54_5dltv"]
 [ext_resource type="Script" uid="uid://dla7rfv4p43jf" path="res://Kalin/States/slide.gd" id="54_5dxkx"]
 [ext_resource type="Script" uid="uid://cenw0nn0fohoa" path="res://Kalin/States/interacting.gd" id="55_5lcso"]
 [ext_resource type="Script" uid="uid://b6xjst2veilw0" path="res://Scripts/smell.gd" id="55_h4isg"]
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="56_ghu8e"]
 [ext_resource type="Script" uid="uid://dpcphh4eavvle" path="res://Kalin/States/stun.gd" id="56_qqpcq"]
-[ext_resource type="Texture2D" uid="uid://cn50pdxbrvllo" path="res://UI/Sliders/health_frame.png" id="57_lnkvj"]
-[ext_resource type="Texture2D" uid="uid://yh6p23n7un5u" path="res://UI/Sliders/cur_health.png" id="58_8idp1"]
-[ext_resource type="Texture2D" uid="uid://cdns6sfhw5j85" path="res://UI/Sliders/cur_stamina.png" id="59_8idp1"]
 [ext_resource type="Script" uid="uid://cjge85wgil63e" path="res://Kalin/States/sex.gd" id="59_muuj4"]
 [ext_resource type="Script" uid="uid://cytac4sg8onjk" path="res://Kalin/States/corner_hang.gd" id="59_osr06"]
 [ext_resource type="Script" uid="uid://c3rllm222ckui" path="res://Kalin/stamina.gd" id="60_2ksh1"]
@@ -223,7 +225,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("../CanvasLayer/HUD/HBoxContainer/Stamina:modulate")
+tracks/9/path = NodePath("../CanvasLayer/HUD/Control/Stamina:modulate")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -3853,7 +3855,6 @@ shape = SubResource("RectangleShape2D_1nk40")
 visible = false
 
 [node name="UIFocus" type="ColorRect" parent="CanvasLayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -3887,46 +3888,16 @@ grow_vertical = 2
 scale = Vector2(4, 4)
 
 [node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD"]
+visible = false
 layout_mode = 0
 offset_right = 108.0
 offset_bottom = 41.0
 theme_override_constants/separation = 0
 
-[node name="Health" type="TextureProgressBar" parent="CanvasLayer/HUD/HBoxContainer" groups=["Persistent"]]
-unique_name_in_owner = true
-layout_mode = 2
-max_value = 10.0
-step = 0.0
-value = 10.0
-texture_under = ExtResource("57_lnkvj")
-texture_progress = ExtResource("58_8idp1")
-script = ExtResource("43_uhoyi")
-
 [node name="VSplitContainer3" type="VSplitContainer" parent="CanvasLayer/HUD/HBoxContainer"]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 theme_override_constants/separation = 10
-
-[node name="Stamina" type="TextureProgressBar" parent="CanvasLayer/HUD/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-max_value = 5.0
-step = 0.0
-value = 5.0
-texture_under = ExtResource("49_yekxk")
-texture_progress = ExtResource("59_8idp1")
-script = ExtResource("60_2ksh1")
-
-[node name="Timer" type="Timer" parent="CanvasLayer/HUD/HBoxContainer/Stamina"]
-one_shot = true
-autostart = true
-
-[node name="BuffContainer" type="HBoxContainer" parent="CanvasLayer/HUD/HBoxContainer/Stamina"]
-layout_mode = 0
-offset_top = 7.0
-offset_right = 116.0
-offset_bottom = 23.0
-scale = Vector2(0.5, 0.5)
 
 [node name="VSplitContainer2" type="VSplitContainer" parent="CanvasLayer/HUD/HBoxContainer"]
 custom_minimum_size = Vector2(0, 4)
@@ -3934,7 +3905,6 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="Experience" type="TextureProgressBar" parent="CanvasLayer/HUD/HBoxContainer" groups=["Persistent"]]
-unique_name_in_owner = true
 layout_mode = 2
 step = 0.0
 texture_under = ExtResource("48_vt74v")
@@ -3942,7 +3912,6 @@ texture_progress = ExtResource("49_083qx")
 script = ExtResource("50_083qx")
 
 [node name="Arousal" type="TextureProgressBar" parent="CanvasLayer/HUD/HBoxContainer" groups=["Persistent"]]
-unique_name_in_owner = true
 layout_mode = 2
 step = 0.0
 texture_under = ExtResource("48_vt74v")
@@ -3956,8 +3925,50 @@ texture_under = ExtResource("48_vt74v")
 texture_progress = ExtResource("54_5dltv")
 script = ExtResource("55_h4isg")
 
+[node name="Control" type="Control" parent="CanvasLayer/HUD"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health" type="TextureProgressBar" parent="CanvasLayer/HUD/Control" groups=["Persistent"]]
+layout_mode = 2
+offset_right = 108.0
+offset_bottom = 22.0
+max_value = 10.0
+step = 0.0
+value = 10.0
+texture_under = ExtResource("46_586st")
+texture_over = ExtResource("47_80r2e")
+texture_progress = ExtResource("48_rbk27")
+script = ExtResource("43_uhoyi")
+
+[node name="Stamina" type="TextureProgressBar" parent="CanvasLayer/HUD/Control"]
+layout_mode = 2
+offset_left = 24.0
+offset_top = 16.75
+offset_right = 132.0
+offset_bottom = 25.75
+max_value = 5.0
+step = 0.0
+value = 5.0
+texture_under = ExtResource("50_yofsr")
+texture_over = ExtResource("51_1yslh")
+texture_progress = ExtResource("52_5atg1")
+tint_progress = Color(0.737559, 0.505072, 0.0677517, 1)
+script = ExtResource("60_2ksh1")
+
+[node name="Timer" type="Timer" parent="CanvasLayer/HUD/Control/Stamina"]
+one_shot = true
+autostart = true
+
+[node name="BuffContainer" type="HBoxContainer" parent="CanvasLayer/HUD/Control/Stamina"]
+layout_mode = 0
+offset_top = 7.0
+offset_right = 116.0
+offset_bottom = 23.0
+scale = Vector2(0.5, 0.5)
+
 [node name="InventoryPanel" type="PanelContainer" parent="CanvasLayer" groups=["UIPanel"]]
-unique_name_in_owner = true
 visible = false
 offset_top = 91.0
 offset_right = 226.0
@@ -3992,7 +4003,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="DescriptionPanel" type="PanelContainer" parent="CanvasLayer"]
-unique_name_in_owner = true
 visible = false
 anchors_preset = 7
 anchor_left = 0.5
@@ -4025,7 +4035,6 @@ layout_mode = 2
 metadata/_edit_lock_ = true
 
 [node name="DescriptionText" type="RichTextLabel" parent="CanvasLayer/DescriptionPanel/MarginContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
 text = "[color=red]This is the description text[/color]"
@@ -4083,7 +4092,6 @@ layout_mode = 2
 text = "Stat Points"
 
 [node name="ThoughtContainer" type="VBoxContainer" parent="CanvasLayer"]
-unique_name_in_owner = true
 offset_top = 272.0
 offset_right = 444.0
 offset_bottom = 720.0

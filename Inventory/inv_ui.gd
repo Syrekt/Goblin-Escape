@@ -4,6 +4,8 @@ extends PanelContainer
 @onready var slots : Array = $MarginContainer/ScrollContainer/ButtonContainer.get_children()
 @onready var button_scene = preload("res://Inventory/inv_button.tscn")
 @onready var ui_focus : ColorRect = get_node("../UIFocus")
+@onready var description_panel : PanelContainer = get_node("../DescriptionPanel")
+@onready var description_text : RichTextLabel = get_node("../DescriptionPanel/MarginContainer/DescriptionText")
 
 @export var inventory : Inventory
 
@@ -14,14 +16,16 @@ var player : Player
 #region Methods
 func _ready() -> void:
 	item_list = inventory.items
+	hide()
+	description_panel.hide()
 func _process(delta: float) -> void:
 	if !get_viewport().gui_get_focus_owner():
-		%DescriptionText.text = ""
+		description_text.text = ""
 		if vbox.get_child_count() > 0:
 			vbox.get_child(0).grab_focus()
 func toggle() -> void:
 	visible = !visible
-	%DescriptionPanel.visible = visible
+	description_panel.visible = visible
 
 	if visible:
 		ui_focus.fade_in()
@@ -45,5 +49,5 @@ func create_button(item : InventoryItem) -> void:
 #region Signals
 func _on_focus_entered(item : InventoryItem) -> void:
 	if item:
-		%DescriptionText.text = item.description
+		description_text.text = item.description
 #endregion

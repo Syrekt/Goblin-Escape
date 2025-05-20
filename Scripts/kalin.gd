@@ -36,8 +36,8 @@ var available_stat_points := 5
 #endregion
 #region Node pointers
 @onready var state_node := $StateMachine
-@onready var health		: TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Health
-@onready var stamina	: TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Stamina
+@onready var health		: TextureProgressBar = $CanvasLayer/HUD/Control/Health #$CanvasLayer/HUD/HBoxContainer/Health
+@onready var stamina	: TextureProgressBar = $CanvasLayer/HUD/Control/Stamina #$CanvasLayer/HUD/HBoxContainer/Stamina
 @onready var experience : TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Experience
 @onready var smell		: TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Smell
 @onready var smell_particles : GPUParticles2D = $SmellParticles
@@ -64,7 +64,7 @@ var available_stat_points := 5
 @onready var audio_emitter : AudioStreamPlayer2D = $MainAudioStreamer
 @onready var inventory_panel = $CanvasLayer/InventoryPanel
 @onready var character_panel = $CanvasLayer/CharacterPanel
-@onready var thought_container = %ThoughtContainer
+@onready var thought_container = $CanvasLayer/ThoughtContainer
 @onready var emote = $Emote
 @onready var parry_timer = $StateMachine/stance_defensive/ParryTimer
 @onready var vignette = $CanvasLayer/StealthVignette
@@ -279,6 +279,7 @@ func check_movement_disabled() -> bool:
 	for node in ui_nodes:
 		if node.visible:
 			$InteractionPrompt.supress = true
+			velocity.x = 0
 			return true
 	$InteractionPrompt.supress = false
 	return false
