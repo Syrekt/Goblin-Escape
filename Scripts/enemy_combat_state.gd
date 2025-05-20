@@ -36,7 +36,6 @@ func exit():
 	timer.queue_free()
 
 func _update(delta: float) -> bool:
-	Debugger.printui("timer.time_left: "+str(timer.time_left));
 	if !enemy.chase_target:
 		enemy.lost_target()
 		return true
