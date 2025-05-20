@@ -15,8 +15,10 @@ func update(delta : float) -> void:
 			finished.emit("chat_lead")
 		else:
 			finished.emit("chat_secondary")
+		return
 	if enemy.chase_target && !enemy.line_of_sight.is_colliding():
 		finished.emit("chase")
+		return
 
 func _on_idle_timer_timeout() -> void:
 	if enemy.patrol_amount > 0:

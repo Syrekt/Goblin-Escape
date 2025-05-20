@@ -1,4 +1,4 @@
-[gd_scene load_steps=255 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=257 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -107,8 +107,8 @@
 [ext_resource type="AudioStream" uid="uid://bdqasi1uw1jm5" path="res://SFX/Kalin/stab1.wav" id="85_exvqe"]
 [ext_resource type="AudioStream" uid="uid://c50be1pxoc3bn" path="res://SFX/Kalin/Sword Woosh 12.wav" id="86_cbw7l"]
 [ext_resource type="Script" uid="uid://dwwirxo8vr8kq" path="res://Kalin/States/ladder_climb.gd" id="88_7e6uh"]
-[ext_resource type="AudioStream" uid="uid://bweqdmfleyo7t" path="res://SFX/Kalin/punch1.wav" id="88_47a0d"]
 [ext_resource type="AudioStream" uid="uid://b7dlcnc8e25ui" path="res://SFX/Kalin/kick_long_whoosh_19.wav" id="89_586st"]
+[ext_resource type="AudioStream" uid="uid://y07o2rjag3lq" path="res://SFX/Kalin/Punch_06.wav" id="91_cbw7l"]
 
 [sub_resource type="Animation" id="Animation_5koc5"]
 length = 0.001
@@ -268,6 +268,54 @@ tracks/12/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath(".:material:shader_parameter/tint_color")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath(".:material:shader_parameter/outline_color")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath(".:material:shader_parameter/width")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("%Sprite2D/..:power_crush")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_b8tlq"]
 resource_name = "bash"
@@ -372,6 +420,54 @@ tracks/7/keys = {
 "args": [],
 "method": &"play_footsteps"
 }]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = false
+tracks/8/path = NodePath(".:material:shader_parameter/tint_color")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.9),
+"transitions": PackedFloat32Array(1e+06, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = false
+tracks/9/path = NodePath(".:material:shader_parameter/outline_color")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.9),
+"transitions": PackedFloat32Array(1e+06, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath(".:material:shader_parameter/width")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("%Sprite2D/..:power_crush")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_bb84h"]
@@ -2944,7 +3040,7 @@ alpha_curve = SubResource("CurveTexture_cbw7l")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bs037"]
 shader = ExtResource("34_wxg5w")
-shader_parameter/outline_color = Color(0, 0, 0, 0)
+shader_parameter/outline_color = Color(1, 1, 1, 0)
 shader_parameter/width = 1.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
@@ -3581,10 +3677,16 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6qte"]
-size = Vector2(15, 45.8333)
+size = Vector2(15, 46.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iccmv"]
 size = Vector2(15, 25.8333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cbw7l"]
+size = Vector2(6, 54.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_47a0d"]
+size = Vector2(4, 55)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_avh81"]
 size = Vector2(15, 24)
@@ -3679,7 +3781,7 @@ position = Vector2(0, -36)
 
 [node name="ColliderStanding" type="CollisionShape2D" parent="." groups=["Flip"]]
 visible = false
-position = Vector2(0, 4.5)
+position = Vector2(0, 4.25001)
 scale = Vector2(1, 1.2)
 shape = SubResource("RectangleShape2D_y6qte")
 
@@ -3706,9 +3808,22 @@ visible = false
 target_position = Vector2(14, 1.90735e-06)
 collision_mask = 33
 
-[node name="RayBehind" type="RayCast2D" parent="." groups=["Flip"]]
+[node name="ColBehind" type="Area2D" parent="." groups=["Flip"]]
 visible = false
-target_position = Vector2(-25, 0)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColBehind"]
+position = Vector2(-10, 4.375)
+shape = SubResource("RectangleShape2D_cbw7l")
+
+[node name="ColFront" type="Area2D" parent="." groups=["Flip"]]
+visible = false
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColFront"]
+position = Vector2(10, 4.5)
+shape = SubResource("RectangleShape2D_47a0d")
 
 [node name="StandCheck" type="Area2D" parent="." groups=["Flip"]]
 visible = false
@@ -4101,7 +4216,7 @@ disabled = false
 
 [node name="bash" type="Node2D" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("41_pdh0h")
-sfx_hit = ExtResource("88_47a0d")
+sfx_hit = ExtResource("91_cbw7l")
 sfx_whiff = ExtResource("89_586st")
 pushback_force = 300
 
@@ -4189,6 +4304,7 @@ script = ExtResource("88_7e6uh")
 
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="ColFront" to="." method="_on_col_front_body_entered"]
 [connection signal="area_entered" from="Interactor" to="." method="_on_interactor_area_entered"]
 [connection signal="area_exited" from="Interactor" to="." method="_on_interactor_area_exited"]
 [connection signal="attack_frame" from="StateMachine/slash" to="StateMachine/slash" method="_on_attack_frame"]

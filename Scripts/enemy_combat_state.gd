@@ -2,11 +2,19 @@ class_name EnemyCombatState extends EnemyState
 
 @export var transitions : Array[EnemyCombatState] ##Transition states from main stance only
 @export var attack_state : EnemyState
+@export var stance_time := 1.0
+@export var attack_time := 0.5
+
+var timer : Timer
 
 
 func enter(previous_state_path: String, data := {}) -> void:
 	enemy.call_deferred("update_animation", name)
 	enemy.velocity.x = 0
+	
+	timer = Timer.new()
+	timer.one_shot = true
+	add_child(timer)
 	
 	if !%AttackDetector.has_overlapping_bodies():
 		finished.emit("chase")
@@ -15,21 +23,24 @@ func enter(previous_state_path: String, data := {}) -> void:
 	var is_main_stance = enemy.main_stance == self
 	if is_main_stance:
 		if randi() % 2:
-			$StanceTimer.start()
+			timer.timeout.connect(_on_stance_timer_timeout)
+			timer.start(stance_time)
 		else:
-			$AttackTimer.start()
+			timer.timeout.connect(_on_attack_timer_timeout)
+			timer.start(attack_time)
 	else:
-		$AttackTimer.start()
+		timer.timeout.connect(_on_attack_timer_timeout)
+		timer.start(attack_time)
 
 func exit():
-	$StanceTimer.stop()
-	$AttackTimer.stop()
+	timer.queue_free()
 
 func _update(delta: float) -> bool:
+	Debugger.printui("timer.time_left: "+str(timer.time_left));
 	if !enemy.chase_target:
 		enemy.lost_target()
 		return true
-	elif enemy.chase_target.unconscious:
+	elif enemy.chase_target.dead:
 		finished.emit("laugh")
 		return true
 	#elif abs(enemy.chase_target.velocity.x) >= 30:
@@ -49,5 +60,7 @@ func _update(delta: float) -> bool:
 
 func _on_stance_timer_timeout() -> void:
 	finished.emit(transitions.pick_random().name)
+	print("stance timer timeout")
 func _on_attack_timer_timeout() -> void:
 	finished.emit(attack_state.name)
+	print("attack timer timeout")

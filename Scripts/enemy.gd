@@ -116,6 +116,7 @@ func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 		animation_player.play(anim, -1, speed, from_end)
 		animation_player.advance(0)
 func hear_noise(noise: Node2D) -> void:
+	aware = true
 	if !$NoiseIgnoreTimer.is_stopped():
 		return
 
@@ -133,6 +134,7 @@ func hear_noise(noise: Node2D) -> void:
 func update_los(target: CharacterBody2D) -> void:
 	var pos = target.global_position
 	line_of_sight.target_position = line_of_sight.to_local(pos)
+	await get_tree().physics_frame
 func lost_target() -> void:
 	#CHANGES STATE
 	emote_emitter.play("confused")
@@ -185,7 +187,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if player_in_range && (!player.invisible || aware):
 		aware = true
-		update_los(player)
+		await update_los(player)
 		if line_of_sight.is_colliding():
 			print("line of sight blocked to chase target")
 			chase_target = null
@@ -246,6 +248,7 @@ func _on_chase_detector_body_entered(body:Node2D) -> void:
 	player_in_range = true
 	awareness_timer.stop()
 func _on_chase_range_body_exited(body:Node2D) -> void:
+	print("player body exited")
 	player_in_range = false
 	if awareness_timer.is_inside_tree():
 		awareness_timer.start()

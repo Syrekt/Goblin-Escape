@@ -14,7 +14,12 @@ func exit() -> void:
 func update(delta: float) -> void:
 	_update(delta)
 	if player.sprite.frame == 3:
-		player.velocity.x = 150 * player.facing
+		if player.absorbed_damage:
+			print("Absorbed damage and increased velocity")
+			player.velocity.x = 300 * player.facing
+			player.absorbed_damage = false
+		else:
+			player.velocity.x = 150 * player.facing
 
 
 func play_footsteps() -> void:

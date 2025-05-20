@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bkrvj8r1dwvog"
+path="res://.godot/imported/Impact_Sword_To_Shield_04.wav-48f33c496afa01f2357d39956d0e2a43.sample"
+
+[deps]
+
+source_file="res://SFX/Sword hit shield/Impact_Sword_To_Shield_04.wav"
+dest_files=["res://.godot/imported/Impact_Sword_To_Shield_04.wav-48f33c496afa01f2357d39956d0e2a43.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -50,7 +50,8 @@ var available_stat_points := 5
 @onready var ray_movable : RayCast2D = $MovableCheck
 @onready var ray_corner_grab_check : RayCast2D = $CornerGrabCheck
 @onready var ray_auto_climb : RayCast2D = $CornerAutoClimb
-@onready var ray_behind : RayCast2D = $RayBehind
+@onready var col_behind : Area2D = $ColBehind
+@onready var col_front : Area2D = $ColFront
 @onready var col_corner_grab_prevent : Area2D = $CornerGrabPrevent
 @onready var col_quick_climb_prevent : Area2D = $QuickClimbPrevent
 @onready var col_stand_check : Area2D = $StandCheck
@@ -80,6 +81,8 @@ var bash_damage 	:= 1
 var damage			:= 1
 var combat_target	: CharacterBody2D = null
 var buffered_state  : String
+@export var power_crush	:= false
+var absorbed_damage := false
 #endregion
 #region Others
 @export var dead				:= false # Health == 0
@@ -138,9 +141,11 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 
 	#See if attack has broken our defense
 	var defended = defending
+	#Bleed if not defending
 	if !defending && _source:
 		var incoming_dir = sign(_source.global_position.x - global_position.x)
 		Ge.bleed_spurt(global_position, -incoming_dir)
+	#Defensive reactions
 	if _source && defending:
 		var incoming_attack = _source.state_node.state.name
 		match incoming_attack:
@@ -156,15 +161,28 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 				defended = false
 			"bash":
 				state_node.state.finished.emit("hurt")
-
+	#Take damage
 	if !defended:
-		Ge.slow_mo(0, 0.1)
+		if power_crush && stamina.spend(_damage, 1.0):
+			absorbed_damage = true
+			Ge.play_audio_free(-10, "res://SFX/Kalin/Weapon_Hit_Armour_03_With_Echo_Enhancement.wav")
+			Ge.slow_mo(0, 0.2)
+			var tween_tint = create_tween().bind_node(self)
+			var tween_outline = create_tween().bind_node(self)
+			tween_tint.tween_property(sprite.material, "shader_parameter/tint_color", Color.WHITE, 0)
+			#tween_outline.tween_property(sprite.material, "shader_parameter/outline_color", Color(0.7, 0.24, 1.0, 1), 0)
+			tween_outline.tween_property(sprite.material, "shader_parameter/outline_color", Color.WHITE, 0)
+			tween_tint.tween_property(sprite.material, "shader_parameter/tint_color", Color(0, 0, 0, 0), 0.5)
+			tween_outline.tween_property(sprite.material, "shader_parameter/outline_color", Color(0, 0, 0, 0), 0.5)
+		else:
+			Ge.slow_mo(0, 0.1)
 		health.value -= _damage
 		if health.value <= 0.1:
 			emit_signal("health_depleted")
 			if _source:
 				_source.dealth_finishing_blow = true
-		elif play_hurt_animation:
+			Ge.play_audio_from_string_array(audio_emitter, -2, "res://SFX/Kalin/Hurt")
+		elif !power_crush && play_hurt_animation:
 			if has_sword:
 				state_node.state.finished.emit("hurt")
 			else:
@@ -418,7 +436,7 @@ func _physics_process(delta: float) -> void:
 			velocity = Vector2.ZERO
 
 
-	if health.value <= 0: cp.pushback_reset()
+	if health.value <= 0 || power_crush: cp.pushback_reset()
 	if cp.pushback_timer > 0:
 		velocity.x = lerpf(cp.pushback_vector.x, 0, cp.pushback_elapsed_time / cp.pushback_duration)
 
@@ -428,8 +446,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, move_speed * delta, accelaration)
 		cp.pushback_reset()
-	Debugger.printui("velocity.x: "+str(velocity.x));
-	Debugger.printui("stance_walk_speed: "+str(stance_walk_speed * delta));
 	#endregion
 	#region Y Movement
 	if !is_on_floor():
@@ -517,7 +533,7 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
-		take_damage(4)
+		take_damage(9)
 		#if randi_range(0, 1) == 1:
 		#	inventory.pickup_item(load("res://Inventory/water.tres"))
 		#else:
@@ -550,4 +566,8 @@ func _on_leave_shadow() -> void:
 	tween1.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color(0.0, 0.0, 0.0, 0.0), 0.2)
 	var tween2 = create_tween().bind_node(self)
 	tween2.tween_property(vignette.material, "shader_parameter/alpha", 0.0, 0.2)
+func _on_col_front_body_entered(body: Node2D) -> void:
+	if body is Enemy:
+		body.aware = true
+		body.chase_target = self
 #endregion
