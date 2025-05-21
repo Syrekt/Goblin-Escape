@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://352hagd7ohou"
-path="res://.godot/imported/crate_particle4.png-38a26e7d69024de5d48e71b4fec8b2e7.ctex"
+uid="uid://chjgsdqrvvtgb"
+path="res://.godot/imported/arousal_progress.png-b7ae2b2407cfa290d194f3c6de8647f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Particles/crate_particle4.png"
-dest_files=["res://.godot/imported/crate_particle4.png-38a26e7d69024de5d48e71b4fec8b2e7.ctex"]
+source_file="res://UI/Sliders/arousal_progress.png"
+dest_files=["res://.godot/imported/arousal_progress.png-b7ae2b2407cfa290d194f3c6de8647f9.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1kum1inwfs80"
-path="res://.godot/imported/spr_staminabar_empty.png-2c693637fe566a49aa1efd30e9bea21e.ctex"
+uid="uid://uxseughhf4fc"
+path="res://.godot/imported/experience_under.png-7ded337ebbc55178d9fd8977e3cbd5a5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/spr_staminabar_empty.png"
-dest_files=["res://.godot/imported/spr_staminabar_empty.png-2c693637fe566a49aa1efd30e9bea21e.ctex"]
+source_file="res://UI/Sliders/experience_under.png"
+dest_files=["res://.godot/imported/experience_under.png-7ded337ebbc55178d9fd8977e3cbd5a5.ctex"]
 
 [params]
 

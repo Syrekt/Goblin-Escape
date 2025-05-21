@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=4 uid="uid://c3ce8mt521wb5"]
+[gd_scene load_steps=52 format=4 uid="uid://c3ce8mt521wb5"]
 
 [ext_resource type="Script" uid="uid://drax23314hg08" path="res://Scripts/room_limit_tween.gd" id="1_81klo"]
 [ext_resource type="PackedScene" uid="uid://h2hwfpjw4rte" path="res://Objects/kalin.tscn" id="1_v3ybc"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/Other/crate1.tscn" id="15_nb51f"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/light.tscn" id="16_cwurv"]
 [ext_resource type="PackedScene" uid="uid://cwfcttxnm8ov1" path="res://Map/Props/gate.tscn" id="16_ewbju"]
+[ext_resource type="PackedScene" uid="uid://dxriomae5diar" path="res://Objects/checkpoint.tscn" id="17_8m3t6"]
 [ext_resource type="PackedScene" uid="uid://hk23fmyof4sb" path="res://Objects/sword.tscn" id="17_85qyi"]
 [ext_resource type="PackedScene" uid="uid://dfoplvp3api4g" path="res://Map/Props/stairs1.tscn" id="17_ewbju"]
 [ext_resource type="PackedScene" uid="uid://dk84lu71fcjkl" path="res://Objects/item_pickup.tscn" id="17_iivbl"]
@@ -127,6 +128,12 @@ follow_damping_value = Vector2(0.2, 0.2)
 pcam_list = [NodePath("Regions/Start Room/Start Room Cam"), NodePath("Regions/Passage1/Passage1 Cam"), NodePath("Regions/Stealth1/Stealth1 Cam"), NodePath("Regions/Passage2/Passage2 Cam"), NodePath("Regions/Health Room1/Health Room1 Cam"), NodePath("Regions/Sword Room/Sword Room Cam"), NodePath("Regions/Passage3/Passage3 Cam"), NodePath("Regions/Stealth&Combat1/Stealth&Combat1 Cam"), NodePath("Regions/TileMapLayer/PhantomCamera2D")]
 area_list = [NodePath("Regions/Start Room/Start Room Area"), NodePath("Regions/Passage1/Passage1 Area"), NodePath("Regions/Stealth1/Stealth1 Area"), NodePath("Regions/Passage2/Passage2 Area"), NodePath("Regions/Health Room1/Health Room1 Area"), NodePath("Regions/Sword Room/Sword Room Area"), NodePath("Regions/Passage3/Passage3 Area"), NodePath("Regions/Stealth&Combat1/Stealth&Combat1 Area"), NodePath("Regions/TileMapLayer/Area2D")]
 
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_left = -198.0
+offset_top = -12.0
+offset_right = -158.0
+offset_bottom = 28.0
+
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_fkdbe")
 volume_db = -10.778
@@ -170,6 +177,7 @@ theme_override_font_sizes/font_size = 64
 text = "Loading...."
 
 [node name="TutorialText" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("3_22asu")
@@ -195,7 +203,7 @@ tile_map_data = PackedByteArray("AADUACAAAQARABoAAADUACEAAQARABsAAADUACIAAQARABw
 tile_set = ExtResource("2_h4fw4")
 
 [node name="Kalin" parent="." instance=ExtResource("1_v3ybc")]
-position = Vector2(565, 190)
+position = Vector2(565, 187)
 has_sword = true
 
 [node name="Regions" type="Node" parent="."]
@@ -220,7 +228,7 @@ position = Vector2(637.5, 128)
 shape = SubResource("RectangleShape2D_ydexs")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Regions/Start Room"]
-tile_map_data = PackedByteArray("AAACAAAAAgAlAAQAAAACAAEAAgAlAAUAAAACAAIAAgAlAAYAAAACAAMAAgAlAAcAAAACAAQAAgAlAAgAAAACAAUAAgAlAAkAAAACAAYAAgAlAAoAAAADAAAAAgAmAAQAAAADAAEAAgAmAAUAAAADAAIAAgAmAAYAAAADAAMAAgAmAAcAAAADAAQAAgAmAAgAAAADAAUAAgAmAAkAAAADAAYAAgAmAAoAAAA=")
+tile_map_data = PackedByteArray("AAACAAAAAgAlAAQAAAACAAEAAgAlAAUAAAACAAIAAgAlAAYAAAACAAMAAgAlAAcAAAACAAQAAgAlAAgAAAACAAUAAgAlAAkAAAACAAYAAgAlAAoAAAADAAAAAgAmAAQAAAADAAEAAgAmAAUAAAADAAIAAgAmAAYAAAADAAMAAgAmAAcAAAADAAQAAgAmAAgAAAADAAUAAgAmAAkAAAADAAYAAgAmAAoAAAA7ABIAAgAEABsAAAA6ABIAAgADABsAAAA5ABIAAgACABsAAAA4ABIAAgABABsAAAA4ABEAAgABABoAAAA5ABEAAgACABoAAAA6ABEAAgADABoAAAA7ABEAAgAEABoAAAA=")
 tile_set = ExtResource("2_h4fw4")
 
 [node name="Node" type="Node" parent="Regions/Start Room"]
@@ -253,6 +261,12 @@ position = Vector2(441, 123)
 [node name="ItemPickup" parent="Regions/Start Room/Node" instance=ExtResource("17_iivbl")]
 position = Vector2(576, 194)
 item = ExtResource("18_7nbq1")
+
+[node name="Enemy" parent="Regions/Start Room/Node" instance=ExtResource("14_nnt18")]
+position = Vector2(670, 190)
+
+[node name="Checkpoint" parent="Regions/Start Room/Node" instance=ExtResource("17_8m3t6")]
+position = Vector2(623, 208)
 
 [node name="ItemPickup" parent="Regions/Start Room" instance=ExtResource("17_iivbl")]
 position = Vector2(730, 202)
@@ -532,7 +546,7 @@ position = Vector2(2096, 608)
 position = Vector2(1720, 819)
 
 [node name="MovableLimit" parent="Regions/Stealth&Combat1/Node" instance=ExtResource("20_vm72l")]
-position = Vector2(1801, 864)
+position = Vector2(1824, 870)
 
 [node name="ItemPickup" parent="Regions/Stealth&Combat1/Node" instance=ExtResource("17_iivbl")]
 position = Vector2(1440, 772)

@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 
 func take_damage(damage: int, source) -> void:
 	if damage > 0:
-		Ge.play_particle(load("res://Particles/crate_particles.tscn"), global_position)
+		Ge.play_particle(load("res://VFX/crate_particles.tscn"), global_position)
 	damage_taken = damage_taken + damage
 	var frame_count = sprite.sprite_frames.get_frame_count(sprite.animation)
 	if damage_taken >= frame_count-1:

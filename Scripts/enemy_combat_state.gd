@@ -4,6 +4,7 @@ class_name EnemyCombatState extends EnemyState
 @export var attack_state : EnemyState
 @export var stance_time := 1.0
 @export var attack_time := 0.5
+@export var debug_stance : String
 
 var timer : Timer
 
@@ -58,8 +59,9 @@ func _update(delta: float) -> bool:
 
 
 func _on_stance_timer_timeout() -> void:
-	finished.emit(transitions.pick_random().name)
-	print("stance timer timeout")
+	if debug_stance != "":
+		finished.emit(debug_stance)
+	else:
+		finished.emit(transitions.pick_random().name)
 func _on_attack_timer_timeout() -> void:
 	finished.emit(attack_state.name)
-	print("attack timer timeout")

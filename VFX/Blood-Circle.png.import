@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0y2p8ifa1sy2"
-path="res://.godot/imported/crate_particle3.png-ec0b8855104e37a131d9cccd848c54bc.ctex"
+uid="uid://cpv0rrvlg87w8"
+path="res://.godot/imported/Blood-Circle.png-e404549eb9f689bace493e484889710f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Particles/crate_particle3.png"
-dest_files=["res://.godot/imported/crate_particle3.png-ec0b8855104e37a131d9cccd848c54bc.ctex"]
+source_file="res://VFX/Blood-Circle.png"
+dest_files=["res://.godot/imported/Blood-Circle.png-e404549eb9f689bace493e484889710f.ctex"]
 
 [params]
 

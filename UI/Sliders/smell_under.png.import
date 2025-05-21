@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3vdllssgc0fa"
-path="res://.godot/imported/crate_particle1.png-fba684eed782eb17a0850fb632b12ec9.ctex"
+uid="uid://ebs31exhntsl"
+path="res://.godot/imported/smell_under.png-7dc05958574f8ea0b6dd8e577e594099.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Particles/crate_particle1.png"
-dest_files=["res://.godot/imported/crate_particle1.png-fba684eed782eb17a0850fb632b12ec9.ctex"]
+source_file="res://UI/Sliders/smell_under.png"
+dest_files=["res://.godot/imported/smell_under.png-7dc05958574f8ea0b6dd8e577e594099.ctex"]
 
 [params]
 

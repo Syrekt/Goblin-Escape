@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpv0rrvlg87w8"
-path="res://.godot/imported/Blood-Circle.png-1c610703b7132045a02eed9a181f28d6.ctex"
+uid="uid://cnjxqb8coj4wg"
+path="res://.godot/imported/spr_healthbar_light.png-81b9425a16cc1f5077c57558061ee24c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Particles/Blood-Circle.png"
-dest_files=["res://.godot/imported/Blood-Circle.png-1c610703b7132045a02eed9a181f28d6.ctex"]
+source_file="res://UI/Sliders/spr_healthbar_light.png"
+dest_files=["res://.godot/imported/spr_healthbar_light.png-81b9425a16cc1f5077c57558061ee24c.ctex"]
 
 [params]
 

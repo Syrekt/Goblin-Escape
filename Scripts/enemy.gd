@@ -71,7 +71,7 @@ func set_facing(dir: int):
 			node.scale.x = facing
 func get_movement_dir():
 	return sign(velocity.x)
-func take_damage(_damage : int, _source: Node2D, critical := false):
+func take_damage(_damage : int, _source: Node2D = null, critical := false):
 	health.value -= _damage
 	aware = true
 	if health.value <= 0:
@@ -158,7 +158,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"hurt":
 			var n = randi() % 3
 			print("n: "+str(n))
-			if n:
+			if n && attack_type_taken.size() > 0:
 				var attack_to_counter = attack_type_taken.pick_random()
 				match attack_to_counter:
 					"slash":
@@ -200,6 +200,7 @@ func _physics_process(delta: float) -> void:
 		print("player isn't in range or invisible, aware: "+str(aware))
 		chase_target = null
 	if debug:
+		Debugger.printui("State: "+str(state_node.state.name));
 		Debugger.printui("player_in_range: "+str(player_in_range))
 		Debugger.printui("chase_target: "+str(chase_target))
 		Debugger.printui("aware: "+str(aware))
@@ -259,4 +260,6 @@ func _on_crush_check_body_entered(body:Node2D) -> void:
 func _on_awareness_timer_timeout() -> void:
 	print("Lost awareness")
 	aware = false
+func _on_threat_collider_body_entered(body:Node2D) -> void:
+	take_damage(health.max_value)
 #endregion

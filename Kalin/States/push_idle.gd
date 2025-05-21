@@ -15,8 +15,8 @@ func update(delta: float) -> void:
 
 	var dir = Input.get_axis("left", "right")
 	if dir == player.facing:
-		if %Stamina.has_enough(0.1):
+		if player.stamina.has_enough(0.1):
 			finished.emit("push")
 	elif dir == -player.facing:
-		if %Stamina.has_enough(0.1):
+		if player.stamina.has_enough(0.1):
 			finished.emit("pull")

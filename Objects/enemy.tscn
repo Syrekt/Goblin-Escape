@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene load_steps=59 format=3 uid="uid://iuj1jg31a55f"]
 
 [ext_resource type="Script" uid="uid://bhcr3m01slk8a" path="res://Scripts/enemy.gd" id="1_18den"]
 [ext_resource type="AudioStream" uid="uid://bx6vdt8wts4xf" path="res://SFX/Kalin/Other/kick_short_whoosh_12.wav" id="6_ifl3v"]
@@ -971,6 +971,9 @@ size = Vector2(313, 46)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wgea4"]
 size = Vector2(18, 11)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cyoxu"]
+size = Vector2(20, 36)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rha5u"]
 size = Vector2(20, 32)
 
@@ -980,7 +983,6 @@ collision_layer = 8
 collision_mask = 9
 script = ExtResource("1_18den")
 main_stance = NodePath("StateMachine/stance_light")
-metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
@@ -1016,10 +1018,14 @@ position = Vector2(0, -10)
 target_position = Vector2(-17, 27)
 
 [node name="WallCheckRight" type="RayCast2D" parent="."]
-target_position = Vector2(24, 0)
+position = Vector2(0, 1)
+target_position = Vector2(20, 0)
+collision_mask = 257
 
 [node name="WallCheckLeft" type="RayCast2D" parent="."]
-target_position = Vector2(-24, 0)
+position = Vector2(0, 1)
+target_position = Vector2(-20, 0)
+collision_mask = 257
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
 material = SubResource("ShaderMaterial_xhuvx")
@@ -1054,18 +1060,16 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Health" type="TextureProgressBar" parent="."]
-unique_name_in_owner = true
 visible = false
 offset_left = -26.0
 offset_top = 19.0
 offset_right = 26.0
 offset_bottom = 59.0
-max_value = 5.0
-value = 5.0
+max_value = 20.0
+value = 20.0
 texture_progress = ExtResource("26_ifl3v")
 
 [node name="Emote" parent="." instance=ExtResource("30_tjqy8")]
-unique_name_in_owner = true
 visible = false
 position = Vector2(2, -47)
 
@@ -1081,6 +1085,14 @@ position = Vector2(0, -22)
 
 [node name="AwarenessTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="ThreatCollider" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ThreatCollider"]
+position = Vector2(-1, -2)
+shape = SubResource("RectangleShape2D_cyoxu")
 
 [node name="StateMachine" parent="." instance=ExtResource("17_n2jyc")]
 visible = false
@@ -1214,6 +1226,7 @@ one_shot = true
 [connection signal="body_exited" from="ChaseRange" to="." method="_on_chase_range_body_exited"]
 [connection signal="body_entered" from="CrushCheck" to="." method="_on_crush_check_body_entered"]
 [connection signal="timeout" from="AwarenessTimer" to="." method="_on_awareness_timer_timeout"]
+[connection signal="body_entered" from="ThreatCollider" to="." method="_on_threat_collider_body_entered"]
 [connection signal="timeout" from="StateMachine/idle/IdleTimer" to="StateMachine/idle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/patrol/PatrolTimer" to="StateMachine/patrol" method="_on_patrol_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/slash/SlashHitbox" to="StateMachine/slash" method="_on_slash_hitbox_body_entered"]

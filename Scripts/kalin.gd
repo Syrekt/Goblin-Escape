@@ -38,10 +38,10 @@ var available_stat_points := 5
 @onready var state_node := $StateMachine
 @onready var health		: TextureProgressBar = $CanvasLayer/HUD/Control/Health #$CanvasLayer/HUD/HBoxContainer/Health
 @onready var stamina	: TextureProgressBar = $CanvasLayer/HUD/Control/Stamina #$CanvasLayer/HUD/HBoxContainer/Stamina
-@onready var experience : TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Experience
-@onready var smell		: TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Smell
+@onready var experience : TextureProgressBar = $CanvasLayer/HUD/Control/Experience
+@onready var smell		: TextureProgressBar = $CanvasLayer/HUD/Control/Smell
 @onready var smell_particles : GPUParticles2D = $SmellParticles
-@onready var arousal	: TextureProgressBar = $CanvasLayer/HUD/HBoxContainer/Arousal
+@onready var arousal	: TextureProgressBar = $CanvasLayer/HUD/Control/Arousal
 @onready var crouching_mask : CollisionShape2D = $ColliderCrouching
 @onready var standing_mask  : CollisionShape2D = $ColliderStanding
 @onready var sprite : Sprite2D = $Sprite2D
@@ -68,6 +68,7 @@ var available_stat_points := 5
 @onready var emote = $Emote
 @onready var parry_timer = $StateMachine/stance_defensive/ParryTimer
 @onready var vignette = $CanvasLayer/StealthVignette
+@onready var treath_collider = $ThreatCollider
 #endregion
 #region Combat
 @export var has_sword := false #false for release
@@ -81,6 +82,7 @@ var bash_damage 	:= 1
 var damage			:= 1
 var combat_target	: CharacterBody2D = null
 var buffered_state  : String
+var parried			:= false
 @export var power_crush	:= false
 var absorbed_damage := false
 #endregion
@@ -126,6 +128,7 @@ func fall(delta):
 	velocity.y += gravity * delta
 	move_and_slide()
 func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := true, attack := {}):
+	## _damage testes
 	var state_name = state_node.state.name
 	if state_name == "death":
 		return
@@ -134,9 +137,18 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 	combat_properties.stunned = false
 	var defending = state_node.state.name == "stance_defensive"
 
-	var parry_active = !parry_timer.is_stopped()
+	#Parry
+	var incoming_attack = _source.state_node.state.name
+	var parry_active := false
+	var perfect_parry := false
+	var perfect_parry_window : float = parry_timer.wait_time / 5 * 4
+	print("perfect_parry_window: "+str(perfect_parry_window))
+	if incoming_attack == "stab":
+		parry_active = !parry_timer.is_stopped()
+		perfect_parry = parry_timer.time_left >= perfect_parry_window
+
 	if defending:
-		if !parry_active && !stamina.spend(_damage, 1.0):
+		if !parry_active && !perfect_parry && !stamina.spend(_damage, 1.0):
 			defending = false
 
 	#See if attack has broken our defense
@@ -147,14 +159,19 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 		Ge.bleed_spurt(global_position, -incoming_dir)
 	#Defensive reactions
 	if _source && defending:
-		var incoming_attack = _source.state_node.state.name
 		match incoming_attack:
 			"stab":
 				state_node.state.finished.emit("block")
 				if parry_active:
+					parried = true
+					smell.get_dirty(2.0)
+					if perfect_parry:
+						Ge.slow_mo(0.25, 0.50)
+						play_sfx(load("res://SFX/parry1.wav"))
+					else:
+						Ge.slow_mo(0.25, 0.25)
+						play_sfx(load("res://SFX/parry2.wav"))
 					_source.combat_properties.stun(2.0)
-					Ge.slow_mo(0.25, 0.25)
-					play_sfx(load("res://SFX/parry1.wav"))
 			"slash":
 				combat_properties.stun(2.0)
 				play_hurt_animation = false
@@ -163,6 +180,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 				state_node.state.finished.emit("hurt")
 	#Take damage
 	if !defended:
+		smell.get_dirty(6.0)
 		if power_crush && stamina.spend(_damage, 1.0):
 			absorbed_damage = true
 			Ge.play_audio_free(-10, "res://SFX/Kalin/Weapon_Hit_Armour_03_With_Echo_Enhancement.wav")
@@ -234,8 +252,13 @@ func quick_climb() -> void:
 	corner_quick_climb = true
 	state_node.state.finished.emit("corner_climb")
 func play_sfx(sfx) -> void:
-	audio_emitter.stream = sfx
-	audio_emitter.play()
+	var emitter : AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+	emitter.stream = sfx
+	emitter.finished.connect(emitter.queue_free)
+	add_child(emitter)
+	emitter.play()
+	#audio_emitter.stream = sfx
+	#audio_emitter.play()
 func combat_perform_attack(hitbox: Area2D, _damage: int, whiff_sfx: AudioStreamWAV, hit_sfx: AudioStreamWAV, knockback_force: int) -> void:
 	if hitbox.has_overlapping_bodies():
 		var body = hitbox.get_overlapping_bodies()[0]
@@ -571,4 +594,6 @@ func _on_col_front_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		body.aware = true
 		body.chase_target = self
+func _on_threat_collider_body_entered(body:Node2D) -> void:
+	take_damage(1)
 #endregion

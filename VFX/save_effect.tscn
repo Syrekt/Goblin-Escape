@@ -1,0 +1,115 @@
+[gd_scene load_steps=17 format=3 uid="uid://d0cyr08xp5cjc"]
+
+[ext_resource type="Texture2D" uid="uid://ber5ucg52ab0r" path="res://VFX/save_effect2.png" id="1_jvb04"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwsqm"]
+atlas = ExtResource("1_jvb04")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xkwl"]
+atlas = ExtResource("1_jvb04")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbow5"]
+atlas = ExtResource("1_jvb04")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8whp2"]
+atlas = ExtResource("1_jvb04")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gwbc"]
+atlas = ExtResource("1_jvb04")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edar4"]
+atlas = ExtResource("1_jvb04")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qs22l"]
+atlas = ExtResource("1_jvb04")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcmj4"]
+atlas = ExtResource("1_jvb04")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rpyx"]
+atlas = ExtResource("1_jvb04")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pg4sm"]
+atlas = ExtResource("1_jvb04")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjk8h"]
+atlas = ExtResource("1_jvb04")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlk70"]
+atlas = ExtResource("1_jvb04")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gcon"]
+atlas = ExtResource("1_jvb04")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skkhl"]
+atlas = ExtResource("1_jvb04")
+region = Rect2(832, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rxwfg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwsqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xkwl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tbow5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8whp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gwbc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edar4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qs22l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vcmj4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rpyx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pg4sm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjk8h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nlk70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6gcon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skkhl")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="SaveEffect" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_rxwfg")
+autoplay = "default"
+frame = 13
+frame_progress = 1.0

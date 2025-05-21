@@ -140,11 +140,19 @@ func popup_text(position: Vector2, text: String, color1 := Color.WHITE, color2 :
 	popup.global_position = position - Vector2(0, 20)
 	popup.label.text = text
 	popup.tween_begin(color1, color2)
+var tween_slow_mo : Tween
 func slow_mo(amount: float, time: float) -> void:
-	var tween = create_tween().bind_node(self)
-	tween.tween_property(Engine, "time_scale", amount, 0.0)
-	tween.tween_property(Engine, "time_scale", 1, time)
-var bleed_burst_scene = load("res://Particles/blood_spurt.tscn")
+	if tween_slow_mo:
+		tween_slow_mo.kill()
+	tween_slow_mo = create_tween().bind_node(self)
+	tween_slow_mo.tween_property(Engine, "time_scale", amount, 0.0)
+	tween_slow_mo.tween_property(Engine, "time_scale", 1, time)
+func kill_slow_mo() -> void:
+	Engine.time_scale = 1.0
+	if tween_slow_mo.is_running():
+		tween_slow_mo.kill()
+		tween_slow_mo = null
+var bleed_burst_scene = load("res://VFX/blood_spurt.tscn")
 func bleed_spurt(position: Vector2, dir: int) -> void:
 	var part : GPUParticles2D = bleed_burst_scene.instantiate()
 	part.global_position = position
@@ -152,7 +160,7 @@ func bleed_spurt(position: Vector2, dir: int) -> void:
 	part.emitting = true
 
 	add_child(part)
-var bleed_gush_scene = load("res://Particles/blood_gush.tscn")
+var bleed_gush_scene = load("res://VFX/blood_gush.tscn")
 func bleed_gush(position: Vector2, dir: int) -> void:
 	var part : GPUParticles2D = bleed_gush_scene.instantiate()
 	part.global_position = position

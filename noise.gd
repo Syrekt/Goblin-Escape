@@ -23,7 +23,8 @@ func _process(delta: float) -> void:
 
 	if collider.has_overlapping_bodies():
 		for body in collider.get_overlapping_bodies():
-			body.hear_noise(self)
+			if body is Enemy:
+				body.hear_noise(self)
 
 
 

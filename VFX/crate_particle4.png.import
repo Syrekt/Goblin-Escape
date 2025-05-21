@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://by7w3x2yria11"
-path="res://.godot/imported/spr_staminabar_full.png-70d2a9daf78381ba6ac8a0d3650ed63e.ctex"
+uid="uid://352hagd7ohou"
+path="res://.godot/imported/crate_particle4.png-2795d4fa9cc0984d01d5d12ce93439b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/spr_staminabar_full.png"
-dest_files=["res://.godot/imported/spr_staminabar_full.png-70d2a9daf78381ba6ac8a0d3650ed63e.ctex"]
+source_file="res://VFX/crate_particle4.png"
+dest_files=["res://.godot/imported/crate_particle4.png-2795d4fa9cc0984d01d5d12ce93439b4.ctex"]
 
 [params]
 
