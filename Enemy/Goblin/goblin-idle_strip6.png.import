@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpxyvituq5b37"
-path="res://.godot/imported/goblin-walk.png-6c1a24144815369dbc8630e9d07477dc.ctex"
+uid="uid://bcs17g4yh13l4"
+path="res://.godot/imported/goblin-idle_strip6.png-ad368d490e0545367ae444cc06373e5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemy/Goblin/goblin-walk.png"
-dest_files=["res://.godot/imported/goblin-walk.png-6c1a24144815369dbc8630e9d07477dc.ctex"]
+source_file="res://Enemy/Goblin/goblin-idle_strip6.png"
+dest_files=["res://.godot/imported/goblin-idle_strip6.png-ad368d490e0545367ae444cc06373e5a.ctex"]
 
 [params]
 

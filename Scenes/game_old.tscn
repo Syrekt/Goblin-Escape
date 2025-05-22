@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dk84lu71fcjkl" path="res://Objects/item_pickup.tscn" id="12_rfjv2"]
 [ext_resource type="Resource" uid="uid://cymrd15m31gph" path="res://Dialogues/EmptyRoom1.dialogue" id="12_rku1e"]
 [ext_resource type="PackedScene" uid="uid://bj1frlho00hma" path="res://Map/Props/stairs2.tscn" id="13_1phco"]
-[ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Objects/enemy.tscn" id="13_nb51f"]
+[ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Enemy/GoblinWarrior/goblin_warrior.tscn" id="13_nb51f"]
 [ext_resource type="Resource" uid="uid://c0yvh55kikql2" path="res://Inventory/health_potion.tres" id="13_rfjv2"]
 [ext_resource type="PackedScene" uid="uid://24ijy2g2jylp" path="res://Objects/hiding_spot.tscn" id="14_ewbju"]
 [ext_resource type="PackedScene" uid="uid://cwfcttxnm8ov1" path="res://Map/Props/gate.tscn" id="14_nb51f"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnglwro36se85"
-path="res://.godot/imported/goblin-hurt.png-5d046530df03766e3351dbe38eb6090a.ctex"
+uid="uid://c6nifh0i54h6f"
+path="res://.godot/imported/goblin-bash.png-5c054c29e3cb84e4ec37e972ed3bd33a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemy/Goblin/goblin-hurt.png"
-dest_files=["res://.godot/imported/goblin-hurt.png-5d046530df03766e3351dbe38eb6090a.ctex"]
+source_file="res://Enemy/GoblinWarrior/goblin-bash.png"
+dest_files=["res://.godot/imported/goblin-bash.png-5c054c29e3cb84e4ec37e972ed3bd33a.ctex"]
 
 [params]
 

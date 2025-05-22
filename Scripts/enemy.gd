@@ -44,9 +44,6 @@ signal health_depleted
 @onready var player_proximity	= $PlayerProximity
 @onready var awareness_timer	: Timer = $AwarenessTimer
 
-@onready var slash_hitbox = $StateMachine/slash/SlashHitbox/Collider
-@onready var stab_hitbox  = $StateMachine/stab/StabHitbox/Collider
-@onready var bash_hitbox  = $StateMachine/bash/BashHitbox/Collider
 @onready var cp	= combat_properties
 @onready var audio_emitter = $SFX
 @onready var emote_emitter = $Emote
@@ -172,7 +169,10 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 					"slash":
 						state.finished.emit("stance_light")
 					"stab":
-						state.finished.emit("stance_defensive")
+						if get_node_or_null("stance_defensive"):
+							state.finished.emit("stance_defensive")
+						else:
+							state.finished.emit(["stance_light", "stance_heavy"].pick_random())
 					"bash":
 						state.finished.emit("stance_heavy")
 			else:

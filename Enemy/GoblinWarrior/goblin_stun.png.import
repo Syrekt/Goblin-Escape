@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chla4jvcboa4e"
-path="res://.godot/imported/goblin-slash.png-98fcdf3d8d3b50f7e0c9f43c2e2646c0.ctex"
+uid="uid://6tgko0bjud38"
+path="res://.godot/imported/goblin_stun.png-219f8ad2b55e608c977019636ba994aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemy/Goblin/goblin-slash.png"
-dest_files=["res://.godot/imported/goblin-slash.png-98fcdf3d8d3b50f7e0c9f43c2e2646c0.ctex"]
+source_file="res://Enemy/GoblinWarrior/goblin_stun.png"
+dest_files=["res://.godot/imported/goblin_stun.png-219f8ad2b55e608c977019636ba994aa.ctex"]
 
 [params]
 

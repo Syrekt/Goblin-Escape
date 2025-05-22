@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6nifh0i54h6f"
-path="res://.godot/imported/goblin-bash.png-31374b8e0f8d9d3e1765903aec2d3238.ctex"
+uid="uid://b5mnbcx6ypteq"
+path="res://.godot/imported/goblin-walk_strip8.png-92f652178e93c7e25ada73913b838117.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemy/Goblin/goblin-bash.png"
-dest_files=["res://.godot/imported/goblin-bash.png-31374b8e0f8d9d3e1765903aec2d3238.ctex"]
+source_file="res://Enemy/Goblin/goblin-walk_strip8.png"
+dest_files=["res://.godot/imported/goblin-walk_strip8.png-92f652178e93c7e25ada73913b838117.ctex"]
 
 [params]
 

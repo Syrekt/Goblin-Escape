@@ -1,19 +1,19 @@
 [gd_scene load_steps=60 format=3 uid="uid://iuj1jg31a55f"]
 
-[ext_resource type="Script" uid="uid://bhcr3m01slk8a" path="res://Scripts/enemy.gd" id="1_18den"]
+[ext_resource type="Script" uid="uid://ebjwqqd047wq" path="res://Enemy/GoblinWarrior/goblin_warrior.gd" id="1_nnmw3"]
 [ext_resource type="AudioStream" uid="uid://bx6vdt8wts4xf" path="res://SFX/Kalin/Other/kick_short_whoosh_12.wav" id="6_ifl3v"]
 [ext_resource type="PackedScene" uid="uid://cpogcou30wxcj" path="res://UI/combat_properties.tscn" id="7_7ej0e"]
 [ext_resource type="Shader" uid="uid://dgty7bsbniivw" path="res://Scripts/flash.gdshader" id="8_6eeyp"]
-[ext_resource type="Texture2D" uid="uid://bxfbcd2o3tqam" path="res://Enemy/Goblin/goblin-idle.png" id="9_3g55t"]
+[ext_resource type="Texture2D" uid="uid://bxfbcd2o3tqam" path="res://Enemy/GoblinWarrior/goblin-idle.png" id="9_3g55t"]
 [ext_resource type="AudioStream" uid="uid://fgclj6nvftu7" path="res://SFX/Kalin/Other/Sword Woosh 1.wav" id="10_u0rn5"]
 [ext_resource type="AudioStream" uid="uid://c50be1pxoc3bn" path="res://SFX/Kalin/Sword Woosh 12.wav" id="11_ifl3v"]
-[ext_resource type="Texture2D" uid="uid://c6nifh0i54h6f" path="res://Enemy/Goblin/goblin-bash.png" id="11_wrk2e"]
-[ext_resource type="Texture2D" uid="uid://6tgko0bjud38" path="res://Enemy/Goblin/goblin_stun.png" id="12_goln1"]
-[ext_resource type="Texture2D" uid="uid://ppmeb6xgbtin" path="res://Enemy/Goblin/goblin-death.png" id="12_to5id"]
-[ext_resource type="Texture2D" uid="uid://cnglwro36se85" path="res://Enemy/Goblin/goblin-hurt.png" id="13_uqw8j"]
-[ext_resource type="Texture2D" uid="uid://bpxyvituq5b37" path="res://Enemy/Goblin/goblin-walk.png" id="14_abbm1"]
-[ext_resource type="Texture2D" uid="uid://chla4jvcboa4e" path="res://Enemy/Goblin/goblin-slash.png" id="15_4po4b"]
-[ext_resource type="Texture2D" uid="uid://bhywg3kg1q3in" path="res://Enemy/Goblin/goblin-attack.png" id="15_mlxbl"]
+[ext_resource type="Texture2D" uid="uid://c6nifh0i54h6f" path="res://Enemy/GoblinWarrior/goblin-bash.png" id="11_wrk2e"]
+[ext_resource type="Texture2D" uid="uid://6tgko0bjud38" path="res://Enemy/GoblinWarrior/goblin_stun.png" id="12_goln1"]
+[ext_resource type="Texture2D" uid="uid://ppmeb6xgbtin" path="res://Enemy/GoblinWarrior/goblin-death.png" id="12_to5id"]
+[ext_resource type="Texture2D" uid="uid://cnglwro36se85" path="res://Enemy/GoblinWarrior/goblin-hurt.png" id="13_uqw8j"]
+[ext_resource type="Texture2D" uid="uid://bpxyvituq5b37" path="res://Enemy/GoblinWarrior/goblin-walk.png" id="14_abbm1"]
+[ext_resource type="Texture2D" uid="uid://chla4jvcboa4e" path="res://Enemy/GoblinWarrior/goblin-slash.png" id="15_4po4b"]
+[ext_resource type="Texture2D" uid="uid://bhywg3kg1q3in" path="res://Enemy/GoblinWarrior/goblin-attack.png" id="15_mlxbl"]
 [ext_resource type="Script" uid="uid://cp0i8c1llur63" path="res://Enemy/States/idle.gd" id="15_ywhtk"]
 [ext_resource type="Script" uid="uid://dfiqyt2s88kmb" path="res://Enemy/States/triggered.gd" id="16_vd4fl"]
 [ext_resource type="PackedScene" uid="uid://b02rwb4cvvhr4" path="res://Objects/state_machine.tscn" id="17_n2jyc"]
@@ -978,12 +978,11 @@ size = Vector2(20, 36)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rha5u"]
 size = Vector2(20, 32)
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("main_stance")]
+[node name="GoblinWarrior" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 8
 collision_mask = 9
-script = ExtResource("1_18den")
-main_stance = NodePath("StateMachine/stance_light")
+script = ExtResource("1_nnmw3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
