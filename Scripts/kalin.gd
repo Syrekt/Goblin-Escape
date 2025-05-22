@@ -128,60 +128,62 @@ func fall(delta):
 	velocity.y += gravity * delta
 	move_and_slide()
 func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := true, attack := {}):
-	## _damage testes
 	var state_name = state_node.state.name
 	if state_name == "death":
 		return
 	%Sprite2D.material.set_shader_parameter("tint_color", Color(0, 0, 0, 0))
 
 	combat_properties.stunned = false
-	var defending = state_node.state.name == "stance_defensive"
+	var defending : bool = state_node.state.name == "stance_defensive"
+	var defended := false
 
+#region Damage has a source
 	#Parry
-	var incoming_attack = _source.state_node.state.name
-	var parry_active := false
-	var perfect_parry := false
-	var perfect_parry_window : float = parry_timer.wait_time / 5 * 4
-	print("perfect_parry_window: "+str(perfect_parry_window))
-	if incoming_attack == "stab":
-		parry_active = !parry_timer.is_stopped()
-		perfect_parry = parry_timer.time_left >= perfect_parry_window
+	if _source:
+		var incoming_attack = _source.state_node.state.name
+		var parry_active := false
+		var perfect_parry := false
+		var perfect_parry_window : float = parry_timer.wait_time / 5 * 4
+		if incoming_attack == "stab":
+			parry_active = !parry_timer.is_stopped()
+			perfect_parry = parry_timer.time_left >= perfect_parry_window
 
-	if defending:
-		if !parry_active && !perfect_parry && !stamina.spend(_damage, 1.0):
-			defending = false
+		if defending:
+			if !parry_active && !perfect_parry && !stamina.spend(_damage, 1.0):
+				defending = false
 
-	#See if attack has broken our defense
-	var defended = defending
-	#Bleed if not defending
-	if !defending && _source:
-		var incoming_dir = sign(_source.global_position.x - global_position.x)
-		Ge.bleed_spurt(global_position, -incoming_dir)
-	#Defensive reactions
-	if _source && defending:
-		match incoming_attack:
-			"stab":
-				state_node.state.finished.emit("block")
-				if parry_active:
-					parried = true
-					smell.get_dirty(2.0)
-					if perfect_parry:
-						Ge.slow_mo(0.25, 0.50)
-						play_sfx(load("res://SFX/parry1.wav"))
-					else:
-						Ge.slow_mo(0.25, 0.25)
-						play_sfx(load("res://SFX/parry2.wav"))
-					_source.combat_properties.stun(2.0)
-			"slash":
-				combat_properties.stun(2.0)
-				play_hurt_animation = false
-				defended = false
-			"bash":
-				state_node.state.finished.emit("hurt")
+		#See if attack has broken our defense
+		defended = defending
+		#Bleed if not defending
+		if !defending && _source:
+			var incoming_dir = sign(_source.global_position.x - global_position.x)
+			Ge.bleed_spurt(global_position, -incoming_dir)
+		#Defensive reactions
+		if defending:
+			match incoming_attack:
+				"stab":
+					play_hurt_animation = false
+					state_node.state.finished.emit("block")
+					if parry_active:
+						parried = true
+						smell.get_dirty(2.0)
+						if perfect_parry:
+							Ge.slow_mo(0.25, 0.50)
+							play_sfx(load("res://SFX/parry1.wav"))
+						else:
+							Ge.slow_mo(0.25, 0.25)
+							play_sfx(load("res://SFX/parry2.wav"))
+						_source.combat_properties.stun(2.0)
+				"slash":
+					combat_properties.stun(2.0)
+					play_hurt_animation = false
+					defended = false
+#endregion
 	#Take damage
 	if !defended:
 		smell.get_dirty(6.0)
 		if power_crush && stamina.spend(_damage, 1.0):
+			play_hurt_animation = false
 			absorbed_damage = true
 			Ge.play_audio_free(-10, "res://SFX/Kalin/Weapon_Hit_Armour_03_With_Echo_Enhancement.wav")
 			Ge.slow_mo(0, 0.2)
@@ -200,12 +202,13 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 			if _source:
 				_source.dealth_finishing_blow = true
 			Ge.play_audio_from_string_array(audio_emitter, -2, "res://SFX/Kalin/Hurt")
-		elif !power_crush && play_hurt_animation:
-			if has_sword:
-				state_node.state.finished.emit("hurt")
-			else:
-				state_node.state.finished.emit("hurt_no_sword")
-			Ge.play_audio_from_string_array(audio_emitter, -2, "res://SFX/Kalin/Hurt")
+	#Play animation
+	if play_hurt_animation:
+		if has_sword:
+			state_node.state.finished.emit("hurt")
+		else:
+			state_node.state.finished.emit("hurt_no_sword")
+		Ge.play_audio_from_string_array(audio_emitter, -2, "res://SFX/Kalin/Hurt")
 func heal(amount: int) -> void:
 	health.value += amount
 func check_movable():

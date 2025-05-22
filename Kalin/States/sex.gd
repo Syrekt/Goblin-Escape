@@ -20,8 +20,12 @@ func exit() -> void:
 	moan_emitter.queue_free()
 	animation_counter = 0
 
+func update(delta : float) -> void:
+	player.arousal.value = move_toward(player.arousal.value, player.arousal.max_value, delta)
+
 
 func count_animation() -> void:
+	player.arousal.value = move_toward(player.arousal.value, player.arousal.max_value, 1)
 	animation_counter += 1
 	print("animation_counter: "+str(animation_counter))
 	if animation_counter >= animation_counter_max:
