@@ -3877,7 +3877,6 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_rbk27")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="UIFocus" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 15
@@ -4002,6 +4001,7 @@ theme = ExtResource("72_qdj7c")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_exvqe")
 script = ExtResource("73_ugwbb")
 inventory = ExtResource("46_1q8gn")
+metadata/_edit_lock_ = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/InventoryPanel"]
 layout_mode = 2
