@@ -53,6 +53,7 @@ func deal_damage(attacker: CharacterBody2D, damage: int, defender: CharacterBody
 				defender.take_damage(0, attacker)
 				result = RESULT_HIT
 			elif attacker is Player && !defender.in_combat:
+				print("Defender not in combat, stun")
 				defender.combat_properties.stun(2.0)
 				result = RESULT_STUN
 			else:

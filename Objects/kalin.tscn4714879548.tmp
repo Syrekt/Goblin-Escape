@@ -3019,7 +3019,6 @@ bbcode_enabled = true
 text = "[color=red]This is the description text[/color]"
 autowrap_mode = 1
 
-[connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Interactor" to="." method="_on_interactor_area_entered"]
 [connection signal="area_exited" from="Interactor" to="." method="_on_interactor_area_exited"]

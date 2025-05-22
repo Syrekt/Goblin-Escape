@@ -2,6 +2,8 @@ extends EnemyState
 
 var chase_dir := 0;
 
+@onready var emote_timer : Timer = $EmoteTimer
+
 func update(delta):
 	#Quit state
 	if !enemy.chase_target:
@@ -29,4 +31,3 @@ func update(delta):
 	else:
 		enemy.update_animation("idle")
 		enemy.velocity.x = 0
-

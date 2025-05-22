@@ -3,10 +3,13 @@ extends TextureProgressBar
 @export var generation_speed := 0.0
 
 var dirt_amount := 0.0
-
+var semen_amount := 0.0
 
 func _process(delta: float) -> void:
-	var final_generation_speed = generation_speed + dirt_amount
+	var final_generation_speed = clampf(generation_speed + dirt_amount - semen_amount, 0, 5)
+	Debugger.printui("smell_generation: "+str(final_generation_speed))
+	Debugger.printui("dirt_amount: "+str(dirt_amount))
+	Debugger.printui("semen_amount: "+str(semen_amount))
 
 	var arr : Array = get_children()
 	for child in arr:
@@ -17,6 +20,8 @@ func _process(delta: float) -> void:
 
 	var particles : GPUParticles2D = owner.smell_particles
 	particles.amount_ratio = (value / max_value)
+	var smell_scale : float = value / max_value
+	owner.smell_collider.scale = Vector2(smell_scale, smell_scale)
 	
 
 

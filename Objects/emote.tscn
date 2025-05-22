@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://b23mtnfp7xuec"]
+[gd_scene load_steps=84 format=3 uid="uid://b23mtnfp7xuec"]
 
 [ext_resource type="Texture2D" uid="uid://b54abmdbj5k8v" path="res://Emotes/question_mark.png" id="1_54ulo"]
 [ext_resource type="Script" uid="uid://1u5otdfgoj24" path="res://Scripts/emote.gd" id="1_m7kr5"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://do023uq0oxtw" path="res://Emotes/emote_sparkles.png" id="8_j8i0o"]
 [ext_resource type="Texture2D" uid="uid://bphtraxgtttlo" path="res://Emotes/emote_sweat.png" id="9_b6knu"]
 [ext_resource type="Texture2D" uid="uid://dwgmw0q31fidh" path="res://Emotes/emote_sweat_drop.png" id="11_wab1j"]
+[ext_resource type="Texture2D" uid="uid://j5jf3sm2mjup" path="res://Emotes/emote_smell.png" id="15_6rfj3"]
 [ext_resource type="Texture2D" uid="uid://dwkrq1lpplpoo" path="res://Emotes/emote_talking.png" id="19_ytvg4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j8i0o"]
@@ -187,6 +188,18 @@ region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ytvg4"]
 atlas = ExtResource("5_676ii")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1cda2"]
+atlas = ExtResource("15_6rfj3")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0uk5"]
+atlas = ExtResource("15_6rfj3")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xm3ib"]
+atlas = ExtResource("15_6rfj3")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pdlop"]
@@ -606,6 +619,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_1cda2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0uk5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xm3ib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1cda2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0uk5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xm3ib")
+}],
+"loop": false,
+"name": &"smell",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_pdlop")
 }, {
 "duration": 1.0,
@@ -728,6 +764,6 @@ script = ExtResource("1_m7kr5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8wq3c")
-animation = &"sweat_drop"
+animation = &"smell"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

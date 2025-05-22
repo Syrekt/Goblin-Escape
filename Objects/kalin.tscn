@@ -1,4 +1,4 @@
-[gd_scene load_steps=262 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=263 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -3677,6 +3677,9 @@ size = Vector2(20, 30)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_586st"]
 size = Vector2(15, 36)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_rbk27"]
+radius = 105.304
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_47a0d"]
 shader = ExtResource("45_cbw7l")
 shader_parameter/alpha = 0.2
@@ -3857,12 +3860,21 @@ position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_1nk40")
 
 [node name="ThreatCollider" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ThreatCollider"]
 position = Vector2(0.5, 14)
 shape = SubResource("RectangleShape2D_586st")
+
+[node name="SmellCollider" type="Area2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmellCollider"]
+shape = SubResource("CircleShape2D_rbk27")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 visible = false
@@ -3975,6 +3987,7 @@ offset_top = 7.0
 offset_right = 40.0
 offset_bottom = 10.0
 step = 0.0
+value = 91.76
 texture_under = ExtResource("60_1yslh")
 texture_progress = ExtResource("61_5atg1")
 tint_progress = Color(0.679805, 0.262423, 0, 1)
@@ -4286,12 +4299,12 @@ script = ExtResource("70_egy32")
 [node name="ladder_climb" type="Node" parent="StateMachine"]
 script = ExtResource("88_7e6uh")
 
-[connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="ColFront" to="." method="_on_col_front_body_entered"]
 [connection signal="area_entered" from="Interactor" to="." method="_on_interactor_area_entered"]
 [connection signal="area_exited" from="Interactor" to="." method="_on_interactor_area_exited"]
 [connection signal="body_entered" from="ThreatCollider" to="." method="_on_threat_collider_body_entered"]
+[connection signal="body_entered" from="SmellCollider" to="." method="_on_smell_collider_body_entered"]
 [connection signal="attack_frame" from="StateMachine/slash" to="StateMachine/slash" method="_on_attack_frame"]
 [connection signal="attack_frame" from="StateMachine/stab" to="StateMachine/stab" method="_on_attack_frame"]
 [connection signal="body_entered" from="StateMachine/bash/BashHitbox" to="StateMachine/bash" method="_on_bash_hitbox_body_entered"]

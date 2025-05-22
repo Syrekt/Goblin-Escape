@@ -128,9 +128,17 @@ func hear_noise(noise: Node2D) -> void:
 			state_node.state.finished.emit("triggered")
 		"triggered":
 			print("lose target from triggered")
+			#Trigger patrol just like losing the target
 			lost_target()
 
 	$NoiseIgnoreTimer.start()
+func smell(source: Player):
+	aware = true
+
+	if !chase_target: match state_node.state.name:
+		"idle", "chat_lead", "patrol":
+			state_node.state.finished.emit("smell")
+
 func update_los(target: CharacterBody2D) -> void:
 	var pos = target.global_position
 	line_of_sight.target_position = line_of_sight.to_local(pos)

@@ -7,7 +7,7 @@ func _ready() -> void:
 
 func play(anim : String) -> void:
 	if !$AnimatedSprite2D.sprite_frames.has_animation(anim):
-		print("Animation invalid: " + str($AnimatedSprite2D.sprite_frames.has_animation(anim)))
+		print("Animation invalid: " + str(anim))
 	sprite.play(anim, 1.0)
 	visible = true
 

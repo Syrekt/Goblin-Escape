@@ -18,6 +18,8 @@ func enter(previous_state_path : String, data := {}) -> void:
 func exit() -> void:
 	orgasm_emitter.queue_free()
 	squirt_emitter.queue_free()
+	player.smell.value = move_toward(player.smell.value, 0, 5)
+	player.smell.semen_amount += 1
 
 func play_orgasm_sound() -> void:
 	Ge.play_audio_from_string_array(orgasm_emitter, 0.0, "res://Sex/Moan/")

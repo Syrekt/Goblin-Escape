@@ -68,7 +68,8 @@ var available_stat_points := 5
 @onready var emote = $Emote
 @onready var parry_timer = $StateMachine/stance_defensive/ParryTimer
 @onready var vignette = $CanvasLayer/StealthVignette
-@onready var treath_collider = $ThreatCollider
+@onready var treath_collider : Area2D = $ThreatCollider
+@onready var smell_collider : Area2D = $SmellCollider
 #endregion
 #region Combat
 @export var has_sword := false #false for release
@@ -104,7 +105,6 @@ var sex_participants : Array
 var light_source : Area2D
 var ray_light : RayCast2D
 #endregion
-signal health_depleted
 signal enter_shadow
 signal leave_shadow
 #region Methods
@@ -198,10 +198,12 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 			Ge.slow_mo(0, 0.1)
 		health.value -= _damage
 		if health.value <= 0.1:
-			emit_signal("health_depleted")
+			print("Health depleted")
 			if _source:
 				_source.dealth_finishing_blow = true
 			Ge.play_audio_from_string_array(audio_emitter, -2, "res://SFX/Kalin/Hurt")
+			state_node.state.finished.emit("death")
+			return
 	#Play animation
 	if play_hurt_animation:
 		if has_sword:
@@ -266,7 +268,6 @@ func combat_perform_attack(hitbox: Area2D, _damage: int, whiff_sfx: AudioStreamW
 	if hitbox.has_overlapping_bodies():
 		var body = hitbox.get_overlapping_bodies()[0]
 		var was_stunned : bool = body.combat_properties.stunned
-		print("was_stunned: "+str(was_stunned))
 
 		var result : int = Combat.deal_damage(self, _damage, body, knockback_force)
 		match result:
@@ -579,8 +580,6 @@ func _on_interactor_area_exited(area: Area2D) -> void:
 		interaction_target.waiting_player_exit = false
 		interaction_target = null
 		$InteractionPrompt._hide()
-func _on_health_depleted() -> void:
-	state_node.state.finished.emit("death")
 func _on_enter_shadow() -> void:
 	invisible = true
 	var tween1 = create_tween().bind_node(self)
@@ -599,4 +598,7 @@ func _on_col_front_body_entered(body: Node2D) -> void:
 		body.chase_target = self
 func _on_threat_collider_body_entered(body:Node2D) -> void:
 	take_damage(1)
+func _on_smell_collider_body_entered(body: Node2D) -> void:
+	if body is Enemy:
+		body.smell(self)
 #endregion

@@ -22,6 +22,7 @@ func exit() -> void:
 
 func update(delta : float) -> void:
 	player.arousal.value = move_toward(player.arousal.value, player.arousal.max_value, delta)
+	player.smell.value = move_toward(player.smell.value, 0, delta)
 
 
 func count_animation() -> void:
