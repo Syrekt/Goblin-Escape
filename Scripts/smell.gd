@@ -7,9 +7,6 @@ var semen_amount := 0.0
 
 func _process(delta: float) -> void:
 	var final_generation_speed = clampf(generation_speed + dirt_amount - semen_amount, 0, 5)
-	Debugger.printui("smell_generation: "+str(final_generation_speed))
-	Debugger.printui("dirt_amount: "+str(dirt_amount))
-	Debugger.printui("semen_amount: "+str(semen_amount))
 
 	var arr : Array = get_children()
 	for child in arr:

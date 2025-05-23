@@ -59,9 +59,11 @@ func _update(delta: float) -> bool:
 
 
 func _on_stance_timer_timeout() -> void:
+	print("stance timer timeout")
 	if debug_stance != "":
 		finished.emit(debug_stance)
 	else:
 		finished.emit(transitions.pick_random().name)
 func _on_attack_timer_timeout() -> void:
+	print("attack timer timeout")
 	finished.emit(attack_state.name)

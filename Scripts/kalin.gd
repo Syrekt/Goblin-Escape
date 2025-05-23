@@ -144,7 +144,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 		var parry_active := false
 		var perfect_parry := false
 		var perfect_parry_window : float = parry_timer.wait_time / 5 * 4
-		if incoming_attack == "stab":
+		if !_source.counter_attack && incoming_attack == "stab":
 			parry_active = !parry_timer.is_stopped()
 			perfect_parry = parry_timer.time_left >= perfect_parry_window
 
