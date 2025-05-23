@@ -385,7 +385,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"hurt_no_sword":
 			state.finished.emit("idle")
 		"corner_climb", "corner_climb_quick":
-			state.finished.emit("idle")
+			global_position += Vector2(26*facing, -35)
+			state.finished.emit("idle", {"just_climbed": true})
 		"slide":
 			state.finished.emit("crouch")
 		"orgasm":

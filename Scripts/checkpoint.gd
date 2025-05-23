@@ -14,3 +14,4 @@ func update(player: Player):
 		player.add_child(save_effect)
 		player.think("I should be safe now..")
 		
+		Ge.play_audio_free(0, "res://SFX/water_splash1.wav")

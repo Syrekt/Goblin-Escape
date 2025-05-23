@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://c3ce8mt521wb5"]
+[gd_scene load_steps=52 format=4 uid="uid://c3ce8mt521wb5"]
 
 [ext_resource type="Script" uid="uid://drax23314hg08" path="res://Scripts/room_limit_tween.gd" id="1_81klo"]
 [ext_resource type="PackedScene" uid="uid://h2hwfpjw4rte" path="res://Objects/kalin.tscn" id="1_v3ybc"]
@@ -30,7 +30,6 @@
 [ext_resource type="PackedScene" uid="uid://dkyt1q4ive1yi" path="res://Map/Props/stairs_long.tscn" id="24_fkdbe"]
 [ext_resource type="PackedScene" uid="uid://2prh5eduxlje" path="res://Objects/condition_checker.tscn" id="25_22asu"]
 [ext_resource type="Resource" uid="uid://din88d5801imq" path="res://Inventory/infertility_potion.tres" id="25_81klo"]
-[ext_resource type="PackedScene" uid="uid://dw2d8bu1vlvv6" path="res://Enemy/Goblin/goblin.tscn" id="30_ese38"]
 [ext_resource type="PackedScene" uid="uid://bi5awk2sr2hdw" path="res://Map/Props/Other/crate2.tscn" id="30_mucmn"]
 
 [sub_resource type="Resource" id="Resource_3imkf"]
@@ -198,7 +197,7 @@ tile_map_data = PackedByteArray("AADUACAAAQARABoAAADUACEAAQARABsAAADUACIAAQARABw
 tile_set = ExtResource("2_h4fw4")
 
 [node name="Kalin" parent="." instance=ExtResource("1_v3ybc")]
-position = Vector2(565, 187)
+position = Vector2(951, 251)
 has_sword = true
 
 [node name="Regions" type="Node" parent="."]
@@ -636,9 +635,6 @@ friend = NodePath("../Enemy2")
 [node name="Enemy2" parent="Regions/TileMapLayer/Node" instance=ExtResource("14_nnt18")]
 position = Vector2(2608, 1216)
 facing = -1
-
-[node name="Goblin" parent="Regions" instance=ExtResource("30_ese38")]
-position = Vector2(669, 205)
 
 [node name="Ladder" parent="." instance=ExtResource("20_7nbq1")]
 position = Vector2(505, 189)

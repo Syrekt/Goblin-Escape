@@ -1,16 +1,22 @@
 extends PlayerState
 
+var just_climbed := false
+
 func enter(previous_state_path: String, data := {}) -> void:
 	player.velocity.x = 0.0
 	player.call_deferred("update_animation", name)
 	lock_stance_button = true;
+	just_climbed = data.get("just_climbed", false)
 
 func update(_delta: float) -> void:
 	player.check_movable();
 	if lock_stance_button:
 		if not player.pressed("stance"): lock_stance_button = false
 
-	if !player.is_on_floor():
+	if just_climbed:
+		await get_tree().physics_frame
+		just_climbed = false
+	elif !player.is_on_floor():
 		finished.emit("fall")
 	elif player.pressed("down"):
 		finished.emit("crouch")

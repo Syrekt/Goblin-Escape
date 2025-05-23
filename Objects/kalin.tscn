@@ -1,4 +1,4 @@
-[gd_scene load_steps=263 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=261 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -51,6 +51,7 @@
 [ext_resource type="Texture2D" uid="uid://cn6iy5klsxb2e" path="res://UI/buttons_xbox.png" id="37_1q8gn"]
 [ext_resource type="Script" uid="uid://e32mry71dwy0" path="res://Kalin/States/land_hurt.gd" id="37_xmisc"]
 [ext_resource type="Script" uid="uid://4n2pywsn1qd6" path="res://Kalin/States/stance_defensive.gd" id="38_823eb"]
+[ext_resource type="Material" uid="uid://cbqub5qvea8vp" path="res://VFX/smell.tres" id="38_yofsr"]
 [ext_resource type="Script" uid="uid://f4jufjbul03i" path="res://Kalin/States/slash.gd" id="39_af0aw"]
 [ext_resource type="Script" uid="uid://2w325nrhldrd" path="res://Kalin/States/stance_walk.gd" id="39_rgkp8"]
 [ext_resource type="PackedScene" uid="uid://b23mtnfp7xuec" path="res://Objects/emote.tscn" id="40_2d1nf"]
@@ -2986,26 +2987,6 @@ _data = {
 &"wallslide": SubResource("Animation_1pm5w")
 }
 
-[sub_resource type="Curve" id="Curve_exvqe"]
-
-[sub_resource type="CurveTexture" id="CurveTexture_cbw7l"]
-curve = SubResource("Curve_exvqe")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oq5iy"]
-particle_flag_disable_z = true
-emission_shape_scale = Vector3(20.24, 20.59, 1)
-emission_shape = 1
-emission_sphere_radius = 1.0
-angle_min = 180.0
-angle_max = 180.0
-gravity = Vector3(0, -2, 0)
-linear_accel_min = -2.43
-linear_accel_max = 2.0
-scale_min = 0.5
-scale_max = 1.5
-color = Color(0.6282, 0.396, 0.72, 0.447059)
-alpha_curve = SubResource("CurveTexture_cbw7l")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bs037"]
 shader = ExtResource("34_wxg5w")
 shader_parameter/outline_color = Color(1, 1, 1, 0)
@@ -3734,7 +3715,7 @@ current = true
 [node name="SmellParticles" type="GPUParticles2D" parent="."]
 texture = ExtResource("44_3q7yy")
 lifetime = 5.0
-process_material = SubResource("ParticleProcessMaterial_oq5iy")
+process_material = ExtResource("38_yofsr")
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
 unique_name_in_owner = true

@@ -9,5 +9,3 @@ func enter(_previous_path_string: String, _data := {}) -> void:
 		player.call_deferred("update_animation", name)
 
 
-func exit() -> void:
-	player.global_position += Vector2(26*player.facing, -35)
