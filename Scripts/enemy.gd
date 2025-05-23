@@ -48,7 +48,7 @@ signal health_depleted
 @onready var audio_emitter = $SFX
 @onready var emote_emitter = $Emote
 @onready var face_location = $FaceMarker
-@onready var player : CharacterBody2D = get_node("/root/Game/Kalin")
+@onready var player : CharacterBody2D = get_tree().current_scene.find_child("Kalin")
 
 var line_of_sight: RayCast2D = null
 

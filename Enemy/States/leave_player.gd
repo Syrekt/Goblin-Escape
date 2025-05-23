@@ -1,11 +1,10 @@
 extends EnemyState
 
 var move_dir : int
-@onready var player : Player = get_node("/root/Game/Kalin")
 
 func enter(previous_state_path : String, data := {}) -> void:
 	enemy.call_deferred("update_animation", "run");
-	move_dir = sign(enemy.global_position.x - player.global_position.x)
+	move_dir = sign(enemy.global_position.x - enemy.player.global_position.x)
 	$Timer.start()
 func exit() -> void:
 	$Timer.stop()

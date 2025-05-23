@@ -1,4 +1,4 @@
-[gd_scene load_steps=261 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=262 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -98,9 +98,10 @@
 [ext_resource type="Script" uid="uid://c3rllm222ckui" path="res://Kalin/stamina.gd" id="60_2ksh1"]
 [ext_resource type="Texture2D" uid="uid://dvos4uam82cch" path="res://UI/Sliders/smell_progress.png" id="61_5atg1"]
 [ext_resource type="Script" uid="uid://42mhp8ajoulq" path="res://Kalin/States/orgasm.gd" id="61_c6www"]
-[ext_resource type="Texture2D" uid="uid://cc7xateo6lu7f" path="res://UI/inventory_bg.png" id="61_exvqe"]
 [ext_resource type="Script" uid="uid://bys0lif7s6ub7" path="res://Kalin/States/hiding.gd" id="68_73qvi"]
 [ext_resource type="Script" uid="uid://dx8nksauci2pa" path="res://Kalin/States/hide.gd" id="68_y0qhg"]
+[ext_resource type="Texture2D" uid="uid://ivtf26n1fq7g" path="res://UI/Inventory/Inventory panel1_no background.png" id="69_wl0wu"]
+[ext_resource type="Texture2D" uid="uid://cfwmxwk10j6i2" path="res://UI/Inventory/Inventory panel1_background.png" id="70_6gnwp"]
 [ext_resource type="Script" uid="uid://c67j1elfon2jo" path="res://Kalin/States/unhide.gd" id="70_egy32"]
 [ext_resource type="Texture2D" uid="uid://bwph1b63ujc3r" path="res://UI/buttons_keyboard.png" id="71_a00wu"]
 [ext_resource type="Theme" uid="uid://d3ajvsrrbu1s5" path="res://UI/inventory.tres" id="72_qdj7c"]
@@ -3685,6 +3686,7 @@ slide_speed = 200.0
 snap_offset = Vector2(-17, 3)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
 editor_draw_limits = true
 script = ExtResource("2_0g2co")
 
@@ -3858,7 +3860,6 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_rbk27")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="UIFocus" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 15
@@ -3974,9 +3975,9 @@ tint_progress = Color(0.679805, 0.262423, 0, 1)
 script = ExtResource("55_h4isg")
 
 [node name="InventoryPanel" type="PanelContainer" parent="CanvasLayer" groups=["UIPanel"]]
-offset_top = 91.0
+offset_top = 138.0
 offset_right = 226.0
-offset_bottom = 512.0
+offset_bottom = 559.0
 focus_mode = 2
 theme = ExtResource("72_qdj7c")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_exvqe")
@@ -3985,17 +3986,31 @@ inventory = ExtResource("46_1q8gn")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/InventoryPanel"]
 layout_mode = 2
-texture = ExtResource("61_exvqe")
-region_rect = Rect2(0, 0, 44, 44)
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
+texture = ExtResource("69_wl0wu")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true
 
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/InventoryPanel/NinePatchRect"]
+self_modulate = Color(1, 1, 1, 0.5)
+layout_mode = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 219.0
+offset_bottom = 414.0
+texture = ExtResource("70_6gnwp")
+region_rect = Rect2(9, 9, 42, 42)
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/InventoryPanel"]
+custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 metadata/_edit_lock_ = true
 
@@ -4012,7 +4027,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="DescriptionPanel" type="PanelContainer" parent="CanvasLayer"]
-visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -4029,15 +4043,29 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_cbw7l")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/DescriptionPanel"]
 layout_mode = 2
-texture = ExtResource("61_exvqe")
-region_rect = Rect2(0, 0, 44, 44)
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
+texture = ExtResource("69_wl0wu")
+region_rect = Rect2(0, 0, 60, 60)
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/DescriptionPanel/NinePatchRect"]
+self_modulate = Color(1, 1, 1, 0.7)
+layout_mode = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 313.0
+offset_bottom = 129.0
+texture = ExtResource("70_6gnwp")
+region_rect = Rect2(9, 9, 42, 42)
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/DescriptionPanel"]
 layout_mode = 2

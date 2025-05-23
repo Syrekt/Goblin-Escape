@@ -1,11 +1,41 @@
 extends Node
 
+var inputs : Dictionary 
+var jump_key : String
+var attack_key : String
+var stance_key : String
+var crouch_key : String
+
 var loading := false
 
 signal show_combat_tutorial
 
 func _ready() -> void:
 	show_combat_tutorial.connect(_show_combat_tutorial)
+	var events = InputMap.action_get_events("jump")
+	for event in events:
+		if event is InputEventKey:
+			jump_key = OS.get_keycode_string(event.physical_keycode).to_upper()
+			print("jump_key: "+str(jump_key))
+
+	events = InputMap.action_get_events("attack")
+	for event in events:
+		if event is InputEventKey:
+			attack_key = OS.get_keycode_string(event.physical_keycode).to_upper()
+			print("attack_key: "+str(attack_key))
+
+	events = InputMap.action_get_events("stance")
+	for event in events:
+		if event is InputEventKey:
+			stance_key = OS.get_keycode_string(event.physical_keycode).to_upper()
+			print("stance_key: "+str(stance_key))
+
+	events = InputMap.action_get_events("down")
+	for event in events:
+		if event is InputEventKey:
+			crouch_key = OS.get_keycode_string(event.physical_keycode).to_upper()
+			print("crouch_key: "+str(crouch_key))
+
 func _show_combat_tutorial():
 	print("Show combat tutorial")
 	var combat_tutorial_scene : PackedScene = load("res://Objects/combat_tutorial.tscn")

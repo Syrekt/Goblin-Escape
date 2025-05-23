@@ -1,27 +1,63 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://d3ajvsrrbu1s5"]
+[gd_resource type="Theme" load_steps=23 format=3 uid="uid://d3ajvsrrbu1s5"]
 
 [ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Others/Ohrenstead.ttf" id="1_5s48r"]
-[ext_resource type="Texture2D" uid="uid://cf2ysgl11vuva" path="res://Inventory/Sprites/inventory_button_focus.png" id="2_i1q7w"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wbxtx"]
+[ext_resource type="Texture2D" uid="uid://c21xmqiyf85ot" path="res://UI/Inventory/Inventory tile_press.png" id="2_cqags"]
+[ext_resource type="Texture2D" uid="uid://clsu42ol4uml4" path="res://UI/Inventory/Inventory tile_hover.png" id="3_pkxtr"]
+[ext_resource type="Texture2D" uid="uid://crshovoo3vgbo" path="res://UI/Inventory/Inventory tile_normal.png" id="4_i22i6"]
+[ext_resource type="Texture2D" uid="uid://ohoknte31n4c" path="res://UI/Inventory/decremant.png" id="5_q7dot"]
+[ext_resource type="Texture2D" uid="uid://bderpb6ncy7j1" path="res://UI/Inventory/decremant_highlight.png" id="6_ie30q"]
+[ext_resource type="Texture2D" uid="uid://bcfd187l2hh1n" path="res://UI/Inventory/decremant_pressed.png" id="7_j7saf"]
+[ext_resource type="Texture2D" uid="uid://cr0h58tmcownx" path="res://UI/Inventory/increment.png" id="8_aauh8"]
+[ext_resource type="Texture2D" uid="uid://bcx8qx0c0nebx" path="res://UI/Inventory/incremen_highlightt.png" id="9_0au78"]
+[ext_resource type="Texture2D" uid="uid://vtr1bcbl6xsk" path="res://UI/Inventory/incremen_pressed.png" id="10_ecf8m"]
+[ext_resource type="Texture2D" uid="uid://cpgdoh6rbooa5" path="res://UI/Inventory/grabber_normal.png" id="11_g3r1w"]
+[ext_resource type="Texture2D" uid="uid://d2g6tbsbqg6fe" path="res://UI/Inventory/scroll_focusl.png" id="12_36ber"]
+[ext_resource type="Texture2D" uid="uid://dve47hweqogj1" path="res://UI/Inventory/scroll_normal.png" id="13_x3eo3"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jwmfk"]
-texture = ExtResource("2_i1q7w")
+texture = ExtResource("2_cqags")
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4a6d8"]
-texture = ExtResource("2_i1q7w")
+texture = ExtResource("3_pkxtr")
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5s48r"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dg5jf"]
+texture = ExtResource("4_i22i6")
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vfl3u"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6x23w"]
+texture = ExtResource("11_g3r1w")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qnl72"]
+texture = ExtResource("12_36ber")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xuoee"]
+texture = ExtResource("12_36ber")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_16uka"]
+texture = ExtResource("13_x3eo3")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vipvq"]
+texture = ExtResource("12_36ber")
 
 [resource]
 Button/font_sizes/font_size = 32
 Button/fonts/font = ExtResource("1_5s48r")
-Button/styles/disabled = SubResource("StyleBoxEmpty_wbxtx")
 Button/styles/focus = SubResource("StyleBoxTexture_jwmfk")
 Button/styles/hover = SubResource("StyleBoxTexture_4a6d8")
-Button/styles/normal = SubResource("StyleBoxEmpty_5s48r")
+Button/styles/normal = SubResource("StyleBoxTexture_dg5jf")
 Button/styles/pressed = SubResource("StyleBoxEmpty_vfl3u")
 HBoxContainer/constants/separation = 6
 HSeparator/styles/separator = null
@@ -31,3 +67,14 @@ MarginContainer/constants/margin_right = 12
 MarginContainer/constants/margin_top = 12
 RichTextLabel/font_sizes/normal_font_size = 32
 RichTextLabel/fonts/normal_font = ExtResource("1_5s48r")
+VScrollBar/icons/decrement = ExtResource("5_q7dot")
+VScrollBar/icons/decrement_highlight = ExtResource("6_ie30q")
+VScrollBar/icons/decrement_pressed = ExtResource("7_j7saf")
+VScrollBar/icons/increment = ExtResource("8_aauh8")
+VScrollBar/icons/increment_highlight = ExtResource("9_0au78")
+VScrollBar/icons/increment_pressed = ExtResource("10_ecf8m")
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_6x23w")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_qnl72")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_xuoee")
+VScrollBar/styles/scroll = SubResource("StyleBoxTexture_16uka")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxTexture_vipvq")

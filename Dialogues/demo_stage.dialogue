@@ -1,11 +1,12 @@
 ~ climbing
 Hold down to cling to ledges.
-Press jump to jump.
+Press {{Ge.jump_key}} to jump.
 => END
 
 ~ fall_damage
 Kalin: I will hurt myself if I fall from this heigth.
-Kalin: I can hand from ledges to shorten the fall.
+Kalin: I can hang from ledges to shorten the fall.
+Hold {{Ge.crouch_key}} while approaching ledges to hang from ledges, you can fall down by pressing {{Ge.crouch_key}} again.
 => END
 
 ~ hiding
