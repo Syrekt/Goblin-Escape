@@ -33,7 +33,6 @@ texture = ExtResource("4_i22i6")
 expand_margin_left = 2.0
 expand_margin_top = 2.0
 expand_margin_right = 2.0
-expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vfl3u"]
 

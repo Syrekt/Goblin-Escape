@@ -68,8 +68,8 @@ var available_stat_points := 5
 @onready var emote = $Emote
 @onready var parry_timer = $StateMachine/stance_defensive/ParryTimer
 @onready var vignette = $CanvasLayer/StealthVignette
-@onready var treath_collider : Area2D = $ThreatCollider
 @onready var smell_collider : Area2D = $SmellCollider
+@onready var cell_check : RayCast2D = $CellCheck
 #endregion
 #region Combat
 @export var has_sword := false #false for release
@@ -234,6 +234,14 @@ func can_grab_corner(rising := false) -> bool:
 	if is_on_ceiling(): return false
 	if ignore_corners: return false
 	return true
+func is_collider_one_way(collider: Object) -> bool:
+	if collider is TileMapLayer:
+		var cell = collider.local_to_map(cell_check.get_collision_point())
+		var data = collider.get_cell_tile_data(cell)
+		return data.is_collision_polygon_one_way(0, 0)
+	else:
+		return collider.is_in_group("OneWayColliders")
+
 func can_quick_climb() -> bool:
 	return velocity.y < -50.0 && !col_quick_climb_prevent.has_overlapping_bodies() && !col_corner_climb_prevent.has_overlapping_bodies() && ray_auto_climb.is_colliding()
 func can_stand_up() -> bool:
@@ -380,6 +388,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"stab", "slash", "bash", "block":
 			if !check_buffered_state():
 				state.finished.emit("stance_light")
+		"bash_no_sword":
+			state.finished.emit("idle")
 		"hurt":
 			state.finished.emit("stance_light")
 		"hurt_no_sword":
@@ -440,8 +450,8 @@ func _physics_process(delta: float) -> void:
 			#Make sure that player can't start moving again if it's stopped by an obstacle in this state
 			move_speed = walk_speed * dir_x if velocity.x == 0.0 else 0.0
 			accelaration = run_stop_dec
-		"bash":
-			accelaration = bash_stop_dec
+		"bash", "bash_no_sword":
+			move_speed = 0
 		"slide", "stun":
 			accelaration = slide_dec
 		"land", "land_hurt":
@@ -599,6 +609,8 @@ func _on_col_front_body_entered(body: Node2D) -> void:
 		body.chase_target = self
 func _on_threat_collider_body_entered(body:Node2D) -> void:
 	take_damage(1)
+	velocity.x = 0
+	move_speed = 0
 func _on_smell_collider_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		body.smell(self)

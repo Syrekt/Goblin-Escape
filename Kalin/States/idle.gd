@@ -11,7 +11,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 func update(_delta: float) -> void:
 	player.check_movable();
 	if lock_stance_button:
-		if not player.pressed("stance"): lock_stance_button = false
+		if !player.pressed("stance"): lock_stance_button = false
 
 	if just_climbed:
 		await get_tree().physics_frame
@@ -22,6 +22,8 @@ func update(_delta: float) -> void:
 		finished.emit("crouch")
 	elif player.just_pressed("jump"):
 		finished.emit("rise")
+	elif !player.has_sword && player.just_pressed("attack") && player.stamina.spend(1.0):
+		finished.emit("bash_no_sword")
 	elif player.has_sword && !lock_stance_button && (player.just_pressed("stance") || player.just_pressed("attack")):
 		finished.emit("stance_light")
 	elif player.velocity.x != 0:

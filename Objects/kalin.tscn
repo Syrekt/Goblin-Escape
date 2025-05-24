@@ -1,4 +1,4 @@
-[gd_scene load_steps=262 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=265 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -91,6 +91,7 @@
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="56_ghu8e"]
 [ext_resource type="Script" uid="uid://dpcphh4eavvle" path="res://Kalin/States/stun.gd" id="56_qqpcq"]
 [ext_resource type="Texture2D" uid="uid://d3ie3nxj0orny" path="res://UI/Sliders/arousal_under.png" id="57_rbk27"]
+[ext_resource type="Script" uid="uid://dov67f6u1vo0" path="res://Kalin/States/bash_no_sword.gd" id="58_wl0wu"]
 [ext_resource type="Texture2D" uid="uid://chjgsdqrvvtgb" path="res://UI/Sliders/arousal_progress.png" id="58_yofsr"]
 [ext_resource type="Script" uid="uid://cjge85wgil63e" path="res://Kalin/States/sex.gd" id="59_muuj4"]
 [ext_resource type="Script" uid="uid://cytac4sg8onjk" path="res://Kalin/States/corner_hang.gd" id="59_osr06"]
@@ -115,6 +116,22 @@
 [ext_resource type="Script" uid="uid://dwwirxo8vr8kq" path="res://Kalin/States/ladder_climb.gd" id="88_7e6uh"]
 [ext_resource type="AudioStream" uid="uid://b7dlcnc8e25ui" path="res://SFX/Kalin/kick_long_whoosh_19.wav" id="89_586st"]
 [ext_resource type="AudioStream" uid="uid://y07o2rjag3lq" path="res://SFX/Kalin/Punch_06.wav" id="91_cbw7l"]
+[ext_resource type="Texture2D" uid="uid://ds7fhf7dvmyyd" path="res://Kalin/Sprites/Kalin-Bash-NoSword.png" id="107_5atg1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_47a0d"]
+shader = ExtResource("45_cbw7l")
+shader_parameter/alpha = 0.2
+shader_parameter/inner_radius = 0.515
+shader_parameter/outer_radius = 0.995
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_exvqe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cbw7l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t42fh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfvac"]
+size = Vector2(105, 32)
 
 [sub_resource type="Animation" id="Animation_5koc5"]
 length = 0.001
@@ -314,6 +331,159 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("2_s11s3")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../StateMachine/bash/BashHitbox/Collider:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("..:facing_locked")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%Sprite2D/..")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [Vector2(0, 32), 20.0],
+"method": &"emit_noise"
+}]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../StateMachine/bash")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_footsteps"
+}]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = false
+tracks/8/path = NodePath(".:material:shader_parameter/tint_color")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.9),
+"transitions": PackedFloat32Array(1e+06, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = false
+tracks/9/path = NodePath(".:material:shader_parameter/outline_color")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.9),
+"transitions": PackedFloat32Array(1e+06, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath(".:material:shader_parameter/width")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("%Sprite2D/..:power_crush")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_wl0wu"]
+resource_name = "bash_no_sword"
+length = 0.9
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("107_5atg1")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -2949,6 +3119,7 @@ tracks/3/keys = {
 _data = {
 &"RESET": SubResource("Animation_5koc5"),
 &"bash": SubResource("Animation_b8tlq"),
+&"bash_no_sword": SubResource("Animation_wl0wu"),
 &"block": SubResource("Animation_bb84h"),
 &"corner_climb": SubResource("Animation_5syxg"),
 &"corner_climb_quick": SubResource("Animation_qqpcq"),
@@ -2991,7 +3162,7 @@ _data = {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bs037"]
 shader = ExtResource("34_wxg5w")
 shader_parameter/outline_color = Color(1, 1, 1, 0)
-shader_parameter/width = 1.0
+shader_parameter/width = 1.5
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
@@ -3662,21 +3833,6 @@ size = Vector2(15, 36)
 [sub_resource type="CircleShape2D" id="CircleShape2D_rbk27"]
 radius = 105.304
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_47a0d"]
-shader = ExtResource("45_cbw7l")
-shader_parameter/alpha = 0.2
-shader_parameter/inner_radius = 0.515
-shader_parameter/outer_radius = 0.995
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_exvqe"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cbw7l"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t42fh"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfvac"]
-size = Vector2(105, 32)
-
 [node name="Kalin" type="CharacterBody2D" groups=["Persistent"]]
 z_index = 2
 collision_layer = 2
@@ -3697,169 +3853,8 @@ process_physics_priority = 300
 script = ExtResource("2_0bx81")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D")
-libraries = {
-&"": SubResource("AnimationLibrary_cuohi")
-}
-
-[node name="AnimationAudioStreamer" type="AudioStreamPlayer2D" parent="."]
-unique_name_in_owner = true
-
-[node name="MainAudioStreamer" type="AudioStreamPlayer2D" parent="."]
-unique_name_in_owner = true
-
-[node name="AudioListener2D" type="AudioListener2D" parent="."]
-current = true
-
-[node name="CombatProperties" parent="." instance=ExtResource("2_yetl5")]
-
-[node name="SmellParticles" type="GPUParticles2D" parent="."]
-texture = ExtResource("44_3q7yy")
-lifetime = 5.0
-process_material = ExtResource("38_yofsr")
-
-[node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_bs037")
-texture = ExtResource("3_b6tj0")
-hframes = 6
-
-[node name="InteractionPrompt" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(0, -42)
-sprite_frames = SubResource("SpriteFrames_go1w5")
-animation = &"xbox"
-script = ExtResource("72_rp7vf")
-
-[node name="Emote" parent="." instance=ExtResource("40_2d1nf")]
-visible = false
-position = Vector2(0, -36)
-
-[node name="ColliderStanding" type="CollisionShape2D" parent="." groups=["Flip"]]
-visible = false
-position = Vector2(0, 4.25001)
-scale = Vector2(1, 1.2)
-shape = SubResource("RectangleShape2D_y6qte")
-
-[node name="ColliderCrouching" type="CollisionShape2D" parent="." groups=["Flip"]]
-visible = false
-position = Vector2(0, 16.5)
-scale = Vector2(1, 1.2)
-shape = SubResource("RectangleShape2D_iccmv")
-disabled = true
-
-[node name="MovableCheck" type="RayCast2D" parent="." groups=["Flip"]]
-visible = false
-target_position = Vector2(17, 0)
-collision_mask = 32
-
-[node name="CornerGrabCheck" type="RayCast2D" parent="." groups=["Flip"]]
-visible = false
-position = Vector2(0, -15)
-target_position = Vector2(14, 1.90735e-06)
-collision_mask = 33
-
-[node name="CornerAutoClimb" type="RayCast2D" parent="." groups=["Flip"]]
-visible = false
-target_position = Vector2(14, 1.90735e-06)
-collision_mask = 33
-
-[node name="ColBehind" type="Area2D" parent="." groups=["Flip"]]
-visible = false
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ColBehind"]
-position = Vector2(-10, 4.375)
-shape = SubResource("RectangleShape2D_cbw7l")
-
-[node name="ColFront" type="Area2D" parent="." groups=["Flip"]]
-visible = false
-collision_layer = 0
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ColFront"]
-position = Vector2(10, 4.5)
-shape = SubResource("RectangleShape2D_47a0d")
-
-[node name="StandCheck" type="Area2D" parent="." groups=["Flip"]]
-visible = false
-position = Vector2(0, -4)
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StandCheck"]
-position = Vector2(0, -7)
-shape = SubResource("RectangleShape2D_avh81")
-
-[node name="CornerGrabPrevent" type="Area2D" parent="." groups=["Flip"]]
-visible = false
-collision_layer = 0
-
-[node name="TopCollider" type="CollisionShape2D" parent="CornerGrabPrevent"]
-position = Vector2(10, -24.5)
-shape = SubResource("RectangleShape2D_lnkvj")
-
-[node name="QuickClimbPrevent" type="Area2D" parent="." groups=["Flip"]]
-visible = false
-scale = Vector2(1, 1.125)
-collision_layer = 0
-
-[node name="QuickClimbCollider" type="CollisionShape2D" parent="QuickClimbPrevent"]
-position = Vector2(8, -11.5556)
-shape = SubResource("RectangleShape2D_lnkvj")
-
-[node name="BottomAutoClimb" type="Area2D" parent="." groups=["Flip"]]
-visible = false
-collision_layer = 0
-
-[node name="BottomCollider" type="CollisionShape2D" parent="BottomAutoClimb"]
-position = Vector2(0, 37.5)
-shape = SubResource("RectangleShape2D_8idp1")
-
-[node name="CornerClimbPrevent" type="Area2D" parent="." groups=["Flip"]]
-visible = false
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerClimbPrevent"]
-position = Vector2(10, -52.5)
-shape = SubResource("RectangleShape2D_qqpcq")
-
-[node name="CornerHangCheck" type="Area2D" parent="." groups=["Flip"]]
-visible = false
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerHangCheck"]
-position = Vector2(22, 61)
-shape = SubResource("RectangleShape2D_osr06")
-
-[node name="Interactor" type="Area2D" parent="." groups=["Flip"]]
-visible = false
-position = Vector2(0, 32)
-collision_layer = 0
-collision_mask = 64
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor"]
-position = Vector2(0, -15)
-shape = SubResource("RectangleShape2D_1nk40")
-
-[node name="ThreatCollider" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 256
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ThreatCollider"]
-position = Vector2(0.5, 14)
-shape = SubResource("RectangleShape2D_586st")
-
-[node name="SmellCollider" type="Area2D" parent="."]
-scale = Vector2(1e-05, 1e-05)
-collision_layer = 0
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SmellCollider"]
-shape = SubResource("CircleShape2D_rbk27")
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="UIFocus" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 15
@@ -4235,6 +4230,9 @@ scale = Vector2(1.47, 2.52)
 collision_mask = 136
 monitorable = false
 
+[node name="bash_no_sword" type="Node" parent="StateMachine"]
+script = ExtResource("58_wl0wu")
+
 [node name="hurt" type="Node" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("40_xirjq")
 
@@ -4311,15 +4309,180 @@ script = ExtResource("70_egy32")
 [node name="ladder_climb" type="Node" parent="StateMachine"]
 script = ExtResource("88_7e6uh")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+&"": SubResource("AnimationLibrary_cuohi")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_bs037")
+texture = ExtResource("3_b6tj0")
+hframes = 6
+
+[node name="AnimationAudioStreamer" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+
+[node name="MainAudioStreamer" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
+[node name="CombatProperties" parent="." instance=ExtResource("2_yetl5")]
+
+[node name="SmellParticles" type="GPUParticles2D" parent="."]
+texture = ExtResource("44_3q7yy")
+lifetime = 5.0
+process_material = ExtResource("38_yofsr")
+
+[node name="InteractionPrompt" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -42)
+sprite_frames = SubResource("SpriteFrames_go1w5")
+animation = &"xbox"
+script = ExtResource("72_rp7vf")
+
+[node name="Emote" parent="." instance=ExtResource("40_2d1nf")]
+visible = false
+position = Vector2(0, -36)
+
+[node name="ColliderStanding" type="CollisionShape2D" parent="." groups=["Flip"]]
+visible = false
+position = Vector2(0, 4.25001)
+scale = Vector2(1, 1.2)
+shape = SubResource("RectangleShape2D_y6qte")
+
+[node name="ColliderCrouching" type="CollisionShape2D" parent="." groups=["Flip"]]
+visible = false
+position = Vector2(0, 16.5)
+scale = Vector2(1, 1.2)
+shape = SubResource("RectangleShape2D_iccmv")
+disabled = true
+
+[node name="MovableCheck" type="RayCast2D" parent="." groups=["Flip"]]
+visible = false
+target_position = Vector2(17, 0)
+collision_mask = 32
+
+[node name="CornerGrabCheck" type="RayCast2D" parent="." groups=["Flip"]]
+visible = false
+position = Vector2(0, -15)
+target_position = Vector2(14, 1.90735e-06)
+collision_mask = 33
+
+[node name="CornerAutoClimb" type="RayCast2D" parent="." groups=["Flip"]]
+visible = false
+target_position = Vector2(14, 1.90735e-06)
+collision_mask = 33
+
+[node name="CellCheck" type="RayCast2D" parent="."]
+target_position = Vector2(0, 39)
+
+[node name="ColBehind" type="Area2D" parent="." groups=["Flip"]]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColBehind"]
+position = Vector2(-10, 4.375)
+shape = SubResource("RectangleShape2D_cbw7l")
+
+[node name="ColFront" type="Area2D" parent="." groups=["Flip"]]
+visible = false
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColFront"]
+position = Vector2(10, 4.5)
+shape = SubResource("RectangleShape2D_47a0d")
+
+[node name="StandCheck" type="Area2D" parent="." groups=["Flip"]]
+visible = false
+position = Vector2(0, -4)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StandCheck"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_avh81")
+
+[node name="CornerGrabPrevent" type="Area2D" parent="." groups=["Flip"]]
+visible = false
+collision_layer = 0
+
+[node name="TopCollider" type="CollisionShape2D" parent="CornerGrabPrevent"]
+position = Vector2(10, -24.5)
+shape = SubResource("RectangleShape2D_lnkvj")
+
+[node name="QuickClimbPrevent" type="Area2D" parent="." groups=["Flip"]]
+visible = false
+scale = Vector2(1, 1.125)
+collision_layer = 0
+
+[node name="QuickClimbCollider" type="CollisionShape2D" parent="QuickClimbPrevent"]
+position = Vector2(8, -11.5556)
+shape = SubResource("RectangleShape2D_lnkvj")
+
+[node name="BottomAutoClimb" type="Area2D" parent="." groups=["Flip"]]
+visible = false
+collision_layer = 0
+
+[node name="BottomCollider" type="CollisionShape2D" parent="BottomAutoClimb"]
+position = Vector2(0, 37.5)
+shape = SubResource("RectangleShape2D_8idp1")
+
+[node name="CornerClimbPrevent" type="Area2D" parent="." groups=["Flip"]]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerClimbPrevent"]
+position = Vector2(10, -52.5)
+shape = SubResource("RectangleShape2D_qqpcq")
+
+[node name="CornerHangCheck" type="Area2D" parent="." groups=["Flip"]]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerHangCheck"]
+position = Vector2(22, 61)
+shape = SubResource("RectangleShape2D_osr06")
+
+[node name="Interactor" type="Area2D" parent="." groups=["Flip"]]
+visible = false
+position = Vector2(0, 32)
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor"]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_1nk40")
+
+[node name="ThreatCollider" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ThreatCollider"]
+position = Vector2(0.5, 14)
+shape = SubResource("RectangleShape2D_586st")
+
+[node name="SmellCollider" type="Area2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmellCollider"]
+shape = SubResource("CircleShape2D_rbk27")
+
+[connection signal="attack_frame" from="StateMachine/slash" to="StateMachine/slash" method="_on_attack_frame"]
+[connection signal="attack_frame" from="StateMachine/stab" to="StateMachine/stab" method="_on_attack_frame"]
+[connection signal="body_entered" from="StateMachine/bash/BashHitbox" to="StateMachine/bash" method="_on_bash_hitbox_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="ColFront" to="." method="_on_col_front_body_entered"]
 [connection signal="area_entered" from="Interactor" to="." method="_on_interactor_area_entered"]
 [connection signal="area_exited" from="Interactor" to="." method="_on_interactor_area_exited"]
 [connection signal="body_entered" from="ThreatCollider" to="." method="_on_threat_collider_body_entered"]
 [connection signal="body_entered" from="SmellCollider" to="." method="_on_smell_collider_body_entered"]
-[connection signal="attack_frame" from="StateMachine/slash" to="StateMachine/slash" method="_on_attack_frame"]
-[connection signal="attack_frame" from="StateMachine/stab" to="StateMachine/stab" method="_on_attack_frame"]
-[connection signal="body_entered" from="StateMachine/bash/BashHitbox" to="StateMachine/bash" method="_on_bash_hitbox_body_entered"]
 
 [editable path="StateMachine/slash/SlashHitbox"]
 [editable path="StateMachine/stab/StabHitbox"]

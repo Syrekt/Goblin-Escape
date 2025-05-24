@@ -19,10 +19,15 @@ func physics_update(delta: float) -> void:
 	elif !player.pressed("down") && player.can_stand_up():
 		player.stand_up()
 	elif player.just_pressed("jump"):
-		if player.get_slide_collision_count() > 0:
-			var collider = player.get_slide_collision(0).get_collider()
+		for i in player.get_slide_collision_count():
+			var collider = player.cell_check.get_collider()
 			print("collider: "+str(collider))
-			if collider.has_node("Shape"):
+			if collider is TileMapLayer:
+				var cell = collider.local_to_map(player.cell_check.get_collision_point())
+				var data = collider.get_cell_tile_data(cell)
+				if data.is_collision_polygon_one_way(0, 0):
+					player.global_position.y += 4
+			elif collider.has_node("Shape"):
 				var shape = collider.get_node("Shape")
 				if shape.one_way_collision:
 					player.global_position.y += 4

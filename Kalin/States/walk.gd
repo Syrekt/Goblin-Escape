@@ -18,6 +18,8 @@ func update(delta: float) -> void:
 		finished.emit("crouch")
 	elif player.just_pressed("jump"):
 		finished.emit("rise")
+	elif !player.has_sword && player.just_pressed("attack") && player.stamina.spend(1.0):
+		finished.emit("bash_no_sword")
 	elif player.has_sword && !lock_stance_button && (player.just_pressed("stance") || player.just_pressed("attack")):
 		finished.emit("stance_walk")
 	elif player.velocity.x == 0:
