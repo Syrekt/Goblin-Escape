@@ -1,10 +1,10 @@
 extends Node2D
 
-@export var condition_target : Node2D
+@export var player : Player
 @export var result_target : Node2D
 
-@export var parameters : Array[String] = []
-@export var results : Array
+@export var parameters : Array[Resource] = []
+@export var results : Array[bool] = []
 
 
 func _ready() -> void:
@@ -12,14 +12,15 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if !result_target || !condition_target:
+	if !result_target || !player:
 		print("Result target or condition target doesn't exists, destroy..")
 		queue_free()
 		return
 
 	var condition := true
+	var inv = player.inventory_panel.inventory
 	for i in parameters.size():
-		if condition_target.get(parameters[i]) != results[i]:
+		if inv.has_item(parameters[i]) != results[i]:
 			condition = false
 
 	if condition:

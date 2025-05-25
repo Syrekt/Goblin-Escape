@@ -4,3 +4,8 @@
 
 [node name="ConditionChecker" type="Node2D"]
 script = ExtResource("1_cum3g")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "bool check"

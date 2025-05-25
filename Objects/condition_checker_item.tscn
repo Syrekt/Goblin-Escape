@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6wbu8u15lep6"]
+
+[ext_resource type="Script" uid="uid://rgyfrvhqk8hq" path="res://Scripts/condition_checker_item.gd" id="1_270tl"]
+
+[node name="ConditionCheckerItem" type="Node2D"]
+script = ExtResource("1_270tl")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "item
+"

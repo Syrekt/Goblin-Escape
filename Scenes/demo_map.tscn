@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://1clhhggjvkd3"]
+[gd_scene load_steps=13 format=4 uid="uid://1clhhggjvkd3"]
 
 [ext_resource type="PackedScene" uid="uid://h2hwfpjw4rte" path="res://Objects/kalin.tscn" id="1_if8hx"]
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="2_3c6lh"]
@@ -6,11 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/light.tscn" id="4_xf1uh"]
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/Other/crate1.tscn" id="5_0jo2v"]
 [ext_resource type="PackedScene" uid="uid://24ijy2g2jylp" path="res://Objects/hiding_spot.tscn" id="6_v47bg"]
-[ext_resource type="PackedScene" uid="uid://2prh5eduxlje" path="res://Objects/condition_checker.tscn" id="7_8q7v6"]
 [ext_resource type="PackedScene" uid="uid://bpj2k5beannxk" path="res://Objects/dialogue_trigger.tscn" id="8_v8o7h"]
 [ext_resource type="Resource" uid="uid://57f3ouwjl4a0" path="res://Dialogues/demo_stage.dialogue" id="9_5rn0h"]
 [ext_resource type="PackedScene" uid="uid://dkyt1q4ive1yi" path="res://Map/Props/stairs_long.tscn" id="10_kmchb"]
-[ext_resource type="Resource" uid="uid://c0yvh55kikql2" path="res://Inventory/health_potion.tres" id="11_3c6lh"]
 [ext_resource type="PackedScene" uid="uid://dk84lu71fcjkl" path="res://Objects/item_pickup.tscn" id="11_3fcy7"]
 [ext_resource type="Resource" uid="uid://b2e8awdp8f23e" path="res://Inventory/perfume.tres" id="12_6xxbj"]
 [ext_resource type="PackedScene" uid="uid://dw2d8bu1vlvv6" path="res://Enemy/Goblin/goblin.tscn" id="13_i4e7e"]
@@ -18,7 +16,7 @@
 [node name="DemoMap" type="Node2D"]
 
 [node name="Kalin" parent="." instance=ExtResource("1_if8hx")]
-position = Vector2(2178, 411)
+position = Vector2(628, 462)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.7984, 0.759976, 1, 1)
@@ -109,13 +107,9 @@ position = Vector2(519, 208)
 z_index = 0
 position = Vector2(2000, 416)
 
-[node name="ConditionChecker" parent="Props" node_paths=PackedStringArray("condition_target", "result_target") instance=ExtResource("7_8q7v6")]
-position = Vector2(1814, 433)
-condition_target = NodePath("../../Kalin")
-result_target = NodePath("DialogueTrigger")
-
-[node name="DialogueTrigger" parent="Props/ConditionChecker" instance=ExtResource("8_v8o7h")]
-position = Vector2(-0.644897, 0.548462)
+[node name="DialogueTrigger3" parent="Props" instance=ExtResource("8_v8o7h")]
+position = Vector2(1813.36, 433.548)
+dialogue_resource = ExtResource("9_5rn0h")
 
 [node name="DialogueTrigger" parent="Props" instance=ExtResource("8_v8o7h")]
 position = Vector2(894, 256)
@@ -126,10 +120,6 @@ dialogue_start = "climbing"
 position = Vector2(1256, 207)
 dialogue_resource = ExtResource("9_5rn0h")
 dialogue_start = "fall_damage"
-
-[node name="ItemPickup" parent="Props" instance=ExtResource("11_3fcy7")]
-position = Vector2(850.36, 243.036)
-item = ExtResource("11_3c6lh")
 
 [node name="Stairs" type="Node" parent="."]
 
@@ -148,5 +138,4 @@ item = ExtResource("12_6xxbj")
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Goblin" parent="Enemies" instance=ExtResource("13_i4e7e")]
-position = Vector2(2000, 427)
-patrolling = true
+position = Vector2(2160, 432)
