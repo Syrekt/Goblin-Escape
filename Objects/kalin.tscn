@@ -1,10 +1,11 @@
-[gd_scene load_steps=267 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=270 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
 [ext_resource type="Script" uid="uid://ettvx4a2msjv" path="res://Scripts/camera_2d.gd" id="2_0g2co"]
 [ext_resource type="Texture2D" uid="uid://dcs3l0iefjo7w" path="res://Kalin/Sprites/Kalin-Fall.png" id="2_1j6vo"]
 [ext_resource type="Texture2D" uid="uid://boahl6r6b6lgx" path="res://Kalin/Sprites/Kalin-Crouch_Idle.png" id="2_6cw72"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="2_f2sxn"]
 [ext_resource type="Texture2D" uid="uid://b83foasp85e6b" path="res://Kalin/Sprites/Kalin-Bash.png" id="2_s11s3"]
 [ext_resource type="PackedScene" uid="uid://cpogcou30wxcj" path="res://UI/combat_properties.tscn" id="2_yetl5"]
 [ext_resource type="Texture2D" uid="uid://yymtfpkr47q8" path="res://Kalin/Sprites/Kalin_idle_unarmed.png" id="3_b6tj0"]
@@ -12,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bwtgglpsavvyw" path="res://Kalin/Sprites/Kalin-Jump.png" id="3_fcid0"]
 [ext_resource type="Texture2D" uid="uid://dowqrv0phpb5t" path="res://Kalin/Sprites/Kalin-Block.png" id="3_pq7gt"]
 [ext_resource type="Texture2D" uid="uid://cxr0adhrbpvo6" path="res://Kalin/Sprites/Kalin-Crouch_Walk.png" id="3_sa02y"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_towol"]
 [ext_resource type="Texture2D" uid="uid://drtos83imulyy" path="res://Kalin/Sprites/Kalin-Landing.png" id="4_7ft60"]
 [ext_resource type="Texture2D" uid="uid://b8a7c6m81s28t" path="res://Kalin/Sprites/Kalin-Death.png" id="4_g6dya"]
 [ext_resource type="Texture2D" uid="uid://cxy7gxvy3yrma" path="res://Kalin/Sprites/Kalin-Climb.png" id="4_xyrfg"]
@@ -119,6 +121,12 @@
 [ext_resource type="AudioStream" uid="uid://b7dlcnc8e25ui" path="res://SFX/Kalin/kick_long_whoosh_19.wav" id="89_586st"]
 [ext_resource type="AudioStream" uid="uid://y07o2rjag3lq" path="res://SFX/Kalin/Punch_06.wav" id="91_cbw7l"]
 [ext_resource type="Texture2D" uid="uid://ds7fhf7dvmyyd" path="res://Kalin/Sprites/Kalin-Bash-NoSword.png" id="107_5atg1"]
+
+[sub_resource type="Resource" id="Resource_446pa"]
+script = ExtResource("3_towol")
+duration = 1.0
+transition = 0
+ease = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_47a0d"]
 shader = ExtResource("45_cbw7l")
@@ -3855,8 +3863,18 @@ script = ExtResource("1_tpqnq")
 slide_speed = 200.0
 snap_offset = Vector2(-17, 3)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+script = ExtResource("2_f2sxn")
 zoom = Vector2(3, 3)
+tween_resource = SubResource("Resource_446pa")
+tween_on_load = false
+draw_limits = true
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+physics_interpolation_mode = 1
+zoom = Vector2(3, 3)
+process_callback = 0
 editor_draw_limits = true
 script = ExtResource("2_0g2co")
 

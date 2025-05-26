@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bkmdulbfadf8d"]
 
-[ext_resource type="Script" uid="uid://dyq5jd3nrkcdp" path="res://Scripts/camera_region.gd" id="1_pbqas"]
+[ext_resource type="Script" uid="uid://gyb1oxt0eedw" path="res://Scripts/pcam_limit.gd" id="1_pbqas"]
 
 [node name="CameraRegion" type="Area2D"]
 collision_layer = 0

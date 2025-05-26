@@ -92,7 +92,7 @@ var absorbed_damage := false
 @export var unconscious			:= false # Post sex situations where health isn't 0
 var states_locked := false
 @export var save_list : Array[NodePath]
-var pcam : PhantomCamera2D
+@onready var pcam : PhantomCamera2D = $PhantomCamera2D
 var movable : Node2D = null
 var noise = preload("res://Objects/noise.tscn")
 var hiding_spot : Interaction
@@ -548,7 +548,8 @@ func _process(delta: float) -> void:
 		if pcam && pcam.follow_mode == pcam.FollowMode.GROUP:
 			pcam.follow_mode = pcam.FollowMode.SIMPLE
 			pcam.erase_follow_targets(combat_target)
-			pcam.draw_limits = true
+			if pcam.limit_target:
+				pcam.draw_limits = true
 		else:
 			camera.position.x = 0
 	#endregion
