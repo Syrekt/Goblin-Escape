@@ -70,6 +70,7 @@ var available_stat_points := 5
 @onready var vignette = $CanvasLayer/StealthVignette
 @onready var smell_collider : Area2D = $SmellCollider
 @onready var cell_check : RayCast2D = $CellCheck
+@onready var interaction_prompt : AnimatedSprite2D = $InteractionPrompt
 #endregion
 #region Combat
 @export var has_sword := false #false for release
@@ -313,10 +314,10 @@ func check_movement_disabled() -> bool:
 	var ui_nodes = get_tree().get_nodes_in_group("UIPanel")
 	for node in ui_nodes:
 		if node.visible:
-			$InteractionPrompt.supress = true
+			interaction_prompt.supress = true
 			velocity.x = 0
 			return true
-	$InteractionPrompt.supress = false
+	interaction_prompt.supress = false
 	return false
 func pressed(input : String) -> bool:
 	if movement_disabled: return false
@@ -573,7 +574,8 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
-		take_damage(9)
+		think("What am I thinking?")
+		#take_damage(9)
 		#if randi_range(0, 1) == 1:
 		#	inventory.pickup_item(load("res://Inventory/water.tres"))
 		#else:
@@ -586,12 +588,12 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 	print(area)
 func _on_interactor_area_entered(area: Area2D) -> void:
 	interaction_target = area
-	$InteractionPrompt._show()
+	interaction_prompt._show(area.title)
 func _on_interactor_area_exited(area: Area2D) -> void:
 	if interaction_target == area:
 		interaction_target.waiting_player_exit = false
 		interaction_target = null
-		$InteractionPrompt._hide()
+		interaction_prompt._hide()
 func _on_enter_shadow() -> void:
 	invisible = true
 	var tween1 = create_tween().bind_node(self)

@@ -31,7 +31,7 @@ position = Vector2(1467, 255)
 shape = SubResource("RectangleShape2D_yyayg")
 
 [node name="Kalin" parent="." instance=ExtResource("1_if8hx")]
-position = Vector2(2872, 400)
+position = Vector2(2566.17, 414.845)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.7984, 0.759976, 1, 1)

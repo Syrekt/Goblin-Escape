@@ -1,11 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://dj11vgm24locj"]
+[gd_scene load_steps=4 format=3 uid="uid://dj11vgm24locj"]
 
 [ext_resource type="Script" uid="uid://byxhm37twn184" path="res://Scripts/thought.gd" id="1_kgof5"]
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="1_wd0ya"]
+[ext_resource type="Texture2D" uid="uid://bi3soe8ckc231" path="res://UI/Kalin.png" id="2_v5quw"]
 
-[node name="Thought" type="RichTextLabel"]
-offset_right = 196.0
-offset_bottom = 14.0
+[node name="HBoxContainer" type="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+offset_right = 327.0
+offset_bottom = 69.0
+scale = Vector2(2, 2)
+script = ExtResource("1_kgof5")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 2
+color = Color(0, 0, 0, 0.168627)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_v5quw")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="Thought" type="RichTextLabel" parent="MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
 theme = ExtResource("1_wd0ya")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
@@ -15,14 +35,4 @@ bbcode_enabled = true
 text = "I'm hungry"
 fit_content = true
 scroll_active = false
-script = ExtResource("1_kgof5")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.168627)
+vertical_alignment = 1

@@ -1,6 +1,7 @@
-extends RichTextLabel
+extends HBoxContainer
 
 var tween : Tween
+@onready var label : RichTextLabel = $MarginContainer/Thought
 
 func tween_reset() -> void:
 	if tween:

@@ -29,6 +29,8 @@ enum keyboard {
 	Z = 41,
 }
 
+@onready var label : Label = get_node("../CanvasLayer/InteractionLabel")
+
 var last_input_type := "keyboard"
 
 var supress := false
@@ -40,14 +42,16 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event is InputEventKey || event is InputEventMouse:
 		last_input_type = "keyboard"
 func _process(delta: float) -> void:
+	Debugger.printui("label.text: "+str(label.text));
 	if _draw:
 		visible = !supress
 	else:
 		visible = false
 
-func _show() -> void:
+func _show(title := "") -> void:
 	var interaction_prompt = ""
 	var events = InputMap.action_get_events("interact")
+	label.text = title
 
 	if events.size() > 0:
 		for event in events:
@@ -64,4 +68,5 @@ func _show() -> void:
 
 	_draw = true
 func _hide() -> void:
+	label.text = ""
 	_draw = false
