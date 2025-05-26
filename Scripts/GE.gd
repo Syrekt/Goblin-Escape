@@ -78,9 +78,9 @@ func EmitNoise(source: CharacterBody2D, position: Vector2, amount: float) -> voi
 	noise.source = source
 
 	get_tree().current_scene.add_child(noise)
-func save_game() -> void:
+func save_game(filename: String) -> void:
 	print("Saving...")
-	var save_file = FileAccess.open("user://savegame.ge", FileAccess.WRITE)
+	var save_file = FileAccess.open("user://"+filename+".ge", FileAccess.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group("Persistent")
 	for node in save_nodes:
 		# Check the node is an instanced scene so it can be instanced again during load.
@@ -110,7 +110,7 @@ func save_game() -> void:
 		save_file.store_line(json_string)
 
 	print("Game saved")
-func load_game() -> void:
+func load_game(filename: String) -> void:
 	print("Loading...")
 
 	loading = true
@@ -119,7 +119,7 @@ func load_game() -> void:
 	var loading_screen = get_node("/root/Game/CanvasLayer/LoadingScreen")
 	loading_screen.show()
 
-	if not FileAccess.file_exists("user://savegame.ge"):
+	if not FileAccess.file_exists("user://"+filename+".ge"):
 		return # Error! We don't have a save to load.
 
 	# We need to revert the game state so we're not cloning objects
@@ -134,7 +134,7 @@ func load_game() -> void:
 
 	# Load the file line by line and process that dictionary to restore
 	# the object it represents.
-	var save_file = FileAccess.open("user://savegame.ge", FileAccess.READ)
+	var save_file = FileAccess.open("user://"+filename+".ge", FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():
 		var json_string = save_file.get_line()
 

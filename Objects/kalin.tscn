@@ -1,4 +1,4 @@
-[gd_scene load_steps=265 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=267 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -22,8 +22,10 @@
 [ext_resource type="PackedScene" uid="uid://b02rwb4cvvhr4" path="res://Objects/state_machine.tscn" id="9_ojhio"]
 [ext_resource type="Script" uid="uid://mtruxnn62ila" path="res://Kalin/States/idle.gd" id="10_4yl4h"]
 [ext_resource type="Texture2D" uid="uid://bh7p7ow7bykv7" path="res://Kalin/Sprites/Kalin-Heavy Stance.png" id="10_8p6tu"]
+[ext_resource type="Texture2D" uid="uid://xoyfqo8f1wal" path="res://UI/Buffs/buff.png" id="10_pxbrw"]
 [ext_resource type="Texture2D" uid="uid://x5i4gyyapuxd" path="res://Kalin/Sprites/Kalin-Pull.png" id="10_qartl"]
 [ext_resource type="Texture2D" uid="uid://cocmax1vh70kr" path="res://Kalin/Sprites/Kalin-Push.png" id="11_0xxw0"]
+[ext_resource type="Texture2D" uid="uid://b4hs0qesl2jhr" path="res://UI/Buffs/debuff.png" id="11_4inu4"]
 [ext_resource type="Script" uid="uid://jcdm00a4m2ox" path="res://Kalin/States/rise.gd" id="11_10o18"]
 [ext_resource type="Texture2D" uid="uid://be86rbb20xfjs" path="res://Kalin/Sprites/Kalin-Light Stance.png" id="11_d86ow"]
 [ext_resource type="AudioStream" uid="uid://de85i38j41fnf" path="res://SFX/Goblin/DAMAGE 01.wav" id="11_s52bw"]
@@ -3866,7 +3868,6 @@ script = ExtResource("2_0bx81")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="UIFocus" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 15
@@ -3917,6 +3918,8 @@ texture_under = ExtResource("46_586st")
 texture_over = ExtResource("47_80r2e")
 texture_progress = ExtResource("48_rbk27")
 script = ExtResource("43_uhoyi")
+buff_sprite = ExtResource("10_pxbrw")
+debuff_sprite = ExtResource("11_4inu4")
 
 [node name="Stamina" type="TextureProgressBar" parent="CanvasLayer/HUD/Control"]
 layout_mode = 2
@@ -3932,17 +3935,24 @@ texture_over = ExtResource("51_1yslh")
 texture_progress = ExtResource("52_5atg1")
 tint_progress = Color(0.737559, 0.505072, 0.0677517, 1)
 script = ExtResource("60_2ksh1")
+buff_sprite = ExtResource("10_pxbrw")
+debuff_sprite = ExtResource("11_4inu4")
 
 [node name="Timer" type="Timer" parent="CanvasLayer/HUD/Control/Stamina"]
 one_shot = true
 autostart = true
 
 [node name="BuffContainer" type="HBoxContainer" parent="CanvasLayer/HUD/Control/Stamina"]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 8.25
-offset_right = 119.0
-offset_bottom = 24.25
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.917
+anchor_right = 0.565
+anchor_bottom = 1.806
+offset_left = -0.0240002
+offset_top = -0.00300026
+offset_right = 57.98
+offset_bottom = 7.996
 scale = Vector2(0.5, 0.5)
 
 [node name="Experience" type="TextureProgressBar" parent="CanvasLayer/HUD/Control" groups=["Persistent"]]
@@ -3980,6 +3990,8 @@ texture_under = ExtResource("60_1yslh")
 texture_progress = ExtResource("61_5atg1")
 tint_progress = Color(0.679805, 0.262423, 0, 1)
 script = ExtResource("55_h4isg")
+buff_sprite = ExtResource("10_pxbrw")
+debuff_sprite = ExtResource("11_4inu4")
 
 [node name="InventoryPanel" type="PanelContainer" parent="CanvasLayer" groups=["UIPanel"]]
 offset_top = 138.0
@@ -3994,10 +4006,10 @@ inventory = ExtResource("46_1q8gn")
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/InventoryPanel"]
 layout_mode = 2
 texture = ExtResource("69_wl0wu")
-patch_margin_left = 9
-patch_margin_top = 9
-patch_margin_right = 9
-patch_margin_bottom = 9
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 24
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true
@@ -4052,10 +4064,10 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_cbw7l")
 layout_mode = 2
 texture = ExtResource("69_wl0wu")
 region_rect = Rect2(0, 0, 60, 60)
-patch_margin_left = 9
-patch_margin_top = 9
-patch_margin_right = 9
-patch_margin_bottom = 9
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 24
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true

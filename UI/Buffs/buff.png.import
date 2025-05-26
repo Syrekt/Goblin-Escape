@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ohoknte31n4c"
-path="res://.godot/imported/decremant.png-fa651193ab3c05f71f276b32bfcc7b3d.ctex"
+uid="uid://xoyfqo8f1wal"
+path="res://.godot/imported/buff.png-e18fe337c34de996061ebf2d34047080.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Inventory/decremant.png"
-dest_files=["res://.godot/imported/decremant.png-fa651193ab3c05f71f276b32bfcc7b3d.ctex"]
+source_file="res://UI/Buffs/buff.png"
+dest_files=["res://.godot/imported/buff.png-e18fe337c34de996061ebf2d34047080.ctex"]
 
 [params]
 

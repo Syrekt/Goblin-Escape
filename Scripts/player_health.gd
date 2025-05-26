@@ -1,10 +1,12 @@
-extends TextureProgressBar
+extends StatBar
 
 @export var regeneration_speed := 0.01
 
-var buff_scene = preload("res://Objects/buff.tscn")
 var tween : Tween = null
 var tint_under_tween : Tween = null
+
+const TINT_KALIN	= Color.RED
+const TINT_SPRITE	= Color.RED
 
 func _process(delta: float) -> void:
 	var final_regeneration_speed = regeneration_speed
@@ -21,24 +23,6 @@ func _process(delta: float) -> void:
 		tint_under_tween.kill()
 		tint_under_tween = null
 
-func blink() -> void:
-	if tween && tween.is_running(): return 
-
-	tween = create_tween().bind_node(self)
-	tween.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color.RED, 0.1)
-	tween.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color(0, 0, 0, 0), 0.1)
-	tween.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color.RED, 0.1)
-	tween.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color(0, 0, 0, 0), 0.1)
-
-	tween.tween_property(self, "modulate", Color.RED, 0.1)
-	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
-	tween.tween_property(self, "modulate", Color.RED, 0.1)
-	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
-
-func add_buff(_value : float, _time : float) -> void:
-	var buff = buff_scene.instantiate()
-	add_child(buff)
-	buff.setup(_value, _time)
 func save() -> Dictionary:
 	var save_dict = {
 		"value"	: value,

@@ -524,9 +524,9 @@ func _physics_process(delta: float) -> void:
 #region Process
 func _process(delta: float) -> void:
 	if just_pressed("quick save"):
-		Ge.save_game()
+		Ge.save_game("save1")
 	if just_pressed("quick load"):
-		Ge.load_game()
+		Ge.load_game("save1")
 	var s = %Sprite2D
 	%StatPoints.text = "Stat Points: " + str(available_stat_points)
 	Debugger.printui(str(state_node.state.name))

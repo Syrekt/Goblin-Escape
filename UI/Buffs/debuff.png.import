@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cr0h58tmcownx"
-path="res://.godot/imported/increment.png-26ab621c101ec675cc442f07e533e276.ctex"
+uid="uid://b4hs0qesl2jhr"
+path="res://.godot/imported/debuff.png-91d06f31e08de7fdbf574ffcb1b1f496.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Inventory/increment.png"
-dest_files=["res://.godot/imported/increment.png-26ab621c101ec675cc442f07e533e276.ctex"]
+source_file="res://UI/Buffs/debuff.png"
+dest_files=["res://.godot/imported/debuff.png-91d06f31e08de7fdbf574ffcb1b1f496.ctex"]
 
 [params]
 

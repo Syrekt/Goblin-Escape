@@ -1,11 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxsu0pg7ly8qp"]
+[gd_scene load_steps=3 format=3 uid="uid://cxsu0pg7ly8qp"]
 
 [ext_resource type="Script" uid="uid://cpv5kddk2hlvd" path="res://Scripts/buff.gd" id="1_qst0f"]
+[ext_resource type="Texture2D" uid="uid://xoyfqo8f1wal" path="res://UI/Buffs/buff.png" id="2_6l36t"]
 
-[node name="Buff" type="Node"]
+[node name="Buff" type="TextureRect"]
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("2_6l36t")
 script = ExtResource("1_qst0f")
+metadata/_edit_lock_ = true
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

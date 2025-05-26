@@ -110,6 +110,7 @@ position = Vector2(2000, 416)
 [node name="DialogueTrigger3" parent="Props" instance=ExtResource("8_v8o7h")]
 position = Vector2(1813.36, 433.548)
 dialogue_resource = ExtResource("9_5rn0h")
+dialogue_start = "smell"
 
 [node name="DialogueTrigger" parent="Props" instance=ExtResource("8_v8o7h")]
 position = Vector2(894, 256)

@@ -1,4 +1,4 @@
-extends TextureProgressBar
+extends StatBar
 
 @export var generation_speed := 0.0
 

@@ -6,6 +6,7 @@ extends PanelContainer
 @onready var ui_focus : ColorRect = get_node("../UIFocus")
 @onready var description_panel : PanelContainer = get_node("../DescriptionPanel")
 @onready var description_text : RichTextLabel = get_node("../DescriptionPanel/MarginContainer/DescriptionText")
+@onready var scroll_bar = $MarginContainer/ScrollContainer
 
 @export var inventory : Inventory
 
@@ -18,6 +19,7 @@ func _ready() -> void:
 	item_list = inventory.items
 	hide()
 	description_panel.hide()
+	scroll_bar.get_v_scroll_bar().set_scale(Vector2(0.5, 1))
 func _process(delta: float) -> void:
 	if !get_viewport().gui_get_focus_owner():
 		description_text.text = ""

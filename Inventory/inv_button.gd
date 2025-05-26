@@ -29,5 +29,9 @@ func _on_pressed() -> void:
 		"Water":
 			print("Drink water")
 			owner.stamina.add_buff(0.5, 10.0)
+		"Perfume":
+			print("Use perfume")
+			owner.smell.value = 0;
+			owner.smell.add_buff(-10, 10)
 	if use():
 		queue_free()

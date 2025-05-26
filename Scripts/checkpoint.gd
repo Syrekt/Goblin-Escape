@@ -4,7 +4,7 @@ var save_effect_scene = load("res://VFX/save_effect.tscn")
 
 func update(player: Player):
 	if Input.is_action_just_pressed("interact"):
-		Ge.save_game()
+		Ge.save_game("save1")
 		player.smell.value = 0
 		player.smell.dirt_amount = 0
 		player.arousal.value = 0

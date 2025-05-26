@@ -8,5 +8,4 @@ script = ExtResource("1_270tl")
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
-text = "item
-"
+text = "item check"
