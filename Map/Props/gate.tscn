@@ -207,6 +207,7 @@ advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="Collider" type="CharacterBody2D" parent="."]
+visible = false
 collision_mask = 0
 
 [node name="Shape" type="CollisionShape2D" parent="Collider"]
@@ -214,6 +215,7 @@ position = Vector2(-2.5, -3)
 shape = SubResource("RectangleShape2D_qwxob")
 
 [node name="Interaction" type="Area2D" parent="."]
+visible = false
 position = Vector2(-26, 21)
 collision_layer = 64
 collision_mask = 0

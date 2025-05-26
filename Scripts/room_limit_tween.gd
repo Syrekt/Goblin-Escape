@@ -10,7 +10,7 @@ extends Node2D
 @export var pcam_list : Array[PhantomCamera2D]
 @export var area_list : Array[Area2D]
 
-@onready var player : Player = get_node("/root/Game/Kalin")
+@onready var player : Player = get_tree().current_scene.find_child("Kalin")
 
 
 func _ready() -> void:
@@ -48,6 +48,6 @@ func _on_body_exited(body: Node2D, pcam: PhantomCamera2D) -> void:
 		pcam.set_follow_target(null)
 		body.pcam = null
 func _on_tween_completed() -> void:
-	var loading_screen = get_node("/root/Game/CanvasLayer/LoadingScreen")
+	var loading_screen = get_tree().current_scene.find_child("LoadingScreen")
 	loading_screen.hide()
 	get_tree().paused = false
