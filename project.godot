@@ -41,6 +41,7 @@ runtime/balloon_path="res://Objects/balloon.tscn"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/borderless=true
 
 [editor]
 

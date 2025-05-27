@@ -42,7 +42,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event is InputEventKey || event is InputEventMouse:
 		last_input_type = "keyboard"
 func _process(delta: float) -> void:
-	Debugger.printui("label.text: "+str(label.text));
 	if _draw:
 		visible = !supress
 	else:

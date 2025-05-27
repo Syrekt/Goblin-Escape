@@ -38,6 +38,9 @@
 [ext_resource type="Script" uid="uid://dptcdau2rvuq3" path="res://Enemy/States/approach_player.gd" id="35_t74qs"]
 [ext_resource type="Script" uid="uid://b74vkmyvk4tmq" path="res://Enemy/States/smell.gd" id="36_cyoxu"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rha5u"]
+size = Vector2(20, 32)
+
 [sub_resource type="Animation" id="Animation_p3exd"]
 length = 0.001
 tracks/0/type = "value"
@@ -976,125 +979,12 @@ size = Vector2(18, 11)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cyoxu"]
 size = Vector2(20, 36)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rha5u"]
-size = Vector2(20, 32)
-
 [node name="GoblinWarrior" type="CharacterBody2D" node_paths=PackedStringArray("main_stance")]
 z_index = 1
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("1_nnmw3")
 main_stance = NodePath("StateMachine/stance_light")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D")
-libraries = {
-&"": SubResource("AnimationLibrary_uyvhu")
-}
-
-[node name="Collider" type="CollisionShape2D" parent="." groups=["Flip"]]
-position = Vector2(-1, -5.5)
-shape = SubResource("RectangleShape2D_cqw5a")
-
-[node name="SFX" type="AudioStreamPlayer2D" parent="."]
-max_distance = 512.0
-
-[node name="PlayerProximity" type="Area2D" parent="."]
-visible = false
-scale = Vector2(0.7, 1)
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerProximity"]
-shape = SubResource("RectangleShape2D_lvv27")
-
-[node name="CombatProperties" parent="." instance=ExtResource("7_7ej0e")]
-pushback_duration = 0.5
-
-[node name="FallCheckRight" type="RayCast2D" parent="."]
-position = Vector2(0, -10)
-target_position = Vector2(17, 27)
-
-[node name="FallCheckLeft" type="RayCast2D" parent="."]
-position = Vector2(0, -10)
-target_position = Vector2(-17, 27)
-
-[node name="WallCheckRight" type="RayCast2D" parent="."]
-position = Vector2(0, 1)
-target_position = Vector2(20, 0)
-collision_mask = 257
-
-[node name="WallCheckLeft" type="RayCast2D" parent="."]
-position = Vector2(0, 1)
-target_position = Vector2(-20, 0)
-collision_mask = 257
-
-[node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
-material = SubResource("ShaderMaterial_xhuvx")
-position = Vector2(0, -16)
-scale = Vector2(-1, 1)
-texture = ExtResource("9_3g55t")
-hframes = 6
-
-[node name="ChaseDetector" type="Area2D" parent="." groups=["Flip"]]
-visible = false
-position = Vector2(0, 16)
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseDetector"]
-position = Vector2(77.9999, -16)
-scale = Vector2(10.4, 1.64)
-shape = SubResource("RectangleShape2D_qsl2l")
-
-[node name="ChaseRange" type="Area2D" parent="."]
-visible = false
-position = Vector2(0, 16)
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseRange"]
-position = Vector2(-0.5, -23)
-shape = SubResource("RectangleShape2D_404n7")
-
-[node name="NoiseIgnoreTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
-[node name="Health" type="TextureProgressBar" parent="."]
-visible = false
-offset_left = -26.0
-offset_top = 19.0
-offset_right = 26.0
-offset_bottom = 59.0
-max_value = 20.0
-value = 20.0
-texture_progress = ExtResource("26_ifl3v")
-
-[node name="Emote" parent="." instance=ExtResource("30_tjqy8")]
-visible = false
-position = Vector2(2, -47)
-
-[node name="CrushCheck" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CrushCheck"]
-position = Vector2(-1, -24)
-shape = SubResource("RectangleShape2D_wgea4")
-
-[node name="FaceMarker" type="Marker2D" parent="."]
-position = Vector2(0, -22)
-
-[node name="AwarenessTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="ThreatCollider" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 256
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ThreatCollider"]
-position = Vector2(-1, -2)
-shape = SubResource("RectangleShape2D_cyoxu")
 
 [node name="StateMachine" parent="." instance=ExtResource("17_n2jyc")]
 visible = false
@@ -1235,13 +1125,119 @@ script = ExtResource("36_cyoxu")
 wait_time = 2.0
 one_shot = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+&"": SubResource("AnimationLibrary_uyvhu")
+}
+
+[node name="Collider" type="CollisionShape2D" parent="." groups=["Flip"]]
+visible = false
+position = Vector2(-1, -5.5)
+shape = SubResource("RectangleShape2D_cqw5a")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+max_distance = 512.0
+
+[node name="PlayerProximity" type="Area2D" parent="."]
+visible = false
+scale = Vector2(0.7, 1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerProximity"]
+shape = SubResource("RectangleShape2D_lvv27")
+
+[node name="CombatProperties" parent="." instance=ExtResource("7_7ej0e")]
+pushback_duration = 0.5
+
+[node name="FallCheckRight" type="RayCast2D" parent="."]
+position = Vector2(0, -10)
+target_position = Vector2(17, 27)
+
+[node name="FallCheckLeft" type="RayCast2D" parent="."]
+position = Vector2(0, -10)
+target_position = Vector2(-17, 27)
+
+[node name="WallCheckRight" type="RayCast2D" parent="."]
+position = Vector2(0, 1)
+target_position = Vector2(20, 0)
+collision_mask = 257
+
+[node name="WallCheckLeft" type="RayCast2D" parent="."]
+position = Vector2(0, 1)
+target_position = Vector2(-20, 0)
+collision_mask = 257
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
+material = SubResource("ShaderMaterial_xhuvx")
+position = Vector2(0, -16)
+scale = Vector2(-1, 1)
+texture = ExtResource("9_3g55t")
+hframes = 6
+
+[node name="ChaseDetector" type="Area2D" parent="." groups=["Flip"]]
+visible = false
+position = Vector2(0, 16)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseDetector"]
+position = Vector2(77.9999, -16)
+scale = Vector2(10.4, 1.64)
+shape = SubResource("RectangleShape2D_qsl2l")
+
+[node name="ChaseRange" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, 16)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseRange"]
+position = Vector2(-0.5, -23)
+shape = SubResource("RectangleShape2D_404n7")
+
+[node name="NoiseIgnoreTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Health" type="TextureProgressBar" parent="."]
+visible = false
+offset_left = -26.0
+offset_top = 19.0
+offset_right = 26.0
+offset_bottom = 59.0
+max_value = 20.0
+value = 20.0
+texture_progress = ExtResource("26_ifl3v")
+
+[node name="Emote" parent="." instance=ExtResource("30_tjqy8")]
+visible = false
+position = Vector2(2, -47)
+
+[node name="CrushCheck" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrushCheck"]
+position = Vector2(-1, -24)
+shape = SubResource("RectangleShape2D_wgea4")
+
+[node name="FaceMarker" type="Marker2D" parent="."]
+position = Vector2(0, -22)
+
+[node name="AwarenessTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ThreatCollider" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ThreatCollider"]
+position = Vector2(-1, -2)
+shape = SubResource("RectangleShape2D_cyoxu")
+
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="ChaseDetector" to="." method="_on_chase_detector_body_entered"]
-[connection signal="body_exited" from="ChaseRange" to="." method="_on_chase_range_body_exited"]
-[connection signal="body_entered" from="CrushCheck" to="." method="_on_crush_check_body_entered"]
-[connection signal="timeout" from="AwarenessTimer" to="." method="_on_awareness_timer_timeout"]
-[connection signal="body_entered" from="ThreatCollider" to="." method="_on_threat_collider_body_entered"]
 [connection signal="timeout" from="StateMachine/idle/IdleTimer" to="StateMachine/idle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/patrol/PatrolTimer" to="StateMachine/patrol" method="_on_patrol_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/slash/SlashHitbox" to="StateMachine/slash" method="_on_slash_hitbox_body_entered"]
@@ -1252,6 +1248,12 @@ one_shot = true
 [connection signal="timeout" from="StateMachine/leave_player/Timer" to="StateMachine/leave_player" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/chat_lead/LeadTimer" to="StateMachine/chat_lead" method="_on_lead_timer_timeout"]
 [connection signal="timeout" from="StateMachine/chat_lead/SecondaryTimer" to="StateMachine/chat_lead" method="_on_secondary_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="ChaseDetector" to="." method="_on_chase_detector_body_entered"]
+[connection signal="body_exited" from="ChaseRange" to="." method="_on_chase_range_body_exited"]
+[connection signal="body_entered" from="CrushCheck" to="." method="_on_crush_check_body_entered"]
+[connection signal="timeout" from="AwarenessTimer" to="." method="_on_awareness_timer_timeout"]
+[connection signal="body_entered" from="ThreatCollider" to="." method="_on_threat_collider_body_entered"]
 
 [editable path="StateMachine/slash/SlashHitbox"]
 [editable path="StateMachine/stab/StabHitbox"]
