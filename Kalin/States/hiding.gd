@@ -15,3 +15,4 @@ func exit() -> void:
 func update(delta : float) -> void:
 	if player.get_movement_dir() != 0 || Input.is_action_just_pressed("interact"):
 		finished.emit("unhide")
+

@@ -333,9 +333,6 @@ func hide_out(_hiding_spot : Area2D) -> void:
 
 	#global_position = hiding_spot.global_position
 	state_node.state.finished.emit("hiding")
-	var tween : Tween = create_tween().bind_node(self)
-	tween.tween_property(self, "global_position", _hiding_spot.global_position, 0.2).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
-
 func think(text: String) -> void:
 	thought_container.push(text)
 	emote.play("talking")
