@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://dw2d8bu1vlvv6"]
+[gd_scene load_steps=56 format=3 uid="uid://dw2d8bu1vlvv6"]
 
 [ext_resource type="Script" uid="uid://bb3qdl7k1v8ae" path="res://Enemy/Goblin/goblin.gd" id="1_poooq"]
 [ext_resource type="Texture2D" uid="uid://bcs17g4yh13l4" path="res://Enemy/Goblin/goblin-idle_strip6.png" id="2_mqpvv"]
@@ -29,6 +29,7 @@
 [ext_resource type="Script" uid="uid://brsvx5cdthjao" path="res://Enemy/States/stun.gd" id="30_wgjhe"]
 [ext_resource type="Script" uid="uid://d2dnfu2yrmil" path="res://Enemy/States/chase.gd" id="31_dmibk"]
 [ext_resource type="Script" uid="uid://b1b47ke4rhvlv" path="res://Enemy/States/sex.gd" id="32_7dr71"]
+[ext_resource type="Script" uid="uid://dptcdau2rvuq3" path="res://Enemy/States/approach_player.gd" id="32_p8gmb"]
 [ext_resource type="Script" uid="uid://cctffwfexml1k" path="res://Enemy/States/laugh.gd" id="33_eisxc"]
 [ext_resource type="Script" uid="uid://btr4jhp2hi3jr" path="res://Enemy/States/leave_player.gd" id="34_ga10t"]
 [ext_resource type="Script" uid="uid://cod1srgspwwqu" path="res://Enemy/States/chat_lead.gd" id="35_e5h4s"]
@@ -1035,6 +1036,9 @@ script = ExtResource("34_ga10t")
 [node name="Timer" type="Timer" parent="StateMachine/leave_player"]
 wait_time = 4.0
 one_shot = true
+
+[node name="approach_player" type="Node" parent="StateMachine"]
+script = ExtResource("32_p8gmb")
 
 [node name="chat_lead" type="Node" parent="StateMachine"]
 script = ExtResource("35_e5h4s")

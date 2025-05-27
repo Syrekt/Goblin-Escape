@@ -177,6 +177,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 						state.finished.emit("stance_heavy")
 			else:
 				state.finished.emit(main_stance.name)
+		"laugh":
+			state.finished.emit("approach_player")
 		"death":
 			if is_on_floor():
 				set_collision_layer_value(4, false)

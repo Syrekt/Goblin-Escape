@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene load_steps=61 format=3 uid="uid://iuj1jg31a55f"]
 
 [ext_resource type="Script" uid="uid://ebjwqqd047wq" path="res://Enemy/GoblinWarrior/goblin_warrior.gd" id="1_nnmw3"]
 [ext_resource type="AudioStream" uid="uid://bx6vdt8wts4xf" path="res://SFX/Kalin/Other/kick_short_whoosh_12.wav" id="6_ifl3v"]
@@ -35,6 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://b23mtnfp7xuec" path="res://Objects/emote.tscn" id="30_tjqy8"]
 [ext_resource type="Script" uid="uid://btr4jhp2hi3jr" path="res://Enemy/States/leave_player.gd" id="31_0glxa"]
 [ext_resource type="Script" uid="uid://cod1srgspwwqu" path="res://Enemy/States/chat_lead.gd" id="33_404n7"]
+[ext_resource type="Script" uid="uid://dptcdau2rvuq3" path="res://Enemy/States/approach_player.gd" id="35_t74qs"]
 [ext_resource type="Script" uid="uid://b74vkmyvk4tmq" path="res://Enemy/States/smell.gd" id="36_cyoxu"]
 
 [sub_resource type="Animation" id="Animation_p3exd"]
@@ -1210,6 +1211,9 @@ script = ExtResource("31_0glxa")
 [node name="Timer" type="Timer" parent="StateMachine/leave_player"]
 wait_time = 4.0
 one_shot = true
+
+[node name="approach_player" type="Node" parent="StateMachine"]
+script = ExtResource("35_t74qs")
 
 [node name="chat_lead" type="Node" parent="StateMachine"]
 script = ExtResource("33_404n7")

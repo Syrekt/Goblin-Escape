@@ -569,8 +569,8 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
-		think("What am I thinking?")
-		#take_damage(9)
+		#think("What am I thinking?")
+		take_damage(9)
 		#if randi_range(0, 1) == 1:
 		#	inventory.pickup_item(load("res://Inventory/water.tres"))
 		#else:

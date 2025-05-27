@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://1clhhggjvkd3"]
+[gd_scene load_steps=17 format=4 uid="uid://1clhhggjvkd3"]
 
 [ext_resource type="PackedScene" uid="uid://h2hwfpjw4rte" path="res://Objects/kalin.tscn" id="1_if8hx"]
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="2_3c6lh"]
@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://dk84lu71fcjkl" path="res://Objects/item_pickup.tscn" id="11_3fcy7"]
 [ext_resource type="Resource" uid="uid://b2e8awdp8f23e" path="res://Inventory/perfume.tres" id="12_6xxbj"]
 [ext_resource type="PackedScene" uid="uid://dw2d8bu1vlvv6" path="res://Enemy/Goblin/goblin.tscn" id="15_yyayg"]
-[ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Enemy/GoblinWarrior/goblin_warrior.tscn" id="16_xf1uh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyayg"]
 size = Vector2(2954, 530)
@@ -34,7 +33,7 @@ position = Vector2(1467, 255)
 shape = SubResource("RectangleShape2D_yyayg")
 
 [node name="Kalin" parent="." instance=ExtResource("1_if8hx")]
-position = Vector2(3021, 410)
+position = Vector2(3200, 416)
 has_sword = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
@@ -173,5 +172,5 @@ item = ExtResource("12_6xxbj")
 [node name="Goblin" parent="Enemies" instance=ExtResource("15_yyayg")]
 position = Vector2(3320, 432)
 
-[node name="GoblinWarrior" parent="." instance=ExtResource("16_xf1uh")]
-position = Vector2(3126.96, 421.938)
+[node name="Crate1" parent="." instance=ExtResource("5_0jo2v")]
+position = Vector2(3103.34, 432.896)
