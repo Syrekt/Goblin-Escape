@@ -978,11 +978,12 @@ size = Vector2(20, 36)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rha5u"]
 size = Vector2(20, 32)
 
-[node name="GoblinWarrior" type="CharacterBody2D"]
+[node name="GoblinWarrior" type="CharacterBody2D" node_paths=PackedStringArray("main_stance")]
 z_index = 1
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("1_nnmw3")
+main_stance = NodePath("StateMachine/stance_light")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")

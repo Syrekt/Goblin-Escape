@@ -6,4 +6,4 @@ func enter(previous_state_path : String, data := {}):
 	enemy.velocity.x = 0
 
 func play_laugh() -> void:
-	Ge.play_audio_from_string_array(enemy.audio_emitter, -10, "res://SFX/Goblin/Laugh/")
+	Ge.play_audio_from_string_array(enemy.global_position, -10, "res://SFX/Goblin/Laugh/")

@@ -31,4 +31,4 @@ func physics_update(delta: float) -> void:
 		finished.emit("bash_no_sword")
 
 func play_footsteps() -> void:
-	Ge.play_audio_from_string_array(%AnimationAudioStreamer, 1, "res://SFX/Kalin/Footsteps Soft/")
+	Ge.play_audio_from_string_array(player.global_position, 1, "res://SFX/Kalin/Footsteps Soft/")

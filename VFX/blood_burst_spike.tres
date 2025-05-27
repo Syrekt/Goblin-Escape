@@ -1,0 +1,60 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=11 format=3 uid="uid://bhayiih8ifu5p"]
+
+[sub_resource type="Curve" id="Curve_5i7ub"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.496241, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_kbykq"]
+curve = SubResource("Curve_5i7ub")
+
+[sub_resource type="Curve" id="Curve_3fcbm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.278196, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ohw6m"]
+curve_x = SubResource("Curve_3fcbm")
+
+[sub_resource type="Curve" id="Curve_yoou6"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_anksn"]
+curve = SubResource("Curve_yoou6")
+
+[sub_resource type="Curve" id="Curve_0ltuy"]
+_data = [Vector2(0.266917, 1), 0.0, 0.0, 0, 0, Vector2(0.93985, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ixpg1"]
+curve = SubResource("Curve_0ltuy")
+
+[sub_resource type="Curve" id="Curve_wr66a"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.683674), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qb5p5"]
+curve = SubResource("Curve_wr66a")
+
+[resource]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+directional_velocity_min = 247.95
+directional_velocity_max = 289.13
+directional_velocity_curve = SubResource("CurveXYZTexture_ohw6m")
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 184.61
+radial_velocity_curve = SubResource("CurveTexture_ixpg1")
+damping_min = 100.0
+damping_max = 100.0
+scale_min = 0.0
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_qb5p5")
+alpha_curve = SubResource("CurveTexture_kbykq")
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.21
+hue_variation_curve = SubResource("CurveTexture_anksn")
+turbulence_influence_min = 0.293
+turbulence_influence_max = 0.293
+turbulence_initial_displacement_min = 70.3
+turbulence_initial_displacement_max = 70.3

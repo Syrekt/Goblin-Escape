@@ -23,7 +23,7 @@ func update(delta: float) -> void:
 
 
 func play_footsteps() -> void:
-	Ge.play_audio_from_string_array(%AnimationAudioStreamer, 1, "res://SFX/Kalin/Footsteps Soft/")
+	Ge.play_audio_from_string_array(player.global_position, 1, "res://SFX/Kalin/Footsteps Soft/")
 
 func _on_hitbox_body_entered(defender: Node2D) -> void:
 	if enemy_ignore_list.has(defender): return
@@ -40,4 +40,4 @@ func _on_hitbox_body_entered(defender: Node2D) -> void:
 			defender.take_damage(1, player)
 			Ge.slow_mo(0, 0.05)
 		else:
-			Ge.play_audio_from_string_array(player.audio_emitter, 0, "res://SFX/Sword hit shield")
+			Ge.play_audio_from_string_array(player.global_position, 0, "res://SFX/Sword hit shield")

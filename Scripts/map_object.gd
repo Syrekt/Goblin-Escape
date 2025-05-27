@@ -41,5 +41,5 @@ func take_damage(damage: int, source) -> void:
 		set_collision_layer_value(8, false)
 		if light_occuler: light_occuler.queue_free()
 	else:
-		Ge.play_audio_from_string_array(source.audio_emitter, 0, "res://SFX/Hit on wood/")
+		Ge.play_audio_from_string_array(source.global_position, 0, "res://SFX/Hit on wood/")
 		sprite.frame = damage_taken

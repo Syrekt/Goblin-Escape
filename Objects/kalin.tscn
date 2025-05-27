@@ -953,6 +953,30 @@ tracks/14/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("%Sprite2D/../StateMachine/slash/SlashHitbox/Collider:disabled")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("%Sprite2D/../StateMachine/stab/StabHitbox/Collider:disabled")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_b8tlq"]
 resource_name = "bash"
@@ -3119,6 +3143,32 @@ tracks/6/keys = {
 "method": &"emit_noise"
 }]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%Sprite2D/../StateMachine/slash/SlashHitbox/Collider:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("%Sprite2D/../StateMachine/slash")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_attack_frame"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_1olko"]
 resource_name = "slide"
@@ -3263,6 +3313,32 @@ tracks/6/keys = {
 "values": [{
 "args": [Vector2(0, 0), 10.0],
 "method": &"emit_noise"
+}]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%Sprite2D/../StateMachine/stab/StabHitbox/Collider:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("%Sprite2D/../StateMachine/stab")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_attack_frame"
 }]
 }
 
@@ -3887,6 +3963,7 @@ script = ExtResource("2_0bx81")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="UIFocus" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 15
@@ -4185,7 +4262,6 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="StateMachine" parent="." groups=["Flip"] instance=ExtResource("9_ojhio")]
-visible = false
 position = Vector2(-4, 34)
 
 [node name="idle" type="Node" parent="StateMachine"]
@@ -4278,8 +4354,11 @@ scale = Vector2(1.5, 2.5)
 collision_mask = 136
 monitorable = false
 
-[node name="bash_no_sword" type="Node2D" parent="StateMachine" groups=["combat_state"]]
+[node name="bash_no_sword" type="Node2D" parent="StateMachine"]
 script = ExtResource("58_wl0wu")
+sfx_hit = ExtResource("91_cbw7l")
+sfx_whiff = ExtResource("89_586st")
+pushback_force = 300
 
 [node name="Hitbox" parent="StateMachine/bash_no_sword" instance=ExtResource("45_42hh8")]
 position = Vector2(12, -34)

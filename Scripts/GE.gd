@@ -46,7 +46,11 @@ func _show_combat_tutorial():
 func string_array_get_random(array: PackedStringArray) -> String:
 	var i = randi() % array.size()
 	return array[i]
-func play_audio_from_string_array(emitter: AudioStreamPlayer2D, volume: float, path: String) -> void:
+func play_audio_from_string_array(position: Vector2, volume: float, path: String) -> void:
+	var emitter : AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+	emitter.global_position = position
+	add_child(emitter)
+
 	if !DirAccess.dir_exists_absolute(path): push_error("Path <%s> doesn't exists!", path)
 	var array = DirAccess.get_files_at(path)
 	var sound = string_array_get_random(array)
@@ -56,6 +60,7 @@ func play_audio_from_string_array(emitter: AudioStreamPlayer2D, volume: float, p
 	emitter.volume_db = volume
 	emitter.stream = load(path + "/" + sound)
 	emitter.play()
+	emitter.finished.connect(emitter.queue_free)
 ## emits audio from emitter
 func play_audio(emitter: AudioStreamPlayer2D, volume: int, audio_path: String) -> void:
 	emitter.volume_db = volume
@@ -198,11 +203,12 @@ func bleed_gush(position: Vector2, dir: int) -> void:
 	part.emitting = true
 
 	add_child(part)
-func play_particle(res: Resource, position: Vector2, dir := 1) -> void:
+func play_particle(res: Resource, position: Vector2, dir := 1, rot := 0) -> void:
 	var particle_controller : Node2D = res.instantiate()
 	particle_controller.global_position = position
 	for particle in particle_controller.get_children():
 		particle.scale.x = dir
+		particle.rotation = rot
 		particle.emitting = true
 		particle.z_index = 1
 

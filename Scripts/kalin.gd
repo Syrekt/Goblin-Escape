@@ -202,7 +202,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 			print("Health depleted")
 			if _source:
 				_source.dealth_finishing_blow = true
-			Ge.play_audio_from_string_array(audio_emitter, -2, "res://SFX/Kalin/Hurt")
+			Ge.play_audio_from_string_array(global_position, -2, "res://SFX/Kalin/Hurt")
 			state_node.state.finished.emit("death")
 			return
 	#Play animation
@@ -211,7 +211,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 			state_node.state.finished.emit("hurt")
 		else:
 			state_node.state.finished.emit("hurt_no_sword")
-		Ge.play_audio_from_string_array(audio_emitter, -2, "res://SFX/Kalin/Hurt")
+		Ge.play_audio_from_string_array(global_position, -2, "res://SFX/Kalin/Hurt")
 func heal(amount: int) -> void:
 	health.value += amount
 func check_movable():
@@ -287,9 +287,9 @@ func combat_perform_attack(hitbox: Area2D, _damage: int, whiff_sfx: AudioStreamW
 			Combat.RESULT_HIT:
 				play_sfx(hit_sfx)
 			Combat.RESULT_BLOCK:
-				Ge.play_audio_from_string_array(audio_emitter, 0, "res://SFX/Sword hit shield")
+				Ge.play_audio_from_string_array(global_position, 0, "res://SFX/Sword hit shield")
 			Combat.RESULT_DEAD:
-				Ge.play_audio_from_string_array(audio_emitter, 0, "res://SFX/Kalin/Finishers")
+				Ge.play_audio_from_string_array(global_position, 0, "res://SFX/Kalin/Finishers")
 	else:
 		play_sfx(whiff_sfx)
 func sex_begin(participants: Array, _position: String) -> void:
@@ -537,22 +537,17 @@ func _process(delta: float) -> void:
 	#region Camera combat position
 	in_combat_state = state_node.state.is_in_group("combat_state")
 	if in_combat_state && combat_target:
-		if pcam:
-			pcam.follow_mode = pcam.FollowMode.GROUP
-			pcam.set_follow_targets([self, combat_target])
-			pcam.draw_limits = false
-		else:
-			camera.position.x = (combat_target.global_position.x - global_position.x)/2;
+		pcam.follow_mode = pcam.FollowMode.GROUP
+		pcam.set_follow_targets([self, combat_target])
+		pcam.draw_limits = false
 		if combat_target.state_node.state.name == "death": combat_target = null
 		elif !combat_target.chase_target: combat_target = null
-	else:
-		if pcam && pcam.follow_mode == pcam.FollowMode.GROUP:
-			pcam.follow_mode = pcam.FollowMode.SIMPLE
-			pcam.erase_follow_targets(combat_target)
-			if pcam.limit_target:
-				pcam.draw_limits = true
-		else:
-			camera.position.x = 0
+	elif pcam.follow_mode == pcam.FollowMode.GROUP:
+		pcam.follow_mode = pcam.FollowMode.SIMPLE
+		pcam.set_follow_target(self)
+		pcam.erase_follow_targets(combat_target)
+		if pcam.limit_target:
+			pcam.draw_limits = true
 	#endregion
 	if Input.is_action_pressed("restart"):
 		get_tree().reload_current_scene()

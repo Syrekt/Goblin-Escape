@@ -8,11 +8,11 @@ point_count = 3
 curve = SubResource("Curve_5i7ub")
 
 [sub_resource type="Curve" id="Curve_ugron"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.992481, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_f3ndi"]
-_data = [Vector2(0, 0.387755), 0.0, 0.0, 0, 0, Vector2(1, 0.408163), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ohw6m"]

@@ -74,7 +74,7 @@ func take_damage(_damage : int, _source: Node2D = null, critical := false):
 	if health.value <= 0:
 		emit_signal("health_depleted")
 	else:
-		Ge.play_audio_from_string_array(audio_emitter, 0, "res://SFX/Goblin/Hurt/")
+		Ge.play_audio_from_string_array(global_position, 0, "res://SFX/Goblin/Hurt/")
 		state_node.state.finished.emit("hurt")
 	
 	if _source:
@@ -270,4 +270,6 @@ func _on_awareness_timer_timeout() -> void:
 	aware = false
 func _on_threat_collider_body_entered(body:Node2D) -> void:
 	take_damage(health.max_value)
+	Ge.play_audio_from_string_array(global_position, 0, "res://SFX/Kalin/Finishers/")
+	Ge.bleed_gush(global_position, 1)
 #endregion

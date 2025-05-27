@@ -5,6 +5,8 @@ var charge_up := 0.0 # Used for slash
 func enter(previous_state_path: String, data := {}) -> void:
 	_enter()
 	charge_up = data.get("charge_up", 0)
+func exit() -> void:
+	_exit()
 
 func update(delta: float) -> void:
 	_update(delta)
@@ -14,6 +16,7 @@ func _on_attack_frame() -> void:
 	var damage = player.slash_damage * 2 if charge_up == 100 else player.slash_damage
 	if hitbox.has_overlapping_bodies():
 		for defender in hitbox.get_overlapping_bodies():
+			print("defender: "+str(defender))
 			if defender is Enemy:
 				Ge.slow_mo(0, 0.05)
 				if !defender.chase_target:

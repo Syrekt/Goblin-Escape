@@ -29,4 +29,4 @@ func physics_update(delta: float) -> void:
 	player.check_movable();
 
 func play_footsteps() -> void:
-	Ge.play_audio_from_string_array(%AnimationAudioStreamer, -10, "res://SFX/Kalin/Footsteps Soft/")
+	Ge.play_audio_from_string_array(player.global_position, -10, "res://SFX/Kalin/Footsteps Soft/")

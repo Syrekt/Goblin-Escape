@@ -29,12 +29,12 @@ func update(delta: float) -> void:
 func _on_lead_timer_timeout() -> void:
 	var emote = animation_names[randi() % animation_names.size()]
 	enemy.emote_emitter.play(emote)
-	Ge.play_audio_from_string_array(enemy.audio_emitter, -10, "res://SFX/Goblin/Chatter/")
+	Ge.play_audio_from_string_array(enemy.global_position, -10, "res://SFX/Goblin/Chatter/")
 	secondary_timer.start()
 
 
 func _on_secondary_timer_timeout() -> void:
 	var emote = animation_names[randi() % animation_names.size()]
 	friend.emote_emitter.play(emote)
-	Ge.play_audio_from_string_array(friend.audio_emitter, -10, "res://SFX/Goblin/Chatter/")
+	Ge.play_audio_from_string_array(friend.global_position, -10, "res://SFX/Goblin/Chatter/")
 	lead_timer.start()

@@ -2,6 +2,8 @@ extends PlayerAttackState
 
 func enter(previous_state_path: String, data := {}) -> void:
 	_enter()
+func exit() -> void:
+	_exit()
 
 func update(delta: float) -> void:
 	_update(delta)
@@ -15,7 +17,7 @@ func _on_attack_frame() -> void:
 			var defender_state = defender.state_node.state.name
 			if defender_state == "stance_defensive":
 				player.combat_properties.stun(2.0)
-				Ge.play_audio_from_string_array(player.audio_emitter, 0, "res://SFX/Sword hit shield")
+				Ge.play_audio_from_string_array(player.global_position, 0, "res://SFX/Sword hit shield")
 			else:
 				defender.combat_properties.pushback_apply(player.global_position, pushback_force)
 				defender.take_damage(player.stab_damage, player)

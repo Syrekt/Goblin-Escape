@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://j8mungsfqqn1"]
+
+[ext_resource type="Texture2D" uid="uid://cpv0rrvlg87w8" path="res://VFX/Blood-Circle.png" id="1_0ddo0"]
+[ext_resource type="Script" uid="uid://cmre3uvggseh0" path="res://VFX/blood_spurt_group.gd" id="1_jh7fl"]
+[ext_resource type="Material" uid="uid://chx8numfgdt1h" path="res://VFX/blood_gush.tres" id="2_jh7fl"]
+[ext_resource type="Material" uid="uid://bhayiih8ifu5p" path="res://VFX/blood_burst_spike.tres" id="4_jh7fl"]
+
+[node name="BloodBurst_Trap" type="Node2D" node_paths=PackedStringArray("particles")]
+script = ExtResource("1_jh7fl")
+particles = [NodePath("BloodSpurt")]
+
+[node name="BloodSpurt" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 375
+texture = ExtResource("1_0ddo0")
+lifetime = 1.83
+one_shot = true
+explosiveness = 0.89
+local_coords = true
+trail_sections = 4
+process_material = ExtResource("2_jh7fl")
+
+[node name="BloodBurst" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 300
+texture = ExtResource("1_0ddo0")
+lifetime = 0.81
+one_shot = true
+explosiveness = 0.3
+local_coords = true
+process_material = ExtResource("4_jh7fl")

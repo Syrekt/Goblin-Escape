@@ -13,6 +13,9 @@ func _enter() -> void:
 	player.call_deferred("update_animation", name)
 	player.velocity.x = 0;
 
+func _exit() -> void:
+	can_buffer_next_attack = false
+
 func _update(delta: float) -> void:
 	if !player.is_on_floor():
 		finished.emit("fall")

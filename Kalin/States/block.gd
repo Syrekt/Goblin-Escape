@@ -2,7 +2,7 @@ extends PlayerState
 
 func enter(previous_state_path : String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
-	Ge.play_audio_from_string_array(player.audio_emitter, 1.0, "res://SFX/Sword block")
+	Ge.play_audio_from_string_array(player.global_position, 1.0, "res://SFX/Sword block")
 func exit() -> void:
 	player.parried = false
 func update(delta: float) -> void:

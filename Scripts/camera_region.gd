@@ -2,10 +2,10 @@ extends Area2D
 
 @onready var boundary : CollisionShape2D = $CollisionShape2D
 
-var limit_top : int
-var limit_bottom : int
-var limit_left : int
-var limit_right : int
+var limit_top : float
+var limit_bottom : float
+var limit_left : float
+var limit_right : float
 
 
 func _ready() -> void:
