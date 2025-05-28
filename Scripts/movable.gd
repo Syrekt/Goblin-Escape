@@ -4,12 +4,14 @@ class_name Movable extends CharacterBody2D
 @onready var audio_emitter : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 @export var drop_sfx : String = "res://SFX/stone_drop2.wav"
+@export var slide_sfx : Resource = load("res://SFX/stone_slide1.wav")
 @export var gravity := 300 * 60
 @export var y_acc := 5
 @export var noise_offset : Vector2
 
 var grabbed := false
 var falling := false
+var was_moving := false
 
 func grab() -> void:
 	grabbed = true
@@ -31,9 +33,19 @@ func _physics_process(delta: float) -> void:
 		Ge.play_audio(audio_emitter, 0, drop_sfx)
 	falling = velocity.y != 0
 func _process(delta: float) -> void:
-	timer.paused = velocity.x == 0
-	if !timer.paused && !audio_emitter.playing:
-		audio_emitter.play()
+	var is_moving = velocity.x != 0
+	Debugger.printui("is_moving: "+str(is_moving))
+	Debugger.printui("was_moving: "+str(was_moving))
+	if is_moving && !was_moving:
+		if !audio_emitter.playing:
+			audio_emitter.stream = slide_sfx
+			audio_emitter.play()
+	elif !is_moving && was_moving:
+		print("Stop audio")
+		audio_emitter.stop()
+	was_moving = is_moving
+
+	timer.paused = !is_moving
 
 
 func _on_timer_timeout() -> void:

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://syjuc866so8k"]
+[gd_scene load_steps=10 format=3 uid="uid://syjuc866so8k"]
 
 [ext_resource type="Texture2D" uid="uid://d2uhikpas8u7s" path="res://Others/light.png" id="1_qbws5"]
 [ext_resource type="Script" uid="uid://n5cxj3sdlw0x" path="res://Scripts/light.gd" id="1_wk5s8"]
 [ext_resource type="Texture2D" uid="uid://cqabb17enck76" path="res://Map/Props/wall_torch1.png" id="2_wk5s8"]
+[ext_resource type="Script" uid="uid://54llosl1wyoo" path="res://Scripts/light_interaction.gd" id="4_b6k7r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rr5ik"]
 atlas = ExtResource("2_wk5s8")
@@ -34,6 +35,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_rr5ik"]
 radius = 96.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fwbi0"]
+size = Vector2(20, 55)
+
 [node name="Light" type="Area2D"]
 collision_layer = 0
 collision_mask = 2
@@ -51,9 +55,22 @@ texture_scale = 0.02
 sprite_frames = SubResource("SpriteFrames_vg6yp")
 animation = &"lit"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="LitArea" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CircleShape2D_rr5ik")
+
+[node name="Interaction" type="Area2D" parent="."]
+visible = false
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("4_b6k7r")
+repeat = true
+title = "Lit/unlit"
+metadata/_custom_type_script = "uid://b7pfro4cp11mh"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
+position = Vector2(0, 17.5)
+shape = SubResource("RectangleShape2D_fwbi0")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -11,6 +11,7 @@ var crouch_key : String
 var loading := false
 
 signal show_combat_tutorial
+signal show_stealth_tutorial
 
 func _ready() -> void:
 	var screen_size : Vector2 = DisplayServer.screen_get_size()
@@ -18,6 +19,7 @@ func _ready() -> void:
 	DisplayServer.window_set_position((screen_size - initial_window_size)/2)
 
 	show_combat_tutorial.connect(_show_combat_tutorial)
+	show_stealth_tutorial.connect(_show_stealth_tutorial)
 	var events = InputMap.action_get_events("jump")
 	for event in events:
 		if event is InputEventKey:
@@ -44,9 +46,20 @@ func _ready() -> void:
 
 func _show_combat_tutorial():
 	print("Show combat tutorial")
-	var combat_tutorial_scene : PackedScene = load("res://Objects/combat_tutorial.tscn")
+	var combat_tutorial_scene := load("res://Tutorial/combat_tutorial.tscn")
 	var combat_tutorial = combat_tutorial_scene.instantiate()
 	add_child(combat_tutorial)
+func _show_stealth_tutorial():
+	print("Show stealth tutorial")
+	var stealth_tutorial_scene := load("res://Tutorial/stealth_tutorial.tscn")
+	var stealth_tutorial = stealth_tutorial_scene.instantiate()
+	stealth_tutorial.tree_exited.connect(_on_stealth_tutorial_tree_exited)
+	add_child(stealth_tutorial)
+func _on_stealth_tutorial_tree_exited() -> void:
+	var balloon_scene := load("res://Objects/balloon.tscn")
+	var balloon = balloon_scene.instantiate()
+	add_child(balloon)
+	balloon.start(load("res://Dialogues/demo_stage.dialogue"), "stealth2")
 
 
 func string_array_get_random(array: PackedStringArray) -> String:

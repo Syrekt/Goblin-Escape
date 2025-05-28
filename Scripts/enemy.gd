@@ -195,7 +195,7 @@ func _ready() -> void:
 	set_facing(facing)
 	heard_noise.connect(player.enemy_heard_noise)
 func _physics_process(delta: float) -> void:
-	if player_in_range && (!player.invisible || aware):
+	if player_in_range && !player.hiding && (!player.invisible || aware):
 		aware = true
 		await update_los(player)
 		if line_of_sight.is_colliding():
@@ -274,4 +274,7 @@ func _on_threat_collider_body_entered(body:Node2D) -> void:
 	take_damage(health.max_value)
 	Ge.play_audio_from_string_array(global_position, 0, "res://SFX/Kalin/Finishers/")
 	Ge.bleed_gush(global_position, 1)
+func _on_player_proximity_body_entered(body:Node2D) -> void:
+	aware = true
+	#awareness_timer.start()
 #endregion

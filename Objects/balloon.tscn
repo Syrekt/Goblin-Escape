@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bicetss7oaklb"]
+[gd_scene load_steps=10 format=3 uid="uid://bicetss7oaklb"]
 
 [ext_resource type="Script" uid="uid://c1oeyysdouoq" path="res://Scripts/balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
+[ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Others/Ohrenstead.ttf" id="2_dyqgq"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
@@ -53,7 +54,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [sub_resource type="Theme" id="Theme_qq3yp"]
-default_font_size = 20
+Button/fonts/font = ExtResource("2_dyqgq")
 Button/styles/disabled = SubResource("StyleBoxFlat_spyqn")
 Button/styles/focus = SubResource("StyleBoxFlat_ri4m3")
 Button/styles/hover = SubResource("StyleBoxFlat_e0njw")
@@ -63,6 +64,7 @@ MarginContainer/constants/margin_left = 30
 MarginContainer/constants/margin_right = 30
 MarginContainer/constants/margin_top = 15
 Panel/styles/panel = SubResource("StyleBoxFlat_uy0d5")
+RichTextLabel/fonts/normal_font = ExtResource("2_dyqgq")
 
 [node name="ExampleBalloon" type="CanvasLayer" groups=["UIPanel"]]
 layer = 100
@@ -85,10 +87,10 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 21.0
-offset_top = -183.0
-offset_right = -19.0
-offset_bottom = -19.0
+offset_left = 9.0
+offset_top = -116.0
+offset_right = -9.0
+offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
@@ -128,9 +130,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -148.0
-offset_top = -586.0
-offset_right = 493.0
-offset_bottom = -182.0
+offset_top = -287.0
+offset_right = 316.0
+offset_bottom = -116.0
 grow_horizontal = 2
 grow_vertical = 0
 

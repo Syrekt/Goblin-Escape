@@ -5,19 +5,19 @@
 [ext_resource type="AudioStream" uid="uid://27ohyoxbt18f" path="res://SFX/stone_slide1.wav" id="3_berpd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5nbmp"]
-size = Vector2(30, 63)
+size = Vector2(30, 64)
 
 [node name="Statue" type="CharacterBody2D"]
 collision_layer = 33
 collision_mask = 33
 script = ExtResource("1_b23wp")
+slide_sfx = ExtResource("3_berpd")
 noise_offset = Vector2(0, 20)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_berpd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_5nbmp")
 
 [node name="Timer" type="Timer" parent="."]

@@ -5,7 +5,6 @@ var input_direction_x := 0
 
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
-	player.set_crouch_mask(true)
 	player.velocity = Vector2.ZERO
 	player.ray_light.position.y = 14
 
@@ -15,9 +14,8 @@ func exit() -> void:
 func physics_update(delta: float) -> void:
 	if !player.is_on_floor():
 		finished.emit("fall")
-		player.set_crouch_mask(false)
 	elif !player.pressed("down") && player.can_stand_up():
-		player.stand_up()
+		finished.emit("idle")
 	elif player.just_pressed("jump"):
 		for i in player.get_slide_collision_count():
 			var collider = player.cell_check.get_collider()

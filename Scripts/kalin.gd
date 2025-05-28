@@ -98,6 +98,7 @@ var states_locked := false
 var movable : Node2D = null
 var noise = preload("res://Objects/noise.tscn")
 var hiding_spot : Interaction
+var hiding := false
 var ladder : Area2D
 const ingame_menu = preload("res://UI/ingame_menu.tscn")
 var open_menu : Node = null
@@ -110,10 +111,6 @@ var ray_light : RayCast2D
 signal enter_shadow
 signal leave_shadow
 #region Methods
-func set_crouch_mask(value: bool):
-	standing_mask.set_disabled(value)
-	crouching_mask.set_disabled(!value)
-
 func set_facing(dir: int):
 	if dir == 0: return
 	facing = dir
@@ -260,9 +257,6 @@ func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 		%Sprite2D.material.set_shader_parameter("number_of_images", Vector2(%Sprite2D.hframes, %Sprite2D.vframes))
 func snap_to_corner(ledge_position: Vector2) -> void:
 	global_position = ledge_position + Vector2(snap_offset.x * facing, snap_offset.y)
-func stand_up() -> void:
-	state_node.state.finished.emit("idle")
-	set_crouch_mask(false)
 func quick_climb() -> void:
 	corner_quick_climb = true
 	state_node.state.finished.emit("corner_climb")
@@ -509,7 +503,7 @@ func _physics_process(delta: float) -> void:
 	#endregion
 	#region Light raycast
 	var in_shadow := false
-	if light_source:
+	if !hiding && light_source && light_source.lit:
 		ray_light.target_position = ray_light.to_local(light_source.global_position)
 		in_shadow = ray_light.is_colliding()
 	else:
@@ -563,7 +557,7 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
-		think("What am I thinking?")
+		think("I smell [color=green]Goblin[/color] [color=red]COCK[/color] UwU")
 		#take_damage(9)
 		#if randi_range(0, 1) == 1:
 		#	inventory.pickup_item(load("res://Inventory/water.tres"))

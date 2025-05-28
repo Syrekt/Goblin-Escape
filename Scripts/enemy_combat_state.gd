@@ -34,7 +34,12 @@ func enter(previous_state_path: String, data := {}) -> void:
 		timer.start(attack_time)
 
 func exit():
-	timer.queue_free()
+	timer.stop()
+	if timer._on_stance_timer_timeout.is_connected():
+		timer._on_stance_timer_timeout.disconnect()
+	if timer._on_attack_timer_timeout.is_connected():
+		timer._on_attack_timer_timeout.disconnect()
+	timer.call_deferred("queue_free")
 
 func _update(delta: float) -> bool:
 	if !enemy.chase_target:

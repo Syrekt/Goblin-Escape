@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfrfvr3f2ii41"]
+
+[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="1_ma4oc"]
+[ext_resource type="Script" uid="uid://c7nq5lemywc53" path="res://Tutorial/stealth_tutorial.gd" id="1_ommnr"]
+[ext_resource type="Texture2D" uid="uid://c4sgdo50jnun4" path="res://Kalin/Sprites/Kalin-Run.png" id="2_ommnr"]
+[ext_resource type="Texture2D" uid="uid://kkvvekjyerv0" path="res://Others/cirle.png" id="3_mt66d"]
+[ext_resource type="Texture2D" uid="uid://vcedblhvcdqh" path="res://Others/stealth_example.png" id="4_ccby3"]
+
+[node name="stealth_tutorial" type="CanvasLayer" groups=["UIPanel"]]
+script = ExtResource("1_ommnr")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.784314)
+
+[node name="RichTextLabel9" type="RichTextLabel" parent="."]
+offset_left = 464.0
+offset_top = 288.0
+offset_right = 624.0
+offset_bottom = 320.0
+theme = ExtResource("1_ma4oc")
+bbcode_enabled = true
+text = "Press [stance] key to continue"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(128, 128)
+texture = ExtResource("2_ommnr")
+hframes = 8
+
+[node name="Cirle" type="Sprite2D" parent="."]
+position = Vector2(128, 128)
+scale = Vector2(5.25, 5.25)
+texture = ExtResource("3_mt66d")
+
+[node name="StealthExample" type="Sprite2D" parent="."]
+position = Vector2(150, 129)
+scale = Vector2(0.518692, 0.518692)
+texture = ExtResource("4_ccby3")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 277.0
+offset_top = 20.0
+offset_right = 578.0
+offset_bottom = 112.0
+theme = ExtResource("1_ma4oc")
+bbcode_enabled = true
+text = "Certain actions make noise, drawing attention of the enemies. Distance of the noise is indicated by the [color=red]white circle[/color] around objects.
+
+Kalin will make sound while performing most acts, but you can walk crouched to move silently."
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 280.0
+offset_top = 133.0
+offset_right = 581.0
+offset_bottom = 236.0
+theme = ExtResource("1_ma4oc")
+bbcode_enabled = true
+text = "Any noise will make enemies [color=red]aware[/color]. [color=red]Aware[/color] enemies will be able to detect Kalin even when she's hidden in darkness.
+
+[color=red]Aware[/color] enemies won't detect Kalin while she's hiding in cavities. "

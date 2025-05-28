@@ -1,110 +1,110 @@
 [gd_scene load_steps=67 format=3 uid="uid://vma4r5yyfdym"]
 
-[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="1_t3o85"]
-[ext_resource type="Script" uid="uid://dgbbqqcce8a8r" path="res://Scripts/combat_tutorial.gd" id="2_srtwr"]
-[ext_resource type="Texture2D" uid="uid://dl4uq2pkst8rp" path="res://Kalin/Sprites/Kalin-Light Attack.png" id="3_o1ylu"]
-[ext_resource type="Texture2D" uid="uid://ch0r37mor26yg" path="res://Tutorial/goblin-attack.png" id="3_srtwr"]
-[ext_resource type="Texture2D" uid="uid://6nv45yts76yd" path="res://Tutorial/goblin-bash.png" id="4_hy3qi"]
-[ext_resource type="Texture2D" uid="uid://b83foasp85e6b" path="res://Kalin/Sprites/Kalin-Bash.png" id="4_mccn1"]
-[ext_resource type="Texture2D" uid="uid://d7bbtq4r2mrh" path="res://Tutorial/goblin-slash.png" id="5_mccn1"]
-[ext_resource type="Texture2D" uid="uid://bx4id7wgw6s38" path="res://Kalin/Sprites/Kalin-Heavy Attack.png" id="5_vdxhb"]
-[ext_resource type="Texture2D" uid="uid://c8o5v455g6aom" path="res://Tutorial/Kalin-Def Stance.png" id="6_vdxhb"]
-[ext_resource type="Texture2D" uid="uid://bpv3lpcqubuen" path="res://Tutorial/Kalin-Heavy Stance.png" id="7_0t240"]
-[ext_resource type="Texture2D" uid="uid://cwh1um8saduaq" path="res://Tutorial/Kalin-Light Stance.png" id="8_h5fga"]
-[ext_resource type="Texture2D" uid="uid://c6nifh0i54h6f" path="res://Enemy/GoblinWarrior/goblin-bash.png" id="12_0t240"]
-[ext_resource type="Texture2D" uid="uid://chla4jvcboa4e" path="res://Enemy/GoblinWarrior/goblin-slash.png" id="13_h5fga"]
-[ext_resource type="Texture2D" uid="uid://bhywg3kg1q3in" path="res://Enemy/GoblinWarrior/goblin-attack.png" id="14_x1co2"]
+[ext_resource type="Script" uid="uid://dgbbqqcce8a8r" path="res://Scripts/combat_tutorial.gd" id="1_0e8n1"]
+[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="2_gg7pn"]
+[ext_resource type="Texture2D" uid="uid://dl4uq2pkst8rp" path="res://Kalin/Sprites/Kalin-Light Attack.png" id="3_7u3d5"]
+[ext_resource type="Texture2D" uid="uid://b83foasp85e6b" path="res://Kalin/Sprites/Kalin-Bash.png" id="4_38bx2"]
+[ext_resource type="Texture2D" uid="uid://bx4id7wgw6s38" path="res://Kalin/Sprites/Kalin-Heavy Attack.png" id="5_6xc0i"]
+[ext_resource type="Texture2D" uid="uid://c8o5v455g6aom" path="res://Tutorial/Kalin-Def Stance.png" id="6_tcodn"]
+[ext_resource type="Texture2D" uid="uid://bpv3lpcqubuen" path="res://Tutorial/Kalin-Heavy Stance.png" id="7_730mb"]
+[ext_resource type="Texture2D" uid="uid://cwh1um8saduaq" path="res://Tutorial/Kalin-Light Stance.png" id="8_oxxag"]
+[ext_resource type="Texture2D" uid="uid://ch0r37mor26yg" path="res://Tutorial/goblin-attack.png" id="9_5q4r8"]
+[ext_resource type="Texture2D" uid="uid://6nv45yts76yd" path="res://Tutorial/goblin-bash.png" id="10_0ngsp"]
+[ext_resource type="Texture2D" uid="uid://d7bbtq4r2mrh" path="res://Tutorial/goblin-slash.png" id="11_kgq1o"]
+[ext_resource type="Texture2D" uid="uid://c6nifh0i54h6f" path="res://Enemy/GoblinWarrior/goblin-bash.png" id="12_68opc"]
+[ext_resource type="Texture2D" uid="uid://chla4jvcboa4e" path="res://Enemy/GoblinWarrior/goblin-slash.png" id="13_kqsev"]
+[ext_resource type="Texture2D" uid="uid://bhywg3kg1q3in" path="res://Enemy/GoblinWarrior/goblin-attack.png" id="14_i8vn2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0t240"]
-atlas = ExtResource("4_mccn1")
+atlas = ExtResource("4_38bx2")
 region = Rect2(0, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h5fga"]
-atlas = ExtResource("4_mccn1")
+atlas = ExtResource("4_38bx2")
 region = Rect2(160, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x1co2"]
-atlas = ExtResource("4_mccn1")
+atlas = ExtResource("4_38bx2")
 region = Rect2(320, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v8gv7"]
-atlas = ExtResource("4_mccn1")
+atlas = ExtResource("4_38bx2")
 region = Rect2(480, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m5o2y"]
-atlas = ExtResource("4_mccn1")
+atlas = ExtResource("4_38bx2")
 region = Rect2(640, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u2o61"]
-atlas = ExtResource("4_mccn1")
+atlas = ExtResource("4_38bx2")
 region = Rect2(800, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rv7cl"]
-atlas = ExtResource("4_mccn1")
+atlas = ExtResource("4_38bx2")
 region = Rect2(960, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ugrqs"]
-atlas = ExtResource("4_mccn1")
+atlas = ExtResource("4_38bx2")
 region = Rect2(1120, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oc7wm"]
-atlas = ExtResource("4_mccn1")
+atlas = ExtResource("4_38bx2")
 region = Rect2(1280, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_whdrm"]
-atlas = ExtResource("5_vdxhb")
+atlas = ExtResource("5_6xc0i")
 region = Rect2(0, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kavab"]
-atlas = ExtResource("5_vdxhb")
+atlas = ExtResource("5_6xc0i")
 region = Rect2(160, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ato7o"]
-atlas = ExtResource("5_vdxhb")
+atlas = ExtResource("5_6xc0i")
 region = Rect2(320, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_24gkp"]
-atlas = ExtResource("5_vdxhb")
+atlas = ExtResource("5_6xc0i")
 region = Rect2(480, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8sgyx"]
-atlas = ExtResource("5_vdxhb")
+atlas = ExtResource("5_6xc0i")
 region = Rect2(640, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yi1ir"]
-atlas = ExtResource("5_vdxhb")
+atlas = ExtResource("5_6xc0i")
 region = Rect2(800, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ohwxv"]
-atlas = ExtResource("5_vdxhb")
+atlas = ExtResource("5_6xc0i")
 region = Rect2(960, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_coief"]
-atlas = ExtResource("5_vdxhb")
+atlas = ExtResource("5_6xc0i")
 region = Rect2(1120, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_34rvw"]
-atlas = ExtResource("3_o1ylu")
+atlas = ExtResource("3_7u3d5")
 region = Rect2(0, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5rwqn"]
-atlas = ExtResource("3_o1ylu")
+atlas = ExtResource("3_7u3d5")
 region = Rect2(160, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nfpba"]
-atlas = ExtResource("3_o1ylu")
+atlas = ExtResource("3_7u3d5")
 region = Rect2(320, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_js2w0"]
-atlas = ExtResource("3_o1ylu")
+atlas = ExtResource("3_7u3d5")
 region = Rect2(480, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5eefe"]
-atlas = ExtResource("3_o1ylu")
+atlas = ExtResource("3_7u3d5")
 region = Rect2(640, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hypx5"]
-atlas = ExtResource("3_o1ylu")
+atlas = ExtResource("3_7u3d5")
 region = Rect2(800, 0, 160, 160)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7a6fu"]
@@ -222,111 +222,111 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7a6fu"]
-atlas = ExtResource("12_0t240")
+atlas = ExtResource("12_68opc")
 region = Rect2(0, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wqty0"]
-atlas = ExtResource("12_0t240")
+atlas = ExtResource("12_68opc")
 region = Rect2(160, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ytmj2"]
-atlas = ExtResource("12_0t240")
+atlas = ExtResource("12_68opc")
 region = Rect2(320, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8es2n"]
-atlas = ExtResource("12_0t240")
+atlas = ExtResource("12_68opc")
 region = Rect2(480, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ov3ht"]
-atlas = ExtResource("12_0t240")
+atlas = ExtResource("12_68opc")
 region = Rect2(640, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hwe3"]
-atlas = ExtResource("12_0t240")
+atlas = ExtResource("12_68opc")
 region = Rect2(800, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6i31t"]
-atlas = ExtResource("12_0t240")
+atlas = ExtResource("12_68opc")
 region = Rect2(960, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r36ad"]
-atlas = ExtResource("12_0t240")
+atlas = ExtResource("12_68opc")
 region = Rect2(1120, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_peuit"]
-atlas = ExtResource("12_0t240")
+atlas = ExtResource("12_68opc")
 region = Rect2(1280, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ka04g"]
-atlas = ExtResource("12_0t240")
+atlas = ExtResource("12_68opc")
 region = Rect2(1440, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fkops"]
-atlas = ExtResource("13_h5fga")
+atlas = ExtResource("13_kqsev")
 region = Rect2(0, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ttbjp"]
-atlas = ExtResource("13_h5fga")
+atlas = ExtResource("13_kqsev")
 region = Rect2(160, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p40u3"]
-atlas = ExtResource("13_h5fga")
+atlas = ExtResource("13_kqsev")
 region = Rect2(320, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k8cvd"]
-atlas = ExtResource("13_h5fga")
+atlas = ExtResource("13_kqsev")
 region = Rect2(480, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e2ph4"]
-atlas = ExtResource("13_h5fga")
+atlas = ExtResource("13_kqsev")
 region = Rect2(640, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_clem5"]
-atlas = ExtResource("13_h5fga")
+atlas = ExtResource("13_kqsev")
 region = Rect2(800, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4le2f"]
-atlas = ExtResource("13_h5fga")
+atlas = ExtResource("13_kqsev")
 region = Rect2(960, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lrt2v"]
-atlas = ExtResource("13_h5fga")
+atlas = ExtResource("13_kqsev")
 region = Rect2(1120, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fn2jp"]
-atlas = ExtResource("13_h5fga")
+atlas = ExtResource("13_kqsev")
 region = Rect2(1280, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_787ho"]
-atlas = ExtResource("13_h5fga")
+atlas = ExtResource("13_kqsev")
 region = Rect2(1440, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fqqxm"]
-atlas = ExtResource("14_x1co2")
+atlas = ExtResource("14_i8vn2")
 region = Rect2(0, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ge6kl"]
-atlas = ExtResource("14_x1co2")
+atlas = ExtResource("14_i8vn2")
 region = Rect2(160, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_55p24"]
-atlas = ExtResource("14_x1co2")
+atlas = ExtResource("14_i8vn2")
 region = Rect2(320, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yfk31"]
-atlas = ExtResource("14_x1co2")
+atlas = ExtResource("14_i8vn2")
 region = Rect2(480, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t0a2x"]
-atlas = ExtResource("14_x1co2")
+atlas = ExtResource("14_i8vn2")
 region = Rect2(640, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fic2w"]
-atlas = ExtResource("14_x1co2")
+atlas = ExtResource("14_i8vn2")
 region = Rect2(800, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2nvh4"]
-atlas = ExtResource("14_x1co2")
+atlas = ExtResource("14_i8vn2")
 region = Rect2(960, 0, 160, 160)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kfrmu"]
@@ -456,7 +456,7 @@ animations = [{
 }]
 
 [node name="Combat Tutorial" type="CanvasLayer" groups=["UIPanel"]]
-script = ExtResource("2_srtwr")
+script = ExtResource("1_0e8n1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -467,50 +467,46 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.784314)
 
 [node name="RichTextLabel9" type="RichTextLabel" parent="."]
-offset_left = 1072.0
-offset_top = 640.0
-offset_right = 1232.0
-offset_bottom = 672.0
-theme = ExtResource("1_t3o85")
+offset_left = 464.0
+offset_top = 288.0
+offset_right = 624.0
+offset_bottom = 320.0
+theme = ExtResource("2_gg7pn")
 bbcode_enabled = true
 text = "Press [stance] key to continue"
 
 [node name="Page1" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_t3o85")
+theme = ExtResource("2_gg7pn")
 
 [node name="Sprite2D" type="Sprite2D" parent="Page1"]
 visible = false
 position = Vector2(288, 304)
 scale = Vector2(2, 2)
-texture = ExtResource("3_o1ylu")
+texture = ExtResource("3_7u3d5")
 hframes = 6
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Page1"]
-position = Vector2(208, 320)
-scale = Vector2(2, 2)
+position = Vector2(128, 128)
 sprite_frames = SubResource("SpriteFrames_7a6fu")
 animation = &"stab"
 autoplay = "stab"
 frame_progress = 0.207933
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Page1"]
-position = Vector2(640, 320)
-scale = Vector2(2, 2)
+position = Vector2(304, 128)
 sprite_frames = SubResource("SpriteFrames_7a6fu")
 animation = &"slash"
 autoplay = "slash"
 frame_progress = 0.807532
 
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Page1"]
-position = Vector2(1024, 320)
-scale = Vector2(2, 2)
+position = Vector2(512, 128)
 sprite_frames = SubResource("SpriteFrames_7a6fu")
 animation = &"bash"
 autoplay = "bash"
@@ -518,60 +514,63 @@ frame_progress = 0.739916
 
 [node name="TextureRect5" type="TextureRect" parent="Page1"]
 visible = false
+layout_mode = 0
 offset_left = 1040.0
 offset_top = 272.0
 offset_right = 1077.0
 offset_bottom = 330.0
 scale = Vector2(2, 2)
-texture = ExtResource("6_vdxhb")
+texture = ExtResource("6_tcodn")
 
 [node name="TextureRect6" type="TextureRect" parent="Page1"]
 visible = false
+layout_mode = 0
 offset_left = 592.0
 offset_top = 224.0
 offset_right = 636.0
 offset_bottom = 302.0
 scale = Vector2(2, 2)
-texture = ExtResource("7_0t240")
+texture = ExtResource("7_730mb")
 
 [node name="TextureRect7" type="TextureRect" parent="Page1"]
 visible = false
+layout_mode = 0
 offset_left = 96.0
 offset_top = 256.0
 offset_right = 143.0
 offset_bottom = 312.0
 scale = Vector2(2, 2)
-texture = ExtResource("8_h5fga")
+texture = ExtResource("8_oxxag")
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="Page1"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 32.0
+offset_right = 464.0
+offset_bottom = 96.0
+bbcode_enabled = true
+text = "To fight, press [stance] or [attack] key.
+To switch different between stances, use up and down keys.
+Each stance has different properties"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Page1"]
-offset_left = 128.0
-offset_top = 416.0
-offset_right = 413.0
-offset_bottom = 560.0
-theme_override_font_sizes/normal_font_size = 32
+layout_mode = 0
+offset_left = 48.0
+offset_top = 176.0
+offset_right = 211.0
+offset_bottom = 256.0
 bbcode_enabled = true
 text = "Light Stance(Default stance)
 - Stab attack
 - Fast and weak
 - Stab interrupts heavy attacks"
 
-[node name="RichTextLabel8" type="RichTextLabel" parent="Page1"]
-offset_left = 320.0
-offset_top = 112.0
-offset_right = 960.0
-offset_bottom = 208.0
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "To fight, press [stance] or [attack] key.
-To switch different between stances, use up and down keys.
-Each stance has different properties"
-
 [node name="RichTextLabel2" type="RichTextLabel" parent="Page1"]
-offset_left = 544.0
-offset_top = 416.0
-offset_right = 864.0
-offset_bottom = 608.0
-theme_override_font_sizes/normal_font_size = 32
+layout_mode = 0
+offset_left = 208.0
+offset_top = 176.0
+offset_right = 400.0
+offset_bottom = 272.0
 bbcode_enabled = true
 text = "Heavy Stance(Up key)
 - Slash Attack
@@ -580,11 +579,11 @@ text = "Heavy Stance(Up key)
 - Slash breaks enemy guard"
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="Page1"]
-offset_left = 928.0
-offset_top = 432.0
-offset_right = 1248.0
-offset_bottom = 592.0
-theme_override_font_sizes/normal_font_size = 32
+layout_mode = 0
+offset_left = 440.0
+offset_top = 192.0
+offset_right = 584.0
+offset_bottom = 256.0
 bbcode_enabled = true
 text = "Defensive Stance(Down key)
 - Bash Attack
@@ -592,96 +591,98 @@ text = "Defensive Stance(Down key)
 - Bash pushes opponents"
 
 [node name="Page2" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme = ExtResource("1_t3o85")
+theme = ExtResource("2_gg7pn")
 
 [node name="TextureRect2" type="TextureRect" parent="Page2"]
 visible = false
+layout_mode = 0
 offset_left = 224.0
 offset_top = 176.0
 offset_right = 384.0
 offset_bottom = 336.0
 scale = Vector2(2, 2)
-texture = ExtResource("3_srtwr")
+texture = ExtResource("9_5q4r8")
 
 [node name="TextureRect3" type="TextureRect" parent="Page2"]
 visible = false
+layout_mode = 0
 offset_left = 656.0
 offset_top = 176.0
 offset_right = 816.0
 offset_bottom = 336.0
 scale = Vector2(2, 2)
-texture = ExtResource("4_hy3qi")
+texture = ExtResource("10_0ngsp")
 
 [node name="TextureRect4" type="TextureRect" parent="Page2"]
 visible = false
+layout_mode = 0
 offset_left = 464.0
 offset_top = 176.0
 offset_right = 624.0
 offset_bottom = 336.0
 scale = Vector2(2, 2)
-texture = ExtResource("5_mccn1")
+texture = ExtResource("11_kgq1o")
 
 [node name="RichTextLabel4" type="RichTextLabel" parent="Page2"]
-offset_left = 336.0
-offset_top = 208.0
-offset_right = 1008.0
-offset_bottom = 304.0
-theme_override_font_sizes/normal_font_size = 32
+layout_mode = 0
+offset_left = 160.0
+offset_top = 48.0
+offset_right = 528.0
+offset_bottom = 80.0
 bbcode_enabled = true
 text = "Enemy stance has same attacks and properties.
 In normal difficulty, enemies flash certain colors when they take a stance."
 
 [node name="RichTextLabel5" type="RichTextLabel" parent="Page2"]
-offset_left = 320.0
-offset_top = 400.0
-offset_right = 464.0
-offset_bottom = 448.0
-theme_override_font_sizes/normal_font_size = 32
+layout_mode = 0
+offset_left = 160.0
+offset_top = 176.0
+offset_right = 224.0
+offset_bottom = 192.0
+pivot_offset = Vector2(63, 16)
 bbcode_enabled = true
 text = "[color=yellow]Light Stance"
 horizontal_alignment = 1
 
 [node name="RichTextLabel6" type="RichTextLabel" parent="Page2"]
-offset_left = 560.0
-offset_top = 400.0
-offset_right = 704.0
-offset_bottom = 432.0
-theme_override_font_sizes/normal_font_size = 32
+layout_mode = 0
+offset_left = 288.0
+offset_top = 176.0
+offset_right = 352.0
+offset_bottom = 192.0
 bbcode_enabled = true
 text = "[color=red]Heavy Stance[/color]"
 
 [node name="RichTextLabel7" type="RichTextLabel" parent="Page2"]
-offset_left = 736.0
-offset_top = 400.0
-offset_right = 912.0
-offset_bottom = 432.0
-theme_override_font_sizes/normal_font_size = 32
+layout_mode = 0
+offset_left = 400.0
+offset_top = 176.0
+offset_right = 496.0
+offset_bottom = 192.0
 bbcode_enabled = true
 text = "[color=blue]Defensive Stance[/color]"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Page2"]
-position = Vector2(384, 336)
-scale = Vector2(2, 2)
+position = Vector2(192, 128)
 sprite_frames = SubResource("SpriteFrames_kfrmu")
 animation = &"stab"
 autoplay = "stab"
 frame_progress = 0.862376
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Page2"]
-position = Vector2(624, 336)
-scale = Vector2(2, 2)
+position = Vector2(320, 128)
 sprite_frames = SubResource("SpriteFrames_kfrmu")
 animation = &"slash"
 autoplay = "slash"
 frame_progress = 0.0669446
 
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Page2"]
-position = Vector2(816, 336)
-scale = Vector2(2, 2)
+position = Vector2(448, 128)
 sprite_frames = SubResource("SpriteFrames_kfrmu")
 animation = &"bash"
 autoplay = "bash"

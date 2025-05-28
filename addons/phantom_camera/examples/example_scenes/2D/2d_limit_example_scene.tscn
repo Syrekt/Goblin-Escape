@@ -266,7 +266,7 @@ debug_color = Color(0, 0.6, 0.701961, 0.0313726)
 [node name="RoomCentrePhantomCamera2D" type="Node2D" parent="."]
 unique_name_in_owner = true
 top_level = true
-position = Vector2(1431.33, -149)
+position = Vector2(1474, -149)
 script = ExtResource("4_4b648")
 follow_mode = 2
 zoom = Vector2(1.5, 1.5)
@@ -306,9 +306,9 @@ follow_damping = true
 draw_limits = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-physics_interpolation_mode = 1
 position = Vector2(66, -91.205)
 zoom = Vector2(2, 2)
+process_callback = 0
 limit_left = -387
 limit_top = -528
 limit_right = 433
