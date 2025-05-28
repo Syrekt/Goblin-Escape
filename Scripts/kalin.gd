@@ -68,7 +68,7 @@ var available_stat_points := 5
 @onready var thought_container = find_child("ThoughtContainer")
 @onready var emote = $Emote
 @onready var parry_timer = $StateMachine/stance_defensive/ParryTimer
-@onready var vignette = $CanvasLayer/StealthVignette
+@onready var vignette = find_child("StealthVignette")
 @onready var smell_collider : Area2D = $SmellCollider
 @onready var cell_check : RayCast2D = $CellCheck
 @onready var interaction_prompt : AnimatedSprite2D = $InteractionPrompt
@@ -413,7 +413,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 #endregion
 #region Init
 func _ready() -> void:
-	var canvas = find_child("CanvasLayer2")
+	var canvas = find_child("UI")
 	canvas.show()
 	hud.show()
 	$SmellParticles.show()

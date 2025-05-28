@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://bbky2bir5aom7" path="res://Inventory/inv_button.gd" id="2_fsafp"]
 
 [node name="Button" type="Button"]
-custom_minimum_size = Vector2(100, 0)
-offset_right = 122.0
+custom_minimum_size = Vector2(150, 0)
+offset_right = 152.0
 offset_bottom = 40.0
 theme = ExtResource("1_twkkk")
 text = "water"

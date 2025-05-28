@@ -3991,9 +3991,9 @@ process_physics_priority = 300
 script = ExtResource("2_0bx81")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Overlays" type="CanvasLayer" parent="."]
 
-[node name="UIFocus" type="ColorRect" parent="CanvasLayer"]
+[node name="UIFocus" type="ColorRect" parent="Overlays"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -4003,7 +4003,7 @@ color = Color(0.06, 0.06, 0.06, 0)
 script = ExtResource("44_8nsgr")
 transparency = 0.3
 
-[node name="StealthVignette" type="ColorRect" parent="CanvasLayer"]
+[node name="StealthVignette" type="ColorRect" parent="Overlays"]
 material = SubResource("ShaderMaterial_47a0d")
 anchors_preset = 15
 anchor_right = 1.0
@@ -4011,22 +4011,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
+visible = false
 
-[node name="HUD" type="Control" parent="CanvasLayer2"]
+[node name="HUD" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(2, 2)
 
-[node name="Health" type="TextureProgressBar" parent="CanvasLayer2/HUD" groups=["Persistent"]]
+[node name="Health" type="TextureProgressBar" parent="UI/HUD" groups=["Persistent"]]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 12.0
-offset_right = 95.0
-offset_bottom = 34.0
+offset_left = 0.5
+offset_top = 7.0
+offset_right = 81.5
+offset_bottom = 29.0
 max_value = 10.0
 step = 0.0
 value = 10.0
@@ -4037,12 +4039,12 @@ script = ExtResource("43_uhoyi")
 buff_sprite = ExtResource("10_pxbrw")
 debuff_sprite = ExtResource("11_4inu4")
 
-[node name="Stamina" type="TextureProgressBar" parent="CanvasLayer2/HUD"]
+[node name="Stamina" type="TextureProgressBar" parent="UI/HUD"]
 layout_mode = 2
-offset_left = 38.0
-offset_top = 31.0
-offset_right = 102.0
-offset_bottom = 40.0
+offset_left = 24.5
+offset_top = 26.0
+offset_right = 88.5
+offset_bottom = 35.0
 max_value = 5.0
 step = 0.0
 value = 5.0
@@ -4054,11 +4056,11 @@ script = ExtResource("60_2ksh1")
 buff_sprite = ExtResource("10_pxbrw")
 debuff_sprite = ExtResource("11_4inu4")
 
-[node name="Timer" type="Timer" parent="CanvasLayer2/HUD/Stamina"]
+[node name="Timer" type="Timer" parent="UI/HUD/Stamina"]
 one_shot = true
 autostart = true
 
-[node name="BuffContainer" type="HBoxContainer" parent="CanvasLayer2/HUD/Stamina"]
+[node name="BuffContainer" type="HBoxContainer" parent="UI/HUD/Stamina"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.028
@@ -4071,36 +4073,36 @@ offset_right = 57.98
 offset_bottom = 7.996
 scale = Vector2(0.5, 0.5)
 
-[node name="Experience" type="TextureProgressBar" parent="CanvasLayer2/HUD" groups=["Persistent"]]
+[node name="Experience" type="TextureProgressBar" parent="UI/HUD" groups=["Persistent"]]
 layout_mode = 2
-offset_left = 35.0
-offset_top = 28.0
-offset_right = 143.0
-offset_bottom = 31.0
+offset_left = 21.5
+offset_top = 23.0
+offset_right = 129.5
+offset_bottom = 26.0
 step = 0.0
 texture_under = ExtResource("54_80r2e")
 texture_progress = ExtResource("55_rbk27")
 tint_progress = Color(0.199724, 0.454105, 0.22321, 1)
 script = ExtResource("50_083qx")
 
-[node name="Arousal" type="TextureProgressBar" parent="CanvasLayer2/HUD" groups=["Persistent"]]
+[node name="Arousal" type="TextureProgressBar" parent="UI/HUD" groups=["Persistent"]]
 layout_mode = 0
-offset_left = 64.0
-offset_top = 19.0
-offset_right = 89.0
-offset_bottom = 22.0
+offset_left = 50.5
+offset_top = 14.0
+offset_right = 75.5
+offset_bottom = 17.0
 step = 0.0
 texture_under = ExtResource("57_rbk27")
 texture_progress = ExtResource("58_yofsr")
 tint_progress = Color(0.474366, 0.00173617, 0.698302, 1)
 script = ExtResource("48_yekxk")
 
-[node name="Smell" type="TextureProgressBar" parent="CanvasLayer2/HUD"]
+[node name="Smell" type="TextureProgressBar" parent="UI/HUD"]
 layout_mode = 0
-offset_left = 34.0
-offset_top = 19.0
-offset_right = 54.0
-offset_bottom = 22.0
+offset_left = 20.5
+offset_top = 14.0
+offset_right = 40.5
+offset_bottom = 17.0
 step = 0.0
 texture_under = ExtResource("60_1yslh")
 texture_progress = ExtResource("61_5atg1")
@@ -4109,11 +4111,11 @@ script = ExtResource("55_h4isg")
 buff_sprite = ExtResource("10_pxbrw")
 debuff_sprite = ExtResource("11_4inu4")
 
-[node name="InventoryPanel" type="PanelContainer" parent="CanvasLayer2" groups=["UIPanel"]]
-custom_minimum_size = Vector2(122, 312)
-offset_top = 48.0
-offset_right = 122.0
-offset_bottom = 208.0
+[node name="InventoryPanel" type="PanelContainer" parent="UI" groups=["UIPanel"]]
+custom_minimum_size = Vector2(122, 264)
+offset_top = 96.0
+offset_right = 172.0
+offset_bottom = 360.0
 focus_mode = 2
 mouse_filter = 1
 theme = ExtResource("72_qdj7c")
@@ -4121,7 +4123,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_exvqe")
 script = ExtResource("73_ugwbb")
 inventory = ExtResource("29_towol")
 
-[node name="FG" type="NinePatchRect" parent="CanvasLayer2/InventoryPanel"]
+[node name="FG" type="NinePatchRect" parent="UI/InventoryPanel"]
 layout_mode = 2
 texture = ExtResource("69_wl0wu")
 patch_margin_left = 24
@@ -4132,7 +4134,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="BG" type="NinePatchRect" parent="CanvasLayer2/InventoryPanel"]
+[node name="BG" type="NinePatchRect" parent="UI/InventoryPanel"]
 self_modulate = Color(1, 1, 1, 0.5)
 layout_mode = 2
 texture = ExtResource("31_nhuj2")
@@ -4142,12 +4144,14 @@ patch_margin_top = 24
 patch_margin_right = 24
 patch_margin_bottom = 24
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/InventoryPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/InventoryPanel"]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_right = 6
 metadata/_edit_lock_ = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer2/InventoryPanel/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/InventoryPanel/MarginContainer"]
 layout_mode = 2
 focus_mode = 2
 theme = ExtResource("72_qdj7c")
@@ -4155,24 +4159,22 @@ follow_focus = true
 draw_focus_border = true
 horizontal_scroll_mode = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/InventoryPanel/MarginContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/InventoryPanel/MarginContainer/ScrollContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 0
 
-[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer2/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer"]
+[node name="ButtonContainer" type="VBoxContainer" parent="UI/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" parent="CanvasLayer2/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer/ButtonContainer" instance=ExtResource("32_fb5pj")]
+[node name="Button" parent="UI/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer/ButtonContainer" instance=ExtResource("32_fb5pj")]
 clip_contents = true
 layout_mode = 2
 text = "waterasdaasdasdsa"
 text_overrun_behavior = 3
 
-[node name="DescriptionPanel" type="PanelContainer" parent="CanvasLayer2"]
+[node name="DescriptionPanel" type="PanelContainer" parent="UI"]
 custom_minimum_size = Vector2(224, 95)
 anchors_preset = 7
 anchor_left = 0.5
@@ -4187,7 +4189,7 @@ grow_vertical = 0
 theme = ExtResource("72_qdj7c")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_cbw7l")
 
-[node name="FG" type="NinePatchRect" parent="CanvasLayer2/DescriptionPanel"]
+[node name="FG" type="NinePatchRect" parent="UI/DescriptionPanel"]
 layout_mode = 2
 texture = ExtResource("69_wl0wu")
 region_rect = Rect2(0, 0, 60, 60)
@@ -4199,7 +4201,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="BG" type="NinePatchRect" parent="CanvasLayer2/DescriptionPanel"]
+[node name="BG" type="NinePatchRect" parent="UI/DescriptionPanel"]
 self_modulate = Color(1, 1, 1, 0.7)
 layout_mode = 2
 texture = ExtResource("31_nhuj2")
@@ -4209,16 +4211,16 @@ patch_margin_right = 24
 patch_margin_bottom = 24
 metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/DescriptionPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/DescriptionPanel"]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="DescriptionText" type="RichTextLabel" parent="CanvasLayer2/DescriptionPanel/MarginContainer"]
+[node name="DescriptionText" type="RichTextLabel" parent="UI/DescriptionPanel/MarginContainer"]
 layout_mode = 2
 bbcode_enabled = true
 text = "[color=red]This is the description text[/color]"
 
-[node name="CharacterPanel" type="PanelContainer" parent="CanvasLayer2" groups=["UIPanel"]]
+[node name="CharacterPanel" type="PanelContainer" parent="UI" groups=["UIPanel"]]
 visible = false
 offset_left = 315.0
 offset_top = 127.0
@@ -4226,7 +4228,7 @@ offset_right = 525.0
 offset_bottom = 315.0
 theme = ExtResource("56_ghu8e")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer2/CharacterPanel"]
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/CharacterPanel"]
 layout_mode = 2
 texture = ExtResource("73_qdj7c")
 region_rect = Rect2(0, 0, 44, 44)
@@ -4238,39 +4240,39 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/CharacterPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/CharacterPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/CharacterPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CharacterPanel/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 28
 
-[node name="Strength" parent="CanvasLayer2/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+[node name="Strength" parent="UI/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
 layout_mode = 2
 
-[node name="Dexterity" parent="CanvasLayer2/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+[node name="Dexterity" parent="UI/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
 layout_mode = 2
 
-[node name="Endurance" parent="CanvasLayer2/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+[node name="Endurance" parent="UI/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
 layout_mode = 2
 
-[node name="Vitality" parent="CanvasLayer2/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+[node name="Vitality" parent="UI/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer2/CharacterPanel/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="UI/CharacterPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_t42fh")
 
-[node name="StatPoints" type="Label" parent="CanvasLayer2/CharacterPanel/MarginContainer/VBoxContainer"]
+[node name="StatPoints" type="Label" parent="UI/CharacterPanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Stat Points"
 
-[node name="ThoughtContainer" type="VBoxContainer" parent="CanvasLayer2"]
+[node name="ThoughtContainer" type="VBoxContainer" parent="UI"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -4280,7 +4282,7 @@ mouse_filter = 2
 alignment = 2
 script = ExtResource("49_b2c13")
 
-[node name="InteractionLabel" type="Label" parent="CanvasLayer2"]
+[node name="InteractionLabel" type="Label" parent="UI"]
 offset_left = 974.0
 offset_top = 616.0
 offset_right = 1172.0
@@ -4659,7 +4661,7 @@ shape = SubResource("CircleShape2D_rbk27")
 [connection signal="body_entered" from="ThreatCollider" to="." method="_on_threat_collider_body_entered"]
 [connection signal="body_entered" from="SmellCollider" to="." method="_on_smell_collider_body_entered"]
 
-[editable path="CanvasLayer2/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer/ButtonContainer/Button"]
+[editable path="UI/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer/ButtonContainer/Button"]
 [editable path="StateMachine/slash/SlashHitbox"]
 [editable path="StateMachine/stab/StabHitbox"]
 [editable path="StateMachine/bash/BashHitbox"]

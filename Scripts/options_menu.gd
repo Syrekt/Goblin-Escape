@@ -8,10 +8,12 @@ func _ready() -> void:
 	get_tree().paused = true
 	var screen_size : Vector2 = DisplayServer.screen_get_size()
 	match screen_size:
-		Vector2(1280, 720):
+		Vector2(640, 480):
 			resolution.index = 0
-		Vector2(1920, 1080):
+		Vector2(1280, 720):
 			resolution.index = 1
+		Vector2(1920, 1080):
+			resolution.index = 2
 
 func _exit_tree() -> void:
 	get_tree().paused = false
@@ -26,9 +28,9 @@ func _on_option_button_item_selected(index: int) -> void:
 	var new_size : Vector2
 	match index:
 		0:
-			new_size = Vector2(1280, 720)
+			new_size = Vector2(640, 480)
 		1:
-			new_size = Vector2i(1920, 1080)
+			new_size = Vector2(1280, 720)
 		2:
 			new_size = Vector2i(1920, 1080)
 
