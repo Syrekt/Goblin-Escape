@@ -1,5 +1,7 @@
 extends Node
 
+var initial_window_size := Vector2(1280, 720)
+
 var inputs : Dictionary 
 var jump_key : String
 var attack_key : String
@@ -11,6 +13,10 @@ var loading := false
 signal show_combat_tutorial
 
 func _ready() -> void:
+	var screen_size : Vector2 = DisplayServer.screen_get_size()
+	DisplayServer.window_set_size(initial_window_size)
+	DisplayServer.window_set_position((screen_size - initial_window_size)/2)
+
 	show_combat_tutorial.connect(_show_combat_tutorial)
 	var events = InputMap.action_get_events("jump")
 	for event in events:

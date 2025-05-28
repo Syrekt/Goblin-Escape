@@ -15,7 +15,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Label" type="Label" parent="HBoxContainer"]
-custom_minimum_size = Vector2(152.255, 0)
+custom_minimum_size = Vector2(91.26, 0)
 layout_mode = 2
 text = "Text"
 vertical_alignment = 1

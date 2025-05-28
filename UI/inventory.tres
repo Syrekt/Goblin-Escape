@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=26 format=3 uid="uid://d3ajvsrrbu1s5"]
+[gd_resource type="Theme" load_steps=29 format=3 uid="uid://d3ajvsrrbu1s5"]
 
 [ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Others/Ohrenstead.ttf" id="1_5s48r"]
 [ext_resource type="Texture2D" uid="uid://c21xmqiyf85ot" path="res://UI/Inventory/Inventory tile_press.png" id="2_cqags"]
@@ -16,33 +16,49 @@
 [ext_resource type="Texture2D" uid="uid://cbs2arseme6aq" path="res://UI/Inventory/grabber_pressed.png" id="13_j7saf"]
 [ext_resource type="Texture2D" uid="uid://dve47hweqogj1" path="res://UI/Inventory/scroll_normal.png" id="13_x3eo3"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q7dot"]
+texture = ExtResource("4_i22i6")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jwmfk"]
 texture = ExtResource("2_cqags")
-texture_margin_left = 8.0
-texture_margin_top = 8.0
-texture_margin_right = 8.0
-texture_margin_bottom = 8.0
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4a6d8"]
 texture = ExtResource("3_pkxtr")
-texture_margin_left = 8.0
-texture_margin_top = 8.0
-texture_margin_right = 8.0
-texture_margin_bottom = 8.0
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ie30q"]
+texture = ExtResource("2_cqags")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dg5jf"]
 texture = ExtResource("4_i22i6")
-texture_margin_left = 8.0
-texture_margin_top = 8.0
-texture_margin_right = 8.0
-texture_margin_bottom = 8.0
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i22i6"]
 texture = ExtResource("2_cqags")
-texture_margin_left = 8.0
-texture_margin_top = 8.0
-texture_margin_right = 8.0
-texture_margin_bottom = 8.0
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j7saf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i22i6"]
 
@@ -68,19 +84,22 @@ texture = ExtResource("13_x3eo3")
 texture = ExtResource("12_36ber")
 
 [resource]
-Button/font_sizes/font_size = 32
+Button/colors/font_hover_color = Color(0.790768, 0.419579, 0.156451, 1)
+Button/colors/font_hover_pressed_color = Color(0.606493, 0.047253, 0.609392, 1)
 Button/fonts/font = ExtResource("1_5s48r")
+Button/styles/disabled = SubResource("StyleBoxTexture_q7dot")
 Button/styles/focus = SubResource("StyleBoxTexture_jwmfk")
 Button/styles/hover = SubResource("StyleBoxTexture_4a6d8")
+Button/styles/hover_pressed = SubResource("StyleBoxTexture_ie30q")
 Button/styles/normal = SubResource("StyleBoxTexture_dg5jf")
 Button/styles/pressed = SubResource("StyleBoxTexture_i22i6")
-HBoxContainer/constants/separation = 6
-HSeparator/styles/separator = null
+HBoxContainer/constants/separation = 0
+HSeparator/styles/separator = SubResource("StyleBoxEmpty_j7saf")
+Label/fonts/font = ExtResource("1_5s48r")
 MarginContainer/constants/margin_bottom = 12
 MarginContainer/constants/margin_left = 12
-MarginContainer/constants/margin_right = 12
+MarginContainer/constants/margin_right = 4
 MarginContainer/constants/margin_top = 12
-RichTextLabel/font_sizes/normal_font_size = 32
 RichTextLabel/fonts/normal_font = ExtResource("1_5s48r")
 ScrollContainer/styles/focus = SubResource("StyleBoxEmpty_i22i6")
 VScrollBar/icons/decrement = ExtResource("5_i22i6")

@@ -36,12 +36,13 @@ var available_stat_points := 5
 #endregion
 #region Node pointers
 @onready var state_node := $StateMachine
-@onready var health		: TextureProgressBar = $CanvasLayer/HUD/Control/Health #$CanvasLayer/HUD/HBoxContainer/Health
-@onready var stamina	: TextureProgressBar = $CanvasLayer/HUD/Control/Stamina #$CanvasLayer/HUD/HBoxContainer/Stamina
-@onready var experience : TextureProgressBar = $CanvasLayer/HUD/Control/Experience
-@onready var smell		: TextureProgressBar = $CanvasLayer/HUD/Control/Smell
+@onready var hud : Control = find_child("HUD")
+@onready var health		: TextureProgressBar = find_child("Health") #$CanvasLayer/HUD/HBoxContainer/Health
+@onready var stamina	: TextureProgressBar = find_child("Stamina") #$CanvasLayer/HUD/HBoxContainer/Stamina
+@onready var experience : TextureProgressBar = find_child("Experience")
+@onready var smell		: TextureProgressBar = find_child("Smell")
+@onready var arousal	: TextureProgressBar = find_child("Arousal")
 @onready var smell_particles : GPUParticles2D = $SmellParticles
-@onready var arousal	: TextureProgressBar = $CanvasLayer/HUD/Control/Arousal
 @onready var crouching_mask : CollisionShape2D = $ColliderCrouching
 @onready var standing_mask  : CollisionShape2D = $ColliderStanding
 @onready var sprite : Sprite2D = $Sprite2D
@@ -62,9 +63,9 @@ var available_stat_points := 5
 @onready var cp = combat_properties
 @onready var camera : Camera2D = $Camera2D
 @onready var audio_emitter : AudioStreamPlayer2D = $MainAudioStreamer
-@onready var inventory_panel = $CanvasLayer/InventoryPanel
-@onready var character_panel = $CanvasLayer/CharacterPanel
-@onready var thought_container = $CanvasLayer/ThoughtContainer
+@onready var inventory_panel = find_child("InventoryPanel")
+@onready var character_panel = find_child("CharacterPanel")
+@onready var thought_container = find_child("ThoughtContainer")
 @onready var emote = $Emote
 @onready var parry_timer = $StateMachine/stance_defensive/ParryTimer
 @onready var vignette = $CanvasLayer/StealthVignette
@@ -412,8 +413,9 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 #endregion
 #region Init
 func _ready() -> void:
-	$CanvasLayer.show()
-	$CanvasLayer/HUD.show()
+	var canvas = find_child("CanvasLayer2")
+	canvas.show()
+	hud.show()
 	$SmellParticles.show()
 	ray_light = RayCast2D.new()
 	ray_light.collide_with_bodies = true
@@ -550,14 +552,9 @@ func _process(delta: float) -> void:
 		get_tree().reload_current_scene()
 	#region Open menu & Inventory
 	if Input.is_action_just_pressed("ui_cancel"):
-		if open_menu == null:
+		if !open_menu:
 			open_menu = ingame_menu.instantiate()
 			add_child(open_menu)
-			get_tree().paused = true;
-		else:
-			get_tree().paused = false;
-			open_menu.queue_free()
-			open_menu = null
 	if Input.is_action_just_pressed("inventory"):
 		toggle_inventory()
 	if Input.is_action_just_pressed("character"):
@@ -566,8 +563,8 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
-		#think("What am I thinking?")
-		take_damage(9)
+		think("What am I thinking?")
+		#take_damage(9)
 		#if randi_range(0, 1) == 1:
 		#	inventory.pickup_item(load("res://Inventory/water.tres"))
 		#else:

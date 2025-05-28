@@ -1,24 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://cd3svdt2crxap"]
+[gd_scene load_steps=4 format=3 uid="uid://cd3svdt2crxap"]
 
 [ext_resource type="Texture2D" uid="uid://cgofr5ib1n3gq" path="res://Inventory/Sprites/spr_Potions1.png" id="1_fsafp"]
+[ext_resource type="Theme" uid="uid://d3ajvsrrbu1s5" path="res://UI/inventory.tres" id="1_twkkk"]
 [ext_resource type="Script" uid="uid://bbky2bir5aom7" path="res://Inventory/inv_button.gd" id="2_fsafp"]
 
 [node name="Button" type="Button"]
-offset_right = 95.0
+custom_minimum_size = Vector2(100, 0)
+offset_right = 122.0
 offset_bottom = 40.0
+theme = ExtResource("1_twkkk")
 text = "water"
 icon = ExtResource("1_fsafp")
-flat = true
 alignment = 0
-expand_icon = true
 script = ExtResource("2_fsafp")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
-offset_left = 1.0
-offset_top = 21.0
-offset_right = 11.0
-offset_bottom = 44.0
+offset_right = 10.0
+offset_bottom = 23.0
 theme_override_constants/outline_size = 6
 text = "0"
 horizontal_alignment = 2

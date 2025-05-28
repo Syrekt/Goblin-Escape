@@ -1,0 +1,156 @@
+[gd_scene load_steps=5 format=3 uid="uid://fgj6dmvmrowh"]
+
+[ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://UI/theme_button.tres" id="1_ucjbo"]
+[ext_resource type="Script" uid="uid://rjdyb70dvpio" path="res://Scripts/options_menu.gd" id="2_iopgn"]
+[ext_resource type="Script" uid="uid://bfd22kixp4ppo" path="res://Scripts/toggle_button.gd" id="2_ucjbo"]
+[ext_resource type="PackedScene" uid="uid://hvdtjmpwq6ji" path="res://UI/Buttons/button_keybind.tscn" id="3_iopgn"]
+
+[node name="OptionsMenu" type="TabContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 186.0
+offset_top = 42.0
+offset_right = -107.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ucjbo")
+current_tab = 0
+script = ExtResource("2_iopgn")
+
+[node name="Graphics" type="TabBar" parent="."]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Graphics"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Graphics/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Graphics/MarginContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Label" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="Fullscreen" type="CheckButton" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("2_ucjbo")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Resolution"
+
+[node name="Resolution" type="OptionButton" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "1280x720"
+popup/item_0/id = 0
+popup/item_1/text = "1920x1080"
+popup/item_1/id = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Pixel Perfect"
+
+[node name="PixelPerfect" type="CheckButton" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+script = ExtResource("2_ucjbo")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "Borderless"
+
+[node name="Borderless" type="CheckButton" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+script = ExtResource("2_ucjbo")
+
+[node name="Audio" type="TabBar" parent="."]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Controls" type="TabBar" parent="."]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Controls"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Controls/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/MarginContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 48
+
+[node name="ButtonKeybind" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+layout_mode = 2
+action_name = "up"
+
+[node name="ButtonKeybind2" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+layout_mode = 2
+action_name = "down"
+
+[node name="ButtonKeybind3" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+layout_mode = 2
+action_name = "left"
+
+[node name="ButtonKeybind4" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+layout_mode = 2
+action_name = "right"
+
+[node name="ButtonKeybind6" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+layout_mode = 2
+action_name = "attack"
+
+[node name="ButtonKeybind7" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+layout_mode = 2
+action_name = "run"
+
+[node name="ButtonKeybind8" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+layout_mode = 2
+action_name = "stance"
+
+[connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="item_selected" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/Resolution" to="." method="_on_option_button_item_selected"]
+[connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/PixelPerfect" to="." method="_on_pixel_perfect_toggled"]
+[connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/Borderless" to="." method="_on_borderless_toggled"]

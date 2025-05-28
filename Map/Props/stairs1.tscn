@@ -4,11 +4,11 @@
 
 [node name="Stairs1" type="CharacterBody2D" groups=["OneWayColliders"]]
 
+[node name="Shape" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-24, -23, 24, 9, 24, 27, -24, -6)
+one_way_collision = true
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_jx4pt")
 region_enabled = true
 region_rect = Rect2(480, 490, 48, 54)
-
-[node name="Shape" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-24, -23, 24, 9, 24, 27, -24, -6)
-one_way_collision = true

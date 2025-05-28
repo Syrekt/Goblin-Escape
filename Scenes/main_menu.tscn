@@ -1,13 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bobvdhwwqeoem"]
+[gd_scene load_steps=5 format=3 uid="uid://bobvdhwwqeoem"]
 
 [ext_resource type="Script" uid="uid://qeqsx8577ni3" path="res://Scripts/main_menu.gd" id="1_hj5dp"]
 [ext_resource type="Texture2D" uid="uid://cx2kdkmk8hhg6" path="res://UI/Goblin Escape - Title.png" id="2_2bpon"]
 [ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://UI/theme_button.tres" id="3_2kr8p"]
-[ext_resource type="PackedScene" uid="uid://hvdtjmpwq6ji" path="res://UI/Buttons/button_keybind.tscn" id="4_o26vq"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_klbse"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6iveg"]
+[ext_resource type="PackedScene" uid="uid://fgj6dmvmrowh" path="res://Objects/options_menu.tscn" id="4_ce3w2"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_hj5dp")
@@ -38,14 +34,16 @@ texture = ExtResource("2_2bpon")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = -1
-anchor_left = 0.041
-anchor_top = 0.624
-anchor_right = 0.041
-anchor_bottom = 0.624
-offset_left = -0.480003
-offset_top = -0.279999
-offset_right = 50.52
-offset_bottom = 49.72
+anchor_left = 0.039
+anchor_top = 0.5
+anchor_right = 0.278
+anchor_bottom = 0.928
+offset_left = -10.96
+offset_top = -113.0
+offset_right = -104.92
+offset_bottom = -193.08
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(3, 3)
 theme = ExtResource("3_2kr8p")
 alignment = 1
@@ -65,141 +63,12 @@ text = "Options"
 layout_mode = 2
 text = "Quit"
 
-[node name="OptionsMenu" type="TabContainer" parent="."]
-visible = false
-anchors_preset = -1
-anchor_left = 0.251
-anchor_top = 0.139
-anchor_right = 0.723
-anchor_bottom = 0.861
-offset_left = -0.280029
-offset_top = -0.0800095
-offset_right = -0.440063
-offset_bottom = 0.0799561
-grow_horizontal = 2
-grow_vertical = 2
-current_tab = 0
-
-[node name="Graphics" type="TabBar" parent="OptionsMenu"]
-layout_mode = 2
-metadata/_tab_index = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="OptionsMenu/Graphics"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 31.0
-offset_bottom = 15.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="ScrollContainer" type="ScrollContainer" parent="OptionsMenu/Graphics/MarginContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="OptionsMenu/Graphics/MarginContainer/ScrollContainer"]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="OptionsMenu/Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Button" type="Label" parent="OptionsMenu/Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Fullscreen"
-
-[node name="HSeparator" type="HSeparator" parent="OptionsMenu/Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxEmpty_klbse")
-
-[node name="CheckButton" type="CheckButton" parent="OptionsMenu/Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="OptionsMenu/Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="OptionsMenu/Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "Resolution"
-
-[node name="HSeparator" type="HSeparator" parent="OptionsMenu/Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxEmpty_6iveg")
-
-[node name="OptionButton" type="OptionButton" parent="OptionsMenu/Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-item_count = 2
-popup/item_0/text = "1280x720"
-popup/item_0/id = 0
-popup/item_1/text = "1920x1080"
-popup/item_1/id = 1
-
-[node name="Audio" type="TabBar" parent="OptionsMenu"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 1
-
-[node name="Controls" type="TabBar" parent="OptionsMenu"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="OptionsMenu/Controls"]
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 31.0
-offset_bottom = 15.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="ScrollContainer" type="ScrollContainer" parent="OptionsMenu/Controls/MarginContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="OptionsMenu/Controls/MarginContainer/ScrollContainer"]
-layout_mode = 2
-theme_override_constants/separation = 48
-
-[node name="ButtonKeybind" parent="OptionsMenu/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("4_o26vq")]
-layout_mode = 2
-action_name = "up"
-
-[node name="ButtonKeybind2" parent="OptionsMenu/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("4_o26vq")]
-layout_mode = 2
-action_name = "down"
-
-[node name="ButtonKeybind3" parent="OptionsMenu/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("4_o26vq")]
-layout_mode = 2
-action_name = "left"
-
-[node name="ButtonKeybind4" parent="OptionsMenu/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("4_o26vq")]
-layout_mode = 2
-action_name = "right"
-
-[node name="ButtonKeybind6" parent="OptionsMenu/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("4_o26vq")]
-layout_mode = 2
-action_name = "attack"
-
-[node name="ButtonKeybind7" parent="OptionsMenu/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("4_o26vq")]
-layout_mode = 2
-action_name = "run"
-
-[node name="ButtonKeybind8" parent="OptionsMenu/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("4_o26vq")]
-layout_mode = 2
-action_name = "stance"
+[node name="OptionsMenu" parent="." instance=ExtResource("4_ce3w2")]
+offset_left = 259.0
+offset_top = 33.0
+offset_right = -34.0
+offset_bottom = -24.0
 
 [connection signal="button_up" from="VBoxContainer/StartGame" to="." method="_on_start_game_button_up"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitGame" to="." method="_on_exit_game_pressed"]
-[connection signal="toggled" from="OptionsMenu/Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]
-[connection signal="item_selected" from="OptionsMenu/Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/OptionButton" to="." method="_on_option_button_item_selected"]

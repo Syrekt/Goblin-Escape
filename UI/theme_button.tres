@@ -7,16 +7,33 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b30vn"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nlykb"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5tl16"]
+texture = ExtResource("2_hv2ae")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8xby3"]
 texture = ExtResource("2_hv2ae")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v0qww"]
 texture = ExtResource("3_sukla")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7iji0"]
 texture = ExtResource("4_86jsb")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1cpqq"]
 
@@ -34,13 +51,18 @@ texture = ExtResource("4_86jsb")
 [resource]
 Button/fonts/font = ExtResource("1_kgf2r")
 Button/styles/disabled = SubResource("StyleBoxEmpty_b30vn")
-Button/styles/focus = SubResource("StyleBoxEmpty_nlykb")
+Button/styles/focus = SubResource("StyleBoxTexture_5tl16")
 Button/styles/hover = SubResource("StyleBoxTexture_8xby3")
 Button/styles/normal = SubResource("StyleBoxTexture_v0qww")
 Button/styles/pressed = SubResource("StyleBoxTexture_7iji0")
+CheckButton/fonts/font = ExtResource("1_kgf2r")
+Label/fonts/font = ExtResource("1_kgf2r")
 MenuButton/styles/disabled = SubResource("StyleBoxEmpty_1cpqq")
 MenuButton/styles/focus = SubResource("StyleBoxEmpty_dt138")
 MenuButton/styles/hover = SubResource("StyleBoxTexture_bi30w")
 MenuButton/styles/normal = SubResource("StyleBoxTexture_g00hn")
 MenuButton/styles/pressed = SubResource("StyleBoxTexture_wu7ve")
+OptionButton/fonts/font = ExtResource("1_kgf2r")
 RichTextLabel/fonts/normal_font = ExtResource("1_kgf2r")
+TabBar/fonts/font = ExtResource("1_kgf2r")
+TabContainer/fonts/font = ExtResource("1_kgf2r")

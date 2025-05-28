@@ -29,7 +29,7 @@ enum keyboard {
 	Z = 41,
 }
 
-@onready var label : Label = get_node("../CanvasLayer/InteractionLabel")
+@onready var label : Label = owner.find_child("InteractionLabel")
 
 var last_input_type := "keyboard"
 

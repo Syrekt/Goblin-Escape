@@ -1,4 +1,4 @@
-[gd_scene load_steps=271 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=273 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://b8a7c6m81s28t" path="res://Kalin/Sprites/Kalin-Death.png" id="4_g6dya"]
 [ext_resource type="Texture2D" uid="uid://cxy7gxvy3yrma" path="res://Kalin/Sprites/Kalin-Climb.png" id="4_xyrfg"]
 [ext_resource type="Texture2D" uid="uid://bx4id7wgw6s38" path="res://Kalin/Sprites/Kalin-Heavy Attack.png" id="6_ju88f"]
+[ext_resource type="Script" uid="uid://coti5wegr4tgt" path="res://Scripts/ui_control.gd" id="8_446pa"]
 [ext_resource type="Texture2D" uid="uid://dl4uq2pkst8rp" path="res://Kalin/Sprites/Kalin-Light Attack.png" id="9_2a2iq"]
 [ext_resource type="Texture2D" uid="uid://d37lg6g726j1r" path="res://Kalin/Sprites/Kalin-Def Stance.png" id="9_3wuxq"]
 [ext_resource type="Texture2D" uid="uid://p3oh0wc2s34d" path="res://Kalin/Sprites/Kalin-Hurt.png" id="9_e3nxf"]
@@ -45,7 +46,10 @@
 [ext_resource type="Texture2D" uid="uid://bxgpgvblnjqhg" path="res://Kalin/Sprites/Kalin-Walk.png" id="22_vnsvi"]
 [ext_resource type="Script" uid="uid://bgnnyj7i10wbg" path="res://Kalin/States/walk.gd" id="28_1dko0"]
 [ext_resource type="Texture2D" uid="uid://bq334bamr3mgu" path="res://Kalin/Sprites/Kalin-Slide.png" id="29_qnnkd"]
+[ext_resource type="Resource" uid="uid://br6rhvsa0swrd" path="res://Inventory/player_inventory_filled.tres" id="29_towol"]
 [ext_resource type="AudioStream" uid="uid://ds7af8tnix0pc" path="res://Sex/Sex Female Moan Soft.wav" id="31_cfvac"]
+[ext_resource type="Texture2D" uid="uid://bl5jujtf6kegu" path="res://UI/Inventory/Inventory panel1_with background.png" id="31_nhuj2"]
+[ext_resource type="PackedScene" uid="uid://cd3svdt2crxap" path="res://Inventory/inv_button.tscn" id="32_fb5pj"]
 [ext_resource type="Script" uid="uid://dkwpmjw6yg1bb" path="res://Kalin/States/stance_light.gd" id="33_ao24u"]
 [ext_resource type="Texture2D" uid="uid://dho48e1ix12qg" path="res://Kalin/Sprites/Kalin-Hurt-No-Sword.png" id="33_m1g60"]
 [ext_resource type="Script" uid="uid://cde3iqq141b2n" path="res://Kalin/States/run_stop.gd" id="34_lbmmt"]
@@ -69,7 +73,6 @@
 [ext_resource type="PackedScene" uid="uid://2s1ryg6qqqmc" path="res://Objects/hitbox.tscn" id="45_42hh8"]
 [ext_resource type="Shader" uid="uid://cld42ccrm5l65" path="res://Scripts/vignette.gdshader" id="45_cbw7l"]
 [ext_resource type="Texture2D" uid="uid://cywhcouoj6ral" path="res://Kalin/Sprites/Kalin-Stun.png" id="45_pat22"]
-[ext_resource type="Resource" uid="uid://buieik1hf8xh2" path="res://Inventory/player_inventory.tres" id="46_1q8gn"]
 [ext_resource type="Texture2D" uid="uid://bp5grpvcbv7uq" path="res://UI/Sliders/spr_healthbar1_empty.png" id="46_586st"]
 [ext_resource type="Texture2D" uid="uid://cnjxqb8coj4wg" path="res://UI/Sliders/spr_healthbar_light.png" id="47_80r2e"]
 [ext_resource type="Script" uid="uid://7g1nk1glip7t" path="res://Kalin/States/push_idle.gd" id="48_mwqkq"]
@@ -106,7 +109,6 @@
 [ext_resource type="Script" uid="uid://bys0lif7s6ub7" path="res://Kalin/States/hiding.gd" id="68_73qvi"]
 [ext_resource type="Script" uid="uid://dx8nksauci2pa" path="res://Kalin/States/hide.gd" id="68_y0qhg"]
 [ext_resource type="Texture2D" uid="uid://ivtf26n1fq7g" path="res://UI/Inventory/Inventory panel1_no background.png" id="69_wl0wu"]
-[ext_resource type="Texture2D" uid="uid://cfwmxwk10j6i2" path="res://UI/Inventory/Inventory panel1_background.png" id="70_6gnwp"]
 [ext_resource type="Script" uid="uid://c67j1elfon2jo" path="res://Kalin/States/unhide.gd" id="70_egy32"]
 [ext_resource type="Texture2D" uid="uid://bwph1b63ujc3r" path="res://UI/buttons_keyboard.png" id="71_a00wu"]
 [ext_resource type="Theme" uid="uid://d3ajvsrrbu1s5" path="res://UI/inventory.tres" id="72_qdj7c"]
@@ -884,31 +886,31 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("../CanvasLayer/HUD/Control/Stamina:modulate")
+tracks/9/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [1.0]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/10/path = NodePath("%Sprite2D/..:dead")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
+"update": 1,
+"values": [false]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("%Sprite2D/..:dead")
+tracks/11/path = NodePath("%Sprite2D/..:unconscious")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -920,7 +922,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("%Sprite2D/..:unconscious")
+tracks/12/path = NodePath("%Sprite2D/..:power_crush")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -932,19 +934,19 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("%Sprite2D/..:power_crush")
+tracks/13/path = NodePath("../StateMachine/bash_no_sword/Hitbox/Collider:disabled")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("../StateMachine/bash_no_sword/Hitbox/Collider:disabled")
+tracks/14/path = NodePath("%Sprite2D/../StateMachine/slash/SlashHitbox/Collider:disabled")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -956,7 +958,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("%Sprite2D/../StateMachine/slash/SlashHitbox/Collider:disabled")
+tracks/15/path = NodePath("%Sprite2D/../StateMachine/stab/StabHitbox/Collider:disabled")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -968,22 +970,10 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("%Sprite2D/../StateMachine/stab/StabHitbox/Collider:disabled")
+tracks/16/path = NodePath("%Sprite2D/../StateMachine/death/SexParticipantCollider/CollisionShape2D:disabled")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/17/type = "value"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("%Sprite2D/../StateMachine/death/SexParticipantCollider/CollisionShape2D:disabled")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -3983,7 +3973,6 @@ snap_offset = Vector2(-17, 3)
 
 [node name="PhantomCamera2D" type="Node2D" parent="."]
 script = ExtResource("2_f2sxn")
-zoom = Vector2(3, 3)
 tween_resource = SubResource("Resource_446pa")
 tween_on_load = false
 draw_limits = true
@@ -3991,7 +3980,6 @@ metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-zoom = Vector2(3, 3)
 process_callback = 0
 editor_draw_limits = true
 script = ExtResource("2_0g2co")
@@ -4004,7 +3992,6 @@ script = ExtResource("2_0bx81")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="UIFocus" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 15
@@ -4024,30 +4011,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HUD" type="Control" parent="CanvasLayer"]
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer2"]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -640.0
-offset_top = -360.0
-offset_right = 1280.0
-offset_bottom = 720.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(4, 4)
 
-[node name="Control" type="Control" parent="CanvasLayer/HUD"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Health" type="TextureProgressBar" parent="CanvasLayer/HUD/Control" groups=["Persistent"]]
-layout_mode = 2
-offset_right = 108.0
-offset_bottom = 22.0
+[node name="Health" type="TextureProgressBar" parent="CanvasLayer2/HUD" groups=["Persistent"]]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 12.0
+offset_right = 95.0
+offset_bottom = 34.0
 max_value = 10.0
 step = 0.0
 value = 10.0
@@ -4058,12 +4037,12 @@ script = ExtResource("43_uhoyi")
 buff_sprite = ExtResource("10_pxbrw")
 debuff_sprite = ExtResource("11_4inu4")
 
-[node name="Stamina" type="TextureProgressBar" parent="CanvasLayer/HUD/Control"]
+[node name="Stamina" type="TextureProgressBar" parent="CanvasLayer2/HUD"]
 layout_mode = 2
-offset_left = 24.0
-offset_top = 16.75
-offset_right = 132.0
-offset_bottom = 25.75
+offset_left = 38.0
+offset_top = 31.0
+offset_right = 102.0
+offset_bottom = 40.0
 max_value = 5.0
 step = 0.0
 value = 5.0
@@ -4075,11 +4054,11 @@ script = ExtResource("60_2ksh1")
 buff_sprite = ExtResource("10_pxbrw")
 debuff_sprite = ExtResource("11_4inu4")
 
-[node name="Timer" type="Timer" parent="CanvasLayer/HUD/Control/Stamina"]
+[node name="Timer" type="Timer" parent="CanvasLayer2/HUD/Stamina"]
 one_shot = true
 autostart = true
 
-[node name="BuffContainer" type="HBoxContainer" parent="CanvasLayer/HUD/Control/Stamina"]
+[node name="BuffContainer" type="HBoxContainer" parent="CanvasLayer2/HUD/Stamina"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.028
@@ -4092,36 +4071,36 @@ offset_right = 57.98
 offset_bottom = 7.996
 scale = Vector2(0.5, 0.5)
 
-[node name="Experience" type="TextureProgressBar" parent="CanvasLayer/HUD/Control" groups=["Persistent"]]
+[node name="Experience" type="TextureProgressBar" parent="CanvasLayer2/HUD" groups=["Persistent"]]
 layout_mode = 2
-offset_left = 21.0
-offset_top = 16.0
-offset_right = 129.0
-offset_bottom = 19.0
+offset_left = 35.0
+offset_top = 28.0
+offset_right = 143.0
+offset_bottom = 31.0
 step = 0.0
 texture_under = ExtResource("54_80r2e")
 texture_progress = ExtResource("55_rbk27")
 tint_progress = Color(0.199724, 0.454105, 0.22321, 1)
 script = ExtResource("50_083qx")
 
-[node name="Arousal" type="TextureProgressBar" parent="CanvasLayer/HUD/Control" groups=["Persistent"]]
+[node name="Arousal" type="TextureProgressBar" parent="CanvasLayer2/HUD" groups=["Persistent"]]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 7.0
-offset_right = 75.0
-offset_bottom = 10.0
+offset_left = 64.0
+offset_top = 19.0
+offset_right = 89.0
+offset_bottom = 22.0
 step = 0.0
 texture_under = ExtResource("57_rbk27")
 texture_progress = ExtResource("58_yofsr")
 tint_progress = Color(0.474366, 0.00173617, 0.698302, 1)
 script = ExtResource("48_yekxk")
 
-[node name="Smell" type="TextureProgressBar" parent="CanvasLayer/HUD/Control"]
+[node name="Smell" type="TextureProgressBar" parent="CanvasLayer2/HUD"]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 7.0
-offset_right = 40.0
-offset_bottom = 10.0
+offset_left = 34.0
+offset_top = 19.0
+offset_right = 54.0
+offset_bottom = 22.0
 step = 0.0
 texture_under = ExtResource("60_1yslh")
 texture_progress = ExtResource("61_5atg1")
@@ -4130,17 +4109,19 @@ script = ExtResource("55_h4isg")
 buff_sprite = ExtResource("10_pxbrw")
 debuff_sprite = ExtResource("11_4inu4")
 
-[node name="InventoryPanel" type="PanelContainer" parent="CanvasLayer" groups=["UIPanel"]]
-offset_top = 138.0
-offset_right = 226.0
-offset_bottom = 559.0
+[node name="InventoryPanel" type="PanelContainer" parent="CanvasLayer2" groups=["UIPanel"]]
+custom_minimum_size = Vector2(122, 312)
+offset_top = 48.0
+offset_right = 122.0
+offset_bottom = 208.0
 focus_mode = 2
+mouse_filter = 1
 theme = ExtResource("72_qdj7c")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_exvqe")
 script = ExtResource("73_ugwbb")
-inventory = ExtResource("46_1q8gn")
+inventory = ExtResource("29_towol")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/InventoryPanel"]
+[node name="FG" type="NinePatchRect" parent="CanvasLayer2/InventoryPanel"]
 layout_mode = 2
 texture = ExtResource("69_wl0wu")
 patch_margin_left = 24
@@ -4151,26 +4132,22 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/InventoryPanel/NinePatchRect"]
+[node name="BG" type="NinePatchRect" parent="CanvasLayer2/InventoryPanel"]
 self_modulate = Color(1, 1, 1, 0.5)
-layout_mode = 0
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 219.0
-offset_bottom = 414.0
-texture = ExtResource("70_6gnwp")
-region_rect = Rect2(9, 9, 42, 42)
-patch_margin_left = 9
-patch_margin_top = 9
-patch_margin_right = 9
-patch_margin_bottom = 9
+layout_mode = 2
+texture = ExtResource("31_nhuj2")
+region_rect = Rect2(0, 0, 60, 60)
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 24
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/InventoryPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/InventoryPanel"]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/InventoryPanel/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer2/InventoryPanel/MarginContainer"]
 layout_mode = 2
 focus_mode = 2
 theme = ExtResource("72_qdj7c")
@@ -4178,26 +4155,39 @@ follow_focus = true
 draw_focus_border = true
 horizontal_scroll_mode = 0
 
-[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer/InventoryPanel/MarginContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/InventoryPanel/MarginContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 0
+
+[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer2/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DescriptionPanel" type="PanelContainer" parent="CanvasLayer"]
+[node name="Button" parent="CanvasLayer2/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer/ButtonContainer" instance=ExtResource("32_fb5pj")]
+clip_contents = true
+layout_mode = 2
+text = "waterasdaasdasdsa"
+text_overrun_behavior = 3
+
+[node name="DescriptionPanel" type="PanelContainer" parent="CanvasLayer2"]
+custom_minimum_size = Vector2(224, 95)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -160.0
-offset_top = -208.0
-offset_right = 160.0
-offset_bottom = -72.0
+offset_left = -112.0
+offset_top = -95.0
+offset_right = 112.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("72_qdj7c")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_cbw7l")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/DescriptionPanel"]
+[node name="FG" type="NinePatchRect" parent="CanvasLayer2/DescriptionPanel"]
 layout_mode = 2
 texture = ExtResource("69_wl0wu")
 region_rect = Rect2(0, 0, 60, 60)
@@ -4209,38 +4199,34 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/DescriptionPanel/NinePatchRect"]
+[node name="BG" type="NinePatchRect" parent="CanvasLayer2/DescriptionPanel"]
 self_modulate = Color(1, 1, 1, 0.7)
-layout_mode = 0
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 313.0
-offset_bottom = 129.0
-texture = ExtResource("70_6gnwp")
-region_rect = Rect2(9, 9, 42, 42)
-patch_margin_left = 9
-patch_margin_top = 9
-patch_margin_right = 9
-patch_margin_bottom = 9
+layout_mode = 2
+texture = ExtResource("31_nhuj2")
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 24
+metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/DescriptionPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/DescriptionPanel"]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="DescriptionText" type="RichTextLabel" parent="CanvasLayer/DescriptionPanel/MarginContainer"]
+[node name="DescriptionText" type="RichTextLabel" parent="CanvasLayer2/DescriptionPanel/MarginContainer"]
 layout_mode = 2
 bbcode_enabled = true
 text = "[color=red]This is the description text[/color]"
 
-[node name="CharacterPanel" type="PanelContainer" parent="CanvasLayer" groups=["UIPanel"]]
+[node name="CharacterPanel" type="PanelContainer" parent="CanvasLayer2" groups=["UIPanel"]]
 visible = false
 offset_left = 315.0
 offset_top = 127.0
 offset_right = 525.0
-offset_bottom = 298.0
+offset_bottom = 315.0
 theme = ExtResource("56_ghu8e")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/CharacterPanel"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer2/CharacterPanel"]
 layout_mode = 2
 texture = ExtResource("73_qdj7c")
 region_rect = Rect2(0, 0, 44, 44)
@@ -4252,48 +4238,49 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CharacterPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/CharacterPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CharacterPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/CharacterPanel/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 28
 
-[node name="Strength" parent="CanvasLayer/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+[node name="Strength" parent="CanvasLayer2/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
 layout_mode = 2
 
-[node name="Dexterity" parent="CanvasLayer/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+[node name="Dexterity" parent="CanvasLayer2/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
 layout_mode = 2
 
-[node name="Endurance" parent="CanvasLayer/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+[node name="Endurance" parent="CanvasLayer2/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
 layout_mode = 2
 
-[node name="Vitality" parent="CanvasLayer/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+[node name="Vitality" parent="CanvasLayer2/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/CharacterPanel/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer2/CharacterPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_t42fh")
 
-[node name="StatPoints" type="Label" parent="CanvasLayer/CharacterPanel/MarginContainer/VBoxContainer"]
+[node name="StatPoints" type="Label" parent="CanvasLayer2/CharacterPanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Stat Points"
 
-[node name="ThoughtContainer" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 24.0
-offset_top = 272.0
-offset_right = 444.0
-offset_bottom = 477.0
-scale = Vector2(2, 2)
+[node name="ThoughtContainer" type="VBoxContainer" parent="CanvasLayer2"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 alignment = 2
 script = ExtResource("49_b2c13")
 
-[node name="InteractionLabel" type="Label" parent="CanvasLayer"]
+[node name="InteractionLabel" type="Label" parent="CanvasLayer2"]
 offset_left = 974.0
 offset_top = 616.0
 offset_right = 1172.0
@@ -4301,6 +4288,17 @@ offset_bottom = 644.0
 theme = ExtResource("56_ghu8e")
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(480, 270)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(240, 135)
+script = ExtResource("8_446pa")
 
 [node name="StateMachine" parent="." groups=["Flip"] instance=ExtResource("9_ojhio")]
 visible = false
@@ -4661,6 +4659,7 @@ shape = SubResource("CircleShape2D_rbk27")
 [connection signal="body_entered" from="ThreatCollider" to="." method="_on_threat_collider_body_entered"]
 [connection signal="body_entered" from="SmellCollider" to="." method="_on_smell_collider_body_entered"]
 
+[editable path="CanvasLayer2/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer/ButtonContainer/Button"]
 [editable path="StateMachine/slash/SlashHitbox"]
 [editable path="StateMachine/stab/StabHitbox"]
 [editable path="StateMachine/bash/BashHitbox"]

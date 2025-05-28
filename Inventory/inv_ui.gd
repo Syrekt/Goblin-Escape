@@ -1,11 +1,11 @@
 extends PanelContainer
 
-@onready var vbox : VBoxContainer = $MarginContainer/ScrollContainer/ButtonContainer
-@onready var slots : Array = $MarginContainer/ScrollContainer/ButtonContainer.get_children()
+@onready var vbox : VBoxContainer = find_child("ButtonContainer") #$MarginContainer/ScrollContainer/ButtonContainer
+@onready var slots : Array = vbox.get_children()
 @onready var button_scene = preload("res://Inventory/inv_button.tscn")
-@onready var ui_focus : ColorRect = get_node("../UIFocus")
-@onready var description_panel : PanelContainer = get_node("../DescriptionPanel")
-@onready var description_text : RichTextLabel = get_node("../DescriptionPanel/MarginContainer/DescriptionText")
+@onready var ui_focus : ColorRect = owner.find_child("UIFocus")
+@onready var description_panel : PanelContainer = owner.find_child("DescriptionPanel")
+@onready var description_text : RichTextLabel = owner.find_child("DescriptionText")
 @onready var scroll_bar = $MarginContainer/ScrollContainer
 
 @export var inventory : Inventory
