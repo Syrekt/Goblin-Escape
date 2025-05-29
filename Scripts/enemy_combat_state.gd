@@ -4,7 +4,7 @@ class_name EnemyCombatState extends EnemyState
 @export var attack_state : EnemyState
 @export var stance_time := 1.0
 @export var attack_time := 0.5
-@export var debug_stance : String
+@export var debug_stance : String ##Debug stance to transition on stance timer timeout
 
 var timer : Timer
 
@@ -35,11 +35,14 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func exit():
 	timer.stop()
-	if timer._on_stance_timer_timeout.is_connected():
-		timer._on_stance_timer_timeout.disconnect()
-	if timer._on_attack_timer_timeout.is_connected():
-		timer._on_attack_timer_timeout.disconnect()
+	if timer.timeout.is_connected(_on_stance_timer_timeout):
+		print("disconnect stance timer timeout")
+		timer.timeout.disconnect(_on_stance_timer_timeout)
+	if timer.timeout.is_connected(_on_attack_timer_timeout):
+		print("disconnect attack timer timeout")
+		timer.timeout.disconnect(_on_attack_timer_timeout)
 	timer.call_deferred("queue_free")
+	enemy.wait_animation_transition = true
 
 func _update(delta: float) -> bool:
 	if !enemy.chase_target:

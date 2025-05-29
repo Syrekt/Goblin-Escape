@@ -232,3 +232,5 @@ func play_particle(res: Resource, position: Vector2, dir := 1, rot := 0) -> void
 		particle.z_index = 1
 
 	add_child(particle_controller)
+func dir_towards(from: Node2D, to: Node2D) -> int:
+	return sign(to.global_position.x - from.global_position.x)

@@ -234,6 +234,15 @@ item = ExtResource("12_6xxbj")
 [node name="Goblin" parent="Enemies" instance=ExtResource("15_yyayg")]
 position = Vector2(3320, 432)
 
-[node name="Goblin2" parent="Enemies" instance=ExtResource("15_yyayg")]
-position = Vector2(6216, 608)
-patrolling = true
+[node name="Goblin2" parent="Enemies" node_paths=PackedStringArray("patrol_points") instance=ExtResource("15_yyayg")]
+position = Vector2(5887, 609)
+debug = true
+patrol_points = [NodePath("Marker2D2"), NodePath("Marker2D")]
+facing = -1
+metadata/_edit_lock_ = true
+
+[node name="Marker2D" type="Marker2D" parent="Enemies/Goblin2"]
+position = Vector2(-250, -1)
+
+[node name="Marker2D2" type="Marker2D" parent="Enemies/Goblin2"]
+position = Vector2(1, -1)

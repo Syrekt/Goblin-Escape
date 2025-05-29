@@ -16,6 +16,8 @@ const RUN_SPEED = 300.0 * 60
 #The one with the assigned values will control the conversation and behavior
 @export var chatting := false
 @export var friend : CharacterBody2D
+@export var patrol_points : Array[Marker2D]
+var current_patrol_point : Marker2D
 
 var patrol_amount := 0
 
@@ -35,6 +37,10 @@ var dealth_finishing_blow := false
 var attack_type_taken : Array[String]
 
 signal health_depleted
+
+#This is used to prevent finishing a state when previous states animation finishes in new state
+#before it changes the animation
+var wait_animation_transition := false 
 
 @onready var animation_player   = $AnimationPlayer
 @onready var sprite			    = $Sprite2D
@@ -57,7 +63,7 @@ signal heard_noise(id: Enemy)
 #region Methods
 func set_facing(dir: int):
 	dir = sign(dir)
-	if dir == 0: pass
+	if dir == 0: return
 
 	facing = dir
 	var local_nodes = find_children("*", "Node", true).filter(func(n): return n.is_in_group("Flip"))
@@ -84,11 +90,11 @@ func take_damage(_damage : int, _source: Node2D = null, critical := false):
 			Ge.bleed_gush(global_position, -incoming_dir)
 		else:
 			Ge.bleed_spurt(global_position, -incoming_dir)
-		update_los(_source)
-		var attack_type = _source.state_node.state.name
-		attack_type_taken.append(attack_type)
+
 		if _source is Player:
-			chase_target = _source
+			var attack_type = _source.state_node.state.name
+			attack_type_taken.append(attack_type)
+			await detect_player(_source)
 		if health.value > 0:
 			set_facing(incoming_dir)
 func next_step_free(direction : int) -> bool:
@@ -107,7 +113,10 @@ func move(speed: float, direction: int) -> bool:
 
 	return velocity.x != 0
 func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
+	wait_animation_transition = false
+	print("Called update_animation")
 	if animation_player.current_animation != anim:
+		print("Play animation: " + anim)
 		animation_player.play(&"RESET");
 		animation_player.advance(0)
 		animation_player.play(anim, -1, speed, from_end)
@@ -130,16 +139,26 @@ func hear_noise(noise: Node2D) -> void:
 
 	$NoiseIgnoreTimer.start()
 func smell(source: Player):
-	aware = true
-
 	if !chase_target: match state_node.state.name:
 		"idle", "chat_lead", "patrol":
 			state_node.state.finished.emit("smell")
 
-func update_los(target: CharacterBody2D) -> void:
+func detect_player(target: CharacterBody2D) -> void:
 	var pos = target.global_position
 	line_of_sight.target_position = line_of_sight.to_local(pos)
 	await get_tree().physics_frame
+	if line_of_sight.is_colliding():
+		if chase_target:
+			print("line of sight blocked to chase target")
+			chase_target = null
+			awareness_timer.start()
+	else:
+		if !awareness_timer.is_stopped(): awareness_timer.stop()
+		chase_target = target
+		aware = true
+		if chase_target.combat_target != self:
+			chase_target.combat_target = self
+		
 func lost_target() -> void:
 	#CHANGES STATE
 	emote_emitter.play("confused")
@@ -151,20 +170,29 @@ func save() -> Dictionary:
 		"pos_y" : global_position.y,
 	}
 	return save_dict
+func update_patrol_point() -> void:
+	var new_point = patrol_points.pick_random()
+	while new_point == current_patrol_point:
+		new_point = patrol_points.pick_random()
+	current_patrol_point = new_point
 #endregion
 #region Animation end
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if wait_animation_transition: return
 	var state = state_node.state
 	var state_name = state.name
 
 	match state_name:
 		"slash", "stab", "bash":
+			print("attack anim finished")
+			print("animation_player.current_animation_position: "+str(animation_player.current_animation_position));
 			state.finished.emit(main_stance.name)
 		"hurt":
 			var n = randi() % 3
 			print("n: "+str(n))
 			if n && attack_type_taken.size() > 0:
 				var attack_to_counter = attack_type_taken.pick_random()
+				print("attack_to_counter: "+str(attack_to_counter))
 				match attack_to_counter:
 					"slash":
 						state.finished.emit("stance_light")
@@ -173,7 +201,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 							state.finished.emit("stance_defensive")
 						else:
 							state.finished.emit(["stance_light", "stance_heavy"].pick_random())
-					"bash":
+					"bash", "bash_no_sword":
 						state.finished.emit("stance_heavy")
 			else:
 				state.finished.emit(main_stance.name)
@@ -194,21 +222,19 @@ func _ready() -> void:
 	$Sprite2D.scale.x = 1
 	set_facing(facing)
 	heard_noise.connect(player.enemy_heard_noise)
+	if patrol_points.size() > 0:
+		current_patrol_point = patrol_points[0]
 func _physics_process(delta: float) -> void:
-	if player_in_range && !player.hiding && (!player.invisible || aware):
-		aware = true
-		await update_los(player)
-		if line_of_sight.is_colliding():
-			print("line of sight blocked to chase target")
-			chase_target = null
-			awareness_timer.start()
-		else:
-			chase_target = player
-			if !chase_target.combat_target:
-				chase_target.combat_target = self
-	elif chase_target:
-		print("player isn't in range or invisible, aware: "+str(aware))
-		chase_target = null
+	if chase_target:
+		await detect_player(player)
+	elif player_in_range:
+		if player.hiding:
+			pass
+		elif aware:
+			await detect_player(player)
+		elif player.invisible:
+			pass
+
 	if debug:
 		Debugger.printui("State: "+str(state_node.state.name));
 		Debugger.printui("player_in_range: "+str(player_in_range))
@@ -256,10 +282,11 @@ func _on_health_depleted() -> void:
 	state_node.state.finished.emit("death")
 	player.experience.add(10)
 func _on_chase_detector_body_entered(body:Node2D) -> void:
+	print("player body entered in chase detector")
 	player_in_range = true
 	awareness_timer.stop()
 func _on_chase_range_body_exited(body:Node2D) -> void:
-	print("player body exited")
+	print("player body exited chase range")
 	player_in_range = false
 	if awareness_timer.is_inside_tree():
 		awareness_timer.start()
@@ -276,5 +303,7 @@ func _on_threat_collider_body_entered(body:Node2D) -> void:
 	Ge.bleed_gush(global_position, 1)
 func _on_player_proximity_body_entered(body:Node2D) -> void:
 	aware = true
+	chase_target = body
+	player_in_range = true
 	#awareness_timer.start()
 #endregion

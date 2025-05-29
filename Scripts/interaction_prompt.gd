@@ -60,7 +60,6 @@ func _show(title := "") -> void:
 					play("keyboard")
 					frame = keyboard[interaction_prompt]
 			elif event is InputEventJoypadButton:
-				print("Gamepad Button " + str(event.button_index))
 				if last_input_type == "gamepad":
 					play("xbox")
 					frame = event.button_index

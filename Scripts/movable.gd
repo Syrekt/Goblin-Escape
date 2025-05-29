@@ -34,8 +34,6 @@ func _physics_process(delta: float) -> void:
 	falling = velocity.y != 0
 func _process(delta: float) -> void:
 	var is_moving = velocity.x != 0
-	Debugger.printui("is_moving: "+str(is_moving))
-	Debugger.printui("was_moving: "+str(was_moving))
 	if is_moving && !was_moving:
 		if !audio_emitter.playing:
 			audio_emitter.stream = slide_sfx
