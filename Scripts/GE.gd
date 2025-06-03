@@ -10,6 +10,8 @@ var crouch_key : String
 
 var loading := false
 
+var camera_focus : Node2D
+
 signal show_combat_tutorial
 signal show_stealth_tutorial
 
@@ -203,7 +205,7 @@ func slow_mo(amount: float, time: float) -> void:
 	tween_slow_mo.tween_property(Engine, "time_scale", 1, time)
 func kill_slow_mo() -> void:
 	Engine.time_scale = 1.0
-	if tween_slow_mo.is_running():
+	if tween_slow_mo && tween_slow_mo.is_running():
 		tween_slow_mo.kill()
 		tween_slow_mo = null
 var bleed_burst_scene = load("res://VFX/blood_spurt.tscn")
@@ -234,3 +236,17 @@ func play_particle(res: Resource, position: Vector2, dir := 1, rot := 0) -> void
 	add_child(particle_controller)
 func dir_towards(from: Node2D, to: Node2D) -> int:
 	return sign(to.global_position.x - from.global_position.x)
+func set_camera_focus() -> void:
+	var player = get_tree().current_scene.find_child("Kalin")
+	var pcam : PhantomCamera2D = player.find_child("PhantomCamera2D")
+	pcam.follow_mode = pcam.FollowMode.GROUP
+	var targets : Array[Node2D] = [player, camera_focus]
+	pcam.append_follow_targets_array(targets)
+	await get_tree().create_timer(0.5).timeout
+func reset_camera_focus() -> void:
+	var player = get_tree().current_scene.find_child("Kalin")
+	var pcam : PhantomCamera2D = player.find_child("PhantomCamera2D")
+	pcam.erase_follow_targets(camera_focus)
+	pcam.follow_mode = pcam.FollowMode.SIMPLE
+	pcam.set_follow_target(player)
+	await get_tree().create_timer(0.5).timeout

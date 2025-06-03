@@ -17,9 +17,6 @@ func enter(previous_state_path: String, data := {}) -> void:
 	timer.one_shot = true
 	add_child(timer)
 	
-	if !%AttackDetector.has_overlapping_bodies():
-		finished.emit("chase")
-		return
 
 	var is_main_stance = enemy.main_stance == self
 	if is_main_stance:
@@ -42,7 +39,6 @@ func exit():
 		print("disconnect attack timer timeout")
 		timer.timeout.disconnect(_on_attack_timer_timeout)
 	timer.call_deferred("queue_free")
-	enemy.wait_animation_transition = true
 
 func _update(delta: float) -> bool:
 	if !enemy.chase_target:
@@ -63,15 +59,24 @@ func _update(delta: float) -> bool:
 	#		return true
 
 	enemy.set_facing(sign(enemy.chase_target.global_position.x - enemy.global_position.x))
+
 	return false
 
 
 func _on_stance_timer_timeout() -> void:
-	print("stance timer timeout")
+	if !%AttackDetector.has_overlapping_bodies():
+		finished.emit("chase")
+		#finished.emit(attack_state.name, {"step_forward": true})
+		return
+	enemy.wait_animation_transition = true
 	if debug_stance != "":
 		finished.emit(debug_stance)
 	else:
 		finished.emit(transitions.pick_random().name)
 func _on_attack_timer_timeout() -> void:
-	print("attack timer timeout")
+	if !%AttackDetector.has_overlapping_bodies():
+		finished.emit("chase")
+		#finished.emit(attack_state.name, {"step_forward": true})
+		return
+	enemy.wait_animation_transition = true
 	finished.emit(attack_state.name)

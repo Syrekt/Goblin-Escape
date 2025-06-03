@@ -15,6 +15,7 @@ script = ExtResource("1_1eomc")
 title = "Hide/Unhide"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_1eomc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -22,6 +23,7 @@ texture = ExtResource("1_c7xb2")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 visible = false
+position = Vector2(0, 11)
 texture = ExtResource("3_knk02")
 hframes = 15
 frame = 14

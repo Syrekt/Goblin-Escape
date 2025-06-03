@@ -4040,11 +4040,15 @@ script = ExtResource("1_tpqnq")
 slide_speed = 200.0
 snap_offset = Vector2(-17, 3)
 
-[node name="PhantomCamera2D" type="Node2D" parent="."]
+[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+top_level = true
 script = ExtResource("2_f2sxn")
+follow_mode = 2
+follow_target = NodePath("..")
 snap_to_pixel = true
 tween_resource = SubResource("Resource_446pa")
 tween_on_load = false
+follow_damping = true
 draw_limits = true
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 

@@ -571,6 +571,20 @@ tracks/5/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../StateMachine/stab")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_hit_frame"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_yed1v"]
 resource_name = "stance_heavy"
@@ -888,12 +902,14 @@ scale = Vector2(2.632, 1.355)
 [node name="stance_heavy" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state") groups=["CombatStance"]]
 script = ExtResource("27_wo02b")
 attack_state = NodePath("../slash")
+attack_time = 0.3
 
 [node name="stance_light" type="Node" parent="StateMachine" node_paths=PackedStringArray("transitions", "attack_state") groups=["CombatStance"]]
 script = ExtResource("28_jm82n")
 transitions = [NodePath("../stance_heavy")]
 attack_state = NodePath("../stab")
-attack_time = 0.75
+stance_time = 0.5
+attack_time = 0.2
 
 [node name="stun" type="Node" parent="StateMachine"]
 script = ExtResource("30_wgjhe")

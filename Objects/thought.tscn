@@ -20,6 +20,7 @@ color = Color(0, 0, 0, 0.168627)
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
 texture = ExtResource("2_v5quw")
+flip_h = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

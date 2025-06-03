@@ -1,9 +1,124 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxriomae5diar"]
+[gd_scene load_steps=22 format=3 uid="uid://dxriomae5diar"]
 
 [ext_resource type="Script" uid="uid://b6kmsohrw028d" path="res://Scripts/checkpoint.gd" id="1_gcwsm"]
 [ext_resource type="AudioStream" uid="uid://b3034fi8yhlhk" path="res://SFX/Water_Fountain_Fienup_002.wav" id="2_4jiqy"]
+[ext_resource type="Texture2D" uid="uid://baxrv6778dioa" path="res://Map/Props/spr_fountain2_stip5.png" id="3_no5uu"]
+[ext_resource type="Texture2D" uid="uid://48ypnvr2g67o" path="res://Map/Props/spr_fountain_stip7.png" id="4_m6be8"]
+[ext_resource type="Texture2D" uid="uid://d2uhikpas8u7s" path="res://Others/light.png" id="5_m6be8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bv8qh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_no5uu"]
+atlas = ExtResource("3_no5uu")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtu3l"]
+atlas = ExtResource("3_no5uu")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scm76"]
+atlas = ExtResource("3_no5uu")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gu81"]
+atlas = ExtResource("3_no5uu")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f50ug"]
+atlas = ExtResource("3_no5uu")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qw2p"]
+atlas = ExtResource("3_no5uu")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ncdgf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_no5uu")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtu3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scm76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gu81")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f50ug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qw2p")
+}],
+"loop": false,
+"name": &"save",
+"speed": 9.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7yl5"]
+atlas = ExtResource("4_m6be8")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4fnj"]
+atlas = ExtResource("4_m6be8")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rd083"]
+atlas = ExtResource("4_m6be8")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xl61h"]
+atlas = ExtResource("4_m6be8")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4tye"]
+atlas = ExtResource("4_m6be8")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwpxw"]
+atlas = ExtResource("4_m6be8")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gf727"]
+atlas = ExtResource("4_m6be8")
+region = Rect2(600, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wlo6k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7yl5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4fnj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rd083")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xl61h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4tye")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwpxw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gf727")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
 
 [node name="Checkpoint" type="Area2D"]
 collision_layer = 64
@@ -17,3 +132,69 @@ shape = SubResource("RectangleShape2D_bv8qh")
 stream = ExtResource("2_4jiqy")
 autoplay = true
 max_distance = 256.0
+
+[node name="UpperSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ncdgf")
+animation = &"save"
+autoplay = "default"
+
+[node name="LowerSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wlo6k")
+autoplay = "default"
+frame_progress = 0.769342
+
+[node name="PointLight2D" type="PointLight2D" parent="." groups=["lights"]]
+position = Vector2(0, -27)
+scale = Vector2(0.199219, 0.199219)
+color = Color(0.258824, 0.301961, 0.662745, 1)
+texture = ExtResource("5_m6be8")
+
+[node name="PointLight2D2" type="PointLight2D" parent="." groups=["lights"]]
+position = Vector2(9, -21)
+scale = Vector2(0.123047, 0.123047)
+color = Color(0.258824, 0.301961, 0.662745, 1)
+texture = ExtResource("5_m6be8")
+
+[node name="PointLight2D3" type="PointLight2D" parent="." groups=["lights"]]
+position = Vector2(14, -13)
+scale = Vector2(0.123047, 0.123047)
+color = Color(0.258824, 0.301961, 0.662745, 1)
+texture = ExtResource("5_m6be8")
+
+[node name="PointLight2D4" type="PointLight2D" parent="." groups=["lights"]]
+position = Vector2(14, -7)
+scale = Vector2(0.123047, 0.123047)
+color = Color(0.258824, 0.301961, 0.662745, 1)
+texture = ExtResource("5_m6be8")
+
+[node name="PointLight2D5" type="PointLight2D" parent="." groups=["lights"]]
+position = Vector2(-15, -7)
+scale = Vector2(0.123047, 0.123047)
+color = Color(0.258824, 0.301961, 0.662745, 1)
+texture = ExtResource("5_m6be8")
+
+[node name="PointLight2D6" type="PointLight2D" parent="." groups=["lights"]]
+position = Vector2(-15, -14)
+scale = Vector2(0.123047, 0.123047)
+color = Color(0.258824, 0.301961, 0.662745, 1)
+texture = ExtResource("5_m6be8")
+
+[node name="PointLight2D7" type="PointLight2D" parent="." groups=["lights"]]
+position = Vector2(-9, -21)
+scale = Vector2(0.123047, 0.123047)
+color = Color(0.258824, 0.301961, 0.662745, 1)
+texture = ExtResource("5_m6be8")
+
+[node name="SpawnPoints" type="Node" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-25, 29)
+
+[node name="Marker2D2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-7, 33)
+
+[node name="Marker2D3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(11, 32)
+
+[node name="Marker2D4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(25, 29)

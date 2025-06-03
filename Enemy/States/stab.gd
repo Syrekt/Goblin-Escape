@@ -1,5 +1,7 @@
 extends EnemyState
 
+var step_forward : bool
+
 func enter(previous_state_path: String, data := {}) -> void:
 	if enemy.counter_attack:
 		enemy.call_deferred("update_animation", name, 2)
@@ -10,9 +12,18 @@ func enter(previous_state_path: String, data := {}) -> void:
 	else:
 		enemy.call_deferred("update_animation", name)
 	enemy.velocity.x = 0
+
+	step_forward = data.get("step_forward", false)
+	print("step_forward: "+str(step_forward))
+
 func exit() -> void:
 	enemy.counter_attack = false
+	enemy.velocity.x = 0
 
 func _on_stab_hitbox_body_entered(defender:Player) -> void:
 	defender.take_damage(1, enemy)
 	defender.combat_properties.pushback_apply(enemy.global_position, 50)
+
+func _on_hit_frame() -> void:
+	if step_forward:
+		enemy.move(enemy.move_speed, enemy.facing)

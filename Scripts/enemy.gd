@@ -114,7 +114,6 @@ func move(speed: float, direction: int) -> bool:
 	return velocity.x != 0
 func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 	wait_animation_transition = false
-	print("Called update_animation")
 	if animation_player.current_animation != anim:
 		print("Play animation: " + anim)
 		animation_player.play(&"RESET");

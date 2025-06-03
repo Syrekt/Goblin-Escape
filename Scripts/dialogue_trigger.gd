@@ -3,6 +3,7 @@ extends Interaction
 @export var dialogue_resource : DialogueResource
 @export var dialogue_start := "start"
 @export var BALLOON = preload("res://Objects/balloon.tscn")
+@export var camera_focus : Node2D
 
 var balloon = null
 
@@ -12,6 +13,7 @@ func _ready():
 
 #region States
 func activate() -> void:
+	Ge.camera_focus = camera_focus
 	if active:
 		print("Activating dialogue while it's already active!")
 

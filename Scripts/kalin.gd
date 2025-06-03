@@ -526,19 +526,20 @@ func _process(delta: float) -> void:
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
 	#region Camera combat position
-	in_combat_state = state_node.state.is_in_group("combat_state")
-	if in_combat_state && combat_target:
-		pcam.follow_mode = pcam.FollowMode.GROUP
-		pcam.set_follow_targets([self, combat_target])
-		pcam.draw_limits = false
-		if combat_target.state_node.state.name == "death": combat_target = null
-		elif !combat_target.chase_target: combat_target = null
-	elif pcam.follow_mode == pcam.FollowMode.GROUP:
-		pcam.follow_mode = pcam.FollowMode.SIMPLE
-		pcam.set_follow_target(self)
-		pcam.erase_follow_targets(combat_target)
-		if pcam.limit_target:
-			pcam.draw_limits = true
+	if !movement_disabled:
+		in_combat_state = state_node.state.is_in_group("combat_state")
+		if in_combat_state && combat_target:
+			pcam.follow_mode = pcam.FollowMode.GROUP
+			pcam.set_follow_targets([self, combat_target])
+			pcam.draw_limits = false
+			if combat_target.state_node.state.name == "death": combat_target = null
+			elif !combat_target.chase_target: combat_target = null
+		elif pcam.follow_mode == pcam.FollowMode.GROUP:
+			pcam.follow_mode = pcam.FollowMode.SIMPLE
+			pcam.set_follow_target(self)
+			pcam.erase_follow_targets(combat_target)
+			if pcam.limit_target:
+				pcam.draw_limits = true
 	#endregion
 	if Input.is_action_pressed("restart"):
 		get_tree().reload_current_scene()

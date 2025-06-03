@@ -36,8 +36,10 @@ do Ge.show_combat_tutorial.emit()
 => END
 
 ~ stealth
-Kalin: I have to be careful, I can't fight without a weapon.
+#Kalin: I have to be careful, I can't fight without a weapon.
+do Ge.set_camera_focus()
 Kalin: I can used the darkness to my advantage and sneak into that spot while he's looking away.
+do Ge.reset_camera_focus()
 do Ge.show_stealth_tutorial.emit()
 => END
 
