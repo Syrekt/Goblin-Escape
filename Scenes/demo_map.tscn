@@ -31,7 +31,6 @@ size = Vector2(2954, 530)
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_kmchb")
 volume_db = -10.778
-autoplay = true
 
 [node name="LoadingScreen" parent="." instance=ExtResource("2_xf1uh")]
 
@@ -45,7 +44,7 @@ position = Vector2(1467, 255)
 shape = SubResource("RectangleShape2D_yyayg")
 
 [node name="Kalin" parent="." instance=ExtResource("1_if8hx")]
-position = Vector2(4920, 589)
+position = Vector2(4591.93, 593.062)
 has_sword = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]

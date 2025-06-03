@@ -6,19 +6,17 @@ var saved := false
 @onready var lower_sprite := $LowerSprite
 @onready var fly_spawn_points := $SpawnPoints
 
-var fly_scene = preload("res://Scripts/fly.gd")
+var fly_scene = preload("res://Others/fly_1.tscn")
+var timer : Timer
 
 func _ready() -> void:
 	for node in get_children():
 		if node.is_in_group("lights"):
 			node.color = Color(0, 0, 0, 0)
-	spawn_fly()
-	spawn_fly()
-	spawn_fly()
-	spawn_fly()
-	spawn_fly()
-	spawn_fly()
-	spawn_fly()
+	timer = Timer.new()
+	timer.timeout.connect(spawn_fly)
+	add_child(timer)
+	timer.start(randf_range(5, 10))
 
 func update(player: Player):
 	if Input.is_action_just_pressed("interact"):
@@ -43,7 +41,7 @@ func update(player: Player):
 
 
 func spawn_fly() -> void:
-	var fly	= fly_scene.new()
+	var fly	= fly_scene.instantiate()
 	var child_count = fly_spawn_points.get_child_count()
 	#print("child_count: "+str(child_count))
 	var spawn_point = fly_spawn_points.get_child(randi() % child_count)

@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://djhkl725582gb"]
+[gd_scene load_steps=20 format=3 uid="uid://djhkl725582gb"]
 
 [ext_resource type="Script" uid="uid://3yi6g5kmgq7n" path="res://Scripts/fly.gd" id="1_kpa5q"]
 [ext_resource type="Texture2D" uid="uid://cwhfqe6aiohnl" path="res://Others/fly1.png" id="1_qt4cr"]
 [ext_resource type="Texture2D" uid="uid://d2uhikpas8u7s" path="res://Others/light.png" id="2_kpa5q"]
+[ext_resource type="Texture2D" uid="uid://btynkt2mh2d8r" path="res://Others/fly2.png" id="3_8ghkn"]
+[ext_resource type="Texture2D" uid="uid://btips6qio7tbs" path="res://Others/fly3.png" id="4_yfnlc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hl5qc"]
 atlas = ExtResource("1_qt4cr")
@@ -24,6 +26,38 @@ region = Rect2(6, 0, 2, 3)
 atlas = ExtResource("1_qt4cr")
 region = Rect2(8, 0, 2, 3)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_22l5c"]
+atlas = ExtResource("3_8ghkn")
+region = Rect2(0, 0, 2, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_up8j2"]
+atlas = ExtResource("3_8ghkn")
+region = Rect2(2, 0, 2, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxr85"]
+atlas = ExtResource("3_8ghkn")
+region = Rect2(4, 0, 2, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wd5ib"]
+atlas = ExtResource("4_yfnlc")
+region = Rect2(0, 0, 3, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5grpp"]
+atlas = ExtResource("4_yfnlc")
+region = Rect2(3, 0, 3, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmacm"]
+atlas = ExtResource("4_yfnlc")
+region = Rect2(6, 0, 3, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qesf1"]
+atlas = ExtResource("4_yfnlc")
+region = Rect2(9, 0, 3, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi78n"]
+atlas = ExtResource("4_yfnlc")
+region = Rect2(12, 0, 3, 3)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_22l5c"]
 animations = [{
 "frames": [{
@@ -43,7 +77,41 @@ animations = [{
 "texture": SubResource("AtlasTexture_mjy6t")
 }],
 "loop": true,
-"name": &"default",
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_22l5c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_up8j2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sxr85")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wd5ib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5grpp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmacm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qesf1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qi78n")
+}],
+"loop": true,
+"name": &"3",
 "speed": 5.0
 }]
 
@@ -51,14 +119,14 @@ animations = [{
 z_index = 3
 motion_mode = 1
 script = ExtResource("1_kpa5q")
-speed = 3.0
-direction = 15
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
 sprite_frames = SubResource("SpriteFrames_22l5c")
-autoplay = "default"
-frame_progress = 0.350409
+animation = &"3"
+autoplay = "1"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 scale = Vector2(0.121094, 0.121094)
+energy = 0.0
 texture = ExtResource("2_kpa5q")
