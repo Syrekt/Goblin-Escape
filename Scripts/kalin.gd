@@ -25,6 +25,8 @@ var invisible := false
 var movement_disabled := false
 
 var noise_muffle := 0.0
+
+var last_ground_position : Vector2
 #endregion
 #region Stats & EXP
 var level := 0
@@ -88,6 +90,7 @@ var parried			:= false
 var absorbed_damage := false
 #endregion
 #region Others
+@export var debug				:= false
 @export var dead				:= false # Health == 0
 @export var unconscious			:= false # Post sex situations where health isn't 0
 var states_locked := false
@@ -108,6 +111,7 @@ var ray_light : RayCast2D
 #endregion
 signal enter_shadow
 signal leave_shadow
+signal enter_abyss
 #region Methods
 func set_facing(dir: int):
 	if dir == 0: return
@@ -414,6 +418,7 @@ func _ready() -> void:
 	add_child(ray_light)
 	enter_shadow.connect(_on_enter_shadow)
 	leave_shadow.connect(_on_leave_shadow)
+	enter_abyss.connect(_on_abyss_entered)
 #endregion
 #region Physics
 func _physics_process(delta: float) -> void:
@@ -487,6 +492,8 @@ func _physics_process(delta: float) -> void:
 				pass
 			_:
 				velocity.y += gravity * delta
+	else:
+		last_ground_position = Vector2(global_position.x - facing*32, global_position.y)
 
 	#endregion
 	#region Finalize movement
@@ -521,7 +528,8 @@ func _process(delta: float) -> void:
 		Ge.load_game("save1")
 	var s = %Sprite2D
 	%StatPoints.text = "Stat Points: " + str(available_stat_points)
-	Debugger.printui(str(state_node.state.name))
+	if debug:
+		Debugger.printui(str(state_node.state.name))
 	movement_disabled = check_movement_disabled()
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
@@ -556,8 +564,8 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
-		think("I smell [color=green]Goblin[/color] [color=red]COCK[/color] UwU")
-		#take_damage(9)
+		#think("I smell [color=green]Goblin[/color] [color=red]COCK[/color] UwU")
+		take_damage(9)
 		#if randi_range(0, 1) == 1:
 		#	inventory.pickup_item(load("res://Inventory/water.tres"))
 		#else:
@@ -599,4 +607,11 @@ func _on_threat_collider_body_entered(body:Node2D) -> void:
 func _on_smell_collider_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		body.smell(self)
+func _on_abyss_entered() -> void:
+	global_position = last_ground_position
+	var fall_damage = 2
+	if health.value <= fall_damage:
+		take_damage(2)#To make sure voices don't overlap
+	else:
+		state_node.state.finished.emit("land_hurt", {"fall_damage": 2})
 #endregion

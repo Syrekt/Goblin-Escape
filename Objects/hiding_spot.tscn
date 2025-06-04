@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://24ijy2g2jylp"]
 
 [ext_resource type="Script" uid="uid://dkkjikarfslbq" path="res://Scripts/hiding_spot.gd" id="1_1eomc"]
-[ext_resource type="Texture2D" uid="uid://bg7vbl65hih4o" path="res://Map/Props/spr_broken_wall1.png" id="1_c7xb2"]
+[ext_resource type="Texture2D" uid="uid://dml38qkt4kasw" path="res://Map/Props/spr_crevice1.png" id="2_knk02"]
 [ext_resource type="Texture2D" uid="uid://ce082w3owvsra" path="res://Kalin/Sprites/kalin_hide_spritesheet.png" id="3_knk02"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1eomc"]
@@ -19,7 +19,7 @@ visible = false
 shape = SubResource("RectangleShape2D_1eomc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_c7xb2")
+texture = ExtResource("2_knk02")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 visible = false

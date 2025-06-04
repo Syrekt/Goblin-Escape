@@ -16,6 +16,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 	var frames = enemy.emote_emitter.sprite.sprite_frames
 	animation_names = frames.get_animation_names()
+
 func exit() -> void:
 	enemy.friend = null
 	enemy.chatting = false
@@ -27,6 +28,7 @@ func update(delta: float) -> void:
 		finished.emit("patrol")
 
 func _on_lead_timer_timeout() -> void:
+	print("lead timer timeout")
 	var emote = animation_names[randi() % animation_names.size()]
 	enemy.emote_emitter.play(emote)
 	Ge.play_audio_from_string_array(enemy.global_position, -10, "res://SFX/Goblin/Chatter/")
@@ -34,6 +36,7 @@ func _on_lead_timer_timeout() -> void:
 
 
 func _on_secondary_timer_timeout() -> void:
+	print("friend timer timeout")
 	var emote = animation_names[randi() % animation_names.size()]
 	friend.emote_emitter.play(emote)
 	Ge.play_audio_from_string_array(friend.global_position, -10, "res://SFX/Goblin/Chatter/")

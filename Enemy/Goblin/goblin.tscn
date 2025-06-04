@@ -856,11 +856,6 @@ script = ExtResource("19_445xe")
 [node name="PatrolTimer" type="Timer" parent="StateMachine/patrol"]
 wait_time = 4.0
 one_shot = true
-autostart = true
-
-[node name="PatrolEndTimer" type="Timer" parent="StateMachine/patrol"]
-wait_time = 8.0
-one_shot = true
 
 [node name="triggered" type="Node" parent="StateMachine"]
 script = ExtResource("20_pj2c7")
@@ -978,7 +973,7 @@ position = Vector2(-1, -5.5)
 shape = SubResource("RectangleShape2D_cqw5a")
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
-max_distance = 512.0
+max_distance = 256.0
 
 [node name="PlayerProximity" type="Area2D" parent="."]
 visible = false
@@ -1048,8 +1043,8 @@ offset_left = -26.0
 offset_top = 19.0
 offset_right = 26.0
 offset_bottom = 59.0
-max_value = 20.0
-value = 20.0
+max_value = 3.0
+value = 3.0
 texture_progress = ExtResource("15_upc2x")
 
 [node name="Emote" parent="." instance=ExtResource("16_57o4q")]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv0mgpbgnl1q1"]
+
+[ext_resource type="Script" uid="uid://b8r0f28jqn1sg" path="res://Scripts/abyss.gd" id="1_t8otq"]
+
+[node name="Abyss" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_t8otq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

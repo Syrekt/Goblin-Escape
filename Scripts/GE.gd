@@ -69,6 +69,7 @@ func string_array_get_random(array: PackedStringArray) -> String:
 	return array[i]
 func play_audio_from_string_array(position: Vector2, volume: float, path: String) -> void:
 	var emitter : AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+	emitter.max_distance = 256;
 	emitter.global_position = position
 	add_child(emitter)
 

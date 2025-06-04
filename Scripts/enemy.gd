@@ -12,10 +12,9 @@ const RUN_SPEED = 300.0 * 60
 @export var in_combat := false
 @export var patrolling := false
 @export var main_stance : EnemyState
-#Only one enemy should have friend and chatting values
 #The one with the assigned values will control the conversation and behavior
-@export var chatting := false
-@export var friend : CharacterBody2D
+@export var chatting := false ##Only one enemy should have this
+@export var friend : CharacterBody2D ##Only one enemy should have this
 @export var patrol_points : Array[Marker2D]
 var current_patrol_point : Marker2D
 
@@ -160,6 +159,7 @@ func detect_player(target: CharacterBody2D) -> void:
 		
 func lost_target() -> void:
 	#CHANGES STATE
+	if debug: print("lost target")
 	emote_emitter.play("confused")
 	patrol_amount = 4
 	state_node.state.finished.emit("idle")
