@@ -6,9 +6,9 @@ func update(delta: float):
 
 	if enemy.chase_target:
 		enemy.set_facing(sign(enemy.chase_target.global_position.x - enemy.global_position.x))
-		if enemy.chase_target.combat_properties.stunned:
+		if in_combat_range && target_stunned:
 			finished.emit("slash")
-		elif enemy.chase_target.state_node.state.name == "stance_heavy":
+		elif target_state == "stance_heavy":
 			enemy.counter_attack = true
 			finished.emit("stab")
 	else:

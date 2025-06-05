@@ -15,7 +15,7 @@ func update(delta):
 	if enemy.chase_target.dead:
 		finished.emit("laugh")
 		return
-	elif %AttackDetector.has_overlapping_bodies():
+	elif enemy.attack_detector.has_overlapping_bodies():
 		if enemy.chase_target.dead || enemy.chase_target.unconscious:
 			enemy.update_animation("idle")
 			enemy.velocity.x = 0

@@ -41,13 +41,14 @@ signal health_depleted
 #before it changes the animation
 var wait_animation_transition := false 
 
-@onready var animation_player   = $AnimationPlayer
-@onready var sprite			    = $Sprite2D
-@onready var state_node		    = $StateMachine
-@onready var health			    = $Health
-@onready var combat_properties  = $CombatProperties
-@onready var player_proximity	= $PlayerProximity
+@onready var animation_player   := $AnimationPlayer
+@onready var sprite			    := $Sprite2D
+@onready var state_node		    := $StateMachine
+@onready var health			    := $Health
+@onready var combat_properties  := $CombatProperties
+@onready var player_proximity	:= $PlayerProximity
 @onready var awareness_timer	: Timer = $AwarenessTimer
+@onready var attack_detector	:= $AttackDetector
 
 @onready var cp	= combat_properties
 @onready var audio_emitter = $SFX

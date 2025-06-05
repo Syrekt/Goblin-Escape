@@ -38,9 +38,6 @@
 [ext_resource type="Script" uid="uid://dptcdau2rvuq3" path="res://Enemy/States/approach_player.gd" id="35_t74qs"]
 [ext_resource type="Script" uid="uid://b74vkmyvk4tmq" path="res://Enemy/States/smell.gd" id="36_cyoxu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rha5u"]
-size = Vector2(20, 32)
-
 [sub_resource type="Animation" id="Animation_p3exd"]
 length = 0.001
 tracks/0/type = "value"
@@ -979,6 +976,9 @@ size = Vector2(18, 11)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cyoxu"]
 size = Vector2(20, 36)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rha5u"]
+size = Vector2(20, 32)
+
 [node name="GoblinWarrior" type="CharacterBody2D" node_paths=PackedStringArray("main_stance")]
 z_index = 1
 collision_layer = 8
@@ -1075,16 +1075,6 @@ script = ExtResource("25_208af")
 
 [node name="chase" type="Node2D" parent="StateMachine" groups=["CombatStance"]]
 script = ExtResource("26_ug7pn")
-
-[node name="AttackDetector" type="Area2D" parent="StateMachine/chase"]
-unique_name_in_owner = true
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/chase/AttackDetector"]
-position = Vector2(0, -16)
-scale = Vector2(3.07, 1)
-shape = SubResource("RectangleShape2D_rha5u")
 
 [node name="EmoteTimer" type="Timer" parent="StateMachine/chase"]
 one_shot = true
@@ -1206,8 +1196,8 @@ offset_left = -26.0
 offset_top = 19.0
 offset_right = 26.0
 offset_bottom = 59.0
-max_value = 20.0
-value = 20.0
+max_value = 3.0
+value = 3.0
 texture_progress = ExtResource("26_ifl3v")
 
 [node name="Emote" parent="." instance=ExtResource("30_tjqy8")]
@@ -1236,14 +1226,22 @@ collision_mask = 256
 position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_cyoxu")
 
+[node name="AttackDetector" type="Area2D" parent="."]
+position = Vector2(0, 16)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDetector"]
+position = Vector2(0, -16)
+scale = Vector2(3.07, 1)
+shape = SubResource("RectangleShape2D_rha5u")
+
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
 [connection signal="timeout" from="StateMachine/idle/IdleTimer" to="StateMachine/idle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/patrol/PatrolTimer" to="StateMachine/patrol" method="_on_patrol_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/slash/SlashHitbox" to="StateMachine/slash" method="_on_slash_hitbox_body_entered"]
 [connection signal="body_entered" from="StateMachine/stab/StabHitbox" to="StateMachine/stab" method="_on_stab_hitbox_body_entered"]
 [connection signal="body_entered" from="StateMachine/bash/BashHitbox" to="StateMachine/bash" method="_on_bash_hitbox_body_entered"]
-[connection signal="body_entered" from="StateMachine/chase/AttackDetector" to="StateMachine/chase" method="_on_attack_detector_body_entered"]
-[connection signal="body_exited" from="StateMachine/chase/AttackDetector" to="." method="_on_attack_detector_body_exited"]
 [connection signal="timeout" from="StateMachine/leave_player/Timer" to="StateMachine/leave_player" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/chat_lead/LeadTimer" to="StateMachine/chat_lead" method="_on_lead_timer_timeout"]
 [connection signal="timeout" from="StateMachine/chat_lead/SecondaryTimer" to="StateMachine/chat_lead" method="_on_secondary_timer_timeout"]
@@ -1254,6 +1252,8 @@ shape = SubResource("RectangleShape2D_cyoxu")
 [connection signal="body_entered" from="CrushCheck" to="." method="_on_crush_check_body_entered"]
 [connection signal="timeout" from="AwarenessTimer" to="." method="_on_awareness_timer_timeout"]
 [connection signal="body_entered" from="ThreatCollider" to="." method="_on_threat_collider_body_entered"]
+[connection signal="body_entered" from="AttackDetector" to="StateMachine/chase" method="_on_attack_detector_body_entered"]
+[connection signal="body_exited" from="AttackDetector" to="." method="_on_attack_detector_body_exited"]
 
 [editable path="StateMachine/slash/SlashHitbox"]
 [editable path="StateMachine/stab/StabHitbox"]

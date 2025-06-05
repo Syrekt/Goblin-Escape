@@ -183,7 +183,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 	#Take damage
 	if !defended:
 		smell.get_dirty(6.0)
-		if power_crush && stamina.spend(_damage, 1.0):
+		if power_crush:# && stamina.spend(_damage, 1.0):
 			play_hurt_animation = false
 			absorbed_damage = true
 			Ge.play_audio_free(-10, "res://SFX/Kalin/Weapon_Hit_Armour_03_With_Echo_Enhancement.wav")
