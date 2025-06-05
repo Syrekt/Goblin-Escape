@@ -49,7 +49,7 @@ position = Vector2(1467, 255)
 shape = SubResource("RectangleShape2D_yyayg")
 
 [node name="Kalin" parent="." instance=ExtResource("1_if8hx")]
-position = Vector2(5120, 592)
+position = Vector2(5820, 592)
 has_sword = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
@@ -171,12 +171,16 @@ z_index = 1
 position = Vector2(894, 256)
 dialogue_resource = ExtResource("9_5rn0h")
 dialogue_start = "climbing"
+auto = true
+repeat = false
 
 [node name="FallDamage" parent="Props" instance=ExtResource("8_v8o7h")]
 z_index = 1
 position = Vector2(1256, 207)
 dialogue_resource = ExtResource("9_5rn0h")
 dialogue_start = "fall_damage"
+auto = true
+repeat = false
 
 [node name="IronBars" parent="Props" instance=ExtResource("10_if8hx")]
 z_index = 1
@@ -194,6 +198,8 @@ results = Array[bool]([true])
 [node name="SmellDialogue" parent="Props/ConditionCheckerItem" instance=ExtResource("8_v8o7h")]
 dialogue_resource = ExtResource("9_5rn0h")
 dialogue_start = "smell"
+auto = true
+repeat = false
 
 [node name="StealthDialogue" parent="Props" instance=ExtResource("8_v8o7h")]
 z_index = 1
@@ -215,6 +221,8 @@ position = Vector2(5856, 616)
 dialogue_resource = ExtResource("9_5rn0h")
 dialogue_start = "stealth"
 camera_focus = NodePath("../../Enemies/Goblin2")
+auto = true
+repeat = false
 metadata/focus_object = NodePath("../../Enemies/Goblin2")
 
 [node name="HidingSpot2" parent="Props" instance=ExtResource("14_8q7v6")]
@@ -267,14 +275,16 @@ position = Vector2(3320, 432)
 
 [node name="Goblin2" parent="Enemies" node_paths=PackedStringArray("patrol_points") instance=ExtResource("15_yyayg")]
 position = Vector2(6240, 608)
-patrol_points = [NodePath("Marker2D2"), NodePath("Marker2D")]
+debug = true
+patrolling = true
+patrol_points = [NodePath("../Marker2D2"), NodePath("../Marker2D")]
 facing = -1
 
-[node name="Marker2D" type="Marker2D" parent="Enemies/Goblin2"]
-position = Vector2(-250, -1)
+[node name="Marker2D" type="Marker2D" parent="Enemies"]
+position = Vector2(5990, 607)
 
-[node name="Marker2D2" type="Marker2D" parent="Enemies/Goblin2"]
-position = Vector2(1, -1)
+[node name="Marker2D2" type="Marker2D" parent="Enemies"]
+position = Vector2(6241, 607)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(5009, 545)
@@ -285,7 +295,3 @@ max_distance = 512.0
 
 [node name="Checkpoint" parent="." instance=ExtResource("21_5rn0h")]
 position = Vector2(4544, 591)
-
-[node name="Goblin" parent="." instance=ExtResource("15_yyayg")]
-position = Vector2(5200, 608)
-facing = -1

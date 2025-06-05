@@ -26,22 +26,28 @@ theme = ExtResource("1_ma4oc")
 bbcode_enabled = true
 text = "Press [stance] key to continue"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Page1" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Page1"]
 position = Vector2(128, 128)
 texture = ExtResource("2_ommnr")
 hframes = 8
 
-[node name="Cirle" type="Sprite2D" parent="."]
+[node name="Cirle" type="Sprite2D" parent="Page1"]
 position = Vector2(128, 128)
 scale = Vector2(5.25, 5.25)
 texture = ExtResource("3_mt66d")
 
-[node name="StealthExample" type="Sprite2D" parent="."]
+[node name="StealthExample" type="Sprite2D" parent="Page1"]
 position = Vector2(150, 129)
 scale = Vector2(0.518692, 0.518692)
 texture = ExtResource("4_ccby3")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="RichTextLabel" type="RichTextLabel" parent="Page1"]
 offset_left = 277.0
 offset_top = 20.0
 offset_right = 578.0
@@ -52,7 +58,7 @@ text = "Certain actions make noise, drawing attention of the enemies. Distance o
 
 Kalin will make sound while performing most acts, but you can walk crouched to move silently."
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Page1"]
 offset_left = 280.0
 offset_top = 133.0
 offset_right = 581.0
@@ -62,3 +68,9 @@ bbcode_enabled = true
 text = "Any noise will make enemies [color=red]aware[/color]. [color=red]Aware[/color] enemies will be able to detect Kalin even when she's hidden in darkness.
 
 [color=red]Aware[/color] enemies won't detect Kalin while she's hiding in cavities. "
+
+[node name="Page2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

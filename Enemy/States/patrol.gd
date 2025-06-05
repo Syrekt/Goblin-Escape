@@ -24,6 +24,8 @@ func exit() -> void:
 		timer.timeout.disconnect(_on_patrol_timer_timeout)
 	timer.stop()
 func update(delta : float) -> void:
+	if enemy.debug:
+		Debugger.printui("current_patrol_point: "+str(enemy.current_patrol_point));
 	if enemy.current_patrol_point: 
 		patrol_dir = Ge.dir_towards(enemy, enemy.current_patrol_point)
 	#Decide if we are going to leave the player alone or chase
@@ -34,6 +36,7 @@ func update(delta : float) -> void:
 			#print("Target in sight, chase target")
 			finished.emit("chase")
 	elif enemy.current_patrol_point && patrol_point_reached():
+		print("patrol point reached")
 		finished.emit("idle")
 		enemy.update_patrol_point()
 	elif !enemy.move(enemy.patrol_move_speed, patrol_dir):
@@ -42,7 +45,7 @@ func update(delta : float) -> void:
 	else:
 		enemy.update_animation("run")
 
-func patrol_point_reached(treshold := 8) -> bool:
+func patrol_point_reached(treshold := 16) -> bool:
 	return abs(enemy.current_patrol_point.global_position.x - enemy.global_position.x) < treshold
 
 func _on_patrol_timer_timeout() -> void:
