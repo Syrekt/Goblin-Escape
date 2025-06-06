@@ -1,10 +1,36 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfrfvr3f2ii41"]
+[gd_scene load_steps=12 format=3 uid="uid://bfrfvr3f2ii41"]
 
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="1_ma4oc"]
 [ext_resource type="Script" uid="uid://c7nq5lemywc53" path="res://Tutorial/stealth_tutorial.gd" id="1_ommnr"]
 [ext_resource type="Texture2D" uid="uid://c4sgdo50jnun4" path="res://Kalin/Sprites/Kalin-Run.png" id="2_ommnr"]
 [ext_resource type="Texture2D" uid="uid://kkvvekjyerv0" path="res://Others/cirle.png" id="3_mt66d"]
 [ext_resource type="Texture2D" uid="uid://vcedblhvcdqh" path="res://Others/stealth_example.png" id="4_ccby3"]
+[ext_resource type="Texture2D" uid="uid://yymtfpkr47q8" path="res://Kalin/Sprites/Kalin_idle_unarmed.png" id="6_ccby3"]
+[ext_resource type="Shader" uid="uid://bxgu8io4cdpn7" path="res://Shaders/outline.gdshader" id="7_7laq5"]
+[ext_resource type="Texture2D" uid="uid://dml38qkt4kasw" path="res://Map/Props/spr_crevice1.png" id="8_m1uw2"]
+[ext_resource type="Texture2D" uid="uid://ce082w3owvsra" path="res://Kalin/Sprites/kalin_hide_spritesheet.png" id="9_5w06g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m1uw2"]
+shader = ExtResource("7_7laq5")
+shader_parameter/outline_color = Color(0, 0, 0, 0)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
+shader_parameter/tint_color = Color(0.1, 0.1, 0.1, 0.5)
+shader_parameter/alpha = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5s5sl"]
+shader = ExtResource("7_7laq5")
+shader_parameter/outline_color = Color(0, 0, 0, 0)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
+shader_parameter/tint_color = Color(0.1, 0.1, 0.1, 0.5)
+shader_parameter/alpha = 1.0
 
 [node name="stealth_tutorial" type="CanvasLayer" groups=["UIPanel"]]
 script = ExtResource("1_ommnr")
@@ -27,6 +53,7 @@ bbcode_enabled = true
 text = "Press [stance] key to continue"
 
 [node name="Page1" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -48,6 +75,7 @@ scale = Vector2(0.518692, 0.518692)
 texture = ExtResource("4_ccby3")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Page1"]
+layout_mode = 0
 offset_left = 277.0
 offset_top = 20.0
 offset_right = 578.0
@@ -59,6 +87,7 @@ text = "Certain actions make noise, drawing attention of the enemies. Distance o
 Kalin will make sound while performing most acts, but you can walk crouched to move silently."
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Page1"]
+layout_mode = 0
 offset_left = 280.0
 offset_top = 133.0
 offset_right = 581.0
@@ -74,3 +103,55 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("1_ma4oc")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Page2"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 48.0
+offset_right = 298.0
+offset_bottom = 95.0
+bbcode_enabled = true
+text = "Kalin is [color=red]invisible[/color] in darkness, but goblins can still smell her. Use perfume or clean her in checkpoint to get rid of the bodily odor."
+
+[node name="Sprite2D" type="Sprite2D" parent="Page2"]
+position = Vector2(104, 152)
+texture = ExtResource("6_ccby3")
+hframes = 6
+
+[node name="Sprite2D2" type="Sprite2D" parent="Page2"]
+material = SubResource("ShaderMaterial_m1uw2")
+position = Vector2(168, 152)
+texture = ExtResource("6_ccby3")
+hframes = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Page2"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 200.0
+offset_right = 249.0
+offset_bottom = 241.0
+bbcode_enabled = true
+text = "While [color=red]invisible[/color], Kalin will look darker and screen will also have a dark overlay around the edges. "
+
+[node name="Sprite2D4" type="Sprite2D" parent="Page2"]
+position = Vector2(472, 107)
+texture = ExtResource("8_m1uw2")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Page2"]
+material = SubResource("ShaderMaterial_5s5sl")
+position = Vector2(480, 120)
+texture = ExtResource("9_5w06g")
+hframes = 15
+frame = 14
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Page2"]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 155.0
+offset_right = 618.0
+offset_bottom = 240.0
+bbcode_enabled = true
+text = "Kalin can hide inside the cavities in the wall to become [color=red]undetectable[/color]. Goblins won't smell Kalin's body odor while she's [color=red]undetectable[/color].
+
+You can use these cavities to avoid enemy patrols."

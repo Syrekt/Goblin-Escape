@@ -2,8 +2,9 @@ extends StatBar
 
 @export var regeneration_speed := 0.01
 
-var tween : Tween = null
-var tint_under_tween : Tween = null
+var tween : Tween
+var tint_under_tween : Tween
+var tint_over_tween : Tween
 
 const TINT_KALIN	= Color.RED
 const TINT_SPRITE	= Color.RED

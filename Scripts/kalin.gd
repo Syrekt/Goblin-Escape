@@ -522,6 +522,7 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
+	interaction_prompt.supress = true
 	if just_pressed("quick save"):
 		Ge.save_game("save1")
 	if just_pressed("quick load"):
@@ -586,16 +587,14 @@ func _on_interactor_area_exited(area: Area2D) -> void:
 		interaction_prompt._hide()
 func _on_enter_shadow() -> void:
 	invisible = true
-	var tween1 = create_tween().bind_node(self)
-	tween1.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color(0.1, 0.1, 0.1, 0.5), 0.2)
-	var tween2 = create_tween().bind_node(self)
-	tween2.tween_property(vignette.material, "shader_parameter/alpha", 0.2, 0.2)
+	var c = Color(0.1, 0.1, 0.1, 0.5)
+	create_tween().bind_node(self).tween_property(%Sprite2D.material, "shader_parameter/tint_color", c, 0.2)
+	create_tween().bind_node(self).tween_property(vignette.material, "shader_parameter/alpha", 0.2, 0.2)
 func _on_leave_shadow() -> void:
 	invisible = false
-	var tween1 = create_tween().bind_node(self)
-	tween1.tween_property(%Sprite2D.material, "shader_parameter/tint_color", Color(0.0, 0.0, 0.0, 0.0), 0.2)
-	var tween2 = create_tween().bind_node(self)
-	tween2.tween_property(vignette.material, "shader_parameter/alpha", 0.0, 0.2)
+	var c = Color(0.0, 0.0, 0.0, 0.0)
+	create_tween().bind_node(self).tween_property(%Sprite2D.material, "shader_parameter/tint_color", c, 0.2)
+	create_tween().bind_node(self).tween_property(vignette.material, "shader_parameter/alpha", 0.0, 0.2)
 func _on_col_front_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		body.aware = true
