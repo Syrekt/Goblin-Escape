@@ -25,6 +25,7 @@ InputHelper="*res://addons/input_helper/input_helper.gd"
 Combat="*res://Scripts/combat.gd"
 Ge="*res://Scripts/GE.gd"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+Options="*res://Scripts/options.gd"
 
 [debug]
 

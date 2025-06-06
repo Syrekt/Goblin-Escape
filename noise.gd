@@ -5,7 +5,7 @@ var amount_max : float
 var is_ready := false
 var source : CharacterBody2D
 var alpha := 0.2
-var lifetime := 2.0
+var lifetime := 1.0
 var tween_method = Tween.EASE_OUT
 
 @onready var collider = $Area2D
