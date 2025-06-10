@@ -32,8 +32,12 @@ func update(delta : float) -> void:
 	if enemy.chase_target:
 		if enemy.chase_target.unconscious:
 			finished.emit("leave_player")
-		else:
+		elif !enemy.chase_target.hiding:
 			#print("Target in sight, chase target")
+			print("chase target from patrol")
+			print("aware: "+str(enemy.aware))
+			print("target.invisible: "+str(enemy.chase_target.invisible));
+			print("target.hiding: "+str(enemy.chase_target.hiding));
 			finished.emit("chase")
 	elif enemy.current_patrol_point && patrol_point_reached():
 		print("patrol point reached")

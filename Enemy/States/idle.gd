@@ -16,7 +16,7 @@ func update(delta : float) -> void:
 		else:
 			finished.emit("chat_secondary")
 		return
-	if enemy.chase_target && !enemy.line_of_sight.is_colliding():
+	if enemy.chase_target && await enemy.detect_player(enemy.chase_target):
 		finished.emit("chase")
 		return
 

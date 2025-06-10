@@ -7,8 +7,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5nbmp"]
 size = Vector2(30, 64)
 
-[node name="Statue" type="CharacterBody2D"]
-collision_layer = 32
+[node name="Statue" type="CharacterBody2D" groups=["OneWayColliders"]]
+collision_layer = 33
 collision_mask = 33
 script = ExtResource("1_b23wp")
 slide_sfx = ExtResource("3_berpd")
@@ -19,6 +19,7 @@ texture = ExtResource("2_berpd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5nbmp")
+one_way_collision = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5

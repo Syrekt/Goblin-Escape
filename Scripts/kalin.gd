@@ -21,7 +21,6 @@ class_name Player extends CharacterBody2D
 var move_speed := 0.0
 var facing := 1
 var ignore_corners := false
-var invisible := false
 var movement_disabled := false
 
 var noise_muffle := 0.0
@@ -52,7 +51,6 @@ var available_stat_points := 5
 @onready var ray_corner_grab_check : RayCast2D = $CornerGrabCheck
 @onready var ray_auto_climb : RayCast2D = $CornerAutoClimb
 @onready var col_behind : Area2D = $ColBehind
-@onready var col_front : Area2D = $ColFront
 @onready var col_corner_grab_prevent : Area2D = $CornerGrabPrevent
 @onready var col_quick_climb_prevent : Area2D = $QuickClimbPrevent
 @onready var col_stand_check : Area2D = $StandCheck
@@ -88,6 +86,7 @@ var buffered_state  : String
 var parried			:= false
 @export var power_crush	:= false
 var absorbed_damage := false
+var enemies_on_chase: Array[Enemy]
 #endregion
 #region Others
 @export var debug				:= false
@@ -100,6 +99,7 @@ var movable : Node2D = null
 var noise = preload("res://Objects/noise.tscn")
 var hiding_spot : Interaction
 var hiding := false
+var invisible := false
 var ladder : Area2D
 const ingame_menu = preload("res://UI/ingame_menu.tscn")
 var open_menu : Node = null
@@ -239,7 +239,10 @@ func is_collider_one_way(collider: Object) -> bool:
 	if collider is TileMapLayer:
 		var cell = collider.local_to_map(cell_check.get_collision_point())
 		var data = collider.get_cell_tile_data(cell)
-		return data.is_collision_polygon_one_way(0, 0)
+		if data:
+			return data.is_collision_polygon_one_way(0, 0)
+		else:
+			return false
 	else:
 		return collider.is_in_group("OneWayColliders")
 
@@ -326,10 +329,21 @@ func just_released(input : String) -> bool:
 	if movement_disabled: return false
 	return Input.is_action_just_released(input)
 func hide_out(_hiding_spot : Area2D) -> void:
-	hiding_spot = _hiding_spot
-
-	#global_position = hiding_spot.global_position
-	state_node.state.finished.emit("hiding")
+	if enemies_on_chase.size() > 0:
+		if randi() %2:
+			think("I'm detected!")
+		else:
+			think("They are on to me!")
+	else:
+		set_collision_layer_value(2, false)
+		set_collision_mask_value(4, false)
+		hiding_spot = _hiding_spot
+		state_node.state.finished.emit("hiding")
+func force_unhide() -> void:
+	set_collision_layer_value(2, true)
+	set_collision_mask_value(4, true)
+	print("Forced unhide by something")
+	hiding = false
 func think(text: String) -> void:
 	thought_container.push(text)
 	emote.play("talking")
@@ -522,6 +536,7 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
+	Debugger.printui("enemies_on_chase: "+str(enemies_on_chase))
 	interaction_prompt.supress = true
 	if just_pressed("quick save"):
 		Ge.save_game("save1")
@@ -595,16 +610,12 @@ func _on_leave_shadow() -> void:
 	var c = Color(0.0, 0.0, 0.0, 0.0)
 	create_tween().bind_node(self).tween_property(%Sprite2D.material, "shader_parameter/tint_color", c, 0.2)
 	create_tween().bind_node(self).tween_property(vignette.material, "shader_parameter/alpha", 0.0, 0.2)
-func _on_col_front_body_entered(body: Node2D) -> void:
-	if body is Enemy:
-		body.aware = true
-		body.chase_target = self
 func _on_threat_collider_body_entered(body:Node2D) -> void:
 	take_damage(1)
 	velocity.x = 0
 	move_speed = 0
 func _on_smell_collider_body_entered(body: Node2D) -> void:
-	if body is Enemy:
+	if !hiding && body is Enemy:
 		body.smell(self)
 func _on_abyss_entered() -> void:
 	global_position = last_ground_position

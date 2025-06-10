@@ -12,6 +12,7 @@ class_name Movable extends CharacterBody2D
 var grabbed := false
 var falling := false
 var was_moving := false
+var spawn_fall_protection := true
 
 func grab() -> void:
 	grabbed = true
@@ -29,8 +30,11 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	if falling && is_on_floor_only():
-		Ge.EmitNoise(self, global_position + noise_offset, 20)
-		Ge.play_audio(audio_emitter, 0, drop_sfx)
+		if spawn_fall_protection:
+			spawn_fall_protection = false
+		else:
+			Ge.EmitNoise(self, global_position + noise_offset, 20)
+			Ge.play_audio(audio_emitter, 0, drop_sfx)
 	falling = velocity.y != 0
 func _process(delta: float) -> void:
 	var is_moving = velocity.x != 0

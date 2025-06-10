@@ -56,7 +56,7 @@ var wait_animation_transition := false
 @onready var face_location = $FaceMarker
 @onready var player : CharacterBody2D = get_tree().current_scene.find_child("Kalin")
 
-var line_of_sight: RayCast2D = null
+var line_of_sight: RayCast2D
 
 signal heard_noise(id: Enemy)
 
@@ -99,9 +99,13 @@ func take_damage(_damage : int, _source: Node2D = null, critical := false):
 			set_facing(incoming_dir)
 func next_step_free(direction : int) -> bool:
 	if direction == 1:
-		return !$WallCheckRight.is_colliding() && $FallCheckRight.is_colliding()
+		var collider = $WallCheckRight.get_collider()
+		var colliding = collider && !collider.is_in_group("OneWayColliders")
+		return !colliding && $FallCheckRight.is_colliding()
 	elif direction == -1:
-		return !$WallCheckLeft.is_colliding() && $FallCheckLeft.is_colliding()
+		var collider = $WallCheckLeft.get_collider()
+		var colliding = collider && !collider.is_in_group("OneWayColliders")
+		return !colliding && $FallCheckLeft.is_colliding()
 	else:
 		return true
 func move(speed: float, direction: int) -> bool:
@@ -142,21 +146,20 @@ func smell(source: Player):
 		"idle", "chat_lead", "patrol":
 			state_node.state.finished.emit("smell")
 
-func detect_player(target: CharacterBody2D) -> void:
+func detect_player(target: Player) -> bool:
 	var pos = target.global_position
 	line_of_sight.target_position = line_of_sight.to_local(pos)
 	await get_tree().physics_frame
 	if line_of_sight.is_colliding():
+		var collider = line_of_sight.get_collider()
+		if collider.is_in_group("OneWayColliders"):
+			return true
 		if chase_target:
 			print("line of sight blocked to chase target")
-			chase_target = null
-			awareness_timer.start()
+			drop_chase(chase_target)
+		return false
 	else:
-		if !awareness_timer.is_stopped(): awareness_timer.stop()
-		chase_target = target
-		aware = true
-		if chase_target.combat_target != self:
-			chase_target.combat_target = self
+		return true
 		
 func lost_target() -> void:
 	#CHANGES STATE
@@ -175,6 +178,24 @@ func update_patrol_point() -> void:
 	while new_point == current_patrol_point:
 		new_point = patrol_points.pick_random()
 	current_patrol_point = new_point
+func start_chase(target:Player) -> void:
+	print("start chase")
+	player_in_range = true
+	chase_target = target
+	awareness_timer.stop()
+	aware = true
+	if target.enemies_on_chase.find(self) == -1:
+		target.enemies_on_chase.append(self)
+	if !target.combat_target:
+		target.combat_target = self
+func drop_chase(target:Player) -> void:
+	print("drop chase")
+	target.enemies_on_chase.erase(self)
+	chase_target = null
+	awareness_timer.start()
+	player_in_range = false
+	if awareness_timer.is_inside_tree():
+		awareness_timer.start()
 #endregion
 #region Animation end
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -184,8 +205,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 	match state_name:
 		"slash", "stab", "bash":
-			print("attack anim finished")
-			print("animation_player.current_animation_position: "+str(animation_player.current_animation_position));
 			state.finished.emit(main_stance.name)
 		"hurt":
 			var n = randi() % 3
@@ -231,15 +250,14 @@ func _ready() -> void:
 		get_tree().root.add_child.call_deferred(point)
 		point.global_position = _global_position
 func _physics_process(delta: float) -> void:
-	for point in patrol_points:
-		Debugger.printui("point.global_position: "+str(point.global_position));
 	if chase_target:
 		await detect_player(player)
 	elif player_in_range:
 		if player.hiding:
 			pass
 		elif aware:
-			await detect_player(player)
+			if await detect_player(player):
+				start_chase(player)
 		elif player.invisible:
 			pass
 
@@ -291,27 +309,22 @@ func _on_health_depleted() -> void:
 	player.experience.add(10)
 func _on_chase_detector_body_entered(body:Node2D) -> void:
 	print("player body entered in chase detector")
-	player_in_range = true
-	awareness_timer.stop()
-func _on_chase_range_body_exited(body:Node2D) -> void:
+	start_chase(body)
+func _on_chase_range_body_exited(body:Player) -> void:
 	print("player body exited chase range")
-	player_in_range = false
-	if awareness_timer.is_inside_tree():
-		awareness_timer.start()
+	drop_chase(body)
 func _on_crush_check_body_entered(body:Node2D) -> void:
-	if body is Movable:
+	if body is Movable && body.velocity.y > 0:
 		call_deferred("set_collision_mask_value", 1, false)
 		state_node.state.finished.emit("death")
 func _on_awareness_timer_timeout() -> void:
 	print("Lost awareness")
 	aware = false
-func _on_threat_collider_body_entered(body:Node2D) -> void:
+func _on_threat_collider_body_entered(body:Player) -> void:
 	take_damage(health.max_value)
 	Ge.play_audio_from_string_array(global_position, 0, "res://SFX/Kalin/Finishers/")
 	Ge.bleed_gush(global_position, 1)
-func _on_player_proximity_body_entered(body:Node2D) -> void:
-	aware = true
-	chase_target = body
-	player_in_range = true
-	#awareness_timer.start()
+func _on_player_proximity_body_entered(body:Player) -> void:
+	if !body.hiding:
+		start_chase(body)
 #endregion

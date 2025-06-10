@@ -1,4 +1,4 @@
-[gd_scene load_steps=272 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=271 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -4027,9 +4027,6 @@ size = Vector2(15, 26.6667)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbw7l"]
 size = Vector2(6, 54.75)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_47a0d"]
-size = Vector2(4, 55)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_avh81"]
 size = Vector2(15, 24)
 
@@ -4621,6 +4618,7 @@ visible = false
 position = Vector2(0, -36)
 
 [node name="ColliderStanding" type="CollisionShape2D" parent="." groups=["Flip"]]
+visible = false
 position = Vector2(0, 5)
 scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_y6qte")
@@ -4634,14 +4632,13 @@ collision_mask = 32
 visible = false
 position = Vector2(0, -15)
 target_position = Vector2(14, 1.90735e-06)
-collision_mask = 33
 
 [node name="CornerAutoClimb" type="RayCast2D" parent="." groups=["Flip"]]
 visible = false
 target_position = Vector2(14, 1.90735e-06)
-collision_mask = 33
 
 [node name="CellCheck" type="RayCast2D" parent="."]
+visible = false
 target_position = Vector2(0, 39)
 
 [node name="ColBehind" type="Area2D" parent="." groups=["Flip"]]
@@ -4651,15 +4648,6 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ColBehind"]
 position = Vector2(-10, 4.375)
 shape = SubResource("RectangleShape2D_cbw7l")
-
-[node name="ColFront" type="Area2D" parent="." groups=["Flip"]]
-visible = false
-collision_layer = 0
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ColFront"]
-position = Vector2(10, 4.5)
-shape = SubResource("RectangleShape2D_47a0d")
 
 [node name="StandCheck" type="Area2D" parent="." groups=["Flip"]]
 visible = false
@@ -4743,7 +4731,6 @@ shape = SubResource("CircleShape2D_rbk27")
 [connection signal="body_entered" from="StateMachine/bash/BashHitbox" to="StateMachine/bash" method="_on_bash_hitbox_body_entered"]
 [connection signal="body_entered" from="StateMachine/bash_no_sword/Hitbox" to="StateMachine/bash_no_sword" method="_on_hitbox_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="ColFront" to="." method="_on_col_front_body_entered"]
 [connection signal="area_entered" from="Interactor" to="." method="_on_interactor_area_entered"]
 [connection signal="area_exited" from="Interactor" to="." method="_on_interactor_area_exited"]
 [connection signal="body_entered" from="ThreatCollider" to="." method="_on_threat_collider_body_entered"]

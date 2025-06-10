@@ -979,11 +979,11 @@ pushback_duration = 0.5
 
 [node name="FallCheckRight" type="RayCast2D" parent="."]
 position = Vector2(0, -10)
-target_position = Vector2(17, 27)
+target_position = Vector2(9, 47)
 
 [node name="FallCheckLeft" type="RayCast2D" parent="."]
 position = Vector2(0, -10)
-target_position = Vector2(-17, 27)
+target_position = Vector2(-11, 47)
 
 [node name="WallCheckRight" type="RayCast2D" parent="."]
 position = Vector2(0, 1)

@@ -25,10 +25,8 @@ func physics_update(delta: float) -> void:
 				var data = collider.get_cell_tile_data(cell)
 				if data.is_collision_polygon_one_way(0, 0):
 					player.global_position.y += 4
-			elif collider.has_node("Shape"):
-				var shape = collider.get_node("Shape")
-				if shape.one_way_collision:
-					player.global_position.y += 4
+			elif collider.is_in_group("OneWayColliders"):
+				player.global_position.y += 4
 	elif !is_equal_approx(player.get_movement_dir(), 0.0):
 		finished.emit("crouch_walk")
 	elif !player.col_corner_hang.has_overlapping_bodies():
