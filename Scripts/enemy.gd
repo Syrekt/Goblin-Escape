@@ -320,7 +320,8 @@ func _on_crush_check_body_entered(body:Node2D) -> void:
 func _on_awareness_timer_timeout() -> void:
 	print("Lost awareness")
 	aware = false
-func _on_threat_collider_body_entered(body:Player) -> void:
+func _on_threat_collider_body_entered(body:Node2D) -> void:
+	print("threat collider")
 	take_damage(health.max_value)
 	Ge.play_audio_from_string_array(global_position, 0, "res://SFX/Kalin/Finishers/")
 	Ge.bleed_gush(global_position, 1)

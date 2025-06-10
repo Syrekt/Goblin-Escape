@@ -536,7 +536,6 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
-	Debugger.printui("enemies_on_chase: "+str(enemies_on_chase))
 	interaction_prompt.supress = true
 	if just_pressed("quick save"):
 		Ge.save_game("save1")

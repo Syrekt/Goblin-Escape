@@ -25,7 +25,6 @@ func activate() -> void:
 
 
 func update(player : Player) -> void:
-	Debugger.printui("update interaction object: " + name)
 	if auto:
 		if !active && !waiting_player_exit:
 			waiting_player_exit = true
