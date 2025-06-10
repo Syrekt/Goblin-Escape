@@ -224,7 +224,15 @@ func _ready() -> void:
 	heard_noise.connect(player.enemy_heard_noise)
 	if patrol_points.size() > 0:
 		current_patrol_point = patrol_points[0]
+	#This allows adding patrol points as child objects
+	for point in patrol_points:
+		var _global_position = point.global_position
+		point.get_parent().remove_child(point)
+		get_tree().root.add_child.call_deferred(point)
+		point.global_position = _global_position
 func _physics_process(delta: float) -> void:
+	for point in patrol_points:
+		Debugger.printui("point.global_position: "+str(point.global_position));
 	if chase_target:
 		await detect_player(player)
 	elif player_in_range:

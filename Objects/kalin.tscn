@@ -20,17 +20,14 @@
 [ext_resource type="Texture2D" uid="uid://bx4id7wgw6s38" path="res://Kalin/Sprites/Kalin-Heavy Attack.png" id="6_ju88f"]
 [ext_resource type="Script" uid="uid://coti5wegr4tgt" path="res://Scripts/ui_control.gd" id="8_446pa"]
 [ext_resource type="Texture2D" uid="uid://dl4uq2pkst8rp" path="res://Kalin/Sprites/Kalin-Light Attack.png" id="9_2a2iq"]
-[ext_resource type="Texture2D" uid="uid://d37lg6g726j1r" path="res://Kalin/Sprites/Kalin-Def Stance.png" id="9_3wuxq"]
 [ext_resource type="Texture2D" uid="uid://p3oh0wc2s34d" path="res://Kalin/Sprites/Kalin-Hurt.png" id="9_e3nxf"]
 [ext_resource type="PackedScene" uid="uid://b02rwb4cvvhr4" path="res://Objects/state_machine.tscn" id="9_ojhio"]
 [ext_resource type="Script" uid="uid://mtruxnn62ila" path="res://Kalin/States/idle.gd" id="10_4yl4h"]
-[ext_resource type="Texture2D" uid="uid://bh7p7ow7bykv7" path="res://Kalin/Sprites/Kalin-Heavy Stance.png" id="10_8p6tu"]
 [ext_resource type="Texture2D" uid="uid://xoyfqo8f1wal" path="res://UI/Buffs/buff.png" id="10_pxbrw"]
 [ext_resource type="Texture2D" uid="uid://x5i4gyyapuxd" path="res://Kalin/Sprites/Kalin-Pull.png" id="10_qartl"]
 [ext_resource type="Texture2D" uid="uid://cocmax1vh70kr" path="res://Kalin/Sprites/Kalin-Push.png" id="11_0xxw0"]
 [ext_resource type="Texture2D" uid="uid://b4hs0qesl2jhr" path="res://UI/Buffs/debuff.png" id="11_4inu4"]
 [ext_resource type="Script" uid="uid://jcdm00a4m2ox" path="res://Kalin/States/rise.gd" id="11_10o18"]
-[ext_resource type="Texture2D" uid="uid://be86rbb20xfjs" path="res://Kalin/Sprites/Kalin-Light Stance.png" id="11_d86ow"]
 [ext_resource type="AudioStream" uid="uid://de85i38j41fnf" path="res://SFX/Goblin/DAMAGE 01.wav" id="11_s52bw"]
 [ext_resource type="Texture2D" uid="uid://yicqhor234bv" path="res://Kalin/Sprites/Kalin-Light Walk.png" id="12_cbigf"]
 [ext_resource type="Script" uid="uid://bqbk0ddj34sqn" path="res://Kalin/States/fall.gd" id="12_oysea"]
@@ -124,6 +121,9 @@
 [ext_resource type="Texture2D" uid="uid://ce082w3owvsra" path="res://Kalin/Sprites/kalin_hide_spritesheet.png" id="89_towol"]
 [ext_resource type="AudioStream" uid="uid://y07o2rjag3lq" path="res://SFX/Kalin/Punch_06.wav" id="91_cbw7l"]
 [ext_resource type="Texture2D" uid="uid://ds7fhf7dvmyyd" path="res://Kalin/Sprites/Kalin-Bash-NoSword.png" id="107_5atg1"]
+[ext_resource type="Texture2D" uid="uid://cl1e5kr34nunv" path="res://Kalin/Sprites/spr_Kalin-Def Stance-idle.png" id="114_nhuj2"]
+[ext_resource type="Texture2D" uid="uid://bak1qi78nequa" path="res://Kalin/Sprites/spr_Kalin-Heavy Stance-idle.png" id="115_fb5pj"]
+[ext_resource type="Texture2D" uid="uid://c2qsuxrlu2jq3" path="res://Kalin/Sprites/spr_Kalin-Light Stance-idle.png" id="116_sxqin"]
 
 [sub_resource type="Resource" id="Resource_446pa"]
 script = ExtResource("3_towol")
@@ -772,6 +772,17 @@ animations = [{
 "name": &"xbox",
 "speed": 0.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bs037"]
+shader = ExtResource("34_wxg5w")
+shader_parameter/outline_color = Color(1, 1, 1, 0)
+shader_parameter/width = 1.5
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
+shader_parameter/tint_color = Color(1, 1, 1, 0)
+shader_parameter/alpha = 1.0
 
 [sub_resource type="Animation" id="Animation_5koc5"]
 length = 0.001
@@ -3433,7 +3444,7 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_xnqfs"]
 resource_name = "stance_defensive"
-length = 0.1
+length = 0.8
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -3443,10 +3454,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -3458,7 +3469,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("9_3wuxq")]
+"values": [ExtResource("114_nhuj2")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -3470,7 +3481,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [17]
+"values": [8]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -3495,11 +3506,23 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.8]
 }
 
 [sub_resource type="Animation" id="Animation_3m75v"]
 resource_name = "stance_heavy"
-length = 0.1
+length = 0.8
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -3509,10 +3532,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -3524,7 +3547,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("10_8p6tu")]
+"values": [ExtResource("115_fb5pj")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -3536,7 +3559,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [9]
+"values": [8]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -3561,11 +3584,23 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.8]
 }
 
 [sub_resource type="Animation" id="Animation_0byfx"]
 resource_name = "stance_light"
-length = 0.1
+length = 0.8
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -3575,10 +3610,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -3590,7 +3625,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("11_d86ow")]
+"values": [ExtResource("116_sxqin")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -3602,7 +3637,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [19]
+"values": [8]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -3627,6 +3662,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.8]
 }
 
 [sub_resource type="Animation" id="Animation_udxs3"]
@@ -3973,17 +4020,6 @@ _data = {
 &"walk": SubResource("Animation_ny4of"),
 &"wallslide": SubResource("Animation_1pm5w")
 }
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bs037"]
-shader = ExtResource("34_wxg5w")
-shader_parameter/outline_color = Color(1, 1, 1, 0)
-shader_parameter/width = 1.5
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-shader_parameter/number_of_images = Vector2(1, 1)
-shader_parameter/tint_color = Color(1, 1, 1, 0)
-shader_parameter/alpha = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6qte"]
 size = Vector2(15, 26.6667)
@@ -4552,17 +4588,17 @@ sprite_frames = SubResource("SpriteFrames_go1w5")
 animation = &"keyboard"
 script = ExtResource("72_rp7vf")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D")
-libraries = {
-&"": SubResource("AnimationLibrary_cuohi")
-}
-
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_bs037")
 texture = ExtResource("3_b6tj0")
 hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+&"": SubResource("AnimationLibrary_cuohi")
+}
 
 [node name="AnimationAudioStreamer" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true

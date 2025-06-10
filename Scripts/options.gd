@@ -47,7 +47,6 @@ func load_options() -> int:
 	return err
 
 func _notification(what: int) -> void:
-	print("what: "+str(what))
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		var pos = DisplayServer.window_get_position()
 		save_options()
