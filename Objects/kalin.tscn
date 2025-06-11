@@ -1,4 +1,4 @@
-[gd_scene load_steps=271 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=274 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -120,7 +120,10 @@
 [ext_resource type="AudioStream" uid="uid://b7dlcnc8e25ui" path="res://SFX/Kalin/kick_long_whoosh_19.wav" id="89_586st"]
 [ext_resource type="Texture2D" uid="uid://ce082w3owvsra" path="res://Kalin/Sprites/kalin_hide_spritesheet.png" id="89_towol"]
 [ext_resource type="AudioStream" uid="uid://y07o2rjag3lq" path="res://SFX/Kalin/Punch_06.wav" id="91_cbw7l"]
+[ext_resource type="Texture2D" uid="uid://slmmdb7ho1hr" path="res://Kalin/Sprites/Kalin-Climb-idle.png" id="92_hbg16"]
+[ext_resource type="Texture2D" uid="uid://c2kpd723h2yus" path="res://Kalin/Sprites/kalin-hide-idle.png" id="97_uxdg2"]
 [ext_resource type="Texture2D" uid="uid://ds7fhf7dvmyyd" path="res://Kalin/Sprites/Kalin-Bash-NoSword.png" id="107_5atg1"]
+[ext_resource type="Texture2D" uid="uid://c2e81afwsiyqs" path="res://Kalin/Sprites/Kalin-Push-idle.png" id="109_cv3n5"]
 [ext_resource type="Texture2D" uid="uid://cl1e5kr34nunv" path="res://Kalin/Sprites/spr_Kalin-Def Stance-idle.png" id="114_nhuj2"]
 [ext_resource type="Texture2D" uid="uid://bak1qi78nequa" path="res://Kalin/Sprites/spr_Kalin-Heavy Stance-idle.png" id="115_fb5pj"]
 [ext_resource type="Texture2D" uid="uid://c2qsuxrlu2jq3" path="res://Kalin/Sprites/spr_Kalin-Light Stance-idle.png" id="116_sxqin"]
@@ -1496,7 +1499,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_dxyog"]
 resource_name = "corner_grab"
-length = 0.1
+length = 0.8
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -1506,10 +1509,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1521,7 +1524,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_xyrfg")]
+"values": [ExtResource("92_hbg16")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1533,7 +1536,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [14]
+"values": [8]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -1546,6 +1549,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.8]
 }
 
 [sub_resource type="Animation" id="Animation_ujrye"]
@@ -1913,7 +1928,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_a00wu"]
 resource_name = "hidden"
-length = 0.1
+length = 0.8
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -1926,7 +1941,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [15]
+"values": [8]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1935,10 +1950,10 @@ tracks/1/path = NodePath(".:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [14]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1950,7 +1965,19 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("89_towol")]
+"values": [ExtResource("97_uxdg2")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.8]
 }
 
 [sub_resource type="Animation" id="Animation_y0qhg"]
@@ -2694,7 +2721,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_dchdh"]
 resource_name = "push_idle"
-length = 0.1
+length = 0.8
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -2704,10 +2731,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -2719,7 +2746,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("11_0xxw0")]
+"values": [ExtResource("109_cv3n5")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -2731,7 +2758,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [9]
+"values": [8]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -2756,6 +2783,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.8]
 }
 
 [sub_resource type="Animation" id="Animation_muuj4"]
