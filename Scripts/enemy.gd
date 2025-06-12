@@ -54,7 +54,7 @@ var wait_animation_transition := false
 @onready var audio_emitter = $SFX
 @onready var emote_emitter = $Emote
 @onready var face_location = $FaceMarker
-@onready var player : CharacterBody2D = get_tree().current_scene.find_child("Kalin")
+@onready var player : Player
 
 var line_of_sight: RayCast2D
 
@@ -119,7 +119,7 @@ func move(speed: float, direction: int) -> bool:
 func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 	wait_animation_transition = false
 	if animation_player.current_animation != anim:
-		print("Play animation: " + anim)
+		if debug: print("Play animation: " + anim)
 		animation_player.play(&"RESET");
 		animation_player.advance(0)
 		animation_player.play(anim, -1, speed, from_end)
@@ -136,7 +136,7 @@ func hear_noise(noise: Node2D) -> void:
 		"idle", "chat_lead":
 			state_node.state.finished.emit("triggered")
 		"triggered":
-			print("lose target from triggered")
+			if debug: print("lose target from triggered")
 			#Trigger patrol just like losing the target
 			lost_target()
 
@@ -189,13 +189,16 @@ func start_chase(target:Player) -> void:
 	if !target.combat_target:
 		target.combat_target = self
 func drop_chase(target:Player) -> void:
-	print("drop chase")
+	if debug: print("drop chase")
 	target.enemies_on_chase.erase(self)
 	chase_target = null
 	awareness_timer.start()
 	player_in_range = false
 	if awareness_timer.is_inside_tree():
 		awareness_timer.start()
+func assign_player(node:Player) -> void:
+	player = node
+	heard_noise.connect(player.enemy_heard_noise)
 #endregion
 #region Animation end
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -240,7 +243,6 @@ func _ready() -> void:
 	add_child(line_of_sight)
 	$Sprite2D.scale.x = 1
 	set_facing(facing)
-	heard_noise.connect(player.enemy_heard_noise)
 	if patrol_points.size() > 0:
 		current_patrol_point = patrol_points[0]
 	#This allows adding patrol points as child objects
@@ -308,17 +310,17 @@ func _on_health_depleted() -> void:
 	state_node.state.finished.emit("death")
 	player.experience.add(10)
 func _on_chase_detector_body_entered(body:Node2D) -> void:
-	print("player body entered in chase detector")
+	if debug: print("player body entered in chase detector")
 	start_chase(body)
 func _on_chase_range_body_exited(body:Player) -> void:
-	print("player body exited chase range")
+	if debug: print("player body exited chase range")
 	drop_chase(body)
 func _on_crush_check_body_entered(body:Node2D) -> void:
 	if body is Movable && body.velocity.y > 0:
 		call_deferred("set_collision_mask_value", 1, false)
 		state_node.state.finished.emit("death")
 func _on_awareness_timer_timeout() -> void:
-	print("Lost awareness")
+	if debug: print("Lost awareness")
 	aware = false
 func _on_threat_collider_body_entered(body:Node2D) -> void:
 	print("threat collider")

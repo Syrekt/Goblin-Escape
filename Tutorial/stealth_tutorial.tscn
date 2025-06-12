@@ -108,29 +108,29 @@ theme = ExtResource("1_ma4oc")
 [node name="RichTextLabel2" type="RichTextLabel" parent="Page2"]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 48.0
+offset_top = 88.0
 offset_right = 298.0
-offset_bottom = 95.0
+offset_bottom = 135.0
 bbcode_enabled = true
 text = "Kalin is [color=red]invisible[/color] in darkness, but goblins can still smell her. Use perfume or clean her in checkpoint to get rid of the bodily odor."
 
 [node name="Sprite2D" type="Sprite2D" parent="Page2"]
-position = Vector2(104, 152)
+position = Vector2(104, 192)
 texture = ExtResource("6_ccby3")
 hframes = 6
 
 [node name="Sprite2D2" type="Sprite2D" parent="Page2"]
 material = SubResource("ShaderMaterial_m1uw2")
-position = Vector2(168, 152)
+position = Vector2(168, 192)
 texture = ExtResource("6_ccby3")
 hframes = 6
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Page2"]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 200.0
+offset_top = 240.0
 offset_right = 249.0
-offset_bottom = 241.0
+offset_bottom = 281.0
 bbcode_enabled = true
 text = "While [color=red]invisible[/color], Kalin will look darker and screen will also have a dark overlay around the edges. "
 

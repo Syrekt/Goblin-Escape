@@ -1,12 +1,12 @@
-~ climbing
-Hold down to cling to ledges.
-Press {{Ge.jump_key}} to jump.
+~ jump
+Press ({{Ge.jump_key}}) to jump.
+
 => END
 
 ~ fall_damage
 Kalin: I will hurt myself if I fall from this heigth.
 Kalin: I can hang from ledges to shorten the fall.
-Hold {{Ge.crouch_key}} while approaching ledges to hang from ledges, you can fall down by pressing {{Ge.crouch_key}} again.
+Hold ({{Ge.crouch_key}}) while approaching ledges to hang from ledges, you can fall down by pressing {{Ge.crouch_key}} again.
 => END
 
 ~ hiding
@@ -26,8 +26,12 @@ Kalin cleans her body in checkpoints, minimizing her body odour. Some potions ca
 
 ~ stealth_no_weapon
 Kalin: There is a goblin ahead. I don't have a weapon but if I can should sneak up on him, I can push him over the edge.
-Without weapon, you can press {{Ge.attack_key}} to push, you can use enviroment to your advantage.
-Hold down {{Ge.crouch_key}} to sneak up on enemies. Make sure Kalin doesn't smell too much, her scent can give her away, making it impossible to sneak. 
+Without weapon, you can press ({{Ge.attack_key}}) to push, you can use enviroment to your advantage.
+Hold down ({{Ge.crouch_key}}) to sneak up on enemies. Make sure Kalin doesn't smell too much, her scent can give her away, making it impossible to sneak. 
+=> END
+
+~ push
+While touching the statue from the side, press ({{Ge.grab_key}}) to grab and move the objects.
 => END
 
 ~ combat

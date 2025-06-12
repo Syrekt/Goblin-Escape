@@ -94,7 +94,8 @@ var enemies_on_chase: Array[Enemy]
 @export var unconscious			:= false # Post sex situations where health isn't 0
 var states_locked := false
 @export var save_list : Array[NodePath]
-@onready var pcam : PhantomCamera2D = $PhantomCamera2D
+@onready var pcam := $PhantomCamera2D
+@onready var pcam_host := $Camera2D/PhantomCameraHost
 var movable : Node2D = null
 var noise = preload("res://Objects/noise.tscn")
 var hiding_spot : Interaction
@@ -108,6 +109,7 @@ var corner_quick_climb := false
 var sex_participants : Array
 var light_source : Area2D
 var ray_light : RayCast2D
+var wait_for_camera := false
 #endregion
 signal enter_shadow
 signal leave_shadow
@@ -316,6 +318,8 @@ func check_movement_disabled() -> bool:
 		if node.visible:
 			interaction_prompt.supress = true
 			velocity.x = 0
+			Debugger.printui("Movement disabled, UI panel detected")
+			Debugger.printui("node: "+str(node))
 			return true
 	interaction_prompt.supress = false
 	return false
@@ -433,6 +437,7 @@ func _ready() -> void:
 	enter_shadow.connect(_on_enter_shadow)
 	leave_shadow.connect(_on_leave_shadow)
 	enter_abyss.connect(_on_abyss_entered)
+	get_tree().current_scene.emit_signal("player_ready", self) #owner should be root node
 #endregion
 #region Physics
 func _physics_process(delta: float) -> void:
@@ -537,6 +542,7 @@ func _physics_process(delta: float) -> void:
 #region Process
 func _process(delta: float) -> void:
 	interaction_prompt.supress = true
+
 	if just_pressed("quick save"):
 		Ge.save_game("save1")
 	if just_pressed("quick load"):
@@ -593,7 +599,8 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 	print(area)
 func _on_interactor_area_entered(area: Area2D) -> void:
 	interaction_target = area
-	interaction_prompt._show(area.title)
+	if !interaction_target.auto:
+		interaction_prompt._show(area.title)
 func _on_interactor_area_exited(area: Area2D) -> void:
 	if interaction_target == area:
 		interaction_target.waiting_player_exit = false

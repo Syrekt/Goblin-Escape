@@ -1,7 +1,9 @@
 extends Node2D
 
-@export var condition_target : Node2D
-@export var result_target : Node2D
+@export var condition_target_path : NodePath
+@export var result_target_path : NodePath
+var condition_target : Node2D
+var result_target : Node2D
 
 @export var parameters : Array[String] = []
 @export var results : Array
@@ -13,8 +15,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if !result_target || !condition_target:
-		print("Result target or condition target doesn't exists, destroy..")
-		queue_free()
+		print("DISABLED: Result target or condition target doesn't exists: " + name)
+		if !result_target: result_target = get_node(result_target_path)
+		if !condition_target: result_target = get_node(result_target_path)
 		return
 
 	var condition := true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=274 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=275 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -124,6 +124,7 @@
 [ext_resource type="Texture2D" uid="uid://c2kpd723h2yus" path="res://Kalin/Sprites/kalin-hide-idle.png" id="97_uxdg2"]
 [ext_resource type="Texture2D" uid="uid://ds7fhf7dvmyyd" path="res://Kalin/Sprites/Kalin-Bash-NoSword.png" id="107_5atg1"]
 [ext_resource type="Texture2D" uid="uid://c2e81afwsiyqs" path="res://Kalin/Sprites/Kalin-Push-idle.png" id="109_cv3n5"]
+[ext_resource type="AudioStream" uid="uid://bswyp2tksy47m" path="res://SFX/Kalin/Other/Squire Soft3.wav" id="111_uxdg2"]
 [ext_resource type="Texture2D" uid="uid://cl1e5kr34nunv" path="res://Kalin/Sprites/spr_Kalin-Def Stance-idle.png" id="114_nhuj2"]
 [ext_resource type="Texture2D" uid="uid://bak1qi78nequa" path="res://Kalin/Sprites/spr_Kalin-Heavy Stance-idle.png" id="115_fb5pj"]
 [ext_resource type="Texture2D" uid="uid://c2qsuxrlu2jq3" path="res://Kalin/Sprites/spr_Kalin-Light Stance-idle.png" id="116_sxqin"]
@@ -2940,15 +2941,15 @@ tracks/4/keys = {
 }
 tracks/5/type = "audio"
 tracks/5/imported = false
-tracks/5/enabled = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("../AnimationAudioStreamer")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "clips": [{
 "end_offset": 0.0,
-"start_offset": 0.0406,
-"stream": ExtResource("15_2ksh1")
+"start_offset": 0.0704,
+"stream": ExtResource("111_uxdg2")
 }],
 "times": PackedFloat32Array(0)
 }
@@ -4109,6 +4110,7 @@ tween_on_load = false
 follow_damping = true
 draw_limits = true
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
@@ -4765,6 +4767,7 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SmellCollider"]
 shape = SubResource("CircleShape2D_rbk27")
 
+[connection signal="tween_completed" from="PhantomCamera2D" to="." method="_on_phantom_camera_2d_tween_completed"]
 [connection signal="attack_frame" from="StateMachine/slash" to="StateMachine/slash" method="_on_attack_frame"]
 [connection signal="attack_frame" from="StateMachine/stab" to="StateMachine/stab" method="_on_attack_frame"]
 [connection signal="body_entered" from="StateMachine/bash/BashHitbox" to="StateMachine/bash" method="_on_bash_hitbox_body_entered"]

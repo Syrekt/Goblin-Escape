@@ -1,5 +1,6 @@
-[gd_scene load_steps=35 format=4 uid="uid://1clhhggjvkd3"]
+[gd_scene load_steps=36 format=4 uid="uid://1clhhggjvkd3"]
 
+[ext_resource type="Script" uid="uid://ysqa4fxfxicu" path="res://Scripts/scene_manager.gd" id="1_b8uw4"]
 [ext_resource type="PackedScene" uid="uid://h2hwfpjw4rte" path="res://Objects/kalin.tscn" id="1_if8hx"]
 [ext_resource type="AudioStream" uid="uid://dkgt8hqnqcgaj" path="res://BGM/juanjo_sound - Do we need a reason.wav" id="1_kmchb"]
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="2_3c6lh"]
@@ -42,13 +43,14 @@ size = Vector2(322, 193)
 size = Vector2(466, 82)
 
 [node name="DemoMap" type="Node2D"]
+script = ExtResource("1_b8uw4")
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_kmchb")
 volume_db = -10.778
-autoplay = true
 
 [node name="LoadingScreen" parent="." instance=ExtResource("2_xf1uh")]
+visible = false
 
 [node name="Camera Regions" type="Node" parent="."]
 
@@ -60,7 +62,7 @@ position = Vector2(1467, 255)
 shape = SubResource("RectangleShape2D_yyayg")
 
 [node name="Kalin" parent="." instance=ExtResource("1_if8hx")]
-position = Vector2(7479, 497)
+position = Vector2(4104, 584)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.8, 0.760784, 1, 1)
@@ -179,17 +181,9 @@ modulate = Color(0.485703, 0.485704, 0.485703, 1)
 z_index = 1
 position = Vector2(519, 208)
 
-[node name="Climbing" parent="Props" instance=ExtResource("8_v8o7h")]
-z_index = 1
-position = Vector2(894, 256)
-dialogue_resource = ExtResource("9_5rn0h")
-dialogue_start = "climbing"
-auto = true
-repeat = false
-
 [node name="FallDamage" parent="Props" instance=ExtResource("8_v8o7h")]
 z_index = 1
-position = Vector2(1256, 207)
+position = Vector2(1216, 208)
 dialogue_resource = ExtResource("9_5rn0h")
 dialogue_start = "fall_damage"
 auto = true
@@ -200,11 +194,11 @@ z_index = 1
 position = Vector2(2909, 369)
 closed = false
 
-[node name="ConditionCheckerItem" parent="Props" node_paths=PackedStringArray("player", "result_target") instance=ExtResource("11_3c6lh")]
+[node name="ConditionCheckerItem" parent="Props" instance=ExtResource("11_3c6lh")]
 z_index = 1
 position = Vector2(602, 491)
-player = NodePath("../../Kalin")
-result_target = NodePath("SmellDialogue")
+player_path = NodePath("../../Kalin")
+result_target_path = NodePath("SmellDialogue")
 parameters = Array[Resource]([ExtResource("12_6xxbj")])
 results = Array[bool]([true])
 
@@ -214,29 +208,12 @@ dialogue_start = "smell"
 auto = true
 repeat = false
 
-[node name="StealthDialogue" parent="Props" instance=ExtResource("8_v8o7h")]
-z_index = 1
-position = Vector2(3116.07, 428.362)
-dialogue_resource = ExtResource("9_5rn0h")
-dialogue_start = "stealth_no_weapon"
-auto = true
-repeat = false
-
 [node name="Statue" parent="Props" instance=ExtResource("13_xf1uh")]
 z_index = 1
 position = Vector2(4240, 592)
 
 [node name="HidingSpot" parent="Props" instance=ExtResource("14_8q7v6")]
 position = Vector2(6100, 584)
-
-[node name="DialogueTrigger" parent="Props" node_paths=PackedStringArray("camera_focus") instance=ExtResource("8_v8o7h")]
-position = Vector2(5856, 616)
-dialogue_resource = ExtResource("9_5rn0h")
-dialogue_start = "stealth"
-camera_focus = NodePath("../../Enemies/Goblin2")
-auto = true
-repeat = false
-metadata/focus_object = NodePath("../../Enemies/Goblin2")
 
 [node name="Statue2" parent="Props" instance=ExtResource("13_xf1uh")]
 position = Vector2(7423, 492)
@@ -261,7 +238,7 @@ position = Vector2(7073, 608)
 collidable = false
 
 [node name="Statue3" parent="Props" instance=ExtResource("13_xf1uh")]
-position = Vector2(8384, 688)
+position = Vector2(8168, 688)
 
 [node name="Barricade" parent="Props" instance=ExtResource("17_eh7pi")]
 position = Vector2(9264, 696)
@@ -274,15 +251,15 @@ position = Vector2(9568, 544)
 
 [node name="Stairs" type="Node" parent="."]
 
-[node name="StairsLong" parent="Stairs" groups=["OneWayColliders"] instance=ExtResource("10_kmchb")]
+[node name="StairsLong" parent="Stairs" instance=ExtResource("10_kmchb")]
 z_index = 1
 position = Vector2(200, 151)
 
-[node name="StairsLong2" parent="Stairs" groups=["OneWayColliders"] instance=ExtResource("10_kmchb")]
+[node name="StairsLong2" parent="Stairs" instance=ExtResource("10_kmchb")]
 z_index = 1
 position = Vector2(1480, 342)
 
-[node name="StairsLong3" parent="Stairs" groups=["OneWayColliders"] instance=ExtResource("10_kmchb")]
+[node name="StairsLong3" parent="Stairs" instance=ExtResource("10_kmchb")]
 z_index = 1
 position = Vector2(3864, 469)
 
@@ -292,7 +269,7 @@ position = Vector2(4000, 586)
 [node name="Stairs3" parent="Stairs" instance=ExtResource("16_8q7v6")]
 position = Vector2(4036, 611)
 
-[node name="StairsLong4" parent="Stairs" groups=["OneWayColliders"] instance=ExtResource("10_kmchb")]
+[node name="StairsLong4" parent="Stairs" instance=ExtResource("10_kmchb")]
 z_index = 1
 position = Vector2(6856, 552)
 scale = Vector2(-1, 1)
@@ -307,6 +284,40 @@ position = Vector2(8888, 648)
 [node name="StairsLong7" parent="Stairs" instance=ExtResource("22_b8uw4")]
 position = Vector2(8888, 584)
 scale = Vector2(-1, 1)
+
+[node name="Dialogues" type="Node" parent="."]
+
+[node name="DialogueTrigger" parent="Dialogues" instance=ExtResource("8_v8o7h")]
+position = Vector2(5856, 616)
+dialogue_resource = ExtResource("9_5rn0h")
+dialogue_start = "stealth"
+camera_focus_path = NodePath("../../Enemies/Goblin2")
+auto = true
+repeat = false
+metadata/focus_object = NodePath("../../Enemies/Goblin2")
+
+[node name="Jump" parent="Dialogues" instance=ExtResource("8_v8o7h")]
+z_index = 1
+position = Vector2(894, 256)
+dialogue_resource = ExtResource("9_5rn0h")
+dialogue_start = "jump"
+auto = true
+repeat = false
+
+[node name="StealthDialogue" parent="Dialogues" instance=ExtResource("8_v8o7h")]
+z_index = 1
+position = Vector2(3104, 432)
+dialogue_resource = ExtResource("9_5rn0h")
+dialogue_start = "stealth_no_weapon"
+auto = true
+repeat = false
+
+[node name="DialogueTrigger2" parent="Dialogues" instance=ExtResource("8_v8o7h")]
+position = Vector2(4160, 608)
+dialogue_resource = ExtResource("9_5rn0h")
+dialogue_start = "push"
+auto = true
+repeat = false
 
 [node name="Node" type="Node" parent="."]
 

@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SaveSystem="*res://addons/save_system/save_system.gd"
 Debugger="*res://Objects/debugger.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 InputHelper="*res://addons/input_helper/input_helper.gd"
@@ -52,7 +51,7 @@ movie_writer/movie_file="C:/Users/Administrator/Videos/Godot/gd.avi"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/save_system/plugin.cfg")
+enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [file_customization]
 

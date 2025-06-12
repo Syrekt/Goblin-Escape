@@ -3,13 +3,14 @@ extends Interaction
 @export var dialogue_resource : DialogueResource
 @export var dialogue_start := "start"
 @export var BALLOON = preload("res://Objects/balloon.tscn")
-@export var camera_focus : Node2D
+@export var camera_focus_path : NodePath
+var camera_focus : Node2D
 
 var balloon = null
 
 func _ready():
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended);
-
+	if camera_focus_path: camera_focus = get_node(camera_focus_path)
 
 #region States
 func activate() -> void:
@@ -35,7 +36,8 @@ func update(player : Player) -> void:
 #endregion
 #region Signals
 func _on_dialogue_ended(resource: DialogueResource) -> void:
-	active = false
-	if !repeat:
-		queue_free()
+	if active:
+		active = false
+		if !repeat:
+			queue_free()
 #engregion

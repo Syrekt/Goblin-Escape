@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dx25dmahp2sdi" path="res://Map/FP_CastlePrison/mainlevbuild.png" id="1_x17ih"]
 
-[node name="StairsLong" type="CharacterBody2D"]
+[node name="StairsLong" type="CharacterBody2D" groups=["OneWayColliders"]]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_x17ih")
@@ -21,6 +21,6 @@ texture = ExtResource("1_x17ih")
 region_enabled = true
 region_rect = Rect2(480, 554, 48, 46)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." groups=["OneWayColliders"]]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-24, -24, 96, 72, 88, 80, -24, -8, -24, -24)
 one_way_collision = true

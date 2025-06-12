@@ -6,6 +6,7 @@ var jump_key : String
 var attack_key : String
 var stance_key : String
 var crouch_key : String
+var grab_key : String
 
 var loading := false
 
@@ -15,6 +16,10 @@ var camera_focus : Node2D
 signal show_combat_tutorial
 signal show_stealth_tutorial
 
+var player : Player
+
+func _process(delta: float) -> void:
+	Debugger.printui("player: "+str(player))
 
 
 func _ready() -> void:
@@ -45,6 +50,12 @@ func _ready() -> void:
 			crouch_key = OS.get_keycode_string(event.physical_keycode).to_upper()
 			print("crouch_key: "+str(crouch_key))
 
+	events = InputMap.action_get_events("grab")
+	for event in events:
+		if event is InputEventKey:
+			grab_key = OS.get_keycode_string(event.physical_keycode).to_upper()
+			print("grab_key: "+str(grab_key))
+
 func _show_combat_tutorial():
 	print("Show combat tutorial")
 	var combat_tutorial_scene := load("res://Tutorial/combat_tutorial.tscn")
@@ -60,7 +71,6 @@ func _on_stealth_tutorial_tree_exited() -> void:
 	var balloon_scene := load("res://Objects/balloon.tscn")
 	var balloon = balloon_scene.instantiate()
 	add_child(balloon)
-	balloon.start(load("res://Dialogues/demo_stage.dialogue"), "stealth2")
 
 
 func string_array_get_random(array: PackedStringArray) -> String:
@@ -90,13 +100,13 @@ func play_audio(emitter: AudioStreamPlayer2D, volume: int, audio_path: String) -
 ## Plays non-directional audio
 func play_audio_free(volume: int, audio_path: String) -> void:
 	## Plays a non-directional sound
-	var player = AudioStreamPlayer.new()
-	add_sibling(player)
+	var audio_emitter = AudioStreamPlayer.new()
+	add_sibling(audio_emitter)
 
-	player.volume_db = volume
-	player.stream = load(audio_path)
-	player.finished.connect(player.queue_free)
-	player.play()
+	audio_emitter.volume_db = volume
+	audio_emitter.stream = load(audio_path)
+	audio_emitter.finished.connect(audio_emitter.queue_free)
+	audio_emitter.play()
 func EmitNoise(source: CharacterBody2D, position: Vector2, amount: float) -> void:
 	var noise = load("res://Objects/noise.tscn").instantiate()
 	noise.amount_max = amount
@@ -107,6 +117,7 @@ func EmitNoise(source: CharacterBody2D, position: Vector2, amount: float) -> voi
 func save_game(filename: String) -> void:
 	print("Saving...")
 	var save_file = FileAccess.open("user://"+filename+".ge", FileAccess.WRITE)
+	#save_file.store_line(get_tree().current_scene.scene_file_path)
 	var save_nodes = get_tree().get_nodes_in_group("Persistent")
 	for node in save_nodes:
 		# Check the node is an instanced scene so it can be instanced again during load.
@@ -137,15 +148,16 @@ func save_game(filename: String) -> void:
 
 	print("Game saved")
 func load_game(filename: String) -> void:
+	#get_tree().change_scene_to_file("res://Scenes/game.tscn")
 	print("Loading...")
 
 	loading = true
 	get_tree().paused = true
 
-	var loading_screen = get_node("/root/Game/CanvasLayer/LoadingScreen")
+	var loading_screen = get_tree().current_scene.find_child("LoadingScreen")
 	loading_screen.show()
 
-	if not FileAccess.file_exists("user://"+filename+".ge"):
+	if !FileAccess.file_exists("user://"+filename+".ge"):
 		return # Error! We don't have a save to load.
 
 	# We need to revert the game state so we're not cloning objects
@@ -157,6 +169,9 @@ func load_game(filename: String) -> void:
 	for i in save_nodes:
 		print("i: "+str(i))
 		i.queue_free()
+	
+	await get_tree().process_frame
+	
 
 	# Load the file line by line and process that dictionary to restore
 	# the object it represents.
@@ -169,7 +184,7 @@ func load_game(filename: String) -> void:
 
 		# Check if there is any error while parsing the JSON string, skip in case of failure.
 		var parse_result = json.parse(json_string)
-		if not parse_result == OK:
+		if !parse_result == OK:
 			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 			continue
 
@@ -180,6 +195,8 @@ func load_game(filename: String) -> void:
 		var new_object = load(node_data["filename"]).instantiate()
 		get_node(node_data["parent"]).add_child(new_object)
 		new_object.position = Vector2(node_data["pos_x"], node_data["pos_y"])
+		if new_object.has_signal("on_load"): # Not used
+			new_object.emit_signal("on_load")
 
 		# Now we set the remaining variables.
 		for i in node_data.keys():
@@ -188,6 +205,9 @@ func load_game(filename: String) -> void:
 			new_object.set(i, node_data[i])
 	loading = false
 	print("Game loaded.")
+	get_tree().paused = false
+	await get_tree().create_timer(1.0).timeout
+	loading_screen.hide()
 
 var popup_scene = preload("res://Objects/text_pop_up.tscn")
 func popup_text(position: Vector2, text: String, color1 := Color.WHITE, color2 := Color.WHITE) -> void:
@@ -237,14 +257,12 @@ func play_particle(res: Resource, position: Vector2, dir := 1, rot := 0) -> void
 func dir_towards(from: Node2D, to: Node2D) -> int:
 	return sign(to.global_position.x - from.global_position.x)
 func set_camera_focus() -> void:
-	var player = get_tree().current_scene.find_child("Kalin")
 	var pcam : PhantomCamera2D = player.find_child("PhantomCamera2D")
 	pcam.follow_mode = pcam.FollowMode.GROUP
 	var targets : Array[Node2D] = [player, camera_focus]
 	pcam.append_follow_targets_array(targets)
 	await get_tree().create_timer(0.5).timeout
 func reset_camera_focus() -> void:
-	var player = get_tree().current_scene.find_child("Kalin")
 	var pcam : PhantomCamera2D = player.find_child("PhantomCamera2D")
 	pcam.erase_follow_targets(camera_focus)
 	pcam.follow_mode = pcam.FollowMode.SIMPLE
