@@ -7,6 +7,6 @@ func _enter_tree() -> void:
 
 func _on_player_ready(player:Player) -> void:
 	Ge.player = player
-	for child in get_children():
+	for child in $Enemies.get_children():
 		if child is Enemy:
 			child.assign_player(player)

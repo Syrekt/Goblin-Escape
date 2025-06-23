@@ -9,6 +9,8 @@ func enter(previous_state_path : String, data = {}) -> void:
 	ignore_timer.start()
 	direction_timer.start()
 	enemy.aware = true
+	enemy.call_deferred("update_animation", "idle")
+	enemy.velocity.x = 0
 
 func update(delta : float) -> void:
 	if direction_timer.is_stopped():
