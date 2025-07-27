@@ -11,6 +11,7 @@ func enter(previous_state_path: String, data := {}):
 
 func exit() -> void:
 	timer.stop()
+	timer.timeout.disconnect(_on_timer_timeout)
 
 func _on_timer_timeout() -> void:
 	finished.emit("triggered")

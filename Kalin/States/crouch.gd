@@ -16,18 +16,9 @@ func physics_update(delta: float) -> void:
 		finished.emit("fall")
 	elif !player.pressed("down") && player.can_stand_up():
 		finished.emit("idle")
-	elif player.just_pressed("jump"):
-		for i in player.get_slide_collision_count():
-			var collider = player.cell_check.get_collider()
-			print("collider: "+str(collider))
-			if collider is TileMapLayer:
-				var cell = collider.local_to_map(player.cell_check.get_collision_point())
-				var data = collider.get_cell_tile_data(cell)
-				if data.is_collision_polygon_one_way(0, 0):
-					player.global_position.y += 4
-			elif collider.is_in_group("OneWayColliders"):
-				player.global_position.y += 4
 	elif !is_equal_approx(player.get_movement_dir(), 0.0):
 		finished.emit("crouch_walk")
-	elif !player.col_corner_hang.has_overlapping_bodies():
+	elif player.just_pressed("jump") && player.is_on_one_way_collider:
+		player.global_position.y += 4
+	elif !player.is_on_one_way_collider && !player.col_corner_hang.has_overlapping_bodies():
 		finished.emit("corner_hang")

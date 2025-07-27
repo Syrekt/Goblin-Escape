@@ -18,10 +18,6 @@ signal show_stealth_tutorial
 
 var player : Player
 
-func _process(delta: float) -> void:
-	Debugger.printui("player: "+str(player))
-
-
 func _ready() -> void:
 
 	show_combat_tutorial.connect(_show_combat_tutorial)

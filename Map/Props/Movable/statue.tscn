@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4vewnv73flk4"]
+[gd_scene load_steps=6 format=3 uid="uid://b4vewnv73flk4"]
 
 [ext_resource type="Script" uid="uid://xy0q654a6bmd" path="res://Scripts/movable.gd" id="1_b23wp"]
 [ext_resource type="Texture2D" uid="uid://bv7mju8hk7yy2" path="res://Map/Props/spr_statue1.png" id="2_berpd"]
 [ext_resource type="AudioStream" uid="uid://27ohyoxbt18f" path="res://SFX/stone_slide1.wav" id="3_berpd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5nbmp"]
-size = Vector2(30, 64)
+size = Vector2(29, 55)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvdhb"]
+size = Vector2(29, 8)
 
 [node name="Statue" type="CharacterBody2D" groups=["OneWayColliders"]]
 collision_layer = 33
@@ -18,6 +21,7 @@ noise_offset = Vector2(0, 20)
 texture = ExtResource("2_berpd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 4.5)
 shape = SubResource("RectangleShape2D_5nbmp")
 one_way_collision = true
 
@@ -28,5 +32,12 @@ autostart = true
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_berpd")
 max_distance = 246.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-0.5, -28)
+shape = SubResource("RectangleShape2D_wvdhb")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

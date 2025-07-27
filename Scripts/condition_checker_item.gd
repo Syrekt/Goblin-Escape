@@ -16,11 +16,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if !result_target || !player:
-		Debugger.printui("DISABLED: Result target or condition target doesn't exists: " + name)
 		if !result_target: result_target = get_node(result_target_path)
 		if !player: player = get_node(player_path)
-		Debugger.printui("result_target: "+str(result_target))
-		Debugger.printui("player: "+str(player))
 		return
 
 	var condition := true

@@ -253,7 +253,6 @@ func _ready() -> void:
 		get_tree().root.add_child.call_deferred(point)
 		point.global_position = _global_position
 func _physics_process(delta: float) -> void:
-	if debug: Debugger.printui("player: "+str(player))
 	if chase_target:
 		await detect_player(player)
 	elif player_in_range:

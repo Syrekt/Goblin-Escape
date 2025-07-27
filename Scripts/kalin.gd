@@ -26,6 +26,8 @@ var movement_disabled := false
 var noise_muffle := 0.0
 
 var last_ground_position : Vector2
+
+var is_on_one_way_collider := false
 #endregion
 #region Stats & EXP
 var level := 0
@@ -446,6 +448,14 @@ func _physics_process(delta: float) -> void:
 	#Don't use input direction for facing if direction_locked
 	var dir_x = int(get_movement_dir()) if !direction_locked else facing
 	var accelaration = def_acc
+	#if get_floor_angle() == 0.0:
+	#Ignore stairs if we are not on a slope or 'up' key is not pressed
+	#This doesn't cause any issues on downstairs probably becase it gets an angle at the end of a platform
+	if Input.is_action_pressed("up") || velocity.y > 0.0:
+		set_collision_mask_value(12, true)
+	else:
+		if get_floor_angle() == 0.0:
+			set_collision_mask_value(12, false)
 
 	match state_name:
 		"idle":
@@ -516,13 +526,24 @@ func _physics_process(delta: float) -> void:
 
 	#endregion
 	#region Finalize movement
-	floor_max_angle = 1
+	#floor_max_angle = 1
 	move_and_slide()
 	if cp.pushback_timer > 0:
 			set_facing(-sign(cp.pushback_vector.x))
 	else:
 		if(!facing_locked && velocity.x != 0):
 			set_facing(sign(velocity.x))
+	
+	is_on_one_way_collider = false
+	for i in get_slide_collision_count():
+		var collider = cell_check.get_collider()
+		if collider:
+			if collider is TileMapLayer:
+				var cell = collider.local_to_map(cell_check.get_collision_point())
+				var data = collider.get_cell_tile_data(cell)
+				is_on_one_way_collider = data.is_collision_polygon_one_way(0, 0)
+			elif collider.is_in_group("OneWayColliders"):
+				is_on_one_way_collider = true
 
 	#endregion
 	#region Light raycast
@@ -559,7 +580,7 @@ func _process(delta: float) -> void:
 		in_combat_state = state_node.state.is_in_group("combat_state")
 		if in_combat_state && combat_target:
 			pcam.follow_mode = pcam.FollowMode.GROUP
-			pcam.set_follow_targets([self, combat_target])
+			pcam.set_follow_targets([self, combat_target] as Array[Node2D])
 			pcam.draw_limits = false
 			if combat_target.state_node.state.name == "death": combat_target = null
 			elif !combat_target.chase_target: combat_target = null
