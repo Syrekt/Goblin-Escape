@@ -6,6 +6,7 @@ func push(text: String) -> void:
 	var text_found := false
 	for child : HBoxContainer in get_children():
 		if child.label.text == text:
+			move_child(child, get_child_count())
 			text_found = true
 			child.tween_reset()
 			break
