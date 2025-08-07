@@ -12,12 +12,19 @@ var result_target : Node2D
 func _ready() -> void:
 	hide()
 
+	if has_node(condition_target_path):
+		condition_target = get_node(condition_target_path)
+	else:
+		push_error("condition_target path is invalid: " + str(condition_target_path))
+	
+	if has_node(result_target_path):
+		result_target = get_node(result_target_path)
+	else:
+		push_error("Result target path is invalid: " + str(result_target_path))
+
 
 func _process(delta: float) -> void:
-	if !result_target || !condition_target:
-		print("DISABLED: Result target or condition target doesn't exists: " + name)
-		if !result_target: result_target = get_node(result_target_path)
-		if !condition_target: result_target = get_node(result_target_path)
+	if !is_instance_valid(condition_target) || !is_instance_valid(result_target):
 		return
 
 	var condition := true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=275 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=276 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cxy7gxvy3yrma" path="res://Kalin/Sprites/Kalin-Climb.png" id="4_xyrfg"]
 [ext_resource type="Texture2D" uid="uid://bx4id7wgw6s38" path="res://Kalin/Sprites/Kalin-Heavy Attack.png" id="6_ju88f"]
 [ext_resource type="Script" uid="uid://coti5wegr4tgt" path="res://Scripts/ui_control.gd" id="8_446pa"]
+[ext_resource type="Script" uid="uid://dhtgp18026dx7" path="res://Scripts/hud.gd" id="8_cv3n5"]
 [ext_resource type="Texture2D" uid="uid://dl4uq2pkst8rp" path="res://Kalin/Sprites/Kalin-Light Attack.png" id="9_2a2iq"]
 [ext_resource type="Texture2D" uid="uid://p3oh0wc2s34d" path="res://Kalin/Sprites/Kalin-Hurt.png" id="9_e3nxf"]
 [ext_resource type="PackedScene" uid="uid://b02rwb4cvvhr4" path="res://Objects/state_machine.tscn" id="9_ojhio"]
@@ -4156,6 +4157,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
+script = ExtResource("8_cv3n5")
 
 [node name="Health" type="TextureProgressBar" parent="UI/HUD" groups=["Persistent"]]
 layout_mode = 0
@@ -4238,7 +4240,6 @@ offset_top = 14.0
 offset_right = 40.5
 offset_bottom = 17.0
 step = 0.0
-value = 100.0
 texture_under = ExtResource("60_1yslh")
 texture_progress = ExtResource("61_5atg1")
 tint_progress = Color(0.679805, 0.262423, 0, 1)

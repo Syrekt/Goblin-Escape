@@ -32,7 +32,7 @@ shader_parameter/number_of_images = Vector2(1, 1)
 shader_parameter/tint_color = Color(0.1, 0.1, 0.1, 0.5)
 shader_parameter/alpha = 1.0
 
-[node name="stealth_tutorial" type="CanvasLayer" groups=["UIPanel"]]
+[node name="stealth_tutorial" type="CanvasLayer" groups=["FullscreenPanel", "UIPanel"]]
 script = ExtResource("1_ommnr")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -43,7 +43,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.784314)
 
-[node name="RichTextLabel9" type="RichTextLabel" parent="."]
+[node name="ContinuePrompt" type="RichTextLabel" parent="."]
+visible = false
 offset_left = 464.0
 offset_top = 288.0
 offset_right = 624.0
@@ -51,6 +52,10 @@ offset_bottom = 320.0
 theme = ExtResource("1_ma4oc")
 bbcode_enabled = true
 text = "Press [stance] key to continue"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
 
 [node name="Page1" type="Control" parent="."]
 visible = false
@@ -112,7 +117,7 @@ offset_top = 88.0
 offset_right = 298.0
 offset_bottom = 135.0
 bbcode_enabled = true
-text = "Kalin is [color=red]invisible[/color] in darkness, but goblins can still smell her. Use perfume or clean her in checkpoint to get rid of the bodily odor."
+text = "Kalin is [color=red]invisible[/color] in darkness, but goblins can still smell her. Use [color=cyan]perfume[/color] or clean her in checkpoint to get rid of the bodily odor."
 
 [node name="Sprite2D" type="Sprite2D" parent="Page2"]
 position = Vector2(104, 192)
@@ -152,6 +157,6 @@ offset_top = 155.0
 offset_right = 618.0
 offset_bottom = 240.0
 bbcode_enabled = true
-text = "Kalin can hide inside the cavities in the wall to become [color=red]undetectable[/color]. Goblins won't smell Kalin's body odor while she's [color=red]undetectable[/color].
+text = "Kalin can hide inside the cavities in the wall to become [color=red]undetectable[/color]. Goblins [color=red]won't smell[/color] Kalin's body odor while she's undetectable.
 
 You can use these cavities to avoid enemy patrols."

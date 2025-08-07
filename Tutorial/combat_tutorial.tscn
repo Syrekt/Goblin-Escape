@@ -455,7 +455,7 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Combat Tutorial" type="CanvasLayer" groups=["UIPanel"]]
+[node name="Combat Tutorial" type="CanvasLayer" groups=["FullscreenPanel", "UIPanel"]]
 script = ExtResource("1_0e8n1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -466,7 +466,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.784314)
 
-[node name="RichTextLabel9" type="RichTextLabel" parent="."]
+[node name="ContinuePrompt" type="RichTextLabel" parent="."]
+visible = false
 offset_left = 464.0
 offset_top = 288.0
 offset_right = 624.0
@@ -474,6 +475,10 @@ offset_bottom = 320.0
 theme = ExtResource("2_gg7pn")
 bbcode_enabled = true
 text = "Press [stance] key to continue"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
 
 [node name="Page1" type="Control" parent="."]
 layout_mode = 3

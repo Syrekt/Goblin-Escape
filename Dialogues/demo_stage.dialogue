@@ -26,8 +26,8 @@ Kalin cleans her body in checkpoints, minimizing her body odour. Some potions ca
 
 ~ stealth_no_weapon
 Kalin: There is a goblin ahead. I don't have a weapon but if I can should sneak up on him, I can push him over the edge.
-Without weapon, you can press ({{Ge.attack_key}}) to push, you can use enviroment to your advantage.
 Hold down ({{Ge.crouch_key}}) to sneak up on enemies. Make sure Kalin doesn't smell too much, her scent can give her away, making it impossible to sneak. 
+Without weapon, you can press ({{Ge.attack_key}}) to push, you can use enviroment to your advantage.
 => END
 
 ~ push
@@ -46,3 +46,18 @@ Kalin: I can used the darkness to my advantage and sneak into that spot while he
 do Ge.reset_camera_focus()
 do Ge.show_stealth_tutorial.emit()
 => END
+
+~ first_steps
+do Ge.walk_player()
+do wait(1.0)
+do Ge.stop_player()
+Kalin: Huff... Made it... gods, they were close.
+Kalin: Damn it.. I told them I'd go alone but I knew this would happen!
+Kalin: Those bandits are not brave enough to enter the dungeon after me... I hope.
+Kalin: Dark, cold, smells like bones... Still better than getting stripped and gutted.
+#Maybe make Kalin walk?
+Kalin: If they are not entering, they are probably waiting to ambush me... can't take the risk.
+Kalin: I need to pass time. Seems like nobody has been here for a long time. Wonder what I could find here?
+
+~ exploring_the_dungeon
+Kalin: Great.. I guess I found the source of the smell.

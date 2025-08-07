@@ -11,13 +11,20 @@ var result_target : Node2D
 
 func _ready() -> void:
 	hide()
-	player = get_node(player_path)
+
+	if has_node(player_path):
+		player = get_node(player_path)
+	else:
+		push_error("Player path is invalid: " + str(player_path))
+	
+	if has_node(result_target_path):
+		result_target = get_node(result_target_path)
+	else:
+		push_error("Result target path is invalid: " + str(result_target_path))
 
 
 func _process(delta: float) -> void:
-	if !result_target || !player:
-		if !result_target: result_target = get_node(result_target_path)
-		if !player: player = get_node(player_path)
+	if !is_instance_valid(player) || !is_instance_valid(result_target):
 		return
 
 	var condition := true

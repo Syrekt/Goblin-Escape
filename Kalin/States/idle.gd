@@ -9,6 +9,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	just_climbed = data.get("just_climbed", false)
 
 func update(_delta: float) -> void:
+	Debugger.printui("player.velocity: "+str(player.velocity));
 	player.check_movable();
 	if lock_stance_button:
 		if !player.pressed("stance"): lock_stance_button = false

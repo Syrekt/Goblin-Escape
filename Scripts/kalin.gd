@@ -21,13 +21,15 @@ class_name Player extends CharacterBody2D
 var move_speed := 0.0
 var facing := 1
 var ignore_corners := false
-var movement_disabled := false
+var controls_disabled := false
 
 var noise_muffle := 0.0
 
 var last_ground_position : Vector2
 
 var is_on_one_way_collider := false
+
+var remote_control_input : Array[String]
 #endregion
 #region Stats & EXP
 var level := 0
@@ -127,8 +129,10 @@ func set_facing(dir: int):
 		else:
 			node.scale.x = facing
 func get_movement_dir() -> float:
-	if movement_disabled: return 0.0
-	return Input.get_axis("left", "right")
+	if controls_disabled:
+		return int(remote_control_input.has("right")) - int(remote_control_input.has("left"))
+	else:
+		return Input.get_axis("left", "right")
 func fall(delta):
 	velocity.y += gravity * delta
 	move_and_slide()
@@ -311,28 +315,29 @@ func emit_noise(offset : Vector2, amount : float) -> void:
 
 	add_sibling(_noise)
 func toggle_inventory():
+	if controls_disabled: return
 	inventory_panel.toggle()
 func toggle_character_panel():
+	if controls_disabled: return
 	character_panel.visible = !character_panel.visible
-func check_movement_disabled() -> bool:
+func check_controls_disabled() -> bool:
 	var ui_nodes = get_tree().get_nodes_in_group("UIPanel")
 	for node in ui_nodes:
 		if node.visible:
 			interaction_prompt.supress = true
-			velocity.x = 0
-			Debugger.printui("Movement disabled, UI panel detected")
-			Debugger.printui("node: "+str(node))
+			#Debugger.printui("Movement disabled, UI panel detected")
+			#Debugger.printui("node: "+str(node))
 			return true
 	interaction_prompt.supress = false
 	return false
 func pressed(input : String) -> bool:
-	if movement_disabled: return false
+	if controls_disabled: return false
 	return Input.is_action_pressed(input)
 func just_pressed(input : String) -> bool:
-	if movement_disabled: return false
+	if controls_disabled: return false
 	return Input.is_action_just_pressed(input)
 func just_released(input : String) -> bool:
-	if movement_disabled: return false
+	if controls_disabled: return false
 	return Input.is_action_just_released(input)
 func hide_out(_hiding_spot : Area2D) -> void:
 	if enemies_on_chase.size() > 0:
@@ -563,6 +568,7 @@ func _physics_process(delta: float) -> void:
 #region Process
 func _process(delta: float) -> void:
 	interaction_prompt.supress = true
+	Debugger.printui("state name: "+str(state_node.state.name));
 
 	if just_pressed("quick save"):
 		Ge.save_game("save1")
@@ -572,11 +578,11 @@ func _process(delta: float) -> void:
 	%StatPoints.text = "Stat Points: " + str(available_stat_points)
 	if debug:
 		Debugger.printui(str(state_node.state.name))
-	movement_disabled = check_movement_disabled()
+	controls_disabled = check_controls_disabled()
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
 	#region Camera combat position
-	if !movement_disabled:
+	if !controls_disabled:
 		in_combat_state = state_node.state.is_in_group("combat_state")
 		if in_combat_state && combat_target:
 			pcam.follow_mode = pcam.FollowMode.GROUP

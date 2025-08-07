@@ -2,6 +2,7 @@ class_name Movable extends CharacterBody2D
 
 @onready var timer : Timer = $Timer
 @onready var audio_emitter : AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var collider := $CollisionShape2D
 
 @export var drop_sfx : String = "res://SFX/stone_drop2.wav"
 @export var slide_sfx : Resource = load("res://SFX/stone_slide1.wav")
@@ -23,6 +24,7 @@ func release() -> void:
 	grabbed = false
 
 func _physics_process(delta: float) -> void:
+	collider.one_way_collision = is_on_floor()
 	if !is_on_floor():
 		if grabbed:
 			release()

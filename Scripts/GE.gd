@@ -12,6 +12,8 @@ var loading := false
 
 var camera_focus : Node2D
 
+var scene_active := false
+
 
 signal show_combat_tutorial
 signal show_stealth_tutorial
@@ -61,12 +63,7 @@ func _show_stealth_tutorial():
 	print("Show stealth tutorial")
 	var stealth_tutorial_scene := load("res://Tutorial/stealth_tutorial.tscn")
 	var stealth_tutorial = stealth_tutorial_scene.instantiate()
-	stealth_tutorial.tree_exited.connect(_on_stealth_tutorial_tree_exited)
 	add_child(stealth_tutorial)
-func _on_stealth_tutorial_tree_exited() -> void:
-	var balloon_scene := load("res://Objects/balloon.tscn")
-	var balloon = balloon_scene.instantiate()
-	add_child(balloon)
 
 
 func string_array_get_random(array: PackedStringArray) -> String:
@@ -264,3 +261,7 @@ func reset_camera_focus() -> void:
 	pcam.follow_mode = pcam.FollowMode.SIMPLE
 	pcam.set_follow_target(player)
 	await get_tree().create_timer(0.5).timeout
+func walk_player() -> void:
+	player.remote_control_input.append("right")
+func stop_player() -> void:
+	player.remote_control_input.erase("right")

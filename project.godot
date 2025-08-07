@@ -68,6 +68,7 @@ folder_colors={
 UIPanel="Contains UI panels that listen input"
 OneWayColliders=""
 Persistent=""
+FullscreenPanel="Panels that covering whole screen, might want to disable HUD when these are active."
 
 [input]
 
@@ -192,6 +193,7 @@ locale/translations_pot_files=PackedStringArray("res://Dialogues/EmptyRoom1.dial
 2d_physics/layer_10="Smell"
 2d_physics/layer_11="Abyss"
 2d_physics/layer_12="Stair"
+2d_physics/layer_13="Crates"
 
 [physics]
 
