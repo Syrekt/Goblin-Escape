@@ -27,6 +27,7 @@ var aware := false # Extra awersion, can detect player in dark
 var direction_locked := false
 var facing_locked := false
 var anim_speed := 1.0
+var chase_disabled := false
 
 var states_locked := false
 
@@ -62,6 +63,7 @@ signal heard_noise(id: Enemy)
 
 #region Methods
 func set_facing(dir: int):
+	if debug: Debugger.printui("dir: "+str(dir))
 	dir = sign(dir)
 	if dir == 0: return
 
@@ -119,7 +121,6 @@ func move(speed: float, direction: int) -> bool:
 func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 	wait_animation_transition = false
 	if animation_player.current_animation != anim:
-		if debug: print("Play animation: " + anim)
 		animation_player.play(&"RESET");
 		animation_player.advance(0)
 		animation_player.play(anim, -1, speed, from_end)
@@ -179,6 +180,10 @@ func update_patrol_point() -> void:
 		new_point = patrol_points.pick_random()
 	current_patrol_point = new_point
 func start_chase(target:Player) -> void:
+	if chase_disabled:
+		print("Chase disabled")
+		return
+
 	print("start chase")
 	player_in_range = true
 	chase_target = target
@@ -192,12 +197,14 @@ func drop_chase(target:Player) -> void:
 	if debug: print("drop chase")
 	target.enemies_on_chase.erase(self)
 	chase_target = null
-	awareness_timer.start()
 	player_in_range = false
 	if awareness_timer.is_inside_tree():
-		awareness_timer.start()
+		add_child(awareness_timer)
+	awareness_timer.start()
 func assign_player(node:Player) -> void:
+	if debug: print("player: "+str(player))
 	if debug: print("Assigning player node: " + node.name)
+	if debug: print("player: "+str(player))
 	player = node
 	heard_noise.connect(player.enemy_heard_noise)
 #endregion
@@ -235,6 +242,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 				set_collision_layer_value(4, false)
 				set_collision_mask_value(1, false)
 				set_collision_mask_value(2, false)
+		"grab":
+			state.finished.emit("stance_light")
 #endregion
 #region Node Process
 func _ready() -> void:
@@ -260,6 +269,7 @@ func _physics_process(delta: float) -> void:
 			pass
 		elif aware:
 			if await detect_player(player):
+				if debug: print("Detect player and start chase");
 				start_chase(player)
 		elif player.invisible:
 			pass
@@ -330,5 +340,6 @@ func _on_threat_collider_body_entered(body:Node2D) -> void:
 	Ge.bleed_gush(global_position, 1)
 func _on_player_proximity_body_entered(body:Player) -> void:
 	if !body.hiding:
+		if debug: print("Start chase by proximity trigger")
 		start_chase(body)
 #endregion

@@ -15,5 +15,6 @@ func update(delta: float) -> void:
 		finished.emit("idle")
 
 func _on_timer_timeout() -> void:
+	if enemy.debug: print("Leave player")
 	enemy.patrol_amount = 2
 	finished.emit("idle")

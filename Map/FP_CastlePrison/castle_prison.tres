@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=99 format=3 uid="uid://1quahlg1y22o"]
+[gd_resource type="TileSet" load_steps=101 format=3 uid="uid://1quahlg1y22o"]
 
 [ext_resource type="Texture2D" uid="uid://bqtpx8ja2r3ni" path="res://Map/FP_CastlePrison/background_obj.png" id="1_leifh"]
 [ext_resource type="Texture2D" uid="uid://d46bcae481s6" path="res://Map/FP_CastlePrison/mainlevbuildB.png" id="2_qy7eu"]
@@ -60,6 +60,12 @@ tile_data = PackedInt32Array(0, 1769474, 33, 65536, 1769474, 34, 131072, 1769474
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_1jx5f"]
 tile_data = PackedInt32Array(0, 2228226, 11, 65536, 2228226, 12)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_lvcev"]
+tile_data = PackedInt32Array(0, 1835010, 30, 65536, 1835010, 31, 131072, 1835010, 32, 196608, 1376258, 17, 262144, 1376258, 18, 327680, 1376258, 19, 262145, 1179650, 33, 327681, 1179650, 34, 262146, 1245186, 33, 327682, 1245186, 34, 262147, 1310722, 33, 327683, 1310722, 34, 262148, 1376258, 33, 327684, 1376258, 34, 5, 1835010, 268435486, 65541, 1835010, 268435487, 131077, 1835010, 268435488, 196613, 1376258, 268435473, 262149, 1376258, 268435474, 327685, 1376258, 268435475)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_04bsh"]
+tile_data = PackedInt32Array(0, 1572866, 12, 65536, 1572866, 11, 131072, 1572866, 12, 196608, 1507330, 30, 262144, 1507330, 31, 327680, 1507330, 32, 1, 1638402, 12, 65537, 1638402, 11, 131073, 1638402, 12, 196609, 1572866, 30, 262145, 1572866, 31, 327681, 1572866, 32, 2, 1703938, 12, 65538, 1703938, 11, 131074, 1703938, 12, 196610, 1638402, 30, 262146, 1638402, 31, 327682, 1638402, 32)
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_w71kv"]
 tile_data = PackedInt32Array(0, 1572866, 9, 65536, 1572866, 10, 131072, 1572866, 11, 196608, 1572866, 12, 1, 1638402, 9, 65537, 1638402, 10, 131073, 1638402, 11, 196609, 1638402, 12, 2, 1703938, 9, 65538, 1703938, 10, 131074, 1703938, 11, 196610, 1703938, 12)
@@ -3742,15 +3748,23 @@ texture = ExtResource("3_usbtt")
 36:44/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, -8, -8, -8, 8)
 20:4/0 = 0
 19:5/0 = 0
+19:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 18:5/0 = 0
+18:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 17:6/0 = 0
+17:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 17:5/0 = 0
+17:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 18:4/0 = 0
 19:4/0 = 0
 18:6/0 = 0
+18:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 19:6/0 = 0
+19:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 20:6/0 = 0
+20:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 20:5/0 = 0
+20:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 17:4/0 = 0
 
 [resource]
@@ -3788,3 +3802,5 @@ pattern_22 = SubResource("TileMapPattern_72dul")
 pattern_23 = SubResource("TileMapPattern_x0leg")
 pattern_24 = SubResource("TileMapPattern_t3ck6")
 pattern_25 = SubResource("TileMapPattern_1jx5f")
+pattern_26 = SubResource("TileMapPattern_lvcev")
+pattern_27 = SubResource("TileMapPattern_04bsh")

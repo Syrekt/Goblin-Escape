@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://dx25dmahp2sdi" path="res://Map/FP_CastlePrison/mainlevbuild.png" id="1_x17ih"]
 
 [node name="StairsLong" type="CharacterBody2D" groups=["OneWayColliders"]]
+collision_layer = 2048
+collision_mask = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_x17ih")

@@ -118,6 +118,7 @@ var wait_for_camera := false
 signal enter_shadow
 signal leave_shadow
 signal enter_abyss
+signal grabbed
 #region Methods
 func set_facing(dir: int):
 	if dir == 0: return
@@ -394,6 +395,9 @@ func check_buffered_state() -> bool:
 		state_node.state.finished.emit(state_to_switch)
 		return true
 	return false
+func get_grabbed(enemy: Enemy, struggle_position: float) -> void:
+	state_node.state.finished.emit("struggle")
+	global_position.x = struggle_position
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -504,6 +508,7 @@ func _physics_process(delta: float) -> void:
 		"hiding", "hidden", "unhide":
 			move_speed = 0
 			velocity = Vector2.ZERO
+	$ThreatCollider.monitoring = abs(move_speed) > stance_walk_speed
 
 
 	if health.value <= 0 || power_crush: cp.pushback_reset()
@@ -568,7 +573,7 @@ func _physics_process(delta: float) -> void:
 #region Process
 func _process(delta: float) -> void:
 	interaction_prompt.supress = true
-	Debugger.printui("state name: "+str(state_node.state.name));
+	if debug: Debugger.printui("state name: "+str(state_node.state.name));
 
 	if just_pressed("quick save"):
 		Ge.save_game("save1")
@@ -576,8 +581,7 @@ func _process(delta: float) -> void:
 		Ge.load_game("save1")
 	var s = %Sprite2D
 	%StatPoints.text = "Stat Points: " + str(available_stat_points)
-	if debug:
-		Debugger.printui(str(state_node.state.name))
+	if debug: Debugger.printui(str(state_node.state.name))
 	controls_disabled = check_controls_disabled()
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()

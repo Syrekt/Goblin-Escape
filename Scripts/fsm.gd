@@ -33,7 +33,7 @@ func _transition_to_next_state(target_state_path: String, data: Dictionary = {})
 		print("States are locked, exiting state transition.")
 		return
 
-	if owner is Player || owner.debug:
+	if owner.debug:
 		print(owner.name,":", state.name, " -> ", target_state_path)
 	if !has_node(target_state_path):
 		printerr(owner.name + ": Trying to transition to state " + target_state_path + " but it does not exist.")

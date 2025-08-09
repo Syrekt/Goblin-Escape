@@ -1,7 +1,7 @@
 class_name EnemyCombatState extends EnemyState
 
-@export var transitions : Array[EnemyCombatState] ##Transition states from main stance only
-@export var attack_state : EnemyState
+@export var transitions : Array[EnemyCombatState] ##Transition states from main stance only. WARNING: Might choose to attack instead of changing stance
+@export var attack_state : Array[EnemyState]
 @export var stance_time := 1.0
 @export var attack_time := 0.5
 @export var debug_stance : String ##Debug stance to transition on stance timer timeout
@@ -67,7 +67,9 @@ func _update(delta: float) -> bool:
 	return false
 
 
+#There is a chance to attack or switch to another combat state
 func _on_stance_timer_timeout() -> void:
+	if enemy.debug: print("Stance timer timeout");
 	if !enemy.attack_detector.has_overlapping_bodies():
 		finished.emit("chase")
 		#finished.emit(attack_state.name, {"step_forward": true})
@@ -78,9 +80,10 @@ func _on_stance_timer_timeout() -> void:
 	else:
 		finished.emit(transitions.pick_random().name)
 func _on_attack_timer_timeout() -> void:
+	if enemy.debug: print("Attack timer timeout");
 	if !enemy.attack_detector.has_overlapping_bodies():
 		finished.emit("chase")
 		#finished.emit(attack_state.name, {"step_forward": true})
 		return
 	enemy.wait_animation_transition = true
-	finished.emit(attack_state.name)
+	finished.emit(attack_state.pick_random().name)

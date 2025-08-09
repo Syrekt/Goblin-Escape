@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://dx25dmahp2sdi" path="res://Map/FP_CastlePrison/mainlevbuild.png" id="1_qe5bt"]
 
 [node name="Stairs4" type="CharacterBody2D" groups=["OneWayColliders"]]
+collision_layer = 2048
+collision_mask = 0
 
 [node name="Shape" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-24, -21, 24, 12, 24, 27, -24, -6)

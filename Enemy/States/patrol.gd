@@ -7,6 +7,8 @@ var patrol_dir : int
 
 
 func enter(previous_state_path: String, data := {}) -> void:
+	if !timer.timeout.is_connected(_on_patrol_timer_timeout):
+		timer.timeout.connect(_on_patrol_timer_timeout)
 	enemy.velocity.x = 0.0
 	#Use timer if we don't have a patrol point
 	if !enemy.current_patrol_point:
@@ -45,7 +47,7 @@ func update(delta : float) -> void:
 		finished.emit("idle")
 		enemy.update_patrol_point()
 	elif !enemy.move(enemy.patrol_move_speed, patrol_dir):
-		#print("Can't move, switch to idle")
+		if enemy.debug: print("Can't move, switch to idle")
 		finished.emit("idle")
 	else:
 		enemy.update_animation("run")
@@ -55,6 +57,7 @@ func patrol_point_reached(treshold := 16) -> bool:
 
 func _on_patrol_timer_timeout() -> void:
 	#print("patrol timer timeout, switch to idle")
+	if enemy.debug: print("Patrol timer timeout")
 	finished.emit("idle")
 	#Idea
 	#if enemy.patrol_amount == 0:
