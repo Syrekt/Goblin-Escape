@@ -4,7 +4,6 @@ extends PlayerState
 @onready var progression_bar : TextureProgressBar = $"../../StruggleProgressBar"
 @onready var struggle_prompt : AnimatedSprite2D = $"../../StruggleProgressBar/AnimatedSprite2D"
 
-var progress := 50.0
 var tween : Tween
 
 
@@ -12,7 +11,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
 	progression_bar.show()
 	struggle_prompt._show("attack")
-	progression_bar.value = 50.0
+	progression_bar.value = progression_bar.max_value / 2
 
 	tween = create_tween().bind_node(self).set_loops(-1)
 	var tween_speed = 0.1
@@ -25,11 +24,11 @@ func exit() -> void:
 
 
 func physics_update(delta: float) -> void:
-	progression_bar.value = move_toward(progression_bar.value, 0, 31 * delta)
-	Debugger.printui("progression_bar.value: "+str(progression_bar.value));
+	progression_bar.value = move_toward(progression_bar.value, 0, 40 * delta)
 	if Input.is_action_just_pressed("attack"):
 		progression_bar.value += 20.0
-	if progression_bar.value >= 100.0:
+	if progression_bar.value >= progression_bar.max_value:
 		player.break_grab()
 	elif progression_bar.value <= 0.0:
-		player.sex_begin([player.grabbed_by], "sex_goblin1")
+		#player.sex_begin([player.grabbed_by], "sex_goblin1")
+		pass

@@ -1398,6 +1398,47 @@ tracks/4/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_6ykrs"]
+resource_name = "break_free"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("126_3s3me")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 1, 0]
+}
+
 [sub_resource type="Animation" id="Animation_5syxg"]
 resource_name = "corner_climb"
 length = 1.4
@@ -1931,6 +1972,47 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_elkpv"]
+resource_name = "grab_goblin"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("126_3s3me")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
 }
 
 [sub_resource type="Animation" id="Animation_a00wu"]
@@ -4065,88 +4147,6 @@ tracks/3/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_6ykrs"]
-resource_name = "break_free"
-length = 0.3
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("126_3s3me")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [2, 1, 0]
-}
-
-[sub_resource type="Animation" id="Animation_elkpv"]
-resource_name = "grab_goblin"
-length = 0.3
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("126_3s3me")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cuohi"]
 _data = {
 &"RESET": SubResource("Animation_5koc5"),
@@ -4550,21 +4550,13 @@ mouse_filter = 2
 alignment = 2
 script = ExtResource("49_b2c13")
 
-[node name="InteractionLabel" type="Label" parent="UI"]
-offset_left = 974.0
-offset_top = 616.0
-offset_right = 1172.0
-offset_bottom = 644.0
-theme = ExtResource("56_ghu8e")
-horizontal_alignment = 2
-vertical_alignment = 1
-
 [node name="StruggleProgressBar" type="TextureProgressBar" parent="."]
 visible = false
 offset_left = -12.0
 offset_top = -27.0
 offset_right = 41.0
 offset_bottom = -20.0
+max_value = 200.0
 value = 22.0
 texture_under = ExtResource("84_8epdb")
 texture_progress = ExtResource("85_6ykrs")
@@ -4574,6 +4566,10 @@ position = Vector2(26, -11)
 sprite_frames = ExtResource("40_8epdb")
 animation = &"keyboard"
 script = ExtResource("72_rp7vf")
+
+[node name="Label" type="Label" parent="StruggleProgressBar/AnimatedSprite2D"]
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="StateMachine" parent="." groups=["Flip"] instance=ExtResource("9_ojhio")]
 visible = false
@@ -4778,6 +4774,15 @@ sprite_frames = SubResource("SpriteFrames_go1w5")
 animation = &"keyboard"
 script = ExtResource("72_rp7vf")
 
+[node name="Label" type="Label" parent="InteractionPrompt"]
+offset_left = 974.0
+offset_top = 657.0
+offset_right = 1172.0
+offset_bottom = 685.0
+theme = ExtResource("56_ghu8e")
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_bs037")
@@ -4894,7 +4899,6 @@ position = Vector2(22, 61)
 shape = SubResource("RectangleShape2D_osr06")
 
 [node name="Interactor" type="Area2D" parent="." groups=["Flip"]]
-visible = false
 position = Vector2(0, 32)
 collision_layer = 0
 collision_mask = 64

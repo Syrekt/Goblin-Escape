@@ -9,7 +9,6 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func exit() -> void:
 	enemy.catched_player = false
-	Engine.time_scale = 1
 
 func update(delta: float) -> void:
 	if enemy.catched_player:

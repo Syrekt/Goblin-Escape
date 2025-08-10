@@ -123,7 +123,7 @@ signal grabbed
 #region Methods
 func set_facing(dir: int):
 	if dir == 0: return
-	facing = dir
+	facing = sign(dir)
 	var local_nodes = find_children("*", "Node", true).filter(func(n): return n.is_in_group("Flip"))
 	for node in local_nodes:
 		if node is Sprite2D:
@@ -637,6 +637,8 @@ func _process(delta: float) -> void:
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	print(area)
 func _on_interactor_area_entered(area: Area2D) -> void:
+	print("interactor area entered")
+	print("area: "+str(area.name))
 	interaction_target = area
 	if !interaction_target.auto:
 		interaction_prompt._show(area.title)
