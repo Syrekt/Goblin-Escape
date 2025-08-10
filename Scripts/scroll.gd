@@ -16,6 +16,6 @@ func update(player: Player) -> void:
 	if Input.is_action_just_pressed("interact"):
 		book.visible = !book.visible
 		if book.visible:
-			interaction_prompt._show()
+			interaction_prompt._show("interact")
 		else:
 			interaction_prompt._hide()

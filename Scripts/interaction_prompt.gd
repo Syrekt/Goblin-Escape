@@ -47,9 +47,9 @@ func _process(delta: float) -> void:
 	else:
 		visible = false
 
-func _show(title := "") -> void:
+func _show(action, title := "") -> void:
 	var interaction_prompt = ""
-	var events = InputMap.action_get_events("interact")
+	var events = InputMap.action_get_events(action)
 	label.text = title
 
 	if events.size() > 0:

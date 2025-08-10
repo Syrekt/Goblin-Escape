@@ -91,6 +91,7 @@ var parried			:= false
 @export var power_crush	:= false
 var absorbed_damage := false
 var enemies_on_chase: Array[Enemy]
+var grabbed_by : Enemy
 #endregion
 #region Others
 @export var debug				:= false
@@ -398,6 +399,11 @@ func check_buffered_state() -> bool:
 func get_grabbed(enemy: Enemy, struggle_position: float) -> void:
 	state_node.state.finished.emit("struggle")
 	global_position.x = struggle_position
+	grabbed_by = enemy
+	set_facing(enemy.global_position.x - global_position.x)
+func break_grab() -> void:
+	state_node.state.finished.emit("stance_light")
+	grabbed_by.state_node.state.finished.emit("stance_light")
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -502,7 +508,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = 0
 			move_speed = 0
 			accelaration = slide_dec
-		"death", "sex", "recover":
+		"death", "sex", "recover", "struggle":
 			move_speed = 0
 			velocity.x = 0
 		"hiding", "hidden", "unhide":

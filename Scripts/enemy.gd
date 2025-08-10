@@ -198,7 +198,7 @@ func drop_chase(target:Player) -> void:
 	target.enemies_on_chase.erase(self)
 	chase_target = null
 	player_in_range = false
-	if awareness_timer.is_inside_tree():
+	if !awareness_timer.is_inside_tree():
 		add_child(awareness_timer)
 	awareness_timer.start()
 func assign_player(node:Player) -> void:

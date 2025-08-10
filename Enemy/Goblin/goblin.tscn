@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://dw2d8bu1vlvv6"]
+[gd_scene load_steps=63 format=3 uid="uid://dw2d8bu1vlvv6"]
 
 [ext_resource type="Script" uid="uid://bb3qdl7k1v8ae" path="res://Enemy/Goblin/goblin.gd" id="1_poooq"]
 [ext_resource type="Texture2D" uid="uid://bcs17g4yh13l4" path="res://Enemy/Goblin/goblin-idle_strip6.png" id="2_mqpvv"]
@@ -11,7 +11,9 @@
 [ext_resource type="AudioStream" uid="uid://c50be1pxoc3bn" path="res://SFX/Kalin/Sword Woosh 12.wav" id="10_54bff"]
 [ext_resource type="Texture2D" uid="uid://d32k3acadprmm" path="res://Enemy/Goblin/goblin-attack_strip8.png" id="10_fstx2"]
 [ext_resource type="Texture2D" uid="uid://bcr3cshvkgvya" path="res://Enemy/Goblin/goblin-stun_strip10.png" id="11_su4u7"]
+[ext_resource type="Script" uid="uid://cpjipgg4mh1mh" path="res://Enemy/States/grab.gd" id="13_6vclp"]
 [ext_resource type="PackedScene" uid="uid://cpogcou30wxcj" path="res://UI/combat_properties.tscn" id="13_hfkw5"]
+[ext_resource type="Script" uid="uid://c2ochiubx250v" path="res://Enemy/States/struggle.gd" id="14_a23rd"]
 [ext_resource type="Shader" uid="uid://dgty7bsbniivw" path="res://Scripts/flash.gdshader" id="14_qitlx"]
 [ext_resource type="Texture2D" uid="uid://yh6p23n7un5u" path="res://UI/Sliders/cur_health.png" id="15_upc2x"]
 [ext_resource type="PackedScene" uid="uid://b23mtnfp7xuec" path="res://Objects/emote.tscn" id="16_57o4q"]
@@ -25,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://2s1ryg6qqqmc" path="res://Objects/hitbox.tscn" id="24_ivgjd"]
 [ext_resource type="Script" uid="uid://3v1xy6c3ig5r" path="res://Enemy/States/stab.gd" id="25_s405j"]
 [ext_resource type="Script" uid="uid://bk738pl78o133" path="res://Enemy/States/stance_heavy.gd" id="27_wo02b"]
+[ext_resource type="Texture2D" uid="uid://dpp1lvwghlw5l" path="res://Enemy/Goblin/goblin_grab_fail_strip7.png" id="27_ynrxc"]
 [ext_resource type="Script" uid="uid://bmsypgid81p62" path="res://Enemy/States/stance_light.gd" id="28_jm82n"]
 [ext_resource type="Script" uid="uid://brsvx5cdthjao" path="res://Enemy/States/stun.gd" id="30_wgjhe"]
 [ext_resource type="Script" uid="uid://d2dnfu2yrmil" path="res://Enemy/States/chase.gd" id="31_dmibk"]
@@ -32,10 +35,12 @@
 [ext_resource type="Script" uid="uid://dptcdau2rvuq3" path="res://Enemy/States/approach_player.gd" id="32_p8gmb"]
 [ext_resource type="Script" uid="uid://cctffwfexml1k" path="res://Enemy/States/laugh.gd" id="33_eisxc"]
 [ext_resource type="Script" uid="uid://btr4jhp2hi3jr" path="res://Enemy/States/leave_player.gd" id="34_ga10t"]
+[ext_resource type="Texture2D" uid="uid://cepchddabji87" path="res://Enemy/Goblin/goblin_struggle_loop_strip19.png" id="35_a23rd"]
 [ext_resource type="Script" uid="uid://cod1srgspwwqu" path="res://Enemy/States/chat_lead.gd" id="35_e5h4s"]
 [ext_resource type="Script" uid="uid://b74vkmyvk4tmq" path="res://Enemy/States/smell.gd" id="36_mo1fh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xhuvx"]
+resource_local_to_scene = true
 shader = ExtResource("14_qitlx")
 shader_parameter/flash_intensity = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 1)
@@ -233,6 +238,61 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_p8gmb"]
 resource_name = "grab"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("27_ynrxc")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../StateMachine/grab")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_on_lunge_frame"
+}, {
+"args": [],
+"method": &"_on_hit_frame"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_kbkgb"]
 resource_name = "hurt"
@@ -745,6 +805,48 @@ tracks/5/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_su4u7"]
+resource_name = "struggle"
+length = 1.9
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("35_a23rd")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [19]
+}
+
 [sub_resource type="Animation" id="Animation_ifl3v"]
 resource_name = "stun"
 loop_mode = 1
@@ -812,8 +914,12 @@ _data = {
 &"stab": SubResource("Animation_p8gt6"),
 &"stance_heavy": SubResource("Animation_yed1v"),
 &"stance_light": SubResource("Animation_aif1k"),
+&"struggle": SubResource("Animation_su4u7"),
 &"stun": SubResource("Animation_ifl3v")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fstx2"]
+size = Vector2(41, 31)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cqw5a"]
 size = Vector2(20, 43)
@@ -842,6 +948,18 @@ collision_layer = 8
 collision_mask = 9
 script = ExtResource("1_poooq")
 main_stance = NodePath("StateMachine/stance_light")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
+material = SubResource("ShaderMaterial_xhuvx")
+position = Vector2(0, -16)
+texture = ExtResource("2_mqpvv")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+&"": SubResource("AnimationLibrary_uyvhu")
+}
 
 [node name="StateMachine" parent="." instance=ExtResource("17_cbc7y")]
 visible = false
@@ -898,15 +1016,38 @@ collision_mask = 2
 position = Vector2(26.14, -24.45)
 scale = Vector2(2.632, 1.355)
 
-[node name="stance_heavy" type="Node" parent="StateMachine" groups=["CombatStance"]]
+[node name="stance_heavy" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state") groups=["CombatStance"]]
 script = ExtResource("27_wo02b")
+attack_state = [NodePath("../slash")]
 attack_time = 0.3
 
-[node name="stance_light" type="Node" parent="StateMachine" node_paths=PackedStringArray("transitions") groups=["CombatStance"]]
+[node name="stance_light" type="Node" parent="StateMachine" node_paths=PackedStringArray("transitions", "attack_state") groups=["CombatStance"]]
 script = ExtResource("28_jm82n")
-transitions = [NodePath("../stance_heavy")]
+transitions = [NodePath(".")]
+attack_state = [NodePath("../grab")]
 stance_time = 0.5
 attack_time = 0.2
+
+[node name="grab" type="Node2D" parent="StateMachine"]
+script = ExtResource("13_6vclp")
+
+[node name="StrugglePosition" type="Marker2D" parent="StateMachine/grab" groups=["Flip"]]
+position = Vector2(24, -32)
+
+[node name="GrabCollider" type="Area2D" parent="StateMachine/grab" groups=["Flip"]]
+position = Vector2(3, -26)
+collision_layer = 0
+collision_mask = 2
+
+[node name="Collider" type="CollisionShape2D" parent="StateMachine/grab/GrabCollider"]
+position = Vector2(10.5, 1.5)
+shape = SubResource("RectangleShape2D_fstx2")
+
+[node name="struggle" type="Node2D" parent="StateMachine"]
+script = ExtResource("14_a23rd")
+
+[node name="StrugglePosition" type="Marker2D" parent="StateMachine/struggle"]
+position = Vector2(23, -18)
 
 [node name="stun" type="Node" parent="StateMachine"]
 script = ExtResource("30_wgjhe")
@@ -952,18 +1093,6 @@ script = ExtResource("36_mo1fh")
 [node name="Timer" type="Timer" parent="StateMachine/smell"]
 wait_time = 2.0
 one_shot = true
-
-[node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
-material = SubResource("ShaderMaterial_xhuvx")
-position = Vector2(0, -16)
-texture = ExtResource("2_mqpvv")
-hframes = 6
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D")
-libraries = {
-&"": SubResource("AnimationLibrary_uyvhu")
-}
 
 [node name="Collider" type="CollisionShape2D" parent="." groups=["Flip"]]
 visible = false
@@ -1077,6 +1206,7 @@ scale = Vector2(3.07, 1)
 shape = SubResource("RectangleShape2D_rha5u")
 
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="StateMachine/idle/IdleTimer" to="StateMachine/idle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/patrol/PatrolTimer" to="StateMachine/patrol" method="_on_patrol_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/slash/SlashHitbox" to="StateMachine/slash" method="_on_slash_hitbox_body_entered"]
@@ -1084,7 +1214,6 @@ shape = SubResource("RectangleShape2D_rha5u")
 [connection signal="timeout" from="StateMachine/leave_player/Timer" to="StateMachine/leave_player" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/chat_lead/LeadTimer" to="StateMachine/chat_lead" method="_on_lead_timer_timeout"]
 [connection signal="timeout" from="StateMachine/chat_lead/SecondaryTimer" to="StateMachine/chat_lead" method="_on_secondary_timer_timeout"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="PlayerProximity" to="." method="_on_player_proximity_body_entered"]
 [connection signal="body_entered" from="ChaseDetector" to="." method="_on_chase_detector_body_entered"]
 [connection signal="body_exited" from="ChaseRange" to="." method="_on_chase_range_body_exited"]
