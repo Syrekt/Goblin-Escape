@@ -7,3 +7,6 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func exit() -> void:
 	enemy.chase_disabled = false
+
+func update(delta: float) -> void:
+	enemy.player.global_position.x = enemy.global_position.x + 23*enemy.facing

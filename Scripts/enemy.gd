@@ -28,6 +28,7 @@ var direction_locked := false
 var facing_locked := false
 var anim_speed := 1.0
 var chase_disabled := false
+var catched_player := false
 
 var states_locked := false
 
@@ -72,6 +73,8 @@ func set_facing(dir: int):
 	for node in local_nodes:
 		if node is Sprite2D:
 			node.flip_h = facing == 1
+		elif node is Marker2D:
+			node.position.x *= -1
 		else:
 			node.scale.x = facing
 func get_movement_dir():
@@ -198,7 +201,7 @@ func drop_chase(target:Player) -> void:
 	target.enemies_on_chase.erase(self)
 	chase_target = null
 	player_in_range = false
-	if !awareness_timer.is_inside_tree():
+	if awareness_timer.get_parent() == null:
 		add_child(awareness_timer)
 	awareness_timer.start()
 func assign_player(node:Player) -> void:
@@ -243,7 +246,10 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 				set_collision_mask_value(1, false)
 				set_collision_mask_value(2, false)
 		"grab":
-			state.finished.emit("stance_light")
+			if catched_player:
+				state.finished.emit("struggle")
+			else:
+				state.finished.emit("stance_light")
 #endregion
 #region Node Process
 func _ready() -> void:

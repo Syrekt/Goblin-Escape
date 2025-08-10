@@ -396,14 +396,14 @@ func check_buffered_state() -> bool:
 		state_node.state.finished.emit(state_to_switch)
 		return true
 	return false
-func get_grabbed(enemy: Enemy, struggle_position: float) -> void:
-	state_node.state.finished.emit("struggle")
-	global_position.x = struggle_position
+func get_grabbed(enemy: Enemy, state: String) -> void:
+	state_node.state.finished.emit(state)
 	grabbed_by = enemy
-	set_facing(enemy.global_position.x - global_position.x)
+	set_facing(grabbed_by.global_position.x - global_position.x)
 func break_grab() -> void:
-	state_node.state.finished.emit("stance_light")
-	grabbed_by.state_node.state.finished.emit("stance_light")
+	state_node.state.finished.emit("break_free")
+	grabbed_by.state_node.state.finished.emit("chase")
+	grabbed_by = null
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -420,7 +420,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 				state.finished.emit("stance_light")
 		"bash_no_sword":
 			state.finished.emit("idle")
-		"hurt":
+		"hurt", "break_free":
 			state.finished.emit("stance_light")
 		"hurt_no_sword":
 			state.finished.emit("idle")
@@ -430,17 +430,19 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"slide":
 			state.finished.emit("crouch")
 		"orgasm":
-			state_node.state.finished.emit("post_sex")
+			state.finished.emit("post_sex")
 			for participant in sex_participants:
 				participant.state_node.state.finished.emit("leave_player")
 		"post_sex":
-			state_node.state.finished.emit("recover")
+			state.finished.emit("recover")
 		"corner_hang":
-			state_node.state.finished.emit("corner_grab")
+			state.finished.emit("corner_grab")
 		"hiding":
-			state_node.state.finished.emit("hidden")
+			state.finished.emit("hidden")
 		"unhide":
-			state_node.state.finished.emit("idle")
+			state.finished.emit("idle")
+		"grab_goblin":
+			state.finished.emit("struggle")
 #endregion
 #region Init
 func _ready() -> void:
@@ -508,7 +510,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = 0
 			move_speed = 0
 			accelaration = slide_dec
-		"death", "sex", "recover", "struggle":
+		"death", "sex", "recover", "struggle", "goblin_grab", "break_free":
 			move_speed = 0
 			velocity.x = 0
 		"hiding", "hidden", "unhide":

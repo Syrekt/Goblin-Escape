@@ -25,8 +25,6 @@ func exit() -> void:
 
 
 func physics_update(delta: float) -> void:
-	player.velocity.x = 0
-	
 	progression_bar.value = move_toward(progression_bar.value, 0, 31 * delta)
 	Debugger.printui("progression_bar.value: "+str(progression_bar.value));
 	if Input.is_action_just_pressed("attack"):
