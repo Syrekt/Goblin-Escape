@@ -402,7 +402,7 @@ func get_grabbed(enemy: Enemy, state: String) -> void:
 	set_facing(grabbed_by.global_position.x - global_position.x)
 func break_grab() -> void:
 	state_node.state.finished.emit("break_free")
-	grabbed_by.state_node.state.finished.emit("chase")
+	grabbed_by.state_node.state.finished.emit("shoved")
 	grabbed_by = null
 #endregion
 #region Animation Ending

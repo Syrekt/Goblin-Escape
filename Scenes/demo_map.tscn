@@ -463,6 +463,7 @@ position = Vector2(-1063.94, 415)
 
 [node name="Goblin5" parent="Enemies" instance=ExtResource("15_yyayg")]
 position = Vector2(7391, 604)
+debug = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(5009, 545)

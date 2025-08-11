@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://dw2d8bu1vlvv6"]
+[gd_scene load_steps=65 format=3 uid="uid://dw2d8bu1vlvv6"]
 
 [ext_resource type="Script" uid="uid://bb3qdl7k1v8ae" path="res://Enemy/Goblin/goblin.gd" id="1_poooq"]
 [ext_resource type="Texture2D" uid="uid://bcs17g4yh13l4" path="res://Enemy/Goblin/goblin-idle_strip6.png" id="2_mqpvv"]
@@ -38,6 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://cepchddabji87" path="res://Enemy/Goblin/goblin_struggle_loop_strip19.png" id="35_a23rd"]
 [ext_resource type="Script" uid="uid://cod1srgspwwqu" path="res://Enemy/States/chat_lead.gd" id="35_e5h4s"]
 [ext_resource type="Script" uid="uid://b74vkmyvk4tmq" path="res://Enemy/States/smell.gd" id="36_mo1fh"]
+[ext_resource type="Script" uid="uid://3lerje1i52sl" path="res://Enemy/States/animation_state_enemy.gd" id="36_ynrxc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xhuvx"]
 resource_local_to_scene = true
@@ -900,6 +901,47 @@ tracks/3/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_a23rd"]
+resource_name = "shoved"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("27_ynrxc")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [3, 4, 5]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uyvhu"]
 _data = {
 &"RESET": SubResource("Animation_p3exd"),
@@ -910,6 +952,7 @@ _data = {
 &"idle": SubResource("Animation_csflc"),
 &"laugh": SubResource("Animation_vd4fl"),
 &"run": SubResource("Animation_wj3eb"),
+&"shoved": SubResource("Animation_a23rd"),
 &"slash": SubResource("Animation_nd8hd"),
 &"stab": SubResource("Animation_p8gt6"),
 &"stance_heavy": SubResource("Animation_yed1v"),
@@ -962,6 +1005,7 @@ libraries = {
 }
 
 [node name="StateMachine" parent="." instance=ExtResource("17_cbc7y")]
+visible = false
 position = Vector2(0, 16)
 
 [node name="idle" type="Node" parent="StateMachine"]
@@ -1092,6 +1136,9 @@ script = ExtResource("36_mo1fh")
 [node name="Timer" type="Timer" parent="StateMachine/smell"]
 wait_time = 2.0
 one_shot = true
+
+[node name="shoved" type="Node" parent="StateMachine"]
+script = ExtResource("36_ynrxc")
 
 [node name="Collider" type="CollisionShape2D" parent="." groups=["Flip"]]
 visible = false

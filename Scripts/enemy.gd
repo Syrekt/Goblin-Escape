@@ -250,6 +250,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 				state.finished.emit("struggle")
 			else:
 				state.finished.emit("stance_light")
+		"shoved":
+			state.finished.emit("stance_light")
 #endregion
 #region Node Process
 func _ready() -> void:

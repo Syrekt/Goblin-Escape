@@ -29,6 +29,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 		else:
 			timer.timeout.connect(_on_attack_timer_timeout)
 			timer.start(attack_time)
+			if enemy.debug: print("timer.time_left: "+str(timer.time_left));
 	else:
 		timer.timeout.connect(_on_attack_timer_timeout)
 		timer.start(attack_time)
@@ -39,7 +40,7 @@ func exit():
 		timer.timeout.disconnect(_on_stance_timer_timeout)
 	if timer.timeout.is_connected(_on_attack_timer_timeout):
 		timer.timeout.disconnect(_on_attack_timer_timeout)
-	timer.call_deferred("queue_free")
+	timer.queue_free()
 
 func _update(delta: float) -> bool:
 	if !enemy.chase_target:
