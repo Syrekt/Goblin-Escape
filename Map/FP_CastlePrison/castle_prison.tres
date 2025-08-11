@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=101 format=3 uid="uid://1quahlg1y22o"]
+[gd_resource type="TileSet" load_steps=102 format=3 uid="uid://1quahlg1y22o"]
 
 [ext_resource type="Texture2D" uid="uid://bqtpx8ja2r3ni" path="res://Map/FP_CastlePrison/background_obj.png" id="1_leifh"]
 [ext_resource type="Texture2D" uid="uid://d46bcae481s6" path="res://Map/FP_CastlePrison/mainlevbuildB.png" id="2_qy7eu"]
@@ -66,6 +66,9 @@ tile_data = PackedInt32Array(0, 1835010, 30, 65536, 1835010, 31, 131072, 1835010
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_04bsh"]
 tile_data = PackedInt32Array(0, 1572866, 12, 65536, 1572866, 11, 131072, 1572866, 12, 196608, 1507330, 30, 262144, 1507330, 31, 327680, 1507330, 32, 1, 1638402, 12, 65537, 1638402, 11, 131073, 1638402, 12, 196609, 1572866, 30, 262145, 1572866, 31, 327681, 1572866, 32, 2, 1703938, 12, 65538, 1703938, 11, 131074, 1703938, 12, 196610, 1638402, 30, 262146, 1638402, 31, 327682, 1638402, 32)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_ro68r"]
+tile_data = PackedInt32Array(0, 2162690, 19, 65536, 2162690, 20, 131072, 2162690, 21, 196608, 2162690, 22, 1, 2228226, 19, 65537, 2228226, 20, 131073, 2228226, 21, 196609, 2228226, 22, 2, 2293762, 19, 65538, 2293762, 20, 131074, 2293762, 21, 196610, 2293762, 22)
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_w71kv"]
 tile_data = PackedInt32Array(0, 1572866, 9, 65536, 1572866, 10, 131072, 1572866, 11, 196608, 1572866, 12, 1, 1638402, 9, 65537, 1638402, 10, 131073, 1638402, 11, 196609, 1638402, 12, 2, 1703938, 9, 65538, 1703938, 10, 131074, 1703938, 11, 196610, 1703938, 12)
@@ -3766,6 +3769,18 @@ texture = ExtResource("3_usbtt")
 20:5/0 = 0
 20:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 17:4/0 = 0
+33:19/0 = 0
+34:20/0 = 0
+34:21/0 = 0
+35:22/0 = 0
+34:22/0 = 0
+33:22/0 = 0
+33:21/0 = 0
+33:20/0 = 0
+34:19/0 = 0
+35:19/0 = 0
+35:20/0 = 0
+35:21/0 = 0
 
 [resource]
 occlusion_layer_0/light_mask = 1
@@ -3804,3 +3819,4 @@ pattern_24 = SubResource("TileMapPattern_t3ck6")
 pattern_25 = SubResource("TileMapPattern_1jx5f")
 pattern_26 = SubResource("TileMapPattern_lvcev")
 pattern_27 = SubResource("TileMapPattern_04bsh")
+pattern_28 = SubResource("TileMapPattern_ro68r")
