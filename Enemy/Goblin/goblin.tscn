@@ -1066,16 +1066,13 @@ attack_time = 0.3
 
 [node name="stance_light" type="Node" parent="StateMachine" node_paths=PackedStringArray("transitions", "attack_state") groups=["CombatStance"]]
 script = ExtResource("28_jm82n")
-transitions = [NodePath(".")]
-attack_state = [NodePath("../grab")]
+transitions = [NodePath("../stance_heavy")]
+attack_state = [NodePath("../grab"), NodePath("../stab")]
 stance_time = 0.5
 attack_time = 0.2
 
 [node name="grab" type="Node2D" parent="StateMachine"]
 script = ExtResource("13_6vclp")
-
-[node name="StrugglePosition" type="Marker2D" parent="StateMachine/grab" groups=["Flip"]]
-position = Vector2(24, -32)
 
 [node name="GrabCollider" type="Area2D" parent="StateMachine/grab" groups=["Flip"]]
 position = Vector2(3, -26)

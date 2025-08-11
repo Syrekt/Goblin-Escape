@@ -1,7 +1,6 @@
 extends EnemyState
 
 @onready var grab_collider : Area2D = $GrabCollider
-@onready var struggle_marker : Marker2D = $StrugglePosition
 
 func enter(previous_state_path: String, data := {}) -> void:
 	enemy.call_deferred("update_animation", name)
