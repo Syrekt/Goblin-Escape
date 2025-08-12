@@ -39,6 +39,20 @@ Kalin: Finally, these fuckers don't stand a chance against me.
 do Ge.show_combat_tutorial.emit()
 => END
 
+~ demo_combat
+Welcome to combat demo of Goblin Escape!\n\n(Press 'ENTER' to continue)
+This demo features a small part of the map just to introduce combat system to our patrons.
+You can check the keybindings in the menu by pressing 'ESC'.
+Want to see the combat explanation?
+- Yes => see_tutorial
+- No => END
+
+~ see_tutorial
+Every character has several stances. While Kalin has 3 stances, the Goblin in this demo has 2 stances.
+There is a visual que for each stance enemy takes so watch out for which color enemy is flashing.
+do Ge.show_combat_tutorial.emit()
+=> END
+
 ~ stealth
 #Kalin: I have to be careful, I can't fight without a weapon.
 do Ge.set_camera_focus()

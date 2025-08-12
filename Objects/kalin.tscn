@@ -4759,6 +4759,8 @@ script = ExtResource("56_qqpcq")
 
 [node name="sex" type="Node" parent="StateMachine"]
 script = ExtResource("59_muuj4")
+animation_counter_max = 8
+animation_counter_min = 5
 
 [node name="orgasm" type="Node" parent="StateMachine"]
 script = ExtResource("61_c6www")

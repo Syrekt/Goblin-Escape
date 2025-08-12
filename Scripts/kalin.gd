@@ -399,7 +399,6 @@ func check_buffered_state() -> bool:
 func get_grabbed(enemy: Enemy, state: String) -> void:
 	state_node.state.finished.emit(state)
 	grabbed_by = enemy
-	set_facing(grabbed_by.global_position.x - global_position.x)
 func break_grab() -> void:
 	state_node.state.finished.emit("break_free")
 	grabbed_by.state_node.state.finished.emit("shoved")
@@ -581,7 +580,6 @@ func _physics_process(delta: float) -> void:
 #region Process
 func _process(delta: float) -> void:
 	interaction_prompt.supress = true
-	if debug: Debugger.printui("state name: "+str(state_node.state.name));
 
 	if just_pressed("quick save"):
 		Ge.save_game("save1")
@@ -641,7 +639,7 @@ func _on_interactor_area_entered(area: Area2D) -> void:
 	print("area: "+str(area.name))
 	interaction_target = area
 	if !interaction_target.auto:
-		interaction_prompt._show(area.title)
+		interaction_prompt._show("interact", area.title)
 func _on_interactor_area_exited(area: Area2D) -> void:
 	if interaction_target == area:
 		interaction_target.waiting_player_exit = false

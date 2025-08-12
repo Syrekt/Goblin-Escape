@@ -25,6 +25,7 @@ func exit() -> void:
 
 func physics_update(delta: float) -> void:
 	progression_bar.value = move_toward(progression_bar.value, 0, 40 * delta)
+	player.set_facing(player.grabbed_by.global_position.x - player.global_position.x)
 	if Input.is_action_just_pressed("attack"):
 		progression_bar.value += 20.0
 	if progression_bar.value >= progression_bar.max_value:
