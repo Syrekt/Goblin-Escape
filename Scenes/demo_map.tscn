@@ -57,6 +57,7 @@ script = ExtResource("1_b8uw4")
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_kmchb")
 volume_db = -10.778
+autoplay = true
 
 [node name="LoadingScreen" parent="." instance=ExtResource("2_xf1uh")]
 visible = false
@@ -368,10 +369,9 @@ auto = true
 repeat = false
 
 [node name="DemoCombatDialogue" parent="Dialogues" instance=ExtResource("8_v8o7h")]
-position = Vector2(3119, 324)
+position = Vector2(3065, 434)
 dialogue_resource = ExtResource("9_5rn0h")
 dialogue_start = "demo_combat"
-auto = true
 repeat = false
 
 [node name="ConditionChecker" parent="Dialogues" instance=ExtResource("24_676m3")]

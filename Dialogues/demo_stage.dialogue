@@ -42,6 +42,7 @@ do Ge.show_combat_tutorial.emit()
 ~ demo_combat
 Welcome to combat demo of Goblin Escape!\n\n(Press 'ENTER' to continue)
 This demo features a small part of the map just to introduce combat system to our patrons.
+This goblin has 3x health than normal for demonstration purposes(it's normal health value might change later).
 You can check the keybindings in the menu by pressing 'ESC'.
 Want to see the combat explanation?
 - Yes => see_tutorial

@@ -659,6 +659,7 @@ func _on_threat_collider_body_entered(body:Node2D) -> void:
 	take_damage(1)
 	velocity.x = 0
 	move_speed = 0
+	think(["I should move carefully.", "I should move slow."].pick_random())
 func _on_smell_collider_body_entered(body: Node2D) -> void:
 	if !hiding && body is Enemy:
 		body.smell(self)

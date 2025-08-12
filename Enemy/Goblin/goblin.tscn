@@ -1206,8 +1206,8 @@ offset_left = -26.0
 offset_top = 19.0
 offset_right = 26.0
 offset_bottom = 59.0
-max_value = 5.0
-value = 5.0
+max_value = 10.0
+value = 10.0
 texture_progress = ExtResource("15_upc2x")
 
 [node name="Emote" parent="." instance=ExtResource("16_57o4q")]
