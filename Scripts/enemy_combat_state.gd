@@ -72,8 +72,8 @@ func _update(delta: float) -> bool:
 func _on_stance_timer_timeout() -> void:
 	if enemy.debug: print("Stance timer timeout");
 	if !enemy.attack_detector.has_overlapping_bodies():
-		finished.emit("chase")
-		#finished.emit(attack_state.name, {"step_forward": true})
+	#	finished.emit("chase")
+		finished.emit(attack_state.pick_random().name, {"step_forward": true})
 		return
 	enemy.wait_animation_transition = true
 	if debug_stance != "":
@@ -83,8 +83,8 @@ func _on_stance_timer_timeout() -> void:
 func _on_attack_timer_timeout() -> void:
 	if enemy.debug: print("Attack timer timeout");
 	if !enemy.attack_detector.has_overlapping_bodies():
-		finished.emit("chase")
-		#finished.emit(attack_state.name, {"step_forward": true})
+		#finished.emit("chase")
+		finished.emit(attack_state.pick_random().name, {"step_forward": true})
 		return
 	enemy.wait_animation_transition = true
 	finished.emit(attack_state.pick_random().name)

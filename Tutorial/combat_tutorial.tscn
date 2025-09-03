@@ -842,6 +842,7 @@ frame = 8
 frame_progress = 0.0461678
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Page2"]
+layout_mode = 0
 offset_left = 112.0
 offset_top = 208.0
 offset_right = 275.0
@@ -860,6 +861,7 @@ animation = &"slash_no_shield"
 autoplay = "slash_no_shield"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Page2"]
+layout_mode = 0
 offset_left = 368.0
 offset_top = 192.0
 offset_right = 560.0
@@ -871,6 +873,7 @@ text = "[color=red]Heavy Stance[/color]
 -- Heavy Attack breaks Kalin's guard and stuns her if she is guarding"
 
 [node name="RichTextLabel8" type="RichTextLabel" parent="Page2"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 288.0
 offset_right = 448.0
@@ -889,6 +892,7 @@ frame_progress = 0.393161
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="Page2"]
 visible = false
+layout_mode = 0
 offset_left = 432.0
 offset_top = 192.0
 offset_right = 616.0

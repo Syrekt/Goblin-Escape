@@ -15,9 +15,13 @@ func exit() -> void:
 	%Sprite2D.material.set_shader_parameter("outline_color", Color(0, 0, 0, 0))
 
 func physics_update(delta: float) -> void:
-	#Charge up the attack
+	# Charge up the attack
 	if player.pressed("attack"):
 		charge_up = move_toward(charge_up, 100, 2)
+		if charge_up > 10:
+			# Switch to charging state
+			finished.emit("slash_charge")
+			return
 
 	if charge_up == 100 && !tween:
 		tween = create_tween().bind_node(self).set_loops(-1)

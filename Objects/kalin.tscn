@@ -1,4 +1,4 @@
-[gd_scene load_steps=285 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=310 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -64,6 +64,7 @@
 [ext_resource type="Script" uid="uid://bwrdgmfgq5cw3" path="res://Kalin/States/animation_state_player.gd" id="40_xirjq"]
 [ext_resource type="Script" uid="uid://b203v085bx2rg" path="res://Kalin/States/bash.gd" id="41_pdh0h"]
 [ext_resource type="Script" uid="uid://bvi7mrhp8r1py" path="res://Kalin/States/stab.gd" id="41_sat24"]
+[ext_resource type="Texture2D" uid="uid://d3lypviirdc8j" path="res://Kalin/Sprites/Kalin-heavycharge-dustspawn.png" id="43_eygup"]
 [ext_resource type="Script" uid="uid://clti5tx0txok1" path="res://Scripts/player_health.gd" id="43_uhoyi"]
 [ext_resource type="Texture2D" uid="uid://cdf5u0hk86v0o" path="res://Others/smoke_test.png" id="44_3q7yy"]
 [ext_resource type="Script" uid="uid://cpautywrye7vy" path="res://Scripts/ui_focus.gd" id="44_8nsgr"]
@@ -90,6 +91,7 @@
 [ext_resource type="Texture2D" uid="uid://by7w3x2yria11" path="res://UI/Sliders/spr_staminabar_full.png" id="52_5atg1"]
 [ext_resource type="Script" uid="uid://dla7rfv4p43jf" path="res://Kalin/States/slide.gd" id="54_5dxkx"]
 [ext_resource type="Texture2D" uid="uid://uxseughhf4fc" path="res://UI/Sliders/experience_under.png" id="54_80r2e"]
+[ext_resource type="Script" uid="uid://b8ggpkgopyddm" path="res://Kalin/States/slash_charge.gd" id="54_jh2p4"]
 [ext_resource type="Script" uid="uid://cenw0nn0fohoa" path="res://Kalin/States/interacting.gd" id="55_5lcso"]
 [ext_resource type="Script" uid="uid://b6xjst2veilw0" path="res://Scripts/smell.gd" id="55_h4isg"]
 [ext_resource type="Texture2D" uid="uid://d2ors75bqsp3c" path="res://UI/Sliders/experience_progress.png" id="55_rbk27"]
@@ -135,6 +137,9 @@
 [ext_resource type="Texture2D" uid="uid://c2qsuxrlu2jq3" path="res://Kalin/Sprites/spr_Kalin-Light Stance-idle.png" id="116_sxqin"]
 [ext_resource type="Texture2D" uid="uid://dmrr340oxi6vr" path="res://Kalin/Sprites/kalin_grabbed_strip3 (static).png" id="126_3s3me"]
 [ext_resource type="Texture2D" uid="uid://d10sqxw7yesb8" path="res://Kalin/Sprites/kalin_struggle_loop_strip19 (static).png" id="127_441gv"]
+[ext_resource type="Texture2D" uid="uid://b6faoe5di8dqk" path="res://Kalin/Sprites/Kalin-heavycharge-dustloop.png" id="132_elkpv"]
+[ext_resource type="Texture2D" uid="uid://dxb5a2elh5hbr" path="res://Kalin/Sprites/Kalin-heavycharge-charge.png" id="133_xnfvy"]
+[ext_resource type="Texture2D" uid="uid://c3wcy7nk5e3vb" path="res://Kalin/Sprites/Kalin-heavycharge-idle.png" id="135_a4eb7"]
 
 [sub_resource type="Resource" id="Resource_446pa"]
 script = ExtResource("3_towol")
@@ -153,6 +158,138 @@ shader_parameter/outer_radius = 0.995
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cbw7l"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t42fh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_go1w5"]
+atlas = ExtResource("132_elkpv")
+region = Rect2(0, 0, 51, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rx7lj"]
+atlas = ExtResource("132_elkpv")
+region = Rect2(51, 0, 51, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84rll"]
+atlas = ExtResource("132_elkpv")
+region = Rect2(102, 0, 51, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64bmk"]
+atlas = ExtResource("132_elkpv")
+region = Rect2(153, 0, 51, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qypli"]
+atlas = ExtResource("132_elkpv")
+region = Rect2(204, 0, 51, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yiovb"]
+atlas = ExtResource("132_elkpv")
+region = Rect2(255, 0, 51, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ljxk"]
+atlas = ExtResource("132_elkpv")
+region = Rect2(306, 0, 51, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ufp2"]
+atlas = ExtResource("132_elkpv")
+region = Rect2(357, 0, 51, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ig3ls"]
+atlas = ExtResource("132_elkpv")
+region = Rect2(408, 0, 51, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vu8x7"]
+atlas = ExtResource("132_elkpv")
+region = Rect2(459, 0, 51, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcc2g"]
+atlas = ExtResource("132_elkpv")
+region = Rect2(510, 0, 51, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38p4s"]
+atlas = ExtResource("43_eygup")
+region = Rect2(0, 0, 51, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lul23"]
+atlas = ExtResource("43_eygup")
+region = Rect2(51, 0, 51, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0u5y4"]
+atlas = ExtResource("43_eygup")
+region = Rect2(102, 0, 51, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgw38"]
+atlas = ExtResource("43_eygup")
+region = Rect2(153, 0, 51, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elsth"]
+atlas = ExtResource("43_eygup")
+region = Rect2(204, 0, 51, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_541ew"]
+atlas = ExtResource("43_eygup")
+region = Rect2(255, 0, 51, 78)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ig3ls"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_go1w5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rx7lj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84rll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64bmk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qypli")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yiovb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ljxk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ufp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ig3ls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vu8x7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcc2g")
+}],
+"loop": true,
+"name": &"charged",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38p4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lul23")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0u5y4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgw38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elsth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_541ew")
+}],
+"loop": true,
+"name": &"charging",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfvac"]
 size = Vector2(105, 32)
@@ -3423,6 +3560,162 @@ tracks/7/keys = {
 "values": [false, true]
 }
 
+[sub_resource type="Animation" id="Animation_jh2p4"]
+resource_name = "slash_charge"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("133_xnfvy")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..:facing_locked")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.8]
+}
+
+[sub_resource type="Animation" id="Animation_eygup"]
+resource_name = "slash_charged"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("135_a4eb7")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..:facing_locked")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.8]
+}
+
 [sub_resource type="Animation" id="Animation_1olko"]
 resource_name = "slide"
 length = 0.4
@@ -4206,6 +4499,8 @@ _data = {
 &"run_stop": SubResource("Animation_x4pkh"),
 &"sex_goblin1": SubResource("Animation_c6www"),
 &"slash": SubResource("Animation_ada4r"),
+&"slash_charge": SubResource("Animation_jh2p4"),
+&"slash_charged": SubResource("Animation_eygup"),
 &"slide": SubResource("Animation_1olko"),
 &"stab": SubResource("Animation_sw71j"),
 &"stance_defensive": SubResource("Animation_xnqfs"),
@@ -4284,6 +4579,7 @@ script = ExtResource("2_0bx81")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="Overlays" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="UIFocus" type="ColorRect" parent="Overlays"]
 anchors_preset = 15
@@ -4385,6 +4681,7 @@ offset_top = 14.0
 offset_right = 75.5
 offset_bottom = 17.0
 step = 0.0
+value = 36.08
 texture_under = ExtResource("57_rbk27")
 texture_progress = ExtResource("58_yofsr")
 tint_progress = Color(0.474366, 0.00173617, 0.698302, 1)
@@ -4596,6 +4893,13 @@ script = ExtResource("72_rp7vf")
 offset_right = 40.0
 offset_bottom = 23.0
 
+[node name="SlashChargeupFX" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_ig3ls")
+animation = &"charged"
+frame = 2
+frame_progress = 0.76164
+
 [node name="StateMachine" parent="." groups=["Flip"] instance=ExtResource("9_ojhio")]
 visible = false
 position = Vector2(-4, 34)
@@ -4638,6 +4942,9 @@ script = ExtResource("21_3t0vr")
 
 [node name="stance_heavy" type="Node" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("36_uhi5y")
+
+[node name="slash_charge" type="Node" parent="StateMachine"]
+script = ExtResource("54_jh2p4")
 
 [node name="stance_light" type="Node" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("33_ao24u")

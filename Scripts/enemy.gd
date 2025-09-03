@@ -37,13 +37,15 @@ var dealth_finishing_blow := false
 
 var attack_type_taken : Array[String]
 
+var gameplay_paused := false
+
 signal health_depleted
 
 #This is used to prevent finishing a state when previous states animation finishes in new state
 #before it changes the animation
 var wait_animation_transition := false 
 
-@onready var animation_player   := $AnimationPlayer
+@onready var animation_player   : AnimationPlayer = $AnimationPlayer
 @onready var sprite			    := $Sprite2D
 @onready var state_node		    := $StateMachine
 @onready var health			    := $Health
@@ -114,11 +116,12 @@ func next_step_free(direction : int) -> bool:
 	else:
 		return true
 func move(speed: float, direction: int) -> bool:
+	# Returns false if next step isn't free, turning the character or stopping it's movement
 	if !next_step_free(direction):
 		return false
 
-	#Update the ray direction towards the direction we want to move
-	velocity.x = speed * direction * get_process_delta_time()
+	if !gameplay_paused:
+		velocity.x = speed * direction * get_process_delta_time()
 
 	return velocity.x != 0
 func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
@@ -269,6 +272,20 @@ func _ready() -> void:
 		point.get_parent().remove_child(point)
 		get_tree().root.add_child.call_deferred(point)
 		point.global_position = _global_position
+func _process(delta: float) -> void:
+	# Check if there is anything that stops the gameplay
+	var ui_nodes = get_tree().get_nodes_in_group("UIPanel")
+	gameplay_paused = false
+	for node in ui_nodes:
+		if node.visible:
+			gameplay_paused = true
+
+	# Animation control when gameplay is paused
+	if gameplay_paused:
+		if animation_player.is_playing():
+			animation_player.pause()
+	elif !animation_player.is_playing():
+		animation_player.play()
 func _physics_process(delta: float) -> void:
 	if chase_target:
 		await detect_player(player)

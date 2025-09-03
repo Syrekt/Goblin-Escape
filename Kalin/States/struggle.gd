@@ -3,6 +3,7 @@ extends PlayerState
 @onready var timer : Timer = $Timer
 @onready var progression_bar : TextureProgressBar = $"../../StruggleProgressBar"
 @onready var struggle_prompt : AnimatedSprite2D = $"../../StruggleProgressBar/AnimatedSprite2D"
+@onready var arousal_bar : TextureProgressBar = $"../../UI/HUD/Arousal"
 
 var tween : Tween
 
@@ -26,8 +27,9 @@ func exit() -> void:
 func physics_update(delta: float) -> void:
 	progression_bar.value = move_toward(progression_bar.value, 0, 40 * delta)
 	player.set_facing(player.grabbed_by.global_position.x - player.global_position.x)
+	var arousal_modifier = (arousal_bar.value / arousal_bar.max_value) * 5.0
 	if Input.is_action_just_pressed("attack"):
-		progression_bar.value += 20.0
+		progression_bar.value += 20.0 - arousal_modifier
 	if progression_bar.value >= progression_bar.max_value:
 		player.break_grab()
 	elif progression_bar.value <= 0.0:
