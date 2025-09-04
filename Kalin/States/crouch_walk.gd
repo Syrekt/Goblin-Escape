@@ -15,8 +15,8 @@ func physics_update(delta: float) -> void:
 	elif !player.pressed("down") && player.can_stand_up():
 		finished.emit("idle")
 	elif player.just_pressed("jump"):
-		print("drop down the platform")
 		#finished.emit("rise")
+		pass
 	elif is_equal_approx(player.get_movement_dir(), 0.0):
 		if player.pressed("down") || !player.can_stand_up():
 			finished.emit("crouch")

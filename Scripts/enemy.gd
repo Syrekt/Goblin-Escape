@@ -281,11 +281,11 @@ func _process(delta: float) -> void:
 	#		gameplay_paused = true
 
 	# Animation control when gameplay is paused
-	if gameplay_paused:
-		if animation_player.is_playing():
-			animation_player.pause()
-	elif !animation_player.is_playing():
-		animation_player.play()
+	#if gameplay_paused:
+	#	if animation_player.is_playing():
+	#		animation_player.pause()
+	#elif !animation_player.is_playing():
+	#	animation_player.play()
 func _physics_process(delta: float) -> void:
 	if chase_target:
 		await detect_player(player)

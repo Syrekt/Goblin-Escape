@@ -14,7 +14,6 @@ func enter(previous_state_path: String, data := {}) -> void:
 	enemy.velocity.x = 0
 
 	step_forward = data.get("step_forward", false)
-	print("step_forward: "+str(step_forward))
 
 func exit() -> void:
 	enemy.counter_attack = false

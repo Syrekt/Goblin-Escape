@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=104 format=3 uid="uid://1quahlg1y22o"]
+[gd_resource type="TileSet" load_steps=105 format=3 uid="uid://1quahlg1y22o"]
 
 [ext_resource type="Texture2D" uid="uid://bqtpx8ja2r3ni" path="res://Map/FP_CastlePrison/background_obj.png" id="1_leifh"]
 [ext_resource type="Texture2D" uid="uid://d46bcae481s6" path="res://Map/FP_CastlePrison/mainlevbuildB.png" id="2_qy7eu"]
@@ -78,6 +78,9 @@ tile_data = PackedInt32Array(0, 1572866, 9, 65536, 1572866, 10, 131072, 1572866,
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_iki0v"]
 tile_data = PackedInt32Array(0, 2293762, 14, 1, 2359298, 14, 2, 2424834, 14, 3, 2490370, 14)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_inseq"]
+tile_data = PackedInt32Array(0, 2293762, 16, 65536, 2293762, 17, 1, 2359298, 16, 65537, 2359298, 17, 2, 2424834, 16, 65538, 2424834, 17, 3, 2490370, 16, 65539, 2490370, 17)
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_jpv3x"]
 tile_data = PackedInt32Array(0, 1245186, 30, 65536, 1245186, 31, 131072, 1245186, 32, 1, 1769474, 30, 65537, 1769474, 31, 131073, 1769474, 32, 2, 1835010, 30, 65538, 1835010, 31, 131074, 1835010, 32)
@@ -3776,39 +3779,55 @@ texture = ExtResource("3_usbtt")
 20:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 17:4/0 = 0
 33:19/0 = 0
+33:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, -8, -8, -8, 8)
 34:20/0 = 0
+34:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, -8, -8, -8, 8)
 34:21/0 = 0
+34:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, -8, -8, -8, 8)
 35:22/0 = 0
+35:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, -8, -8, -8, 8)
 34:22/0 = 0
+34:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, -8, -8, -8, 8)
 33:22/0 = 0
+33:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, -8, -8, -8, 8)
 33:21/0 = 0
+33:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, -8, -8, -8, 8)
 33:20/0 = 0
+33:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, -8, -8, -8, 8)
 34:19/0 = 0
+34:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, -8, -8, -8, 8)
 35:19/0 = 0
+35:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, -8, -8, -8, 8)
 35:20/0 = 0
+35:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, -8, -8, -8, 8)
 35:21/0 = 0
+35:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, -8, -8, -8, 8)
 35:16/0 = 0
 38:16/0 = 0
 37:16/0 = 0
 36:16/0 = 0
 35:14/0 = 0
-35:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+35:14/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 36:14/0 = 0
-36:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+36:14/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 37:14/0 = 0
-37:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+37:14/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 38:14/0 = 0
-38:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+38:14/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 35:17/0 = 0
 36:17/0 = 0
 37:17/0 = 0
 38:17/0 = 0
 29:7/0 = 0
 29:8/0 = 0
+29:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, -8, -8, -8, 8)
 29:9/0 = 0
+29:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 30:7/0 = 0
 30:8/0 = 0
+30:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, -8, -8, -8, 8)
 30:9/0 = 0
+30:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [resource]
 occlusion_layer_0/light_mask = 1
@@ -3816,6 +3835,8 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
 physics_layer_1/collision_layer = 256
 physics_layer_1/collision_mask = 0
+physics_layer_2/collision_layer = 8192
+physics_layer_2/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_nnt18")
 sources/1 = SubResource("TileSetAtlasSource_ewbju")
 sources/2 = SubResource("TileSetAtlasSource_85qyi")
@@ -3850,3 +3871,4 @@ pattern_27 = SubResource("TileMapPattern_04bsh")
 pattern_28 = SubResource("TileMapPattern_ro68r")
 pattern_29 = SubResource("TileMapPattern_aachr")
 pattern_30 = SubResource("TileMapPattern_iki0v")
+pattern_31 = SubResource("TileMapPattern_inseq")

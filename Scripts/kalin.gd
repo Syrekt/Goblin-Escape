@@ -472,6 +472,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		if get_floor_angle() == 0.0:
 			set_collision_mask_value(12, false)
+	if Input.is_action_pressed("up"):
+		set_collision_mask_value(14, true)
+	elif Input.is_action_pressed("down"):
+		set_collision_mask_value(14, false)
+	if get_floor_angle() != 0.0:
+		set_collision_mask_value(14, false)
 
 	match state_name:
 		"idle":
