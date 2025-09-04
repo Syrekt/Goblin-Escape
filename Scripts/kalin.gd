@@ -515,6 +515,9 @@ func _physics_process(delta: float) -> void:
 		"hiding", "hidden", "unhide":
 			move_speed = 0
 			velocity = Vector2.ZERO
+		"stance_light", "stance_heavy", "stance_defensive":
+			move_speed = 0
+			velocity = Vector2.ZERO
 	$ThreatCollider.monitoring = abs(move_speed) > stance_walk_speed
 
 

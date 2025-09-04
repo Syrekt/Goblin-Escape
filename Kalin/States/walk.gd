@@ -22,7 +22,7 @@ func update(delta: float) -> void:
 		finished.emit("bash_no_sword")
 	elif player.has_sword && !lock_stance_button && (player.just_pressed("stance") || player.just_pressed("attack")):
 		finished.emit("stance_walk")
-	elif player.velocity.x == 0:
+	elif player.get_movement_dir() == 0:
 		finished.emit("idle")
 
 func physics_update(delta: float) -> void:

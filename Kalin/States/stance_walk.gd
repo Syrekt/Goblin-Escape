@@ -13,6 +13,7 @@ func update(delta):
 	if lock_stance_button:
 		if !player.pressed("stance"): lock_stance_button = false
 
+
 	if! player.is_on_floor():
 		finished.emit("fall")
 	elif !lock_stance_button && player.just_pressed("stance"):

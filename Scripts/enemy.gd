@@ -37,7 +37,7 @@ var dealth_finishing_blow := false
 
 var attack_type_taken : Array[String]
 
-var gameplay_paused := false
+var gameplay_paused := false # Disabled
 
 signal health_depleted
 
@@ -120,7 +120,7 @@ func move(speed: float, direction: int) -> bool:
 	if !next_step_free(direction):
 		return false
 
-	if !gameplay_paused:
+	if !gameplay_paused: # Disabled
 		velocity.x = speed * direction * get_process_delta_time()
 
 	return velocity.x != 0
@@ -275,10 +275,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Check if there is anything that stops the gameplay
 	var ui_nodes = get_tree().get_nodes_in_group("UIPanel")
-	gameplay_paused = false
-	for node in ui_nodes:
-		if node.visible:
-			gameplay_paused = true
+	#gameplay_paused = false
+	#for node in ui_nodes:
+	#	if node.visible:
+	#		gameplay_paused = true
 
 	# Animation control when gameplay is paused
 	if gameplay_paused:
@@ -339,6 +339,8 @@ func _physics_process(delta: float) -> void:
 			set_facing(sign(velocity.x))
 
 	#endregion
+	if gameplay_paused:# Disabled
+		velocity = Vector2.ZERO
 #endregion
 #region Signals
 func _on_health_depleted() -> void:
