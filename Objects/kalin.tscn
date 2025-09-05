@@ -1,4 +1,4 @@
-[gd_scene load_steps=310 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=311 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -140,6 +140,7 @@
 [ext_resource type="Texture2D" uid="uid://b6faoe5di8dqk" path="res://Kalin/Sprites/Kalin-heavycharge-dustloop.png" id="132_elkpv"]
 [ext_resource type="Texture2D" uid="uid://dxb5a2elh5hbr" path="res://Kalin/Sprites/Kalin-heavycharge-charge.png" id="133_xnfvy"]
 [ext_resource type="Texture2D" uid="uid://c3wcy7nk5e3vb" path="res://Kalin/Sprites/Kalin-heavycharge-idle.png" id="135_a4eb7"]
+[ext_resource type="Script" uid="uid://bilgsf14hcllx" path="res://Objects/interactor.gd" id="141_ws413"]
 
 [sub_resource type="Resource" id="Resource_446pa"]
 script = ExtResource("3_towol")
@@ -5237,10 +5238,15 @@ visible = false
 position = Vector2(0, 32)
 collision_layer = 0
 collision_mask = 64
+script = ExtResource("141_ws413")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor"]
 position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_1nk40")
+
+[node name="Cooldown" type="Timer" parent="Interactor"]
+one_shot = true
+autostart = true
 
 [node name="ThreatCollider" type="Area2D" parent="."]
 visible = false

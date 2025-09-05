@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://h6taionkkj78"]
+
+[ext_resource type="Texture2D" uid="uid://d46bcae481s6" path="res://Map/FP_CastlePrison/mainlevbuildB.png" id="1_vjajj"]
+[ext_resource type="Script" uid="uid://be7aagsl8mw7d" path="res://Map/Fast Travel/tunnel_entrance.gd" id="1_yixon"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jeyjq"]
+size = Vector2(36, 38)
+
+[node name="TunnelEntrance" type="Area2D"]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("1_yixon")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vjajj")
+region_enabled = true
+region_rect = Rect2(320, 208, 64, 48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jeyjq")
