@@ -1,6 +1,7 @@
 [remap]
 
-importer="dialogue_manager_compiler_14"
+importer="dialogue_manager"
+importer_version=15
 type="Resource"
 uid="uid://cymrd15m31gph"
 path="res://.godot/imported/EmptyRoom1.dialogue-bb32048b59fb207dfe1b70208c2ddb34.tres"

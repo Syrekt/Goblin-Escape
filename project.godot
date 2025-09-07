@@ -194,6 +194,8 @@ locale/translations_pot_files=PackedStringArray("res://Dialogues/EmptyRoom1.dial
 2d_physics/layer_11="Abyss"
 2d_physics/layer_12="Stair"
 2d_physics/layer_13="Crates"
+2d_physics/layer_14="Stair Path"
+2d_physics/layer_15="Collectable"
 
 [physics]
 
@@ -204,3 +206,4 @@ common/physics_interpolation=true
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
+viewport/hdr_2d=true

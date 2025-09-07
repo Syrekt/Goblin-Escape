@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6uxk5lsmex85"]
+
+[ext_resource type="Script" uid="uid://bsi01gc8576nb" path="res://Scripts/collectable.gd" id="1_mq80g"]
+[ext_resource type="Texture2D" uid="uid://ckc8isdxytn5x" path="res://Objects/collectable_base.png" id="1_rco4t"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s8j2c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s8j2c"]
+radius = 5.09902
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jtlra"]
+radius = 16.0
+
+[node name="Collectable" type="RigidBody2D"]
+collision_layer = 0
+physics_material_override = SubResource("PhysicsMaterial_s8j2c")
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 5.0
+script = ExtResource("1_mq80g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_s8j2c")
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 16384
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_jtlra")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-9.53674e-07, -9.53674e-07)
+texture = ExtResource("1_rco4t")
+region_rect = Rect2(-2.62102, -2.20038, 8.82551, 9.20375)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true

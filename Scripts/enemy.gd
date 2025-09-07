@@ -5,6 +5,8 @@ const RUN_SPEED = 300.0 * 60
 
 @export var debug := false
 
+@export var experience_drop := 1
+
 @export var move_speed := 100 * 60
 @export var patrol_move_speed := 100 * 60
 @export var gravity := 500.0;
@@ -61,6 +63,8 @@ var wait_animation_transition := false
 @onready var player : Player
 
 var line_of_sight: RayCast2D
+
+var collectable_scene = preload("res://Objects/collectable.tscn")
 
 signal heard_noise(id: Enemy)
 
@@ -346,7 +350,19 @@ func _physics_process(delta: float) -> void:
 func _on_health_depleted() -> void:
 	print("health depleted")
 	state_node.state.finished.emit("death")
-	player.experience.add(10)
+	#player.experience.add(10)
+
+	for i in experience_drop:
+		# Add exp point to the scene
+		var collectable : RigidBody2D = collectable_scene.instantiate()
+		collectable.type = collectable.Types.EXPERIENCE
+		add_child(collectable)
+
+		# Set speed and direction
+		var deg = randf_range(-135, -45)
+		var rad = deg_to_rad(deg)
+		var speed = 200.0 #randf_range(200.0, 300.0)
+		collectable.linear_velocity = Vector2.from_angle(rad) * speed
 func _on_chase_detector_body_entered(body:Node2D) -> void:
 	if debug: print("player body entered in chase detector")
 	start_chase(body)
