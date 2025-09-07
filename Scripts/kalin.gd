@@ -74,6 +74,7 @@ var available_stat_points := 5
 @onready var smell_collider : Area2D = $SmellCollider
 @onready var cell_check : RayCast2D = $CellCheck
 @onready var interaction_prompt : AnimatedSprite2D = $InteractionPrompt
+@onready var buff_container : HBoxContainer = $UI/HUD/Stamina/BuffContainer
 #endregion
 #region Combat
 @export var has_sword := false #false for release
@@ -95,8 +96,9 @@ var grabbed_by : Enemy
 #endregion
 #region Others
 @export var debug				:= false
-@export var dead				:= false # Health == 0
-@export var unconscious			:= false # Post sex situations where health isn't 0
+@export var dead				:= false ## Health == 0
+@export var unconscious			:= false ## Post sex situations where health isn't 0
+var can_have_sex := false ## When enemies can move in for sex
 var states_locked := false
 @export var save_list : Array[NodePath]
 @onready var pcam := $PhantomCamera2D
@@ -588,6 +590,9 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
+	Debugger.printui("dead: "+str(dead))
+	Debugger.printui("unconscious: "+str(unconscious))
+	Debugger.printui("can_have_sex: "+str(can_have_sex))
 	interaction_prompt.supress = true
 
 	if just_pressed("quick save"):

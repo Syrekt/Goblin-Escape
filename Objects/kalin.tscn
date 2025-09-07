@@ -1,4 +1,4 @@
-[gd_scene load_steps=313 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=314 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -115,6 +115,7 @@
 [ext_resource type="Script" uid="uid://cqgh8iyg4ujbk" path="res://Scripts/interaction_prompt.gd" id="72_rp7vf"]
 [ext_resource type="Texture2D" uid="uid://fyevcw0t8yc" path="res://UI/panel_bg.png" id="73_qdj7c"]
 [ext_resource type="Script" uid="uid://drm2busxe3db8" path="res://Inventory/inv_ui.gd" id="73_ugwbb"]
+[ext_resource type="Script" uid="uid://b4i1liivosq1t" path="res://Kalin/States/recover.gd" id="74_k043l"]
 [ext_resource type="AudioStream" uid="uid://cky5m7018jb2l" path="res://SFX/Kalin/HIT 01.wav" id="81_lsbl4"]
 [ext_resource type="AudioStream" uid="uid://bs6xrkccvjvu7" path="res://SFX/Kalin/Heavy sword woosh 11.wav" id="82_8nsgr"]
 [ext_resource type="Script" uid="uid://ujev05elxx65" path="res://Kalin/States/struggle.gd" id="83_441gv"]
@@ -1059,7 +1060,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("%Sprite2D/..:dead")
+tracks/10/path = NodePath("%Sprite2D/..:power_crush")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -1071,31 +1072,31 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("%Sprite2D/..:unconscious")
+tracks/11/path = NodePath("../StateMachine/bash_no_sword/Hitbox/Collider:disabled")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("%Sprite2D/..:power_crush")
+tracks/12/path = NodePath("%Sprite2D/../StateMachine/slash/SlashHitbox/Collider:disabled")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("../StateMachine/bash_no_sword/Hitbox/Collider:disabled")
+tracks/13/path = NodePath("%Sprite2D/../StateMachine/stab/StabHitbox/Collider:disabled")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -1107,7 +1108,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("%Sprite2D/../StateMachine/slash/SlashHitbox/Collider:disabled")
+tracks/14/path = NodePath("%Sprite2D/../StateMachine/death/SexParticipantCollider/CollisionShape2D:disabled")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -1119,58 +1120,34 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("%Sprite2D/../StateMachine/stab/StabHitbox/Collider:disabled")
+tracks/15/path = NodePath("%Sprite2D/../ColliderStanding:position")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(0, 5)]
 }
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("%Sprite2D/../StateMachine/death/SexParticipantCollider/CollisionShape2D:disabled")
+tracks/16/path = NodePath("%Sprite2D/../ColliderStanding:scale")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(1, 2)]
 }
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("%Sprite2D/../ColliderStanding:position")
+tracks/17/path = NodePath("%Sprite2D/..:facing_locked")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 5)]
-}
-tracks/18/type = "value"
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/path = NodePath("%Sprite2D/../ColliderStanding:scale")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 2)]
-}
-tracks/19/type = "value"
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/path = NodePath("%Sprite2D/..:facing_locked")
-tracks/19/interp = 1
-tracks/19/loop_wrap = true
-tracks/19/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -2050,22 +2027,10 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("%Sprite2D/..:dead")
+tracks/4/path = NodePath("%Sprite2D/../StateMachine/death/SexParticipantCollider/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("%Sprite2D/../StateMachine/death/SexParticipantCollider/CollisionShape2D:disabled")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -2828,18 +2793,6 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0)
 }
 tracks/4/use_blend = true
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("%Sprite2D/..:unconscious")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_mj8sq"]
 resource_name = "pull"
@@ -3113,18 +3066,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("%Sprite2D/..:unconscious")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_rp60i"]
@@ -5039,7 +4980,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="recover" type="Node" parent="StateMachine"]
-script = ExtResource("40_xirjq")
+script = ExtResource("74_k043l")
 
 [node name="push_idle" type="Node" parent="StateMachine"]
 script = ExtResource("48_mwqkq")

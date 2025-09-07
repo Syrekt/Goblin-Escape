@@ -12,7 +12,7 @@ func update(delta):
 		return
 
 	#region React to player
-	if enemy.chase_target.dead:
+	if enemy.chase_target.can_have_sex && (enemy.chase_target.dead || enemy.chase_target.unconscious):
 		finished.emit("laugh")
 		return
 	elif enemy.attack_detector.has_overlapping_bodies():

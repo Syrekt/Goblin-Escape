@@ -6,17 +6,37 @@ extends PlayerState
 
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
-	recovery_timer.start()
-	sex_timer.start()
 	player.velocity.x = 0
 
-func update(delta: float) -> void:
-	if recovery_timer.is_stopped():
-		finished.emit("recover")
+	for buff in player.buff_container.get_children():
+		if buff.effect == "death's door":
+			player.dead = true
+			player.unconscious = false
+			buff.queue_free()
+			break
 
-	if sex_timer.is_stopped():
-		if participant_collider.has_overlapping_bodies():
-			for body in participant_collider.get_overlapping_bodies():
-				#We can handle more characters later
-				player.sex_begin([body], "sex_goblin1")
-				break
+	if !player.dead:
+		player.unconscious = true
+		recovery_timer.start()
+		sex_timer.start()
+
+	print("recovery_timer.time_left: "+str(recovery_timer.time_left));
+
+	# Decide what to do if dead
+
+func exit() -> void:
+	recovery_timer.stop()
+	sex_timer.stop()
+
+func update(delta: float) -> void:
+	if player.unconscious:
+		if recovery_timer.is_stopped():
+			finished.emit("recover")
+
+		if sex_timer.is_stopped():
+			player.can_have_sex = true
+			if participant_collider.has_overlapping_bodies():
+				for body in participant_collider.get_overlapping_bodies():
+					#We can handle more characters later
+					player.sex_begin([body], "sex_goblin1")
+					break
