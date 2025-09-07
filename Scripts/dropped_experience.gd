@@ -1,8 +1,8 @@
 extends Interaction
 
-var experience_amount : int
+var amount : int
 
 func update(player: Player) -> void:
 	if Input.is_action_just_pressed("interact"):
-		player.experience.value += experience_amount
+		player.experience.add(amount)
 		queue_free()

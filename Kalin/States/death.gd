@@ -3,6 +3,9 @@ extends PlayerState
 @onready var recovery_timer : Timer = $RecoveryTimer
 @onready var sex_timer : Timer = $SexTimer
 @onready var participant_collider : Area2D = $SexParticipantCollider
+@onready var death_timer : Timer = $DeathTimer
+@onready var death_screen : CanvasLayer = get_tree().current_scene.find_child("DeathScreen")
+
 
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
@@ -15,7 +18,9 @@ func enter(previous_state_path: String, data := {}) -> void:
 			buff.queue_free()
 			break
 
-	if !player.dead:
+	if player.dead:
+		death_timer.start()
+	else:
 		player.unconscious = true
 		recovery_timer.start()
 		sex_timer.start()
@@ -27,8 +32,40 @@ func enter(previous_state_path: String, data := {}) -> void:
 func exit() -> void:
 	recovery_timer.stop()
 	sex_timer.stop()
+	death_timer.stop()
+
+func send_player() -> void:
+	player.health.value = player.health.max_value
+	player.dead = false
+	player.experience.drop_experience()
+	finished.emit("recover", {"prevent_deaths_door" : true})
+	if Ge.last_checkpoint:
+		player.global_position = Ge.last_checkpoint.global_position
+	else:
+		print("No last checkpoint found")
 
 func update(delta: float) -> void:
+	if player.dead:
+		if death_timer.is_stopped():
+			if !death_screen.visible:
+				player.controls_disabled = true
+				var color_rect = death_screen.find_child("ColorRect")
+				death_screen.show()
+				var tween = create_tween().bind_node(self)
+				Debugger.printui("color_rect.color: "+str(color_rect.color));
+				tween.tween_property(color_rect, "color", Color(0.0, 0.0, 0.0, 1.0), 1)
+				await tween.finished
+
+				await get_tree().create_timer(1.0).timeout
+				send_player()
+
+				tween = create_tween().bind_node(self)
+				tween.tween_property(color_rect, "color", Color(0.0, 0.0, 0.0, 0.0), 1)
+				await tween.finished
+
+				player.controls_disabled = false
+				death_screen.hide()
+
 	if player.unconscious:
 		if recovery_timer.is_stopped():
 			finished.emit("recover")

@@ -11,7 +11,7 @@ void fragment() {
     COLOR = texture(t0, SCREEN_UV);
     if (length(COLOR) >= glow_threshold) {
         ivec2 size = textureSize(t0, 0);
-	
+
         float uv_x = SCREEN_UV.x * float(size.x);
         float uv_y = SCREEN_UV.y * float(size.y);
 
@@ -34,6 +34,6 @@ void fragment() {
     	COLOR = texture(t0, SCREEN_UV) + ((sum / 9.0) * glow_intensity);
 	COLOR = mix(COLOR, vec4(glow_colour, 1.0), color_intensity);
     }
-	
-	
+
+
 }

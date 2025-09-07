@@ -1,17 +1,57 @@
-extends TextureProgressBar
+extends Label
+
+var visible_amount := 0
+var amount := 0
+var experience_drop = preload("res://Objects/dropped_experience.tscn")
+@onready var amount_container = $"../../../ExpAmountContainer"
+@onready var amount_label = $"../../../ExpAmountContainer/AmountLabel"
+
+@onready var timer : Timer = $Timer
+
+var tween_label : Tween
+var tween_amount : Tween
+
+func _ready() -> void:
+	timer.timeout.connect(_on_timer_timeout)
 
 func save() -> Dictionary:
 	var save_dict = {
-		"value" : value,
-		"max_value"	: max_value,
+		"amount" : amount,
 	}
 	return save_dict
 
-func add(_value : int) -> void:
-	print("add expericence: " + str(_value))
-	var excess_value = (value + _value) - max_value
-	if excess_value > 0:
-		print("level up")
-		value = excess_value
-	else:
-		value += _value
+func add(_amount: int) -> void:
+	timer.start()
+	amount += _amount
+	amount_label.amount += _amount
+
+func lose(_amount: int) -> void:
+	timer.start()
+	amount -= _amount
+	amount_label.amount -= _amount
+
+func _on_timer_timeout() -> void:
+	if tween_label:		tween_label.kill()
+	if tween_amount:	tween_amount.kill()
+
+	tween_label = create_tween().bind_node(self)
+	tween_label.tween_property(amount_label, "amount", 0, 2)
+
+	tween_amount = create_tween().bind_node(self)
+	tween_amount.tween_property(self, "visible_amount", amount, 2)
+
+	
+
+func _process(delta: float) -> void:
+	var spd = clamp(abs(amount - visible_amount), 200, 500)
+	#visible_amount = move_toward(visible_amount, amount, spd * delta)
+	text = str(visible_amount)
+
+func drop_experience() -> void:
+	var exp_drop = experience_drop.instantiate()
+
+	exp_drop.amount = amount
+	lose(amount)
+	exp_drop.global_position = owner.global_position
+
+	get_tree().current_scene.add_child(exp_drop)

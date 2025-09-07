@@ -14,6 +14,7 @@ var camera_focus : Node2D
 
 var scene_active := false
 
+var last_checkpoint : Checkpoint
 
 signal show_combat_tutorial
 signal show_stealth_tutorial
@@ -111,6 +112,17 @@ func save_game(filename: String) -> void:
 	print("Saving...")
 	var save_file = FileAccess.open("user://"+filename+".ge", FileAccess.WRITE)
 	#save_file.store_line(get_tree().current_scene.scene_file_path)
+
+	var ge = {
+		"globals":{
+			"last checkpoint" : {
+				"parent": last_checkpoint.get_parent().get_path(),
+				"filename": last_checkpoint.get_scene_file_path(),
+			}
+		}
+	}
+	save_file.store_line(JSON.stringify(ge))
+
 	var save_nodes = get_tree().get_nodes_in_group("Persistent")
 	for node in save_nodes:
 		# Check the node is an instanced scene so it can be instanced again during load.
@@ -171,6 +183,7 @@ func load_game(filename: String) -> void:
 	var save_file = FileAccess.open("user://"+filename+".ge", FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():
 		var json_string = save_file.get_line()
+		print("json_string: "+str(json_string))
 
 		# Creates the helper class to interact with JSON.
 		var json = JSON.new()
@@ -183,6 +196,14 @@ func load_game(filename: String) -> void:
 
 		# Get the data from the JSON object.
 		var node_data = json.data
+		print("json.data: "+str(json.data));
+		print("parse_result: "+str(parse_result))
+		if node_data.has("globals"):
+			var g = node_data["globals"]
+			if g.has("last checkpoint"):
+				var checkpoint = g["last checkpoint"]
+				find_child(checkpoint.filename)
+			continue
 
 		# Firstly, we need to create the object and add it to the tree and set its position.
 		var new_object = load(node_data["filename"]).instantiate()

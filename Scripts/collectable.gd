@@ -1,4 +1,5 @@
 # Needs Player collision mask enabled for collision detection to be collected
+# Experince is multiplied by 100 at the add() function
 
 class_name Collectable extends RigidBody2D
 
@@ -46,7 +47,7 @@ func start_pull(_puller: CharacterBody2D) -> void:
 func get_collected() -> void:
 	match type:
 		Types.EXPERIENCE:
-			puller.experience.value += amount
+			puller.experience.add(amount * 100)
 		"_":
 			print("No collectable type")
 	queue_free()

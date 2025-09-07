@@ -2,9 +2,13 @@ extends EnemyCombatState
 
 func update(delta: float):
 	if _update(delta): return
+	var target = enemy.chase_target
 
 
 	if enemy.chase_target:
+		if target.unconscious || target.dead:
+			finished.emit("chase")
+			return
 		enemy.set_facing(sign(enemy.chase_target.global_position.x - enemy.global_position.x))
 		if in_combat_range && target_stunned:
 			finished.emit("slash")

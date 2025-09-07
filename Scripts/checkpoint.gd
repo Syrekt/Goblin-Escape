@@ -1,4 +1,4 @@
-extends Interaction
+class_name Checkpoint extends Interaction
 
 var save_effect_scene = load("res://VFX/save_effect.tscn")
 var saved := false
@@ -20,10 +20,12 @@ func _ready() -> void:
 
 func update(player: Player):
 	if Input.is_action_just_pressed("interact"):
+		Ge.last_checkpoint = self
 		Ge.save_game("save1")
 		player.smell.value = 0
 		player.smell.dirt_amount = 0
 		player.arousal.value = 0
+		player.health.value = player.health.max_value
 
 		upper_sprite.play("save")
 

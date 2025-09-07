@@ -32,7 +32,7 @@ float get_line_width(vec2 p, float s) {
 		p /= 2.0;
 		intensity /= 2.0;
 	}
-	
+
 	return mix(max_line_width, min_line_width, w);
 }
 
@@ -47,7 +47,7 @@ void fragment() {
 		vec2 disp = scale * vec2(cos(angle), sin(angle));
 		alpha += texture(TEXTURE, UV + disp).a;
 	}
-	
+
 	if ((alpha > 0.0) && (texture(TEXTURE, UV).a < 0.1)) {
 		COLOR = outline_colour;
 	}

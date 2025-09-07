@@ -44,7 +44,7 @@ var available_stat_points := 5
 @onready var hud : Control = find_child("HUD")
 @onready var health		: TextureProgressBar = find_child("Health") #$CanvasLayer/HUD/HBoxContainer/Health
 @onready var stamina	: TextureProgressBar = find_child("Stamina") #$CanvasLayer/HUD/HBoxContainer/Stamina
-@onready var experience : TextureProgressBar = find_child("Experience")
+@onready var experience : Label = find_child("Experience")
 @onready var smell		: TextureProgressBar = find_child("Smell")
 @onready var arousal	: TextureProgressBar = find_child("Arousal")
 @onready var smell_particles : GPUParticles2D = $SmellParticles
@@ -144,7 +144,8 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 	var state_name = state_node.state.name
 	if state_name == "death":
 		return
-	%Sprite2D.material.set_shader_parameter("tint_color", Color(0, 0, 0, 0))
+	# This breaks the shadow tint when Kalin takes damage in shadows
+	#%Sprite2D.material.set_shader_parameter("tint_color", Color(0, 0, 0, 0))
 
 	combat_properties.stunned = false
 	var defending : bool = state_node.state.name == "stance_defensive"
@@ -590,9 +591,6 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
-	Debugger.printui("dead: "+str(dead))
-	Debugger.printui("unconscious: "+str(unconscious))
-	Debugger.printui("can_have_sex: "+str(can_have_sex))
 	interaction_prompt.supress = true
 
 	if just_pressed("quick save"):

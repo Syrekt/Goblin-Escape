@@ -39,8 +39,6 @@ var dealth_finishing_blow := false
 
 var attack_type_taken : Array[String]
 
-var gameplay_paused := false # Disabled
-
 signal health_depleted
 
 #This is used to prevent finishing a state when previous states animation finishes in new state
@@ -124,8 +122,7 @@ func move(speed: float, direction: int) -> bool:
 	if !next_step_free(direction):
 		return false
 
-	if !gameplay_paused: # Disabled
-		velocity.x = speed * direction * get_process_delta_time()
+	velocity.x = speed * direction * get_process_delta_time()
 
 	return velocity.x != 0
 func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
@@ -246,7 +243,15 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			else:
 				state.finished.emit(main_stance.name)
 		"laugh":
-			state.finished.emit("approach_player")
+			if chase_target:
+				if chase_target.dead:
+					state.finished.emit("leave_player")
+				elif chase_target.can_have_sex:
+					state.finished.emit("approach_player")
+				else:
+					state.finished.emit("idle")
+			else:
+				state.finished.emit("idle")
 		"death":
 			if is_on_floor():
 				set_collision_layer_value(4, false)
@@ -279,17 +284,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Check if there is anything that stops the gameplay
 	var ui_nodes = get_tree().get_nodes_in_group("UIPanel")
-	#gameplay_paused = false
-	#for node in ui_nodes:
-	#	if node.visible:
-	#		gameplay_paused = true
-
-	# Animation control when gameplay is paused
-	#if gameplay_paused:
-	#	if animation_player.is_playing():
-	#		animation_player.pause()
-	#elif !animation_player.is_playing():
-	#	animation_player.play()
 func _physics_process(delta: float) -> void:
 	if chase_target:
 		await detect_player(player)
@@ -343,8 +337,6 @@ func _physics_process(delta: float) -> void:
 			set_facing(sign(velocity.x))
 
 	#endregion
-	if gameplay_paused:# Disabled
-		velocity = Vector2.ZERO
 #endregion
 #region Signals
 func _on_health_depleted() -> void:

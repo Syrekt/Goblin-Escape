@@ -12,7 +12,8 @@ const TINT_SPRITE	= Color.RED
 func _process(delta: float) -> void:
 	var final_regeneration_speed = regeneration_speed
 
-	value += final_regeneration_speed * delta
+	if !owner.dead && !owner.unconscious:
+		value += final_regeneration_speed * delta
 
 	if final_regeneration_speed > regeneration_speed:
 		if !tint_under_tween:

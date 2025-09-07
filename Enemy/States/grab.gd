@@ -24,5 +24,6 @@ func _on_lunge_frame() -> void:
 		enemy.move(enemy.move_speed/4.0, enemy.facing)
 func _on_hit_frame() -> void:
 	if grab_collider.has_overlapping_bodies():
-		enemy.catched_player = true
-		enemy.player.get_grabbed(enemy, "grab_goblin")
+		if enemy.player.health.value > 0:
+			enemy.catched_player = true
+			enemy.player.get_grabbed(enemy, "grab_goblin")
