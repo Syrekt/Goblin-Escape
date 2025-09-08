@@ -1,8 +1,10 @@
+# I should save the existing exp drop in this node
 extends Label
 
 var visible_amount := 0
 var amount := 0
 var experience_drop = preload("res://Objects/dropped_experience.tscn")
+var previous_drop : Area2D ## Keeps track of previously dropped exp
 @onready var amount_container = $"../../../ExpAmountContainer"
 @onready var amount_label = $"../../../ExpAmountContainer/AmountLabel"
 
@@ -48,6 +50,7 @@ func _process(delta: float) -> void:
 	text = str(visible_amount)
 
 func drop_experience() -> void:
+	if previous_drop: previous_drop.queue_free()
 	var exp_drop = experience_drop.instantiate()
 
 	exp_drop.amount = amount
@@ -55,3 +58,4 @@ func drop_experience() -> void:
 	exp_drop.global_position = owner.global_position
 
 	get_tree().current_scene.add_child(exp_drop)
+	previous_drop = exp_drop

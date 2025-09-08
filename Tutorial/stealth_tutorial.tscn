@@ -58,7 +58,6 @@ one_shot = true
 autostart = true
 
 [node name="Page1" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -104,6 +103,7 @@ text = "Any noise will make enemies [color=red]aware[/color]. [color=red]Aware[/
 [color=red]Aware[/color] enemies won't detect Kalin while she's hiding in cavities. "
 
 [node name="Page2" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

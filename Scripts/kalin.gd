@@ -41,6 +41,8 @@ var available_stat_points := 5
 #endregion
 #region Node pointers
 @onready var state_node := $StateMachine
+@onready var ui : CanvasLayer = $UI
+@onready var ui_modulate : CanvasModulate = $UI/CanvasModulate
 @onready var hud : Control = find_child("HUD")
 @onready var health		: TextureProgressBar = find_child("Health") #$CanvasLayer/HUD/HBoxContainer/Health
 @onready var stamina	: TextureProgressBar = find_child("Stamina") #$CanvasLayer/HUD/HBoxContainer/Stamina
@@ -445,6 +447,12 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			state.finished.emit("idle")
 		"grab_goblin":
 			state.finished.emit("struggle")
+		"crawl_in":
+			state.finished.emit("crawl_out")
+		"crawl_out":
+			state.finished.emit("get_up")
+		"get_up":
+			state.finished.emit("idle")
 #endregion
 #region Init
 func _ready() -> void:

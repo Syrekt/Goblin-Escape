@@ -69,6 +69,7 @@ UIPanel="Contains UI panels that listen input"
 OneWayColliders=""
 Persistent=""
 FullscreenPanel="Panels that covering whole screen, might want to disable HUD when these are active."
+Enemy=""
 
 [input]
 

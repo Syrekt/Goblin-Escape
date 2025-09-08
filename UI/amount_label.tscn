@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1whasvhsic8h"]
 
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="1_ky6x2"]
-[ext_resource type="Script" uid="uid://djltesv8l62wm" path="res://scripts/amount_label.gd" id="2_f5rcj"]
+[ext_resource type="Script" uid="uid://djltesv8l62wm" path="res://Scripts/amount_label.gd" id="2_f5rcj"]
 
 [node name="AmountLabel" type="Label"]
 offset_right = 40.0

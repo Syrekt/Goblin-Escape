@@ -286,3 +286,15 @@ func walk_player() -> void:
 	player.remote_control_input.append("right")
 func stop_player() -> void:
 	player.remote_control_input.erase("right")
+func get_closest_node(from, group) -> Node:
+	var closest : Node = null
+	var min_dist = INF
+
+	for node in get_tree().get_nodes_in_group(group):
+		var dist = from.global_position.distance_to(node.global_position)
+		if dist < min_dist:
+			min_dist = dist
+			closest = node
+
+	return closest
+

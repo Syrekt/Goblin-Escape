@@ -38,7 +38,7 @@ func send_player() -> void:
 	player.health.value = player.health.max_value
 	player.dead = false
 	player.experience.drop_experience()
-	finished.emit("recover", {"prevent_deaths_door" : true})
+	finished.emit("get_up")
 	if Ge.last_checkpoint:
 		player.global_position = Ge.last_checkpoint.global_position
 	else:
@@ -49,6 +49,8 @@ func update(delta: float) -> void:
 		if death_timer.is_stopped():
 			if !death_screen.visible:
 				player.controls_disabled = true
+				player.ui.fade_out(1)
+
 				var color_rect = death_screen.find_child("ColorRect")
 				death_screen.show()
 				var tween = create_tween().bind_node(self)
@@ -61,10 +63,14 @@ func update(delta: float) -> void:
 
 				tween = create_tween().bind_node(self)
 				tween.tween_property(color_rect, "color", Color(0.0, 0.0, 0.0, 0.0), 1)
+
+				player.ui.fade_in(1)
+
 				await tween.finished
 
 				player.controls_disabled = false
 				death_screen.hide()
+				#player.ui.show()
 
 	if player.unconscious:
 		if recovery_timer.is_stopped():

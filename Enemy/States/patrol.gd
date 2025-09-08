@@ -64,3 +64,5 @@ func _on_patrol_timer_timeout() -> void:
 	#Idea
 	#if enemy.patrol_amount == 0:
 	#	enemy.emote_emitter.play("idle")
+func _on_decrease_patrol_timer() -> void:
+	timer.wait_time = min(timer.wait_time, 0.5)

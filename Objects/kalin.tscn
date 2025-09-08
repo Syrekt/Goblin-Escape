@@ -1,4 +1,4 @@
-[gd_scene load_steps=318 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=322 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://b8a7c6m81s28t" path="res://Kalin/Sprites/Kalin-Death.png" id="4_g6dya"]
 [ext_resource type="Texture2D" uid="uid://cxy7gxvy3yrma" path="res://Kalin/Sprites/Kalin-Climb.png" id="4_xyrfg"]
 [ext_resource type="Texture2D" uid="uid://bx4id7wgw6s38" path="res://Kalin/Sprites/Kalin-Heavy Attack.png" id="6_ju88f"]
+[ext_resource type="Script" uid="uid://bh5b7s4u5leyi" path="res://scripts/ui.gd" id="8_4oj65"]
 [ext_resource type="Script" uid="uid://dhtgp18026dx7" path="res://Scripts/hud.gd" id="8_cv3n5"]
 [ext_resource type="Texture2D" uid="uid://dl4uq2pkst8rp" path="res://Kalin/Sprites/Kalin-Light Attack.png" id="9_2a2iq"]
 [ext_resource type="Texture2D" uid="uid://p3oh0wc2s34d" path="res://Kalin/Sprites/Kalin-Hurt.png" id="9_e3nxf"]
@@ -39,7 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://bse8dgihy05xu" path="res://Kalin/Sprites/Kalin-Wallslide.png" id="19_dyqvk"]
 [ext_resource type="Script" uid="uid://c7frkek8a6s60" path="res://Kalin/States/crouch_walk.gd" id="21_3t0vr"]
 [ext_resource type="Script" uid="uid://3xoy8rjyfmi3" path="res://Kalin/States/crouch.gd" id="21_60gj1"]
-[ext_resource type="Script" uid="uid://bm8wfeg4wwdvr" path="res://scripts/fatigue.gd" id="21_sklaw"]
+[ext_resource type="Script" uid="uid://bm8wfeg4wwdvr" path="res://Scripts/fatigue.gd" id="21_sklaw"]
 [ext_resource type="Texture2D" uid="uid://whea0khot8nb" path="res://Sex/kalin+goblin-loop.png" id="22_bs037"]
 [ext_resource type="Texture2D" uid="uid://bxgpgvblnjqhg" path="res://Kalin/Sprites/Kalin-Walk.png" id="22_vnsvi"]
 [ext_resource type="Script" uid="uid://bgnnyj7i10wbg" path="res://Kalin/States/walk.gd" id="28_1dko0"]
@@ -4413,6 +4414,152 @@ tracks/3/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_4oj65"]
+resource_name = "crawl_in"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_sa02y")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_as7pt"]
+resource_name = "crawl_out"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_sa02y")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_amdn2"]
+resource_name = "get_up"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_7ft60")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..:direction_locked")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cuohi"]
 _data = {
 &"RESET": SubResource("Animation_5koc5"),
@@ -4424,10 +4571,13 @@ _data = {
 &"corner_climb_quick": SubResource("Animation_qqpcq"),
 &"corner_grab": SubResource("Animation_dxyog"),
 &"corner_hang": SubResource("Animation_ujrye"),
+&"crawl_in": SubResource("Animation_4oj65"),
+&"crawl_out": SubResource("Animation_as7pt"),
 &"crouch": SubResource("Animation_qdaj2"),
 &"crouch_walk": SubResource("Animation_us7aq"),
 &"death": SubResource("Animation_s6n7c"),
 &"fall": SubResource("Animation_sxpma"),
+&"get_up": SubResource("Animation_amdn2"),
 &"grab_goblin": SubResource("Animation_elkpv"),
 &"hidden": SubResource("Animation_a00wu"),
 &"hiding": SubResource("Animation_y0qhg"),
@@ -4551,6 +4701,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UI" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("8_4oj65")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="UI"]
 
 [node name="HUD" type="Control" parent="UI"]
 layout_mode = 3
@@ -5096,6 +5250,15 @@ script = ExtResource("40_xirjq")
 
 [node name="break_free" type="Node" parent="StateMachine"]
 script = ExtResource("87_6ykrs")
+
+[node name="crawl_in" type="Node" parent="StateMachine"]
+script = ExtResource("40_xirjq")
+
+[node name="crawl_out" type="Node" parent="StateMachine"]
+script = ExtResource("40_xirjq")
+
+[node name="get_up" type="Node" parent="StateMachine"]
+script = ExtResource("40_xirjq")
 
 [node name="InteractionPrompt" type="AnimatedSprite2D" parent="."]
 visible = false
