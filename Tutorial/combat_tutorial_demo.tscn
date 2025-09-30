@@ -729,7 +729,7 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Combat Tutorial" type="CanvasLayer" groups=["FullscreenPanel", "UIPanel"]]
+[node name="Combat Tutorial" type="CanvasLayer" groups=["FullscreenPanel"]]
 script = ExtResource("1_sl0a2")
 
 [node name="ColorRect" type="ColorRect" parent="."]

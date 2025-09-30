@@ -2,14 +2,19 @@ class_name Checkpoint extends Interaction
 
 var save_effect_scene = load("res://VFX/save_effect.tscn")
 var saved := false
+var player : Player
 @onready var upper_sprite := $UpperSprite
 @onready var lower_sprite := $LowerSprite
 @onready var fly_spawn_points := $SpawnPoints
+@onready var rest_menu : PanelContainer = $CanvasLayer/RestMenu
 
 var fly_scene = preload("res://Others/fly_1.tscn")
 var timer : Timer
 
 func _ready() -> void:
+	rest_menu.hide()
+
+#region VFX lights
 	for node in get_children():
 		if node.is_in_group("lights"):
 			node.color = Color(0, 0, 0, 0)
@@ -17,9 +22,12 @@ func _ready() -> void:
 	timer.timeout.connect(spawn_fly)
 	add_child(timer)
 	timer.start(randf_range(5, 10))
+#endregion
 
-func update(player: Player):
-	if Input.is_action_just_pressed("interact"):
+func update(_player : Player) -> void:
+	player = _player
+	if player.pressed("interact"):
+		get_tree().current_scene.reset_scene()
 		Ge.last_checkpoint = self
 		Ge.save_game("save1")
 		player.smell.value = 0
@@ -41,7 +49,11 @@ func update(player: Player):
 				var tween := create_tween().bind_node(node)
 				tween.tween_property(node, "color", Color(0.25, 0.3, 0.66, 1.0), 1)
 
+		rest_menu.show()
+		#Play some VFX and reset enemies
 
+
+#region Methods
 func spawn_fly() -> void:
 	var fly	= fly_scene.instantiate()
 	var child_count = fly_spawn_points.get_child_count()
@@ -51,3 +63,12 @@ func spawn_fly() -> void:
 	fly.global_position = spawn_point.global_position
 	fly.checkpoint = self
 	add_child(fly)
+#endregion
+#region Signals
+func _on_level_up_pressed() -> void:
+	player.toggle_character_panel()
+
+func _on_leave_pressed() -> void:
+	player.character_panel.hide()
+	rest_menu.hide()
+#endregion

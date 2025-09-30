@@ -1,9 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://bf7nobsdrpasm"]
+[gd_scene load_steps=14 format=3 uid="uid://bf7nobsdrpasm"]
 
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="1_qmd1x"]
 [ext_resource type="Script" uid="uid://bkwqrxfebqxun" path="res://Scripts/stat_panel.gd" id="2_pc5kx"]
 [ext_resource type="Texture2D" uid="uid://c0dcoth0u6wbm" path="res://UI/arrow_button4.png" id="3_tfpey"]
 [ext_resource type="Texture2D" uid="uid://bp6xxlabmlpm1" path="res://UI/arrow_button3.png" id="4_i4h3f"]
+[ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://UI/theme_button.tres" id="4_pc5kx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pc5kx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tfpey"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i4h3f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l7b8g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8mvb0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v4pq3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3cnye"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2t5ff"]
 
 [node name="StatPanel" type="Control"]
 layout_mode = 3
@@ -19,7 +36,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="NameContainer" type="PanelContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(108.71, 0)
+custom_minimum_size = Vector2(83.535, 0)
 layout_mode = 2
 
 [node name="Name" type="Label" parent="HBoxContainer/NameContainer"]
@@ -37,11 +54,22 @@ text = "0"
 [node name="Decrease" type="Button" parent="HBoxContainer"]
 visible = false
 layout_mode = 2
+theme = ExtResource("4_pc5kx")
+theme_type_variation = &"FlatButton"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pc5kx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tfpey")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_i4h3f")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_l7b8g")
 icon = ExtResource("3_tfpey")
 flat = true
 
 [node name="Increase" type="Button" parent="HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("4_pc5kx")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8mvb0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_v4pq3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3cnye")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2t5ff")
 icon = ExtResource("4_i4h3f")
 flat = true
 

@@ -64,6 +64,8 @@ var line_of_sight: RayCast2D
 
 var collectable_scene = preload("res://Objects/collectable.tscn")
 
+var spawn_state : Dictionary
+
 signal heard_noise(id: Enemy)
 
 #region Methods
@@ -214,6 +216,21 @@ func assign_player(node:Player) -> void:
 	if debug: print("player: "+str(player))
 	player = node
 	heard_noise.connect(player.enemy_heard_noise)
+func reset() -> void:
+	print("Reset: " + name)
+	health.value			= health.max_value
+	states_locked			= false
+	aware					= false
+	in_combat				= false
+	catched_player			= false
+	dealth_finishing_blow	= false
+	counter_attack			= false
+	attack_type_taken		= []
+
+	global_position = spawn_state.position
+	set_facing(spawn_state.facing)
+
+	state_node.state.finished.emit("idle")
 #endregion
 #region Animation end
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -281,6 +298,11 @@ func _ready() -> void:
 		point.get_parent().remove_child(point)
 		get_tree().root.add_child.call_deferred(point)
 		point.global_position = _global_position
+
+	spawn_state.facing = facing
+	spawn_state.position = global_position
+
+	print("spawn_state: "+str(spawn_state))
 func _process(delta: float) -> void:
 	# Check if there is anything that stops the gameplay
 	var ui_nodes = get_tree().get_nodes_in_group("UIPanel")
@@ -342,7 +364,6 @@ func _physics_process(delta: float) -> void:
 func _on_health_depleted() -> void:
 	print("health depleted")
 	state_node.state.finished.emit("death")
-	#player.experience.add(10)
 
 	for i in experience_drop:
 		# Add exp point to the scene

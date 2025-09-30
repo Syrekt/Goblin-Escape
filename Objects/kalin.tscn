@@ -1,4 +1,4 @@
-[gd_scene load_steps=322 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=329 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://b8a7c6m81s28t" path="res://Kalin/Sprites/Kalin-Death.png" id="4_g6dya"]
 [ext_resource type="Texture2D" uid="uid://cxy7gxvy3yrma" path="res://Kalin/Sprites/Kalin-Climb.png" id="4_xyrfg"]
 [ext_resource type="Texture2D" uid="uid://bx4id7wgw6s38" path="res://Kalin/Sprites/Kalin-Heavy Attack.png" id="6_ju88f"]
-[ext_resource type="Script" uid="uid://bh5b7s4u5leyi" path="res://scripts/ui.gd" id="8_4oj65"]
+[ext_resource type="Script" uid="uid://bh5b7s4u5leyi" path="res://Scripts/ui.gd" id="8_4oj65"]
 [ext_resource type="Script" uid="uid://dhtgp18026dx7" path="res://Scripts/hud.gd" id="8_cv3n5"]
 [ext_resource type="Texture2D" uid="uid://dl4uq2pkst8rp" path="res://Kalin/Sprites/Kalin-Light Attack.png" id="9_2a2iq"]
 [ext_resource type="Texture2D" uid="uid://p3oh0wc2s34d" path="res://Kalin/Sprites/Kalin-Hurt.png" id="9_e3nxf"]
@@ -65,9 +65,12 @@
 [ext_resource type="Script" uid="uid://2w325nrhldrd" path="res://Kalin/States/stance_walk.gd" id="39_rgkp8"]
 [ext_resource type="PackedScene" uid="uid://b23mtnfp7xuec" path="res://Objects/emote.tscn" id="40_2d1nf"]
 [ext_resource type="SpriteFrames" uid="uid://tad7af6w5gxb" path="res://Sprite Frames/input_prompts.tres" id="40_8epdb"]
+[ext_resource type="Texture2D" uid="uid://1cx04mfn7355" path="res://UI/button_cross.png" id="40_as7pt"]
 [ext_resource type="Script" uid="uid://bwrdgmfgq5cw3" path="res://Kalin/States/animation_state_player.gd" id="40_xirjq"]
+[ext_resource type="Script" uid="uid://cgetbapkjgu5s" path="res://UI/CharacterPanel/close.gd" id="41_amdn2"]
 [ext_resource type="Script" uid="uid://b203v085bx2rg" path="res://Kalin/States/bash.gd" id="41_pdh0h"]
 [ext_resource type="Script" uid="uid://bvi7mrhp8r1py" path="res://Kalin/States/stab.gd" id="41_sat24"]
+[ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://UI/theme_button.tres" id="42_as7pt"]
 [ext_resource type="Texture2D" uid="uid://d3lypviirdc8j" path="res://Kalin/Sprites/Kalin-heavycharge-dustspawn.png" id="43_eygup"]
 [ext_resource type="Script" uid="uid://clti5tx0txok1" path="res://Scripts/player_health.gd" id="43_uhoyi"]
 [ext_resource type="Texture2D" uid="uid://cdf5u0hk86v0o" path="res://Others/smoke_test.png" id="44_3q7yy"]
@@ -150,9 +153,6 @@
 
 [sub_resource type="Resource" id="Resource_446pa"]
 script = ExtResource("3_towol")
-duration = 1.0
-transition = 0
-ease = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_47a0d"]
 shader = ExtResource("45_cbw7l")
@@ -165,6 +165,14 @@ shader_parameter/outer_radius = 0.995
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8gxoc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cbw7l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4jgp1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y4shw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n1k6j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3pkug"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t42fh"]
 
@@ -1272,7 +1280,7 @@ tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.9),
-"transitions": PackedFloat32Array(1e+06, 1, 1),
+"transitions": PackedFloat32Array(1000000, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
@@ -1284,7 +1292,7 @@ tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.9),
-"transitions": PackedFloat32Array(1e+06, 1, 1),
+"transitions": PackedFloat32Array(1000000, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
@@ -1399,7 +1407,7 @@ tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.9),
-"transitions": PackedFloat32Array(1e+06, 1, 1),
+"transitions": PackedFloat32Array(1000000, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
@@ -1411,7 +1419,7 @@ tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.9),
-"transitions": PackedFloat32Array(1e+06, 1, 1),
+"transitions": PackedFloat32Array(1000000, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
@@ -1811,6 +1819,87 @@ tracks/3/keys = {
 "values": [Vector2(0, 0), Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_4oj65"]
+resource_name = "crawl_in"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_sa02y")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_as7pt"]
+resource_name = "crawl_out"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_sa02y")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+}
+
 [sub_resource type="Animation" id="Animation_qdaj2"]
 resource_name = "crouch"
 length = 1.1
@@ -2095,6 +2184,71 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 23.68)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..:direction_locked")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_amdn2"]
+resource_name = "get_up"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_7ft60")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -4414,152 +4568,6 @@ tracks/3/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_4oj65"]
-resource_name = "crawl_in"
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_sa02y")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [10]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-}
-
-[sub_resource type="Animation" id="Animation_as7pt"]
-resource_name = "crawl_out"
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_sa02y")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [10]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-}
-
-[sub_resource type="Animation" id="Animation_amdn2"]
-resource_name = "get_up"
-length = 0.4
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [3, 4, 5, 6, 7]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_7ft60")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:offset")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("..:direction_locked")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cuohi"]
 _data = {
 &"RESET": SubResource("Animation_5koc5"),
@@ -4680,7 +4688,6 @@ script = ExtResource("2_0bx81")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="Overlays" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="UIFocus" type="ColorRect" parent="Overlays"]
 anchors_preset = 15
@@ -4701,7 +4708,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UI" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("8_4oj65")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="UI"]
@@ -4733,7 +4739,7 @@ buff_sprite = ExtResource("10_pxbrw")
 debuff_sprite = ExtResource("11_4inu4")
 
 [node name="Stamina" type="TextureProgressBar" parent="UI/HUD"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 24.5
 offset_top = 26.0
 offset_right = 88.5
@@ -4767,7 +4773,7 @@ offset_bottom = 7.996
 scale = Vector2(0.5, 0.5)
 
 [node name="Fatigue" type="TextureProgressBar" parent="UI/HUD" groups=["Persistent"]]
-layout_mode = 2
+layout_mode = 0
 offset_left = 21.5
 offset_top = 23.0
 offset_right = 129.5
@@ -4867,6 +4873,9 @@ layout_mode = 2
 text = "waterasdaasdasdsa"
 text_overrun_behavior = 3
 
+[node name="Label" parent="UI/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer/ButtonContainer/Button" index="0"]
+layout_mode = 0
+
 [node name="ExpAmountContainer" type="VBoxContainer" parent="UI"]
 offset_left = 563.0
 offset_top = 274.0
@@ -4878,7 +4887,7 @@ alignment = 2
 [node name="AmountLabel" parent="UI/ExpAmountContainer" instance=ExtResource("34_8gxoc")]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="UI"]
+[node name="ExpTypeBox" type="PanelContainer" parent="UI"]
 offset_left = 563.0
 offset_top = 324.0
 offset_right = 632.0
@@ -4886,7 +4895,7 @@ offset_bottom = 353.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_8gxoc")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="UI/PanelContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/ExpTypeBox"]
 layout_mode = 2
 texture = ExtResource("34_s3ngn")
 patch_margin_left = 4
@@ -4896,7 +4905,7 @@ patch_margin_bottom = 4
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="Experience" type="Label" parent="UI/PanelContainer/NinePatchRect"]
+[node name="Experience" type="Label" parent="UI/ExpTypeBox/NinePatchRect"]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 4.0
@@ -4908,7 +4917,7 @@ vertical_alignment = 1
 clip_text = true
 script = ExtResource("50_083qx")
 
-[node name="Timer" type="Timer" parent="UI/PanelContainer/NinePatchRect/Experience"]
+[node name="Timer" type="Timer" parent="UI/ExpTypeBox/NinePatchRect/Experience"]
 one_shot = true
 
 [node name="DescriptionPanel" type="PanelContainer" parent="UI"]
@@ -4960,20 +4969,20 @@ text = "[color=red]This is the description text[/color]"
 
 [node name="CharacterPanel" type="PanelContainer" parent="UI" groups=["UIPanel"]]
 visible = false
-offset_left = 315.0
-offset_top = 127.0
-offset_right = 525.0
-offset_bottom = 315.0
+offset_left = 12.0
+offset_top = 104.0
+offset_right = 172.0
+offset_bottom = 330.0
 theme = ExtResource("56_ghu8e")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="UI/CharacterPanel"]
 layout_mode = 2
 texture = ExtResource("73_qdj7c")
 region_rect = Rect2(0, 0, 44, 44)
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true
@@ -4988,6 +4997,18 @@ theme_override_constants/margin_bottom = 8
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/CharacterPanel/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 28
+
+[node name="Close" type="Button" parent="UI/CharacterPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("42_as7pt")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4jgp1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_y4shw")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_n1k6j")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3pkug")
+icon = ExtResource("40_as7pt")
+flat = true
+script = ExtResource("41_amdn2")
 
 [node name="Strength" parent="UI/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
 layout_mode = 2
@@ -5435,6 +5456,7 @@ position = Vector2(0, 10.5)
 shape = SubResource("RectangleShape2D_ws413")
 
 [connection signal="tween_completed" from="PhantomCamera2D" to="." method="_on_phantom_camera_2d_tween_completed"]
+[connection signal="pressed" from="UI/CharacterPanel/MarginContainer/VBoxContainer/Close" to="UI/CharacterPanel/MarginContainer/VBoxContainer/Close" method="_on_pressed"]
 [connection signal="attack_frame" from="StateMachine/slash" to="StateMachine/slash" method="_on_attack_frame"]
 [connection signal="attack_frame" from="StateMachine/stab" to="StateMachine/stab" method="_on_attack_frame"]
 [connection signal="body_entered" from="StateMachine/bash/BashHitbox" to="StateMachine/bash" method="_on_bash_hitbox_body_entered"]

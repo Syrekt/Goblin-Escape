@@ -11,10 +11,8 @@ func _process(delta: float) -> void:
 	value_label.text = str(owner.get(stat_name.to_lower()))
 	if owner.available_stat_points > 0:
 		button_increase.visible = true
-		#button_decrease.visible = true
 	else:
 		button_increase.visible = false
-		#button_decrease.visible = false
 
 
 func _on_decrease_pressed() -> void:

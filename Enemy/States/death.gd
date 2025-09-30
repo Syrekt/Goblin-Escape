@@ -9,3 +9,12 @@ func enter(previous_state_path: String, data := {}) -> void:
 	for child in children:
 		if child is Area2D:
 			child.set_deferred("monitoring", false)
+
+func exit() -> void:
+	var children = enemy.get_children()
+	for child in children:
+		if child is Area2D:
+			child.set_deferred("monitoring", true)
+	enemy.set_collision_mask_value(1, true)
+	enemy.set_collision_mask_value(2, true)
+	enemy.set_collision_layer_value(4, true)

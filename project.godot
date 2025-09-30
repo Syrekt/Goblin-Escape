@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Goblin Escape"
 run/main_scene="uid://1clhhggjvkd3"
-config/features=PackedStringArray("4.4", "Mobile")
+config/features=PackedStringArray("4.5", "Mobile")
 boot_splash/show_image=false
 config/icon="res://icon.svg"
 
@@ -65,10 +65,10 @@ folder_colors={
 
 [global_group]
 
-UIPanel="Contains UI panels that listen input"
+UIPanel="Contains UI panels that listen input, disables movement"
 OneWayColliders=""
 Persistent=""
-FullscreenPanel="Panels that covering whole screen, might want to disable HUD when these are active."
+FullscreenPanel="Panels that covering whole screen, might want to disable HUD when these are active. Disables controls"
 Enemy=""
 
 [input]

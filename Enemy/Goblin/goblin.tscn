@@ -1128,7 +1128,6 @@ one_shot = true
 script = ExtResource("36_ynrxc")
 
 [node name="Collider" type="CollisionShape2D" parent="." groups=["Flip"]]
-visible = false
 position = Vector2(-1, -5.5)
 shape = SubResource("RectangleShape2D_cqw5a")
 
@@ -1196,8 +1195,8 @@ offset_left = -26.0
 offset_top = 19.0
 offset_right = 26.0
 offset_bottom = 59.0
-max_value = 10.0
-value = 10.0
+max_value = 5.0
+value = 5.0
 texture_progress = ExtResource("15_upc2x")
 
 [node name="Emote" parent="." instance=ExtResource("16_57o4q")]
