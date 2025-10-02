@@ -297,4 +297,3 @@ func get_closest_node(from, group) -> Node:
 			closest = node
 
 	return closest
-

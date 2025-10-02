@@ -1,6 +1,5 @@
 class_name Enemy extends CharacterBody2D
 
-
 const RUN_SPEED = 300.0 * 60
 
 @export var debug := false
@@ -43,7 +42,13 @@ var dealth_finishing_blow := false
 
 var attack_type_taken : Array[String]
 
+var light_source : Area2D
+var ray_light : RayCast2D
+var in_shadow := false
+
 signal health_depleted
+signal enter_shadow
+signal leave_shadow
 
 #This is used to prevent finishing a state when previous states animation finishes in new state
 #before it changes the animation
@@ -310,6 +315,9 @@ func _ready() -> void:
 	spawn_state.facing = facing
 	spawn_state.position = global_position
 
+	enter_shadow.connect(_on_enter_shadow)
+	leave_shadow.connect(_on_leave_shadow)
+
 	print("spawn_state: "+str(spawn_state))
 func _process(delta: float) -> void:
 	# Check if there is anything that stops the gameplay
@@ -326,6 +334,17 @@ func _physics_process(delta: float) -> void:
 				start_chase(player)
 		elif player.invisible:
 			pass
+
+	if debug: Debugger.printui("in_shadow: "+str(in_shadow))
+	if light_source && light_source.lit:
+		ray_light.target_position = ray_light.to_local(light_source.global_position)
+		if ray_light.is_colliding():
+			if !in_shadow:
+				enter_shadow.emit()
+		elif in_shadow:
+			leave_shadow.emit()
+	elif !in_shadow:
+			enter_shadow.emit()
 
 	if debug:
 		Debugger.printui("State: "+str(state_node.state.name));
@@ -407,4 +426,12 @@ func _on_player_proximity_body_entered(body:Player) -> void:
 	if !body.hiding:
 		if debug: print("Start chase by proximity trigger")
 		start_chase(body)
+func _on_enter_shadow() -> void:
+	in_shadow = true
+	var c = Color(0.1, 0.1, 0.1, 0.5)
+	create_tween().bind_node(self).tween_property(sprite.material, "shader_parameter/tint_color", c, 0.2)
+func _on_leave_shadow() -> void:
+	in_shadow = false
+	var c = Color(0.0, 0.0, 0.0, 0.0)
+	create_tween().bind_node(self).tween_property(sprite.material, "shader_parameter/tint_color", c, 0.2)
 #endregion

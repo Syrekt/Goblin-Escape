@@ -523,6 +523,8 @@ func _ready() -> void:
 #endregion
 #region Physics
 func _physics_process(delta: float) -> void:
+	Debugger.printui("Player invisible: "+str(invisible))
+	Debugger.printui("Player hiding: "+str(hiding))
 	#region X Movement
 	var state_name = state_node.state.name
 	#Don't use input direction for facing if direction_locked

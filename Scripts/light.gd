@@ -29,9 +29,11 @@ func toggle_ligth() -> void:
 		sprite.play("lit")
 
 
-func _on_body_entered(body: Player) -> void:
-	body.light_source = self
+func _on_body_entered(body: CharacterBody2D) -> void:
+	if body is Player || body is Enemy:
+		body.light_source = self
 
-func _on_body_exited(body: Player) -> void:
-	if body.light_source == self:
-		body.light_source = null
+func _on_body_exited(body: CharacterBody2D) -> void:
+	if body is Player || body is Enemy:
+		if body.light_source == self:
+			body.light_source = null
