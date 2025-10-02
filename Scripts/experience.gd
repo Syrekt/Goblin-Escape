@@ -16,11 +16,11 @@ var tween_amount : Tween
 func _ready() -> void:
 	timer.timeout.connect(_on_timer_timeout)
 
-func save() -> Dictionary:
-	var save_dict = {
+func save() -> void:
+	var save_data = {
 		"amount" : amount,
 	}
-	return save_dict
+	Ge.save_node(self, save_data)
 
 func add(_amount: int) -> void:
 	print("_amount: "+str(_amount))

@@ -1019,7 +1019,7 @@ size = Vector2(20, 36)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rha5u"]
 size = Vector2(20, 32)
 
-[node name="Goblin" type="CharacterBody2D" node_paths=PackedStringArray("main_stance") groups=["Enemy"]]
+[node name="Goblin" type="CharacterBody2D" node_paths=PackedStringArray("main_stance") groups=["Enemy", "Persistent"]]
 z_index = 1
 collision_layer = 8
 collision_mask = 9
@@ -1111,6 +1111,7 @@ transitions = [NodePath("../stance_heavy")]
 attack_state = [NodePath("../grab"), NodePath("../stab")]
 stance_time = 0.5
 attack_time = 0.2
+debug_stance = "grab"
 
 [node name="grab" type="Node2D" parent="StateMachine"]
 script = ExtResource("13_6vclp")

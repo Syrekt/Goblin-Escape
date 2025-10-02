@@ -131,7 +131,7 @@ var grabbed_by : Enemy
 @export var unconscious			:= false ## Post sex situations where health isn't 0
 var can_have_sex := false ## When enemies can move in for sex
 var states_locked := false
-@export var save_list : Array[NodePath]
+@export var save_list : Array[String]
 @onready var pcam := $PhantomCamera2D
 @onready var pcam_host := $Camera2D/PhantomCameraHost
 var movable : Node2D = null
@@ -148,6 +148,8 @@ var sex_participants : Array
 var light_source : Area2D
 var ray_light : RayCast2D
 var wait_for_camera := false
+#endregion
+#region Save List
 #endregion
 signal enter_shadow
 signal leave_shadow
@@ -372,7 +374,7 @@ func check_movement_disabled() -> bool:
 	for node in ui_nodes:
 		if node.visible:
 			interaction_prompt.supress = true
-			Debugger.printui("Movement disabled, UI panel detected")
+			Debugger.printui("Movement disabled, UI panel detected: %s" % node.name)
 			#Debugger.printui("node: "+str(node))
 			return true
 	interaction_prompt.supress = false
@@ -408,20 +410,18 @@ func think(text: String) -> void:
 func enemy_heard_noise(enemy: Enemy) -> void:
 	if !in_combat_state:
 		think("I should be careful")
-func save() -> Dictionary:
-	var save_dict = {
+func save() -> void:
+	var save_data = {
 		"pos_x"	: position.x,
 		"pos_y"	: position.y,
-
-		"experience_point" : experience_point,
-		"level"		: level,
-		"vitality"	: vitality,
-		"strength" 	: strength,
-		"endurance"	: endurance,
-
-		"has_sword" : has_sword,
 	}
-	return save_dict
+
+	for i in save_list:
+		if get(i):
+			save_data[i] = get(i)
+		else:
+			print("Unkown value on save " + i)
+	Ge.save_node(self, save_data)
 func check_buffered_state() -> bool:
 	var state_to_switch : String
 	if buffered_state:
@@ -523,8 +523,6 @@ func _ready() -> void:
 #endregion
 #region Physics
 func _physics_process(delta: float) -> void:
-	Debugger.printui("Player invisible: "+str(invisible))
-	Debugger.printui("Player hiding: "+str(hiding))
 	#region X Movement
 	var state_name = state_node.state.name
 	#Don't use input direction for facing if direction_locked
@@ -657,9 +655,9 @@ func _process(delta: float) -> void:
 	interaction_prompt.supress = true
 
 	if just_pressed("quick save"):
-		Ge.save_game("save1")
+		Ge.save_game()
 	if just_pressed("quick load"):
-		Ge.load_game("save1")
+		Ge.load_game()
 	var s = %Sprite2D
 	if debug: Debugger.printui(str(state_node.state.name))
 	controls_disabled = check_controls_disabled()

@@ -25,9 +25,8 @@ func _process(delta: float) -> void:
 		tint_under_tween.kill()
 		tint_under_tween = null
 
-func save() -> Dictionary:
-	var save_dict = {
+func save() -> void:
+	var save_data = {
 		"value"	: value,
-		"max_value"	: max_value
 	}
-	return save_dict
+	Ge.save_node(self, save_data)

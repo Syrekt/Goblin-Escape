@@ -217,6 +217,7 @@ position = Vector2(-26, -1)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="RestMenu" type="PanelContainer" parent="CanvasLayer" groups=["UIPanel"]]
+visible = false
 offset_left = 435.0
 offset_top = 18.0
 offset_right = 611.0

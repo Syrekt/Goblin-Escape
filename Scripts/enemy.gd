@@ -2,6 +2,7 @@ class_name Enemy extends CharacterBody2D
 
 const RUN_SPEED = 300.0 * 60
 
+@export var save_list : Array[String]
 @export var debug := false
 
 @export var experience_drop := 1
@@ -190,12 +191,22 @@ func lost_target() -> void:
 	emote_emitter.play("confused")
 	patrol_amount = 4
 	state_node.state.finished.emit("idle")
-func save() -> Dictionary:
-	var save_dict = {
+func save() -> void:
+	var save_data = {
 		"pos_x" : global_position.x,
 		"pos_y" : global_position.y,
+		"health" : health.value,
+		"state" : state_node.state.name,
 	}
-	return save_dict
+	for i in save_list:
+		if get(i):
+			save_data[i] = get(i)
+		else:
+			print("Unkown value on save " + i)
+	Ge.save_node(self, save_data)
+func load(data: Dictionary) -> void:
+	health.value = data.health
+	state_node.state.finished.emit(data.state)
 func update_patrol_point() -> void:
 	var new_point = patrol_points.pick_random()
 	while new_point == current_patrol_point:
@@ -228,7 +239,8 @@ func assign_player(node:Player) -> void:
 	if debug: print("Assigning player node: " + node.name)
 	if debug: print("player: "+str(player))
 	player = node
-	heard_noise.connect(player.enemy_heard_noise)
+	if !heard_noise.is_connected(player.enemy_heard_noise):
+		heard_noise.connect(player.enemy_heard_noise)
 func reset() -> void:
 	print("Reset: " + name)
 	health.value			= health.max_value

@@ -1,11 +1,16 @@
 extends Node2D
 
 signal player_ready
+ 
+func _ready() -> void:
+	#Ge.load_game()
+	pass
 
 func _enter_tree() -> void:
 	player_ready.connect(_on_player_ready)
 
 func _on_player_ready(player:Player) -> void:
+	print("on player ready")
 	Ge.player = player
 	for child in get_children():
 		if child is Enemy:

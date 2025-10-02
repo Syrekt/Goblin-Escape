@@ -16,6 +16,9 @@ var scene_active := false
 
 var last_checkpoint : Checkpoint
 
+var save_data : Dictionary
+var save_slot := "save1"
+
 signal show_combat_tutorial
 signal show_stealth_tutorial
 
@@ -108,20 +111,26 @@ func EmitNoise(source: CharacterBody2D, position: Vector2, amount: float) -> voi
 	noise.source = source
 
 	get_tree().current_scene.add_child(noise)
-func save_game(filename: String) -> void:
+func save_node(node, data: Dictionary) -> void:
+	print("Save node: %s" % node.name)
+	print("data: "+str(data))
+	var json = JSON.stringify(data)
+	print("json: "+str(json))
+	data["filename"] = node.get_scene_file_path() 
+	data["parent"] = node.get_parent().get_path() 
+	data["name"] = node.name
+	save_data.set(node.get_path(), data)
+func save_game() -> void:
 	print("Saving...")
-	var save_file = FileAccess.open("user://"+filename+".ge", FileAccess.WRITE)
-	#save_file.store_line(get_tree().current_scene.scene_file_path)
+	var save_file = FileAccess.open("user://"+save_slot+".ge", FileAccess.WRITE)
 
-	var ge = {
-		"globals":{
+	if last_checkpoint:
+		save_data["globals"] = {
 			"last checkpoint" : {
 				"parent": last_checkpoint.get_parent().get_path(),
 				"filename": last_checkpoint.get_scene_file_path(),
 			}
 		}
-	}
-	save_file.store_line(JSON.stringify(ge))
 
 	var save_nodes = get_tree().get_nodes_in_group("Persistent")
 	for node in save_nodes:
@@ -136,34 +145,41 @@ func save_game(filename: String) -> void:
 			continue
 
 		# Call the node's save function.
-		var node_data = node.save()
-		for prop in node.get_property_list():
-			if prop.name == "save_list":
-				for _node in node.save_list:
-					print("_node.name: "+str(_node.name));
-					node_data[_node.name] = _node.save()
-		node_data["filename"] = node.get_scene_file_path()
-		node_data["parent"] = node.get_parent().get_path()
+		print("Save node: %s" % node.name)
+		node.save()
+		#for prop in node.get_property_list():
+		#	if prop.name == "save_list":
+		#		for _node in node.save_list:
+		#			print("_node.name: "+str(_node.name));
+		#			node_data[_node.name] = _node.save()
+		#node_data["filename"] = node.get_scene_file_path()
+		#node_data["parent"] = node.get_parent().get_path()
 
-		# JSON provides a static method to serialized JSON string.
-		var json_string = JSON.stringify(node_data)
+		## JSON provides a static method to serialized JSON string.
+		#var json_string = JSON.stringify(node_data)
 
 		# Store the save dictionary as a new line in the save file.
-		save_file.store_line(json_string)
+		#save_file.store_line(json_string)
 
-	print("Game saved")
-func load_game(filename: String) -> void:
+	save_file.store_line(JSON.stringify(save_data))
+	save_file.close()
+	print("Game saved: %s" % save_file.get_path())
+func load_game() -> void:
 	#get_tree().change_scene_to_file("res://Scenes/game.tscn")
 	print("Loading...")
+	var save_file = FileAccess.open("user://"+save_slot+".ge", FileAccess.READ)
+	if !save_file:
+		print("Save file corrupt or doesn't exist")
+		return
 
 	loading = true
 	get_tree().paused = true
 
 	var loading_screen = get_tree().current_scene.find_child("LoadingScreen")
-	loading_screen.show()
+	#loading_screen.show()
 
-	if !FileAccess.file_exists("user://"+filename+".ge"):
-		return # Error! We don't have a save to load.
+	#if !FileAccess.file_exists("user://"+filename+".ge"):
+	#	return # Error! We don't have a save to load.
 
 	# We need to revert the game state so we're not cloning objects
 	# during loading. This will vary wildly depending on the needs of a
@@ -180,7 +196,6 @@ func load_game(filename: String) -> void:
 
 	# Load the file line by line and process that dictionary to restore
 	# the object it represents.
-	var save_file = FileAccess.open("user://"+filename+".ge", FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():
 		var json_string = save_file.get_line()
 		print("json_string: "+str(json_string))
@@ -195,32 +210,59 @@ func load_game(filename: String) -> void:
 			continue
 
 		# Get the data from the JSON object.
-		var node_data = json.data
-		print("json.data: "+str(json.data));
+		save_data = json.data
+		print("save_data: "+str(save_data));
 		print("parse_result: "+str(parse_result))
-		if node_data.has("globals"):
-			var g = node_data["globals"]
-			if g.has("last checkpoint"):
-				var checkpoint = g["last checkpoint"]
-				find_child(checkpoint.filename)
-			continue
-
-		# Firstly, we need to create the object and add it to the tree and set its position.
-		var new_object = load(node_data["filename"]).instantiate()
-		get_node(node_data["parent"]).add_child(new_object)
-		new_object.position = Vector2(node_data["pos_x"], node_data["pos_y"])
-		if new_object.has_signal("on_load"): # Not used
-			new_object.emit_signal("on_load")
-
-		# Now we set the remaining variables.
-		for i in node_data.keys():
-			if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y":
+		for i in save_data.keys():
+			print("Loading key(%s)" % i)
+			if i == "globals":
+				var globals = save_data[i]
+				if globals.has("last checkpoint"):
+					var checkpoint = globals["last checkpoint"]
+					find_child(checkpoint.filename)
 				continue
-			new_object.set(i, node_data[i])
+			var node_data = save_data[i]
+			# Firstly, we need to create the object and add it to the tree and set its position.
+			var new_object = load(node_data["filename"]).instantiate()
+			print("New object created: %s" % new_object.name)
+
+			#var new_object = load(node_data["filename"]).instantiate()
+			#get_node(node_data["parent"]).add_child(new_object)
+			#new_object.position = Vector2(node_data["pos_x"], node_data["pos_y"])
+
+			get_node(node_data["parent"]).add_child(new_object)
+			new_object.position = Vector2(node_data["pos_x"], node_data["pos_y"])
+			new_object.name = node_data["name"]
+			if new_object is Player:
+				# Assign player id to global variable
+				Ge.player = new_object
+				new_object.pcam.follow_damping = false
+
+			# Remove unnecessary keys
+			node_data.erase("filename")
+			node_data.erase("parent")
+			node_data.erase("pos_x")
+			node_data.erase("pos_y")
+
+			# Now we set the remaining variables.
+			for value in node_data:
+				new_object.set(value, node_data[value])
+			if new_object.has_method("load"):
+				new_object.load(node_data)
+
+			# We can use this if something needs to be done after loading the node
+			if new_object.has_signal("on_load"): # Not used
+				new_object.emit_signal("on_load")
+
+	# Assign player id to every enemy
+	get_tree().current_scene.player_ready.emit(player)
+
 	loading = false
+	save_file.close()
 	print("Game loaded.")
 	get_tree().paused = false
 	await get_tree().create_timer(1.0).timeout
+	Ge.player.pcam.follow_damping = true
 	loading_screen.hide()
 
 var popup_scene = preload("res://Objects/text_pop_up.tscn")
@@ -297,3 +339,7 @@ func get_closest_node(from, group) -> Node:
 			closest = node
 
 	return closest
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		print("Save game before quitting")
+		save_game()

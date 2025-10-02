@@ -6,9 +6,8 @@ func _process(delta: float) -> void:
 	pregnancy_chance = value / 100.0
 	#Debugger.printui("pregnancy_chance: "+str(pregnancy_chance))
 
-func save() -> Dictionary:
-	var save_dict = {
-		"value" : value,
-		"max_value"	: max_value,
+func save() -> void:
+	var save_data = {
+		"value"	: value,
 	}
-	return save_dict
+	Ge.save_node(self, save_data)
