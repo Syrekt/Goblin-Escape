@@ -33,6 +33,6 @@ func physics_update(delta: float) -> void:
 		progression_bar.value += 20.0 - arousal_modifier
 	if progression_bar.value >= progression_bar.max_value:
 		player.break_grab()
-	elif progression_bar.value <= 100.0:
+	elif progression_bar.value <= 0.0:
 		finished.emit(player.grabbed_by.transition_state)
 		player.grabbed_by.state_node.state.finished.emit(player.grabbed_by.transition_state)

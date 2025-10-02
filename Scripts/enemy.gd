@@ -220,7 +220,7 @@ func drop_chase(target:Player) -> void:
 	target.enemies_on_chase.erase(self)
 	chase_target = null
 	player_in_range = false
-	if awareness_timer.get_parent() == null:
+	if !awareness_timer.is_inside_tree():
 		add_child(awareness_timer)
 	awareness_timer.start()
 func assign_player(node:Player) -> void:
@@ -335,7 +335,6 @@ func _physics_process(delta: float) -> void:
 		elif player.invisible:
 			pass
 
-	if debug: Debugger.printui("in_shadow: "+str(in_shadow))
 	if light_source && light_source.lit:
 		ray_light.target_position = ray_light.to_local(light_source.global_position)
 		if ray_light.is_colliding():
