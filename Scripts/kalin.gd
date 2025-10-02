@@ -111,6 +111,9 @@ const STAB_FATIGUE_STRENGTH_MOD		:= 0.4
 const STAB_FATIGUE_ENDURANCE_MOD	:= 0.7
 const BASH_FATIGUE_STRENGTH_MOD		:= 0.5
 const BASH_FATIGUE_ENDURANCE_MOD	:= 0.8
+const SLASH_SWEAT_PER_STRENGHT	:= 0.06
+const STAB_SWEAT_PER_STRENGHT	:= 0.02
+const BASH_SWEAT_PER_STRENGHT	:= 0.06
 
 @export var has_sword := false #false for release
 var in_combat_state := false
@@ -191,7 +194,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 			perfect_parry = parry_timer.time_left >= perfect_parry_window
 
 		if defending:
-			if !parry_active && !perfect_parry && !stamina.spend(_damage, 1.0):
+			if !parry_active && !perfect_parry && !stamina.spend(1, 1.0):
 				defending = false
 
 		#See if attack has broken our defense
@@ -424,13 +427,13 @@ func check_buffered_state() -> bool:
 	if buffered_state:
 		match buffered_state:
 			"slash":
-				if stamina.spend(SLASH_COST):
+				if stamina.spend(SLASH_COST, SLASH_SWEAT + log((SLASH_SWEAT_PER_STRENGHT * strength) + 1)):
 					state_to_switch = "slash"
 			"stab":
-				if stamina.spend(STAB_COST):
+				if stamina.spend(STAB_COST, STAB_SWEAT + log((STAB_SWEAT_PER_STRENGHT * strength) + 1)):
 					state_to_switch = "stab"
 			"bash":
-				if stamina.spend(BASH_COST):
+				if stamina.spend(BASH_COST, BASH_SWEAT + log((BASH_SWEAT_PER_STRENGHT * strength) + 1)):
 					state_to_switch = "bash"
 	buffered_state = ""
 	if state_to_switch:
@@ -494,13 +497,15 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"unhide":
 			state.finished.emit("idle")
 		"grab_goblin":
-			state.finished.emit("struggle")
+			state.finished.emit("struggle_goblin")
 		"crawl_in":
 			state.finished.emit("crawl_out")
 		"crawl_out":
 			state.finished.emit("get_up")
 		"get_up":
 			state.finished.emit("idle")
+		"struggle_transition_goblin":
+			sex_begin([grabbed_by], "sex_goblin1")
 #endregion
 #region Init
 func _ready() -> void:
@@ -574,7 +579,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = 0
 			move_speed = 0
 			accelaration = slide_dec
-		"death", "sex", "recover", "struggle", "goblin_grab", "break_free":
+		"death", "sex", "recover", "struggle_goblin", "goblin_grab", "break_free":
 			move_speed = 0
 			velocity.x = 0
 		"hiding", "hidden", "unhide":

@@ -20,6 +20,8 @@ const RUN_SPEED = 300.0 * 60
 @export var chatting := false ##Only one enemy should have this
 @export var friend : CharacterBody2D ##Only one enemy should have this
 @export var patrol_points : Array[Marker2D]
+@export var struggle_state : String
+@export var transition_state : String
 var current_patrol_point : Marker2D
 
 var patrol_amount := 0
@@ -88,6 +90,10 @@ func set_facing(dir: int):
 func get_movement_dir():
 	return sign(velocity.x)
 func take_damage(_damage : int, _source: Node2D = null, critical := false):
+	if state_node.state.name == "death":
+		print("Already dead, don't take damage")
+		return
+
 	health.value -= _damage
 	aware = true
 	if health.value <= 0:
@@ -278,7 +284,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 				set_collision_mask_value(2, false)
 		"grab":
 			if catched_player:
-				state.finished.emit("struggle")
+				state.finished.emit(struggle_state)
 			else:
 				state.finished.emit("stance_light")
 		"shoved":

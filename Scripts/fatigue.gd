@@ -1,7 +1,7 @@
 extends TextureProgressBar
 
 func _process(delta: float) -> void:
-	Debugger.printui("value: "+str(value))
+	pass
 
 func add(amount: float) -> void:
 	if amount < 0:

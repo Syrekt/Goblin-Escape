@@ -18,10 +18,8 @@ var type : int
 var amount := 1
 
 func _ready() -> void:
-	print("type: "+str(type))
 	match type:
 		Types.EXPERIENCE:
-			print("Experience type")
 			sprite.texture = experience_sprite
 		"_":
 			print("Missing collectable sprite")

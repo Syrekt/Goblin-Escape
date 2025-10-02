@@ -23,6 +23,7 @@ func save() -> Dictionary:
 	return save_dict
 
 func add(_amount: int) -> void:
+	print("_amount: "+str(_amount))
 	timer.start()
 	amount += _amount
 	amount_label.amount += _amount

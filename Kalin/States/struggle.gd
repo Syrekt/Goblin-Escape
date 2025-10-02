@@ -33,4 +33,4 @@ func physics_update(delta: float) -> void:
 	if progression_bar.value >= progression_bar.max_value:
 		player.break_grab()
 	elif progression_bar.value <= 0.0:
-		player.sex_begin([player.grabbed_by], "sex_goblin1")
+		finished.emit(player.grabbed_by.transition_state)
