@@ -6,6 +6,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	player.set_facing(player.get_movement_dir())
 
 func update(delta: float) -> void:
+	player.fatigue.add(0.0006)
 	if player.combat_target:
 		if !player.stamina.spend(0.01, 0.001):
 			finished.emit("run_stop")

@@ -32,8 +32,8 @@ script = ExtResource("2_pc5kx")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 132.0
+offset_bottom = 14.0
 
 [node name="NameContainer" type="PanelContainer" parent="HBoxContainer"]
 custom_minimum_size = Vector2(83.535, 0)

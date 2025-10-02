@@ -7,6 +7,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	player.play_sfx(sfx_whiff)
 	enemy_ignore_list = []
 	player.set_collision_mask_value(4, true)
+	player.fatigue.perform("bash")
 
 func exit() -> void:
 	_exit()
@@ -27,6 +28,8 @@ func play_footsteps() -> void:
 	Ge.play_audio_from_string_array(player.global_position, 1, "res://SFX/Kalin/Footsteps Soft/")
 
 func _on_bash_hitbox_body_entered(defender: Node2D) -> void:
+	var player_bash_damage = player.BASH_DAMAGE + player.BASH_DAMAGE_PER_STRENGTH * player.strength
+
 	if enemy_ignore_list.has(defender): return
 	enemy_ignore_list.append(defender)
 
@@ -38,7 +41,7 @@ func _on_bash_hitbox_body_entered(defender: Node2D) -> void:
 		if !defender.in_combat:
 			defender.combat_properties.stun(2.0)
 		elif !defender_state == "stance_defensive":
-			defender.take_damage(player.bash_damage, player)
+			defender.take_damage(player_bash_damage, player)
 			Ge.slow_mo(0, 0.05)
 		else:
 			Ge.play_audio_from_string_array(player.global_position, 0, "res://SFX/Sword hit shield")

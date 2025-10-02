@@ -18,7 +18,9 @@ func exit() -> void:
 
 func update(delta : float) -> void:
 	player.arousal.value = move_toward(player.arousal.value, player.arousal.max_value, delta)
-	player.smell.value = move_toward(player.smell.value, 0, delta)
+	player.stamina.spend(0.005, 0.005, false)
+	#player.smell.value = move_toward(player.smell.value, player.smell.max_value, delta)
+	player.fatigue.add(0.001)
 
 
 func count_animation() -> void:

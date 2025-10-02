@@ -4,7 +4,7 @@ extends StatBar
 
 @onready var timer = $Timer
 const TINT_KALIN	= Color.ORANGE
-const TITN_SPRITE	= Color.RED
+const TINT_SPRITE	= Color.RED
 
 var tint_under_tween : Tween
 
@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 		if child is Buff:
 			final_regeneration_speed += child.value
 
-	if timer.time_left == 0:
+	if timer.time_left == 0 && !owner.dead && !owner.unconscious:
 		value = move_toward(value, max_value, regeneration_speed*delta)
 
 	if final_regeneration_speed > regeneration_speed:
@@ -30,18 +30,19 @@ func _process(delta: float) -> void:
 		tint_under_tween = null
 
 
-func spend(amount: float, smell := 0.0) -> bool:
+func spend(amount: float, smell := 0.0, allow_vfx := true) -> bool:
 	if value >= amount:
 		value -= amount
 		timer.start()
 		owner.smell.get_dirty(smell)
 		return true
 	else:
-		blink(TINT_KALIN, TITN_SPRITE)
+		if allow_vfx:
+			blink(TINT_KALIN, TINT_SPRITE)
 		return false
 
 func has_enough(amount: float) -> bool:
-	if value < amount: blink(TINT_KALIN, TITN_SPRITE)
+	if value < amount: blink(TINT_KALIN, TINT_SPRITE)
 	return value >= amount
 
 

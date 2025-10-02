@@ -47,7 +47,7 @@ func start_pull(_puller: CharacterBody2D) -> void:
 func get_collected() -> void:
 	match type:
 		Types.EXPERIENCE:
-			puller.experience.add(amount * 100)
+			puller.experience.add(amount * 1)
 		"_":
 			print("No collectable type")
 	queue_free()

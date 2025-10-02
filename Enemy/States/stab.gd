@@ -20,7 +20,7 @@ func exit() -> void:
 	enemy.velocity.x = 0
 
 func _on_stab_hitbox_body_entered(defender:Player) -> void:
-	defender.take_damage(1, enemy)
+	defender.take_damage(enemy.stab_damage, enemy)
 	defender.combat_properties.pushback_apply(enemy.global_position, 50)
 
 func _on_hit_frame() -> void:

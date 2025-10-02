@@ -10,7 +10,9 @@ const RUN_SPEED = 300.0 * 60
 @export var move_speed := 100 * 60
 @export var patrol_move_speed := 100 * 60
 @export var gravity := 500.0;
-@export var damage := 1
+@export var slash_damage	:= 1
+@export var stab_damage		:= 1
+@export var bash_damage		:= 1
 @export var in_combat := false
 @export var patrolling := false
 @export var main_stance : EnemyState
@@ -365,6 +367,7 @@ func _on_health_depleted() -> void:
 	print("health depleted")
 	state_node.state.finished.emit("death")
 
+	print("experience_drop: "+str(experience_drop))
 	for i in experience_drop:
 		# Add exp point to the scene
 		var collectable : RigidBody2D = collectable_scene.instantiate()

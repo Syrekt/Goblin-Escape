@@ -1,4 +1,4 @@
-[gd_scene load_steps=329 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=330 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -63,11 +63,11 @@
 [ext_resource type="Material" uid="uid://cbqub5qvea8vp" path="res://VFX/smell.tres" id="38_yofsr"]
 [ext_resource type="Script" uid="uid://f4jufjbul03i" path="res://Kalin/States/slash.gd" id="39_af0aw"]
 [ext_resource type="Script" uid="uid://2w325nrhldrd" path="res://Kalin/States/stance_walk.gd" id="39_rgkp8"]
+[ext_resource type="Script" uid="uid://bxhwv1lfn78vm" path="res://UI/CharacterPanel/character_panel.gd" id="39_y4shw"]
 [ext_resource type="PackedScene" uid="uid://b23mtnfp7xuec" path="res://Objects/emote.tscn" id="40_2d1nf"]
 [ext_resource type="SpriteFrames" uid="uid://tad7af6w5gxb" path="res://Sprite Frames/input_prompts.tres" id="40_8epdb"]
 [ext_resource type="Texture2D" uid="uid://1cx04mfn7355" path="res://UI/button_cross.png" id="40_as7pt"]
 [ext_resource type="Script" uid="uid://bwrdgmfgq5cw3" path="res://Kalin/States/animation_state_player.gd" id="40_xirjq"]
-[ext_resource type="Script" uid="uid://cgetbapkjgu5s" path="res://UI/CharacterPanel/close.gd" id="41_amdn2"]
 [ext_resource type="Script" uid="uid://b203v085bx2rg" path="res://Kalin/States/bash.gd" id="41_pdh0h"]
 [ext_resource type="Script" uid="uid://bvi7mrhp8r1py" path="res://Kalin/States/stab.gd" id="41_sat24"]
 [ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://UI/theme_button.tres" id="42_as7pt"]
@@ -173,6 +173,8 @@ shader_parameter/outer_radius = 0.995
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n1k6j"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3pkug"]
+
+[sub_resource type="GDScript" id="GDScript_4jgp1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t42fh"]
 
@@ -4728,9 +4730,8 @@ offset_left = 0.5
 offset_top = 7.0
 offset_right = 81.5
 offset_bottom = 29.0
-max_value = 10.0
 step = 0.0
-value = 10.0
+value = 100.0
 texture_under = ExtResource("46_586st")
 texture_over = ExtResource("47_80r2e")
 texture_progress = ExtResource("48_rbk27")
@@ -4803,6 +4804,7 @@ offset_top = 14.0
 offset_right = 40.5
 offset_bottom = 17.0
 step = 0.0
+value = 52.0
 texture_under = ExtResource("60_1yslh")
 texture_progress = ExtResource("61_5atg1")
 tint_progress = Color(0.679805, 0.262423, 0, 1)
@@ -4972,8 +4974,9 @@ visible = false
 offset_left = 12.0
 offset_top = 104.0
 offset_right = 172.0
-offset_bottom = 330.0
+offset_bottom = 276.0
 theme = ExtResource("56_ghu8e")
+script = ExtResource("39_y4shw")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="UI/CharacterPanel"]
 layout_mode = 2
@@ -4996,7 +4999,7 @@ theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/CharacterPanel/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 28
+theme_override_constants/separation = 18
 
 [node name="Close" type="Button" parent="UI/CharacterPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -5008,12 +5011,13 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_n1k6j")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3pkug")
 icon = ExtResource("40_as7pt")
 flat = true
-script = ExtResource("41_amdn2")
+script = SubResource("GDScript_4jgp1")
+
+[node name="LevelLabel" type="Label" parent="UI/CharacterPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level: "
 
 [node name="Strength" parent="UI/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
-layout_mode = 2
-
-[node name="Dexterity" parent="UI/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
 layout_mode = 2
 
 [node name="Endurance" parent="UI/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
@@ -5026,10 +5030,9 @@ layout_mode = 2
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_t42fh")
 
-[node name="StatPoints" type="Label" parent="UI/CharacterPanel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="ExpRequired" type="Label" parent="UI/CharacterPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Stat Points"
+text = "Required Exp: "
 
 [node name="ThoughtContainer" type="VBoxContainer" parent="UI"]
 anchors_preset = 15
@@ -5456,7 +5459,7 @@ position = Vector2(0, 10.5)
 shape = SubResource("RectangleShape2D_ws413")
 
 [connection signal="tween_completed" from="PhantomCamera2D" to="." method="_on_phantom_camera_2d_tween_completed"]
-[connection signal="pressed" from="UI/CharacterPanel/MarginContainer/VBoxContainer/Close" to="UI/CharacterPanel/MarginContainer/VBoxContainer/Close" method="_on_pressed"]
+[connection signal="pressed" from="UI/CharacterPanel/MarginContainer/VBoxContainer/Close" to="UI/CharacterPanel" method="_on_close_pressed"]
 [connection signal="attack_frame" from="StateMachine/slash" to="StateMachine/slash" method="_on_attack_frame"]
 [connection signal="attack_frame" from="StateMachine/stab" to="StateMachine/stab" method="_on_attack_frame"]
 [connection signal="body_entered" from="StateMachine/bash/BashHitbox" to="StateMachine/bash" method="_on_bash_hitbox_body_entered"]

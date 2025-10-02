@@ -48,6 +48,7 @@ func _process(delta: float) -> void:
 	var spd = clamp(abs(amount - visible_amount), 200, 500)
 	#visible_amount = move_toward(visible_amount, amount, spd * delta)
 	text = str(visible_amount)
+	owner.experience_point = amount
 
 func drop_experience() -> void:
 	if previous_drop: previous_drop.queue_free()

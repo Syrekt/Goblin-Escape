@@ -33,12 +33,15 @@ var is_on_one_way_collider := false
 var remote_control_input : Array[String]
 #endregion
 #region Stats & EXP
-var level := 0
-var available_stat_points := 5
-@export var vitality := 0
-@export var strength := 0
-@export var dexterity := 0
-@export var endurance := 0
+const HEALTH_PER_VIT	:= 10
+const STAMINA_PER_VIT	:= 2
+
+@export var vitality := 1
+@export var strength := 1
+@export var endurance := 1
+@export var level := 0
+@export var experience_point := 0
+var experience_required := 100
 #endregion
 #region Node pointers
 @onready var state_node := $StateMachine
@@ -48,6 +51,7 @@ var available_stat_points := 5
 @onready var health		: TextureProgressBar = find_child("Health") #$CanvasLayer/HUD/HBoxContainer/Health
 @onready var stamina	: TextureProgressBar = find_child("Stamina") #$CanvasLayer/HUD/HBoxContainer/Stamina
 @onready var experience : Label = find_child("Experience")
+@onready var fatigue	: TextureProgressBar = $UI/HUD/Fatigue
 @onready var smell		: TextureProgressBar = find_child("Smell")
 @onready var arousal	: TextureProgressBar = find_child("Arousal")
 @onready var smell_particles : GPUParticles2D = $SmellParticles
@@ -80,15 +84,36 @@ var available_stat_points := 5
 @onready var buff_container : HBoxContainer = $UI/HUD/Stamina/BuffContainer
 #endregion
 #region Combat
-@export var has_sword := false #false for release
-var in_combat_state := false
+const SLASH_DAMAGE	:= 15
+const STAB_DAMAGE	:= 10
+const BASH_DAMAGE 	:= 10
+const SLASH_DAMAGE_PER_STRENGTH	:= 2
+const STAB_DAMAGE_PER_STRENGTH	:= 1
+const BASH_DAMAGE_PER_STRENGTH 	:= 1
 const SLASH_COST	:= 2
 const STAB_COST		:= 1
 const BASH_COST 	:= 2
-var slash_damage	:= 2
-var stab_damage		:= 1
-var bash_damage 	:= 1
-var damage			:= 1
+const SLASH_COST_PER_STRENGTH	:= 0.2
+const STAB_COST_PER_STRENGTH	:= 0.15
+const BASH_COST_PER_STRENGTH	:= 0.15
+const SLASH_COST_PER_ENDURANCE	:= 0.1
+const STAB_COST_PER_ENDURANCE	:= 0.08
+const BASH_COST_PER_ENDURANCE	:= 0.08
+const SLASH_SWEAT	:= 0.2
+const STAB_SWEAT	:= 0.1
+const BASH_SWEAT	:= 0.1
+const SLASH_FATIGUE	:= 1.0
+const STAB_FATIGUE	:= 0.5
+const BASH_FATIGUE	:= 1.0
+const SLASH_FATIGUE_STRENGTH_MOD	:= 0.5
+const SLASH_FATIGUE_ENDURANCE_MOD	:= 0.8
+const STAB_FATIGUE_STRENGTH_MOD		:= 0.4
+const STAB_FATIGUE_ENDURANCE_MOD	:= 0.7
+const BASH_FATIGUE_STRENGTH_MOD		:= 0.5
+const BASH_FATIGUE_ENDURANCE_MOD	:= 0.8
+
+@export var has_sword := false #false for release
+var in_combat_state := false
 var combat_target	: CharacterBody2D = null
 var buffered_state  : String
 var parried			:= false
@@ -385,11 +410,10 @@ func save() -> Dictionary:
 		"pos_x"	: position.x,
 		"pos_y"	: position.y,
 
-		"available_stat_points" : available_stat_points,
+		"experience_point" : experience_point,
 		"level"		: level,
 		"vitality"	: vitality,
 		"strength" 	: strength,
-		"dexterity"	: dexterity,
 		"endurance"	: endurance,
 
 		"has_sword" : has_sword,
@@ -420,6 +444,18 @@ func break_grab() -> void:
 	state_node.state.finished.emit("break_free")
 	grabbed_by.state_node.state.finished.emit("shoved")
 	grabbed_by = null
+func level_up() -> void:
+	var base_requirement := 100
+	var mod		:= 10.0
+	var growth	:= 3.0
+	experience_point -= experience_required
+	experience.lose(experience_required)
+	level += 1
+	experience_required = ceil(base_requirement * level + mod * pow(level, growth));
+	print("Experience required for the next level: "+str(experience_required))
+func calculate_stats() -> void:
+	health.value_max = 100 + HEALTH_PER_VIT * vitality
+	stamina.value_max = 5 + STAMINA_PER_VIT * vitality
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -618,7 +654,6 @@ func _process(delta: float) -> void:
 	if just_pressed("quick load"):
 		Ge.load_game("save1")
 	var s = %Sprite2D
-	%StatPoints.text = "Stat Points: " + str(available_stat_points)
 	if debug: Debugger.printui(str(state_node.state.name))
 	controls_disabled = check_controls_disabled()
 	movement_disabled = check_movement_disabled()
@@ -657,7 +692,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
 		#think("I smell [color=green]Goblin[/color] [color=red]COCK[/color] UwU")
-		take_damage(9)
+		take_damage(500)
 		#if randi_range(0, 1) == 1:
 		#	inventory.pickup_item(load("res://Inventory/water.tres"))
 		#else:

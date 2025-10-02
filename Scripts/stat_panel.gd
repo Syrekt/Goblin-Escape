@@ -9,7 +9,7 @@ extends Control
 func _process(delta: float) -> void:
 	name_label.text = stat_name
 	value_label.text = str(owner.get(stat_name.to_lower()))
-	if owner.available_stat_points > 0:
+	if owner.experience_point >= owner.experience_required:
 		button_increase.visible = true
 	else:
 		button_increase.visible = false
@@ -19,10 +19,12 @@ func _on_decrease_pressed() -> void:
 	var value = owner.get(stat_name.to_lower())
 	if value > 0:
 		owner.set(stat_name.to_lower(), value - 1)
-		owner.available_stat_points += 1
+		owner.experience_point += 100
 
 func _on_increase_pressed() -> void:
-	if owner.available_stat_points > 0:
+	if owner.experience_point >= owner.experience_required:
 		var value = owner.get(stat_name.to_lower())
+		print("value: "+str(value))
+		print("stat_name: "+str(stat_name))
 		owner.set(stat_name.to_lower(), value + 1)
-		owner.available_stat_points -= 1
+		owner.level_up()

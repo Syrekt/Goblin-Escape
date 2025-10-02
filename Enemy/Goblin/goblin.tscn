@@ -979,7 +979,11 @@ z_index = 1
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("1_poooq")
-move_speed = 9000
+experience_drop = 10
+move_speed = 14000
+slash_damage = 15
+stab_damage = 10
+bash_damage = 10
 main_stance = NodePath("StateMachine/stance_light")
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
@@ -1195,8 +1199,8 @@ offset_left = -26.0
 offset_top = 19.0
 offset_right = 26.0
 offset_bottom = 59.0
-max_value = 5.0
-value = 5.0
+max_value = 50.0
+value = 50.0
 texture_progress = ExtResource("15_upc2x")
 
 [node name="Emote" parent="." instance=ExtResource("16_57o4q")]

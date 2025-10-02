@@ -27,4 +27,4 @@ func _on_bash_hitbox_body_entered(defender:Player) -> void:
 			else:
 				defender.combat_properties.pushback_apply(enemy.global_position, 100)
 
-			defender.take_damage(1, enemy)
+			defender.take_damage(enemy.bash_damage, enemy)

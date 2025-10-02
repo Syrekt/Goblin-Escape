@@ -2,6 +2,7 @@ extends PlayerAttackState
 
 func enter(previous_state_path: String, data := {}) -> void:
 	_enter()
+	player.fatigue.perform("stab")
 func exit() -> void:
 	_exit()
 
@@ -10,6 +11,8 @@ func update(delta: float) -> void:
 
 func _on_attack_frame() -> void:
 	if hitbox.has_overlapping_bodies():
+		var player_stab_damage = player.STAB_DAMAGE + player.STAB_DAMAGE_PER_STRENGTH * player.strength
+
 		#Allow buffering next attack on hit
 		can_buffer_next_attack = true
 		var defender = hitbox.get_overlapping_bodies()[0]
@@ -20,7 +23,7 @@ func _on_attack_frame() -> void:
 				Ge.play_audio_from_string_array(player.global_position, 0, "res://SFX/Sword hit shield")
 			else:
 				defender.combat_properties.pushback_apply(player.global_position, pushback_force)
-				defender.take_damage(player.stab_damage, player)
+				defender.take_damage(player_stab_damage, player)
 				player.play_sfx(sfx_hit)
 				Ge.slow_mo(0, 0.05)
 		else:
