@@ -359,12 +359,11 @@ func toggle_character_panel():
 	if controls_disabled: return
 	character_panel.visible = !character_panel.visible
 func check_controls_disabled() -> bool:
-	var ui_nodes = get_tree().get_nodes_in_group("FullScreenPanel")
+	var ui_nodes = get_tree().get_nodes_in_group("FullscreenPanel")
 	for node in ui_nodes:
 		if node.visible:
 			interaction_prompt.supress = true
-			Debugger.printui("Controls disabled, UI panel detected")
-			#Debugger.printui("node: "+str(node))
+			Debugger.printui("Controls disabled, FullscreenPanel detected: %s" % node.name)
 			return true
 	interaction_prompt.supress = false
 	return false

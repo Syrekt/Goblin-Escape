@@ -12,7 +12,7 @@ func _ready():
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended);
 	if camera_focus_path: camera_focus = get_node(camera_focus_path)
 
-#region States
+#region Methods
 func activate() -> void:
 	Ge.camera_focus = camera_focus
 	Ge.scene_active = true

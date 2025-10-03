@@ -11,8 +11,10 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func save() -> void:
-	var save_file = FileAccess.open("user://save1.ge", FileAccess.WRITE)
 	var node_data = {
 		"destroyed" : true
 	}
 	Ge.save_node(self, node_data)
+func load(data: Dictionary) -> void:
+	if data.destroyed:
+		queue_free()

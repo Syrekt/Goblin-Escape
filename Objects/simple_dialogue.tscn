@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b45030hb2anpy"]
+
+[ext_resource type="Script" uid="uid://cl6f3bmx2nj45" path="res://Objects/simple_dialogue.gd" id="1_ccj2p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e3ohb"]
+
+[node name="SimpleDialogue" type="Area2D"]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("1_ccj2p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_e3ohb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

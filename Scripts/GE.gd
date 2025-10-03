@@ -2,11 +2,12 @@ extends Node
 
 
 var inputs : Dictionary 
-var jump_key : String
-var attack_key : String
-var stance_key : String
-var crouch_key : String
-var grab_key : String
+var jump_key	: String
+var attack_key	: String
+var stance_key 	: String
+var crouch_key 	: String
+var grab_key	: String
+var run_key		: String
 
 var loading := false
 
@@ -28,35 +29,20 @@ func _ready() -> void:
 
 	show_combat_tutorial.connect(_show_combat_tutorial)
 	show_stealth_tutorial.connect(_show_stealth_tutorial)
-	var events = InputMap.action_get_events("jump")
-	for event in events:
-		if event is InputEventKey:
-			jump_key = OS.get_keycode_string(event.physical_keycode).to_upper()
-			print("jump_key: "+str(jump_key))
 
-	events = InputMap.action_get_events("attack")
-	for event in events:
-		if event is InputEventKey:
-			attack_key = OS.get_keycode_string(event.physical_keycode).to_upper()
-			print("attack_key: "+str(attack_key))
+	assign_key("jump", "jump_key")
+	assign_key("attack", "attack_key")
+	assign_key("stance", "stance_key")
+	assign_key("down", "down_key")
+	assign_key("grab", "grab_key")
+	assign_key("run", "run_key")
 
-	events = InputMap.action_get_events("stance")
+func assign_key(action: String, value: String) -> void:
+	var events = InputMap.action_get_events(action)
 	for event in events:
 		if event is InputEventKey:
-			stance_key = OS.get_keycode_string(event.physical_keycode).to_upper()
-			print("stance_key: "+str(stance_key))
-
-	events = InputMap.action_get_events("down")
-	for event in events:
-		if event is InputEventKey:
-			crouch_key = OS.get_keycode_string(event.physical_keycode).to_upper()
-			print("crouch_key: "+str(crouch_key))
-
-	events = InputMap.action_get_events("grab")
-	for event in events:
-		if event is InputEventKey:
-			grab_key = OS.get_keycode_string(event.physical_keycode).to_upper()
-			print("grab_key: "+str(grab_key))
+			set(value, OS.get_keycode_string(event.physical_keycode).to_upper())
+			print(action + "_key: " + str(run_key))
 
 func _show_combat_tutorial():
 	print("Show combat tutorial")
