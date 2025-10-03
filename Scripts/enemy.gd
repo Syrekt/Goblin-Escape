@@ -197,6 +197,7 @@ func save() -> void:
 		"pos_y" : global_position.y,
 		"health" : health.value,
 		"state" : state_node.state.name,
+		"spawn_state" : spawn_state,
 	}
 	for i in save_list:
 		if get(i):
@@ -205,8 +206,14 @@ func save() -> void:
 			print("Unkown value on save " + i)
 	Ge.save_node(self, save_data)
 func load(data: Dictionary) -> void:
-	health.value = data.health
+	health.value	= data.health
 	state_node.state.finished.emit(data.state)
+
+	data.erase("health")
+	data.erase("state")
+
+	for key in data.keys():
+		set(key, data[key])
 func update_patrol_point() -> void:
 	var new_point = patrol_points.pick_random()
 	while new_point == current_patrol_point:
@@ -252,7 +259,8 @@ func reset() -> void:
 	counter_attack			= false
 	attack_type_taken		= []
 
-	global_position = spawn_state.position
+	global_position.x = spawn_state.pos_x
+	global_position.y = spawn_state.pos_y
 	set_facing(spawn_state.facing)
 
 	state_node.state.finished.emit("idle")
@@ -325,12 +333,11 @@ func _ready() -> void:
 		point.global_position = _global_position
 
 	spawn_state.facing = facing
-	spawn_state.position = global_position
+	spawn_state.pos_x = global_position.x
+	spawn_state.pos_y = global_position.y
 
 	enter_shadow.connect(_on_enter_shadow)
 	leave_shadow.connect(_on_leave_shadow)
-
-	print("spawn_state: "+str(spawn_state))
 func _process(delta: float) -> void:
 	# Check if there is anything that stops the gameplay
 	var ui_nodes = get_tree().get_nodes_in_group("UIPanel")

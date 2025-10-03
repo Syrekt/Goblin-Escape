@@ -412,8 +412,13 @@ func enemy_heard_noise(enemy: Enemy) -> void:
 		think("I should be careful")
 func save() -> void:
 	var save_data = {
-		"pos_x"	: position.x,
-		"pos_y"	: position.y,
+		"pos_x"		: position.x,
+		"pos_y"		: position.y,
+		"health"	: health.value,
+		"stamina"	: stamina.value,
+		"arousal"	: arousal.value,
+		"smell"		: smell.value,
+		"fatigue"	: fatigue.value,
 	}
 
 	for i in save_list:
@@ -422,6 +427,21 @@ func save() -> void:
 		else:
 			print("Unkown value on save " + i)
 	Ge.save_node(self, save_data)
+func load(data: Dictionary) -> void:
+	health.value	= data.health
+	stamina.value	= data.stamina
+	arousal.value	= data.arousal
+	smell.value		= data.smell
+	fatigue.value	= data.fatigue
+
+	data.erase("health")
+	data.erase("stamina")
+	data.erase("arousal")
+	data.erase("smell")
+	data.erase("fatigue")
+
+	for key in data.keys():
+		set(key, data[key])
 func check_buffered_state() -> bool:
 	var state_to_switch : String
 	if buffered_state:

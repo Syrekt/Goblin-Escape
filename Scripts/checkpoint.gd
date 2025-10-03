@@ -13,6 +13,7 @@ var timer : Timer
 
 func _ready() -> void:
 	rest_menu.hide()
+	print("Checkpoint ready")
 
 #region VFX lights
 	for node in get_children():
@@ -26,6 +27,7 @@ func _ready() -> void:
 
 func update(_player : Player) -> void:
 	player = _player
+	#$CanvasLayer.layer = 10
 	if player.pressed("interact"):
 		get_tree().current_scene.reset_scene()
 		Ge.last_checkpoint = self

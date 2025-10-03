@@ -113,9 +113,7 @@ func EmitNoise(source: CharacterBody2D, position: Vector2, amount: float) -> voi
 	get_tree().current_scene.add_child(noise)
 func save_node(node, data: Dictionary) -> void:
 	print("Save node: %s" % node.name)
-	print("data: "+str(data))
 	var json = JSON.stringify(data)
-	print("json: "+str(json))
 	data["filename"] = node.get_scene_file_path() 
 	data["parent"] = node.get_parent().get_path() 
 	data["name"] = node.name
@@ -145,7 +143,6 @@ func save_game() -> void:
 			continue
 
 		# Call the node's save function.
-		print("Save node: %s" % node.name)
 		node.save()
 		#for prop in node.get_property_list():
 		#	if prop.name == "save_list":
@@ -165,7 +162,7 @@ func save_game() -> void:
 	save_file.close()
 	print("Game saved: %s" % save_file.get_path())
 func load_game() -> void:
-	#get_tree().change_scene_to_file("res://Scenes/game.tscn")
+	#get_tree().change_scene_to_file("res://Scenes/demo_map.tscn")
 	print("Loading...")
 	var save_file = FileAccess.open("user://"+save_slot+".ge", FileAccess.READ)
 	if !save_file:
@@ -176,7 +173,18 @@ func load_game() -> void:
 	get_tree().paused = true
 
 	var loading_screen = get_tree().current_scene.find_child("LoadingScreen")
-	#loading_screen.show()
+	loading_screen.show()
+
+	# Decided to remove the font anyway
+	var tween_font = create_tween().bind_node(loading_screen)
+	var font = loading_screen.find_child("Label")
+	font.set("theme_override_colors/font_color", Color.WHITE)
+	tween_font.tween_property(font, "theme_override_colors/font_color", Color(1.0, 1.0, 1.0, 0.0), 0.5)
+
+	var tween_rect = create_tween().bind_node(loading_screen)
+	var rect = loading_screen.find_child("ColorRect")
+	rect.color = Color.BLACK
+	tween_rect.tween_property(rect, "color", Color(0.0, 0.0, 0.0, 0.0), 1)
 
 	#if !FileAccess.file_exists("user://"+filename+".ge"):
 	#	return # Error! We don't have a save to load.
@@ -188,7 +196,6 @@ func load_game() -> void:
 	var save_nodes = get_tree().get_nodes_in_group("Persistent")
 	print("save_nodes: "+str(save_nodes))
 	for i in save_nodes:
-		print("i: "+str(i))
 		i.queue_free()
 	
 	await get_tree().process_frame
@@ -198,7 +205,6 @@ func load_game() -> void:
 	# the object it represents.
 	while save_file.get_position() < save_file.get_length():
 		var json_string = save_file.get_line()
-		print("json_string: "+str(json_string))
 
 		# Creates the helper class to interact with JSON.
 		var json = JSON.new()
@@ -211,7 +217,6 @@ func load_game() -> void:
 
 		# Get the data from the JSON object.
 		save_data = json.data
-		print("save_data: "+str(save_data));
 		print("parse_result: "+str(parse_result))
 		for i in save_data.keys():
 			print("Loading key(%s)" % i)
@@ -245,10 +250,11 @@ func load_game() -> void:
 			node_data.erase("pos_y")
 
 			# Now we set the remaining variables.
-			for value in node_data:
-				new_object.set(value, node_data[value])
 			if new_object.has_method("load"):
 				new_object.load(node_data)
+			else:
+				for value in node_data:
+					new_object.set(value, node_data[value])
 
 			# We can use this if something needs to be done after loading the node
 			if new_object.has_signal("on_load"): # Not used
@@ -263,7 +269,10 @@ func load_game() -> void:
 	get_tree().paused = false
 	await get_tree().create_timer(1.0).timeout
 	Ge.player.pcam.follow_damping = true
-	loading_screen.hide()
+	# loading_screen.hide()
+	for node in get_tree().current_scene.get_children():
+		if node is Control:
+			print("%s | mouse filter=%s | path=%s" % [node.name, node.mouse_filter, node.get_path()])
 
 var popup_scene = preload("res://Objects/text_pop_up.tscn")
 func popup_text(position: Vector2, text: String, color1 := Color.WHITE, color2 := Color.WHITE) -> void:
