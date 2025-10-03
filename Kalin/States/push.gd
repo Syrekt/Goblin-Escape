@@ -12,10 +12,8 @@ func update(delta: float) -> void:
 		finished.emit("idle")
 		return
 
-	player.stamina.spend(0.01, 0.01)
-	if !player.stamina.has_enough(0.01):
-		player.velocity.x = 0
-		finished.emit("push_idle")
+	# Just for smell
+	player.stamina.spend(0.00, 0.01)
 
 	#Drop the movable
 	if !player.movable.grabbed:

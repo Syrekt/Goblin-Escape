@@ -20,15 +20,10 @@ func activate() -> void:
 			sprite.play("opening")
 	else:
 		sprite.play()
+	$AudioStreamPlayer2D.play()
 func update(player : Player) -> void:
-	if auto:
-		if !active && !waiting_player_exit:
-			waiting_player_exit = true
-			activate()
-	else:
-		if !active && Input.is_action_just_pressed("interact"):
-			activate()
-
+	if Input.is_action_just_pressed("interact"):
+		activate()
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:

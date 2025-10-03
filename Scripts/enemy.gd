@@ -238,7 +238,7 @@ func drop_chase(target:Player) -> void:
 	target.enemies_on_chase.erase(self)
 	chase_target = null
 	player_in_range = false
-	if !awareness_timer.is_inside_tree():
+	if !awareness_timer.is_inside_tree() || awareness_timer.get_parent() == null:
 		add_child(awareness_timer)
 	awareness_timer.start()
 func assign_player(node:Player) -> void:
@@ -408,9 +408,12 @@ func _physics_process(delta: float) -> void:
 #region Signals
 func _on_health_depleted() -> void:
 	print("health depleted")
+	#state_node.state.call_deferred("emit_signal", "finished", "death")
 	state_node.state.finished.emit("death")
 
-	print("experience_drop: "+str(experience_drop))
+	call_deferred("_spawn_collectable")
+
+func _spawn_collectable() -> void:
 	for i in experience_drop:
 		# Add exp point to the scene
 		var collectable : RigidBody2D = collectable_scene.instantiate()

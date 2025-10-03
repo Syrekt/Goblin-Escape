@@ -139,6 +139,7 @@ var noise = preload("res://Objects/noise.tscn")
 var hiding_spot : Interaction
 var hiding := false
 var invisible := false
+var current_tint : Color = Color(0.0, 0.0, 0.0, 1.0)
 var ladder : Area2D
 const ingame_menu = preload("res://UI/ingame_menu.tscn")
 var open_menu : Node = null
@@ -239,7 +240,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 			tween_tint.tween_property(sprite.material, "shader_parameter/tint_color", Color.WHITE, 0)
 			#tween_outline.tween_property(sprite.material, "shader_parameter/outline_color", Color(0.7, 0.24, 1.0, 1), 0)
 			tween_outline.tween_property(sprite.material, "shader_parameter/outline_color", Color.WHITE, 0)
-			tween_tint.tween_property(sprite.material, "shader_parameter/tint_color", Color(0, 0, 0, 0), 0.5)
+			tween_tint.tween_property(sprite.material, "shader_parameter/tint_color", current_tint, 0.5)
 			tween_outline.tween_property(sprite.material, "shader_parameter/outline_color", Color(0, 0, 0, 0), 0.5)
 		else:
 			Ge.slow_mo(0, 0.1)
@@ -623,7 +624,6 @@ func _physics_process(delta: float) -> void:
 	#endregion
 	#region Y Movement
 	if !is_on_floor():
-		Debugger.printui("Not on floor")
 		match state_name:
 			"corner_climb", "corner_grab", "corner_hang":
 				velocity.y = 0
@@ -685,14 +685,15 @@ func _process(delta: float) -> void:
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
 	#region Camera combat position
+	if combat_target:
+		if combat_target.state_node.state.name == "death": combat_target = null
+		elif !combat_target.chase_target: combat_target = null
 	if !controls_disabled:
 		in_combat_state = state_node.state.is_in_group("combat_state")
 		if in_combat_state && combat_target:
 			pcam.follow_mode = pcam.FollowMode.GROUP
 			pcam.set_follow_targets([self, combat_target] as Array[Node2D])
 			pcam.draw_limits = false
-			if combat_target.state_node.state.name == "death": combat_target = null
-			elif !combat_target.chase_target: combat_target = null
 		elif pcam.follow_mode == pcam.FollowMode.GROUP:
 			pcam.follow_mode = pcam.FollowMode.SIMPLE
 			pcam.set_follow_target(self)
@@ -741,13 +742,13 @@ func _on_interactor_area_exited(area: Area2D) -> void:
 		interaction_prompt._hide()
 func _on_enter_shadow() -> void:
 	invisible = true
-	var c = Color(0.1, 0.1, 0.1, 0.5)
-	create_tween().bind_node(self).tween_property(%Sprite2D.material, "shader_parameter/tint_color", c, 0.2)
+	current_tint = Color(0.1, 0.1, 0.1, 0.5)
+	create_tween().bind_node(self).tween_property(%Sprite2D.material, "shader_parameter/tint_color", current_tint, 0.2)
 	create_tween().bind_node(self).tween_property(vignette.material, "shader_parameter/alpha", 0.2, 0.2)
 func _on_leave_shadow() -> void:
 	invisible = false
-	var c = Color(0.0, 0.0, 0.0, 0.0)
-	create_tween().bind_node(self).tween_property(%Sprite2D.material, "shader_parameter/tint_color", c, 0.2)
+	current_tint = Color(0.0, 0.0, 0.0, 0.0)
+	create_tween().bind_node(self).tween_property(%Sprite2D.material, "shader_parameter/tint_color", current_tint, 0.2)
 	create_tween().bind_node(self).tween_property(vignette.material, "shader_parameter/alpha", 0.0, 0.2)
 func _on_threat_collider_body_entered(body:Node2D) -> void:
 	take_damage(1)

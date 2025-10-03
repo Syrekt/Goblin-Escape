@@ -1111,7 +1111,6 @@ transitions = [NodePath("../stance_heavy")]
 attack_state = [NodePath("../grab"), NodePath("../stab")]
 stance_time = 0.5
 attack_time = 0.2
-debug_stance = "grab"
 
 [node name="grab" type="Node2D" parent="StateMachine"]
 script = ExtResource("13_6vclp")

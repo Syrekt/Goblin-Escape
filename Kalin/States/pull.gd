@@ -8,12 +8,10 @@ func physics_update(delta: float) -> void:
 	player.movable.velocity = player.velocity;
 
 func update(delta: float) -> void:
-	player.stamina.spend(0.01, 0.01)
-	if !player.stamina.has_enough(0.01):
-		player.velocity.x = 0
-		finished.emit("push_idle")
+	# Just for smell
+	player.stamina.spend(0.0, 0.01)
 
-	#Drop the movable
+	# Drop the movable
 	if !player.movable.grabbed:
 		finished.emit("idle")
 

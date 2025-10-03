@@ -20,6 +20,8 @@ var save_slot := "save1"
 
 var BALLOON = preload("res://Objects/balloon.tscn")
 
+var show_noise := false
+
 signal show_combat_tutorial
 signal show_stealth_tutorial
 
