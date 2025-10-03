@@ -13,7 +13,6 @@ func _ready() -> void:
 
 #region Methods
 func activate() -> void:
-	Ge.scene_active = true
 	if active:
 		print("Activating dialogue while it's already active!")
 

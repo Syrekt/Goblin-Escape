@@ -15,7 +15,6 @@ func _ready():
 #region Methods
 func activate() -> void:
 	Ge.camera_focus = camera_focus
-	Ge.scene_active = true
 	if active:
 		print("Activating dialogue while it's already active!")
 

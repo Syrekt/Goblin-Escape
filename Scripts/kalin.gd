@@ -623,6 +623,7 @@ func _physics_process(delta: float) -> void:
 	#endregion
 	#region Y Movement
 	if !is_on_floor():
+		Debugger.printui("Not on floor")
 		match state_name:
 			"corner_climb", "corner_grab", "corner_hang":
 				velocity.y = 0
@@ -756,11 +757,11 @@ func _on_threat_collider_body_entered(body:Node2D) -> void:
 func _on_smell_collider_body_entered(body: Node2D) -> void:
 	if !hiding && body is Enemy:
 		body.smell(self)
-func _on_abyss_entered() -> void:
+func _on_abyss_entered(abyss: Area2D) -> void:
 	global_position = last_ground_position
-	var fall_damage = 2
+	var fall_damage = abyss.damage
 	if health.value <= fall_damage:
-		take_damage(2)#To make sure voices don't overlap
+		take_damage(fall_damage) # To make sure voices don't overlap with fall voice(?)
 	else:
-		state_node.state.finished.emit("land_hurt", {"fall_damage": 2})
+		state_node.state.finished.emit("land_hurt", {"fall_damage": fall_damage})
 #endregion

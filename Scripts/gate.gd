@@ -1,5 +1,6 @@
 extends Node2D
 
+
 @onready var shape : CollisionShape2D = get_node("Collider/Shape")
 @onready var audio_emitter : AudioStreamPlayer2D = $AudioEmitter
 @onready var interaction : Area2D = $Interaction
@@ -8,6 +9,9 @@ extends Node2D
 
 @export var closed := true
 @export var key : InventoryItem
+
+@export_multiline var closed_dialogue : String
+@export_multiline var custom_thought : String
 
 
 func _process(delta: float) -> void:

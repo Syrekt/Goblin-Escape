@@ -13,12 +13,12 @@ var loading := false
 
 var camera_focus : Node2D
 
-var scene_active := false
-
 var last_checkpoint : Checkpoint
 
 var save_data : Dictionary
 var save_slot := "save1"
+
+var BALLOON = preload("res://Objects/balloon.tscn")
 
 signal show_combat_tutorial
 signal show_stealth_tutorial
@@ -338,3 +338,8 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		print("Save game before quitting")
 		save_game()
+func one_shot_dialogue(text: String) -> void:
+	var dialogue_resource = DialogueManager.create_resource_from_text("~ title\n" + text)
+	var balloon = BALLOON.instantiate()
+	get_tree().current_scene.add_child(balloon)
+	balloon.start(dialogue_resource, "title")
