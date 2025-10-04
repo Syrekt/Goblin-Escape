@@ -4,7 +4,7 @@ class_name Player extends CharacterBody2D
 @export var run_speed			:= 100.0 * 60.0
 @export var walk_speed			:= 50.0 * 60.0
 @export var stance_walk_speed	:= 30.0 * 60.0
-@export var crouch_speed		:= 30.0 * 60.0
+@export var crouch_speed		:= 50.0 * 60.0
 @export var push_pull_speed 	:= 25.0 * 60.0
 @export var slide_speed			:= 5.0 * 60.0
 @export var slide_dec			:= 7.0
@@ -156,6 +156,8 @@ signal enter_shadow
 signal leave_shadow
 signal enter_abyss
 signal grabbed
+signal fullscreen_panel_opened
+signal fullscreen_panel_closed
 #region Methods
 func set_facing(dir: int):
 	if dir == 0: return
@@ -361,13 +363,20 @@ func toggle_character_panel():
 	character_panel.visible = !character_panel.visible
 func check_controls_disabled() -> bool:
 	var ui_nodes = get_tree().get_nodes_in_group("FullscreenPanel")
+	var node_found := false
 	for node in ui_nodes:
 		if node.visible:
 			interaction_prompt.supress = true
 			Debugger.printui("Controls disabled, FullscreenPanel detected: %s" % node.name)
-			return true
+			node_found = true
+			break
 	interaction_prompt.supress = false
-	return false
+	if node_found:
+		if !controls_disabled:
+			fullscreen_panel_opened.emit();
+	elif controls_disabled:
+		fullscreen_panel_closed.emit()
+	return node_found
 func check_movement_disabled() -> bool:
 	if controls_disabled: return true
 	var ui_nodes = get_tree().get_nodes_in_group("UIPanel")
@@ -539,6 +548,8 @@ func _ready() -> void:
 	enter_shadow.connect(_on_enter_shadow)
 	leave_shadow.connect(_on_leave_shadow)
 	enter_abyss.connect(_on_abyss_entered)
+	fullscreen_panel_opened.connect(_on_fullscreen_panel_opened)
+	fullscreen_panel_closed.connect(_on_fullscreen_panel_closed)
 	get_tree().current_scene.emit_signal("player_ready", self) #owner should be root node
 #endregion
 #region Physics
@@ -770,4 +781,14 @@ func _on_abyss_entered(abyss: Area2D) -> void:
 		take_damage(fall_damage) # To make sure voices don't overlap with fall voice(?)
 	else:
 		state_node.state.finished.emit("land_hurt", {"fall_damage": fall_damage})
+func _on_fullscreen_panel_opened() -> void:
+	var huds = get_tree().get_nodes_in_group("HUD")
+	print("Hide HUD")
+	for panel in huds:
+		panel.hide()
+func _on_fullscreen_panel_closed() -> void:
+	var huds = get_tree().get_nodes_in_group("HUD")
+	print("Show HUD")
+	for panel in huds:
+		panel.show()
 #endregion

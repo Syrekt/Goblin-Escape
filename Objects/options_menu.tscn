@@ -9,10 +9,6 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 186.0
-offset_top = 42.0
-offset_right = -107.0
-offset_bottom = -15.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
@@ -95,6 +91,10 @@ text = "Borderless"
 layout_mode = 2
 script = ExtResource("2_ucjbo")
 
+[node name="CenterWindow" type="Button" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Center Window"
+
 [node name="Audio" type="TabBar" parent="."]
 visible = false
 layout_mode = 2
@@ -106,7 +106,7 @@ layout_mode = 2
 metadata/_tab_index = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Controls"]
-layout_mode = 2
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 31.0
@@ -153,7 +153,59 @@ action_name = "run"
 layout_mode = 2
 action_name = "stance"
 
+[node name="Gameplay" type="TabBar" parent="."]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Gameplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Gameplay/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Gameplay/MarginContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Gameplay/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Control"]
+layout_mode = 0
+offset_right = 181.0
+offset_bottom = 14.0
+
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Control/HSplitContainer"]
+layout_mode = 2
+text = "Noise Color"
+
+[node name="NoiseColor" type="ColorPickerButton" parent="Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Control/HSplitContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 0.2)
+edit_alpha = false
+edit_intensity = false
+
+[node name="ResetColor" type="Button" parent="Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Control"]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 1.0
+offset_right = 227.0
+offset_bottom = 23.0
+text = "Reset"
+
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="item_selected" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/Resolution" to="." method="_on_option_button_item_selected"]
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/PixelPerfect" to="." method="_on_pixel_perfect_toggled"]
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/Borderless" to="." method="_on_borderless_toggled"]
+[connection signal="pressed" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/CenterWindow" to="." method="_on_center_window_pressed"]
+[connection signal="color_changed" from="Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Control/HSplitContainer/NoiseColor" to="." method="_on_noise_color_color_changed"]
+[connection signal="pressed" from="Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Control/ResetColor" to="." method="_on_reset_color_pressed"]

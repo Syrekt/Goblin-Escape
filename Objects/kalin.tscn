@@ -1,4 +1,4 @@
-[gd_scene load_steps=334 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=332 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -68,9 +68,9 @@
 [ext_resource type="SpriteFrames" uid="uid://tad7af6w5gxb" path="res://Sprite Frames/input_prompts.tres" id="40_8epdb"]
 [ext_resource type="Texture2D" uid="uid://1cx04mfn7355" path="res://UI/button_cross.png" id="40_as7pt"]
 [ext_resource type="Script" uid="uid://bwrdgmfgq5cw3" path="res://Kalin/States/animation_state_player.gd" id="40_xirjq"]
+[ext_resource type="Theme" uid="uid://d06uownpg5ssx" path="res://UI/theme_icon.tres" id="41_3pkug"]
 [ext_resource type="Script" uid="uid://b203v085bx2rg" path="res://Kalin/States/bash.gd" id="41_pdh0h"]
 [ext_resource type="Script" uid="uid://bvi7mrhp8r1py" path="res://Kalin/States/stab.gd" id="41_sat24"]
-[ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://UI/theme_button.tres" id="42_as7pt"]
 [ext_resource type="Texture2D" uid="uid://d3lypviirdc8j" path="res://Kalin/Sprites/Kalin-heavycharge-dustspawn.png" id="43_eygup"]
 [ext_resource type="Script" uid="uid://clti5tx0txok1" path="res://Scripts/player_health.gd" id="43_uhoyi"]
 [ext_resource type="Texture2D" uid="uid://cdf5u0hk86v0o" path="res://Others/smoke_test.png" id="44_3q7yy"]
@@ -104,12 +104,10 @@
 [ext_resource type="Texture2D" uid="uid://d2ors75bqsp3c" path="res://UI/Sliders/experience_progress.png" id="55_rbk27"]
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="56_ghu8e"]
 [ext_resource type="Script" uid="uid://dpcphh4eavvle" path="res://Kalin/States/stun.gd" id="56_qqpcq"]
-[ext_resource type="Texture2D" uid="uid://d3ie3nxj0orny" path="res://UI/Sliders/arousal_under.png" id="57_rbk27"]
 [ext_resource type="Script" uid="uid://dov67f6u1vo0" path="res://Kalin/States/bash_no_sword.gd" id="58_wl0wu"]
 [ext_resource type="Texture2D" uid="uid://chjgsdqrvvtgb" path="res://UI/Sliders/arousal_progress.png" id="58_yofsr"]
 [ext_resource type="Script" uid="uid://cjge85wgil63e" path="res://Kalin/States/sex.gd" id="59_muuj4"]
 [ext_resource type="Script" uid="uid://cytac4sg8onjk" path="res://Kalin/States/corner_hang.gd" id="59_osr06"]
-[ext_resource type="Texture2D" uid="uid://ebs31exhntsl" path="res://UI/Sliders/smell_under.png" id="60_1yslh"]
 [ext_resource type="Script" uid="uid://c3rllm222ckui" path="res://Kalin/stamina.gd" id="60_2ksh1"]
 [ext_resource type="Texture2D" uid="uid://dvos4uam82cch" path="res://UI/Sliders/smell_progress.png" id="61_5atg1"]
 [ext_resource type="Script" uid="uid://42mhp8ajoulq" path="res://Kalin/States/orgasm.gd" id="61_c6www"]
@@ -4761,7 +4759,7 @@ scale = Vector2(2, 2)
 mouse_filter = 2
 script = ExtResource("8_cv3n5")
 
-[node name="Health" type="TextureProgressBar" parent="UI/HUD"]
+[node name="Health" type="TextureProgressBar" parent="UI/HUD" groups=["HUD"]]
 layout_mode = 0
 offset_left = 0.5
 offset_top = 7.0
@@ -4776,19 +4774,19 @@ script = ExtResource("43_uhoyi")
 buff_sprite = ExtResource("10_pxbrw")
 debuff_sprite = ExtResource("11_4inu4")
 
-[node name="Stamina" type="TextureProgressBar" parent="UI/HUD"]
+[node name="Stamina" type="TextureProgressBar" parent="UI/HUD" groups=["HUD"]]
 layout_mode = 0
-offset_left = 24.5
-offset_top = 26.0
-offset_right = 88.5
-offset_bottom = 35.0
+offset_left = 22.5
+offset_top = 28.0
+offset_right = 150.5
+offset_bottom = 46.0
 max_value = 5.0
 step = 0.0
 value = 5.0
 texture_under = ExtResource("50_yofsr")
 texture_over = ExtResource("51_1yslh")
 texture_progress = ExtResource("52_5atg1")
-tint_progress = Color(0.737559, 0.505072, 0.0677517, 1)
+tint_progress = Color(0.7372549, 0.5058824, 0.06666667, 1)
 script = ExtResource("60_2ksh1")
 buff_sprite = ExtResource("10_pxbrw")
 debuff_sprite = ExtResource("11_4inu4")
@@ -4810,38 +4808,36 @@ offset_right = 57.98
 offset_bottom = 7.996
 scale = Vector2(0.5, 0.5)
 
-[node name="Fatigue" type="TextureProgressBar" parent="UI/HUD"]
+[node name="Fatigue" type="TextureProgressBar" parent="UI/HUD" groups=["HUD"]]
 layout_mode = 0
-offset_left = 21.5
+offset_left = 21.0
 offset_top = 23.0
-offset_right = 129.5
-offset_bottom = 26.0
+offset_right = 233.0
+offset_bottom = 31.0
 step = 0.0
 texture_under = ExtResource("54_80r2e")
 texture_progress = ExtResource("55_rbk27")
 tint_progress = Color(0.199724, 0.454105, 0.22321, 1)
 script = ExtResource("21_sklaw")
 
-[node name="Arousal" type="TextureProgressBar" parent="UI/HUD"]
+[node name="Arousal" type="TextureProgressBar" parent="UI/HUD" groups=["HUD"]]
 layout_mode = 0
-offset_left = 50.5
-offset_top = 14.0
-offset_right = 75.5
-offset_bottom = 17.0
+offset_left = 100.0
+offset_top = 20.5
+offset_right = 150.0
+offset_bottom = 26.5
 step = 0.0
-texture_under = ExtResource("57_rbk27")
 texture_progress = ExtResource("58_yofsr")
 tint_progress = Color(0.474366, 0.00173617, 0.698302, 1)
 script = ExtResource("48_yekxk")
 
-[node name="Smell" type="TextureProgressBar" parent="UI/HUD"]
+[node name="Smell" type="TextureProgressBar" parent="UI/HUD" groups=["HUD"]]
 layout_mode = 0
-offset_left = 20.5
-offset_top = 14.0
-offset_right = 40.5
-offset_bottom = 17.0
+offset_left = 40.5
+offset_top = 21.0
+offset_right = 80.5
+offset_bottom = 27.0
 step = 0.0
-texture_under = ExtResource("60_1yslh")
 texture_progress = ExtResource("61_5atg1")
 tint_progress = Color(0.679805, 0.262423, 0, 1)
 script = ExtResource("55_h4isg")
@@ -4914,7 +4910,7 @@ text_overrun_behavior = 3
 [node name="Label" parent="UI/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer/ButtonContainer/Button" index="0"]
 layout_mode = 0
 
-[node name="ExpAmountContainer" type="VBoxContainer" parent="UI"]
+[node name="ExpAmountContainer" type="VBoxContainer" parent="UI" groups=["HUD"]]
 offset_left = 563.0
 offset_top = 274.0
 offset_right = 632.0
@@ -4925,7 +4921,7 @@ alignment = 2
 [node name="AmountLabel" parent="UI/ExpAmountContainer" instance=ExtResource("34_8gxoc")]
 layout_mode = 2
 
-[node name="ExpTypeBox" type="PanelContainer" parent="UI"]
+[node name="ExpTypeBox" type="PanelContainer" parent="UI" groups=["HUD"]]
 offset_left = 563.0
 offset_top = 324.0
 offset_right = 632.0
@@ -5040,7 +5036,7 @@ theme_override_constants/separation = 18
 [node name="Close" type="Button" parent="UI/CharacterPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
-theme = ExtResource("42_as7pt")
+theme = ExtResource("41_3pkug")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_4jgp1")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_y4shw")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_n1k6j")
@@ -5070,7 +5066,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_t42fh")
 layout_mode = 2
 text = "Required Exp: "
 
-[node name="ThoughtContainer" type="VBoxContainer" parent="UI"]
+[node name="ThoughtContainer" type="VBoxContainer" parent="UI" groups=["HUD"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

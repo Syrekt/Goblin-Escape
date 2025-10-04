@@ -20,7 +20,8 @@ var save_slot := "save1"
 
 var BALLOON = preload("res://Objects/balloon.tscn")
 
-var show_noise := false
+var show_noise	:= true
+var noise_color : Color = Color(1, 1, 1, 0.2)
 
 signal show_combat_tutorial
 signal show_stealth_tutorial
@@ -50,12 +51,12 @@ func _show_combat_tutorial():
 	print("Show combat tutorial")
 	var combat_tutorial_scene := load("res://Tutorial/combat_tutorial.tscn")
 	var combat_tutorial = combat_tutorial_scene.instantiate()
-	add_child(combat_tutorial)
+	get_tree().current_scene.add_child(combat_tutorial)
 func _show_stealth_tutorial():
 	print("Show stealth tutorial")
 	var stealth_tutorial_scene := load("res://Tutorial/stealth_tutorial.tscn")
 	var stealth_tutorial = stealth_tutorial_scene.instantiate()
-	add_child(stealth_tutorial)
+	get_tree().current_scene.add_child(stealth_tutorial)
 
 
 func string_array_get_random(array: PackedStringArray) -> String:

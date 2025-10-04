@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bfrfvr3f2ii41"]
+[gd_scene load_steps=18 format=3 uid="uid://bfrfvr3f2ii41"]
 
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="1_ma4oc"]
-[ext_resource type="Script" uid="uid://c7nq5lemywc53" path="res://Tutorial/stealth_tutorial.gd" id="1_ommnr"]
+[ext_resource type="Script" uid="uid://c7nq5lemywc53" path="res://Tutorial/tabbed_tutorial.gd" id="1_ommnr"]
 [ext_resource type="Texture2D" uid="uid://c4sgdo50jnun4" path="res://Kalin/Sprites/Kalin-Run.png" id="2_ommnr"]
 [ext_resource type="Texture2D" uid="uid://kkvvekjyerv0" path="res://Others/cirle.png" id="3_mt66d"]
 [ext_resource type="Texture2D" uid="uid://vcedblhvcdqh" path="res://Others/stealth_example.png" id="4_ccby3"]
@@ -9,6 +9,11 @@
 [ext_resource type="Shader" uid="uid://bxgu8io4cdpn7" path="res://Shaders/outline.gdshader" id="7_7laq5"]
 [ext_resource type="Texture2D" uid="uid://dml38qkt4kasw" path="res://Map/Props/spr_crevice1.png" id="8_m1uw2"]
 [ext_resource type="Texture2D" uid="uid://ce082w3owvsra" path="res://Kalin/Sprites/kalin_hide_spritesheet.png" id="9_5w06g"]
+[ext_resource type="Theme" uid="uid://d06uownpg5ssx" path="res://UI/theme_icon.tres" id="10_nh8aq"]
+[ext_resource type="Texture2D" uid="uid://bbdbmfiw7rvtk" path="res://UI/arrow_button1.png" id="11_06lct"]
+[ext_resource type="Texture2D" uid="uid://bbqpi1e7rckoc" path="res://UI/arrow_button2.png" id="12_2qk3m"]
+[ext_resource type="Script" uid="uid://dt6p5xyi7h0ui" path="res://Scripts/button.gd" id="12_06lct"]
+[ext_resource type="Texture2D" uid="uid://1cx04mfn7355" path="res://UI/button_cross.png" id="14_2qk3m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m1uw2"]
 shader = ExtResource("7_7laq5")
@@ -32,53 +37,45 @@ shader_parameter/number_of_images = Vector2(1, 1)
 shader_parameter/tint_color = Color(0.1, 0.1, 0.1, 0.5)
 shader_parameter/alpha = 1.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6a3fo"]
+
 [node name="stealth_tutorial" type="CanvasLayer" groups=["FullscreenPanel"]]
 script = ExtResource("1_ommnr")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="TabContainer" type="TabContainer" parent="."]
+self_modulate = Color(0, 0, 0, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.784314)
+current_tab = 2
+tabs_visible = false
 
-[node name="ContinuePrompt" type="RichTextLabel" parent="."]
+[node name="Page1" type="Control" parent="TabContainer"]
 visible = false
-offset_left = 464.0
-offset_top = 288.0
-offset_right = 624.0
-offset_bottom = 320.0
-theme = ExtResource("1_ma4oc")
-bbcode_enabled = true
-text = "Press [stance] key to continue"
+layout_mode = 2
+metadata/_tab_index = 0
 
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-autostart = true
-
-[node name="Page1" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Sprite2D" type="Sprite2D" parent="Page1"]
+[node name="Sprite2D" type="Sprite2D" parent="TabContainer/Page1"]
 position = Vector2(128, 128)
 texture = ExtResource("2_ommnr")
 hframes = 8
 
-[node name="Cirle" type="Sprite2D" parent="Page1"]
+[node name="Cirle" type="Sprite2D" parent="TabContainer/Page1"]
 position = Vector2(128, 128)
 scale = Vector2(5.25, 5.25)
 texture = ExtResource("3_mt66d")
 
-[node name="StealthExample" type="Sprite2D" parent="Page1"]
+[node name="StealthExample" type="Sprite2D" parent="TabContainer/Page1"]
 position = Vector2(150, 129)
 scale = Vector2(0.518692, 0.518692)
 texture = ExtResource("4_ccby3")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Page1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Page1"]
 layout_mode = 0
 offset_left = 277.0
 offset_top = 20.0
@@ -90,7 +87,7 @@ text = "Certain actions make noise, drawing attention of the enemies. Distance o
 
 Kalin will make sound while performing most acts, but you can walk crouched to move silently."
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Page1"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="TabContainer/Page1"]
 layout_mode = 0
 offset_left = 280.0
 offset_top = 133.0
@@ -102,15 +99,13 @@ text = "Any noise will make enemies [color=red]aware[/color]. [color=red]Aware[/
 
 [color=red]Aware[/color] enemies won't detect Kalin while she's hiding in cavities. "
 
-[node name="Page2" type="Control" parent="."]
+[node name="Page2" type="Control" parent="TabContainer"]
 visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2
 theme = ExtResource("1_ma4oc")
+metadata/_tab_index = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Page2"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="TabContainer/Page2"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 88.0
@@ -119,18 +114,18 @@ offset_bottom = 135.0
 bbcode_enabled = true
 text = "Kalin is [color=red]invisible[/color] in darkness, but goblins can still smell her. Use [color=cyan]perfume[/color] or clean her in checkpoint to get rid of the bodily odor."
 
-[node name="Sprite2D" type="Sprite2D" parent="Page2"]
+[node name="Sprite2D" type="Sprite2D" parent="TabContainer/Page2"]
 position = Vector2(104, 192)
 texture = ExtResource("6_ccby3")
 hframes = 6
 
-[node name="Sprite2D2" type="Sprite2D" parent="Page2"]
+[node name="Sprite2D2" type="Sprite2D" parent="TabContainer/Page2"]
 material = SubResource("ShaderMaterial_m1uw2")
 position = Vector2(168, 192)
 texture = ExtResource("6_ccby3")
 hframes = 6
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Page2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Page2"]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 240.0
@@ -139,24 +134,101 @@ offset_bottom = 281.0
 bbcode_enabled = true
 text = "While [color=red]invisible[/color], Kalin will look darker and screen will also have a dark overlay around the edges. "
 
-[node name="Sprite2D4" type="Sprite2D" parent="Page2"]
+[node name="Sprite2D4" type="Sprite2D" parent="TabContainer/Page2"]
 position = Vector2(472, 107)
 texture = ExtResource("8_m1uw2")
 
-[node name="Sprite2D3" type="Sprite2D" parent="Page2"]
+[node name="Sprite2D3" type="Sprite2D" parent="TabContainer/Page2"]
 material = SubResource("ShaderMaterial_5s5sl")
 position = Vector2(480, 120)
 texture = ExtResource("9_5w06g")
 hframes = 15
 frame = 14
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="Page2"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="TabContainer/Page2"]
 layout_mode = 0
 offset_left = 328.0
 offset_top = 155.0
 offset_right = 618.0
 offset_bottom = 240.0
 bbcode_enabled = true
-text = "Kalin can hide inside the cavities in the wall to become [color=red]undetectable[/color]. Goblins [color=red]won't smell[/color] Kalin's body odor while she's undetectable.
+text = "Kalin can hide inside the cavities in the wall to become [color=red]undetectable[/color]. Goblins [color=red]won't smell[/color] Kalin's body odor while she's [color=red]undetectable[/color].
 
 You can use these cavities to avoid enemy patrols."
+
+[node name="Page3" type="Control" parent="TabContainer"]
+layout_mode = 2
+theme = ExtResource("1_ma4oc")
+metadata/_tab_index = 2
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="TabContainer/Page3"]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 131.0
+offset_right = 454.0
+offset_bottom = 216.0
+bbcode_enabled = true
+text = "Noise indicator is toggled on. You can toggle it off from options or change it's color."
+
+[node name="ContinuePrompt" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 464.0
+offset_top = 288.0
+offset_right = 624.0
+offset_bottom = 320.0
+theme = ExtResource("1_ma4oc")
+bbcode_enabled = true
+text = "Press [stance] key to continue"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Left" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 323.0
+offset_right = 302.0
+offset_bottom = 337.0
+theme = ExtResource("10_nh8aq")
+icon = ExtResource("11_06lct")
+script = ExtResource("12_06lct")
+
+[node name="Right" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 326.0
+offset_top = 323.0
+offset_right = 342.0
+offset_bottom = 337.0
+theme = ExtResource("10_nh8aq")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6a3fo")
+icon = ExtResource("12_2qk3m")
+script = ExtResource("12_06lct")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 322.0
+offset_right = 321.0
+offset_bottom = 336.0
+theme = ExtResource("1_ma4oc")
+text = "1/2"
+
+[node name="Close" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 31.0
+offset_right = 606.0
+offset_bottom = 53.6875
+theme = ExtResource("10_nh8aq")
+icon = ExtResource("14_2qk3m")
+expand_icon = true
+script = ExtResource("12_06lct")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
+[connection signal="pressed" from="Control/Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Control/Right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="Control/Close" to="." method="_on_button_pressed"]

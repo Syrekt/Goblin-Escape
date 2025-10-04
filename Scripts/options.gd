@@ -7,23 +7,34 @@ var borderless := false
 var pixel_perfect := false
 var window_size := Vector2(1280, 720)
 var window_pos := Vector2(0, 0)
+var window_screen := 0
 
+func _set_window_position() -> void:
+	DisplayServer.window_set_position(window_pos)
 
 func _ready() -> void:
 	#region Setup display
-	var screen_size : Vector2 = DisplayServer.screen_get_size()
-	DisplayServer.window_set_size(window_size)
 	#Load display
-	if load_options() != OK:
-		window_pos = (screen_size - window_size)/2
-		window_pos.x += DisplayServer.screen_get_size().x;
-	get_window().set_content_scale_aspect(Window.CONTENT_SCALE_ASPECT_KEEP if pixel_perfect else Window.CONTENT_SCALE_ASPECT_EXPAND)
-	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true if borderless else false)
-	if fullscreen:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN if fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
+	var options_loaded = load_options()
+	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, borderless)
+	DisplayServer.window_set_size(window_size)
+	DisplayServer.window_set_current_screen(window_screen)
+	DisplayServer.window_set_position(window_pos)
+
+
+	if pixel_perfect:
+		get_window().set_content_scale_aspect(Window.CONTENT_SCALE_ASPECT_KEEP)
 	else:
-		DisplayServer.window_set_position(window_pos)
+		get_window().set_content_scale_aspect(Window.CONTENT_SCALE_ASPECT_EXPAND)
+	if fullscreen:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
+	if options_loaded != OK:
+		notification(NOTIFICATION_WM_SIZE_CHANGED)
 	#endregion
+
 
 func save_options() -> void:
 	var config = ConfigFile.new()
@@ -31,6 +42,8 @@ func save_options() -> void:
 	config.set_value("window", "borderless", borderless)
 	config.set_value("window", "pixel_perfect", pixel_perfect)
 	config.set_value("window", "window_pos", DisplayServer.window_get_position())
+	config.set_value("window", "window_size", DisplayServer.window_get_size())
+	config.set_value("window", "window_screen", DisplayServer.window_get_current_screen())
 	config.save(config_path)
 func load_options() -> int:
 	var config = ConfigFile.new()
@@ -40,13 +53,16 @@ func load_options() -> int:
 		borderless 		= config.get_value("window", "borderless", borderless)
 		pixel_perfect	= config.get_value("window", "pixel_perfect", pixel_perfect)
 		window_pos		= config.get_value("window", "window_pos", window_pos)
-		if window_pos == Vector2(0, 0):
-			var screen_size : Vector2 = DisplayServer.screen_get_size()
-			window_pos = (screen_size - window_size)/2
-			window_pos.x += DisplayServer.screen_get_size().x;
+		window_size		= config.get_value("window", "window_size", window_size)
+		window_screen   = config.get_value("window", "window_screen", window_screen)
+		print("window_pos: "+str(window_pos))
+		print("window_size: "+str(window_size))
+		print("window_screen: "+str(window_screen))
 	return err
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		var pos = DisplayServer.window_get_position()
+		print("save option")
+		save_options()
+	if what == NOTIFICATION_WM_POSITION_CHANGED:
 		save_options()

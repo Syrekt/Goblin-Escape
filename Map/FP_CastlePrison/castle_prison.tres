@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=106 format=3 uid="uid://1quahlg1y22o"]
+[gd_resource type="TileSet" load_steps=107 format=3 uid="uid://1quahlg1y22o"]
 
 [ext_resource type="Texture2D" uid="uid://bqtpx8ja2r3ni" path="res://Map/FP_CastlePrison/background_obj.png" id="1_leifh"]
 [ext_resource type="Texture2D" uid="uid://d46bcae481s6" path="res://Map/FP_CastlePrison/mainlevbuildB.png" id="2_qy7eu"]
@@ -84,6 +84,9 @@ tile_data = PackedInt32Array(0, 2293762, 16, 65536, 2293762, 17, 1, 2359298, 16,
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_khlmt"]
 tile_data = PackedInt32Array(0, 2490370, 0, 65536, 2490370, 1, 131072, 2490370, 2, 1, 2555906, 0, 65537, 2555906, 1, 131073, 2555906, 2)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_hwx72"]
+tile_data = PackedInt32Array(0, 589826, 0, 65536, 589826, 1, 1, 655362, 0, 65537, 655362, 1)
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_jpv3x"]
 tile_data = PackedInt32Array(0, 1245186, 30, 65536, 1245186, 31, 131072, 1245186, 32, 1, 1769474, 30, 65537, 1769474, 31, 131073, 1769474, 32, 2, 1835010, 30, 65538, 1835010, 31, 131074, 1835010, 32)
@@ -3875,6 +3878,10 @@ texture = ExtResource("3_usbtt")
 39:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 0.359717, -8, 0.359717, 8, -8, 8)
 39:2/0 = 0
 39:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 0.359717, -8, 0.359717, 8, -8, 8)
+9:0/0 = 0
+10:0/0 = 0
+9:1/0 = 0
+10:1/0 = 0
 
 [resource]
 occlusion_layer_0/light_mask = 1
@@ -3920,3 +3927,4 @@ pattern_29 = SubResource("TileMapPattern_aachr")
 pattern_30 = SubResource("TileMapPattern_iki0v")
 pattern_31 = SubResource("TileMapPattern_inseq")
 pattern_32 = SubResource("TileMapPattern_khlmt")
+pattern_33 = SubResource("TileMapPattern_hwx72")

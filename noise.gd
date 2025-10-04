@@ -4,18 +4,21 @@ var amount_cur := 0.0
 var amount_max : float
 var is_ready := false
 var source : CharacterBody2D
-var alpha := 0.2
 var lifetime := 1.0
 var tween_method = Tween.EASE_OUT
+var color : Color
+
 
 @onready var collider = $Area2D
 @onready var shape = $Area2D/Shape
 
 func _ready() -> void:
+	color = Ge.noise_color
+
 	var tween_scale = create_tween().bind_node(self)
 	tween_scale.tween_property(shape, "scale", Vector2(amount_max, amount_max), lifetime).set_ease(tween_method)
 	var tween_alpha = create_tween().bind_node(self)
-	tween_alpha.tween_property(self, "alpha", 0, lifetime).set_ease(tween_method)
+	tween_alpha.tween_property(self, "color:a", 0, lifetime).set_ease(tween_method)
 	tween_alpha.tween_callback(queue_free)
 
 func _process(delta: float) -> void:
@@ -39,4 +42,4 @@ func _process(delta: float) -> void:
 
 func _draw() -> void:
 	if !Ge.show_noise: return
-	draw_circle(Vector2.ZERO, 10*shape.scale.x, Color(1, 1, 1, alpha), false)
+	draw_circle(Vector2.ZERO, 10*shape.scale.x, color, false)
