@@ -20,7 +20,7 @@ var save_slot := "save1"
 
 var BALLOON = preload("res://Objects/balloon.tscn")
 
-var show_noise	:= true
+var noise_enabled	:= true
 var noise_color : Color = Color(1, 1, 1, 0.2)
 
 signal show_combat_tutorial

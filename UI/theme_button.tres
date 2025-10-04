@@ -1,9 +1,12 @@
-[gd_resource type="Theme" load_steps=15 format=3 uid="uid://crosqd2uoimhi"]
+[gd_resource type="Theme" load_steps=24 format=3 uid="uid://crosqd2uoimhi"]
 
 [ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Others/Ohrenstead.ttf" id="1_kgf2r"]
 [ext_resource type="Texture2D" uid="uid://bjowu5bqsapub" path="res://UI/button_hover.png" id="2_hv2ae"]
 [ext_resource type="Texture2D" uid="uid://bpge6nsa5vqiq" path="res://UI/button_normal.png" id="3_sukla"]
 [ext_resource type="Texture2D" uid="uid://cxdtwv3bf6wmu" path="res://UI/button_pressed.png" id="4_86jsb"]
+[ext_resource type="Texture2D" uid="uid://fyevcw0t8yc" path="res://UI/panel_bg.png" id="5_7biuq"]
+[ext_resource type="Texture2D" uid="uid://br5edqpdo5eeq" path="res://UI/button_disabled.png" id="6_58tpi"]
+[ext_resource type="Texture2D" uid="uid://c5p3qrwcq3s36" path="res://UI/button_selected.png" id="7_ultn6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b30vn"]
 
@@ -48,6 +51,37 @@ texture = ExtResource("3_sukla")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wu7ve"]
 texture = ExtResource("4_86jsb")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3sudc"]
+texture = ExtResource("5_7biuq")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1cmyi"]
+texture = ExtResource("6_58tpi")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5v6gi"]
+texture = ExtResource("4_86jsb")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i1f4t"]
+texture = ExtResource("2_hv2ae")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h5g0m"]
+texture = ExtResource("7_ultn6")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2x3wo"]
+texture = ExtResource("3_sukla")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+
 [resource]
 Button/fonts/font = ExtResource("1_kgf2r")
 Button/styles/disabled = SubResource("StyleBoxEmpty_b30vn")
@@ -66,3 +100,9 @@ OptionButton/fonts/font = ExtResource("1_kgf2r")
 RichTextLabel/fonts/normal_font = ExtResource("1_kgf2r")
 TabBar/fonts/font = ExtResource("1_kgf2r")
 TabContainer/fonts/font = ExtResource("1_kgf2r")
+TabContainer/styles/panel = SubResource("StyleBoxTexture_3sudc")
+TabContainer/styles/tab_disabled = SubResource("StyleBoxTexture_1cmyi")
+TabContainer/styles/tab_focus = SubResource("StyleBoxTexture_5v6gi")
+TabContainer/styles/tab_hovered = SubResource("StyleBoxTexture_i1f4t")
+TabContainer/styles/tab_selected = SubResource("StyleBoxTexture_h5g0m")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxTexture_2x3wo")

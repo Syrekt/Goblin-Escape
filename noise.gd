@@ -41,5 +41,5 @@ func _process(delta: float) -> void:
 
 
 func _draw() -> void:
-	if !Ge.show_noise: return
+	if !Ge.noise_enabled: return
 	draw_circle(Vector2.ZERO, 10*shape.scale.x, color, false)

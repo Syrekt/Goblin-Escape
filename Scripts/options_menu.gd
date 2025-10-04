@@ -2,7 +2,21 @@ extends TabContainer
 
 
 @onready var resolution : OptionButton = find_child("Resolution")
-@onready var noise_color : ColorPickerButton = find_child("NoiseColor")
+
+@onready var noise_color_r : HSlider = find_child("NoiseColorRedSlider")
+@onready var noise_color_g : HSlider = find_child("NoiseColorGreenSlider")
+@onready var noise_color_b : HSlider = find_child("NoiseColorBlueSlider")
+@onready var noise_color_a : HSlider = find_child("NoiseColorAlphaSlider")
+
+@onready var noise_toggle : CheckButton = find_child("NoiseToggleCheckButton")
+
+@onready var slider_red_label : Label = find_child("Red").find_child("Label")
+@onready var slider_green_label : Label = find_child("Green").find_child("Label")
+@onready var slider_blue_label : Label = find_child("Blue").find_child("Label")
+@onready var slider_alpha_label : Label = find_child("Alpha").find_child("Label")
+
+@onready var noise_color_rect : ColorRect = find_child("NoiseColorRect")
+
 
 
 func _ready() -> void:
@@ -16,10 +30,22 @@ func _ready() -> void:
 		Vector2(1920, 1080):
 			resolution.selected = 2
 
-	noise_color.color = Ge.noise_color
+	noise_color_r.value = Ge.noise_color.r * 255.0
+	noise_color_g.value = Ge.noise_color.g * 255.0
+	noise_color_b.value = Ge.noise_color.b * 255.0
+	noise_color_a.value = Ge.noise_color.a * 255.0
+
+	noise_toggle.button_pressed = Ge.noise_enabled
 
 func _process(delta: float) -> void:
 	resolution.disabled = Options.fullscreen
+
+	noise_color_rect.color = Color(noise_color_r.value/255.0, noise_color_g.value/255.0, noise_color_b.value/255.0, noise_color_a.value/255.0)
+
+	slider_red_label.text	= "Red: " + str(int(noise_color_r.value))
+	slider_green_label.text = "Green: " + str(int(noise_color_g.value))
+	slider_blue_label.text	= "Blue: " + str(int(noise_color_b.value))
+	slider_alpha_label.text	= "Alpha: " + str(int(noise_color_a.value))
 
 func _exit_tree() -> void:
 	get_tree().paused = false
@@ -63,6 +89,10 @@ func _on_noise_color_color_changed(color: Color) -> void:
 
 func _on_reset_color_pressed() -> void:
 	Ge.noise_color = Color(1, 1, 1, 0.2)
+	noise_color_r.value = Ge.noise_color.r * 255.0
+	noise_color_g.value = Ge.noise_color.g * 255.0
+	noise_color_b.value = Ge.noise_color.b * 255.0
+	noise_color_a.value = Ge.noise_color.a * 255.0
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_SIZE_CHANGED:
@@ -76,3 +106,27 @@ func _notification(what: int) -> void:
 
 func _on_center_window_pressed() -> void:
 	notification(NOTIFICATION_WM_SIZE_CHANGED)
+
+
+func _on_noise_color_red_slider_drag_ended(value_changed: bool) -> void:
+	print("noise_color_r.value: "+str(noise_color_r.value));
+	Ge.noise_color.r = noise_color_r.value / 255.0
+
+
+func _on_noise_color_green_slider_drag_ended(value_changed: bool) -> void:
+	print("noise_color_g.value: "+str(noise_color_g.value));
+	Ge.noise_color.g = noise_color_g.value / 255.0
+
+
+func _on_noise_color_blue_slider_drag_ended(value_changed: bool) -> void:
+	print("noise_color_b.value: "+str(noise_color_b.value));
+	Ge.noise_color.b = noise_color_b.value / 255.0
+
+
+func _on_noise_color_alpha_slider_drag_ended(value_changed: bool) -> void:
+	print("noise_color_a.value: "+str(noise_color_a.value));
+	Ge.noise_color.a = noise_color_a.value / 255.0
+
+
+func _on_check_button_toggled(toggled_on: bool) -> void:
+	Ge.noise_enabled = toggled_on
