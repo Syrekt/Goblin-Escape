@@ -303,10 +303,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			else:
 				state.finished.emit("idle")
 		"death":
-			if is_on_floor():
-				set_collision_layer_value(4, false)
-				set_collision_mask_value(1, false)
-				set_collision_mask_value(2, false)
+			pass
 		"grab":
 			if catched_player:
 				state.finished.emit(struggle_state)
@@ -418,12 +415,13 @@ func _spawn_collectable() -> void:
 		# Add exp point to the scene
 		var collectable : RigidBody2D = collectable_scene.instantiate()
 		collectable.type = collectable.Types.EXPERIENCE
+		collectable.amount = 10
 		add_child(collectable)
 
 		# Set speed and direction
 		var deg = randf_range(-135, -45)
 		var rad = deg_to_rad(deg)
-		var speed = 200.0 #randf_range(200.0, 300.0)
+		var speed = randf_range(100.0, 300.0)
 		collectable.linear_velocity = Vector2.from_angle(rad) * speed
 func _on_chase_detector_body_entered(body:Node2D) -> void:
 	if debug: print("player body entered in chase detector")

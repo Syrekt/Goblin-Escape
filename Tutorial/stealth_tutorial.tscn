@@ -168,7 +168,7 @@ offset_top = 131.0
 offset_right = 454.0
 offset_bottom = 216.0
 bbcode_enabled = true
-text = "Noise indicator is toggled on. You can toggle it off from options or change it's color."
+text = "Noise indicator is now toggled on. You can toggle it off from options or change it's color."
 
 [node name="ContinuePrompt" type="RichTextLabel" parent="."]
 visible = false

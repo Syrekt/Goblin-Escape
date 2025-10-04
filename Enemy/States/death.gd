@@ -1,6 +1,9 @@
 extends EnemyState
 
 func enter(previous_state_path: String, data := {}) -> void:
+	enemy.set_collision_layer_value(4, false)
+	enemy.set_collision_mask_value(1, false)
+	enemy.set_collision_mask_value(2, false)
 	enemy.call_deferred("update_animation", "death")
 	enemy.states_locked = true
 	enemy.velocity.x = 0

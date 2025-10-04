@@ -20,8 +20,8 @@ var save_slot := "save1"
 
 var BALLOON = preload("res://Objects/balloon.tscn")
 
-var noise_enabled	:= true
-var noise_color : Color = Color(1, 1, 1, 0.2)
+var noise_enabled	:= false
+var noise_color : Color = Color(1, 1, 1, 0.05)
 
 signal show_combat_tutorial
 signal show_stealth_tutorial
@@ -314,7 +314,8 @@ func set_camera_focus() -> void:
 	var pcam : PhantomCamera2D = player.find_child("PhantomCamera2D")
 	pcam.follow_mode = pcam.FollowMode.GROUP
 	var targets : Array[Node2D] = [player, camera_focus]
-	pcam.append_follow_targets_array(targets)
+	#pcam.append_follow_targets_array(targets)
+	pcam.set_follow_targets(targets)
 	await get_tree().create_timer(0.5).timeout
 func reset_camera_focus() -> void:
 	var pcam : PhantomCamera2D = player.find_child("PhantomCamera2D")

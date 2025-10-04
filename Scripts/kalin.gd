@@ -718,17 +718,16 @@ func _process(delta: float) -> void:
 		elif pcam.follow_mode == pcam.FollowMode.GROUP:
 			pcam.follow_mode = pcam.FollowMode.SIMPLE
 			pcam.set_follow_target(self)
-			pcam.erase_follow_targets(combat_target)
 			if pcam.limit_target:
 				pcam.draw_limits = true
 	#endregion
 	if Input.is_action_pressed("restart"):
 		get_tree().reload_current_scene()
 	#region Open menu & Inventory
-	if Input.is_action_just_pressed("ui_cancel"):
+	if !controls_disabled && Input.is_action_just_pressed("ui_cancel"):
 		if !open_menu:
 			open_menu = ingame_menu.instantiate()
-			add_child(open_menu)
+			get_tree().current_scene.add_child(open_menu)
 	if Input.is_action_just_pressed("inventory"):
 		toggle_inventory()
 	if Input.is_action_just_pressed("character"):

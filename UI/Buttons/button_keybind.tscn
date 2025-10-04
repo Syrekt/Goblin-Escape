@@ -9,23 +9,20 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_6efsq")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="Label" type="Label" parent="HSplitContainer"]
 custom_minimum_size = Vector2(91.26, 0)
 layout_mode = 2
 text = "Text"
 vertical_alignment = 1
 
-[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="HBoxContainer"]
+[node name="Button" type="Button" parent="HSplitContainer"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 toggle_mode = true
 
-[connection signal="toggled" from="HBoxContainer/Button" to="." method="_on_button_toggled"]
+[connection signal="toggled" from="HSplitContainer/Button" to="." method="_on_button_toggled"]

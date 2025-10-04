@@ -60,6 +60,7 @@ do Ge.set_camera_focus()
 Kalin: I can used the darkness to my advantage and sneak into that spot while he's looking away.
 do Ge.reset_camera_focus()
 do Ge.show_stealth_tutorial.emit()
+do Ge.noise_enabled = true
 => END
 
 ~ first_steps

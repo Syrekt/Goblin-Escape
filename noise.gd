@@ -21,6 +21,8 @@ func _ready() -> void:
 	tween_alpha.tween_property(self, "color:a", 0, lifetime).set_ease(tween_method)
 	tween_alpha.tween_callback(queue_free)
 
+	z_index = 1
+
 func _process(delta: float) -> void:
 	if !is_ready:
 		await get_tree().process_frame
