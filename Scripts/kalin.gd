@@ -4,7 +4,7 @@ class_name Player extends CharacterBody2D
 @export var run_speed			:= 100.0 * 60.0
 @export var walk_speed			:= 50.0 * 60.0
 @export var stance_walk_speed	:= 30.0 * 60.0
-@export var crouch_speed		:= 50.0 * 60.0
+@export var crouch_speed		:= 45.0 * 60.0
 @export var push_pull_speed 	:= 25.0 * 60.0
 @export var slide_speed			:= 5.0 * 60.0
 @export var slide_dec			:= 7.0
@@ -253,7 +253,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 			if _source:
 				_source.dealth_finishing_blow = true
 			Ge.play_audio_from_string_array(global_position, -2, "res://SFX/Kalin/Hurt")
-			state_node.state.finished.emit("death")
+			state_node.state.finished.emit("death", {"source" = _source})
 			return
 	#Play animation
 	if play_hurt_animation:
@@ -633,7 +633,7 @@ func _physics_process(delta: float) -> void:
 			move_speed = 0
 			velocity = Vector2.ZERO
 	var being_careful = state_name == "stance_walk" || state_name == "crouch_walk"
-	$ThreatCollider.monitoring = abs(move_speed) > 0 && !being_careful
+	$ThreatCollider.monitoring = (velocity.x != 0 || velocity.y > 0) && !being_careful
 
 
 	if health.value <= 0 || power_crush: cp.pushback_reset()

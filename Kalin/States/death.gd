@@ -10,13 +10,18 @@ extends PlayerState
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
 	player.velocity.x = 0
+	var source = data.get("source")
 
-	for buff in player.buff_container.get_children():
-		if buff.effect == "death's door":
-			player.dead = true
-			player.unconscious = false
-			buff.queue_free()
-			break
+	if !source:
+		player.dead = true
+		player.unconscious = false
+	else:
+		for buff in player.buff_container.get_children():
+			if buff.effect == "death's door":
+				player.dead = true
+				player.unconscious = false
+				buff.queue_free()
+				break
 
 	if player.dead:
 		death_timer.start()

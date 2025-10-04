@@ -20,7 +20,6 @@ func update(delta):
 		elif player.can_quick_climb():
 			var collider = player.ray_auto_climb.get_collider()
 			if !player.is_collider_one_way(collider):
-				print("collider: "+str(collider))
 				player.quick_climb()
 
 	if player.velocity.y >= 0 && player.is_on_floor():
