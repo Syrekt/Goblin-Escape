@@ -303,7 +303,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			else:
 				state.finished.emit("idle")
 		"death":
-			pass
+			set_collision_mask_value(1, false)
 		"grab":
 			if catched_player:
 				state.finished.emit(struggle_state)

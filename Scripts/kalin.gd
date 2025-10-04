@@ -13,6 +13,7 @@ class_name Player extends CharacterBody2D
 @export var def_acc				:= 10.0
 @export var run_stop_dec		:= 3.0
 @export var bash_stop_dec		:= 4.0
+@export var jump_move_speed		:= 700.0
 
 @export var snap_offset			:= Vector2(-5, -13)
 @export var facing_locked		:= false
@@ -595,6 +596,8 @@ func _physics_process(delta: float) -> void:
 			move_speed = stance_walk_speed * dir_x
 		"run":
 			move_speed = run_speed * dir_x
+		#"rise", "fall":
+		#	move_speed = stance_walk_speed * dir_x
 		"push_idle":
 			move_speed = 0
 		"push", "pull":
@@ -629,7 +632,8 @@ func _physics_process(delta: float) -> void:
 		"stance_light", "stance_heavy", "stance_defensive":
 			move_speed = 0
 			velocity = Vector2.ZERO
-	$ThreatCollider.monitoring = abs(move_speed) > stance_walk_speed
+	var being_careful = state_name == "stance_walk" || state_name == "crouch_walk"
+	$ThreatCollider.monitoring = abs(move_speed) > 0 && !being_careful
 
 
 	if health.value <= 0 || power_crush: cp.pushback_reset()
@@ -766,7 +770,7 @@ func _on_leave_shadow() -> void:
 	create_tween().bind_node(self).tween_property(%Sprite2D.material, "shader_parameter/tint_color", current_tint, 0.2)
 	create_tween().bind_node(self).tween_property(vignette.material, "shader_parameter/alpha", 0.0, 0.2)
 func _on_threat_collider_body_entered(body:Node2D) -> void:
-	take_damage(1)
+	take_damage(10)
 	velocity.x = 0
 	move_speed = 0
 	think(["I should move carefully.", "I should move slow."].pick_random())

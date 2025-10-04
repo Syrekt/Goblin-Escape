@@ -8,6 +8,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 		player.call_deferred("update_animation", name)
 
 func update(delta):
+	player.velocity.x += player.get_movement_dir() * player.jump_move_speed * delta
 	if player.can_grab_corner():
 		if player.ray_corner_grab_check.is_colliding():
 			var collider = player.ray_corner_grab_check.get_collider()
