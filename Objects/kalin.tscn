@@ -1,4 +1,4 @@
-[gd_scene load_steps=333 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=334 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -4685,10 +4685,14 @@ radius = 105.304
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ws413"]
 size = Vector2(104, 41)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1k6j"]
+size = Vector2(14, 8)
+
 [node name="Kalin" type="CharacterBody2D" groups=["Persistent"]]
 z_index = 2
 collision_layer = 2
 collision_mask = 9
+floor_snap_length = 12.0
 script = ExtResource("1_tpqnq")
 slide_speed = 200.0
 snap_offset = Vector2(-17, 3)
@@ -5492,6 +5496,21 @@ script = ExtResource("142_u8fl4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableCollider"]
 position = Vector2(0, 10.5)
 shape = SubResource("RectangleShape2D_ws413")
+
+[node name="StairCheck" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, 36)
+collision_layer = 0
+collision_mask = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StairCheck"]
+shape = SubResource("RectangleShape2D_n1k6j")
+
+[node name="RayUpstairsCheck" type="RayCast2D" parent="."]
+visible = false
+position = Vector2(0, 23)
+target_position = Vector2(43, 0)
+collision_mask = 2048
 
 [connection signal="tween_completed" from="PhantomCamera2D" to="." method="_on_phantom_camera_2d_tween_completed"]
 [connection signal="pressed" from="UI/CharacterPanel/MarginContainer/VBoxContainer/Close" to="UI/CharacterPanel" method="_on_close_pressed"]

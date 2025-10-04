@@ -551,11 +551,21 @@ func _physics_process(delta: float) -> void:
 	#if get_floor_angle() == 0.0:
 	#Ignore stairs if we are not on a slope or 'up' key is not pressed
 	#This doesn't cause any issues on downstairs probably becase it gets an angle at the end of a platform
+
+
+	if !$RayUpstairsCheck.is_colliding() && $StairCheck.has_overlapping_bodies():
+		# If ray isn't colliding with upstairs
+		# And StairCheck is colliding with downstairs
+		set_collision_mask_value(12, true)
+	elif get_floor_angle() == 0.0:
+		# Disable upstairs collision if Kalin is on flat ground
+		set_collision_mask_value(12, false)
+
+	# Player activates upstair collision manually
 	if Input.is_action_pressed("up") || velocity.y > 0.0:
 		set_collision_mask_value(12, true)
-	else:
-		if get_floor_angle() == 0.0:
-			set_collision_mask_value(12, false)
+
+
 	if Input.is_action_pressed("up"):
 		set_collision_mask_value(14, true)
 	elif Input.is_action_pressed("down"):
@@ -621,6 +631,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, move_speed * delta, accelaration)
 		cp.pushback_reset()
+
 	#endregion
 	#region Y Movement
 	if !is_on_floor():
@@ -636,7 +647,6 @@ func _physics_process(delta: float) -> void:
 
 	#endregion
 	#region Finalize movement
-	#floor_max_angle = 1
 	move_and_slide()
 	if cp.pushback_timer > 0:
 			set_facing(-sign(cp.pushback_vector.x))
@@ -717,12 +727,7 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
-		#think("I smell [color=green]Goblin[/color] [color=red]COCK[/color] UwU")
 		take_damage(500)
-		#if randi_range(0, 1) == 1:
-		#	inventory.pickup_item(load("res://Inventory/water.tres"))
-		#else:
-		#	inventory.pickup_item(load("res://Inventory/health_potion.tres"))
 
 	check_interactable()
 #endregion
