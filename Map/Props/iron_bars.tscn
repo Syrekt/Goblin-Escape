@@ -1,7 +1,7 @@
 [gd_scene load_steps=24 format=3 uid="uid://bnf3rd1nfdher"]
 
 [ext_resource type="Script" uid="uid://d1ppg7n1ukrb5" path="res://Scripts/gate.gd" id="1_1i6dx"]
-[ext_resource type="Resource" uid="uid://cgja8j6c7wx70" path="res://Inventory/key1.tres" id="2_1fvy0"]
+[ext_resource type="Resource" uid="uid://cgja8j6c7wx70" path="res://Inventory/Resources/key1.tres" id="2_1fvy0"]
 [ext_resource type="Texture2D" uid="uid://d46bcae481s6" path="res://Map/FP_CastlePrison/mainlevbuildB.png" id="3_jdph8"]
 [ext_resource type="AudioStream" uid="uid://b2ppvcuribru0" path="res://SFX/Rotate Stone 03.wav" id="6_hrldw"]
 [ext_resource type="Script" uid="uid://c1125my8d6cmi" path="res://Scripts/gate_interaction.gd" id="7_8iy4v"]

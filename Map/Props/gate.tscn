@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://cwfcttxnm8ov1"]
 
 [ext_resource type="Script" uid="uid://d1ppg7n1ukrb5" path="res://Scripts/gate.gd" id="1_egbxd"]
-[ext_resource type="Resource" uid="uid://cgja8j6c7wx70" path="res://Inventory/key1.tres" id="2_nmmnp"]
+[ext_resource type="Resource" uid="uid://cgja8j6c7wx70" path="res://Inventory/Resources/key1.tres" id="2_nmmnp"]
 [ext_resource type="Texture2D" uid="uid://cyvefowtscdo1" path="res://Map/Props/gate_behind.png" id="3_4ssys"]
 [ext_resource type="Texture2D" uid="uid://lgw6u1kh27mf" path="res://Map/Props/spr_gateopen_strip9.png" id="3_v7prn"]
 [ext_resource type="AudioStream" uid="uid://b2ppvcuribru0" path="res://SFX/Rotate Stone 03.wav" id="5_3qqfp"]

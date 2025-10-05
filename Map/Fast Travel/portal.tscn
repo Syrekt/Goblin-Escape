@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwmhdexiecm88"]
+
+[ext_resource type="Texture2D" uid="uid://ck1su20rnccrg" path="res://Map/Fast Travel/portal_active.png" id="1_87g4m"]
+[ext_resource type="Script" uid="uid://ds8ot5t8s8evr" path="res://Map/Fast Travel/portal.gd" id="1_art86"]
+[ext_resource type="Texture2D" uid="uid://bnfof7wdfl67g" path="res://Map/Fast Travel/portal_inert.png" id="2_art86"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rer87"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_87g4m")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_art86")
+}],
+"loop": true,
+"name": &"inert",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txi0j"]
+size = Vector2(94, 73)
+
+[node name="Portal" type="Area2D"]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("1_art86")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rer87")
+animation = &"inert"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 26.5)
+shape = SubResource("RectangleShape2D_txi0j")

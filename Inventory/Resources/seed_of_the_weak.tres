@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://k0yylj4qlstr"]
+
+[ext_resource type="Texture2D" uid="uid://dx6pj7qbjua5r" path="res://Inventory/Sprites/seed_of_the_weak.png" id="1_vwhlb"]
+[ext_resource type="Script" uid="uid://nrl1858h0shp" path="res://Inventory/inv_item.gd" id="2_15gjl"]
+
+[resource]
+script = ExtResource("2_15gjl")
+name = "Seed of the Weak"
+icon = ExtResource("1_vwhlb")
+amount = 1
+consumable = false
+description = "Collected seed of a weak soul."
+metadata/_custom_type_script = "uid://nrl1858h0shp"

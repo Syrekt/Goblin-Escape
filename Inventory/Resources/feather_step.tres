@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://b17im7w40vkfm"]
+
+[ext_resource type="Texture2D" uid="uid://b28nl6yaw76ct" path="res://Inventory/Sprites/ Potions-export8.png" id="1_j8s7j"]
+[ext_resource type="Script" uid="uid://nrl1858h0shp" path="res://Inventory/inv_item.gd" id="2_ml51o"]
+
+[resource]
+script = ExtResource("2_ml51o")
+name = "Feather Step"
+icon = ExtResource("1_j8s7j")
+amount = 1
+consumable = true
+description = "Reduces the [color=yellow]movement[/color] sounds you make."
+metadata/_custom_type_script = "uid://nrl1858h0shp"

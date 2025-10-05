@@ -274,7 +274,7 @@ func check_movable():
 		state_node.state.finished.emit("push_idle")
 
 func check_interactable() -> void:
-	if interaction_target:
+	if interaction_target && !in_combat_state:
 		interaction_target.update(self)
 func can_grab_corner(rising := false) -> bool:
 	var grab_prevent =  col_corner_grab_prevent.has_overlapping_bodies()
@@ -659,6 +659,7 @@ func _physics_process(delta: float) -> void:
 				velocity.y += gravity * delta
 	else:
 		last_ground_position = Vector2(global_position.x - facing*32, global_position.y)
+		ignore_corners = false
 
 	#endregion
 	#region Finalize movement
@@ -697,7 +698,6 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
-	interaction_prompt.supress = true
 
 	if just_pressed("quick save"):
 		Ge.save_game()
@@ -705,8 +705,13 @@ func _process(delta: float) -> void:
 		Ge.load_game()
 	var s = %Sprite2D
 	if debug: Debugger.printui(str(state_node.state.name))
+
+	# Movement and control checks change interaction_prompt.supress value
+	interaction_prompt.supress = true
 	controls_disabled = check_controls_disabled()
 	movement_disabled = check_movement_disabled()
+	if in_combat_state: interaction_prompt.supress = true
+
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
 	#region Camera combat position

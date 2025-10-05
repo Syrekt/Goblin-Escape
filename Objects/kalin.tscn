@@ -45,7 +45,7 @@
 [ext_resource type="Texture2D" uid="uid://bxgpgvblnjqhg" path="res://Kalin/Sprites/Kalin-Walk.png" id="22_vnsvi"]
 [ext_resource type="Script" uid="uid://bgnnyj7i10wbg" path="res://Kalin/States/walk.gd" id="28_1dko0"]
 [ext_resource type="Texture2D" uid="uid://bq334bamr3mgu" path="res://Kalin/Sprites/Kalin-Slide.png" id="29_qnnkd"]
-[ext_resource type="Resource" uid="uid://br6rhvsa0swrd" path="res://Inventory/player_inventory_filled.tres" id="29_towol"]
+[ext_resource type="Resource" uid="uid://br6rhvsa0swrd" path="res://Inventory/Resources/player_inventory_filled.tres" id="29_towol"]
 [ext_resource type="AudioStream" uid="uid://ds7af8tnix0pc" path="res://Sex/Sex Female Moan Soft.wav" id="31_cfvac"]
 [ext_resource type="Texture2D" uid="uid://bl5jujtf6kegu" path="res://UI/Inventory/Inventory panel1_with background.png" id="31_nhuj2"]
 [ext_resource type="PackedScene" uid="uid://cd3svdt2crxap" path="res://Inventory/inv_button.tscn" id="32_fb5pj"]
@@ -4743,6 +4743,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UI" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("8_4oj65")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="UI"]

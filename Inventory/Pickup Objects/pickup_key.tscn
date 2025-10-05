@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3rt6deiln7x5"]
+
+[ext_resource type="Texture2D" uid="uid://b4beanfitbh48" path="res://Inventory/Keys/key items1.png" id="1_4lsbi"]
+[ext_resource type="Script" uid="uid://cliq1akrpj5ng" path="res://Scripts/item_pickup.gd" id="2_yt1iq"]
+[ext_resource type="Resource" uid="uid://cgja8j6c7wx70" path="res://Inventory/Resources/key1.tres" id="3_aqrbd"]
+
+[node name="PickupKey" type="Sprite2D"]
+texture = ExtResource("1_4lsbi")
+script = ExtResource("2_yt1iq")
+item = ExtResource("3_aqrbd")
