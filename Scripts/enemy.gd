@@ -408,7 +408,7 @@ func _on_health_depleted() -> void:
 	#state_node.state.call_deferred("emit_signal", "finished", "death")
 	state_node.state.finished.emit("death")
 
-	call_deferred("_spawn_collectable")
+	#call_deferred("_spawn_collectable")
 
 func _spawn_collectable() -> void:
 	for i in experience_drop:

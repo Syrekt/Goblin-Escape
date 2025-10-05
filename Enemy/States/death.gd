@@ -12,6 +12,9 @@ func enter(previous_state_path: String, data := {}) -> void:
 	for child in children:
 		if child is Area2D:
 			child.set_deferred("monitoring", false)
+	
+	enemy.player.experience.add(enemy.experience_drop)
+	Ge.play_audio_free(0, "res://SFX/sfx_experience_drop.wav")
 
 func exit() -> void:
 	var children = enemy.get_children()
