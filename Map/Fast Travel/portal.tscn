@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwmhdexiecm88"]
+[gd_scene load_steps=8 format=3 uid="uid://dwmhdexiecm88"]
 
 [ext_resource type="Texture2D" uid="uid://ck1su20rnccrg" path="res://Map/Fast Travel/portal_active.png" id="1_87g4m"]
 [ext_resource type="Script" uid="uid://ds8ot5t8s8evr" path="res://Map/Fast Travel/portal.gd" id="1_art86"]
 [ext_resource type="Texture2D" uid="uid://bnfof7wdfl67g" path="res://Map/Fast Travel/portal_inert.png" id="2_art86"]
+[ext_resource type="Texture2D" uid="uid://d2uhikpas8u7s" path="res://Others/light.png" id="4_rer87"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rer87"]
 animations = [{
@@ -26,6 +27,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_txi0j"]
 size = Vector2(94, 73)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_rer87"]
+radius = 96.0
+
 [node name="Portal" type="Area2D"]
 collision_layer = 64
 collision_mask = 0
@@ -39,3 +43,11 @@ animation = &"inert"
 visible = false
 position = Vector2(0, 26.5)
 shape = SubResource("RectangleShape2D_txi0j")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.45882353, 0.23921569, 1, 1)
+texture = ExtResource("4_rer87")
+
+[node name="LitArea" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_rer87")

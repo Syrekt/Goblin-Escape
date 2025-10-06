@@ -4722,7 +4722,6 @@ script = ExtResource("2_0bx81")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="Overlays" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="UIFocus" type="ColorRect" parent="Overlays"]
 anchors_preset = 15
