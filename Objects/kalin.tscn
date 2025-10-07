@@ -1,4 +1,4 @@
-[gd_scene load_steps=332 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=333 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://b8a7c6m81s28t" path="res://Kalin/Sprites/Kalin-Death.png" id="4_g6dya"]
 [ext_resource type="Texture2D" uid="uid://cxy7gxvy3yrma" path="res://Kalin/Sprites/Kalin-Climb.png" id="4_xyrfg"]
 [ext_resource type="Texture2D" uid="uid://bx4id7wgw6s38" path="res://Kalin/Sprites/Kalin-Heavy Attack.png" id="6_ju88f"]
+[ext_resource type="PackedScene" uid="uid://cicbke4iaj0r1" path="res://UI/map.tscn" id="6_y4shw"]
 [ext_resource type="Script" uid="uid://bh5b7s4u5leyi" path="res://Scripts/ui.gd" id="8_4oj65"]
 [ext_resource type="Script" uid="uid://dhtgp18026dx7" path="res://Scripts/hud.gd" id="8_cv3n5"]
 [ext_resource type="Texture2D" uid="uid://dl4uq2pkst8rp" path="res://Kalin/Sprites/Kalin-Light Attack.png" id="9_2a2iq"]
@@ -4686,7 +4687,7 @@ radius = 61.16576
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n1k6j"]
 size = Vector2(14, 8)
 
-[node name="Kalin" type="CharacterBody2D" groups=["Persistent"]]
+[node name="Kalin" type="CharacterBody2D" groups=["MapNode", "Persistent"]]
 z_index = 2
 collision_layer = 2
 collision_mask = 9
@@ -4720,6 +4721,9 @@ process_priority = 300
 process_physics_priority = 300
 script = ExtResource("2_0bx81")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="Map" parent="." instance=ExtResource("6_y4shw")]
+visible = false
 
 [node name="Overlays" type="CanvasLayer" parent="."]
 

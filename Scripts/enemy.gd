@@ -4,6 +4,7 @@ const RUN_SPEED = 300.0 * 60
 
 @export var save_list : Array[String]
 @export var debug := false
+@export var map_icon : String
 
 @export var experience_drop := 1
 

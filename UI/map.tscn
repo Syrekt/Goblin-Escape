@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=3 uid="uid://cicbke4iaj0r1"]
+
+[ext_resource type="Texture2D" uid="uid://fyevcw0t8yc" path="res://UI/panel_bg.png" id="1_rn5uk"]
+[ext_resource type="Script" uid="uid://bcij5po6cr6y" path="res://UI/map.gd" id="1_y34d6"]
+[ext_resource type="Texture2D" uid="uid://bgtnfmiahcm78" path="res://UI/pattern_blueprintPaper.png" id="2_io1km"]
+[ext_resource type="Script" uid="uid://d26mtl35vorw8" path="res://UI/sub_viewport.gd" id="3_osu28"]
+[ext_resource type="Texture2D" uid="uid://bnvph07xpf3y8" path="res://UI/Map Markers/map_marker_kalin.png" id="3_y34d6"]
+[ext_resource type="Texture2D" uid="uid://qh08oomof7hu" path="res://UI/Map Markers/map_marker_goblin.png" id="5_bwcis"]
+[ext_resource type="Texture2D" uid="uid://k1pfmj4yh317" path="res://UI/Map Markers/map_marker_portal.png" id="5_bx377"]
+
+[node name="Map" type="CanvasLayer" groups=["UIPanel"]]
+layer = 2
+
+[node name="MapContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 54.0
+offset_top = 23.0
+offset_right = -45.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y34d6")
+
+[node name="Frame" type="NinePatchRect" parent="MapContainer"]
+layout_mode = 2
+texture = ExtResource("1_rn5uk")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MapContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MapContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="MapContainer/MarginContainer/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+canvas_cull_mask = 4294967294
+size = Vector2i(541, 307)
+render_target_update_mode = 4
+script = ExtResource("3_osu28")
+
+[node name="Camera2D" type="Camera2D" parent="MapContainer/MarginContainer/SubViewportContainer/SubViewport"]
+zoom = Vector2(0.2, 0.2)
+
+[node name="Grid" type="TextureRect" parent="MapContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_io1km")
+stretch_mode = 1
+
+[node name="PlayerMarker" type="Sprite2D" parent="MapContainer/MarginContainer/Grid"]
+visible = false
+z_index = 2
+position = Vector2(320, 180)
+texture = ExtResource("3_y34d6")
+
+[node name="EnemyMarker" type="Sprite2D" parent="MapContainer/MarginContainer/Grid"]
+visible = false
+z_index = 1
+texture = ExtResource("5_bwcis")
+
+[node name="PortalMarker" type="Sprite2D" parent="MapContainer/MarginContainer/Grid"]
+visible = false
+texture = ExtResource("5_bx377")
+
+[connection signal="gui_input" from="MapContainer" to="MapContainer" method="_on_gui_input"]

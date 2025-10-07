@@ -83,6 +83,7 @@ var experience_required := 100
 @onready var cell_check : RayCast2D = $CellCheck
 @onready var interaction_prompt : AnimatedSprite2D = $InteractionPrompt
 @onready var buff_container : HBoxContainer = $UI/HUD/Stamina/BuffContainer
+@onready var map : CanvasLayer = $Map
 #endregion
 #region Combat
 const SLASH_DAMAGE	:= 15
@@ -150,6 +151,7 @@ var sex_participants : Array
 var light_source : Area2D
 var ray_light : RayCast2D
 var wait_for_camera := false
+var map_icon := "player"
 #endregion
 #region Save List
 #endregion
@@ -362,6 +364,9 @@ func toggle_inventory():
 func toggle_character_panel():
 	if controls_disabled: return
 	character_panel.visible = !character_panel.visible
+func toggle_map():
+	if controls_disabled: return
+	map.visible = !map.visible
 func check_controls_disabled() -> bool:
 	var ui_nodes = get_tree().get_nodes_in_group("FullscreenPanel")
 	var node_found := false
@@ -739,9 +744,8 @@ func _process(delta: float) -> void:
 			get_tree().current_scene.add_child(open_menu)
 	if Input.is_action_just_pressed("inventory"):
 		toggle_inventory()
-	if Input.is_action_just_pressed("character"):
-		# Disabled, opened from rest menu
-		pass
+	if Input.is_action_just_pressed("map"):
+		toggle_map()
 
 	#endregion
 	if Input.is_action_just_pressed("debug1"):

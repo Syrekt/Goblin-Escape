@@ -1019,11 +1019,12 @@ size = Vector2(20, 36)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rha5u"]
 size = Vector2(20, 32)
 
-[node name="Goblin" type="CharacterBody2D" node_paths=PackedStringArray("main_stance") groups=["Enemy", "Persistent"]]
+[node name="Goblin" type="CharacterBody2D" node_paths=PackedStringArray("main_stance") groups=["Enemy", "MapNode", "Persistent"]]
 z_index = 1
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("1_poooq")
+map_icon = "enemy"
 experience_drop = 100
 move_speed = 14000
 slash_damage = 15

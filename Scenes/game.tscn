@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://24ijy2g2jylp" path="res://Objects/hiding_spot.tscn" id="14_1phco"]
 [ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Enemy/GoblinWarrior/goblin_warrior.tscn" id="14_nnt18"]
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="15_nb51f"]
-[ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/light.tscn" id="16_cwurv"]
+[ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="16_cwurv"]
 [ext_resource type="PackedScene" uid="uid://cwfcttxnm8ov1" path="res://Map/Props/gate.tscn" id="16_ewbju"]
 [ext_resource type="PackedScene" uid="uid://dxriomae5diar" path="res://Objects/checkpoint.tscn" id="17_8m3t6"]
 [ext_resource type="PackedScene" uid="uid://hk23fmyof4sb" path="res://Objects/sword.tscn" id="17_85qyi"]
