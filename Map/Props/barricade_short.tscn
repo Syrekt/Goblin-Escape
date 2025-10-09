@@ -1,0 +1,93 @@
+[gd_scene load_steps=13 format=3 uid="uid://dl3r4ydh3ugt3"]
+
+[ext_resource type="Script" uid="uid://2psqd5pwfxyk" path="res://Scripts/map_object.gd" id="1_k0f8f"]
+[ext_resource type="Texture2D" uid="uid://dosq8yyo1ek67" path="res://Map/Props/spr_barricade1_short_strip5.png" id="2_k0f8f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5srt2"]
+size = Vector2(15, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmxnk"]
+atlas = ExtResource("2_k0f8f")
+region = Rect2(0, 0, 76, 103)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02jbp"]
+atlas = ExtResource("2_k0f8f")
+region = Rect2(76, 0, 76, 103)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_757ir"]
+atlas = ExtResource("2_k0f8f")
+region = Rect2(152, 0, 76, 103)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yw150"]
+atlas = ExtResource("2_k0f8f")
+region = Rect2(228, 0, 76, 103)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30ief"]
+atlas = ExtResource("2_k0f8f")
+region = Rect2(304, 0, 76, 103)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2stkb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmxnk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02jbp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02jbp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_757ir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yw150")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30ief")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_psc5i"]
+polygon = PackedVector2Array(-25, -4, -7, 3, -5, 3, -5, -3, -19, -10, -25, -10)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_37a8e"]
+polygon = PackedVector2Array(-19, -10, -6, 3, -6, 8, -11, 8, -25, -5, -25, -10)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kkmxf"]
+polygon = PackedVector2Array(-24, -26, -16, -26, -16, -27, -9, -27, -9, -28, -5, -28, -5, -34, -13, -34, -13, -33, -20, -33, -20, -32, -24, -32)
+
+[node name="Barricade" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_k0f8f")
+health = 30
+destructable = true
+collidable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-14, -10)
+shape = SubResource("RectangleShape2D_5srt2")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_2stkb")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, 10)
+
+[node name="DropMarker" type="Marker2D" parent="."]
+position = Vector2(0, 35)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_psc5i")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+position = Vector2(1, -14)
+occluder = SubResource("OccluderPolygon2D_37a8e")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_kkmxf")

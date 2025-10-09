@@ -507,7 +507,12 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			heal(1)
 		"stab", "slash", "bash", "block":
 			if !check_buffered_state():
-				state.finished.emit("stance_light")
+				if pressed("up"):
+					state.finished.emit("stance_heavy")
+				elif pressed("down"):
+					state.finished.emit("stance_defensive")
+				else:
+					state.finished.emit("stance_light")
 		"bash_no_sword":
 			state.finished.emit("idle")
 		"hurt", "break_free":

@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cicbke4iaj0r1"]
+[gd_scene load_steps=7 format=3 uid="uid://cicbke4iaj0r1"]
 
 [ext_resource type="Texture2D" uid="uid://fyevcw0t8yc" path="res://UI/panel_bg.png" id="1_rn5uk"]
 [ext_resource type="Script" uid="uid://bcij5po6cr6y" path="res://UI/map.gd" id="1_y34d6"]
-[ext_resource type="Texture2D" uid="uid://bgtnfmiahcm78" path="res://UI/pattern_blueprintPaper.png" id="2_io1km"]
 [ext_resource type="Script" uid="uid://d26mtl35vorw8" path="res://UI/sub_viewport.gd" id="3_osu28"]
 [ext_resource type="Texture2D" uid="uid://bnvph07xpf3y8" path="res://UI/Map Markers/map_marker_kalin.png" id="3_y34d6"]
 [ext_resource type="Texture2D" uid="uid://qh08oomof7hu" path="res://UI/Map Markers/map_marker_goblin.png" id="5_bwcis"]
@@ -56,25 +55,28 @@ script = ExtResource("3_osu28")
 [node name="Camera2D" type="Camera2D" parent="MapContainer/MarginContainer/SubViewportContainer/SubViewport"]
 zoom = Vector2(0.2, 0.2)
 
-[node name="Grid" type="TextureRect" parent="MapContainer/MarginContainer"]
+[node name="PlayerMarker" type="Sprite2D" parent="MapContainer/MarginContainer/SubViewportContainer/SubViewport"]
 visible = false
-layout_mode = 2
-texture = ExtResource("2_io1km")
-stretch_mode = 1
-
-[node name="PlayerMarker" type="Sprite2D" parent="MapContainer/MarginContainer/Grid"]
-visible = false
+visibility_layer = 3
 z_index = 2
-position = Vector2(320, 180)
+position = Vector2(374, 203)
 texture = ExtResource("3_y34d6")
 
-[node name="EnemyMarker" type="Sprite2D" parent="MapContainer/MarginContainer/Grid"]
+[node name="EnemyMarker" type="Sprite2D" parent="MapContainer/MarginContainer/SubViewportContainer/SubViewport"]
 visible = false
+visibility_layer = 3
 z_index = 1
+position = Vector2(54, 23)
 texture = ExtResource("5_bwcis")
 
-[node name="PortalMarker" type="Sprite2D" parent="MapContainer/MarginContainer/Grid"]
+[node name="PortalMarker" type="Sprite2D" parent="MapContainer/MarginContainer/SubViewportContainer/SubViewport"]
 visible = false
+visibility_layer = 3
+position = Vector2(54, 23)
 texture = ExtResource("5_bx377")
+
+[node name="Grid" type="Control" parent="MapContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
 
 [connection signal="gui_input" from="MapContainer" to="MapContainer" method="_on_gui_input"]

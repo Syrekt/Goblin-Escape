@@ -3,20 +3,19 @@
 class_name Map extends MarginContainer
 
 var player : Player
-@export var zoom = 1.5:
+@onready var camera			= $MarginContainer/SubViewportContainer/SubViewport/Camera2D
+@onready var zoom = camera.zoom.x:
 	set = set_zoom
-
 func set_zoom(value):
 	var old_zoom = zoom
-	zoom = clamp(value, 0.1, 0.5)
+	zoom = clamp(value, 0.1, 5)
 	if zoom != old_zoom:
 		camera.zoom = Vector2(zoom, zoom)
 
-@onready var camera			= $MarginContainer/SubViewportContainer/SubViewport/Camera2D
 @onready var grid			= $MarginContainer/Grid
-@onready var player_marker	= $MarginContainer/Grid/PlayerMarker
-@onready var enemy_marker	= $MarginContainer/Grid/EnemyMarker
-@onready var portal_marker	= $MarginContainer/Grid/PortalMarker
+@onready var player_marker	= $MarginContainer/SubViewportContainer/SubViewport/PlayerMarker
+@onready var enemy_marker	= $MarginContainer/SubViewportContainer/SubViewport/EnemyMarker
+@onready var portal_marker	= $MarginContainer/SubViewportContainer/SubViewport/PortalMarker
 
 @onready var icons = {
 	"player": player_marker,
@@ -24,7 +23,6 @@ func set_zoom(value):
 	"portal": portal_marker,
 }
 
-var grid_scale
 var markers = {}
 
 var dragging := false
@@ -33,15 +31,7 @@ var mouse_pos_start : Vector2
 
 func _ready() -> void:
 	player = Ge.player
-	# In _ready() we’ll center the player’s marker at the center of the grid. and calculate the scale factor. 
-	# (Note: you’ll need to connect the resized signal and do both of these things in the callback if you have 
-	# a dynamically sized UI).
-	await get_tree().process_frame
-	player_marker.position = grid.size / 2
-	grid_scale = grid.size / (get_viewport_rect().size * zoom)
 	
-	# We’ll also create markers for every game object (using the “minimap_objects” group) by duplicating 
-	# the matching marker node and tying the marker to the object via the markers dictionary: 
 	var map_nodes = get_tree().get_nodes_in_group("MapNode")
 	for node in map_nodes:
 		print("node: "+str(node))
@@ -53,32 +43,26 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if !player:
 		player = Ge.player
+		camera.global_position = player.global_position - get_viewport_rect().size / 2
 		return
 
-	# Next, we’ll find each object’s position relative to the player and use that to find the marker’s position 
-	# (remembering to offset by grid.size / 2 because the control’s origin is in the top left corner). 
+	var screen_rect = Rect2(
+		camera.get_screen_center_position() - camera.get_viewport_rect().size * 0.5 / camera.zoom,
+		camera.get_viewport_rect().size / camera.zoom
+	)
 	for node in markers:
-		var node_pos = (node.position - player.position) * grid_scale + grid.size / 2
-		# We can also decide what to do about markers that are “off-screen” - when they would be outside the
-		# grid’s rectangle. Choose one of the following options (do this also before using clamp()).
-		# The first option is to hide them:
-		if grid.get_rect().has_point(node_pos + grid.position):
+		markers[node].position = (node.global_position - screen_rect.position) * camera.zoom 
+		if node == player:
+			markers[node].position.x = clamp(markers[node].position.x, 0, screen_rect.size.x * camera.zoom.x)
+			markers[node].position.y = clamp(markers[node].position.y, 0, screen_rect.size.y * camera.zoom.y)
+		if screen_rect.has_point(node.global_position):
 			markers[node].show()
-		else:
+		elif node != player:
 			markers[node].hide()
 
-
-		# The problem with this is that markers can be placed outside the grid:
-		# To fix this, after calculating obj_pos, but before setting the marker’s position, 
-		# clamp it to the grid’s rectangle:
-		node_pos = node_pos.clamp(Vector2.ZERO, grid.size)
-
-		markers[node].position = node_pos
-
 	if dragging: drag()
-	Debugger.printui("camera.zoom: "+str(camera.zoom));
-	Debugger.printui("camera.position: "+str(camera.position));
 
+#region Drag
 func drag_start() -> void:
 	dragging = true
 	mouse_pos_start = get_viewport().get_mouse_position()
@@ -90,8 +74,7 @@ func drag_end() -> void:
 	dragging = false
 	camera.offset = Vector2(0, 0)
 	camera.global_position += camera_offset
-
-
+#endregion
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed:
@@ -99,7 +82,8 @@ func _on_gui_input(event: InputEvent) -> void:
 				zoom += 0.1
 			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				zoom -= 0.1
-			elif event.button_index == MOUSE_BUTTON_LEFT:
+			elif event.button_index == MOUSE_BUTTON_MIDDLE:
 				drag_start()
 		elif dragging:
-			drag_end()
+			if event.button_index == MOUSE_BUTTON_MIDDLE:
+				drag_end()
