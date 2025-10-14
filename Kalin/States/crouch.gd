@@ -12,13 +12,16 @@ func exit() -> void:
 	player.ray_light.position.y = 0
 
 func physics_update(delta: float) -> void:
+	var floor_angle = player.get_floor_angle()
 	if !player.is_on_floor():
 		finished.emit("fall")
 	elif !player.pressed("down") && player.can_stand_up():
 		finished.emit("idle")
 	elif !is_equal_approx(player.get_movement_dir(), 0.0):
 		finished.emit("crouch_walk")
+	elif player.pressed("attack") && floor_angle == 0:
+		finished.emit("slide")
 	elif player.just_pressed("jump") && player.is_on_one_way_collider:
 		player.global_position.y += 4
-	elif !player.is_on_one_way_collider && !player.col_corner_hang.has_overlapping_bodies():
+	elif floor_angle == 0 && !player.is_on_one_way_collider && !player.col_corner_hang.has_overlapping_bodies():
 		finished.emit("corner_hang")

@@ -277,6 +277,10 @@ func slow_mo(amount: float, time: float) -> void:
 	tween_slow_mo = create_tween().bind_node(self)
 	tween_slow_mo.tween_property(Engine, "time_scale", amount, 0.0)
 	tween_slow_mo.tween_property(Engine, "time_scale", 1, time)
+func hit_stop(time: float) -> void:
+	get_tree().paused = true
+	await get_tree().create_timer(time, true).timeout
+	get_tree().paused = false
 func kill_slow_mo() -> void:
 	Engine.time_scale = 1.0
 	if tween_slow_mo && tween_slow_mo.is_running():

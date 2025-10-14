@@ -19,8 +19,8 @@ func physics_update(delta: float) -> void:
 
 	if !player.pressed("run") || player.get_movement_dir() != player.facing || player.velocity.x == 0:
 		finished.emit("run_stop")
-	#elif player.pressed("down") && floor_angle == 0:
-	#	finished.emit("slide")
+	elif player.pressed("down") && floor_angle == 0:
+		finished.emit("slide")
 	elif !player.is_on_floor():
 		finished.emit("fall")
 	elif player.just_pressed("jump"):

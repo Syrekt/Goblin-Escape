@@ -57,7 +57,11 @@ enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://add
 
 folder_colors={
 "res://Inventory/": "orange",
+"res://Kalin/": "blue",
+"res://Map/": "green",
+"res://Objects/": "red",
 "res://SFX/": "red",
+"res://Scripts/": "pink",
 "res://Sex/": "purple",
 "res://UI/": "blue",
 "res://addons/": "gray"

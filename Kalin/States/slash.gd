@@ -22,7 +22,8 @@ func _on_attack_frame() -> void:
 		for defender in hitbox.get_overlapping_bodies():
 			print("defender: "+str(defender))
 			if defender is Enemy:
-				Ge.slow_mo(0, 0.05)
+				#Ge.slow_mo(0, 0.05)
+				Ge.hit_stop(0.1)
 				if !defender.chase_target:
 					damage_dealt *= 2
 				var defender_state = defender.state_node.state.name

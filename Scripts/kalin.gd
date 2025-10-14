@@ -1,3 +1,4 @@
+@icon("res://SVGIcons/man-svgrepo-com.svg")
 class_name Player extends CharacterBody2D
 
 #region Movement
@@ -153,14 +154,16 @@ var ray_light : RayCast2D
 var wait_for_camera := false
 var map_icon := "player"
 #endregion
-#region Save List
-#endregion
+#region Signals
 signal enter_shadow
 signal leave_shadow
 signal enter_abyss
 signal grabbed
 signal fullscreen_panel_opened
 signal fullscreen_panel_closed
+#endregion
+#region Save List
+#endregion
 #region Methods
 func set_facing(dir: int):
 	if dir == 0: return
@@ -520,7 +523,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"hurt_no_sword":
 			state.finished.emit("idle")
 		"corner_climb", "corner_climb_quick":
-			global_position += Vector2(26*facing, -35)
+			#global_position += Vector2(26*facing, -35)
 			state.finished.emit("idle", {"just_climbed": true})
 		"slide":
 			state.finished.emit("crouch")
@@ -759,7 +762,7 @@ func _process(delta: float) -> void:
 
 	check_interactable()
 #endregion
-#region Signals
+#region Listeners
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	print(area)
 func _on_interactor_area_entered(area: Area2D) -> void:

@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://djk8oskwq3mdn"]
+
+[ext_resource type="PackedScene" uid="uid://dk84lu71fcjkl" path="res://Inventory/item_pickup.tscn" id="1_hkj3j"]
+[ext_resource type="Texture2D" uid="uid://c72jyub2opmw8" path="res://Inventory/Sprites/ Potions-export19.png" id="2_06cod"]
+[ext_resource type="Resource" uid="uid://c0yvh55kikql2" path="res://Inventory/Resources/health_potion.tres" id="3_irovo"]
+
+[node name="PickupHealth" type="Sprite2D"]
+
+[node name="ItemPickup" parent="." instance=ExtResource("1_hkj3j")]
+texture = ExtResource("2_06cod")
+item = ExtResource("3_irovo")

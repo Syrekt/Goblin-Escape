@@ -1188,6 +1188,7 @@ position = Vector2(-1, -5.5)
 shape = SubResource("RectangleShape2D_cqw5a")
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
 max_distance = 256.0
 
 [node name="PlayerProximity" type="Area2D" parent="."]

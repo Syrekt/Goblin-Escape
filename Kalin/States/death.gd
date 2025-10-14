@@ -56,22 +56,31 @@ func update(delta: float) -> void:
 				player.controls_disabled = true
 				player.ui.fade_out(1)
 
-				var color_rect = death_screen.find_child("ColorRect")
+				var color_rect	= death_screen.find_child("ColorRect")
+				var label		= death_screen.find_child("RichTextLabel")
+
 				death_screen.show()
-				var tween = create_tween().bind_node(self)
-				Debugger.printui("color_rect.color: "+str(color_rect.color));
-				tween.tween_property(color_rect, "color", Color(0.0, 0.0, 0.0, 1.0), 1)
-				await tween.finished
+				var tween_rect	: Tween = create_tween().bind_node(self)
+				tween_rect.tween_property(color_rect, "color", Color(0.0, 0.0, 0.0, 1.0), 1)
+				await tween_rect.finished
+
+				#var tween_label = create_tween().bind_node(self)
+				#tween_label.tween_property(label, "theme_override_colors/default_color", Color(1.0, 0.0, 0.0, 1.0), 1)
+				#await tween_label.finished
 
 				await get_tree().create_timer(1.0).timeout
 				send_player()
 
-				tween = create_tween().bind_node(self)
-				tween.tween_property(color_rect, "color", Color(0.0, 0.0, 0.0, 0.0), 1)
+				#tween_label = create_tween().bind_node(self)
+				#tween_label.tween_property(label, "theme_override_colors/default_color", Color(1.0, 0.0, 0.0, 0.0), 1)
+				#await tween_label.finished
+
+				tween_rect = create_tween().bind_node(self)
+				tween_rect.tween_property(color_rect, "color", Color(0.0, 0.0, 0.0, 0.0), 1)
 
 				player.ui.fade_in(1)
 
-				await tween.finished
+				await tween_rect.finished
 
 				player.controls_disabled = false
 				death_screen.hide()
