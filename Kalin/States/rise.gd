@@ -36,9 +36,7 @@ func update(delta):
 				player.quick_climb()
 
 	var on_floor = player.is_on_floor()
-	Debugger.printui("on_floor: "+str(on_floor))
 	var velocity = player.velocity
-	Debugger.printui("velocity: "+str(velocity))
 	if cut_ground_contact && player.is_on_floor():
 		finished.emit("idle")
 	elif player.velocity.y >= 0:

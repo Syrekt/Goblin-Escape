@@ -141,12 +141,13 @@ func next_step_free(direction : int) -> bool:
 		return true
 func move(speed: float, direction: int) -> bool:
 	# Returns false if next step isn't free, turning the character or stopping it's movement
-	if !next_step_free(direction):
+
+	if next_step_free(direction):
+		move_speed = speed * direction
+		return true
+	else:
+		move_speed = 0
 		return false
-
-	move_speed = speed * direction
-
-	return velocity.x != 0
 func apply_force_x(force, life, _ease = Tween.EASE_OUT) -> void:
 	if force_tween && force_tween.is_valid():
 		force_tween.kill()
@@ -155,7 +156,8 @@ func apply_force_x(force, life, _ease = Tween.EASE_OUT) -> void:
 	force_x = force * facing
 	force_tween.tween_property(self, "force_x", 0.0, life)
 func stop_force_x() -> void: ## Stops the force_x and kills tween
-	force_tween.kill()
+	if force_tween && force_tween.is_valid():
+		force_tween.kill()
 	force_x = 0
 func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 	wait_animation_transition = false
@@ -393,7 +395,7 @@ func _physics_process(delta: float) -> void:
 	if debug:
 		Debugger.printui("force_x: "+str(force_x))
 	velocity.x = (move_speed + force_x) * delta * 60
-	move_speed = 0.0; # Reset move speed
+	move_speed = 0.0; # Reset move speed since, this needs setting each frame
 	var dir_x = get_movement_dir() if !direction_locked else facing
 
 	if health.value <= 0: cp.pushback_reset()

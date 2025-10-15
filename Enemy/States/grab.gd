@@ -14,6 +14,8 @@ func exit() -> void:
 	enemy.catched_player = false
 
 func update(delta: float) -> void:
+	if enemy.velocity.y != 0:
+		finished.emit("idle")
 	if enemy.catched_player:
 		enemy.player.global_position.x = enemy.global_position.x + 24*enemy.facing
 

@@ -5112,13 +5112,13 @@ frame_progress = 0.76164
 visible = false
 position = Vector2(-4, 34)
 
-[node name="idle" type="Node" parent="StateMachine"]
+[node name="idle" type="Node" parent="StateMachine" groups=["position_reliable"]]
 script = ExtResource("10_4yl4h")
 
-[node name="walk" type="Node" parent="StateMachine"]
+[node name="walk" type="Node" parent="StateMachine" groups=["position_reliable"]]
 script = ExtResource("28_1dko0")
 
-[node name="run" type="Node" parent="StateMachine"]
+[node name="run" type="Node" parent="StateMachine" groups=["position_reliable"]]
 script = ExtResource("3_ejfka")
 
 [node name="run_stop" type="Node" parent="StateMachine"]
@@ -5142,22 +5142,22 @@ script = ExtResource("14_sgd03")
 [node name="land_hurt" type="Node" parent="StateMachine"]
 script = ExtResource("37_xmisc")
 
-[node name="crouch" type="Node" parent="StateMachine"]
+[node name="crouch" type="Node" parent="StateMachine" groups=["position_reliable"]]
 script = ExtResource("21_60gj1")
 
-[node name="crouch_walk" type="Node" parent="StateMachine"]
+[node name="crouch_walk" type="Node" parent="StateMachine" groups=["position_reliable"]]
 script = ExtResource("21_3t0vr")
 
-[node name="stance_heavy" type="Node" parent="StateMachine" groups=["combat_state"]]
+[node name="stance_heavy" type="Node" parent="StateMachine" groups=["combat_state", "position_reliable"]]
 script = ExtResource("36_uhi5y")
 
 [node name="slash_charge" type="Node" parent="StateMachine"]
 script = ExtResource("54_jh2p4")
 
-[node name="stance_light" type="Node" parent="StateMachine" groups=["combat_state"]]
+[node name="stance_light" type="Node" parent="StateMachine" groups=["combat_state", "position_reliable"]]
 script = ExtResource("33_ao24u")
 
-[node name="stance_defensive" type="Node" parent="StateMachine" groups=["combat_state"]]
+[node name="stance_defensive" type="Node" parent="StateMachine" groups=["combat_state", "position_reliable"]]
 script = ExtResource("38_823eb")
 
 [node name="ParryTimer" type="Timer" parent="StateMachine/stance_defensive"]
@@ -5167,7 +5167,7 @@ one_shot = true
 [node name="block" type="Node" parent="StateMachine" groups=["combat_state"]]
 script = ExtResource("49_sprrr")
 
-[node name="stance_walk" type="Node" parent="StateMachine" groups=["combat_state"]]
+[node name="stance_walk" type="Node" parent="StateMachine" groups=["combat_state", "position_reliable"]]
 script = ExtResource("39_rgkp8")
 
 [node name="slash" type="Node2D" parent="StateMachine" groups=["combat_state"]]
@@ -5247,13 +5247,13 @@ one_shot = true
 [node name="recover" type="Node" parent="StateMachine"]
 script = ExtResource("74_k043l")
 
-[node name="push_idle" type="Node" parent="StateMachine"]
+[node name="push_idle" type="Node" parent="StateMachine" groups=["position_reliable"]]
 script = ExtResource("48_mwqkq")
 
-[node name="push" type="Node" parent="StateMachine"]
+[node name="push" type="Node" parent="StateMachine" groups=["position_reliable"]]
 script = ExtResource("49_ujutq")
 
-[node name="pull" type="Node" parent="StateMachine"]
+[node name="pull" type="Node" parent="StateMachine" groups=["position_reliable"]]
 script = ExtResource("50_tcyto")
 
 [node name="corner_grab" type="Node" parent="StateMachine"]

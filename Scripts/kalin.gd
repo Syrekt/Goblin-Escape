@@ -33,6 +33,8 @@ var last_ground_position : Vector2
 var is_on_one_way_collider := false
 
 var remote_control_input : Array[String]
+
+var climb_start_position : Vector2
 #endregion
 #region Stats & EXP
 const HEALTH_PER_VIT	:= 10
@@ -265,6 +267,9 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 			return
 	#Play animation
 	if play_hurt_animation:
+		if state_name == "corner_climb":
+			global_position = climb_start_position
+
 		if has_sword:
 			state_node.state.finished.emit("hurt")
 		else:
@@ -379,7 +384,7 @@ func check_controls_disabled() -> bool:
 	for node in ui_nodes:
 		if node.visible:
 			interaction_prompt.supress = true
-			Debugger.printui("Controls disabled, FullscreenPanel detected: %s" % node.name)
+			#Debugger.printui("Controls disabled, FullscreenPanel detected: %s" % node.name)
 			node_found = true
 			break
 	interaction_prompt.supress = false
@@ -395,7 +400,7 @@ func check_movement_disabled() -> bool:
 	for node in ui_nodes:
 		if node.visible:
 			interaction_prompt.supress = true
-			Debugger.printui("Movement disabled, UI panel detected: %s" % node.name)
+			#Debugger.printui("Movement disabled, UI panel detected: %s" % node.name)
 			#Debugger.printui("node: "+str(node))
 			return true
 	interaction_prompt.supress = false
@@ -654,7 +659,7 @@ func _physics_process(delta: float) -> void:
 		"stance_light", "stance_heavy", "stance_defensive":
 			move_speed = 0
 			velocity = Vector2.ZERO
-	var being_careful = state_name == "stance_walk" || state_name == "crouch_walk"
+	var being_careful = state_name == "stance_walk" || state_name == "crouch_walk" || state_name == "rise"
 	$ThreatCollider.monitoring = (velocity.x != 0 || velocity.y > 0) && !being_careful
 
 
@@ -680,7 +685,8 @@ func _physics_process(delta: float) -> void:
 			_:
 				velocity.y += gravity * delta
 	else:
-		last_ground_position = Vector2(global_position.x - facing*32, global_position.y)
+		if state_node.state.is_in_group("position_reliable"):
+			last_ground_position = Vector2(global_position.x - facing*32, global_position.y)
 		ignore_corners = false
 
 	#endregion

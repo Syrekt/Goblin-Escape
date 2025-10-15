@@ -2,6 +2,7 @@ extends PlayerState
 
 
 func enter(_previous_path_string: String, _data := {}) -> void:
+	player.climb_start_position = player.global_position
 	var tween_player = create_tween().bind_node(self).set_ease(Tween.EASE_OUT)
 	var tween_sprite = create_tween().bind_node(self).set_ease(Tween.EASE_OUT)
 
@@ -20,3 +21,4 @@ func enter(_previous_path_string: String, _data := {}) -> void:
 
 func exit() -> void:
 	player.sprite.offset = Vector2.ZERO
+	player.climb_start_position = Vector2.ZERO
