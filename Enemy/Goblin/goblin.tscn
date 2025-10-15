@@ -1026,7 +1026,6 @@ collision_mask = 9
 script = ExtResource("1_poooq")
 map_icon = "enemy"
 experience_drop = 100
-move_speed = 14000
 slash_damage = 15
 stab_damage = 10
 bash_damage = 10

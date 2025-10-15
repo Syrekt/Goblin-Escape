@@ -10,7 +10,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func update(delta: float) -> void:
 	if step_forward:
-		enemy.move(4, enemy.facing)
+		enemy.apply_force_x(200, 0.5)
 
 func _on_slash_hitbox_body_entered(defender:Player) -> void:
 	var defender_state = defender.state_node.state.name

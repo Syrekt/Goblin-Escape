@@ -1176,7 +1176,6 @@ collision_mask = 9
 script = ExtResource("1_nnmw3")
 map_icon = "enemy"
 experience_drop = 12
-move_speed = 14000
 slash_damage = 20
 stab_damage = 15
 bash_damage = 15

@@ -25,4 +25,4 @@ func _on_stab_hitbox_body_entered(defender:Player) -> void:
 
 func _on_hit_frame() -> void:
 	if step_forward:
-		enemy.move(enemy.move_speed, enemy.facing)
+		enemy.apply_force_x(100.0, 0.5)

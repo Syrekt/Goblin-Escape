@@ -1,15 +1,19 @@
 class_name Enemy extends CharacterBody2D
 
-const RUN_SPEED = 300.0 * 60
-
 @export var save_list : Array[String]
 @export var debug := false
 @export var map_icon : String
 
 @export var experience_drop := 1
 
-@export var move_speed := 100 * 60
-@export var patrol_move_speed := 100 * 60
+var move_speed	:= 0.0
+var force_x		:= 0.0
+var force_tween : Tween
+@export var chase_move_speed	:= 100
+@export var patrol_move_speed	:= 100
+@export var stab_step_speed 	:= 100
+@export var slash_step_speed 	:= 200
+@export var lunge_speed			:= 50
 @export var gravity := 500.0;
 @export var slash_damage	:= 1
 @export var stab_damage		:= 1
@@ -97,6 +101,7 @@ func set_facing(dir: int):
 func get_movement_dir():
 	return sign(velocity.x)
 func take_damage(_damage : int, _source: Node2D = null, critical := false):
+	stop_force_x()
 	if state_node.state.name == "death":
 		print("Already dead, don't take damage")
 		return
@@ -139,9 +144,19 @@ func move(speed: float, direction: int) -> bool:
 	if !next_step_free(direction):
 		return false
 
-	velocity.x = speed * direction * get_process_delta_time()
+	move_speed = speed * direction
 
 	return velocity.x != 0
+func apply_force_x(force, life, _ease = Tween.EASE_OUT) -> void:
+	if force_tween && force_tween.is_valid():
+		force_tween.kill()
+
+	force_tween = create_tween().bind_node(self).set_ease(_ease)
+	force_x = force * facing
+	force_tween.tween_property(self, "force_x", 0.0, life)
+func stop_force_x() -> void: ## Stops the force_x and kills tween
+	force_tween.kill()
+	force_x = 0
 func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 	wait_animation_transition = false
 	if animation_player.current_animation != anim:
@@ -375,6 +390,10 @@ func _physics_process(delta: float) -> void:
 		#Debugger.printui("patrol_amount: "+str(patrol_amount))
 		#Debugger.printui("state_node.state.name: "+str(state_node.state.name));
 	#region X Movement
+	if debug:
+		Debugger.printui("force_x: "+str(force_x))
+	velocity.x = (move_speed + force_x) * delta * 60
+	move_speed = 0.0; # Reset move speed
 	var dir_x = get_movement_dir() if !direction_locked else facing
 
 	if health.value <= 0: cp.pushback_reset()

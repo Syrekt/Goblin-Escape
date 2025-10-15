@@ -37,7 +37,7 @@ func update(delta):
 
 	#If can move, play run animation, idle otherwise
 	chase_dir = sign(enemy.chase_target.position.x - enemy.position.x)
-	if enemy.move(enemy.move_speed, chase_dir):
+	if enemy.move(enemy.chase_move_speed, chase_dir):
 		enemy.update_animation("run")
 	else:
 		enemy.update_animation("idle")

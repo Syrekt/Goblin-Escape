@@ -19,9 +19,9 @@ func update(delta: float) -> void:
 
 func _on_lunge_frame() -> void:
 	if step_forward:
-		enemy.move(enemy.move_speed/2.0, enemy.facing)
+		enemy.apply_force_x(100, 0.5)
 	else:
-		enemy.move(enemy.move_speed/4.0, enemy.facing)
+		enemy.apply_force_x(50, 0.5)
 func _on_hit_frame() -> void:
 	if grab_collider.has_overlapping_bodies():
 		if enemy.player.health.value > 0:

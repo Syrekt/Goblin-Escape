@@ -50,6 +50,10 @@ func _process(delta: float) -> void:
 		camera.get_screen_center_position() - camera.get_viewport_rect().size * 0.5 / camera.zoom,
 		camera.get_viewport_rect().size / camera.zoom
 	)
+	# Remove any freed nodes from array
+	for node in markers:
+		if !node:
+			markers.erase(node)
 	for node in markers:
 		markers[node].position = (node.global_position - screen_rect.position) * camera.zoom 
 		if node == player:
