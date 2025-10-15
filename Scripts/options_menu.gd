@@ -24,7 +24,7 @@ func _ready() -> void:
 	get_tree().paused = true
 	var screen_size : Vector2 = DisplayServer.window_get_size()
 	match screen_size:
-		Vector2(640, 480):
+		Vector2(640, 360):
 			resolution.selected = 0
 		Vector2(1280, 720):
 			resolution.selected = 1
@@ -69,7 +69,7 @@ func _on_option_button_item_selected(index: int) -> void:
 	var new_size : Vector2
 	match index:
 		0:
-			new_size = Vector2(640, 480)
+			new_size = Vector2(640, 360)
 		1:
 			new_size = Vector2(1280, 720)
 		2:
