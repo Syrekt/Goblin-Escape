@@ -18,6 +18,18 @@ extends TabContainer
 
 @onready var noise_color_rect : ColorRect = find_child("NoiseColorRect")
 
+@onready var reset_keybindings : Button = find_child("ResetKeybindings")
+
+var default_keybindings : Dictionary = {
+	"up"		: [KEY_A],
+	"down"		: [KEY_S],
+	"left" 		: [KEY_A],
+	"right"		: [KEY_D],
+	"attack"	: [KEY_J],
+	"stance" 	: [KEY_SPACE],
+	"jump"		: [KEY_K],
+	"run"		: [KEY_SHIFT],
+}
 
 
 func _ready() -> void:
@@ -139,3 +151,18 @@ func _on_noise_color_alpha_slider_drag_ended(value_changed: bool) -> void:
 
 func _on_check_button_toggled(toggled_on: bool) -> void:
 	Ge.noise_enabled = toggled_on
+
+
+func _on_reset_keybindings_pressed() -> void:
+	print("Reset keybindings")
+	# Re-add defaults
+	for action in default_keybindings.keys():
+		InputMap.action_erase_events(action)
+		for key in default_keybindings[action]:
+			var ev := InputEventKey.new()
+			ev.physical_keycode = key
+			print("key: "+str(key))
+			print("ev: "+str(ev))
+			InputMap.action_add_event(action, ev)
+	for button in get_tree().get_nodes_in_group("key_bind_buttons"):
+		button.set_text_for_key()

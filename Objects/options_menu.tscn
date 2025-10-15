@@ -122,6 +122,7 @@ theme_override_constants/margin_bottom = 12
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Controls/MarginContainer"]
 layout_mode = 2
+scroll_vertical = 75
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Controls/MarginContainer/ScrollContainer"]
 layout_mode = 2
@@ -154,6 +155,17 @@ action_name = "run"
 [node name="ButtonKeybind8" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
 action_name = "stance"
+
+[node name="Control" type="Control" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(117.83, 31.67)
+layout_mode = 2
+
+[node name="ResetKeybindings" type="Button" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer/Control"]
+layout_mode = 0
+offset_left = 136.62
+offset_right = 224.62001
+offset_bottom = 22.0
+text = "Reset Keybindings"
 
 [node name="Noise Indicator" type="TabBar" parent="."]
 visible = false
@@ -277,6 +289,7 @@ ticks_position = 3
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/PixelPerfect" to="." method="_on_pixel_perfect_toggled"]
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/Borderless" to="." method="_on_borderless_toggled"]
 [connection signal="pressed" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/CenterWindow" to="." method="_on_center_window_pressed"]
+[connection signal="pressed" from="Controls/MarginContainer/ScrollContainer/VBoxContainer/Control/ResetKeybindings" to="." method="_on_reset_keybindings_pressed"]
 [connection signal="toggled" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/NoiseToggle/NoiseToggleCheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="pressed" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer/ResetColor" to="." method="_on_reset_color_pressed"]
 [connection signal="drag_ended" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Red/NoiseColorRedSlider" to="." method="_on_noise_color_red_slider_drag_ended"]
