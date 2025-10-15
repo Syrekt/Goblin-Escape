@@ -566,6 +566,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 #endregion
 #region Init
 func _ready() -> void:
+	$Overlays.show()
 	var canvas = find_child("UI")
 	canvas.show()
 	hud.show()
@@ -773,7 +774,7 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
-		take_damage(500)
+		take_damage(90)
 
 	check_interactable()
 #endregion

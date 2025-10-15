@@ -9,6 +9,7 @@ func enter(previous_state_name: String, data := {}) -> void:
 	player.can_have_sex = false
 	player.unconscious = false
 
+	print("add death's door debuff")
 	var buff = buff_scene.instantiate()
 	buff.texture = debuff_sprite
 	buff.effect = "death's door"

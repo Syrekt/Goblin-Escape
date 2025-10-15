@@ -9,6 +9,7 @@ extends TabContainer
 @onready var noise_color_a : HSlider = find_child("NoiseColorAlphaSlider")
 
 @onready var noise_toggle : CheckButton = find_child("NoiseToggleCheckButton")
+@onready var borderless_toggle : CheckButton = find_child("Borderless")
 
 @onready var slider_red_label : Label = find_child("Red").find_child("Label")
 @onready var slider_green_label : Label = find_child("Green").find_child("Label")
@@ -36,9 +37,12 @@ func _ready() -> void:
 	noise_color_a.value = Ge.noise_color.a * 255.0
 
 	noise_toggle.button_pressed = Ge.noise_enabled
+	borderless_toggle.button_pressed = Options.borderless
+
 
 func _process(delta: float) -> void:
 	resolution.disabled = Options.fullscreen
+	borderless_toggle.disabled = Options.fullscreen
 
 	noise_color_rect.color = Color(noise_color_r.value/255.0, noise_color_g.value/255.0, noise_color_b.value/255.0, noise_color_a.value/255.0)
 
@@ -52,10 +56,13 @@ func _exit_tree() -> void:
 
 
 func _on_fullscreen_toggled(toggled_on: bool) -> void:
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN if toggled_on else DisplayServer.WINDOW_MODE_WINDOWED)
+	if toggled_on:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN )
+	else:
+		#_on_borderless_toggled(false)
+		#borderless_toggle.button_pressed = Options.borderless
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	Options.fullscreen = toggled_on
-	var window_size = DisplayServer.window_get_size()
-	var display_size = DisplayServer.window_get_size()
 	notification(NOTIFICATION_WM_SIZE_CHANGED)
 
 func _on_option_button_item_selected(index: int) -> void:
@@ -79,6 +86,7 @@ func _on_pixel_perfect_toggled(toggled_on: bool) -> void:
 
 
 func _on_borderless_toggled(toggled_on: bool) -> void:
+	print("toggle borderless")
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true if toggled_on else false)
 	Options.borderless = toggled_on
 	DisplayServer.window_set_size(Options.window_size)
@@ -97,6 +105,7 @@ func _on_reset_color_pressed() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_SIZE_CHANGED:
 		print("Center window")
+		DisplayServer.window_set_size(Options.window_size)
 		var window_size = DisplayServer.window_get_size()
 		var display_size = DisplayServer.screen_get_size()
 		print("window_size: "+str(window_size))

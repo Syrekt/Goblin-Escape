@@ -4826,10 +4826,10 @@ script = ExtResource("21_sklaw")
 
 [node name="Arousal" type="TextureProgressBar" parent="UI/HUD" groups=["HUD"]]
 layout_mode = 0
-offset_left = 100.0
-offset_top = 20.5
-offset_right = 150.0
-offset_bottom = 26.5
+offset_left = 22.0
+offset_top = 23.0
+offset_right = 73.0
+offset_bottom = 24.0
 step = 0.0
 texture_progress = ExtResource("58_yofsr")
 tint_progress = Color(0.474366, 0.00173617, 0.698302, 1)
