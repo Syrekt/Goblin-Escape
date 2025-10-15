@@ -16,7 +16,7 @@ func exit() -> void:
 
 func physics_update(delta: float) -> void:
 	# Charge up the attack
-	if player.pressed("attack") && player.stamina.has_enough(player.SLASH_COST):
+	if player.pressed("attack") && player.stamina.has_enough(player.SLASH_STAMINA_COST):
 		charge_up = move_toward(charge_up, 100, 2)
 		if charge_up > 10:
 			# Switch to charging state
@@ -36,7 +36,7 @@ func physics_update(delta: float) -> void:
 		finished.emit("stance_light")
 	elif player.pressed("down"):
 		finished.emit("stance_defensive")
-	elif player.just_released("attack") && player.stamina.spend(player.SLASH_COST, 2.0):
+	elif player.just_released("attack") && player.stamina.spend(player.SLASH_STAMINA_COST, 2.0):
 		finished.emit("slash", {
 				"charge_up" : charge_up
 			})

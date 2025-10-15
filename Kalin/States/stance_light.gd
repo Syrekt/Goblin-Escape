@@ -15,11 +15,11 @@ func update(delta: float) -> void:
 		finished.emit("fall")
 	elif !lock_stance_button && player.just_pressed("stance"):
 		finished.emit("idle")
-	elif player.pressed("up"):
+	elif player.pressed("up") && player.has_heavy_stance:
 		finished.emit("stance_heavy")
-	elif player.pressed("down"):
+	elif player.pressed("down") && player.has_defensive_stance:
 		finished.emit("stance_defensive")
-	elif player.pressed("attack") && player.stamina.spend(player.STAB_COST, 1.0):
+	elif player.pressed("attack") && player.stamina.spend(player.STAB_STAMINA_COST, 1.0):
 		finished.emit("stab")
 	elif !is_equal_approx(player.get_movement_dir(), 0.0):
 		if player.pressed("run") && player.stamina.has_enough(1.0):

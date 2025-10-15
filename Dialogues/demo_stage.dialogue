@@ -35,7 +35,7 @@ While touching the statue from the side, press ({{Ge.grab_key}}) to grab and mov
 => END
 
 ~ combat
-Kalin: Finally, these fuckers don't stand a chance against me.
+#Kalin: Finally, these fuckers don't stand a chance against me.
 do Ge.show_combat_tutorial.emit()
 => END
 

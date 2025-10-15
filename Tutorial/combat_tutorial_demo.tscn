@@ -743,10 +743,18 @@ script = ExtResource("1_vl2tm")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
-autostart = true
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="ColorControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="ColorControl"]
 self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -755,40 +763,40 @@ grow_vertical = 2
 current_tab = 0
 tabs_visible = false
 
-[node name="Page1" type="Control" parent="TabContainer"]
+[node name="Page1" type="Control" parent="ColorControl/TabContainer"]
 layout_mode = 2
 theme = ExtResource("2_jcgw0")
 metadata/_tab_index = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="TabContainer/Page1"]
+[node name="Sprite2D" type="Sprite2D" parent="ColorControl/TabContainer/Page1"]
 visible = false
 position = Vector2(288, 304)
 scale = Vector2(2, 2)
 texture = ExtResource("3_v07me")
 hframes = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TabContainer/Page1"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page1"]
 position = Vector2(128, 128)
 sprite_frames = SubResource("SpriteFrames_7a6fu")
 animation = &"stab"
 autoplay = "stab"
 frame_progress = 0.207933
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="TabContainer/Page1"]
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page1"]
 position = Vector2(304, 128)
 sprite_frames = SubResource("SpriteFrames_7a6fu")
 animation = &"slash"
 autoplay = "slash"
 frame_progress = 0.807532
 
-[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="TabContainer/Page1"]
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page1"]
 position = Vector2(512, 128)
 sprite_frames = SubResource("SpriteFrames_7a6fu")
 animation = &"bash"
 autoplay = "bash"
 frame_progress = 0.739916
 
-[node name="TextureRect5" type="TextureRect" parent="TabContainer/Page1"]
+[node name="TextureRect5" type="TextureRect" parent="ColorControl/TabContainer/Page1"]
 visible = false
 layout_mode = 0
 offset_left = 1040.0
@@ -798,7 +806,7 @@ offset_bottom = 330.0
 scale = Vector2(2, 2)
 texture = ExtResource("6_vl2tm")
 
-[node name="TextureRect6" type="TextureRect" parent="TabContainer/Page1"]
+[node name="TextureRect6" type="TextureRect" parent="ColorControl/TabContainer/Page1"]
 visible = false
 layout_mode = 0
 offset_left = 592.0
@@ -808,7 +816,7 @@ offset_bottom = 302.0
 scale = Vector2(2, 2)
 texture = ExtResource("7_co1p0")
 
-[node name="TextureRect7" type="TextureRect" parent="TabContainer/Page1"]
+[node name="TextureRect7" type="TextureRect" parent="ColorControl/TabContainer/Page1"]
 visible = false
 layout_mode = 0
 offset_left = 96.0
@@ -818,7 +826,7 @@ offset_bottom = 312.0
 scale = Vector2(2, 2)
 texture = ExtResource("8_jgwkl")
 
-[node name="RichTextLabel8" type="RichTextLabel" parent="TabContainer/Page1"]
+[node name="RichTextLabel8" type="RichTextLabel" parent="ColorControl/TabContainer/Page1"]
 layout_mode = 0
 offset_left = 144.0
 offset_top = 32.0
@@ -829,7 +837,7 @@ text = "To fight, press [stance] or [attack] key.
 To switch different between stances, use up and down keys.
 Each stance has different properties"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Page1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorControl/TabContainer/Page1"]
 layout_mode = 0
 offset_left = 48.0
 offset_top = 176.0
@@ -841,7 +849,7 @@ text = "Light Stance(Default stance)
 - Stab attack(costs 1 stamina)
 -- Stab interrupts heavy attacks"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="TabContainer/Page1"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="ColorControl/TabContainer/Page1"]
 layout_mode = 0
 offset_left = 208.0
 offset_top = 176.0
@@ -854,7 +862,7 @@ text = "Heavy Stance(Up key)
 - Slash Attack(costs 2 stamina)
 -- Slash breaks enemy guard"
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="TabContainer/Page1"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="ColorControl/TabContainer/Page1"]
 layout_mode = 0
 offset_left = 416.0
 offset_top = 192.0
@@ -869,13 +877,13 @@ text = "Defensive Stance(Down key)
 
 "
 
-[node name="Page2" type="Control" parent="TabContainer"]
+[node name="Page2" type="Control" parent="ColorControl/TabContainer"]
 visible = false
 layout_mode = 2
 theme = ExtResource("2_jcgw0")
 metadata/_tab_index = 1
 
-[node name="TextureRect2" type="TextureRect" parent="TabContainer/Page2"]
+[node name="TextureRect2" type="TextureRect" parent="ColorControl/TabContainer/Page2"]
 visible = false
 layout_mode = 0
 offset_left = 224.0
@@ -885,7 +893,7 @@ offset_bottom = 336.0
 scale = Vector2(2, 2)
 texture = ExtResource("9_kuyg4")
 
-[node name="TextureRect3" type="TextureRect" parent="TabContainer/Page2"]
+[node name="TextureRect3" type="TextureRect" parent="ColorControl/TabContainer/Page2"]
 visible = false
 layout_mode = 0
 offset_left = 656.0
@@ -895,7 +903,7 @@ offset_bottom = 336.0
 scale = Vector2(2, 2)
 texture = ExtResource("10_d8c6a")
 
-[node name="TextureRect4" type="TextureRect" parent="TabContainer/Page2"]
+[node name="TextureRect4" type="TextureRect" parent="ColorControl/TabContainer/Page2"]
 visible = false
 layout_mode = 0
 offset_left = 464.0
@@ -905,7 +913,7 @@ offset_bottom = 336.0
 scale = Vector2(2, 2)
 texture = ExtResource("11_buoo5")
 
-[node name="RichTextLabel4" type="RichTextLabel" parent="TabContainer/Page2"]
+[node name="RichTextLabel4" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
 layout_mode = 0
 offset_left = 160.0
 offset_top = 48.0
@@ -916,7 +924,7 @@ text = "Stances allow access to certain moves.
 Goblin's inital stance is Light Stance, which gives access to [color=red]Heavy[/color] stance.
 In normal difficulty, enemies flash certain colors when they take a stance."
 
-[node name="RichTextLabel5" type="RichTextLabel" parent="TabContainer/Page2"]
+[node name="RichTextLabel5" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
 visible = false
 layout_mode = 0
 offset_left = 96.0
@@ -928,7 +936,7 @@ bbcode_enabled = true
 text = "[color=yellow]Light Stance"
 horizontal_alignment = 1
 
-[node name="RichTextLabel6" type="RichTextLabel" parent="TabContainer/Page2"]
+[node name="RichTextLabel6" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
 visible = false
 layout_mode = 0
 offset_left = 288.0
@@ -938,7 +946,7 @@ offset_bottom = 192.0
 bbcode_enabled = true
 text = "[color=red]Heavy Stance[/color]"
 
-[node name="RichTextLabel7" type="RichTextLabel" parent="TabContainer/Page2"]
+[node name="RichTextLabel7" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
 visible = false
 layout_mode = 0
 offset_left = 464.0
@@ -948,7 +956,7 @@ offset_bottom = 192.0
 bbcode_enabled = true
 text = "[color=blue]Defensive Stance[/color]"
 
-[node name="LightAttack" type="Sprite2D" parent="TabContainer/Page2"]
+[node name="LightAttack" type="Sprite2D" parent="ColorControl/TabContainer/Page2"]
 visible = false
 modulate = Color(1, 1, 0, 1)
 self_modulate = Color(1, 1, 0, 1)
@@ -957,14 +965,14 @@ position = Vector2(128, 128)
 texture = ExtResource("13_308n3")
 hframes = 8
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TabContainer/Page2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorControl/TabContainer/Page2"]
 root_node = NodePath("../LightAttack")
 libraries = {
 &"": SubResource("AnimationLibrary_oxxag")
 }
 autoplay = "new_animation"
 
-[node name="HeavyAttack" type="Sprite2D" parent="TabContainer/Page2"]
+[node name="HeavyAttack" type="Sprite2D" parent="ColorControl/TabContainer/Page2"]
 visible = false
 modulate = Color(1, 1, 0, 1)
 self_modulate = Color(1, 1, 0, 1)
@@ -973,14 +981,14 @@ position = Vector2(320, 128)
 texture = ExtResource("13_308n3")
 hframes = 8
 
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="TabContainer/Page2"]
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="ColorControl/TabContainer/Page2"]
 root_node = NodePath("../HeavyAttack")
 libraries = {
 &"": SubResource("AnimationLibrary_oxxag")
 }
 autoplay = "heavy"
 
-[node name="Bash" type="Sprite2D" parent="TabContainer/Page2"]
+[node name="Bash" type="Sprite2D" parent="ColorControl/TabContainer/Page2"]
 visible = false
 modulate = Color(1, 1, 0, 1)
 self_modulate = Color(1, 1, 0, 1)
@@ -989,35 +997,35 @@ position = Vector2(512, 128)
 texture = ExtResource("13_308n3")
 hframes = 8
 
-[node name="AnimationPlayer3" type="AnimationPlayer" parent="TabContainer/Page2"]
+[node name="AnimationPlayer3" type="AnimationPlayer" parent="ColorControl/TabContainer/Page2"]
 root_node = NodePath("../Bash")
 libraries = {
 &"": SubResource("AnimationLibrary_oxxag")
 }
 autoplay = "bash"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TabContainer/Page2"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page2"]
 position = Vector2(128, 144)
 sprite_frames = SubResource("SpriteFrames_kfrmu")
 animation = &"stab"
 autoplay = "stab"
 frame_progress = 0.862376
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="TabContainer/Page2"]
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page2"]
 position = Vector2(320, 144)
 sprite_frames = SubResource("SpriteFrames_kfrmu")
 animation = &"slash"
 autoplay = "slash"
 frame_progress = 0.0669446
 
-[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="TabContainer/Page2"]
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page2"]
 position = Vector2(512, 144)
 sprite_frames = SubResource("SpriteFrames_kfrmu")
 animation = &"bash"
 autoplay = "bash"
 frame_progress = 0.393161
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Page2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
 layout_mode = 0
 offset_left = 48.0
 offset_top = 208.0
@@ -1029,7 +1037,7 @@ text = "[color=yellow]Light Stance[/color](Default stance)
 - Light attack has no properties
 - Can grab Kalin"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="TabContainer/Page2"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
 layout_mode = 0
 offset_left = 224.0
 offset_top = 192.0
@@ -1041,7 +1049,7 @@ text = "[color=red]Heavy Stance[/color]
 - Heavy Attack
 -- Heavy Attack breaks Kalin's guard and stuns her if she is guarding"
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="TabContainer/Page2"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
 layout_mode = 0
 offset_left = 432.0
 offset_top = 192.0
@@ -1056,23 +1064,12 @@ text = "[color=blue]Defensive Stance[/color]
 
 "
 
-[node name="ContinuePrompt" type="RichTextLabel" parent="."]
-visible = false
-offset_left = 464.0
-offset_top = 288.0
-offset_right = 624.0
-offset_bottom = 320.0
-theme = ExtResource("2_jcgw0")
-bbcode_enabled = true
-text = "Press [stance] key to continue"
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
+[node name="Control" type="Control" parent="ColorControl"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Left" type="Button" parent="Control"]
+[node name="Left" type="Button" parent="ColorControl/Control"]
 layout_mode = 0
 offset_left = 286.0
 offset_top = 323.0
@@ -1082,7 +1079,7 @@ theme = ExtResource("17_co1p0")
 icon = ExtResource("18_jgwkl")
 script = ExtResource("19_kuyg4")
 
-[node name="Right" type="Button" parent="Control"]
+[node name="Right" type="Button" parent="ColorControl/Control"]
 layout_mode = 0
 offset_left = 326.0
 offset_top = 323.0
@@ -1093,7 +1090,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_ujdoy")
 icon = ExtResource("20_d8c6a")
 script = ExtResource("19_kuyg4")
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Label" type="Label" parent="ColorControl/Control"]
 layout_mode = 0
 offset_left = 308.0
 offset_top = 322.0
@@ -1102,7 +1099,7 @@ offset_bottom = 336.0
 theme = ExtResource("2_jcgw0")
 text = "1/2"
 
-[node name="Close" type="Button" parent="Control"]
+[node name="Close" type="Button" parent="ColorControl/Control"]
 layout_mode = 0
 offset_left = 584.0
 offset_top = 31.0
@@ -1112,3 +1109,13 @@ theme = ExtResource("17_co1p0")
 icon = ExtResource("21_buoo5")
 expand_icon = true
 script = ExtResource("19_kuyg4")
+
+[node name="ContinuePrompt" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 464.0
+offset_top = 288.0
+offset_right = 624.0
+offset_bottom = 320.0
+theme = ExtResource("2_jcgw0")
+bbcode_enabled = true
+text = "Press [stance] key to continue"

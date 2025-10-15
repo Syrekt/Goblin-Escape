@@ -93,9 +93,10 @@ const BASH_DAMAGE 	:= 10
 const SLASH_DAMAGE_PER_STRENGTH	:= 2
 const STAB_DAMAGE_PER_STRENGTH	:= 1
 const BASH_DAMAGE_PER_STRENGTH 	:= 1
-const SLASH_COST	:= 2
-const STAB_COST		:= 1
-const BASH_COST 	:= 2
+# Stamina costs
+const SLASH_STAMINA_COST	:= 2
+const STAB_STAMINA_COST		:= 1
+const BASH_STAMINA_COST 	:= 2
 const SLASH_COST_PER_STRENGTH	:= 0.2
 const STAB_COST_PER_STRENGTH	:= 0.15
 const BASH_COST_PER_STRENGTH	:= 0.15
@@ -127,6 +128,8 @@ var parried			:= false
 var absorbed_damage := false
 var enemies_on_chase: Array[Enemy]
 var grabbed_by : Enemy
+@export var has_heavy_stance		:= false
+@export var has_defensive_stance	:= false
 #endregion
 #region Others
 @export var debug				:= false
@@ -465,13 +468,13 @@ func check_buffered_state() -> bool:
 	if buffered_state:
 		match buffered_state:
 			"slash":
-				if stamina.spend(SLASH_COST, SLASH_SWEAT + log((SLASH_SWEAT_PER_STRENGHT * strength) + 1)):
+				if has_heavy_stance && stamina.spend(SLASH_STAMINA_COST, get_slash_sweat_cost()):
 					state_to_switch = "slash"
 			"stab":
-				if stamina.spend(STAB_COST, STAB_SWEAT + log((STAB_SWEAT_PER_STRENGHT * strength) + 1)):
+				if stamina.spend(STAB_STAMINA_COST, get_stab_sweat_cost()):
 					state_to_switch = "stab"
 			"bash":
-				if stamina.spend(BASH_COST, BASH_SWEAT + log((BASH_SWEAT_PER_STRENGHT * strength) + 1)):
+				if has_defensive_stance && stamina.spend(BASH_STAMINA_COST, get_bash_sweat_cost()):
 					state_to_switch = "bash"
 	buffered_state = ""
 	if state_to_switch:
@@ -497,6 +500,12 @@ func level_up() -> void:
 func calculate_stats() -> void:
 	health.value_max = 100 + HEALTH_PER_VIT * vitality
 	stamina.value_max = 5 + STAMINA_PER_VIT * vitality
+func get_slash_sweat_cost() -> float:
+	return SLASH_SWEAT + log((SLASH_SWEAT_PER_STRENGHT * strength) + 1)
+func get_stab_sweat_cost() -> float:
+	return STAB_SWEAT + log((STAB_SWEAT_PER_STRENGHT * strength) + 1)
+func get_bash_sweat_cost() -> float:
+	return BASH_SWEAT + log((BASH_SWEAT_PER_STRENGHT * strength) + 1)
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -510,9 +519,9 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			heal(1)
 		"stab", "slash", "bash", "block":
 			if !check_buffered_state():
-				if pressed("up"):
+				if pressed("up") && has_heavy_stance:
 					state.finished.emit("stance_heavy")
-				elif pressed("down"):
+				elif pressed("down") && has_defensive_stance:
 					state.finished.emit("stance_defensive")
 				else:
 					state.finished.emit("stance_light")

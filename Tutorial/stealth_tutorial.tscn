@@ -45,8 +45,17 @@ script = ExtResource("1_ommnr")
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="ColorControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="ColorControl"]
 self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -55,27 +64,27 @@ grow_vertical = 2
 current_tab = 2
 tabs_visible = false
 
-[node name="Page1" type="Control" parent="TabContainer"]
+[node name="Page1" type="Control" parent="ColorControl/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="TabContainer/Page1"]
+[node name="Sprite2D" type="Sprite2D" parent="ColorControl/TabContainer/Page1"]
 position = Vector2(128, 128)
 texture = ExtResource("2_ommnr")
 hframes = 8
 
-[node name="Cirle" type="Sprite2D" parent="TabContainer/Page1"]
+[node name="Cirle" type="Sprite2D" parent="ColorControl/TabContainer/Page1"]
 position = Vector2(128, 128)
 scale = Vector2(5.25, 5.25)
 texture = ExtResource("3_mt66d")
 
-[node name="StealthExample" type="Sprite2D" parent="TabContainer/Page1"]
+[node name="StealthExample" type="Sprite2D" parent="ColorControl/TabContainer/Page1"]
 position = Vector2(150, 129)
 scale = Vector2(0.518692, 0.518692)
 texture = ExtResource("4_ccby3")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Page1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorControl/TabContainer/Page1"]
 layout_mode = 0
 offset_left = 277.0
 offset_top = 20.0
@@ -87,7 +96,7 @@ text = "Certain actions make noise, drawing attention of the enemies. Distance o
 
 Kalin will make sound while performing most acts, but you can walk crouched to move silently."
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="TabContainer/Page1"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="ColorControl/TabContainer/Page1"]
 layout_mode = 0
 offset_left = 280.0
 offset_top = 133.0
@@ -99,13 +108,13 @@ text = "Any noise will make enemies [color=red]aware[/color]. [color=red]Aware[/
 
 [color=red]Aware[/color] enemies won't detect Kalin while she's hiding in cavities. "
 
-[node name="Page2" type="Control" parent="TabContainer"]
+[node name="Page2" type="Control" parent="ColorControl/TabContainer"]
 visible = false
 layout_mode = 2
 theme = ExtResource("1_ma4oc")
 metadata/_tab_index = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="TabContainer/Page2"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 88.0
@@ -114,18 +123,18 @@ offset_bottom = 135.0
 bbcode_enabled = true
 text = "Kalin is [color=red]invisible[/color] in darkness, but goblins can still smell her. Use [color=cyan]perfume[/color] or clean her in checkpoint to get rid of the bodily odor."
 
-[node name="Sprite2D" type="Sprite2D" parent="TabContainer/Page2"]
+[node name="Sprite2D" type="Sprite2D" parent="ColorControl/TabContainer/Page2"]
 position = Vector2(104, 192)
 texture = ExtResource("6_ccby3")
 hframes = 6
 
-[node name="Sprite2D2" type="Sprite2D" parent="TabContainer/Page2"]
+[node name="Sprite2D2" type="Sprite2D" parent="ColorControl/TabContainer/Page2"]
 material = SubResource("ShaderMaterial_m1uw2")
 position = Vector2(168, 192)
 texture = ExtResource("6_ccby3")
 hframes = 6
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Page2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 240.0
@@ -134,18 +143,18 @@ offset_bottom = 281.0
 bbcode_enabled = true
 text = "While [color=red]invisible[/color], Kalin will look darker and screen will also have a dark overlay around the edges. "
 
-[node name="Sprite2D4" type="Sprite2D" parent="TabContainer/Page2"]
+[node name="Sprite2D4" type="Sprite2D" parent="ColorControl/TabContainer/Page2"]
 position = Vector2(472, 107)
 texture = ExtResource("8_m1uw2")
 
-[node name="Sprite2D3" type="Sprite2D" parent="TabContainer/Page2"]
+[node name="Sprite2D3" type="Sprite2D" parent="ColorControl/TabContainer/Page2"]
 material = SubResource("ShaderMaterial_5s5sl")
 position = Vector2(480, 120)
 texture = ExtResource("9_5w06g")
 hframes = 15
 frame = 14
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="TabContainer/Page2"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
 layout_mode = 0
 offset_left = 328.0
 offset_top = 155.0
@@ -156,12 +165,12 @@ text = "Kalin can hide inside the cavities in the wall to become [color=red]unde
 
 You can use these cavities to avoid enemy patrols."
 
-[node name="Page3" type="Control" parent="TabContainer"]
+[node name="Page3" type="Control" parent="ColorControl/TabContainer"]
 layout_mode = 2
 theme = ExtResource("1_ma4oc")
 metadata/_tab_index = 2
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="TabContainer/Page3"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="ColorControl/TabContainer/Page3"]
 layout_mode = 0
 offset_left = 164.0
 offset_top = 131.0
@@ -169,6 +178,52 @@ offset_right = 454.0
 offset_bottom = 216.0
 bbcode_enabled = true
 text = "Noise indicator is now toggled on. You can toggle it off from options or change it's color."
+
+[node name="Control" type="Control" parent="ColorControl"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Left" type="Button" parent="ColorControl/Control"]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 323.0
+offset_right = 302.0
+offset_bottom = 337.0
+theme = ExtResource("10_nh8aq")
+icon = ExtResource("11_06lct")
+script = ExtResource("12_06lct")
+
+[node name="Right" type="Button" parent="ColorControl/Control"]
+layout_mode = 0
+offset_left = 326.0
+offset_top = 323.0
+offset_right = 342.0
+offset_bottom = 337.0
+theme = ExtResource("10_nh8aq")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6a3fo")
+icon = ExtResource("12_2qk3m")
+script = ExtResource("12_06lct")
+
+[node name="Label" type="Label" parent="ColorControl/Control"]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 322.0
+offset_right = 321.0
+offset_bottom = 336.0
+theme = ExtResource("1_ma4oc")
+text = "1/2"
+
+[node name="Close" type="Button" parent="ColorControl/Control"]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 31.0
+offset_right = 606.0
+offset_bottom = 53.6875
+theme = ExtResource("10_nh8aq")
+icon = ExtResource("14_2qk3m")
+expand_icon = true
+script = ExtResource("12_06lct")
 
 [node name="ContinuePrompt" type="RichTextLabel" parent="."]
 visible = false
@@ -180,55 +235,6 @@ theme = ExtResource("1_ma4oc")
 bbcode_enabled = true
 text = "Press [stance] key to continue"
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Left" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 286.0
-offset_top = 323.0
-offset_right = 302.0
-offset_bottom = 337.0
-theme = ExtResource("10_nh8aq")
-icon = ExtResource("11_06lct")
-script = ExtResource("12_06lct")
-
-[node name="Right" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 326.0
-offset_top = 323.0
-offset_right = 342.0
-offset_bottom = 337.0
-theme = ExtResource("10_nh8aq")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_6a3fo")
-icon = ExtResource("12_2qk3m")
-script = ExtResource("12_06lct")
-
-[node name="Label" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = 308.0
-offset_top = 322.0
-offset_right = 321.0
-offset_bottom = 336.0
-theme = ExtResource("1_ma4oc")
-text = "1/2"
-
-[node name="Close" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 584.0
-offset_top = 31.0
-offset_right = 606.0
-offset_bottom = 53.6875
-theme = ExtResource("10_nh8aq")
-icon = ExtResource("14_2qk3m")
-expand_icon = true
-script = ExtResource("12_06lct")
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
-[connection signal="pressed" from="Control/Left" to="." method="_on_left_pressed"]
-[connection signal="pressed" from="Control/Right" to="." method="_on_right_pressed"]
-[connection signal="pressed" from="Control/Close" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="ColorControl/Control/Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="ColorControl/Control/Right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="ColorControl/Control/Close" to="." method="_on_button_pressed"]
