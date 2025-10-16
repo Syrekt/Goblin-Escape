@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://hvdtjmpwq6ji" path="res://UI/Buttons/button_keybind.tscn" id="3_iopgn"]
 
 [node name="OptionsMenu" type="TabContainer"]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,11 +14,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 2
+current_tab = 0
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -95,6 +95,7 @@ layout_mode = 2
 script = ExtResource("2_ucjbo")
 
 [node name="CenterWindow" type="Button" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Center Window"
 
@@ -104,6 +105,7 @@ layout_mode = 2
 metadata/_tab_index = 1
 
 [node name="Controls" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -122,11 +124,10 @@ theme_override_constants/margin_bottom = 12
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Controls/MarginContainer"]
 layout_mode = 2
-scroll_vertical = 75
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Controls/MarginContainer/ScrollContainer"]
 layout_mode = 2
-theme_override_constants/separation = 48
+theme_override_constants/separation = 32
 
 [node name="ButtonKeybind" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
@@ -157,13 +158,13 @@ layout_mode = 2
 action_name = "stance"
 
 [node name="Control" type="Control" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(117.83, 31.67)
+custom_minimum_size = Vector2(264, 22)
 layout_mode = 2
 
 [node name="ResetKeybindings" type="Button" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer/Control"]
 layout_mode = 0
-offset_left = 136.62
-offset_right = 224.62001
+offset_left = 140.0
+offset_right = 228.0
 offset_bottom = 22.0
 text = "Reset Keybindings"
 

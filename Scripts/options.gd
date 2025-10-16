@@ -8,6 +8,7 @@ var pixel_perfect := false
 var window_size := Vector2(1280, 720)
 var window_pos := Vector2(0, 0)
 var window_screen := 0
+var current_screen := 0
 
 func _set_window_position() -> void:
 	DisplayServer.window_set_position(window_pos)

@@ -10,6 +10,7 @@ extends TabContainer
 
 @onready var noise_toggle : CheckButton = find_child("NoiseToggleCheckButton")
 @onready var borderless_toggle : CheckButton = find_child("Borderless")
+@onready var fullscreen_toggle : CheckButton = find_child("Fullscreen")
 
 @onready var slider_red_label : Label = find_child("Red").find_child("Label")
 @onready var slider_green_label : Label = find_child("Green").find_child("Label")
@@ -33,6 +34,7 @@ var default_keybindings : Dictionary = {
 
 
 func _ready() -> void:
+	current_tab = 0
 	get_tree().paused = true
 	var screen_size : Vector2 = DisplayServer.window_get_size()
 	match screen_size:
@@ -53,8 +55,14 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	resolution.disabled = Options.fullscreen
-	borderless_toggle.disabled = Options.fullscreen
+	Options.current_screen = DisplayServer.window_get_current_screen()
+	var current_screen = Options.current_screen
+	print("current_screen: "+str(current_screen))
+	var fullscreen = Options.fullscreen
+	print("fullscreen: "+str(fullscreen))
+	resolution.disabled = fullscreen
+	borderless_toggle.disabled = fullscreen
+	
 
 	noise_color_rect.color = Color(noise_color_r.value/255.0, noise_color_g.value/255.0, noise_color_b.value/255.0, noise_color_a.value/255.0)
 
@@ -122,7 +130,12 @@ func _notification(what: int) -> void:
 		var display_size = DisplayServer.screen_get_size()
 		print("window_size: "+str(window_size))
 		print("display_size: "+str(display_size))
+
+		await get_tree().process_frame
 		DisplayServer.window_set_position((display_size - window_size)/2)
+
+		DisplayServer.window_set_current_screen(Options.current_screen)
+		await get_tree().process_frame
 		Options.save_options()
 
 func _on_center_window_pressed() -> void:
