@@ -5193,10 +5193,10 @@ script = ExtResource("3_ejfka")
 [node name="run_stop" type="Node" parent="StateMachine"]
 script = ExtResource("34_lbmmt")
 
-[node name="rise" type="Node" parent="StateMachine"]
+[node name="rise" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("11_10o18")
 
-[node name="fall" type="Node" parent="StateMachine"]
+[node name="fall" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("12_oysea")
 
 [node name="LandAnimationTimer" type="Timer" parent="StateMachine/fall"]
@@ -5205,10 +5205,10 @@ one_shot = true
 [node name="GrabTimer" type="Timer" parent="StateMachine/fall"]
 one_shot = true
 
-[node name="land" type="Node" parent="StateMachine"]
+[node name="land" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("14_sgd03")
 
-[node name="land_hurt" type="Node" parent="StateMachine"]
+[node name="land_hurt" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("37_xmisc")
 
 [node name="land_short" type="Node" parent="StateMachine"]
@@ -5220,29 +5220,29 @@ script = ExtResource("21_60gj1")
 [node name="crouch_walk" type="Node" parent="StateMachine" groups=["position_reliable"]]
 script = ExtResource("21_3t0vr")
 
-[node name="stance_heavy" type="Node" parent="StateMachine" groups=["combat_state", "position_reliable"]]
+[node name="stance_heavy" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction", "position_reliable"]]
 script = ExtResource("36_uhi5y")
 
-[node name="slash_charge" type="Node" parent="StateMachine"]
+[node name="slash_charge" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("54_jh2p4")
 
-[node name="stance_light" type="Node" parent="StateMachine" groups=["combat_state", "position_reliable"]]
+[node name="stance_light" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction", "position_reliable"]]
 script = ExtResource("33_ao24u")
 
-[node name="stance_defensive" type="Node" parent="StateMachine" groups=["combat_state", "position_reliable"]]
+[node name="stance_defensive" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction", "position_reliable"]]
 script = ExtResource("38_823eb")
 
 [node name="ParryTimer" type="Timer" parent="StateMachine/stance_defensive"]
 wait_time = 0.5
 one_shot = true
 
-[node name="block" type="Node" parent="StateMachine" groups=["combat_state"]]
+[node name="block" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction"]]
 script = ExtResource("49_sprrr")
 
 [node name="stance_walk" type="Node" parent="StateMachine" groups=["combat_state", "position_reliable"]]
 script = ExtResource("39_rgkp8")
 
-[node name="slash" type="Node2D" parent="StateMachine" groups=["combat_state"]]
+[node name="slash" type="Node2D" parent="StateMachine" groups=["combat_state", "no_interaction"]]
 script = ExtResource("39_af0aw")
 sfx_hit = ExtResource("81_lsbl4")
 sfx_whiff = ExtResource("82_8nsgr")
@@ -5253,7 +5253,7 @@ scale = Vector2(2.84, 3.72)
 collision_mask = 32904
 monitorable = false
 
-[node name="stab" type="Node2D" parent="StateMachine" groups=["combat_state"]]
+[node name="stab" type="Node2D" parent="StateMachine" groups=["combat_state", "no_interaction"]]
 script = ExtResource("41_sat24")
 sfx_hit = ExtResource("85_exvqe")
 sfx_whiff = ExtResource("86_cbw7l")
@@ -5265,7 +5265,7 @@ scale = Vector2(3.2721, 0.904796)
 collision_mask = 32904
 monitorable = false
 
-[node name="bash" type="Node2D" parent="StateMachine" groups=["combat_state"]]
+[node name="bash" type="Node2D" parent="StateMachine" groups=["combat_state", "no_interaction"]]
 script = ExtResource("41_pdh0h")
 sfx_hit = ExtResource("91_cbw7l")
 sfx_whiff = ExtResource("89_586st")
@@ -5277,7 +5277,7 @@ scale = Vector2(1.5, 2.5)
 collision_mask = 32904
 monitorable = false
 
-[node name="bash_no_sword" type="Node2D" parent="StateMachine"]
+[node name="bash_no_sword" type="Node2D" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("58_wl0wu")
 sfx_hit = ExtResource("91_cbw7l")
 sfx_whiff = ExtResource("89_586st")
@@ -5288,13 +5288,13 @@ position = Vector2(12, -34)
 scale = Vector2(1.5, 2.5)
 collision_mask = 136
 
-[node name="hurt" type="Node" parent="StateMachine" groups=["combat_state"]]
+[node name="hurt" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction"]]
 script = ExtResource("40_xirjq")
 
-[node name="hurt_no_sword" type="Node" parent="StateMachine"]
+[node name="hurt_no_sword" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("40_xirjq")
 
-[node name="death" type="Node2D" parent="StateMachine" groups=["combat_state"]]
+[node name="death" type="Node2D" parent="StateMachine" groups=["combat_state", "no_interaction"]]
 script = ExtResource("50_1fn32")
 
 [node name="SexParticipantCollider" type="Area2D" parent="StateMachine/death"]
@@ -5316,7 +5316,7 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
-[node name="recover" type="Node" parent="StateMachine"]
+[node name="recover" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("74_k043l")
 
 [node name="push_idle" type="Node" parent="StateMachine" groups=["position_reliable"]]
@@ -5328,33 +5328,33 @@ script = ExtResource("49_ujutq")
 [node name="pull" type="Node" parent="StateMachine" groups=["position_reliable"]]
 script = ExtResource("50_tcyto")
 
-[node name="corner_grab" type="Node" parent="StateMachine"]
+[node name="corner_grab" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("51_t8vjn")
 
-[node name="corner_climb" type="Node" parent="StateMachine"]
+[node name="corner_climb" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("52_4ckjm")
 
-[node name="corner_hang" type="Node" parent="StateMachine"]
+[node name="corner_hang" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("59_osr06")
 
-[node name="slide" type="Node" parent="StateMachine"]
+[node name="slide" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("54_5dxkx")
 
 [node name="interacting" type="Node" parent="StateMachine"]
 script = ExtResource("55_5lcso")
 
-[node name="stun" type="Node" parent="StateMachine" groups=["combat_state"]]
+[node name="stun" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction"]]
 script = ExtResource("56_qqpcq")
 
-[node name="sex" type="Node" parent="StateMachine"]
+[node name="sex" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("59_muuj4")
 animation_counter_max = 8
 animation_counter_min = 5
 
-[node name="orgasm" type="Node" parent="StateMachine"]
+[node name="orgasm" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("61_c6www")
 
-[node name="post_sex" type="Node" parent="StateMachine"]
+[node name="post_sex" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("40_xirjq")
 
 [node name="hiding" type="Node" parent="StateMachine"]
@@ -5369,29 +5369,29 @@ script = ExtResource("70_egy32")
 [node name="ladder_climb" type="Node" parent="StateMachine"]
 script = ExtResource("88_7e6uh")
 
-[node name="struggle_goblin" type="Node" parent="StateMachine"]
+[node name="struggle_goblin" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("83_441gv")
 
 [node name="Timer" type="Timer" parent="StateMachine/struggle_goblin"]
 wait_time = 5.0
 one_shot = true
 
-[node name="struggle_transition_goblin" type="Node" parent="StateMachine"]
+[node name="struggle_transition_goblin" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("98_y4shw")
 
-[node name="grab_goblin" type="Node" parent="StateMachine"]
+[node name="grab_goblin" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("40_xirjq")
 
-[node name="break_free" type="Node" parent="StateMachine"]
+[node name="break_free" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("87_6ykrs")
 
-[node name="crawl_in" type="Node" parent="StateMachine"]
+[node name="crawl_in" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("40_xirjq")
 
-[node name="crawl_out" type="Node" parent="StateMachine"]
+[node name="crawl_out" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("40_xirjq")
 
-[node name="get_up" type="Node" parent="StateMachine"]
+[node name="get_up" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("40_xirjq")
 
 [node name="InteractionPrompt" type="AnimatedSprite2D" parent="."]

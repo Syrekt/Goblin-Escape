@@ -387,7 +387,6 @@ func check_controls_disabled() -> bool:
 			#Debugger.printui("Controls disabled, FullscreenPanel detected: %s" % node.name)
 			node_found = true
 			break
-	interaction_prompt.supress = false
 	if node_found:
 		if !controls_disabled:
 			fullscreen_panel_opened.emit();
@@ -403,7 +402,6 @@ func check_movement_disabled() -> bool:
 			#Debugger.printui("Movement disabled, UI panel detected: %s" % node.name)
 			#Debugger.printui("node: "+str(node))
 			return true
-	interaction_prompt.supress = false
 	return false
 func pressed(input : String) -> bool:
 	if movement_disabled: return false
@@ -735,10 +733,11 @@ func _process(delta: float) -> void:
 	if debug: Debugger.printui(str(state_node.state.name))
 
 	# Movement and control checks change interaction_prompt.supress value
-	interaction_prompt.supress = true
+	var no_interaction = state_node.state.is_in_group("no_interaction")
+	interaction_prompt.supress = false
 	controls_disabled = check_controls_disabled()
 	movement_disabled = check_movement_disabled()
-	if in_combat_state: interaction_prompt.supress = true
+	if no_interaction: interaction_prompt.supress = true
 
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
