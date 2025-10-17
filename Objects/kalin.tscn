@@ -1,4 +1,4 @@
-[gd_scene load_steps=333 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=335 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -108,6 +108,7 @@
 [ext_resource type="Script" uid="uid://dov67f6u1vo0" path="res://Kalin/States/bash_no_sword.gd" id="58_wl0wu"]
 [ext_resource type="Texture2D" uid="uid://chjgsdqrvvtgb" path="res://UI/Sliders/arousal_progress.png" id="58_yofsr"]
 [ext_resource type="Script" uid="uid://cjge85wgil63e" path="res://Kalin/States/sex.gd" id="59_muuj4"]
+[ext_resource type="Script" uid="uid://cda7lryh5gipg" path="res://Kalin/States/land_short.gd" id="59_n1k6j"]
 [ext_resource type="Script" uid="uid://cytac4sg8onjk" path="res://Kalin/States/corner_hang.gd" id="59_osr06"]
 [ext_resource type="Script" uid="uid://c3rllm222ckui" path="res://Kalin/stamina.gd" id="60_2ksh1"]
 [ext_resource type="Texture2D" uid="uid://dvos4uam82cch" path="res://UI/Sliders/smell_progress.png" id="61_5atg1"]
@@ -2346,7 +2347,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.8]
+"values": [0.5999999999999996]
 }
 
 [sub_resource type="Animation" id="Animation_y0qhg"]
@@ -4610,6 +4611,61 @@ tracks/3/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_y4shw"]
+resource_name = "land_short"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.100000024, 0.19999999),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_7ft60")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Sprite2D/..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [Vector2(0, 32), 5.0],
+"method": &"emit_noise"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cuohi"]
 _data = {
 &"RESET": SubResource("Animation_5koc5"),
@@ -4636,6 +4692,7 @@ _data = {
 &"idle": SubResource("Animation_dkbxi"),
 &"land": SubResource("Animation_jxgp1"),
 &"land_hurt": SubResource("Animation_2ksh1"),
+&"land_short": SubResource("Animation_y4shw"),
 &"orgasm_goblin1": SubResource("Animation_cfvac"),
 &"post_sex": SubResource("Animation_osr06"),
 &"pull": SubResource("Animation_mj8sq"),
@@ -5153,6 +5210,9 @@ script = ExtResource("14_sgd03")
 
 [node name="land_hurt" type="Node" parent="StateMachine"]
 script = ExtResource("37_xmisc")
+
+[node name="land_short" type="Node" parent="StateMachine"]
+script = ExtResource("59_n1k6j")
 
 [node name="crouch" type="Node" parent="StateMachine" groups=["position_reliable"]]
 script = ExtResource("21_60gj1")

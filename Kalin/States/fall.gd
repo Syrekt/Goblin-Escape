@@ -15,6 +15,8 @@ func physics_update(delta: float) -> void:
 	player.velocity.x += player.get_movement_dir() * player.jump_move_speed * delta
 	if player.is_on_floor():
 		var fall_damage = 0;
+		var fall_distance = player.global_position.y - player.last_ground_position.y
+		print("fall_distance: "+str(fall_distance))
 		if abs(player.global_position.y - fall_start_y) > 96:
 			fall_damage = round((player.global_position.y - fall_start_y)/16)
 		print("fall_damage: "+str(fall_damage))
@@ -22,6 +24,8 @@ func physics_update(delta: float) -> void:
 			finished.emit("land_hurt", {"fall_damage" : fall_damage})
 		elif land_animation_timer.is_stopped():
 			finished.emit("land")
+		elif fall_distance > 2:
+			finished.emit("land_short")
 		else:
 			finished.emit("idle")
 

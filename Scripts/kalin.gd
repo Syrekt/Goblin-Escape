@@ -517,7 +517,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	var state = state_node.state
 
 	match state.name:
-		"land", "land_hurt", "run_stop":
+		"land", "land_hurt", "run_stop", "land_short":
 			state.finished.emit("idle")
 		"recover":
 			state.finished.emit("idle")
@@ -638,7 +638,7 @@ func _physics_process(delta: float) -> void:
 			move_speed = 0
 		"slide", "stun":
 			accelaration = slide_dec
-		"land", "land_hurt":
+		"land", "land_hurt", "land_short":
 			move_speed = 0;
 			accelaration = slide_dec
 		"slash", "stab":
@@ -727,7 +727,6 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
-	Debugger.printui("invisible: "+str(invisible))
 	if just_pressed("quick save"):
 		Ge.save_game()
 	if just_pressed("quick load"):
