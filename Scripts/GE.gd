@@ -106,6 +106,8 @@ func save_node(node, data: Dictionary) -> void:
 	data["filename"] = node.get_scene_file_path() 
 	data["parent"] = node.get_parent().get_path() 
 	data["name"] = node.name
+	data["pos_x"] = node.position.x;
+	data["pos_y"] = node.position.y
 	save_data.set(node.get_path(), data)
 func save_game() -> void:
 	print("Saving...")
@@ -217,6 +219,8 @@ func load_game() -> void:
 				continue
 			var node_data = save_data[i]
 			# Firstly, we need to create the object and add it to the tree and set its position.
+			var file = node_data["filename"]
+			print("file: "+str(file))
 			var new_object = load(node_data["filename"]).instantiate()
 			print("New object created: %s" % new_object.name)
 

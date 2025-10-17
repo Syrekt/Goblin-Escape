@@ -287,7 +287,7 @@ func check_movable():
 		state_node.state.finished.emit("push_idle")
 
 func check_interactable() -> void:
-	if interaction_target && !in_combat_state:
+	if interaction_target && interaction_target.interactable && !in_combat_state:
 		interaction_target.update(self)
 func can_grab_corner(rising := false) -> bool:
 	var grab_prevent =  col_corner_grab_prevent.has_overlapping_bodies()
@@ -784,7 +784,7 @@ func _on_interactor_area_entered(area: Area2D) -> void:
 	print("interactor area entered")
 	print("area: "+str(area.name))
 	interaction_target = area
-	if !interaction_target.auto:
+	if !interaction_target.auto && interaction_target.interactable:
 		interaction_prompt._show("interact", area.title)
 func _on_interactor_area_exited(area: Area2D) -> void:
 	if interaction_target == area:

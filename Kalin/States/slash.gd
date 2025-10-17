@@ -14,7 +14,7 @@ func update(delta: float) -> void:
 
 func _on_attack_frame() -> void:
 	var player_slash_damage = player.SLASH_DAMAGE + player.SLASH_DAMAGE_PER_STRENGTH * player.strength
-	var damage_dealt = player_slash_damage * ((charge_up / 100) * 2)
+	var damage_dealt = player_slash_damage + player_slash_damage * (charge_up / 100)
 	print("Slash damage: "+str(damage_dealt))
 	print("Charge modifier: " + str(charge_up / 100))
 

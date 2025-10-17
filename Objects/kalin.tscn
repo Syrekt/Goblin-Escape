@@ -2783,6 +2783,61 @@ tracks/7/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_y4shw"]
+resource_name = "land_short"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.100000024, 0.19999999),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_7ft60")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Sprite2D/..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [Vector2(0, 32), 5.0],
+"method": &"emit_noise"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_cfvac"]
 resource_name = "orgasm_goblin1"
 length = 2.0
@@ -4611,61 +4666,6 @@ tracks/3/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_y4shw"]
-resource_name = "land_short"
-length = 0.3
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.100000024, 0.19999999),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [5, 6, 7]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_7ft60")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("%Sprite2D/..")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [Vector2(0, 32), 5.0],
-"method": &"emit_noise"
-}]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cuohi"]
 _data = {
 &"RESET": SubResource("Animation_5koc5"),
@@ -5250,7 +5250,7 @@ sfx_whiff = ExtResource("82_8nsgr")
 [node name="SlashHitbox" parent="StateMachine/slash" instance=ExtResource("45_42hh8")]
 position = Vector2(41, -37)
 scale = Vector2(2.84, 3.72)
-collision_mask = 136
+collision_mask = 32904
 monitorable = false
 
 [node name="stab" type="Node2D" parent="StateMachine" groups=["combat_state"]]
@@ -5262,7 +5262,7 @@ pushback_force = 0
 [node name="StabHitbox" parent="StateMachine/stab" instance=ExtResource("45_42hh8")]
 position = Vector2(45, -41)
 scale = Vector2(3.2721, 0.904796)
-collision_mask = 136
+collision_mask = 32904
 monitorable = false
 
 [node name="bash" type="Node2D" parent="StateMachine" groups=["combat_state"]]
@@ -5274,7 +5274,7 @@ pushback_force = 300
 [node name="BashHitbox" parent="StateMachine/bash" instance=ExtResource("45_42hh8")]
 position = Vector2(12, -34)
 scale = Vector2(1.5, 2.5)
-collision_mask = 136
+collision_mask = 32904
 monitorable = false
 
 [node name="bash_no_sword" type="Node2D" parent="StateMachine"]

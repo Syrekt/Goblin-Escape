@@ -5,7 +5,7 @@ class_name MapObject extends CharacterBody2D
 @onready var audio_emitter : AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var light_occuler : LightOccluder2D = $LightOccluder2D
 
-@export var health	:= 10.0
+@export var health	:= 50.0
 var health_max		:= 0.0
 var health_cur 		:= 0.0
 
