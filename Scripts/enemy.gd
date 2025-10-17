@@ -38,7 +38,7 @@ var aware := false # Extra awersion, can detect player in dark
 var direction_locked := false
 var facing_locked := false
 var anim_speed := 1.0
-var chase_disabled := false
+var chase_disabled := false ## Disabled in struggle state
 var catched_player := false
 
 var states_locked := false
@@ -81,7 +81,7 @@ var collectable_scene = preload("res://Objects/collectable.tscn")
 
 var spawn_state : Dictionary
 
-signal heard_noise(id: Enemy)
+signal heard_noise(id: Enemy) ## Triggers Kalin's reaction
 
 #region Methods
 func set_facing(dir: int):
@@ -172,6 +172,7 @@ func hear_noise(noise: Node2D) -> void:
 		return
 
 	if noise.source is Player:
+		emote_emitter.play("triggered")
 		heard_noise.emit(self)
 	friend = null
 	if !chase_target: match state_node.state.name:
@@ -242,6 +243,7 @@ func start_chase(target:Player) -> void:
 		print("Chase disabled")
 		return
 
+	emote_emitter.play("alarmed")
 	print("start chase")
 	player_in_range = true
 	chase_target = target
@@ -446,8 +448,14 @@ func _spawn_collectable() -> void:
 		var speed = randf_range(100.0, 300.0)
 		collectable.linear_velocity = Vector2.from_angle(rad) * speed
 func _on_chase_detector_body_entered(body:Node2D) -> void:
-	if debug: print("player body entered in chase detector")
-	start_chase(body)
+	print("player body entered in chase detector")
+
+	print("body.invisible: "+str(body.invisible));
+	print("aware: "+str(aware))
+	if aware:
+		start_chase(body)
+	elif !body.invisible:
+		start_chase(body)
 func _on_chase_range_body_exited(body:Player) -> void:
 	if debug: print("player body exited chase range")
 	drop_chase(body)

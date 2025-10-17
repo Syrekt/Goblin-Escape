@@ -727,6 +727,7 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
+	Debugger.printui("invisible: "+str(invisible))
 	if just_pressed("quick save"):
 		Ge.save_game()
 	if just_pressed("quick load"):

@@ -4708,7 +4708,7 @@ floor_snap_length = 12.0
 script = ExtResource("1_tpqnq")
 slide_speed = 200.0
 snap_offset = Vector2(-17, 3)
-save_list = Array[String](["vitality", "strength", "endurance", "level", "has_sword", "experience_point"])
+save_list = Array[String](["vitality", "strength", "endurance", "level", "has_sword", "experience_point", "has_heavy_stance", "has_defensive_stance"])
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true

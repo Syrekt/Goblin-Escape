@@ -1,5 +1,6 @@
 extends Area2D
 
+var ray : RayCast2D
 
 @export var lit := true
 @export var toggle_speed := 1.0
@@ -12,6 +13,9 @@ func _ready() -> void:
 	if !lit:
 		lit_area.scale = Vector2(0, 0)
 		point_light.scale = Vector2(0, 0)
+	ray = RayCast2D.new()
+	ray.collide_with_areas = true
+	add_child(ray)
 
 
 func toggle_light() -> void:
@@ -42,7 +46,10 @@ func load(data: Dictionary) -> void:
 
 func _on_body_entered(body: CharacterBody2D) -> void:
 	if body is Player || body is Enemy:
-		body.light_source = self
+		ray.target_position = ray.to_local(body.global_position)
+		await get_tree().physics_frame
+		if(!ray.is_colliding()):
+			body.light_source = self
 
 func _on_body_exited(body: CharacterBody2D) -> void:
 	if body is Player || body is Enemy:
