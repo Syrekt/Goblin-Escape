@@ -10,13 +10,12 @@ process_mode = 3
 script = ExtResource("1_cv5li")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.909804, 0.745098, 0.372549, 1)
+color = Color(0, 0, 0, 0.5803922)
 metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -60,11 +59,19 @@ text = "Options"
 layout_mode = 2
 text = "Quit"
 
-[node name="OptionsMenu" parent="." instance=ExtResource("4_aoygg")]
-offset_left = 146.0
-offset_top = 20.0
-offset_right = -149.0
-offset_bottom = -35.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 34
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 34
+
+[node name="OptionsMenu" parent="MarginContainer" instance=ExtResource("4_aoygg")]
+layout_mode = 2
 
 [connection signal="button_up" from="VBoxContainer/Continue" to="." method="_on_continue_button_up"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]

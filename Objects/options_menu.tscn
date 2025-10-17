@@ -12,12 +12,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 0
+current_tab = 2
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -105,7 +108,6 @@ layout_mode = 2
 metadata/_tab_index = 1
 
 [node name="Controls" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -122,50 +124,42 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Controls/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="Controls/MarginContainer"]
 layout_mode = 2
+theme_override_constants/h_separation = 212
+theme_override_constants/v_separation = 32
+columns = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Controls/MarginContainer/ScrollContainer"]
-layout_mode = 2
-theme_override_constants/separation = 32
-
-[node name="ButtonKeybind" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind" parent="Controls/MarginContainer/GridContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
 action_name = "up"
 
-[node name="ButtonKeybind2" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind2" parent="Controls/MarginContainer/GridContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
 action_name = "down"
 
-[node name="ButtonKeybind3" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind3" parent="Controls/MarginContainer/GridContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
 action_name = "left"
 
-[node name="ButtonKeybind4" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind4" parent="Controls/MarginContainer/GridContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
 action_name = "right"
 
-[node name="ButtonKeybind6" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind6" parent="Controls/MarginContainer/GridContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
 action_name = "attack"
 
-[node name="ButtonKeybind7" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind7" parent="Controls/MarginContainer/GridContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
 action_name = "run"
 
-[node name="ButtonKeybind8" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind8" parent="Controls/MarginContainer/GridContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
 action_name = "stance"
 
-[node name="Control" type="Control" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(264, 22)
+[node name="ResetKeybindings" type="Button" parent="Controls/MarginContainer/GridContainer"]
 layout_mode = 2
-
-[node name="ResetKeybindings" type="Button" parent="Controls/MarginContainer/ScrollContainer/VBoxContainer/Control"]
-layout_mode = 0
-offset_left = 140.0
-offset_right = 228.0
-offset_bottom = 22.0
 text = "Reset Keybindings"
 
 [node name="Noise Indicator" type="TabBar" parent="."]
@@ -290,7 +284,7 @@ ticks_position = 3
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/PixelPerfect" to="." method="_on_pixel_perfect_toggled"]
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/Borderless" to="." method="_on_borderless_toggled"]
 [connection signal="pressed" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/CenterWindow" to="." method="_on_center_window_pressed"]
-[connection signal="pressed" from="Controls/MarginContainer/ScrollContainer/VBoxContainer/Control/ResetKeybindings" to="." method="_on_reset_keybindings_pressed"]
+[connection signal="pressed" from="Controls/MarginContainer/GridContainer/ResetKeybindings" to="." method="_on_reset_keybindings_pressed"]
 [connection signal="toggled" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/NoiseToggle/NoiseToggleCheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="pressed" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer/ResetColor" to="." method="_on_reset_color_pressed"]
 [connection signal="drag_ended" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Red/NoiseColorRedSlider" to="." method="_on_noise_color_red_slider_drag_ended"]

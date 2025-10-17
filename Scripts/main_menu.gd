@@ -4,7 +4,7 @@ class_name MainMenu extends CanvasLayer
 var confirmation_dialogue = preload("res://UI/confirmation_dialog.tscn")
 
 @onready var vbox = $VBoxContainer
-@onready var options = $OptionsMenu
+@onready var options = find_child("OptionsMenu")
 
 func _ready() -> void:
 	#get_tree().paused = true

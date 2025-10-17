@@ -55,13 +55,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	Options.current_screen = DisplayServer.window_get_current_screen()
-	var current_screen = Options.current_screen
-	print("current_screen: "+str(current_screen))
-	var fullscreen = Options.fullscreen
-	print("fullscreen: "+str(fullscreen))
-	resolution.disabled = fullscreen
-	borderless_toggle.disabled = fullscreen
+	Options.current_screen		= DisplayServer.window_get_current_screen()
+	resolution.disabled			= Options.fullscreen
+	borderless_toggle.disabled	= Options.fullscreen
 	
 
 	noise_color_rect.color = Color(noise_color_r.value/255.0, noise_color_g.value/255.0, noise_color_b.value/255.0, noise_color_a.value/255.0)

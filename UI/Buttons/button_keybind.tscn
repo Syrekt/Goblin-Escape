@@ -11,7 +11,7 @@ script = ExtResource("1_6efsq")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 layout_mode = 0
-offset_right = 263.0
+offset_right = 203.0
 offset_bottom = 23.0
 
 [node name="Label" type="Label" parent="HSplitContainer"]
@@ -21,7 +21,7 @@ text = "Text"
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="HSplitContainer"]
-custom_minimum_size = Vector2(160, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 toggle_mode = true
 

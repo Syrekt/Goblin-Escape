@@ -14,7 +14,8 @@ func update(_delta: float) -> void:
 		if !player.pressed("stance"): lock_stance_button = false
 
 	if just_climbed:
-		await get_tree().physics_frame
+		# Why?
+		#await get_tree().physics_frame
 		just_climbed = false
 	elif !player.is_on_floor():
 		finished.emit("fall")

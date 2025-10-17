@@ -8,8 +8,9 @@ func enter(previous_path_string: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
 
 func exit() -> void:
-	if player.pcam:
-		player.pcam.follow_offset = Vector2.ZERO
+	#if player.pcam:
+	#	player.pcam.follow_offset = Vector2.ZERO
+	pass
 
 func update(delta: float) -> void:
 	if player.pressed("up") || player.pressed("jump"):

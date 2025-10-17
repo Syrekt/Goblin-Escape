@@ -23,5 +23,5 @@ func physics_update(delta: float) -> void:
 		finished.emit("slide")
 	elif player.just_pressed("jump") && player.is_on_one_way_collider:
 		player.global_position.y += 4
-	elif floor_angle == 0 && !player.is_on_one_way_collider && !player.col_corner_hang.has_overlapping_bodies():
+	elif floor_angle == 0 && !player.col_corner_hang.has_overlapping_bodies():
 		finished.emit("corner_hang")

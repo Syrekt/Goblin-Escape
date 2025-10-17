@@ -25,7 +25,7 @@ func update(delta):
 	if player.can_grab_corner():
 		if player.ray_corner_grab_check.is_colliding():
 			var collider = player.ray_corner_grab_check.get_collider()
-			if !player.is_collider_one_way(collider):
+			if true: #!player.is_collider_one_way(collider):
 				if player.col_auto_climb_bottom.has_overlapping_bodies():
 					player.quick_climb()
 				else:

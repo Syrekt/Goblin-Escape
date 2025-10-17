@@ -34,7 +34,7 @@ var is_on_one_way_collider := false
 
 var remote_control_input : Array[String]
 
-var climb_start_position : Vector2
+var climb_start_position : Vector2 ## When Kalin takes damage, she is moved to this position
 #endregion
 #region Stats & EXP
 const HEALTH_PER_VIT	:= 10
@@ -727,7 +727,6 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
-
 	if just_pressed("quick save"):
 		Ge.save_game()
 	if just_pressed("quick load"):
