@@ -8,7 +8,6 @@ extends Node2D
 @onready var animation_tree : AnimationTree = $AnimationTree
 
 @export var closed := true
-@export var key : InventoryItem
 
 @export_multiline var closed_dialogue : String
 @export_multiline var custom_thought : String

@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=108 format=3 uid="uid://1quahlg1y22o"]
+[gd_resource type="TileSet" load_steps=110 format=3 uid="uid://1quahlg1y22o"]
 
 [ext_resource type="Texture2D" uid="uid://bqtpx8ja2r3ni" path="res://Map/FP_CastlePrison/background_obj.png" id="1_leifh"]
 [ext_resource type="Texture2D" uid="uid://d46bcae481s6" path="res://Map/FP_CastlePrison/mainlevbuildB.png" id="2_qy7eu"]
@@ -90,6 +90,12 @@ tile_data = PackedInt32Array(0, 589826, 0, 65536, 589826, 1, 1, 655362, 0, 65537
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_liv5d"]
 tile_data = PackedInt32Array(0, 1966082, 14, 65536, 1966082, 15, 131072, 1966082, 16, 1, 2031618, 14, 65537, 2031618, 15, 131073, 2031618, 16, 65538, 2293762, 14, 65539, 2359298, 14, 65540, 2424834, 14, 65541, 2490370, 14, 65542, 2293762, 14, 65543, 2359298, 14, 65544, 2424834, 14, 65545, 2490370, 14, 10, 1966082, 268435463, 65546, 1966082, 268435464, 131082, 1966082, 268435465, 11, 1900546, 268435463, 65547, 1900546, 268435464, 131083, 1900546, 268435465)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_4d7v7"]
+tile_data = PackedInt32Array(0, 2228226, 11, 65536, 2228226, 12, 131072, 1376258, 17, 196608, 1114114, 268435481, 262144, 1376258, 18, 327680, 1376258, 19, 262145, 1179650, 33, 327681, 1179650, 34, 262146, 1245186, 33, 327682, 1245186, 34, 262147, 1310722, 33, 327683, 1310722, 34, 262148, 1376258, 33, 327684, 1376258, 34, 5, 2228226, 268435467, 65541, 2228226, 268435468, 131077, 1376258, 268435473, 196613, 1114114, 25, 262149, 1376258, 268435474, 327685, 1376258, 268435475)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_px6gy"]
+tile_data = PackedInt32Array(0, 917506, 27, 65536, 917506, 28, 65537, 983042, 28)
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_jpv3x"]
 tile_data = PackedInt32Array(0, 1245186, 30, 65536, 1245186, 31, 131072, 1245186, 32, 1, 1769474, 30, 65537, 1769474, 31, 131073, 1769474, 32, 2, 1835010, 30, 65538, 1835010, 31, 131074, 1835010, 32)
@@ -3885,6 +3891,9 @@ texture = ExtResource("3_usbtt")
 10:0/0 = 0
 9:1/0 = 0
 10:1/0 = 0
+15:28/0 = 0
+14:28/0 = 0
+14:27/0 = 0
 
 [resource]
 occlusion_layer_0/light_mask = 1
@@ -3932,3 +3941,5 @@ pattern_31 = SubResource("TileMapPattern_inseq")
 pattern_32 = SubResource("TileMapPattern_khlmt")
 pattern_33 = SubResource("TileMapPattern_hwx72")
 pattern_34 = SubResource("TileMapPattern_liv5d")
+pattern_35 = SubResource("TileMapPattern_4d7v7")
+pattern_36 = SubResource("TileMapPattern_px6gy")

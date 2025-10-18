@@ -172,6 +172,7 @@ func hear_noise(noise: Node2D) -> void:
 		return
 
 	if noise.source is Player:
+		set_facing(facing * -1)
 		emote_emitter.play("triggered")
 		heard_noise.emit(self)
 	friend = null
@@ -258,8 +259,6 @@ func drop_chase(target:Player) -> void:
 	target.enemies_on_chase.erase(self)
 	chase_target = null
 	player_in_range = false
-	if !awareness_timer.is_inside_tree() || awareness_timer.get_parent() == null:
-		add_child(awareness_timer)
 	awareness_timer.start()
 func assign_player(node:Player) -> void:
 	if debug: print("player: "+str(player))
@@ -355,6 +354,8 @@ func _ready() -> void:
 
 	enter_shadow.connect(_on_enter_shadow)
 	leave_shadow.connect(_on_leave_shadow)
+
+	awareness_timer.stop()
 func _process(delta: float) -> void:
 	# Check if there is anything that stops the gameplay
 	var ui_nodes = get_tree().get_nodes_in_group("UIPanel")

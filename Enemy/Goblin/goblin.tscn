@@ -1276,6 +1276,7 @@ position = Vector2(0, -22)
 
 [node name="AwarenessTimer" type="Timer" parent="."]
 one_shot = true
+autostart = true
 
 [node name="ThreatCollider" type="Area2D" parent="."]
 visible = false

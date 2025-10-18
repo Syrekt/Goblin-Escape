@@ -35,6 +35,7 @@ func update(delta : float) -> void:
 		if enemy.chase_target.dead:
 			finished.emit("leave_player")
 		elif enemy.chase_target.unconscious && enemy.chase_target.can_have_sex:
+			enemy.start_chase(enemy.chase_target)
 			finished.emit("chase")
 		elif !enemy.chase_target.hiding:
 			#print("Target in sight, chase target")
@@ -43,6 +44,7 @@ func update(delta : float) -> void:
 				print("aware: "+str(enemy.aware))
 				print("target.invisible: "+str(enemy.chase_target.invisible));
 				print("target.hiding: "+str(enemy.chase_target.hiding));
+			enemy.start_chase(enemy.chase_target)
 			finished.emit("chase")
 	elif enemy.current_patrol_point && patrol_point_reached():
 		if enemy.debug: print("patrol point reached")
