@@ -38,14 +38,17 @@ func _physics_process(delta: float) -> void:
 func take_damage(damage: int, source) -> void:
 	if damage > 0:
 		Ge.play_particle(load("res://VFX/crate_particles.tscn"), global_position)
-	damage_taken = damage_taken + damage
+	health_cur -= damage
 	var frame_count = float(sprite.sprite_frames.get_frame_count(sprite.animation))
-	if damage_taken >= frame_count-1:
+	if health_cur > 0:
+		Ge.play_audio_from_string_array(source.global_position, 0, "res://SFX/Hit on wood/")
+
+		damage_taken = damage_taken + damage
+		sprite.frame = (1 - (health_cur / health_max)) * frame_count
+	else:
+		sprite.frame = frame_count
 		Ge.play_audio_free(0, "res://SFX/wood break.mp3")
-		sprite.frame = (health_cur / health_max) * frame_count
+
 		set_collision_layer_value(1, false)
 		set_collision_layer_value(8, false)
 		if light_occuler: light_occuler.queue_free()
-	else:
-		Ge.play_audio_from_string_array(source.global_position, 0, "res://SFX/Hit on wood/")
-		sprite.frame = damage_taken
