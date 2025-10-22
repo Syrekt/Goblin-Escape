@@ -21,6 +21,7 @@ func physics_update(delta: float) -> void:
 			fall_damage = round((player.global_position.y - fall_start_y)/16)
 		print("fall_damage: "+str(fall_damage))
 		if fall_damage > 0:
+			fall_damage = max(fall_damage, 10) # Apply minimum of 10 damage
 			finished.emit("land_hurt", {"fall_damage" : fall_damage})
 		elif land_animation_timer.is_stopped():
 			finished.emit("land")
