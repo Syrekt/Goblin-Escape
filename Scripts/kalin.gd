@@ -509,6 +509,13 @@ func get_stab_sweat_cost() -> float:
 	return STAB_SWEAT + log((STAB_SWEAT_PER_STRENGHT * strength) + 1)
 func get_bash_sweat_cost() -> float:
 	return BASH_SWEAT + log((BASH_SWEAT_PER_STRENGHT * strength) + 1)
+func can_be_attacked() -> bool: ## Returns false when player is in 'sex_state' or 'strugle_state'
+	var groups = state_node.get_groups()
+	for group in groups:
+		if group == "sex_state" || group == "struggle_state":
+			return false
+
+	return true
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

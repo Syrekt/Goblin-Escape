@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://dw2d8bu1vlvv6"]
+[gd_scene load_steps=69 format=3 uid="uid://dw2d8bu1vlvv6"]
 
 [ext_resource type="Script" uid="uid://bb3qdl7k1v8ae" path="res://Enemy/Goblin/goblin.gd" id="1_poooq"]
 [ext_resource type="Texture2D" uid="uid://bcs17g4yh13l4" path="res://Enemy/Goblin/goblin-idle_strip6.png" id="2_mqpvv"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://bnsshl0mlmfvb" path="res://Enemy/States/slash.gd" id="23_6fbis"]
 [ext_resource type="PackedScene" uid="uid://2s1ryg6qqqmc" path="res://Objects/hitbox.tscn" id="24_ivgjd"]
 [ext_resource type="Script" uid="uid://3v1xy6c3ig5r" path="res://Enemy/States/stab.gd" id="25_s405j"]
+[ext_resource type="Script" uid="uid://do6ca6hqqbpps" path="res://Enemy/states/stance_walk.gd" id="27_su4u7"]
 [ext_resource type="Script" uid="uid://bk738pl78o133" path="res://Enemy/States/stance_heavy.gd" id="27_wo02b"]
 [ext_resource type="Texture2D" uid="uid://dpp1lvwghlw5l" path="res://Enemy/Goblin/goblin_grab_fail_strip7.png" id="27_ynrxc"]
 [ext_resource type="Script" uid="uid://bmsypgid81p62" path="res://Enemy/States/stance_light.gd" id="28_jm82n"]
@@ -1019,6 +1020,9 @@ size = Vector2(20, 36)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rha5u"]
 size = Vector2(20, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_su4u7"]
+size = Vector2(136.5, 31.5)
+
 [node name="Goblin" type="CharacterBody2D" node_paths=PackedStringArray("main_stance") groups=["Enemy", "MapNode", "Persistent"]]
 z_index = 1
 collision_layer = 8
@@ -1111,6 +1115,9 @@ transitions = [NodePath("../stance_heavy")]
 attack_state = [NodePath("../grab"), NodePath("../stab")]
 stance_time = 0.5
 attack_time = 0.2
+
+[node name="stance_walk" type="Node" parent="StateMachine"]
+script = ExtResource("27_su4u7")
 
 [node name="grab" type="Node2D" parent="StateMachine"]
 script = ExtResource("13_6vclp")
@@ -1298,6 +1305,15 @@ position = Vector2(0, -16)
 scale = Vector2(3.07, 1)
 shape = SubResource("RectangleShape2D_rha5u")
 
+[node name="EnemyProximity" type="Area2D" parent="." groups=["Flip"]]
+visible = false
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyProximity"]
+position = Vector2(55.75, -0.25)
+shape = SubResource("RectangleShape2D_su4u7")
+
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="StateMachine/idle/IdleTimer" to="StateMachine/idle" method="_on_idle_timer_timeout"]
@@ -1308,7 +1324,6 @@ shape = SubResource("RectangleShape2D_rha5u")
 [connection signal="timeout" from="StateMachine/chat_lead/LeadTimer" to="StateMachine/chat_lead" method="_on_lead_timer_timeout"]
 [connection signal="timeout" from="StateMachine/chat_lead/SecondaryTimer" to="StateMachine/chat_lead" method="_on_secondary_timer_timeout"]
 [connection signal="body_entered" from="PlayerProximity" to="." method="_on_player_proximity_body_entered"]
-[connection signal="body_entered" from="ChaseDetector" to="." method="_on_chase_detector_body_entered"]
 [connection signal="body_exited" from="ChaseRange" to="." method="_on_chase_range_body_exited"]
 [connection signal="body_entered" from="CrushCheck" to="." method="_on_crush_check_body_entered"]
 [connection signal="timeout" from="AwarenessTimer" to="." method="_on_awareness_timer_timeout"]

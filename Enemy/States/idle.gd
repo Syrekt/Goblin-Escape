@@ -17,8 +17,9 @@ func update(delta : float) -> void:
 			finished.emit("chat_secondary")
 		return
 	if enemy.chase_target && await enemy.detect_player(enemy.chase_target):
-		finished.emit("chase")
-		return
+		if enemy.chase_target.can_be_attacked():
+			finished.emit("chase")
+			return
 
 func _on_idle_timer_timeout() -> void:
 	if enemy.patrol_amount > 0:

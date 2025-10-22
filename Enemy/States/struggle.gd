@@ -10,3 +10,5 @@ func exit() -> void:
 
 func update(delta: float) -> void:
 	enemy.player.global_position.x = enemy.global_position.x + 23*enemy.facing
+	if enemy.player.grabbed_by != enemy:
+		finished.emit("shoved")

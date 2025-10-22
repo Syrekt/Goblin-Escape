@@ -74,8 +74,10 @@ func _on_stance_timer_timeout() -> void:
 	if !enemy.attack_detector.has_overlapping_bodies():
 		if enemy.global_position.distance_to(enemy.chase_target.global_position) > 64:
 			finished.emit("chase")
-		else:
+		elif enemy.chase_target.can_be_attacked():
 			finished.emit(attack_state.pick_random().name, {"step_forward": true})
+		else:
+			finished.emit("idle")
 		return
 	enemy.wait_animation_transition = true
 	if debug_stance != "":
@@ -87,8 +89,10 @@ func _on_attack_timer_timeout() -> void:
 	if !enemy.attack_detector.has_overlapping_bodies():
 		if enemy.global_position.distance_to(enemy.chase_target.global_position) > 64:
 			finished.emit("chase")
-		else:
+		elif enemy.chase_target.can_be_attacked():
 			finished.emit(attack_state.pick_random().name, {"step_forward": true})
+		else:
+			finished.emit("idle")
 		return
 	enemy.wait_animation_transition = true
 	finished.emit(attack_state.pick_random().name)

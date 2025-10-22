@@ -33,7 +33,7 @@ var patrol_amount := 0
 
 @export var facing := 1
 var player_in_range := false
-var chase_target : Node2D
+var chase_target : Player
 var aware := false # Extra awersion, can detect player in dark
 var direction_locked := false
 var facing_locked := false
@@ -68,6 +68,8 @@ var wait_animation_transition := false
 @onready var player_proximity	:= $PlayerProximity
 @onready var awareness_timer	: Timer = $AwarenessTimer
 @onready var attack_detector	:= $AttackDetector
+@onready var enemy_proximity	: Area2D = $EnemyProximity
+@onready var chase_detector		: Area2D = $ChaseDetector
 
 @onready var cp	= combat_properties
 @onready var audio_emitter = $SFX
@@ -172,7 +174,8 @@ func hear_noise(noise: Node2D) -> void:
 		return
 
 	if noise.source is Player:
-		set_facing(facing * -1)
+		print("noise.global_position: "+str(noise.global_position));
+		#set_facing(noise.global_position.x  - global_position.x)
 		emote_emitter.play("triggered")
 		heard_noise.emit(self)
 	friend = null
@@ -371,6 +374,8 @@ func _physics_process(delta: float) -> void:
 				start_chase(player)
 		elif player.invisible:
 			pass
+	if chase_detector.has_overlapping_bodies():
+		start_chase(player)
 
 	if light_source && light_source.lit:
 		ray_light.target_position = ray_light.to_local(light_source.global_position)
@@ -448,15 +453,6 @@ func _spawn_collectable() -> void:
 		var rad = deg_to_rad(deg)
 		var speed = randf_range(100.0, 300.0)
 		collectable.linear_velocity = Vector2.from_angle(rad) * speed
-func _on_chase_detector_body_entered(body:Node2D) -> void:
-	print("player body entered in chase detector")
-
-	print("body.invisible: "+str(body.invisible));
-	print("aware: "+str(aware))
-	if aware:
-		start_chase(body)
-	elif !body.invisible:
-		start_chase(body)
 func _on_chase_range_body_exited(body:Player) -> void:
 	if debug: print("player body exited chase range")
 	drop_chase(body)

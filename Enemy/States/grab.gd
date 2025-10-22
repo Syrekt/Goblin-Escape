@@ -25,6 +25,8 @@ func _on_lunge_frame() -> void:
 	else:
 		enemy.apply_force_x(50, 0.5)
 func _on_hit_frame() -> void:
+	if !enemy.player.can_be_attacked():
+		return
 	if grab_collider.has_overlapping_bodies():
 		if enemy.player.health.value > 0:
 			enemy.catched_player = true

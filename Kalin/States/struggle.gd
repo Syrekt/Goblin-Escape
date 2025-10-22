@@ -21,6 +21,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 
 func exit() -> void:
+	player.grabbed_by = null
 	progression_bar.hide()
 	tween.kill()
 

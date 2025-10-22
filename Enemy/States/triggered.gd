@@ -5,7 +5,6 @@ extends EnemyState
 
 func enter(previous_state_path : String, data = {}) -> void:
 	enemy.emote_emitter.play(name)
-	enemy.set_facing(-enemy.facing)
 	ignore_timer.start()
 	direction_timer.start()
 	enemy.aware = true
