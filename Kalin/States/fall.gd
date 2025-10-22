@@ -18,7 +18,7 @@ func physics_update(delta: float) -> void:
 		var fall_distance = player.global_position.y - player.last_ground_position.y
 		print("fall_distance: "+str(fall_distance))
 		if abs(player.global_position.y - fall_start_y) > 96:
-			fall_damage = round((player.global_position.y - fall_start_y)/16)
+			fall_damage = round((player.global_position.y - fall_start_y)/8)
 		print("fall_damage: "+str(fall_damage))
 		if fall_damage > 0:
 			fall_damage = max(fall_damage, 10) # Apply minimum of 10 damage

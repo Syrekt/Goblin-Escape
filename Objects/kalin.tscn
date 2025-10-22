@@ -5346,15 +5346,15 @@ script = ExtResource("55_5lcso")
 [node name="stun" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction"]]
 script = ExtResource("56_qqpcq")
 
-[node name="sex" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="sex" type="Node" parent="StateMachine" groups=["no_interaction", "sex_state"]]
 script = ExtResource("59_muuj4")
 animation_counter_max = 8
 animation_counter_min = 5
 
-[node name="orgasm" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="orgasm" type="Node" parent="StateMachine" groups=["no_interaction", "sex_state"]]
 script = ExtResource("61_c6www")
 
-[node name="post_sex" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="post_sex" type="Node" parent="StateMachine" groups=["no_interaction", "sex_state"]]
 script = ExtResource("40_xirjq")
 
 [node name="hiding" type="Node" parent="StateMachine"]
@@ -5369,20 +5369,20 @@ script = ExtResource("70_egy32")
 [node name="ladder_climb" type="Node" parent="StateMachine"]
 script = ExtResource("88_7e6uh")
 
-[node name="struggle_goblin" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="struggle_goblin" type="Node" parent="StateMachine" groups=["no_interaction", "struggle_state"]]
 script = ExtResource("83_441gv")
 
 [node name="Timer" type="Timer" parent="StateMachine/struggle_goblin"]
 wait_time = 5.0
 one_shot = true
 
-[node name="struggle_transition_goblin" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="struggle_transition_goblin" type="Node" parent="StateMachine" groups=["no_interaction", "struggle_state"]]
 script = ExtResource("98_y4shw")
 
-[node name="grab_goblin" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="grab_goblin" type="Node" parent="StateMachine" groups=["no_interaction", "struggle_state"]]
 script = ExtResource("40_xirjq")
 
-[node name="break_free" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="break_free" type="Node" parent="StateMachine" groups=["no_interaction", "struggle_state"]]
 script = ExtResource("87_6ykrs")
 
 [node name="crawl_in" type="Node" parent="StateMachine" groups=["no_interaction"]]
