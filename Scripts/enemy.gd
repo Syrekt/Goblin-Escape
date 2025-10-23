@@ -10,7 +10,8 @@ var move_speed	:= 0.0
 var force_x		:= 0.0
 var force_tween : Tween
 @export var chase_move_speed	:= 100
-@export var patrol_move_speed	:= 100
+@export var patrol_move_speed	:= 75
+@export var combat_move_speed	:= 50
 @export var stab_step_speed 	:= 100
 @export var slash_step_speed 	:= 200
 @export var lunge_speed			:= 50
@@ -141,9 +142,11 @@ func next_step_free(direction : int) -> bool:
 		return !colliding && $FallCheckLeft.is_colliding()
 	else:
 		return true
-func move(speed: float, direction: int) -> bool:
+func move(speed: float, direction: int, look_towards := direction) -> bool:
 	# Returns false if next step isn't free, turning the character or stopping it's movement
 
+	if look_towards != 0:
+		set_facing(look_towards)
 	if next_step_free(direction):
 		move_speed = speed * direction
 		return true
@@ -173,15 +176,18 @@ func hear_noise(noise: Node2D) -> void:
 	if !$NoiseIgnoreTimer.is_stopped():
 		return
 
-	if noise.source is Player:
+	print("noise.source: "+str(noise.source));
+	if !chase_target && noise.source is Player:
 		print("noise.global_position: "+str(noise.global_position));
-		#set_facing(noise.global_position.x  - global_position.x)
+		var dir = sign(noise.global_position.x - global_position.x)
+		set_facing(noise.global_position.x  - global_position.x)
 		emote_emitter.play("triggered")
 		heard_noise.emit(self)
 	friend = null
 	if !chase_target: match state_node.state.name:
 		"idle", "chat_lead":
 			state_node.state.finished.emit("triggered")
+			emote_emitter.play("triggered")
 		"triggered":
 			if debug: print("lose target from triggered")
 			#Trigger patrol just like losing the target
@@ -210,7 +216,7 @@ func detect_player(target: Player) -> bool:
 		
 func lost_target() -> void:
 	#CHANGES STATE
-	if debug: print("lost target")
+	print("lost target")
 	emote_emitter.play("confused")
 	patrol_amount = 4
 	state_node.state.finished.emit("idle")
@@ -244,11 +250,11 @@ func update_patrol_point() -> void:
 	current_patrol_point = new_point
 func start_chase(target:Player) -> void:
 	if chase_disabled:
-		print("Chase disabled")
+		if debug: print("Chase disabled")
 		return
 
-	emote_emitter.play("alarmed")
-	print("start chase")
+	if !chase_target:
+		emote_emitter.play("alarmed")
 	player_in_range = true
 	chase_target = target
 	awareness_timer.stop()
@@ -262,6 +268,8 @@ func drop_chase(target:Player) -> void:
 	target.enemies_on_chase.erase(self)
 	chase_target = null
 	player_in_range = false
+	if !awareness_timer.is_inside_tree():
+		printerr("Awareness timer isn't inside tree")
 	awareness_timer.start()
 func assign_player(node:Player) -> void:
 	if debug: print("player: "+str(player))
@@ -286,12 +294,18 @@ func reset() -> void:
 	set_facing(spawn_state.facing)
 
 	state_node.state.finished.emit("idle")
+func has_enemy_in_proximity() -> bool:
+	if enemy_proximity.get_overlapping_bodies().any(func(b): return b != self):
+		return true
+	return false
 #endregion
 #region Animation end
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if wait_animation_transition: return
 	var state = state_node.state
 	var state_name = state.name
+	if debug:
+		print("anim_name: "+str(anim_name))
 
 	match state_name:
 		"slash", "stab", "bash":
@@ -426,9 +440,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if cp.pushback_vector.x != 0:
 			set_facing(-sign(cp.pushback_vector.x))
-	else:
-		if(!facing_locked && velocity.x != 0):
-			set_facing(sign(velocity.x))
+	#else:
+	#	if(!facing_locked && velocity.x != 0):
+	#		set_facing(sign(velocity.x))
 
 	#endregion
 #endregion

@@ -94,5 +94,6 @@ func _on_attack_timer_timeout() -> void:
 		else:
 			finished.emit("idle")
 		return
-	enemy.wait_animation_transition = true
-	finished.emit(attack_state.pick_random().name)
+	if enemy.chase_target.can_be_attacked():
+		enemy.wait_animation_transition = true
+		finished.emit(attack_state.pick_random().name)

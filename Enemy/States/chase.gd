@@ -19,15 +19,17 @@ func update(delta):
 		print("target dead or unconscious")
 		finished.emit("laugh")
 		return
-	if enemy.attack_detector.has_overlapping_bodies():
-		# If in combat range
+	if enemy.attack_detector.has_overlapping_bodies(): # If in combat range
 		
 		if target.hiding:
 			# If Kalin hides in front of the enemy, unhide her
 			target.force_unhide()
 		elif !target.dead && !target.unconscious:
 			# Target is alive so take stance
-			finished.emit(enemy.main_stance.name)
+			if target.can_be_attacked():
+				finished.emit(enemy.main_stance.name)
+			else:
+				finished.emit("idle")
 		elif target.unconscious && target.can_have_sex:
 			# Allow player controller to play the sex animation
 			enemy.update_animation("idle")

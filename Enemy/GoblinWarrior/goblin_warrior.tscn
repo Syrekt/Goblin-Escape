@@ -35,7 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://yh6p23n7un5u" path="res://UI/Sliders/cur_health.png" id="26_ifl3v"]
 [ext_resource type="Script" uid="uid://d2dnfu2yrmil" path="res://Enemy/States/chase.gd" id="26_ug7pn"]
 [ext_resource type="Script" uid="uid://cctffwfexml1k" path="res://Enemy/States/laugh.gd" id="29_vd4fl"]
-[ext_resource type="Script" uid="uid://do6ca6hqqbpps" path="res://Enemy/states/stance_walk.gd" id="30_ec1cy"]
+[ext_resource type="Script" uid="uid://do6ca6hqqbpps" path="res://Enemy/States/stance_walk.gd" id="30_ec1cy"]
 [ext_resource type="PackedScene" uid="uid://b23mtnfp7xuec" path="res://Objects/emote.tscn" id="30_tjqy8"]
 [ext_resource type="Script" uid="uid://btr4jhp2hi3jr" path="res://Enemy/States/leave_player.gd" id="31_0glxa"]
 [ext_resource type="Script" uid="uid://cod1srgspwwqu" path="res://Enemy/States/chat_lead.gd" id="33_404n7"]

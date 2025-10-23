@@ -27,7 +27,7 @@
 [ext_resource type="Script" uid="uid://bnsshl0mlmfvb" path="res://Enemy/States/slash.gd" id="23_6fbis"]
 [ext_resource type="PackedScene" uid="uid://2s1ryg6qqqmc" path="res://Objects/hitbox.tscn" id="24_ivgjd"]
 [ext_resource type="Script" uid="uid://3v1xy6c3ig5r" path="res://Enemy/States/stab.gd" id="25_s405j"]
-[ext_resource type="Script" uid="uid://do6ca6hqqbpps" path="res://Enemy/states/stance_walk.gd" id="27_su4u7"]
+[ext_resource type="Script" uid="uid://do6ca6hqqbpps" path="res://Enemy/States/stance_walk.gd" id="27_su4u7"]
 [ext_resource type="Script" uid="uid://bk738pl78o133" path="res://Enemy/States/stance_heavy.gd" id="27_wo02b"]
 [ext_resource type="Texture2D" uid="uid://dpp1lvwghlw5l" path="res://Enemy/Goblin/goblin_grab_fail_strip7.png" id="27_ynrxc"]
 [ext_resource type="Script" uid="uid://bmsypgid81p62" path="res://Enemy/States/stance_light.gd" id="28_jm82n"]
@@ -1021,7 +1021,7 @@ size = Vector2(20, 36)
 size = Vector2(20, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_su4u7"]
-size = Vector2(136.5, 31.5)
+size = Vector2(83.5, 31.5)
 
 [node name="Goblin" type="CharacterBody2D" node_paths=PackedStringArray("main_stance") groups=["Enemy", "MapNode", "Persistent"]]
 z_index = 1
@@ -1311,7 +1311,7 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyProximity"]
-position = Vector2(55.75, -0.25)
+position = Vector2(29.25, -0.25)
 shape = SubResource("RectangleShape2D_su4u7")
 
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]

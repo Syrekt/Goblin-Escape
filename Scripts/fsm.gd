@@ -29,6 +29,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _transition_to_next_state(target_state_path: String, data: Dictionary = {}) -> void:
+	if owner.debug:
+		print_stack()
 	if "states_locked" in owner && owner.states_locked:
 		print("States are locked, exiting state transition.")
 		return

@@ -5,9 +5,15 @@ func update(delta: float):
 	var target = enemy.chase_target
 
 
-	if enemy.enemy_proximity.has_overlapping_bodies():
-		finished.emit("stance_walk", {"time" : 2, "reverse" : true})
+	if enemy.has_enemy_in_proximity():
+		finished.emit("stance_walk", {"time" : 0.1, "backwards" : true})
+		print("Has another enemy in it's proximity detector")
+		return
+
 	if enemy.chase_target:
+		if target.is_in_sex_state():
+			finished.emit("idle")
+			return
 		if target.unconscious || target.dead:
 			finished.emit("chase")
 			return

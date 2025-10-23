@@ -21,7 +21,6 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 
 func exit() -> void:
-	player.grabbed_by = null
 	progression_bar.hide()
 	tween.kill()
 
@@ -35,5 +34,5 @@ func physics_update(delta: float) -> void:
 	if progression_bar.value >= progression_bar.max_value:
 		player.break_grab()
 	elif progression_bar.value <= 0.0:
-		finished.emit(player.grabbed_by.transition_state)
 		player.grabbed_by.state_node.state.finished.emit(player.grabbed_by.transition_state)
+		finished.emit(player.grabbed_by.transition_state)

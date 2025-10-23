@@ -28,6 +28,7 @@ func _on_hit_frame() -> void:
 	if !enemy.player.can_be_attacked():
 		return
 	if grab_collider.has_overlapping_bodies():
+		var can_be_attacked = enemy.player.can_be_attacked()
 		if enemy.player.health.value > 0:
 			enemy.catched_player = true
 			enemy.player.get_grabbed(enemy, "grab_goblin")

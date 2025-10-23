@@ -189,7 +189,7 @@ func fall(delta):
 	move_and_slide()
 func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := true, attack := {}):
 	var state_name = state_node.state.name
-	if state_name == "death":
+	if !can_be_attacked():
 		return
 	# This breaks the shadow tint when Kalin takes damage in shadows
 	#%Sprite2D.material.set_shader_parameter("tint_color", Color(0, 0, 0, 0))
@@ -367,6 +367,7 @@ func emit_noise(offset : Vector2, amount : float) -> void:
 
 	_noise.amount_max = amount - noise_muffle
 	_noise.global_position = global_position + offset
+	_noise.source = self
 
 	add_sibling(_noise)
 func toggle_inventory():
@@ -489,8 +490,7 @@ func get_grabbed(enemy: Enemy, state: String) -> void:
 	grabbed_by = enemy
 func break_grab() -> void:
 	state_node.state.finished.emit("break_free")
-	grabbed_by.state_node.state.finished.emit("shoved")
-	grabbed_by = null
+	grabbed_by = null # Enemy will change it's state to 'shoved'
 func level_up() -> void:
 	var base_requirement := 100
 	var mod		:= 10.0
@@ -510,12 +510,19 @@ func get_stab_sweat_cost() -> float:
 func get_bash_sweat_cost() -> float:
 	return BASH_SWEAT + log((BASH_SWEAT_PER_STRENGHT * strength) + 1)
 func can_be_attacked() -> bool: ## Returns false when player is in 'sex_state' or 'strugle_state'
-	var groups = state_node.get_groups()
+	var groups = state_node.state.get_groups()
 	for group in groups:
-		if group == "sex_state" || group == "struggle_state":
+		if group == "sex_state" || group == "struggle_state" || state_node.state.name == "death":
 			return false
 
 	return true
+func is_in_sex_state() -> bool:
+	var groups = state_node.state.get_groups()
+	for group in groups:
+		if group == "sex_state":
+			return true
+
+	return false
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -537,10 +544,14 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 					state.finished.emit("stance_light")
 		"bash_no_sword":
 			state.finished.emit("idle")
-		"hurt", "break_free":
-			state.finished.emit("stance_light")
-		"hurt_no_sword":
+		"break_free":
+			if has_sword:
+				state.finished.emit("stance_light")
+			else:
+				state.finished.emit("idle")
+		"hurt", "hurt_no_sword":
 			state.finished.emit("idle")
+			grabbed_by = null
 		"corner_climb", "corner_climb_quick":
 			#global_position += Vector2(26*facing, -35)
 			state.finished.emit("idle", {"just_climbed": true})
@@ -732,6 +743,7 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
+	Debugger.printui("Can be attacked: "+str(can_be_attacked()));
 	if just_pressed("quick save"):
 		Ge.save_game()
 	if just_pressed("quick load"):
