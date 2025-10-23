@@ -388,7 +388,7 @@ func _physics_process(delta: float) -> void:
 				start_chase(player)
 		elif player.invisible:
 			pass
-	if chase_detector.has_overlapping_bodies():
+	if chase_detector.monitoring && chase_detector.has_overlapping_bodies():
 		start_chase(player)
 
 	if light_source && light_source.lit:

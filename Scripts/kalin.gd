@@ -550,7 +550,10 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			else:
 				state.finished.emit("idle")
 		"hurt", "hurt_no_sword":
-			state.finished.emit("idle")
+			if has_sword:
+				state.finished.emit("stance_light")
+			else:
+				state.finished.emit("idle")
 			grabbed_by = null
 		"corner_climb", "corner_climb_quick":
 			#global_position += Vector2(26*facing, -35)
@@ -743,7 +746,6 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
-	Debugger.printui("Can be attacked: "+str(can_be_attacked()));
 	if just_pressed("quick save"):
 		Ge.save_game()
 	if just_pressed("quick load"):
