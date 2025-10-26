@@ -1196,6 +1196,7 @@ shape = SubResource("RectangleShape2D_cqw5a")
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
 max_distance = 256.0
+bus = &"SFX"
 
 [node name="PlayerProximity" type="Area2D" parent="."]
 visible = false
@@ -1317,7 +1318,6 @@ shape = SubResource("RectangleShape2D_su4u7")
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="StateMachine/idle/IdleTimer" to="StateMachine/idle" method="_on_idle_timer_timeout"]
-[connection signal="timeout" from="StateMachine/patrol/PatrolTimer" to="StateMachine/patrol" method="_on_patrol_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/slash/SlashHitbox" to="StateMachine/slash" method="_on_slash_hitbox_body_entered"]
 [connection signal="body_entered" from="StateMachine/stab/StabHitbox" to="StateMachine/stab" method="_on_stab_hitbox_body_entered"]
 [connection signal="timeout" from="StateMachine/leave_player/Timer" to="StateMachine/leave_player" method="_on_timer_timeout"]

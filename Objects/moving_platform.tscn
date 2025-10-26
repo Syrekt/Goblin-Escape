@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqnewohsid5ao"]
+
+[ext_resource type="Texture2D" uid="uid://dx25dmahp2sdi" path="res://Map/FP_CastlePrison/mainlevbuild.png" id="1_dqaly"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wgnl3"]
+size = Vector2(96, 11)
+
+[node name="MovingPlatform" type="CharacterBody2D"]
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_dqaly")
+region_enabled = true
+region_rect = Rect2(272, 538, 96, 22)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5.5)
+shape = SubResource("RectangleShape2D_wgnl3")

@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Goblin Escape"
+config/version="0.1 Beta"
 run/main_scene="uid://1clhhggjvkd3"
 config/features=PackedStringArray("4.5", "Mobile")
 boot_splash/show_image=false
@@ -28,6 +29,7 @@ Options="*res://Scripts/options.gd"
 
 [debug]
 
+settings/gdscript/always_track_call_stacks=true
 gdscript/warnings/unused_variable=0
 gdscript/warnings/unused_private_class_variable=0
 gdscript/warnings/unused_parameter=0
@@ -227,3 +229,10 @@ textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
 viewport/hdr_2d=true
+
+[sentry]
+
+options/dsn="https://afff980a93f2922ed1f62f47b7b9cac6@o432685.ingest.us.sentry.io/4510251418910720"
+options/attach_scene_tree=true
+logger/logger_enabled=false
+experimental/attach_screenshot=true

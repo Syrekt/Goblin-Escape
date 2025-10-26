@@ -56,7 +56,6 @@ sprite_frames = SubResource("SpriteFrames_vg6yp")
 animation = &"lit"
 
 [node name="LitArea" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_rr5ik")
 
 [node name="Interaction" type="Area2D" parent="."]
@@ -71,6 +70,9 @@ metadata/_custom_type_script = "uid://b7pfro4cp11mh"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
 position = Vector2(0, 17.5)
 shape = SubResource("RectangleShape2D_fwbi0")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

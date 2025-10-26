@@ -21,6 +21,15 @@ extends TabContainer
 
 @onready var reset_keybindings : Button = find_child("ResetKeybindings")
 
+@onready var master_bus_id	:= AudioServer.get_bus_index("Master")
+@onready var sfx_bus_id		:= AudioServer.get_bus_index("SFX")
+@onready var efx_bus_id 	:= AudioServer.get_bus_index("EFX")
+@onready var bgm_bus_id 	:= AudioServer.get_bus_index("BGM")
+@onready var master_volume_slider	: HSlider = find_child("MasterVolume")
+@onready var sfx_volume_slider		: HSlider = find_child("SFXVolume")
+@onready var efx_volume_slider 		: HSlider = find_child("EFXVolume")
+@onready var bgm_volume_slider 		: HSlider = find_child("BGMVolume")
+
 var default_keybindings : Dictionary = {
 	"up"		: [KEY_A],
 	"down"		: [KEY_S],
@@ -52,6 +61,11 @@ func _ready() -> void:
 
 	noise_toggle.button_pressed = Ge.noise_enabled
 	borderless_toggle.button_pressed = Options.borderless
+
+	master_volume_slider.value	= AudioServer.get_bus_volume_db(master_bus_id)
+	sfx_volume_slider.value		= AudioServer.get_bus_volume_db(sfx_bus_id)
+	efx_volume_slider.value 	= AudioServer.get_bus_volume_db(efx_bus_id)
+	bgm_volume_slider.value 	= AudioServer.get_bus_volume_db(bgm_bus_id)
 
 
 func _process(delta: float) -> void:
@@ -175,3 +189,17 @@ func _on_reset_keybindings_pressed() -> void:
 			InputMap.action_add_event(action, ev)
 	for button in get_tree().get_nodes_in_group("key_bind_buttons"):
 		button.set_text_for_key()
+
+
+func _on_master_volume_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(master_bus_id, value)
+	AudioServer.set_bus_mute(master_bus_id, value <= -10.0)
+func _on_sfx_volume_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(sfx_bus_id, value)
+	AudioServer.set_bus_mute(sfx_bus_id, value <= -10.0)
+func _on_efx_volume_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(efx_bus_id, value)
+	AudioServer.set_bus_mute(efx_bus_id, value <= -10.0)
+func _on_bgm_volume_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(bgm_bus_id, value)
+	AudioServer.set_bus_mute(bgm_bus_id, value <= -10.0)

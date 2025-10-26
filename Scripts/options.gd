@@ -39,12 +39,16 @@ func _ready() -> void:
 
 func save_options() -> void:
 	var config = ConfigFile.new()
-	config.set_value("window", "fullscreen", fullscreen)
-	config.set_value("window", "borderless", borderless)
+	config.set_value("window", "fullscreen",	fullscreen)
+	config.set_value("window", "borderless", 	borderless)
 	config.set_value("window", "pixel_perfect", pixel_perfect)
-	config.set_value("window", "window_pos", DisplayServer.window_get_position())
-	config.set_value("window", "window_size", DisplayServer.window_get_size())
+	config.set_value("window", "window_pos",	DisplayServer.window_get_position())
+	config.set_value("window", "window_size",	DisplayServer.window_get_size())
 	config.set_value("window", "window_screen", DisplayServer.window_get_current_screen())
+	config.set_value("audio", "Master", AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))
+	config.set_value("audio", "SFX",	AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX")))
+	config.set_value("audio", "EFX", 	AudioServer.get_bus_volume_db(AudioServer.get_bus_index("EFX")))
+	config.set_value("audio", "BGM", 	AudioServer.get_bus_volume_db(AudioServer.get_bus_index("BGM")))
 	config.save(config_path)
 func load_options() -> int:
 	var config = ConfigFile.new()
@@ -56,6 +60,10 @@ func load_options() -> int:
 		window_pos		= config.get_value("window", "window_pos", window_pos)
 		window_size		= config.get_value("window", "window_size", window_size)
 		window_screen   = config.get_value("window", "window_screen", window_screen)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),	config.get_value("audio", "Master", 0))
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),		config.get_value("audio", "SFX", 0))
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("EFX"), 	config.get_value("audio", "EFX", 0))
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("BGM"), 	config.get_value("audio", "BGM", 0))
 		print("window_pos: "+str(window_pos))
 		print("window_size: "+str(window_size))
 		print("window_screen: "+str(window_screen))
@@ -63,7 +71,7 @@ func load_options() -> int:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		print("save option")
+		print("Save options")
 		save_options()
 	if what == NOTIFICATION_WM_POSITION_CHANGED:
 		save_options()

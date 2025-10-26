@@ -16,7 +16,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 2
+current_tab = 1
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
@@ -103,11 +103,81 @@ layout_mode = 2
 text = "Center Window"
 
 [node name="Audio" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
+[node name="MarginContainer" type="MarginContainer" parent="Audio"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Audio/MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="MasterVolumeContainer" type="HSplitContainer" parent="Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/MasterVolumeContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Master"
+
+[node name="MasterVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/MasterVolumeContainer"]
+layout_mode = 2
+min_value = -10.0
+max_value = 0.0
+
+[node name="SFXVolumeContainer" type="HSplitContainer" parent="Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/SFXVolumeContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "SFX"
+
+[node name="SFXVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/SFXVolumeContainer"]
+layout_mode = 2
+min_value = -10.0
+max_value = 0.0
+
+[node name="BGMVolumeContainer" type="HSplitContainer" parent="Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/BGMVolumeContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "BGM"
+
+[node name="BGMVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/BGMVolumeContainer"]
+layout_mode = 2
+min_value = -10.0
+max_value = 0.0
+
+[node name="EFXVolumeContainer" type="HSplitContainer" parent="Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/EFXVolumeContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Enviroment"
+
+[node name="EFXVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/EFXVolumeContainer"]
+layout_mode = 2
+min_value = -10.0
+max_value = 0.0
+
 [node name="Controls" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -284,6 +354,10 @@ ticks_position = 3
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/PixelPerfect" to="." method="_on_pixel_perfect_toggled"]
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/Borderless" to="." method="_on_borderless_toggled"]
 [connection signal="pressed" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/CenterWindow" to="." method="_on_center_window_pressed"]
+[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/MasterVolumeContainer/MasterVolume" to="." method="_on_master_volume_value_changed"]
+[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/SFXVolumeContainer/SFXVolume" to="." method="_on_sfx_volume_value_changed"]
+[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/BGMVolumeContainer/BGMVolume" to="." method="_on_bgm_volume_value_changed"]
+[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/EFXVolumeContainer/EFXVolume" to="." method="_on_efx_volume_value_changed"]
 [connection signal="pressed" from="Controls/MarginContainer/GridContainer/ResetKeybindings" to="." method="_on_reset_keybindings_pressed"]
 [connection signal="toggled" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/NoiseToggle/NoiseToggleCheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="pressed" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer/ResetColor" to="." method="_on_reset_color_pressed"]

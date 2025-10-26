@@ -29,6 +29,8 @@ signal show_stealth_tutorial
 var player : Player
 
 func _ready() -> void:
+	if !OS.is_debug_build():
+		SentryOptions.logger_enabled = true
 
 	show_combat_tutorial.connect(_show_combat_tutorial)
 	show_stealth_tutorial.connect(_show_stealth_tutorial)

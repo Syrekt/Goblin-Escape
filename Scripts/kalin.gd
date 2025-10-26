@@ -523,6 +523,9 @@ func is_in_sex_state() -> bool:
 			return true
 
 	return false
+func corner_climb_check_headbump() -> void:
+	if col_stand_check.has_overlapping_bodies():
+		state_node.state.finished.emit("crouch")
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -557,7 +560,10 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			grabbed_by = null
 		"corner_climb", "corner_climb_quick":
 			#global_position += Vector2(26*facing, -35)
-			state.finished.emit("idle", {"just_climbed": true})
+			if can_stand_up():
+				state.finished.emit("idle", {"just_climbed": true})
+			else:
+				state.finished.emit("crouch")
 		"slide":
 			state.finished.emit("crouch")
 		"orgasm":
@@ -585,6 +591,9 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 #endregion
 #region Init
 func _ready() -> void:
+	SentrySDK.add_breadcrumb(SentryBreadcrumb.create("Just about to welcome the World."))
+	SentrySDK.capture_message("Hello, World!")
+
 	$Overlays.show()
 	var canvas = find_child("UI")
 	canvas.show()
