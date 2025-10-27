@@ -31,7 +31,7 @@ func update(delta : float) -> void:
 	if enemy.current_patrol_point: 
 		patrol_dir = Ge.dir_towards(enemy, enemy.current_patrol_point)
 	#Decide if we are going to leave the player alone or chase
-	if enemy.chase_target:
+	if enemy.chase_target && enemy.target_in_sight:
 		if enemy.chase_target.dead:
 			finished.emit("leave_player")
 		elif enemy.chase_target.unconscious && enemy.chase_target.can_have_sex:

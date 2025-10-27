@@ -54,19 +54,31 @@ func load_options() -> int:
 	var config = ConfigFile.new()
 	var err = config.load(config_path)
 	if err == OK:
+		#region Load Display
 		fullscreen		= config.get_value("window", "fullscreen", false)
 		borderless 		= config.get_value("window", "borderless", borderless)
 		pixel_perfect	= config.get_value("window", "pixel_perfect", pixel_perfect)
 		window_pos		= config.get_value("window", "window_pos", window_pos)
 		window_size		= config.get_value("window", "window_size", window_size)
 		window_screen   = config.get_value("window", "window_screen", window_screen)
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),	config.get_value("audio", "Master", 0))
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),		config.get_value("audio", "SFX", 0))
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("EFX"), 	config.get_value("audio", "EFX", 0))
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("BGM"), 	config.get_value("audio", "BGM", 0))
 		print("window_pos: "+str(window_pos))
 		print("window_size: "+str(window_size))
 		print("window_screen: "+str(window_screen))
+		#endregion
+		#region Load Audio
+		var master_bus	= [AudioServer.get_bus_index("Master"), config.get_value("audio", "Master", 0)]
+		var sfx_bus		= [AudioServer.get_bus_index("SFX"), config.get_value("audio", "SFX", 0)]
+		var efx_bus		= [AudioServer.get_bus_index("EFX"), config.get_value("audio", "EFX", 0)]
+		var bgm_bus		= [AudioServer.get_bus_index("BGM"), config.get_value("audio", "BGM", 0)]
+		AudioServer.set_bus_volume_db(master_bus[0], master_bus[1])
+		AudioServer.set_bus_volume_db(sfx_bus[0], sfx_bus[1])
+		AudioServer.set_bus_volume_db(efx_bus[0], efx_bus[1])
+		AudioServer.set_bus_volume_db(bgm_bus[0], bgm_bus[1])
+		AudioServer.set_bus_mute(master_bus[0], master_bus[1] <= -10.0)
+		AudioServer.set_bus_mute(sfx_bus[0], sfx_bus[1] <= -10.0)
+		AudioServer.set_bus_mute(efx_bus[0], efx_bus[1] <= -10.0)
+		AudioServer.set_bus_mute(bgm_bus[0], bgm_bus[1] <= -10.0)
+		#endregion
 	return err
 
 func _notification(what: int) -> void:

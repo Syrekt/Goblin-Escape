@@ -35,6 +35,7 @@ var patrol_amount := 0
 @export var facing := 1
 var player_in_range := false
 var chase_target : Player
+var target_in_sight := false
 var aware := false # Extra awersion, can detect player in dark
 var direction_locked := false
 var facing_locked := false
@@ -61,16 +62,17 @@ signal leave_shadow
 #before it changes the animation
 var wait_animation_transition := false 
 
-@onready var animation_player   : AnimationPlayer = $AnimationPlayer
-@onready var sprite			    := $Sprite2D
-@onready var state_node		    := $StateMachine
-@onready var health			    := $Health
-@onready var combat_properties  := $CombatProperties
-@onready var player_proximity	:= $PlayerProximity
-@onready var awareness_timer	: Timer = $AwarenessTimer
-@onready var attack_detector	:= $AttackDetector
-@onready var enemy_proximity	: Area2D = $EnemyProximity
-@onready var chase_detector		: Area2D = $ChaseDetector
+@onready var animation_player		: AnimationPlayer = $AnimationPlayer
+@onready var sprite			    	:= $Sprite2D
+@onready var state_node		    	:= $StateMachine
+@onready var health			    	:= $Health
+@onready var combat_properties  	:= $CombatProperties
+@onready var player_proximity		:= $PlayerProximity
+@onready var awareness_timer		: Timer = $AwarenessTimer
+@onready var attack_detector		:= $AttackDetector
+@onready var enemy_proximity		: Area2D = $EnemyProximity
+@onready var chase_detector			: Area2D = $ChaseDetector
+@onready var destructable_detector	: Area2D = $DestructableCollider
 
 @onready var cp	= combat_properties
 @onready var audio_emitter = $SFX
@@ -200,7 +202,8 @@ func smell(source: Player):
 			state_node.state.finished.emit("smell")
 
 func detect_player(target: Player) -> bool:
-	var pos = target.global_position
+	var pos = target.hurtbox.global_position
+	pos.y -= 10
 	line_of_sight.target_position = line_of_sight.to_local(pos)
 	await get_tree().physics_frame
 	if line_of_sight.is_colliding():
@@ -252,13 +255,16 @@ func start_chase(target:Player) -> void:
 	if chase_disabled:
 		if debug: print("Chase disabled")
 		return
+	if chase_target && !target_in_sight:
+		if debug: print("No line of sight")
+		return
 
-	if !chase_target:
+	if !chase_target && !aware:
 		emote_emitter.play("alarmed")
 	player_in_range = true
 	chase_target = target
-	awareness_timer.stop()
 	aware = true
+	awareness_timer.stop()
 	if target.enemies_on_chase.find(self) == -1:
 		target.enemies_on_chase.append(self)
 	if !target.combat_target:
@@ -298,6 +304,13 @@ func has_enemy_in_proximity() -> bool:
 	if enemy_proximity.get_overlapping_bodies().any(func(b): return b != self):
 		return true
 	return false
+func pick_attack_state(state_array: Array, target: Player) -> String:
+	var state = state_array.pick_random().name
+	print("state_array: "+str(state_array))
+	while state == "grab" && global_position.y != target.global_position.y:
+		state = state_array.pick_random().name
+	print("Returning attack state %s", state)
+	return state
 #endregion
 #region Animation end
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -378,7 +391,7 @@ func _process(delta: float) -> void:
 	var ui_nodes = get_tree().get_nodes_in_group("UIPanel")
 func _physics_process(delta: float) -> void:
 	if chase_target:
-		await detect_player(player)
+		target_in_sight	= await detect_player(player)
 	elif player_in_range:
 		if player.hiding:
 			pass

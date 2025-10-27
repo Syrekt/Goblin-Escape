@@ -1,8 +1,7 @@
-[gd_scene load_steps=69 format=3 uid="uid://dw2d8bu1vlvv6"]
+[gd_scene load_steps=68 format=3 uid="uid://dw2d8bu1vlvv6"]
 
 [ext_resource type="Script" uid="uid://bb3qdl7k1v8ae" path="res://Enemy/Goblin/goblin.gd" id="1_poooq"]
 [ext_resource type="Texture2D" uid="uid://bcs17g4yh13l4" path="res://Enemy/Goblin/goblin-idle_strip6.png" id="2_mqpvv"]
-[ext_resource type="Texture2D" uid="uid://c6nifh0i54h6f" path="res://Enemy/GoblinWarrior/goblin-bash.png" id="3_i4q05"]
 [ext_resource type="Texture2D" uid="uid://duodso4u0eecv" path="res://Enemy/Goblin/goblin-death_strip13.png" id="4_al5wh"]
 [ext_resource type="Texture2D" uid="uid://cv4dnrs85bg7f" path="res://Enemy/Goblin/goblin-hurt_strip6.png" id="5_6vclp"]
 [ext_resource type="Texture2D" uid="uid://b5mnbcx6ypteq" path="res://Enemy/Goblin/goblin-walk_strip8.png" id="6_a23rd"]
@@ -147,46 +146,6 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_3i20h"]
-resource_name = "block"
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_i4q05")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
 }
 
 [sub_resource type="Animation" id="Animation_iprve"]
@@ -979,7 +938,6 @@ tracks/3/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uyvhu"]
 _data = {
 &"RESET": SubResource("Animation_p3exd"),
-&"block": SubResource("Animation_3i20h"),
 &"death": SubResource("Animation_iprve"),
 &"grab": SubResource("Animation_p8gmb"),
 &"hurt": SubResource("Animation_kbkgb"),
@@ -1022,6 +980,9 @@ size = Vector2(20, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_su4u7"]
 size = Vector2(83.5, 31.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhfhj"]
+size = Vector2(31, 26)
 
 [node name="Goblin" type="CharacterBody2D" node_paths=PackedStringArray("main_stance") groups=["Enemy", "MapNode", "Persistent"]]
 z_index = 1
@@ -1088,7 +1049,7 @@ script = ExtResource("22_tpi7j")
 script = ExtResource("23_6fbis")
 
 [node name="SlashHitbox" parent="StateMachine/slash" groups=["Flip"] instance=ExtResource("24_ivgjd")]
-collision_mask = 2
+collision_mask = 130
 
 [node name="Collider" parent="StateMachine/slash/SlashHitbox" index="0"]
 position = Vector2(20.045, -20)
@@ -1098,7 +1059,7 @@ scale = Vector2(2, 1)
 script = ExtResource("25_s405j")
 
 [node name="StabHitbox" parent="StateMachine/stab" groups=["Flip"] instance=ExtResource("24_ivgjd")]
-collision_mask = 2
+collision_mask = 130
 
 [node name="Collider" parent="StateMachine/stab/StabHitbox" index="0"]
 position = Vector2(26.14, -24.45)
@@ -1296,7 +1257,6 @@ position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_cyoxu")
 
 [node name="AttackDetector" type="Area2D" parent="."]
-visible = false
 position = Vector2(0, 16)
 collision_layer = 0
 collision_mask = 2
@@ -1314,6 +1274,14 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyProximity"]
 position = Vector2(29.25, -0.25)
 shape = SubResource("RectangleShape2D_su4u7")
+
+[node name="DestructableCollider" type="Area2D" parent="." groups=["Flip"]]
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DestructableCollider"]
+position = Vector2(15.5, 3)
+shape = SubResource("RectangleShape2D_qhfhj")
 
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

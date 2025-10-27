@@ -87,6 +87,7 @@ var experience_required := 100
 @onready var interaction_prompt : AnimatedSprite2D = $InteractionPrompt
 @onready var buff_container : HBoxContainer = $UI/HUD/Stamina/BuffContainer
 @onready var map : CanvasLayer = $Map
+@onready var hurtbox : CollisionShape2D = $ColliderStanding
 #endregion
 #region Combat
 const SLASH_DAMAGE	:= 15
@@ -433,8 +434,9 @@ func think(text: String) -> void:
 	thought_container.push(text)
 	emote.play("talking")
 func enemy_heard_noise(enemy: Enemy) -> void:
-	if !in_combat_state:
-		think("I should be careful")
+	pass
+	#if !in_combat_state:
+	#	think("I should be careful")
 func save() -> void:
 	var save_data = {
 		"pos_x"		: position.x,

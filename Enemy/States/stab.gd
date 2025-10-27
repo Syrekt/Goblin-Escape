@@ -1,6 +1,7 @@
 extends EnemyState
 
 var step_forward : bool
+@onready var hitbox : Area2D = get_child(0)
 
 func enter(previous_state_path: String, data := {}) -> void:
 	if enemy.counter_attack:
@@ -19,9 +20,13 @@ func exit() -> void:
 	enemy.counter_attack = false
 	enemy.velocity.x = 0
 
-func _on_stab_hitbox_body_entered(defender:Player) -> void:
-	defender.take_damage(enemy.stab_damage, enemy)
-	defender.combat_properties.pushback_apply(enemy.global_position, 50)
+func _on_stab_hitbox_body_entered(node: Node2D) -> void:
+	for defender in hitbox.get_overlapping_bodies():
+		if defender is Player:
+			defender.take_damage(enemy.stab_damage, enemy)
+			defender.combat_properties.pushback_apply(enemy.global_position, 50)
+		else:
+			defender.take_damage(enemy.slash_damage, enemy)
 
 func _on_hit_frame() -> void:
 	if step_forward:
