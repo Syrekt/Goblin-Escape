@@ -987,7 +987,7 @@ size = Vector2(31, 26)
 [node name="Goblin" type="CharacterBody2D" node_paths=PackedStringArray("main_stance") groups=["Enemy", "MapNode", "Persistent"]]
 z_index = 1
 collision_layer = 8
-collision_mask = 9
+collision_mask = 65545
 script = ExtResource("1_poooq")
 map_icon = "enemy"
 experience_drop = 100

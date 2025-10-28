@@ -22,7 +22,10 @@ func physics_update(delta: float) -> void:
 			finished.emit("crouch")
 		else:
 			finished.emit("idle")
-	elif player.just_pressed("jump") && player.is_on_one_way_collider:
-		player.global_position.y += 4
+	elif player.just_pressed("jump"):
+		if player.is_on_one_way_collider:
+			player.global_position.y += 4
+		else:
+			player.ignore_platforms()
 	elif floor_angle == 0 && !player.col_corner_hang.has_overlapping_bodies():
 		finished.emit("corner_hang")

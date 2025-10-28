@@ -291,10 +291,9 @@ func check_interactable() -> void:
 	if interaction_target && interaction_target.interactable && !in_combat_state:
 		interaction_target.update(self)
 func can_grab_corner(rising := false) -> bool:
-	var grab_prevent =  col_corner_grab_prevent.has_overlapping_bodies()
-	var grab_trigger = ray_corner_grab_check.is_colliding()
+	var grab_prevent = col_corner_grab_prevent.has_overlapping_bodies()
 
-	if col_corner_grab_prevent.has_overlapping_bodies(): return false
+	if grab_prevent: return false
 	if is_on_floor(): return false
 	if is_on_ceiling(): return false
 	if ignore_corners: return false
@@ -528,6 +527,14 @@ func is_in_sex_state() -> bool:
 func corner_climb_check_headbump() -> void:
 	if col_stand_check.has_overlapping_bodies():
 		state_node.state.finished.emit("crouch")
+func prevent_corner_grab() -> void:
+	ignore_corners = true
+	await get_tree().create_timer(0.3).timeout
+	ignore_corners = false
+func ignore_platforms() -> void:
+	set_collision_mask_value(17, false)
+	await get_tree().create_timer(0.5).timeout
+	set_collision_mask_value(17, true)
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -684,7 +691,7 @@ func _physics_process(delta: float) -> void:
 		"death", "sex", "recover", "struggle_goblin", "goblin_grab", "break_free":
 			move_speed = 0
 			velocity.x = 0
-		"hiding", "hidden", "unhide":
+		"hiding", "hidden", "unhide", "crawl_in":
 			move_speed = 0
 			velocity = Vector2.ZERO
 		"stance_light", "stance_heavy", "stance_defensive":
@@ -707,6 +714,7 @@ func _physics_process(delta: float) -> void:
 
 	#endregion
 	#region Y Movement
+	set_collision_mask_value(18, !is_on_floor())
 	if !is_on_floor():
 		match state_name:
 			"corner_climb", "corner_grab", "corner_hang":
