@@ -4815,7 +4815,7 @@ size = Vector2(14, 8)
 [node name="Kalin" type="CharacterBody2D" groups=["MapNode", "Persistent"]]
 z_index = 2
 collision_layer = 2
-collision_mask = 9
+collision_mask = 65545
 floor_constant_speed = true
 floor_snap_length = 12.0
 script = ExtResource("1_tpqnq")
@@ -4831,6 +4831,7 @@ follow_target = NodePath("..")
 snap_to_pixel = true
 tween_resource = SubResource("Resource_446pa")
 tween_on_load = false
+follow_damping = true
 draw_limits = true
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 metadata/_edit_lock_ = true
@@ -5502,6 +5503,7 @@ visible = false
 position = Vector2(0, -36)
 
 [node name="ColliderStanding" type="CollisionShape2D" parent="." groups=["Flip"]]
+visible = false
 position = Vector2(0, 5.5)
 scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_y6qte")
@@ -5515,10 +5517,12 @@ collision_mask = 32
 visible = false
 position = Vector2(0, -15)
 target_position = Vector2(14, 1.90735e-06)
+collision_mask = 65537
 
 [node name="CornerAutoClimb" type="RayCast2D" parent="." groups=["Flip"]]
 visible = false
 target_position = Vector2(14, 1.90735e-06)
+collision_mask = 65537
 
 [node name="CellCheck" type="RayCast2D" parent="."]
 visible = false
@@ -5543,17 +5547,17 @@ position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_avh81")
 
 [node name="CornerGrabPrevent" type="Area2D" parent="." groups=["Flip"]]
-visible = false
 collision_layer = 0
+collision_mask = 65537
 
 [node name="TopCollider" type="CollisionShape2D" parent="CornerGrabPrevent"]
 position = Vector2(10, -24.5)
 shape = SubResource("RectangleShape2D_lnkvj")
 
 [node name="QuickClimbPrevent" type="Area2D" parent="." groups=["Flip"]]
-visible = false
 scale = Vector2(1, 1.125)
 collision_layer = 0
+collision_mask = 65537
 
 [node name="QuickClimbCollider" type="CollisionShape2D" parent="QuickClimbPrevent"]
 position = Vector2(8, -11.5556)
@@ -5570,6 +5574,7 @@ shape = SubResource("RectangleShape2D_8idp1")
 [node name="CornerClimbPrevent" type="Area2D" parent="." groups=["Flip"]]
 visible = false
 collision_layer = 0
+collision_mask = 65537
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CornerClimbPrevent"]
 position = Vector2(10, -52.5)
@@ -5578,7 +5583,7 @@ shape = SubResource("RectangleShape2D_qqpcq")
 [node name="CornerHangCheck" type="Area2D" parent="." groups=["Flip"]]
 visible = false
 collision_layer = 0
-collision_mask = 2049
+collision_mask = 67585
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CornerHangCheck"]
 position = Vector2(22, 61)
