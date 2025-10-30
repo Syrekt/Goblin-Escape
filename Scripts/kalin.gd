@@ -790,6 +790,10 @@ func _process(delta: float) -> void:
 		if combat_target.state_node.state.name == "death": combat_target = null
 		elif !combat_target.chase_target: combat_target = null
 	if !controls_disabled:
+		Debugger.printui("pcam: "+str(pcam))
+		Debugger.printui("pcam.limit_target: "+str(pcam.limit_target));
+		Debugger.printui("pcam.follow_mode: "+str(pcam.follow_mode));
+		pcam.follow_mode = 3
 		in_combat_state = state_node.state.is_in_group("combat_state")
 		if in_combat_state && combat_target:
 			pcam.follow_mode = pcam.FollowMode.GROUP

@@ -1,11 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkmdulbfadf8d"]
+[gd_scene load_steps=5 format=3 uid="uid://bkmdulbfadf8d"]
 
 [ext_resource type="Script" uid="uid://gyb1oxt0eedw" path="res://Scripts/pcam_limit.gd" id="1_pbqas"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="2_42klj"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_je06f"]
+
+[sub_resource type="Resource" id="Resource_1mhth"]
+script = ExtResource("3_je06f")
 
 [node name="CameraRegion" type="Area2D"]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_pbqas")
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+script = ExtResource("2_42klj")
+tween_resource = SubResource("Resource_1mhth")
+draw_limits = true
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
