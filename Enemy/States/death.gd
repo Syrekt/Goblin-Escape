@@ -7,14 +7,15 @@ func enter(previous_state_path: String, data := {}) -> void:
 	enemy.states_locked = true
 	enemy.velocity.x = 0
 	enemy.combat_properties.pushback_reset();
-	Ge.play_audio_from_string_array(enemy.global_position, -10, "res://SFX/Goblin/Death")
 	var children = enemy.get_children()
 	for child in children:
 		if child is Area2D:
 			child.set_deferred("monitoring", false)
 	
-	enemy.player.experience.add(enemy.experience_drop)
-	Ge.play_audio_free(0, "res://SFX/sfx_experience_drop.wav")
+	if !Ge.loading:
+		Ge.play_audio_from_string_array(enemy.global_position, -10, "res://SFX/Goblin/Death")
+		enemy.player.experience.add(enemy.experience_drop)
+		Ge.play_audio_free(0, "res://SFX/sfx_experience_drop.wav")
 
 func exit() -> void:
 	var children = enemy.get_children()

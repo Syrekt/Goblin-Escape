@@ -596,7 +596,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"get_up":
 			state.finished.emit("idle")
 		"struggle_transition_goblin":
-			sex_begin([grabbed_by], "sex_goblin1")
+			sex_begin([grabbed_by], "struggle_sex_goblin1")
 #endregion
 #region Init
 func _ready() -> void:

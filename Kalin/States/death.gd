@@ -24,15 +24,15 @@ func enter(previous_state_path: String, data := {}) -> void:
 				break
 
 	if player.dead:
+		print("Dead")
 		death_timer.start()
+		print("death_timer.time_left: "+str(death_timer.time_left));
 	else:
+		print("Unconscious")
 		player.unconscious = true
-		recovery_timer.start()
 		sex_timer.start()
-
-	print("recovery_timer.time_left: "+str(recovery_timer.time_left));
-
-	# Decide what to do if dead
+		recovery_timer.start()
+		print("recovery_timer.time_left: "+str(recovery_timer.time_left));
 
 func exit() -> void:
 	recovery_timer.stop()
@@ -86,14 +86,17 @@ func update(delta: float) -> void:
 				death_screen.hide()
 				#player.ui.show()
 
-	if player.unconscious:
-		if recovery_timer.is_stopped():
-			finished.emit("recover")
 
-		if sex_timer.is_stopped():
-			player.can_have_sex = true
-			if participant_collider.has_overlapping_bodies():
-				for body in participant_collider.get_overlapping_bodies():
-					#We can handle more characters later
-					player.sex_begin([body], "sex_goblin1")
-					break
+func _on_recovery_timer_timeout() -> void:
+	print("Recovery timer timeout")
+	finished.emit("recover")
+
+
+func _on_sex_timer_timeout() -> void:
+	print("Sex timer timeout")
+	player.can_have_sex = true
+	if participant_collider.has_overlapping_bodies():
+		for body in participant_collider.get_overlapping_bodies():
+			#We can handle more characters later
+			player.sex_begin([body], "lose_sex_goblin1")
+			break

@@ -17,7 +17,14 @@ func _ready() -> void:
 func update(_player: Player) -> void:
 	player = _player
 	if Input.is_action_just_pressed("interact"):
-		if barricaded:
+		if target_entrance.barricaded:
+			var thoughts = [
+				"It's blocked on the other end.",
+				"I should clear the exit first.",
+				"I don't want to get stuck in there.",
+			]
+			player.think(thoughts.pick_random())
+		elif barricaded:
 			var thoughts = [
 				"I should destroy the barricade.",
 				"The barricade’s blocking the way. I need to break it.",

@@ -1257,6 +1257,7 @@ position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_cyoxu")
 
 [node name="AttackDetector" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, 16)
 collision_layer = 0
 collision_mask = 2
@@ -1276,6 +1277,7 @@ position = Vector2(29.25, -0.25)
 shape = SubResource("RectangleShape2D_su4u7")
 
 [node name="DestructableCollider" type="Area2D" parent="." groups=["Flip"]]
+visible = false
 collision_layer = 0
 collision_mask = 128
 

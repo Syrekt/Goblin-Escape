@@ -5,7 +5,14 @@ var squirt_emitter : AudioStreamPlayer2D
 var goblin_emitter : AudioStreamPlayer2D
 
 func enter(previous_state_path : String, data := {}) -> void:
-	player.call_deferred("update_animation", "orgasm_goblin1")
+	var anim = player.animation_player.current_animation
+	print("Sex animation before orgasm: "+str(anim))
+	match player.animation_player.current_animation:
+		"struggle_sex_goblin1":
+			player.call_deferred("update_animation", "struggle_orgasm_goblin1")
+		"lose_sex_goblin1":
+			player.call_deferred("update_animation", "lose_orgasm_goblin1")
+
 
 func exit() -> void:
 	player.smell.value = move_toward(player.smell.value, 0, 5)
