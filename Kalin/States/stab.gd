@@ -27,7 +27,10 @@ func _on_attack_frame() -> void:
 				player.play_sfx(sfx_hit)
 				Ge.slow_mo(0, 0.05)
 		else:
-			defender.take_damage(0, player)
-			player.think("I should hit harder")
+			if defender is TunnelBarricade:
+				defender.take_damage(10, player)
+			else:
+				defender.take_damage(0, player)
+				player.think("I should hit harder")
 	else:
 		player.play_sfx(sfx_whiff)

@@ -135,6 +135,7 @@ shape = SubResource("RectangleShape2D_bv8qh")
 stream = ExtResource("2_4jiqy")
 autoplay = true
 max_distance = 256.0
+bus = &"SFX"
 
 [node name="UpperSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ncdgf")

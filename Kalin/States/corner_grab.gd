@@ -15,6 +15,10 @@ func exit() -> void:
 func update(delta: float) -> void:
 	if player.pressed("up") || player.pressed("jump"):
 		finished.emit("corner_climb")
+	if player.pressed("left") && player.facing == -1:
+		finished.emit("corner_climb")
+	if player.pressed("right") && player.facing == 1:
+		finished.emit("corner_climb")
 	if player.just_pressed("down"):
 		player.prevent_corner_grab()
 		finished.emit("fall")

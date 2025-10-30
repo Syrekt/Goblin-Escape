@@ -68,6 +68,7 @@ func play_audio_from_string_array(position: Vector2, volume: float, path: String
 	var emitter : AudioStreamPlayer2D = AudioStreamPlayer2D.new()
 	emitter.max_distance = 256;
 	emitter.global_position = position
+	emitter.bus = "SFX"
 	add_child(emitter)
 
 	if !DirAccess.dir_exists_absolute(path): push_error("Path <%s> doesn't exists!", path)
@@ -93,6 +94,7 @@ func play_audio_free(volume: int, audio_path: String) -> void:
 
 	audio_emitter.volume_db = volume
 	audio_emitter.stream = load(audio_path)
+	audio_emitter.bus = "SFX"
 	audio_emitter.finished.connect(audio_emitter.queue_free)
 	audio_emitter.play()
 func EmitNoise(source: CharacterBody2D, position: Vector2, amount: float) -> void:

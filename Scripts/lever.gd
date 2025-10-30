@@ -28,3 +28,8 @@ func update(player : Player) -> void:
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	target_door.closed = sprite.animation == "closing"
+
+
+func _on_interacted() -> void:
+	if interaction_speech != "":
+		Ge.player.think(interaction_speech)

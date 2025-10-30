@@ -20,7 +20,7 @@ func update(_player: Player) -> void:
 		if target_entrance.barricaded:
 			var thoughts = [
 				"It's blocked on the other end.",
-				"I should clear the exit first.",
+				"I should clear it's exit first.",
 				"I don't want to get stuck in there.",
 			]
 			player.think(thoughts.pick_random())

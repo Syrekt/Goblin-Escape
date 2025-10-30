@@ -13,6 +13,7 @@ collision_mask = 2
 script = ExtResource("1_pbqas")
 
 [node name="PhantomCamera2D" type="Node2D" parent="."]
+position = Vector2(321, 181)
 script = ExtResource("2_42klj")
 tween_resource = SubResource("Resource_1mhth")
 draw_limits = true

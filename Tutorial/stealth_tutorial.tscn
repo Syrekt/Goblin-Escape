@@ -121,7 +121,7 @@ offset_top = 88.0
 offset_right = 298.0
 offset_bottom = 135.0
 bbcode_enabled = true
-text = "Kalin is [color=red]invisible[/color] in darkness, but goblins can still smell her. Use [color=cyan]perfume[/color] or clean her in checkpoint to get rid of the bodily odor."
+text = "Kalin is [color=red]invisible[/color] in darkness, but goblins can still smell her. Use [color=cyan]Stenchbane[/color] or clean her in checkpoint to get rid of the bodily odor."
 
 [node name="Sprite2D" type="Sprite2D" parent="ColorControl/TabContainer/Page2"]
 position = Vector2(104, 192)

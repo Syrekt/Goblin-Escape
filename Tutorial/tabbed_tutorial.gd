@@ -27,7 +27,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	var tab_count = container.get_tab_count()
-	Debugger.printui("tab_count: "+str(tab_count))
 	label.text = str(container.current_tab + 1) + "/" + str(container.get_tab_count())
 	if faded_in:
 		if Input.is_action_just_pressed("left"):

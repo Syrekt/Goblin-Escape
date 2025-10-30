@@ -7,3 +7,7 @@ class_name Interaction extends Area2D
 
 var active := false
 var waiting_player_exit := false
+
+@export_multiline var interaction_speech : String
+
+signal interacted

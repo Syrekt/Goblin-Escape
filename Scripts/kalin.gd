@@ -141,8 +141,7 @@ var grabbed_by : Enemy
 var can_have_sex := false ## When enemies can move in for sex
 var states_locked := false
 @export var save_list : Array[String]
-@onready var pcam := $PhantomCamera2D
-@onready var pcam_host := $Camera2D/PhantomCameraHost
+@onready var pcam : PhantomCamera2D
 var movable : Node2D = null
 var noise = preload("res://Objects/noise.tscn")
 var hiding_spot : Interaction
@@ -158,6 +157,7 @@ var light_source : Area2D
 var ray_light : RayCast2D
 var wait_for_camera := false
 var map_icon := "player"
+var potential_movable : Movable
 #endregion
 #region Signals
 signal enter_shadow
@@ -278,9 +278,13 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 func heal(amount: int) -> void:
 	health.value += amount
 func check_movable():
-	var potential_movable = null
 	if ray_movable.is_colliding(): 
 		potential_movable = ray_movable.get_collider();
+		potential_movable.interaction_prompt._show("grab", "Push")
+	elif potential_movable:
+		potential_movable.interaction_prompt._hide()
+		potential_movable = null
+
 
 	if just_pressed("grab") && potential_movable != null && !potential_movable.falling:
 		movable = potential_movable
@@ -789,11 +793,7 @@ func _process(delta: float) -> void:
 	if combat_target:
 		if combat_target.state_node.state.name == "death": combat_target = null
 		elif !combat_target.chase_target: combat_target = null
-	if !controls_disabled:
-		Debugger.printui("pcam: "+str(pcam))
-		Debugger.printui("pcam.limit_target: "+str(pcam.limit_target));
-		Debugger.printui("pcam.follow_mode: "+str(pcam.follow_mode));
-		pcam.follow_mode = 3
+	if !controls_disabled && pcam:
 		in_combat_state = state_node.state.is_in_group("combat_state")
 		if in_combat_state && combat_target:
 			pcam.follow_mode = pcam.FollowMode.GROUP
@@ -866,6 +866,9 @@ func _on_abyss_entered(abyss: Area2D) -> void:
 		take_damage(fall_damage) # To make sure voices don't overlap with fall voice(?)
 	else:
 		state_node.state.finished.emit("land_hurt", {"fall_damage": fall_damage})
+	pcam.follow_axis_lock = PhantomCamera2D.FollowLockAxis.XY
+	await get_tree().create_timer(1.0).timeout
+	pcam.follow_axis_lock = PhantomCamera2D.FollowLockAxis.NONE
 func _on_fullscreen_panel_opened() -> void:
 	var huds = get_tree().get_nodes_in_group("HUD")
 	print("Hide HUD")

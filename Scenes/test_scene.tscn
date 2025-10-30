@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://rrnk862o0mdw"]
+[gd_scene load_steps=10 format=4 uid="uid://rrnk862o0mdw"]
 
 [ext_resource type="Script" uid="uid://ysqa4fxfxicu" path="res://Scripts/scene_manager.gd" id="1_50ct6"]
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_r5l72"]
@@ -6,7 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://d1ido0af5r23x" path="res://Objects/loading_screen.tscn" id="4_x033f"]
 [ext_resource type="PackedScene" uid="uid://45snbjkrrgyc" path="res://UI/death_screen.tscn" id="5_rdbpf"]
 [ext_resource type="PackedScene" uid="uid://bxgqi0q1okfjx" path="res://Objects/screen_fade.tscn" id="6_oho3u"]
-[ext_resource type="PackedScene" uid="uid://dw2d8bu1vlvv6" path="res://Enemy/Goblin/goblin.tscn" id="7_rdbpf"]
+[ext_resource type="PackedScene" uid="uid://bkmdulbfadf8d" path="res://Objects/camera_region.tscn" id="7_rdbpf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oho3u"]
+size = Vector2(641.5, 368)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3awe"]
+size = Vector2(640, 368)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_50ct6")
@@ -26,6 +32,16 @@ visible = false
 
 [node name="ScreenFade" parent="." instance=ExtResource("6_oho3u")]
 
-[node name="Goblin" parent="." instance=ExtResource("7_rdbpf")]
-position = Vector2(457, 227)
-debug = true
+[node name="CameraRegion" parent="." instance=ExtResource("7_rdbpf")]
+position = Vector2(-192, 96)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraRegion"]
+position = Vector2(319.25, 184)
+shape = SubResource("RectangleShape2D_oho3u")
+
+[node name="CameraRegion2" parent="." instance=ExtResource("7_rdbpf")]
+position = Vector2(448, 96)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraRegion2"]
+position = Vector2(320, 184)
+shape = SubResource("RectangleShape2D_d3awe")

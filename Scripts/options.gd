@@ -49,6 +49,8 @@ func save_options() -> void:
 	config.set_value("audio", "SFX",	AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX")))
 	config.set_value("audio", "EFX", 	AudioServer.get_bus_volume_db(AudioServer.get_bus_index("EFX")))
 	config.set_value("audio", "BGM", 	AudioServer.get_bus_volume_db(AudioServer.get_bus_index("BGM")))
+	config.set_value("noise", "enabled",	Ge.noise_enabled)
+	config.set_value("noise", "color",		Ge.noise_color)
 	config.save(config_path)
 func load_options() -> int:
 	var config = ConfigFile.new()
@@ -78,6 +80,10 @@ func load_options() -> int:
 		AudioServer.set_bus_mute(sfx_bus[0], sfx_bus[1] <= -10.0)
 		AudioServer.set_bus_mute(efx_bus[0], efx_bus[1] <= -10.0)
 		AudioServer.set_bus_mute(bgm_bus[0], bgm_bus[1] <= -10.0)
+		#endregion
+		#region Noise
+		Ge.noise_enabled	= config.get_value("noise", "enabled", false)
+		Ge.noise_color		= config.get_value("noise", "color", false)
 		#endregion
 	return err
 

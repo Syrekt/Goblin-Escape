@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name TunnelBarricade extends CharacterBody2D
 
 var health : float
 

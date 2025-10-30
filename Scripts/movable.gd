@@ -3,6 +3,7 @@ class_name Movable extends CharacterBody2D
 @onready var timer : Timer = $Timer
 @onready var audio_emitter : AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var collider := $CollisionShape2D
+@onready var interaction_prompt : AnimatedSprite2D = $InteractionPrompt
 
 @export var drop_sfx : String = "res://SFX/stone_drop2.wav"
 @export var slide_sfx : Resource = load("res://SFX/stone_slide1.wav")
@@ -18,6 +19,7 @@ var spawn_fall_protection := true
 func grab() -> void:
 	grabbed = true
 	velocity = Vector2.ZERO
+	interaction_prompt._hide()
 
 func release() -> void:
 	velocity = Vector2.ZERO
