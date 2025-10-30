@@ -1,18 +1,23 @@
-extends Interaction
+class_name Portal extends Interaction
 
 @export var inert := true
 var map_icon := "portal"
+
+@onready var map_scene : PackedScene = preload("res://UI/map.tscn")
 
 
 func update(player: Player) -> void:
 	active = !inert
 
-	if Input.is_action_just_pressed("interact"):
+	if player.just_pressed("interact"):
 		if inert:
 			activate()
 		else:
-			print("Teleport")
-			pass
+			var map : Map = map_scene.instantiate()
+			map.teleporting		= true
+			map.portal_from		= self
+			map.portal_target	= self
+			get_tree().current_scene.add_child(map)
 
 	if inert:
 		return

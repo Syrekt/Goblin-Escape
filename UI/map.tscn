@@ -9,6 +9,7 @@
 
 [node name="Map" type="CanvasLayer" groups=["UIPanel"]]
 layer = 2
+script = ExtResource("1_y34d6")
 
 [node name="MapContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -20,7 +21,6 @@ offset_right = -45.0
 offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_y34d6")
 
 [node name="Frame" type="NinePatchRect" parent="MapContainer"]
 layout_mode = 2
@@ -79,4 +79,4 @@ texture = ExtResource("5_bx377")
 layout_mode = 2
 mouse_filter = 2
 
-[connection signal="gui_input" from="MapContainer" to="MapContainer" method="_on_gui_input"]
+[connection signal="gui_input" from="MapContainer" to="." method="_on_map_container_gui_input"]

@@ -1,10 +1,15 @@
 ## Due to the way that Container nodes handle their children, at _ready() time you won’t get the correct value 
 ## for the child’s size. For this reason, we need to wait until the next frame to get the Grid’s size. 
-class_name Map extends MarginContainer
+class_name Map extends CanvasLayer
+
+var teleporting := false
+var portal_nodes	: Array[Portal]
+var portal_from		: Portal
+var portal_target	: Portal
 
 var player : Player
-@onready var camera			= $MarginContainer/SubViewportContainer/SubViewport/Camera2D
-@onready var zoom = camera.zoom.x:
+@onready var camera	= $MapContainer/MarginContainer/SubViewportContainer/SubViewport/Camera2D
+@onready var zoom	= camera.zoom.x:
 	set = set_zoom
 func set_zoom(value):
 	var old_zoom = zoom
@@ -12,10 +17,10 @@ func set_zoom(value):
 	if zoom != old_zoom:
 		camera.zoom = Vector2(zoom, zoom)
 
-@onready var grid			= $MarginContainer/Grid
-@onready var player_marker	= $MarginContainer/SubViewportContainer/SubViewport/PlayerMarker
-@onready var enemy_marker	= $MarginContainer/SubViewportContainer/SubViewport/EnemyMarker
-@onready var portal_marker	= $MarginContainer/SubViewportContainer/SubViewport/PortalMarker
+@onready var grid			= $MapContainer/MarginContainer/Grid
+@onready var player_marker	= $MapContainer/MarginContainer/SubViewportContainer/SubViewport/PlayerMarker
+@onready var enemy_marker	= $MapContainer/MarginContainer/SubViewportContainer/SubViewport/EnemyMarker
+@onready var portal_marker	= $MapContainer/MarginContainer/SubViewportContainer/SubViewport/PortalMarker
 
 @onready var icons = {
 	"player": player_marker,
@@ -34,18 +39,25 @@ func _ready() -> void:
 	
 	var map_nodes = get_tree().get_nodes_in_group("MapNode")
 	for node in map_nodes:
-		print("node: "+str(node))
 		var new_marker = icons[node.map_icon].duplicate()
 		grid.add_child(new_marker)
 		new_marker.show()
 		markers[node] = new_marker
 
+	# Add portals to list
+	for node in get_tree().current_scene.get_children():
+		if node is Portal && !node.inert:
+			portal_nodes.append(node)
+
 func _process(delta: float) -> void:
+	# Check for player and adjust position
 	if !player:
 		player = Ge.player
-		camera.global_position = player.global_position - get_viewport_rect().size / 2
+		camera.global_position = player.global_position - $MapContainer.get_viewport_rect().size / 2
 		return
-
+	if teleporting:
+		camera.global_position = portal_target.global_position - $MapContainer.get_viewport_rect().size / 2 #lerp(camera.global_position, portal_target.global_position - $MapContainer.get_viewport_rect().size / 2, 0.05)
+	# Zoom
 	var screen_rect = Rect2(
 		camera.get_screen_center_position() - camera.get_viewport_rect().size * 0.5 / camera.zoom,
 		camera.get_viewport_rect().size / camera.zoom
@@ -63,15 +75,36 @@ func _process(delta: float) -> void:
 			markers[node].show()
 		elif node != player:
 			markers[node].hide()
-
-	if dragging: drag()
-
+	# Teleport to active portals
+	if teleporting:
+		if Input.is_action_just_pressed("left"):
+			var index = portal_nodes.find(portal_target)
+			if index > 0:
+				portal_target = portal_nodes.get(index - 1)
+		elif Input.is_action_just_pressed("right"):
+			var index = portal_nodes.find(portal_target)
+			if index < portal_nodes.size() - 1:
+				portal_target = portal_nodes.get(index + 1)
+		elif portal_target != portal_from && Input.is_action_just_pressed("interact"):
+			visible = false
+			var fade = get_tree().current_scene.get_node("ScreenFade")
+			player.controls_disabled = true
+			fade.fade_in(1.0)
+			await get_tree().create_timer(1.0).timeout
+			player.global_position = portal_target.global_position
+			fade.fade_out(1.0)
+			player.controls_disabled = false
+			queue_free()
+			return
+	# Dragging is disabled while teleporting
+	if dragging:
+		drag()
 #region Drag
 func drag_start() -> void:
 	dragging = true
-	mouse_pos_start = get_viewport().get_mouse_position()
+	mouse_pos_start = $MapContainer.get_viewport().get_mouse_position()
 func drag() -> void:
-	var mouse_pos = get_viewport().get_mouse_position()
+	var mouse_pos = $MapContainer.get_viewport().get_mouse_position()
 	camera_offset = (mouse_pos_start - mouse_pos) / camera.zoom
 	camera.offset = camera_offset
 func drag_end() -> void:
@@ -79,7 +112,12 @@ func drag_end() -> void:
 	camera.offset = Vector2(0, 0)
 	camera.global_position += camera_offset
 #endregion
-func _on_gui_input(event: InputEvent) -> void:
+func _on_map_container_gui_input(event: InputEvent) -> void:
+	# Close map
+	if Input.is_action_just_pressed("ui_cancel"):
+		print("close map")
+		queue_free()
+		return
 	if event is InputEventMouseButton:
 		if event.pressed:
 			if event.button_index == MOUSE_BUTTON_WHEEL_UP:

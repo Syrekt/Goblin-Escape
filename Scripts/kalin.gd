@@ -86,7 +86,7 @@ var experience_required := 100
 @onready var cell_check : RayCast2D = $CellCheck
 @onready var interaction_prompt : AnimatedSprite2D = $InteractionPrompt
 @onready var buff_container : HBoxContainer = $UI/HUD/Stamina/BuffContainer
-@onready var map : CanvasLayer = $Map
+@onready var map_scene : PackedScene = preload("res://UI/map.tscn")
 @onready var hurtbox : CollisionShape2D = $ColliderStanding
 #endregion
 #region Combat
@@ -146,12 +146,11 @@ var states_locked := false
 var movable : Node2D = null
 var noise = preload("res://Objects/noise.tscn")
 var hiding_spot : Interaction
-var hiding := false
-var invisible := false
+var hiding := false ## Hiding in a spot
+var invisible := false ## Can't be seen in dark
 var current_tint : Color = Color(0.0, 0.0, 0.0, 1.0)
 var ladder : Area2D
 const ingame_menu = preload("res://UI/ingame_menu.tscn")
-var open_menu : Node = null
 var interaction_target : Area2D = null
 var corner_quick_climb := false
 var sex_participants : Array
@@ -378,7 +377,12 @@ func toggle_character_panel():
 	character_panel.visible = !character_panel.visible
 func toggle_map():
 	if controls_disabled: return
-	map.visible = !map.visible
+	var map : Map = get_tree().current_scene.get_node_or_null("Map")
+	if !map:
+		map = map_scene.instantiate()
+		get_tree().current_scene.add_child(map)
+	else:
+		map.queue_free()
 func check_controls_disabled() -> bool:
 	var ui_nodes = get_tree().get_nodes_in_group("FullscreenPanel")
 	var node_found := false
@@ -801,7 +805,10 @@ func _process(delta: float) -> void:
 		get_tree().reload_current_scene()
 	#region Open menu & Inventory
 	if !controls_disabled && Input.is_action_just_pressed("ui_cancel"):
-		if !open_menu:
+		var map : Map = get_tree().current_scene.get_node_or_null("Map")
+		var open_menu : MainMenu = get_tree().current_scene.get_node_or_null("IngameMenu")
+		if map: map.queue_free()
+		elif !open_menu:
 			open_menu = ingame_menu.instantiate()
 			get_tree().current_scene.add_child(open_menu)
 	if Input.is_action_just_pressed("inventory"):
