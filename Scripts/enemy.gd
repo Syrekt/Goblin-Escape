@@ -299,9 +299,12 @@ func has_enemy_in_proximity() -> bool:
 		return true
 	return false
 func pick_attack_state(state_array: Array, target: Player) -> String:
-	var state = state_array.pick_random().name
+	print("State name: "+str(state_node.state.name));
 	print("state_array: "+str(state_array))
+	var state = state_array.pick_random().name
+	print("state: "+str(state))
 	while state == "grab" && global_position.y != target.global_position.y:
+		print("y position doesn't match the target, dismiss grab attack")
 		state = state_array.pick_random().name
 	print("Returning attack state %s" %state)
 	return state
@@ -327,7 +330,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 					"slash":
 						state.finished.emit("stance_light")
 					"stab":
-						if get_node_or_null("stance_defensive"):
+						if get_node_or_null("StateMachine/stance_defensive"):
 							state.finished.emit("stance_defensive")
 						else:
 							state.finished.emit(["stance_light", "stance_heavy"].pick_random())

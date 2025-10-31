@@ -1,6 +1,6 @@
 [gd_scene load_steps=246 format=3 uid="uid://h2hwfpjw4rte"]
 
-[ext_resource type="Script" uid="uid://bawiiueqctleo" path="res://Scripts/kalin.gd" id="1_tpqnq"]
+[ext_resource type="Script" uid="uid://b5p67lby0k2d0" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
 [ext_resource type="Script" uid="uid://ettvx4a2msjv" path="res://Scripts/camera_2d.gd" id="2_0g2co"]
 [ext_resource type="Texture2D" uid="uid://dcs3l0iefjo7w" path="res://Kalin/Sprites/Kalin-Fall.png" id="2_1j6vo"]
@@ -4334,7 +4334,7 @@ _data = {
 size = Vector2(15, 24.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbw7l"]
-size = Vector2(6, 54.75)
+size = Vector2(6, 49)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_avh81"]
 size = Vector2(15, 24)
@@ -5054,11 +5054,10 @@ target_position = Vector2(0, 39)
 collision_mask = 2049
 
 [node name="ColBehind" type="Area2D" parent="." groups=["Flip"]]
-visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ColBehind"]
-position = Vector2(-10, 4.375)
+position = Vector2(-10, 1.5)
 shape = SubResource("RectangleShape2D_cbw7l")
 
 [node name="StandCheck" type="Area2D" parent="." groups=["Flip"]]

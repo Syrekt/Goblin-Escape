@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cxu1p2ap15mlj" path="res://Objects/skill_pickup.tscn" id="8_d3awe"]
 [ext_resource type="Texture2D" uid="uid://wcoq7ay5eurm" path="res://UI/rpg_icon_pack.png" id="9_yglu3"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="10_bwjpn"]
-[ext_resource type="PackedScene" uid="uid://dw2d8bu1vlvv6" path="res://Enemy/Goblin/goblin.tscn" id="11_ibmi3"]
+[ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Enemy/GoblinWarrior/goblin_warrior.tscn" id="12_4blnk"]
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="12_ibmi3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oho3u"]
@@ -65,12 +65,9 @@ skill_name = "has_defensive_stance"
 [node name="Torch" parent="." instance=ExtResource("10_bwjpn")]
 position = Vector2(256, 212)
 
-[node name="Goblin" parent="." instance=ExtResource("11_ibmi3")]
-position = Vector2(395, 233)
-
-[node name="Goblin2" parent="." instance=ExtResource("11_ibmi3")]
-position = Vector2(327, 233)
-
 [node name="Crate1" parent="." instance=ExtResource("12_ibmi3")]
 position = Vector2(704, 240)
 drop_random_loot = true
+
+[node name="GoblinWarrior" parent="." instance=ExtResource("12_4blnk")]
+position = Vector2(400, 239)

@@ -2,8 +2,8 @@ class_name EnemyCombatState extends EnemyState
 
 @export var transitions : Array[EnemyCombatState] ##Transition states from main stance only. WARNING: Might choose to attack instead of changing stance
 @export var attack_state : Array[EnemyState]
-@export var stance_time := 1.0
-@export var attack_time := 0.5
+@export var stance_time := 0.5
+@export var attack_time := 0.2
 @export var debug_stance : String ##Debug stance to transition on stance timer timeout
 
 var timer : Timer
@@ -75,7 +75,11 @@ func _on_stance_timer_timeout() -> void:
 		if enemy.global_position.distance_to(enemy.chase_target.global_position) > 64:
 			finished.emit("chase")
 		elif enemy.chase_target.can_be_attacked():
-			finished.emit(enemy.pick_attack_state(attack_state, enemy.chase_target), {"step_forward": true})
+			var player_state = enemy.chase_target.state_node.state.name
+			if player_state == "stance_defensive":
+				finished.emit("slash")
+			else:
+				finished.emit(enemy.pick_attack_state(attack_state, enemy.chase_target))
 		else:
 			finished.emit("idle")
 		return
@@ -92,10 +96,10 @@ func _on_attack_timer_timeout() -> void:
 		if enemy.global_position.distance_to(enemy.chase_target.global_position) > 64:
 			finished.emit("chase")
 		elif enemy.chase_target.can_be_attacked():
-			finished.emit(enemy.pick_attack_state(attack_state, enemy.chase_target), {"step_forward": true})
+			finished.emit(enemy.pick_attack_state(attack_state, enemy.chase_target))
 		else:
 			finished.emit("idle")
 		return
 	if enemy.chase_target.can_be_attacked():
 		enemy.wait_animation_transition = true
-		finished.emit(enemy.pick_attack_state(attack_state, enemy.chase_target), {"step_forward": true})
+		finished.emit(enemy.pick_attack_state(attack_state, enemy.chase_target))
