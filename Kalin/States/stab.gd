@@ -31,6 +31,9 @@ func _on_attack_frame() -> void:
 				defender.take_damage(10, player)
 			else:
 				defender.take_damage(0, player)
-				player.think("I should hit harder")
+				if !player.has_heavy_stance:
+					player.think("I can't break it yet")
+				else:
+					player.think("I should hit harder")
 	else:
 		player.play_sfx(sfx_whiff)

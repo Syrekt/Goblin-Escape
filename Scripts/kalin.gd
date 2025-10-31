@@ -789,7 +789,6 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
-	Debugger.printui("col_behind.has_overlapping_bodies(): "+str(col_behind.has_overlapping_bodies()));
 	if Input.is_action_just_pressed("left_mouse_button"):
 		global_position = get_global_mouse_position()
 	if just_pressed("quick save"):

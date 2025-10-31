@@ -4491,9 +4491,9 @@ script = ExtResource("21_sklaw")
 [node name="Arousal" type="TextureProgressBar" parent="UI/HUD" groups=["HUD"]]
 layout_mode = 0
 offset_left = 22.0
-offset_top = 23.0
-offset_right = 73.0
-offset_bottom = 24.0
+offset_top = 15.0
+offset_right = 40.0
+offset_bottom = 16.0
 step = 0.0
 texture_progress = ExtResource("58_yofsr")
 tint_progress = Color(0.474366, 0.00173617, 0.698302, 1)
@@ -4698,7 +4698,8 @@ theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/CharacterPanel/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 18
+tooltip_text = "Level up using this panel"
+theme_override_constants/separation = 8
 
 [node name="Close" type="Button" parent="UI/CharacterPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -4716,16 +4717,32 @@ script = SubResource("GDScript_4jgp1")
 layout_mode = 2
 text = "Level: "
 
+[node name="HSeparator" type="HSeparator" parent="UI/CharacterPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_t42fh")
+
 [node name="Strength" parent="UI/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
 layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "- Adds damage but increases Fatigue over time.
+- Increases stamina cost of attacks
+"
 
 [node name="Endurance" parent="UI/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
 layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "- Adds stamina and reduces Fatigue but increases smell build up.
+- Protects Kalin against Corruption as long as Kalin doesn't run out.
+- Decreases general stamina costs
+"
 
 [node name="Vitality" parent="UI/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
 layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "- Increases health and stamina.
+"
 
-[node name="HSeparator" type="HSeparator" parent="UI/CharacterPanel/MarginContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="UI/CharacterPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_t42fh")
 
@@ -5054,6 +5071,7 @@ target_position = Vector2(0, 39)
 collision_mask = 2049
 
 [node name="ColBehind" type="Area2D" parent="." groups=["Flip"]]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ColBehind"]
