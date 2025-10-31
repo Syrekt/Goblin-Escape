@@ -159,6 +159,13 @@ func save_game() -> void:
 func load_game() -> void:
 	#get_tree().change_scene_to_file("res://Scenes/demo_map.tscn")
 	print("Loading...")
+
+	# Disable tweening on pcams
+	var cam_regions = get_tree().get_nodes_in_group("Camera Region")
+	for region : PCamLimit in cam_regions:
+		region.disable_tween()
+
+
 	var save_file = FileAccess.open("user://"+save_slot+".ge", FileAccess.READ)
 	if !save_file:
 		print("Save file corrupt or doesn't exist")

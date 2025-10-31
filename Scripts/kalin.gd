@@ -785,9 +785,6 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
-	if pcam:
-		Debugger.printui("pcam.follow_damping: "+str(pcam.follow_damping));
-		Debugger.printui("pcam.tween_on_load: "+str(pcam.tween_on_load));
 	if just_pressed("quick save"):
 		Ge.save_game()
 	if just_pressed("quick load"):

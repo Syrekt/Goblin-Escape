@@ -78,6 +78,7 @@ FullscreenPanel="Panels that covering whole screen, might want to disable HUD wh
 Enemy=""
 HUD="Contains HUD elements that should be toggled together"
 MapNode="These nodes will be drawn on minimap"
+"Camera Region"=""
 
 [input]
 
