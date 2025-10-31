@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://b87kivkxujdf"]
+
+[ext_resource type="Texture2D" uid="uid://c0q36ckmtcgxo" path="res://Inventory/Sprites/ Potions-export50.png" id="1_12k6q"]
+[ext_resource type="Script" uid="uid://nrl1858h0shp" path="res://Inventory/inv_item.gd" id="2_gfcro"]
+
+[resource]
+script = ExtResource("2_gfcro")
+name = "Minor Rejuvenation Draught"
+icon = ExtResource("1_12k6q")
+description = "Regenerates small amount of health overtime."
+metadata/_custom_type_script = "uid://nrl1858h0shp"

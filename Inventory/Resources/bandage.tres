@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://d4ctodhxrgntr"]
+
+[ext_resource type="Script" uid="uid://nrl1858h0shp" path="res://Inventory/inv_item.gd" id="1_imrj6"]
+[ext_resource type="Texture2D" uid="uid://bjt5ics7rvdth" path="res://Inventory/Sprites/bandage.png" id="1_nteft"]
+
+[resource]
+script = ExtResource("1_imrj6")
+name = "Bandage"
+icon = ExtResource("1_nteft")
+description = "Stops the bleeding."
+metadata/_custom_type_script = "uid://nrl1858h0shp"

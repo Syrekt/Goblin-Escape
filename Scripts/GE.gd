@@ -328,14 +328,14 @@ func play_particle(res: Resource, position: Vector2, dir := 1, rot := 0) -> void
 func dir_towards(from: Node2D, to: Node2D) -> int:
 	return sign(to.global_position.x - from.global_position.x)
 func set_camera_focus() -> void:
-	var pcam : PhantomCamera2D = player.find_child("PhantomCamera2D")
+	var pcam : PhantomCamera2D = player.pcam
 	pcam.follow_mode = pcam.FollowMode.GROUP
 	var targets : Array[Node2D] = [player, camera_focus]
 	#pcam.append_follow_targets_array(targets)
 	pcam.set_follow_targets(targets)
 	await get_tree().create_timer(0.5).timeout
 func reset_camera_focus() -> void:
-	var pcam : PhantomCamera2D = player.find_child("PhantomCamera2D")
+	var pcam : PhantomCamera2D = player.pcam
 	pcam.erase_follow_targets(camera_focus)
 	pcam.follow_mode = pcam.FollowMode.SIMPLE
 	pcam.set_follow_target(player)

@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://cy0k8vepu16km"]
+
+[ext_resource type="Texture2D" uid="uid://4s6u2ndoyh16" path="res://Inventory/Sprites/ Potions-export4.png" id="1_lni0t"]
+[ext_resource type="Script" uid="uid://cliq1akrpj5ng" path="res://Scripts/item_pickup.gd" id="2_djcwb"]
+[ext_resource type="Resource" uid="uid://b30py087tp8p4" path="res://Inventory/Resources/pher_potion.tres" id="3_ep2dg"]
+[ext_resource type="Script" uid="uid://cmq4j7er6fkpl" path="res://Inventory/item_pickup_area.gd" id="4_jq3n1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ql57a"]
+
+[node name="PickupPher" type="Sprite2D"]
+texture = ExtResource("1_lni0t")
+script = ExtResource("2_djcwb")
+item = ExtResource("3_ep2dg")
+
+[node name="ItemPickupArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("4_jq3n1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPickupArea"]
+shape = SubResource("RectangleShape2D_ql57a")

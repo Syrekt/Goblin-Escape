@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://rrnk862o0mdw"]
+[gd_scene load_steps=14 format=4 uid="uid://rrnk862o0mdw"]
 
 [ext_resource type="Script" uid="uid://ysqa4fxfxicu" path="res://Scripts/scene_manager.gd" id="1_50ct6"]
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_r5l72"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://wcoq7ay5eurm" path="res://UI/rpg_icon_pack.png" id="9_yglu3"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="10_bwjpn"]
 [ext_resource type="PackedScene" uid="uid://dw2d8bu1vlvv6" path="res://Enemy/Goblin/goblin.tscn" id="11_ibmi3"]
+[ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="12_ibmi3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oho3u"]
 size = Vector2(1025.5, 384)
@@ -69,3 +70,7 @@ position = Vector2(395, 233)
 
 [node name="Goblin2" parent="." instance=ExtResource("11_ibmi3")]
 position = Vector2(327, 233)
+
+[node name="Crate1" parent="." instance=ExtResource("12_ibmi3")]
+position = Vector2(704, 240)
+drop_random_loot = true

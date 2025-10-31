@@ -264,7 +264,8 @@ func start_chase() -> void:
 	state_node.state.finished.emit("chase")
 func drop_chase() -> void:
 	if debug: print("drop chase")
-	chase_target.enemies_on_chase.erase(self)
+	if chase_target:
+		chase_target.enemies_on_chase.erase(self)
 	chase_target = null
 	player_in_range = false
 	if !awareness_timer.is_inside_tree():

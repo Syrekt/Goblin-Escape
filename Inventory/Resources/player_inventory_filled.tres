@@ -1,10 +1,8 @@
-[gd_resource type="Resource" script_class="Inventory" load_steps=4 format=3 uid="uid://br6rhvsa0swrd"]
+[gd_resource type="Resource" script_class="Inventory" load_steps=3 format=3 uid="uid://br6rhvsa0swrd"]
 
 [ext_resource type="Script" uid="uid://nrl1858h0shp" path="res://Inventory/inv_item.gd" id="1_rbt1x"]
-[ext_resource type="Resource" uid="uid://b17im7w40vkfm" path="res://Inventory/Resources/feather_step.tres" id="2_h13l6"]
 [ext_resource type="Script" uid="uid://cmn57sa12vri8" path="res://Inventory/inv.gd" id="3_5i8bu"]
 
 [resource]
 script = ExtResource("3_5i8bu")
-items = Array[ExtResource("1_rbt1x")]([ExtResource("2_h13l6"), ExtResource("2_h13l6"), ExtResource("2_h13l6"), ExtResource("2_h13l6"), ExtResource("2_h13l6"), ExtResource("2_h13l6"), ExtResource("2_h13l6"), ExtResource("2_h13l6"), ExtResource("2_h13l6"), ExtResource("2_h13l6"), ExtResource("2_h13l6"), ExtResource("2_h13l6"), ExtResource("2_h13l6")])
 metadata/_custom_type_script = "uid://cmn57sa12vri8"

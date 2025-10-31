@@ -11,6 +11,7 @@ var health_cur 		:= 0.0
 
 @export var destructable	:= false
 @export var collidable		:= false
+@export var drop_random_loot := false
 
 @export var gravity := 300 * 60
 @export var y_acc := 5
@@ -48,7 +49,29 @@ func take_damage(damage: int, source) -> void:
 	else:
 		sprite.frame = frame_count
 		Ge.play_audio_free(0, "res://SFX/wood break.mp3")
+		if drop_random_loot:
+			drop_loot()
 
 		set_collision_layer_value(1, false)
 		set_collision_layer_value(8, false)
 		if light_occuler: light_occuler.queue_free()
+func drop_loot() -> void:
+	var path = "res://Inventory/Pickup Objects"
+	var array : Array = DirAccess.get_files_at(path)
+	var scene = array.pick_random()
+	print("scene: "+str(scene))
+	var loot = load(path + "/" + scene).instantiate()
+	loot.global_position = global_position
+	get_tree().current_scene.add_child(loot)
+
+func save() -> void:
+	Ge.save_node(self,{
+		"health_cur": health_cur,
+	})
+func load(data: Dictionary) -> void:
+	health_cur = data.get(health_cur, true)
+	var frame_count = float(sprite.sprite_frames.get_frame_count(sprite.animation))
+	if health_cur > 0:
+		sprite.frame = (1 - (health_cur / health_max)) * frame_count
+	else:
+		sprite.frame = frame_count

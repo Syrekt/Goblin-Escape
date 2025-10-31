@@ -7,7 +7,5 @@
 script = ExtResource("2_10ggv")
 name = "Pher Potion"
 icon = ExtResource("1_u0mu0")
-amount = 1
-consumable = true
 description = "Supresses body odor, reduces stamina generation."
 metadata/_custom_type_script = "uid://nrl1858h0shp"
