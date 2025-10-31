@@ -1,11 +1,4 @@
-extends Area2D
-
-var auto := false
-var repeat := false
-var title : String ## Text that shows besides the button prompt
-
-var active := false
-var waiting_player_exit := false
+extends Interaction
 
 func update(player: Player) -> void:
 	if Input.is_action_just_pressed("interact"):

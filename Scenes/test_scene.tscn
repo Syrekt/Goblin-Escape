@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://rrnk862o0mdw"]
+[gd_scene load_steps=12 format=4 uid="uid://rrnk862o0mdw"]
 
 [ext_resource type="Script" uid="uid://ysqa4fxfxicu" path="res://Scripts/scene_manager.gd" id="1_50ct6"]
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_r5l72"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://45snbjkrrgyc" path="res://UI/death_screen.tscn" id="5_rdbpf"]
 [ext_resource type="PackedScene" uid="uid://bxgqi0q1okfjx" path="res://Objects/screen_fade.tscn" id="6_oho3u"]
 [ext_resource type="PackedScene" uid="uid://bkmdulbfadf8d" path="res://Objects/camera_region.tscn" id="7_rdbpf"]
+[ext_resource type="PackedScene" uid="uid://cxu1p2ap15mlj" path="res://Objects/skill_pickup.tscn" id="8_d3awe"]
+[ext_resource type="Texture2D" uid="uid://wcoq7ay5eurm" path="res://UI/rpg_icon_pack.png" id="9_yglu3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oho3u"]
 size = Vector2(641.5, 368)
@@ -19,6 +21,7 @@ script = ExtResource("1_50ct6")
 
 [node name="Kalin" parent="." instance=ExtResource("2_50ct6")]
 position = Vector2(526, 223)
+has_sword = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAIAA8AAgAcAA4AAAAIABAAAgAcAA8AAAAIABEAAgAcABAAAAAJAA8AAgAdAA4AAAAJABAAAgAdAA8AAAAJABEAAgAdABAAAAAKAA8AAgAeAA4AAAAKABAAAgAeAA8AAAAKABEAAgAeABAAAAALAA8AAgAfAA4AAAALABAAAgAfAA8AAAALABEAAgAfABAAAAAMAA8AAgAcAA4AAAAMABAAAgAcAA8AAAAMABEAAgAcABAAAAANAA8AAgAdAA4AAAANABAAAgAdAA8AAAANABEAAgAdABAAAAAOAA8AAgAeAA4AAAAOABAAAgAeAA8AAAAOABEAAgAeABAAAAAPAA8AAgAfAA4AAAAPABAAAgAfAA8AAAAPABEAAgAfABAAAAAQAA8AAgAcAA4AAAAQABAAAgAcAA8AAAAQABEAAgAcABAAAAARAA8AAgAdAA4AAAARABAAAgAdAA8AAAARABEAAgAdABAAAAASAA8AAgAeAA4AAAASABAAAgAeAA8AAAASABEAAgAeABAAAAATAA8AAgAfAA4AAAATABAAAgAfAA8AAAATABEAAgAfABAAAAAUAA8AAgAcAA4AAAAUABAAAgAcAA8AAAAUABEAAgAcABAAAAAVAA8AAgAdAA4AAAAVABAAAgAdAA8AAAAVABEAAgAdABAAAAAWAA8AAgAeAA4AAAAWABAAAgAeAA8AAAAWABEAAgAeABAAAAAXAA8AAgAfAA4AAAAXABAAAgAfAA8AAAAXABEAAgAfABAAAAAYAA8AAgAcAA4AAAAYABAAAgAcAA8AAAAYABEAAgAcABAAAAAZAA8AAgAdAA4AAAAZABAAAgAdAA8AAAAZABEAAgAdABAAAAAaAA8AAgAeAA4AAAAaABAAAgAeAA8AAAAaABEAAgAeABAAAAAbAA8AAgAfAA4AAAAbABAAAgAfAA8AAAAbABEAAgAfABAAAAAcAA8AAgAcAA4AAAAcABAAAgAcAA8AAAAcABEAAgAcABAAAAAdAA8AAgAdAA4AAAAdABAAAgAdAA8AAAAdABEAAgAdABAAAAAeAA8AAgAeAA4AAAAeABAAAgAeAA8AAAAeABEAAgAeABAAAAAfAA8AAgAfAA4AAAAfABAAAgAfAA8AAAAfABEAAgAfABAAAAAgAA8AAgAcAA4AAAAgABAAAgAcAA8AAAAgABEAAgAcABAAAAAhAA8AAgAdAA4AAAAhABAAAgAdAA8AAAAhABEAAgAdABAAAAAiAA8AAgAeAA4AAAAiABAAAgAeAA8AAAAiABEAAgAeABAAAAAjAA8AAgAfAA4AAAAjABAAAgAfAA8AAAAjABEAAgAfABAAAAAkAA8AAgAcAA4AAAAkABAAAgAcAA8AAAAkABEAAgAcABAAAAAlAA8AAgAdAA4AAAAlABAAAgAdAA8AAAAlABEAAgAdABAAAAAmAA8AAgAeAA4AAAAmABAAAgAeAA8AAAAmABEAAgAeABAAAAAnAA8AAgAfAA4AAAAnABAAAgAfAA8AAAAnABEAAgAfABAAAAAoAA8AAgAcAA4AAAAoABAAAgAcAA8AAAAoABEAAgAcABAAAAApAA8AAgAdAA4AAAApABAAAgAdAA8AAAApABEAAgAdABAAAAAqAA8AAgAeAA4AAAAqABAAAgAeAA8AAAAqABEAAgAeABAAAAArAA8AAgAfAA4AAAArABAAAgAfAA8AAAArABEAAgAfABAAAAAsAA8AAgAcAA4AAAAsABAAAgAcAA8AAAAsABEAAgAcABAAAAAtAA8AAgAdAA4AAAAtABAAAgAdAA8AAAAtABEAAgAdABAAAAAuAA8AAgAeAA4AAAAuABAAAgAeAA8AAAAuABEAAgAeABAAAAAvAA8AAgAfAA4AAAAvABAAAgAfAA8AAAAvABEAAgAfABAAAAANAAsAAgARACUAAAANAAwAAgARACYAAAAOAAsAAgASACUAAAAOAAwAAgASACYAAAAPAAsAAgAVACUAAAAPAAwAAgAVACYAAAAQAAsAAgAWACUAAAAQAAwAAgAWACYAAAAkAA0AAgARACUAAAAkAA4AAgARACYAAAAlAA0AAgASACUAAAAlAA4AAgASACYAAAAmAA0AAgAVACUAAAAmAA4AAgAVACYAAAAnAA0AAgAWACUAAAAnAA4AAgAWACYAAAAbAAkAAgARACUAAAAbAAoAAgARACYAAAAcAAkAAgASACUAAAAcAAoAAgASACYAAAAdAAkAAgAVACUAAAAdAAoAAgAVACYAAAAeAAkAAgAWACUAAAAeAAoAAgAWACYAAAAUAAsAAgARACUAAAAUAAwAAgARACYAAAAVAAsAAgASACUAAAAVAAwAAgASACYAAAAWAAsAAgAVACUAAAAWAAwAAgAVACYAAAAXAAsAAgAWACUAAAAXAAwAAgAWACYAAAA=")
@@ -33,6 +36,7 @@ visible = false
 [node name="ScreenFade" parent="." instance=ExtResource("6_oho3u")]
 
 [node name="CameraRegion" parent="." instance=ExtResource("7_rdbpf")]
+visible = false
 position = Vector2(-192, 96)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraRegion"]
@@ -40,8 +44,23 @@ position = Vector2(319.25, 184)
 shape = SubResource("RectangleShape2D_oho3u")
 
 [node name="CameraRegion2" parent="." instance=ExtResource("7_rdbpf")]
+visible = false
 position = Vector2(448, 96)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraRegion2"]
 position = Vector2(320, 184)
 shape = SubResource("RectangleShape2D_d3awe")
+
+[node name="SkillPickup" parent="." instance=ExtResource("8_d3awe")]
+position = Vector2(592, 240)
+texture = ExtResource("9_yglu3")
+region_enabled = true
+region_rect = Rect2(80, 320, 16, 16)
+skill_name = "has_heavy_stance"
+
+[node name="SkillPickup2" parent="." instance=ExtResource("8_d3awe")]
+position = Vector2(464, 240)
+texture = ExtResource("9_yglu3")
+region_enabled = true
+region_rect = Rect2(128, 320, 16, 16)
+skill_name = "has_defensive_stance"

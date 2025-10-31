@@ -158,6 +158,7 @@ var ray_light : RayCast2D
 var wait_for_camera := false
 var map_icon := "player"
 var potential_movable : Movable
+var disable_camera_damping_on_spawn := true
 #endregion
 #region Signals
 signal enter_shadow
@@ -476,6 +477,7 @@ func load(data: Dictionary) -> void:
 
 	for key in data.keys():
 		set(key, data[key])
+	disable_camera_damping_on_spawn = true
 func check_buffered_state() -> bool:
 	var state_to_switch : String
 	if buffered_state:
@@ -543,6 +545,16 @@ func ignore_platforms() -> void:
 	set_collision_mask_value(17, false)
 	await get_tree().create_timer(0.5).timeout
 	set_collision_mask_value(17, true)
+func unlock_skill(_name: String) -> void:
+	print("Unlocked skill: %s" % _name)
+	set(_name, true)
+	match _name:
+		"has_heavy_stance":
+			var tutorial = load("res://Tutorial/heavy_stance_tutorial.tscn").instantiate()
+			get_tree().current_scene.add_child(tutorial)
+		"has_defensive_stance":
+			var tutorial = load("res://Tutorial/defensive_stance_tutorial.tscn").instantiate()
+			get_tree().current_scene.add_child(tutorial)
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -773,6 +785,9 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
+	if pcam:
+		Debugger.printui("pcam.follow_damping: "+str(pcam.follow_damping));
+		Debugger.printui("pcam.tween_on_load: "+str(pcam.tween_on_load));
 	if just_pressed("quick save"):
 		Ge.save_game()
 	if just_pressed("quick load"):
@@ -798,12 +813,12 @@ func _process(delta: float) -> void:
 		if in_combat_state && combat_target:
 			pcam.follow_mode = pcam.FollowMode.GROUP
 			pcam.set_follow_targets([self, combat_target] as Array[Node2D])
-			pcam.draw_limits = false
+			#pcam.draw_limits = false
 		elif pcam.follow_mode == pcam.FollowMode.GROUP:
 			pcam.follow_mode = pcam.FollowMode.SIMPLE
 			pcam.set_follow_target(self)
-			if pcam.limit_target:
-				pcam.draw_limits = true
+			#if pcam.limit_target:
+			#	pcam.draw_limits = true
 	#endregion
 	if Input.is_action_pressed("restart"):
 		get_tree().reload_current_scene()

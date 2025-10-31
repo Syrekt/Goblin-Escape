@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://b8rlvg8w53iwn"]
 
 [ext_resource type="Script" uid="uid://dvnalqik5wysn" path="res://Scripts/scroll.gd" id="1_r6cjm"]
-[ext_resource type="Texture2D" uid="uid://biod40131ri15" path="res://UI/Full Sheet.png" id="1_shj22"]
+[ext_resource type="Texture2D" uid="uid://biod40131ri15" path="res://UI/fruit_assets.png" id="1_shj22"]
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="3_0nkf5"]
 [ext_resource type="Texture2D" uid="uid://cdbaknodlx4a2" path="res://UI/Super GUI Bundle 3 Paper Pack v1.0/Books/Book 1/Static Book/0.png" id="4_x5qcj"]
 [ext_resource type="SpriteFrames" uid="uid://tad7af6w5gxb" path="res://Sprite Frames/input_prompts.tres" id="5_4vief"]

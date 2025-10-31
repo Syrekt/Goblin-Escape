@@ -238,7 +238,6 @@ func load_game() -> void:
 			if new_object is Player:
 				# Assign player id to global variable
 				Ge.player = new_object
-				new_object.pcam.follow_damping = false
 
 			# Remove unnecessary keys
 			node_data.erase("filename")
@@ -265,7 +264,6 @@ func load_game() -> void:
 	print("Game loaded.")
 	get_tree().paused = false
 	await get_tree().create_timer(1.0).timeout
-	Ge.player.pcam.follow_damping = true
 	# loading_screen.hide()
 	for node in get_tree().current_scene.get_children():
 		if node is Control:
