@@ -157,6 +157,7 @@ var light_source : Area2D
 var ray_light : RayCast2D
 var wait_for_camera := false
 var map_icon := "player"
+var draw_on_map := true
 var potential_movable : Movable
 var disable_camera_damping_on_spawn := true
 #endregion
@@ -552,6 +553,8 @@ func unlock_skill(_name: String) -> void:
 		"has_heavy_stance":
 			var tutorial = load("res://Tutorial/heavy_stance_tutorial.tscn").instantiate()
 			get_tree().current_scene.add_child(tutorial)
+			await tutorial.tree_exited
+			think("I can break the barricades now.")
 		"has_defensive_stance":
 			var tutorial = load("res://Tutorial/defensive_stance_tutorial.tscn").instantiate()
 			get_tree().current_scene.add_child(tutorial)
@@ -764,7 +767,8 @@ func _physics_process(delta: float) -> void:
 			if collider is TileMapLayer:
 				var cell = collider.local_to_map(cell_check.get_collision_point())
 				var data = collider.get_cell_tile_data(cell)
-				is_on_one_way_collider = data.is_collision_polygon_one_way(0, 0)
+				if data:
+					is_on_one_way_collider = data.is_collision_polygon_one_way(0, 0)
 			elif collider.is_in_group("OneWayColliders"):
 				is_on_one_way_collider = true
 
@@ -785,6 +789,10 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
+	Debugger.printui("invisible: "+str(invisible))
+	Debugger.printui("hiding: "+str(hiding))
+	if Input.is_action_just_pressed("left_mouse_button"):
+		global_position = get_global_mouse_position()
 	if just_pressed("quick save"):
 		Ge.save_game()
 	if just_pressed("quick load"):

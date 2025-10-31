@@ -10,17 +10,16 @@ func exit() -> void:
 	$IdleTimer.stop()
 
 func update(delta : float) -> void:
+	if enemy.chase_target:
+		if enemy.player_detected():
+			enemy.start_chase()
+			return
 	if enemy.chatting:
 		if enemy.friend:
 			finished.emit("chat_lead")
 		else:
 			finished.emit("chat_secondary")
 		return
-	if enemy.chase_target && await enemy.detect_player(enemy.chase_target):
-		if enemy.chase_target:
-			if enemy.chase_target.can_be_attacked():
-				finished.emit("chase")
-				return
 
 func _on_idle_timer_timeout() -> void:
 	if enemy.patrol_amount > 0:

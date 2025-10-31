@@ -1491,7 +1491,6 @@ shape = SubResource("RectangleShape2D_ec1cy")
 [connection signal="timeout" from="StateMachine/chat_lead/LeadTimer" to="StateMachine/chat_lead" method="_on_lead_timer_timeout"]
 [connection signal="timeout" from="StateMachine/chat_lead/SecondaryTimer" to="StateMachine/chat_lead" method="_on_secondary_timer_timeout"]
 [connection signal="body_entered" from="PlayerProximity" to="." method="_on_player_proximity_body_entered"]
-[connection signal="body_exited" from="ChaseRange" to="." method="_on_chase_range_body_exited"]
 [connection signal="body_entered" from="CrushCheck" to="." method="_on_crush_check_body_entered"]
 [connection signal="timeout" from="AwarenessTimer" to="." method="_on_awareness_timer_timeout"]
 [connection signal="body_entered" from="ThreatCollider" to="." method="_on_threat_collider_body_entered"]

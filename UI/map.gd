@@ -17,15 +17,22 @@ func set_zoom(value):
 	if zoom != old_zoom:
 		camera.zoom = Vector2(zoom, zoom)
 
-@onready var grid			= $MapContainer/MarginContainer/Grid
-@onready var player_marker	= $MapContainer/MarginContainer/SubViewportContainer/SubViewport/PlayerMarker
-@onready var enemy_marker	= $MapContainer/MarginContainer/SubViewportContainer/SubViewport/EnemyMarker
-@onready var portal_marker	= $MapContainer/MarginContainer/SubViewportContainer/SubViewport/PortalMarker
+@onready var grid				= $MapContainer/MarginContainer/Grid
+@onready var player_marker		= $MapContainer/MarginContainer/SubViewportContainer/SubViewport/PlayerMarker
+@onready var enemy_marker		= $MapContainer/MarginContainer/SubViewportContainer/SubViewport/EnemyMarker
+@onready var portal_marker		= $MapContainer/MarginContainer/SubViewportContainer/SubViewport/PortalMarker
+@onready var objective_marker	= $MapContainer/MarginContainer/SubViewportContainer/SubViewport/ObjectiveMarker
+
+
+
+
+
 
 @onready var icons = {
-	"player": player_marker,
-	"enemy"	: enemy_marker,
-	"portal": portal_marker,
+	"player"		: player_marker,
+	"enemy"			: enemy_marker,
+	"portal"		: portal_marker,
+	"objective"		: objective_marker,
 }
 
 var markers = {}
@@ -67,14 +74,19 @@ func _process(delta: float) -> void:
 		if !node:
 			markers.erase(node)
 	for node in markers:
+		var persistent = markers[node].is_in_group("persistent_marker")
 		markers[node].position = (node.global_position - screen_rect.position) * camera.zoom 
-		if node == player:
+		if persistent:
+			markers[node].show()
 			markers[node].position.x = clamp(markers[node].position.x, 0, screen_rect.size.x * camera.zoom.x)
 			markers[node].position.y = clamp(markers[node].position.y, 0, screen_rect.size.y * camera.zoom.y)
-		if screen_rect.has_point(node.global_position):
-			markers[node].show()
-		elif node != player:
-			markers[node].hide()
+		else:
+			if screen_rect.has_point(node.global_position):
+				markers[node].show()
+			else:
+				markers[node].hide()
+		# Override any show() if draw_on_map is false
+		if !node.draw_on_map: markers[node].hide()
 	# Teleport to active portals
 	if teleporting:
 		if Input.is_action_just_pressed("left"):

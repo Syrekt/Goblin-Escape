@@ -3,6 +3,7 @@ class_name Enemy extends CharacterBody2D
 @export var save_list : Array[String]
 @export var debug := false
 @export var map_icon : String
+var draw_on_map := true
 
 @export var experience_drop := 1
 
@@ -112,7 +113,6 @@ func take_damage(_damage : int, _source: Node2D = null, critical := false):
 		return
 
 	health.value -= _damage
-	aware = true
 	if health.value <= 0:
 		emit_signal("health_depleted")
 	else:
@@ -130,7 +130,8 @@ func take_damage(_damage : int, _source: Node2D = null, critical := false):
 		if _source is Player:
 			var attack_type = _source.state_node.state.name
 			attack_type_taken.append(attack_type)
-			await detect_player(_source)
+			aware = true
+			chase_target = player
 		if health.value > 0:
 			set_facing(incoming_dir)
 func next_step_free(direction : int) -> bool:
@@ -201,22 +202,6 @@ func smell(source: Player):
 		"idle", "chat_lead", "patrol":
 			state_node.state.finished.emit("smell")
 
-func detect_player(target: Player) -> bool:
-	var pos = target.hurtbox.global_position
-	pos.y -= 10
-	line_of_sight.target_position = line_of_sight.to_local(pos)
-	await get_tree().physics_frame
-	if line_of_sight.is_colliding():
-		var collider = line_of_sight.get_collider()
-		if collider.is_in_group("OneWayColliders"):
-			return true
-		if chase_target:
-			print("line of sight blocked to chase target")
-			drop_chase(chase_target)
-		return false
-	else:
-		return true
-		
 func lost_target() -> void:
 	#CHANGES STATE
 	print("lost target")
@@ -251,7 +236,14 @@ func update_patrol_point() -> void:
 	while new_point == current_patrol_point:
 		new_point = patrol_points.pick_random()
 	current_patrol_point = new_point
-func start_chase(target:Player) -> void:
+func player_detected() -> bool:
+	if !target_in_sight: return false
+	if chase_target.hiding: return false
+	if !aware && chase_target.invisible: return false
+
+	if debug: print("Detect player");
+	return true
+func start_chase() -> void:
 	if chase_disabled:
 		if debug: print("Chase disabled")
 		return
@@ -262,16 +254,17 @@ func start_chase(target:Player) -> void:
 	if !chase_target && !aware:
 		emote_emitter.play("alarmed")
 	player_in_range = true
-	chase_target = target
+	print("Set aware from start_chase")
 	aware = true
 	awareness_timer.stop()
-	if target.enemies_on_chase.find(self) == -1:
-		target.enemies_on_chase.append(self)
-	if !target.combat_target:
-		target.combat_target = self
-func drop_chase(target:Player) -> void:
+	if chase_target.enemies_on_chase.find(self) == -1:
+		chase_target.enemies_on_chase.append(self)
+	if !chase_target.combat_target:
+		chase_target.combat_target = self
+	state_node.state.finished.emit("chase")
+func drop_chase() -> void:
 	if debug: print("drop chase")
-	target.enemies_on_chase.erase(self)
+	chase_target.enemies_on_chase.erase(self)
 	chase_target = null
 	player_in_range = false
 	if !awareness_timer.is_inside_tree():
@@ -309,7 +302,7 @@ func pick_attack_state(state_array: Array, target: Player) -> String:
 	print("state_array: "+str(state_array))
 	while state == "grab" && global_position.y != target.global_position.y:
 		state = state_array.pick_random().name
-	print("Returning attack state %s", state)
+	print("Returning attack state %s" %state)
 	return state
 #endregion
 #region Animation end
@@ -386,24 +379,19 @@ func _ready() -> void:
 	leave_shadow.connect(_on_leave_shadow)
 
 	awareness_timer.stop()
+
+	chase_detector.body_entered.connect(_on_chase_detector_body_entered)
+	$ChaseRange.body_exited.connect(_on_chase_range_body_exited)
 func _process(delta: float) -> void:
+	if debug: Debugger.printui("target_in_sight: "+str(target_in_sight))
 	# Check if there is anything that stops the gameplay
 	var ui_nodes = get_tree().get_nodes_in_group("UIPanel")
 func _physics_process(delta: float) -> void:
 	if chase_target:
-		target_in_sight	= await detect_player(player)
-	elif player_in_range:
-		if player.hiding:
-			pass
-		elif aware:
-			if await detect_player(player):
-				if debug: print("Detect player and start chase");
-				start_chase(player)
-		elif player.invisible:
-			pass
-	if chase_detector.monitoring && chase_detector.has_overlapping_bodies():
-		start_chase(player)
-
+		var pos = chase_target.hurtbox.global_position
+		pos.y -= 10
+		line_of_sight.target_position = line_of_sight.to_local(pos)
+		target_in_sight = !line_of_sight.is_colliding()
 	if light_source && light_source.lit:
 		ray_light.target_position = ray_light.to_local(light_source.global_position)
 		if ray_light.is_colliding():
@@ -480,9 +468,12 @@ func _spawn_collectable() -> void:
 		var rad = deg_to_rad(deg)
 		var speed = randf_range(100.0, 300.0)
 		collectable.linear_velocity = Vector2.from_angle(rad) * speed
+func _on_chase_detector_body_entered(body:Player) -> void:
+	if debug: print("Player body entered chase detector")
+	chase_target = body
 func _on_chase_range_body_exited(body:Player) -> void:
-	if debug: print("player body exited chase range")
-	drop_chase(body)
+	if debug: print("Player body exited chase range")
+	drop_chase()
 func _on_crush_check_body_entered(body:Node2D) -> void:
 	if body is Movable && body.velocity.y > 0:
 		call_deferred("set_collision_mask_value", 1, false)
@@ -498,7 +489,8 @@ func _on_threat_collider_body_entered(body:Node2D) -> void:
 func _on_player_proximity_body_entered(body:Player) -> void:
 	if !body.hiding:
 		if debug: print("Start chase by proximity trigger")
-		start_chase(body)
+		chase_target = body
+		aware = true
 func _on_enter_shadow() -> void:
 	in_shadow = true
 	var c = Color(0.1, 0.1, 0.1, 0.5)

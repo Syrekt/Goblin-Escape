@@ -18,11 +18,12 @@ func update(delta: float):
 			finished.emit("chase")
 			return
 		enemy.set_facing(sign(enemy.chase_target.global_position.x - enemy.global_position.x))
-		if in_combat_range && target_stunned:
-			finished.emit("slash")
-		elif target_state == "stance_heavy":
-			enemy.counter_attack = true
-			finished.emit("stab")
+		if in_combat_range:
+			if target_stunned:
+				finished.emit("slash")
+			elif target_state == "stance_heavy":
+				enemy.counter_attack = true
+				finished.emit("stab")
 	else:
 		print("no chase target in light")
 		enemy.lost_target()

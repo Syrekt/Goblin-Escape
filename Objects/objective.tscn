@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b71wdq8j8366l"]
+
+[ext_resource type="Texture2D" uid="uid://bmsip3kpuiq6b" path="res://UI/spr_quest_indicator.png" id="1_xh5hq"]
+[ext_resource type="Script" uid="uid://dc87d8v6jtmqc" path="res://Scripts/objective.gd" id="2_kjdey"]
+
+[node name="Objective" type="Sprite2D" groups=["MapNode"]]
+visible = false
+light_mask = 0
+visibility_layer = 2
+texture = ExtResource("1_xh5hq")
+script = ExtResource("2_kjdey")
