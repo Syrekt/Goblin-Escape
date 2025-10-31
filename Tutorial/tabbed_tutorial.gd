@@ -24,6 +24,8 @@ func _ready() -> void:
 	container.tab_changed.connect(_on_tab_container_tab_changed)
 	$Timer.timeout.connect(_on_timer_timeout)
 
+	get_tree().paused = true
+
 
 func _process(delta: float) -> void:
 	var tab_count = container.get_tab_count()
@@ -35,6 +37,7 @@ func _process(delta: float) -> void:
 			container.select_next_available()
 
 	if finished && (Input.is_action_just_pressed("stance") || Input.is_action_just_pressed("ui_cancel")):
+		get_tree().paused = false
 		queue_free()
 
 func show_controls() -> void:

@@ -22,6 +22,6 @@ func update(delta : float) -> void:
 		finished.emit("idle")
 		return
 
-	if enemy.chase_target && await enemy.detect_player(enemy.chase_target):
+	if enemy.chase_target && enemy.player_detected():
 		finished.emit("chase")
 		return

@@ -753,6 +753,7 @@ animations = [{
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kqsev"]
 
 [node name="Combat Tutorial" type="CanvasLayer" groups=["FullscreenPanel"]]
+process_mode = 2
 script = ExtResource("1_jbjhl")
 
 [node name="Timer" type="Timer" parent="."]
@@ -766,6 +767,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorRect" type="ColorRect" parent="ColorControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.16565639, 0.16565642, 0.16565636, 0.6745098)
+
 [node name="TabContainer" type="TabContainer" parent="ColorControl"]
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 1
@@ -774,10 +784,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 0
+current_tab = 1
 tabs_visible = false
 
 [node name="Page1" type="Control" parent="ColorControl/TabContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("2_alokh")
 metadata/_tab_index = 0
@@ -867,7 +878,6 @@ bbcode_enabled = true
 text = "[color=red]HEAVY STANCE[/color]"
 
 [node name="Page2" type="Control" parent="ColorControl/TabContainer"]
-visible = false
 layout_mode = 2
 theme = ExtResource("2_alokh")
 metadata/_tab_index = 1

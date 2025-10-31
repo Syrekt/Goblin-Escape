@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://h6kdgfq4tnxx"]
+
+[ext_resource type="Script" uid="uid://dpvjp13nfocrp" path="res://Scripts/hint.gd" id="1_2yov7"]
+[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="2_lvdvr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvdvr"]
+size = Vector2(81, 53)
+
+[node name="Hint" type="Area2D"]
+modulate = Color(1, 1, 1, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_2yov7")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -161.0
+offset_top = -98.0
+offset_right = 161.0
+offset_bottom = -41.0
+theme = ExtResource("2_lvdvr")
+bbcode_enabled = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_lvdvr")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

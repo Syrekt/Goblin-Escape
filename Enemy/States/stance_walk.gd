@@ -27,6 +27,8 @@ func exit() -> void:
 
 func update(delta: float) -> void:
 	enemy.move(enemy.combat_move_speed, direction, facing)
+	if enemy.is_on_wall():
+		finished.emit("stance_light")
 
 func _on_timer_timeout() -> void:
 	if !enemy.has_enemy_in_proximity():

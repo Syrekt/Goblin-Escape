@@ -8,11 +8,11 @@ var chase_dir := 0;
 func update(delta):
 	var target = enemy.chase_target
 
+	#Quit state
 	if enemy.destructable_detector.has_overlapping_bodies():
 		print("Colliding with a destructable")
 		finished.emit("slash")
 		return
-	#Quit state
 	if !target:
 		print("lose target from chase")
 		enemy.lost_target()
@@ -26,6 +26,11 @@ func update(delta):
 	if !enemy.target_in_sight:
 		enemy.lost_target()
 		return
+	if enemy.has_enemy_in_proximity():
+		enemy.update_animation("idle")
+		enemy.velocity.x = 0
+		return
+
 
 	#region React to player
 	if enemy.attack_detector.has_overlapping_bodies(): # If in combat range

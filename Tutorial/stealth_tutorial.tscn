@@ -40,6 +40,7 @@ shader_parameter/alpha = 1.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6a3fo"]
 
 [node name="stealth_tutorial" type="CanvasLayer" groups=["FullscreenPanel"]]
+process_mode = 2
 script = ExtResource("1_ommnr")
 
 [node name="Timer" type="Timer" parent="."]
@@ -52,6 +53,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ColorControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.16565639, 0.16565642, 0.16565636, 0.6745098)
 
 [node name="TabContainer" type="TabContainer" parent="ColorControl"]
 self_modulate = Color(0, 0, 0, 1)
