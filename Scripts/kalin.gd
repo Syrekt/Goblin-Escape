@@ -623,8 +623,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 #endregion
 #region Init
 func _ready() -> void:
-	SentrySDK.add_breadcrumb(SentryBreadcrumb.create("Just about to welcome the World."))
-	SentrySDK.capture_message("Hello, World!")
+	#SentrySDK.add_breadcrumb(SentryBreadcrumb.create("Just about to welcome the World."))
+	#SentrySDK.capture_message("Hello, World!")
 
 	$Overlays.show()
 	var canvas = find_child("UI")
