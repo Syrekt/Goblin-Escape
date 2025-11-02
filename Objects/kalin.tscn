@@ -1,4 +1,4 @@
-[gd_scene load_steps=246 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=249 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://b5p67lby0k2d0" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -6,10 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://dcs3l0iefjo7w" path="res://Kalin/Sprites/Kalin-Fall.png" id="2_1j6vo"]
 [ext_resource type="Texture2D" uid="uid://boahl6r6b6lgx" path="res://Kalin/Sprites/Kalin-Crouch_Idle.png" id="2_6cw72"]
 [ext_resource type="Texture2D" uid="uid://b83foasp85e6b" path="res://Kalin/Sprites/Kalin-Bash.png" id="2_s11s3"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="2_y4shw"]
 [ext_resource type="PackedScene" uid="uid://cpogcou30wxcj" path="res://UI/combat_properties.tscn" id="2_yetl5"]
 [ext_resource type="Texture2D" uid="uid://yymtfpkr47q8" path="res://Kalin/Sprites/Kalin_idle_unarmed.png" id="3_b6tj0"]
 [ext_resource type="Script" uid="uid://bkcjynwpex7ka" path="res://Kalin/States/run.gd" id="3_ejfka"]
 [ext_resource type="Texture2D" uid="uid://bwtgglpsavvyw" path="res://Kalin/Sprites/Kalin-Jump.png" id="3_fcid0"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_n1k6j"]
 [ext_resource type="Texture2D" uid="uid://dowqrv0phpb5t" path="res://Kalin/Sprites/Kalin-Block.png" id="3_pq7gt"]
 [ext_resource type="Texture2D" uid="uid://cxr0adhrbpvo6" path="res://Kalin/Sprites/Kalin-Crouch_Walk.png" id="3_sa02y"]
 [ext_resource type="Texture2D" uid="uid://drtos83imulyy" path="res://Kalin/Sprites/Kalin-Landing.png" id="4_7ft60"]
@@ -149,6 +151,9 @@
 [ext_resource type="Texture2D" uid="uid://b604lsbo7ft5d" path="res://Kalin/Sprites/struggle_transition_kalin_strip18.png" id="143_n1k6j"]
 [ext_resource type="Texture2D" uid="uid://k1sw3hl11be3" path="res://Kalin/Sprites/kalin-sex-lose-goblin.png" id="147_3pkug"]
 [ext_resource type="Texture2D" uid="uid://d3tsay8nfhcv8" path="res://Kalin/Sprites/kalin-orgasm-lose-goblin.png" id="148_aajsm"]
+
+[sub_resource type="Resource" id="Resource_3pkug"]
+script = ExtResource("3_n1k6j")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_47a0d"]
 shader = ExtResource("45_cbw7l")
@@ -4376,6 +4381,14 @@ script = ExtResource("1_tpqnq")
 slide_speed = 200.0
 snap_offset = Vector2(-17, 3)
 save_list = Array[String](["vitality", "strength", "endurance", "level", "has_sword", "experience_point", "has_heavy_stance", "has_defensive_stance"])
+
+[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+script = ExtResource("2_y4shw")
+follow_target = NodePath("..")
+snap_to_pixel = true
+tween_resource = SubResource("Resource_3pkug")
+draw_limits = true
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1

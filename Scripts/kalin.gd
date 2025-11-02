@@ -141,7 +141,7 @@ var grabbed_by : Enemy
 var can_have_sex := false ## When enemies can move in for sex
 var states_locked := false
 @export var save_list : Array[String]
-@onready var pcam : PhantomCamera2D
+@onready var pcam : PhantomCamera2D = $PhantomCamera2D
 var movable : Node2D = null
 var noise = preload("res://Objects/noise.tscn")
 var hiding_spot : Interaction
@@ -639,7 +639,7 @@ func _ready() -> void:
 	enter_abyss.connect(_on_abyss_entered)
 	fullscreen_panel_opened.connect(_on_fullscreen_panel_opened)
 	fullscreen_panel_closed.connect(_on_fullscreen_panel_closed)
-	get_tree().current_scene.emit_signal("player_ready", self) #owner should be root node
+	#get_tree().current_scene.emit_signal("player_ready", self) #owner should be root node
 #endregion
 #region Physics
 func _physics_process(delta: float) -> void:

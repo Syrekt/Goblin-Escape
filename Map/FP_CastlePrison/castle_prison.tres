@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=135 format=3 uid="uid://1quahlg1y22o"]
+[gd_resource type="TileSet" load_steps=139 format=3 uid="uid://1quahlg1y22o"]
 
 [ext_resource type="Texture2D" uid="uid://bqtpx8ja2r3ni" path="res://Map/FP_CastlePrison/background_obj.png" id="1_leifh"]
 [ext_resource type="Texture2D" uid="uid://d46bcae481s6" path="res://Map/FP_CastlePrison/mainlevbuildB.png" id="2_qy7eu"]
@@ -111,6 +111,18 @@ tile_data = PackedInt32Array(0, 1245186, 30, 65536, 1245186, 31, 131072, 1245186
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_efqla"]
 tile_data = PackedInt32Array(0, 262146, 11, 65536, 262146, 12, 1, 1245186, 33, 65537, 1245186, 34, 2, 1310722, 33, 65538, 1310722, 34, 3, 2228226, 11, 65539, 2228226, 12)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_1ubti"]
+tile_data = PackedInt32Array(0, 851969, 13, 65536, 851969, 14, 131072, 851969, 15, 196608, 851969, 16, 1, 917505, 13, 65537, 917505, 14, 131073, 917505, 15, 196609, 917505, 16, 2, 983041, 13, 65538, 983041, 14, 131074, 983041, 15, 196610, 983041, 16, 3, 1048577, 13, 65539, 1048577, 14, 131075, 1048577, 15, 196611, 1048577, 16, 4, 1114113, 13, 65540, 1114113, 14, 131076, 1114113, 15, 196612, 1114113, 16, 5, 1179649, 13, 65541, 1179649, 14, 131077, 1179649, 15, 196613, 1179649, 16)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_1ty7y"]
+tile_data = PackedInt32Array(0, 851969, 8, 65536, 851969, 9, 131072, 851969, 10, 196608, 851969, 11, 1, 917505, 8, 65537, 917505, 9, 131073, 917505, 10, 196609, 917505, 11, 2, 983041, 8, 65538, 983041, 9, 131074, 983041, 10, 196610, 983041, 11, 3, 1048577, 8, 65539, 1048577, 9, 131075, 1048577, 10, 196611, 1048577, 11, 4, 1114113, 8, 65540, 1114113, 9, 131076, 1114113, 10, 196612, 1114113, 11, 5, 1179649, 8, 65541, 1179649, 9, 131077, 1179649, 10, 196613, 1179649, 11)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_7ra33"]
+tile_data = PackedInt32Array(0, 1310721, 8, 65536, 1310721, 9, 131072, 1310721, 10, 196608, 1310721, 11, 1, 1376257, 8, 65537, 1376257, 9, 131073, 1376257, 10, 196609, 1376257, 11, 2, 1441793, 8, 65538, 1441793, 9, 131074, 1441793, 10, 196610, 1441793, 11, 3, 1507329, 8, 65539, 1507329, 9, 131075, 1507329, 10, 196611, 1507329, 11, 4, 1572865, 8, 65540, 1572865, 9, 131076, 1572865, 10, 196612, 1572865, 11, 5, 1638401, 8, 65541, 1638401, 9, 131077, 1638401, 10, 196613, 1638401, 11)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_7cu1q"]
+tile_data = PackedInt32Array(0, 1900546, 268435477, 65536, 1900546, 268435478, 1, 1835010, 268435477, 65537, 1835010, 268435478, 2, 1310722, 268435477, 65538, 1638402, 268435478, 3, 1310722, 268435477, 65539, 1572866, 268435478, 4, 1310722, 268435477, 65540, 1507330, 268435478, 5, 1310722, 268435477, 65541, 1441794, 268435478, 6, 1310722, 268435477, 65542, 1703938, 268435478, 7, 1310722, 268435477, 65543, 1638402, 268435478, 8, 1310722, 268435477, 65544, 1572866, 268435478, 9, 1310722, 268435477, 65545, 1507330, 268435478)
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_55f7i"]
 tile_data = PackedInt32Array(0, 1966082, 42, 65536, 1966082, 43, 131072, 1966082, 44, 1, 2031618, 42, 65537, 2031618, 43, 131073, 2031618, 44, 2, 2097154, 42, 65538, 2097154, 43, 131074, 2097154, 44)
@@ -4147,3 +4159,7 @@ pattern_37 = SubResource("TileMapPattern_cw38m")
 pattern_38 = SubResource("TileMapPattern_4dj5j")
 pattern_39 = SubResource("TileMapPattern_knq3x")
 pattern_40 = SubResource("TileMapPattern_efqla")
+pattern_41 = SubResource("TileMapPattern_1ubti")
+pattern_42 = SubResource("TileMapPattern_1ty7y")
+pattern_43 = SubResource("TileMapPattern_7ra33")
+pattern_44 = SubResource("TileMapPattern_7cu1q")

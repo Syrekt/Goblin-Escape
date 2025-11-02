@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://ryftdejj4lyy"]
+
+[ext_resource type="Script" uid="uid://3tfxltpsrr1c" path="res://addons/MetroidvaniaSystem/Scripts/CustomElementManager.gd" id="1_3kt0x"]
+[ext_resource type="Script" uid="uid://orxlanqpgccv" path="res://addons/MetroidvaniaSystem/Scripts/Settings.gd" id="1_ui0vk"]
+[ext_resource type="Resource" uid="uid://bt6s3nd8xo6b" path="res://addons/MetroidvaniaSystem/Themes/Exquisite/Theme.tres" id="2_3kt0x"]
+
+[resource]
+script = ExtResource("1_ui0vk")
+theme = ExtResource("2_3kt0x")
+map_root_folder = "res://Rooms/"
+scene_template = "uid://bjjiopi3tjo35"
+in_game_cell_size = Vector2(1152, 640)
+custom_element_script = ExtResource("1_3kt0x")
