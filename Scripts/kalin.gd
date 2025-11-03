@@ -585,10 +585,13 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			else:
 				state.finished.emit("idle")
 		"hurt", "hurt_no_sword":
-			if has_sword:
-				state.finished.emit("stance_light")
+			if can_stand_up():
+				if combat_target && has_sword:
+					state.finished.emit("stance_light")
+				else:
+					state.finished.emit("idle")
 			else:
-				state.finished.emit("idle")
+				state.finished.emit("crouch")
 			grabbed_by = null
 		"corner_climb", "corner_climb_quick":
 			#global_position += Vector2(26*facing, -35)
@@ -835,8 +838,8 @@ func _process(delta: float) -> void:
 			get_tree().current_scene.add_child(open_menu)
 	if Input.is_action_just_pressed("inventory"):
 		toggle_inventory()
-	if Input.is_action_just_pressed("map"):
-		toggle_map()
+	#if Input.is_action_just_pressed("map"):
+	#	toggle_map()
 
 	#endregion
 	if Input.is_action_just_pressed("debug1"):

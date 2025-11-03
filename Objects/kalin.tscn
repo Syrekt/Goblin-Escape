@@ -1,4 +1,4 @@
-[gd_scene load_steps=249 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=250 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://b5p67lby0k2d0" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -4278,6 +4278,47 @@ tracks/3/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_r14np"]
+resource_name = "corner_hang_quick"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_xyrfg")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.19999999, 0.29999995, 0.39999998, 0.5, 0.6, 0.6999999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 6, 5, 4, 3, 2, 1, 0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cuohi"]
 _data = {
 &"RESET": SubResource("Animation_5koc5"),
@@ -4289,6 +4330,7 @@ _data = {
 &"corner_climb_quick": SubResource("Animation_qqpcq"),
 &"corner_grab": SubResource("Animation_dxyog"),
 &"corner_hang": SubResource("Animation_ujrye"),
+&"corner_hang_quick": SubResource("Animation_r14np"),
 &"crawl_in": SubResource("Animation_4oj65"),
 &"crawl_out": SubResource("Animation_as7pt"),
 &"crouch": SubResource("Animation_qdaj2"),
@@ -4378,13 +4420,13 @@ collision_mask = 65545
 floor_constant_speed = true
 floor_snap_length = 12.0
 script = ExtResource("1_tpqnq")
+run_speed = 9000.0
 slide_speed = 200.0
 snap_offset = Vector2(-17, 3)
 save_list = Array[String](["vitality", "strength", "endurance", "level", "has_sword", "experience_point", "has_heavy_stance", "has_defensive_stance"])
 
-[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+[node name="PhantomCamera2D" type="Node2D" parent="."]
 script = ExtResource("2_y4shw")
-follow_target = NodePath("..")
 snap_to_pixel = true
 tween_resource = SubResource("Resource_3pkug")
 draw_limits = true

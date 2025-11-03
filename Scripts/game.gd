@@ -22,6 +22,8 @@ func _ready() -> void:
 
 	room_loaded.connect(init_room, CONNECT_DEFERRED)
 	load_room(starting_map)
+	if get_node_or_null("Room/Marker2D"):
+		player.position = $Room/Marker2D.position
 
 	# ^ replaces NodePath
 	var start := map.get_node_or_null(^"SavePoint")
@@ -47,5 +49,7 @@ func reset_map_starting_coords() -> void:
 	%MapWindow.reset_starting_coords()
 
 func init_room() -> void:
+	MetSys.get_current_room_instance().adjust_camera_limits(player.pcam)
 	if MetSys.last_player_position.x == Vector2i.MAX.x:
+		#MetSys.set_player_position(player.position)
 		MetSys.set_player_position(player.position)

@@ -37,7 +37,7 @@ tile_map_data = PackedByteArray("AAAAABIAAgASAB4AAAAAABMAAgASAB8AAAAAABQAAgASACA
 tile_set = ExtResource("1_57x6s")
 
 [node name="FG-1-Spikes-Chains" type="TileMapLayer" parent="Tilemaps"]
-tile_map_data = PackedByteArray("AAAkABcAAgABABoAAAAkABgAAgABABsAAAAlABcAAgACABoAAAAlABgAAgACABsAAAAmABcAAgABABoAAAAmABgAAgABABsAAAAnABcAAgACABoAAAAnABgAAgACABsAAAAoABcAAgADABoAAAAoABgAAgADABsAAAApABcAAgAEABoAAAApABgAAgAEABsAAAAuABcAAgABABoAAAAuABgAAgABABsAAAAvABcAAgACABoAAAAvABgAAgACABsAAAAwABcAAgABABoAAAAwABgAAgABABsAAAAxABcAAgACABoAAAAxABgAAgACABsAAAAyABcAAgADABoAAAAyABgAAgADABsAAAAzABcAAgAEABoAAAAzABgAAgAEABsAAAA5ABcAAgABABoAAAA5ABgAAgABABsAAAA6ABcAAgABABoAAAA6ABgAAgABABsAAAA7ABcAAgACABoAAAA7ABgAAgACABsAAAA8ABcAAgADABoAAAA8ABgAAgADABsAAAA9ABcAAgAEABoAAAA9ABgAAgAEABsAAAA=")
+tile_map_data = PackedByteArray("AAAkABcAAgABABoAAAAkABgAAgABABsAAAAlABcAAgACABoAAAAlABgAAgACABsAAAAmABcAAgABABoAAAAmABgAAgABABsAAAAnABcAAgACABoAAAAnABgAAgACABsAAAAoABcAAgADABoAAAAoABgAAgADABsAAAApABcAAgAEABoAAAApABgAAgAEABsAAAAuABcAAgABABoAAAAuABgAAgABABsAAAAvABcAAgACABoAAAAvABgAAgACABsAAAAwABcAAgABABoAAAAwABgAAgABABsAAAAxABcAAgACABoAAAAxABgAAgACABsAAAAyABcAAgADABoAAAAyABgAAgADABsAAAAzABcAAgAEABoAAAAzABgAAgAEABsAAAA7ABcAAgACABoAAAA7ABgAAgACABsAAAA8ABcAAgADABoAAAA8ABgAAgADABsAAAA9ABcAAgAEABoAAAA9ABgAAgAEABsAAAA6ABgAAgABABsAAAA6ABcAAgABABoAAAA=")
 tile_set = ExtResource("1_57x6s")
 
 [node name="FG-2" type="TileMapLayer" parent="Tilemaps"]
@@ -48,8 +48,12 @@ tile_set = ExtResource("1_57x6s")
 [node name="StairsLong" parent="." instance=ExtResource("3_keedp")]
 position = Vector2(1464, 328)
 
-[node name="Lever" parent="." instance=ExtResource("4_83kn6")]
+[node name="Lever" parent="." node_paths=PackedStringArray("target_door") instance=ExtResource("4_83kn6")]
 position = Vector2(1328, 368)
+target_door = NodePath("../Gate")
 
 [node name="Gate" parent="." instance=ExtResource("5_kpgh2")]
 position = Vector2(1824, 368)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(25, 251)

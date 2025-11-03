@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://drnoyosnrd7wq"]
+[gd_scene load_steps=25 format=3 uid="uid://drnoyosnrd7wq"]
 
 [ext_resource type="Script" uid="uid://d1ppg7n1ukrb5" path="res://Scripts/gate.gd" id="1_44b2i"]
-[ext_resource type="Texture2D" uid="uid://c7g050lmul5yc" path="res://Map/Props/gate1.png" id="3_s1dkf"]
+[ext_resource type="Texture2D" uid="uid://6iuk7y60ebqy" path="res://Map/Props/gate1_behind.png" id="2_s1dkf"]
+[ext_resource type="Texture2D" uid="uid://dxigefvxij58a" path="res://Map/Props/gate1_front.png" id="3_44b2i"]
 [ext_resource type="Texture2D" uid="uid://lgw6u1kh27mf" path="res://Map/Props/spr_gateopen_strip9.png" id="4_xlntt"]
 [ext_resource type="AudioStream" uid="uid://b2ppvcuribru0" path="res://SFX/Rotate Stone 03.wav" id="6_ftetw"]
 [ext_resource type="Script" uid="uid://c1125my8d6cmi" path="res://Scripts/gate_interaction.gd" id="7_bbwr1"]
@@ -181,8 +182,12 @@ script = ExtResource("1_44b2i")
 
 [node name="AudioEmitter" type="AudioStreamPlayer2D" parent="."]
 
-[node name="FrameBehind" type="Sprite2D" parent="."]
-texture = ExtResource("3_s1dkf")
+[node name="FrameBack" type="Sprite2D" parent="."]
+texture = ExtResource("2_s1dkf")
+
+[node name="FrameFront" type="Sprite2D" parent="."]
+z_index = 10
+texture = ExtResource("3_44b2i")
 
 [node name="Bars" type="Sprite2D" parent="."]
 texture = ExtResource("4_xlntt")

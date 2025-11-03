@@ -1,13 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3ce8mt521wb5"]
+[gd_scene load_steps=8 format=3 uid="uid://c3ce8mt521wb5"]
 
 [ext_resource type="PackedScene" uid="uid://h2hwfpjw4rte" path="res://Objects/kalin.tscn" id="1_v3ybc"]
 [ext_resource type="Script" uid="uid://ckr03m8hdsnts" path="res://Scripts/game.gd" id="1_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://d1ido0af5r23x" path="res://Objects/loading_screen.tscn" id="2_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cdy3r2d5x6ydm" path="res://UI/minimap.tscn" id="3_3dryh"]
+[ext_resource type="PackedScene" uid="uid://45snbjkrrgyc" path="res://UI/death_screen.tscn" id="3_v158k"]
 [ext_resource type="Script" uid="uid://c6l4itv8om7oy" path="res://Scripts/map_window.gd" id="4_3dryh"]
+[ext_resource type="PackedScene" uid="uid://bxgqi0q1okfjx" path="res://Objects/screen_fade.tscn" id="4_h4fw4"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wrm1d")
-starting_map = "StartingPoint.tscn"
+starting_map = "Corridor-2x1-3.tscn"
+
+[node name="LoadingScreen" parent="." instance=ExtResource("2_1l0tm")]
+visible = false
+
+[node name="DeathScreen" parent="." instance=ExtResource("3_v158k")]
+visible = false
+
+[node name="ScreenFade" parent="." instance=ExtResource("4_h4fw4")]
 
 [node name="Kalin" parent="." instance=ExtResource("1_v3ybc")]
 unique_name_in_owner = true

@@ -4,7 +4,7 @@ extends PlayerState
 @onready var sex_timer : Timer = $SexTimer
 @onready var participant_collider : Area2D = $SexParticipantCollider
 @onready var death_timer : Timer = $DeathTimer
-@onready var death_screen : CanvasLayer = get_tree().current_scene.find_child("DeathScreen")
+@onready var death_screen : CanvasLayer = $"../../../DeathScreen"
 
 
 func enter(previous_state_path: String, data := {}) -> void:

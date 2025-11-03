@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://dilefrlsilsc"]
+
+[ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_vty2u"]
+[ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_7heb3"]
+
+[node name="Room" type="Node2D"]
+
+[node name="Tilemaps" type="Node2D" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Tilemaps"]
+
+[node name="BG-6" type="TileMapLayer" parent="Tilemaps/ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Tilemaps/ParallaxBackground"]
+
+[node name="BG-5-Columns-Walls" type="TileMapLayer" parent="Tilemaps/ParallaxBackground/ParallaxLayer"]
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Tilemaps/ParallaxBackground"]
+
+[node name="BG-4-Paths" type="TileMapLayer" parent="Tilemaps/ParallaxBackground/ParallaxLayer2"]
+
+[node name="BG-3-Debris" type="TileMapLayer" parent="Tilemaps"]
+tile_set = ExtResource("1_vty2u")
+
+[node name="BG-2-Wall-Doors-Windows" type="TileMapLayer" parent="Tilemaps"]
+tile_set = ExtResource("1_vty2u")
+
+[node name="BG-1-Columns" type="TileMapLayer" parent="Tilemaps"]
+tile_set = ExtResource("1_vty2u")
+
+[node name="Collision" type="TileMapLayer" parent="Tilemaps"]
+tile_set = ExtResource("1_vty2u")
+
+[node name="FG-1-Spikes-Chains" type="TileMapLayer" parent="Tilemaps"]
+tile_set = ExtResource("1_vty2u")
+
+[node name="FG-2" type="TileMapLayer" parent="Tilemaps"]
+tile_set = ExtResource("1_vty2u")
+
+[node name="RoomInstance" parent="." instance=ExtResource("2_7heb3")]

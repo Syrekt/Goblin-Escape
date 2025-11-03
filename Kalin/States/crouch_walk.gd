@@ -15,8 +15,6 @@ func physics_update(delta: float) -> void:
 		finished.emit("fall")
 	elif !player.pressed("down") && player.can_stand_up():
 		finished.emit("idle")
-	elif player.pressed("attack") && floor_angle == 0:
-		finished.emit("slide")
 	elif is_equal_approx(player.get_movement_dir(), 0.0):
 		if player.pressed("down") || !player.can_stand_up():
 			finished.emit("crouch")
