@@ -558,6 +558,14 @@ func unlock_skill(_name: String) -> void:
 		"has_defensive_stance":
 			var tutorial = load("res://Tutorial/defensive_stance_tutorial.tscn").instantiate()
 			get_tree().current_scene.add_child(tutorial)
+func on_enter() -> void:
+	var state = state_node.state.name
+	match state:
+		"rise":
+			velocity.y = -jump_impulse
+		# Disabled since fall damage on room change might work
+		#"fall":
+		#	state_node.state.fall_start_y = global_position.y
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

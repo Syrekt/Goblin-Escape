@@ -15,7 +15,7 @@ func physics_update(delta: float) -> void:
 	player.velocity.x += player.get_movement_dir() * player.jump_move_speed * delta
 	if player.is_on_floor():
 		var fall_damage = 0;
-		var fall_distance = player.global_position.y - player.last_ground_position.y
+		var fall_distance = player.global_position.y - fall_start_y
 		print("fall_distance: "+str(fall_distance))
 		if abs(player.global_position.y - fall_start_y) > 128:
 			fall_damage = round((player.global_position.y - fall_start_y)/8)

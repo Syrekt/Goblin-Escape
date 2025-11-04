@@ -10,22 +10,31 @@
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Tilemaps"]
 
 [node name="BG-6" type="TileMapLayer" parent="Tilemaps/ParallaxBackground"]
+z_index = -6
+tile_set = ExtResource("1_odkvd")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Tilemaps/ParallaxBackground"]
 
 [node name="BG-5-Columns-Walls" type="TileMapLayer" parent="Tilemaps/ParallaxBackground/ParallaxLayer"]
+z_index = -5
+tile_set = ExtResource("1_odkvd")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="Tilemaps/ParallaxBackground"]
 
 [node name="BG-4-Paths" type="TileMapLayer" parent="Tilemaps/ParallaxBackground/ParallaxLayer2"]
+z_index = -4
+tile_set = ExtResource("1_odkvd")
 
 [node name="BG-3-Debris" type="TileMapLayer" parent="Tilemaps"]
+z_index = -3
 tile_set = ExtResource("1_odkvd")
 
 [node name="BG-2-Wall-Doors-Windows" type="TileMapLayer" parent="Tilemaps"]
+z_index = -2
 tile_set = ExtResource("1_odkvd")
 
 [node name="BG-1-Columns" type="TileMapLayer" parent="Tilemaps"]
+z_index = -1
 tile_set = ExtResource("1_odkvd")
 
 [node name="Collision" type="TileMapLayer" parent="Tilemaps"]
@@ -35,6 +44,7 @@ tile_set = ExtResource("1_odkvd")
 tile_set = ExtResource("1_odkvd")
 
 [node name="FG-2" type="TileMapLayer" parent="Tilemaps"]
+z_index = 2
 tile_set = ExtResource("1_odkvd")
 
 [node name="RoomInstance" parent="." instance=ExtResource("2_xy0h5")]
