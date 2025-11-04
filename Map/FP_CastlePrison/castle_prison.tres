@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=141 format=3 uid="uid://1quahlg1y22o"]
+[gd_resource type="TileSet" load_steps=142 format=3 uid="uid://1quahlg1y22o"]
 
 [ext_resource type="Texture2D" uid="uid://bqtpx8ja2r3ni" path="res://Map/FP_CastlePrison/background_obj.png" id="1_leifh"]
 [ext_resource type="Texture2D" uid="uid://d46bcae481s6" path="res://Map/FP_CastlePrison/mainlevbuildB.png" id="2_qy7eu"]
@@ -129,6 +129,9 @@ tile_data = PackedInt32Array(0, 1703938, 268435465, 65536, 1703938, 268435466, 1
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_krvo0"]
 tile_data = PackedInt32Array(0, 1376258, 805306387, 65536, 1703938, 268435465, 1, 1310722, 21, 65537, 1638402, 268435465, 2, 1310722, 21, 65538, 1572866, 268435465)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_i8dxc"]
+tile_data = PackedInt32Array(0, 2228226, 25, 65536, 2228226, 26, 131072, 2228226, 27, 196608, 2228226, 28, 1, 2293762, 25, 65537, 2293762, 26, 131073, 2293762, 27, 196609, 2293762, 28)
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_55f7i"]
 tile_data = PackedInt32Array(0, 1966082, 42, 65536, 1966082, 43, 131072, 1966082, 44, 1, 2031618, 42, 65537, 2031618, 43, 131073, 2031618, 44, 2, 2097154, 42, 65538, 2097154, 43, 131074, 2097154, 44)
@@ -4171,3 +4174,4 @@ pattern_43 = SubResource("TileMapPattern_7ra33")
 pattern_44 = SubResource("TileMapPattern_7cu1q")
 pattern_45 = SubResource("TileMapPattern_yhp61")
 pattern_46 = SubResource("TileMapPattern_krvo0")
+pattern_47 = SubResource("TileMapPattern_i8dxc")

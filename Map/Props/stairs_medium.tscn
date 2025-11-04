@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dx25dmahp2sdi" path="res://Map/FP_CastlePrison/mainlevbuild.png" id="1_k1u5r"]
 
-[node name="StairsLong" type="CharacterBody2D" groups=["OneWayColliders"]]
+[node name="StairsMedium" type="CharacterBody2D" groups=["OneWayColliders"]]
 collision_layer = 2048
 collision_mask = 0
 
