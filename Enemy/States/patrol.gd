@@ -26,23 +26,28 @@ func exit() -> void:
 		timer.timeout.disconnect(_on_patrol_timer_timeout)
 	timer.stop()
 func update(delta : float) -> void:
+	var moving = false
 	if enemy.chase_target:
 		if enemy.player_detected():
 			enemy.start_chase()
 			return
 	if enemy.current_patrol_point: 
 		patrol_dir = Ge.dir_towards(enemy, enemy.current_patrol_point)
-	elif enemy.current_patrol_point && patrol_point_reached():
-		if enemy.debug: print("patrol point reached")
-		finished.emit("idle")
-		enemy.update_patrol_point()
+		moving = enemy.move(enemy.patrol_move_speed, patrol_dir)
+		if enemy.current_patrol_point && patrol_point_reached():
+			if enemy.debug: print("patrol point reached")
+			enemy.update_patrol_point()
+			finished.emit("idle")
 	elif !enemy.move(enemy.patrol_move_speed, patrol_dir):
 		if enemy.debug: print("Can't move, switch to idle")
 		finished.emit("idle")
-	else:
+
+	if moving:
 		enemy.update_animation("run")
 
 func patrol_point_reached(treshold := 16) -> bool:
+	var dist = abs(enemy.current_patrol_point.global_position.x - enemy.global_position.x)
+	if enemy.debug: Debugger.printui("dist: "+str(dist))
 	return abs(enemy.current_patrol_point.global_position.x - enemy.global_position.x) < treshold
 
 func _on_patrol_timer_timeout() -> void:

@@ -43,9 +43,9 @@ $ln;Dungeon
 [20,-4,0]
 1,1,-1,-1||1|CentralRoom1.tscn
 [20,-7,0]
-1,-1,0,0|||
+1,-1,0,0|||HeavyStancePath1.tscn
 [20,-6,0]
-0,1,0,-1|||
+0,1,0,-1|||HeavyStancePath1.tscn
 [21,-7,0]
 0,0,1,1|||
 [21,-8,0]
@@ -57,9 +57,9 @@ $ln;Dungeon
 [22,-6,0]
 0,1,0,-1|||
 [21,-5,0]
--1,0,1,0|||
+-1,0,1,0|||HeavyStanceRoom.tscn
 [22,-5,0]
-0,0,-1,1||4|
+0,0,-1,1||4|HeavyStanceRoom.tscn
 [18,-4,0]
 0,1,0,1|||DefensiveStancePath1.tscn
 [17,-4,0]
@@ -75,7 +75,7 @@ $ln;Dungeon
 [16,-3,0]
 0,0,-1,1|||DefensiveStancePathExit1.tscn
 [20,-3,0]
--1,0,0,1|||
+-1,0,0,1|||SwordPath1.tscn
 [18,-2,0]
 0,0,-1,1|||DefensiveStancePath3.tscn
 [17,-2,0]
@@ -89,7 +89,7 @@ $ln;Dungeon
 [23,-2,0]
 -1,0,1,0|||
 [21,-3,0]
--1,0,-1,0|||
+-1,0,-1,0|||SwordPath1.tscn
 [22,-2,0]
 1,0,0,1|||
 [24,-1,0]
@@ -97,6 +97,6 @@ $ln;Dungeon
 [25,-1,0]
 0,0,-1,0||4|
 [22,-3,0]
-0,1,-1,0|||
+0,1,-1,0|||SwordPath1.tscn
 [21,-4,0]
-0,0,1,0||3|
+0,0,1,0||3|DemoLastRoom.tscn

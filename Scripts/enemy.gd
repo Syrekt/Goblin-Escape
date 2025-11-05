@@ -131,7 +131,7 @@ func take_damage(_damage : int, _source: Node2D = null, critical := false):
 			var attack_type = _source.state_node.state.name
 			attack_type_taken.append(attack_type)
 			aware = true
-			chase_target = player
+			chase_target = _source
 		if health.value > 0:
 			set_facing(incoming_dir)
 func next_step_free(direction : int) -> bool:
@@ -266,7 +266,7 @@ func drop_chase() -> void:
 	if debug: print("drop chase")
 	if chase_target:
 		chase_target.enemies_on_chase.erase(self)
-	chase_target = null
+	#chase_target = null
 	player_in_range = false
 	if !awareness_timer.is_inside_tree():
 		printerr("Awareness timer isn't inside tree")
@@ -392,9 +392,14 @@ func _process(delta: float) -> void:
 	var ui_nodes = get_tree().get_nodes_in_group("UIPanel")
 func _physics_process(delta: float) -> void:
 	if chase_target:
-		var pos = chase_target.hurtbox.global_position
+		var pos := chase_target.hurtbox.global_position
 		pos.y -= 10
 		line_of_sight.target_position = line_of_sight.to_local(pos)
+		var collider = line_of_sight.get_collider()
+		if collider && collider is CollisionObject2D:
+			var owner_id = collider.get_shape_owners()[0]
+			if collider.is_shape_owner_one_way_collision_enabled(owner_id):
+				line_of_sight.add_exception(collider)
 		target_in_sight = !line_of_sight.is_colliding()
 	if light_source && light_source.lit:
 		ray_light.target_position = ray_light.to_local(light_source.global_position)

@@ -630,20 +630,6 @@ tracks/5/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/6/type = "method"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("../StateMachine/stab")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0.4),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_on_hit_frame"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_yed1v"]
 resource_name = "stance_heavy"
@@ -1074,8 +1060,6 @@ attack_time = 0.3
 script = ExtResource("28_jm82n")
 transitions = [NodePath("../stance_heavy")]
 attack_state = [NodePath("../grab"), NodePath("../stab")]
-stance_time = 0.5
-attack_time = 0.2
 
 [node name="stance_walk" type="Node" parent="StateMachine"]
 script = ExtResource("27_su4u7")
