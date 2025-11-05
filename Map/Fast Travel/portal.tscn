@@ -37,7 +37,7 @@ script = ExtResource("1_art86")
 repeat = true
 title = "Teleport"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="." groups=["Persistent"]]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rer87")
 animation = &"inert"
 

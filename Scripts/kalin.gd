@@ -446,7 +446,7 @@ func enemy_heard_noise(enemy: Enemy) -> void:
 	pass
 	#if !in_combat_state:
 	#	think("I should be careful")
-func save() -> void:
+func save(save_manager: RefCounted) -> void:
 	var save_data = {
 		"pos_x"		: position.x,
 		"pos_y"		: position.y,
@@ -462,8 +462,10 @@ func save() -> void:
 			save_data[i] = get(i)
 		else:
 			print("Unkown value on save " + i)
-	Ge.save_node(self, save_data)
+	#Ge.save_node(self, save_data)
+	save_manager.set_value("kalin", save_data)
 func load(data: Dictionary) -> void:
+	print("Loaded player data: "+str(data))
 	health.value	= data.health
 	stamina.value	= data.stamina
 	arousal.value	= data.arousal
@@ -479,6 +481,7 @@ func load(data: Dictionary) -> void:
 	for key in data.keys():
 		set(key, data[key])
 	disable_camera_damping_on_spawn = true
+	global_position = Vector2(data.pos_x, data.pos_y)
 func check_buffered_state() -> bool:
 	var state_to_switch : String
 	if buffered_state:
@@ -540,7 +543,7 @@ func corner_climb_check_headbump() -> void:
 		state_node.state.finished.emit("crouch")
 func prevent_corner_grab() -> void:
 	ignore_corners = true
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.6).timeout
 	ignore_corners = false
 func ignore_platforms() -> void:
 	set_collision_mask_value(17, false)
@@ -760,7 +763,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		if state_node.state.is_in_group("position_reliable"):
 			last_ground_position = Vector2(global_position.x - facing*32, global_position.y)
-		ignore_corners = false
 
 	#endregion
 	#region Finalize movement
@@ -803,9 +805,9 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("left_mouse_button"):
 		global_position = get_global_mouse_position()
 	if just_pressed("quick save"):
-		Ge.save_game()
+		Game.get_singleton().save_game()
 	if just_pressed("quick load"):
-		Ge.load_game()
+		Game.get_singleton().load_game()
 	var s = %Sprite2D
 	if debug: Debugger.printui(str(state_node.state.name))
 
@@ -834,8 +836,8 @@ func _process(delta: float) -> void:
 			#if pcam.limit_target:
 			#	pcam.draw_limits = true
 	#endregion
-	if Input.is_action_pressed("restart"):
-		get_tree().reload_current_scene()
+	#if Input.is_action_pressed("restart"):
+	#	get_tree().reload_current_scene()
 	#region Open menu & Inventory
 	if !controls_disabled && Input.is_action_just_pressed("ui_cancel"):
 		var map : Map = get_tree().current_scene.get_node_or_null("Map")

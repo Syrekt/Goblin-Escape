@@ -11,7 +11,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_secw8"]
 size = Vector2(1025.7107, 96.99994)
 
-[node name="Room" type="Node2D"]
+[node name="JumpingPuzzle1-Easy" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 
@@ -77,3 +77,6 @@ position = Vector2(1616, 1224)
 
 [node name="Crate4" parent="." instance=ExtResource("6_vcqxd")]
 position = Vector2(1632, 1195)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(914, 505)

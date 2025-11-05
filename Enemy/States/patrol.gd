@@ -26,7 +26,7 @@ func exit() -> void:
 		timer.timeout.disconnect(_on_patrol_timer_timeout)
 	timer.stop()
 func update(delta : float) -> void:
-	var moving = false
+	var moving := false
 	if enemy.chase_target:
 		if enemy.player_detected():
 			enemy.start_chase()
@@ -38,9 +38,11 @@ func update(delta : float) -> void:
 			if enemy.debug: print("patrol point reached")
 			enemy.update_patrol_point()
 			finished.emit("idle")
-	elif !enemy.move(enemy.patrol_move_speed, patrol_dir):
-		if enemy.debug: print("Can't move, switch to idle")
-		finished.emit("idle")
+	else:
+		moving = enemy.move(enemy.patrol_move_speed, patrol_dir)
+		if !moving:
+			if enemy.debug: print("Can't move, switch to idle")
+			finished.emit("idle")
 
 	if moving:
 		enemy.update_animation("run")

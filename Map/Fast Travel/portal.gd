@@ -32,10 +32,10 @@ func activate() -> void:
 func use() -> void:
 	pass
 
-func save() -> void:
-	Ge.save_node(self,{
+func save() -> Dictionary:
+	return {
 		"inert": false,
-	})
+	}
 func load(data: Dictionary) -> void:
 	inert = data.get(inert, true)
 	if !inert:

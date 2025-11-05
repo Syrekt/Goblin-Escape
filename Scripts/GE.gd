@@ -174,19 +174,8 @@ func load_game() -> void:
 	loading = true
 	get_tree().paused = true
 
-	var loading_screen = get_tree().current_scene.find_child("LoadingScreen")
-	loading_screen.show()
-
-	# Decided to remove the font anyway
-	var tween_font = create_tween().bind_node(loading_screen)
-	var font = loading_screen.find_child("Label")
-	font.set("theme_override_colors/font_color", Color.WHITE)
-	tween_font.tween_property(font, "theme_override_colors/font_color", Color(1.0, 1.0, 1.0, 0.0), 0.5)
-
-	var tween_rect = create_tween().bind_node(loading_screen)
-	var rect = loading_screen.find_child("ColorRect")
-	rect.color = Color.BLACK
-	tween_rect.tween_property(rect, "color", Color(0.0, 0.0, 0.0, 0.0), 1)
+	var loading_screen : LoadingScreen = get_tree().current_scene.find_child("LoadingScreen")
+	loading_screen.tween_in()
 
 	#if !FileAccess.file_exists("user://"+filename+".ge"):
 	#	return # Error! We don't have a save to load.

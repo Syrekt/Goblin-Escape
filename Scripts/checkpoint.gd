@@ -29,9 +29,10 @@ func update(_player : Player) -> void:
 	player = _player
 	#$CanvasLayer.layer = 10
 	if player.pressed("interact"):
-		get_tree().current_scene.reset_scene()
-		Ge.last_checkpoint = self
-		Ge.save_game()
+		#get_tree().current_scene.reset_scene()
+		#Ge.last_checkpoint = self
+		#Ge.save_game()
+		Game.get_singleton().save_game()
 		player.smell.value = 0
 		player.smell.dirt_amount = 0
 		player.arousal.value = 0

@@ -20,6 +20,7 @@ func physics_update(delta: float) -> void:
 	elif !is_equal_approx(player.get_movement_dir(), 0.0):
 		finished.emit("crouch_walk")
 	elif player.just_pressed("jump"):
+		player.prevent_corner_grab()
 		if player.is_on_one_way_collider:
 			player.global_position.y += 4
 		else:

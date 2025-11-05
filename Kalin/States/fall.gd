@@ -10,9 +10,15 @@ func enter(previous_state_path: String, data := {}) -> void:
 	land_animation_timer.start(0.6)
 	grab_timer.start(0.1)
 	fall_start_y = player.global_position.y
+	player.col_corner_grab_prevent.set_collision_mask_value(17, false)
+
+func exit() -> void:
+	player.col_corner_grab_prevent.set_collision_mask_value(17, true)
 
 func physics_update(delta: float) -> void:
 	player.velocity.x += player.get_movement_dir() * player.jump_move_speed * delta
+	if player.pressed("up"):
+		player.ignore_corners = false
 	if player.is_on_floor():
 		var fall_damage = 0;
 		var fall_distance = player.global_position.y - fall_start_y
@@ -30,14 +36,12 @@ func physics_update(delta: float) -> void:
 		else:
 			finished.emit("idle")
 
-	if grab_timer.is_stopped() && player.can_grab_corner() && player.ray_corner_grab_check.is_colliding():
-		var collider = player.ray_corner_grab_check.get_collider()
-		if true: #!player.is_collider_one_way(collider):
-			if player.col_auto_climb_bottom.has_overlapping_bodies():
-				player.snap_to_corner(player.ray_corner_grab_check.get_collision_point())
-				player.quick_climb()
-			else:
-				finished.emit("corner_grab")
+	if !player.pressed("down") && grab_timer.is_stopped() && player.can_grab_corner() && player.ray_corner_grab_check.is_colliding():
+		if player.col_auto_climb_bottom.has_overlapping_bodies():
+			player.snap_to_corner(player.ray_corner_grab_check.get_collision_point())
+			player.quick_climb()
+		else:
+			finished.emit("corner_grab")
 	
 	if player.ladder:
 		if Input.is_action_pressed("up") || Input.is_action_pressed("down"):

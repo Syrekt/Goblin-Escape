@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Enemy/GoblinWarrior/goblin_warrior.tscn" id="8_dpdta"]
 [ext_resource type="PackedScene" uid="uid://hxoxl4bcalr3" path="res://Map/Props/lever.tscn" id="10_h1lsh"]
 
-[node name="Room" type="Node2D"]
+[node name="CentralRoom1" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 
@@ -59,9 +59,10 @@ z_index = 2
 tile_map_data = PackedByteArray("AAA8ACYAAgAjABAAAAA8ACcAAgAjABEAAAA9ACYAAgAkABAAAAA9ACcAAgAkABEAAAA+ACYAAgAlABAAAAA+ACcAAgAlABEAAAA/ACYAAgAmABAAAAA/ACcAAgAmABEAAABAACYAAgAjABAAAABAACcAAgAjABEAAABBACYAAgAkABAAAABBACcAAgAkABEAAABCACYAAgAlABAAAABCACcAAgAlABEAAABDACYAAgAmABAAAABDACcAAgAmABEAAAA=")
 tile_set = ExtResource("1_5ep3j")
 
-[node name="RoomInstance" parent="." instance=ExtResource("2_713km")]
+[node name="RoomInstance" parent="." node_paths=PackedStringArray("spawn_point") instance=ExtResource("2_713km")]
+spawn_point = NodePath("../SpawnPoint")
 
-[node name="Marker2D" type="Marker2D" parent="."]
+[node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(1927, 67)
 
 [node name="StairsMedium" parent="." instance=ExtResource("3_1edel")]
@@ -104,6 +105,5 @@ scale = Vector2(-1, 1)
 position = Vector2(1831, 180)
 scale = Vector2(-1, 1)
 
-[node name="Lever" parent="." node_paths=PackedStringArray("target_door") instance=ExtResource("10_h1lsh")]
+[node name="Lever" parent="." instance=ExtResource("10_h1lsh")]
 position = Vector2(2181, 75)
-target_door = NodePath("")

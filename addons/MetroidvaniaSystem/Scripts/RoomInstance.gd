@@ -15,6 +15,8 @@ var min_cell := Vector2i.MAX
 var max_cell := Vector2i.MIN
 var layer: int
 
+@export var spawn_point : Node2D
+
 signal previews_updated
 
 func _enter_tree() -> void:
@@ -49,6 +51,7 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	if MetSys.current_room == self:
 		MetSys.current_room = null
+	Game.get_singleton().save_room()
 
 func _update_assigned_scene():
 	queue_redraw()

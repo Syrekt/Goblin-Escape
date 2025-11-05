@@ -1,6 +1,6 @@
 extends Sprite2D
 
-@export var skill_name		: String
+@export var skill_name		: String ## Variable player uses to check for activation
 @export var pickup_sound	: String = "res://SFX/Notes Scrunched In Wallet.wav"
 
 var tween : Tween

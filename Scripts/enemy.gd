@@ -131,7 +131,7 @@ func take_damage(_damage : int, _source: Node2D = null, critical := false):
 			var attack_type = _source.state_node.state.name
 			attack_type_taken.append(attack_type)
 			aware = true
-			chase_target = _source
+			assign_chase_target(_source)
 		if health.value > 0:
 			set_facing(incoming_dir)
 func next_step_free(direction : int) -> bool:
@@ -208,7 +208,7 @@ func lost_target() -> void:
 	emote_emitter.play("confused")
 	patrol_amount = 4
 	state_node.state.finished.emit("idle")
-func save() -> void:
+func save() -> Dictionary:
 	var save_data = {
 		"pos_x" : global_position.x,
 		"pos_y" : global_position.y,
@@ -221,7 +221,7 @@ func save() -> void:
 			save_data[i] = get(i)
 		else:
 			print("Unkown value on save " + i)
-	Ge.save_node(self, save_data)
+	return save_data
 func load(data: Dictionary) -> void:
 	health.value	= data.health
 	state_node.state.finished.emit(data.state)
@@ -231,6 +231,7 @@ func load(data: Dictionary) -> void:
 
 	for key in data.keys():
 		set(key, data[key])
+	global_position = Vector2(data.pos_x, data.pos_y)
 func update_patrol_point() -> void:
 	var new_point = patrol_points.pick_random()
 	while new_point == current_patrol_point:
@@ -266,11 +267,20 @@ func drop_chase() -> void:
 	if debug: print("drop chase")
 	if chase_target:
 		chase_target.enemies_on_chase.erase(self)
-	#chase_target = null
+	drop_chase_target()
 	player_in_range = false
 	if !awareness_timer.is_inside_tree():
 		printerr("Awareness timer isn't inside tree")
 	awareness_timer.start()
+func assign_chase_target(target) -> void:
+	chase_target = target
+	if !chase_target.combat_target:
+		chase_target.combat_target = self
+func drop_chase_target() -> void:
+	if chase_target:
+		if chase_target.combat_target == self:
+			chase_target.combat_target = null
+	chase_target = null
 func assign_player(node:Player) -> void:
 	if debug: print("player: "+str(player))
 	if debug: print("Assigning player node: " + node.name)
@@ -479,7 +489,7 @@ func _spawn_collectable() -> void:
 		collectable.linear_velocity = Vector2.from_angle(rad) * speed
 func _on_chase_detector_body_entered(body:Player) -> void:
 	if debug: print("Player body entered chase detector")
-	chase_target = body
+	assign_chase_target(body)
 func _on_chase_range_body_exited(body:Player) -> void:
 	if debug: print("Player body exited chase range")
 	drop_chase()
@@ -498,7 +508,7 @@ func _on_threat_collider_body_entered(body:Node2D) -> void:
 func _on_player_proximity_body_entered(body:Player) -> void:
 	if !body.hiding:
 		if debug: print("Start chase by proximity trigger")
-		chase_target = body
+		assign_chase_target(body)
 		aware = true
 func _on_enter_shadow() -> void:
 	in_shadow = true

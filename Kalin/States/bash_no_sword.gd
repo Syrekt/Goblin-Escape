@@ -4,6 +4,9 @@ var enemy_ignore_list := [] # Used for bash
 
 func enter(previous_state_path: String, data := {}) -> void:
 	_enter()
+	if previous_state_path == "run": # Override the animation set in _enter()
+		player.call_deferred("update_animation", "bash_running")
+
 	player.play_sfx(sfx_whiff)
 	enemy_ignore_list = []
 	player.set_collision_mask_value(4, true)

@@ -16,7 +16,8 @@ func enter(previous_state_path: String, data := {}) -> void:
 	
 	if !Ge.loading:
 		Ge.play_audio_from_string_array(enemy.global_position, -10, "res://SFX/Goblin/Death")
-		enemy.player.experience.add(enemy.experience_drop)
+		var player = get_tree().current_scene.find_child("Kalin")
+		player.experience.add(enemy.experience_drop)
 		Ge.play_audio_free(0, "res://SFX/sfx_experience_drop.wav")
 
 func exit() -> void:
