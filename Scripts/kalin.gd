@@ -458,10 +458,12 @@ func save(save_manager: RefCounted) -> void:
 	}
 
 	for i in save_list:
-		if get(i):
+		var value = get(i)
+		print(i + ": "+str(value))
+		if i in self:
 			save_data[i] = get(i)
 		else:
-			print("Unkown value on save " + i)
+			print("Unkown value, can't save " + i)
 	#Ge.save_node(self, save_data)
 	save_manager.set_value("kalin", save_data)
 func load(data: Dictionary) -> void:
