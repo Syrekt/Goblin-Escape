@@ -23,6 +23,8 @@ var BALLOON = preload("res://Objects/balloon.tscn")
 var noise_enabled	:= false
 var noise_color : Color = Color(1, 1, 1, 0.05)
 
+var show_tutorials := true
+
 signal show_combat_tutorial
 signal show_stealth_tutorial
 

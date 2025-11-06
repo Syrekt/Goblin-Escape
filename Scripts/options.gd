@@ -39,18 +39,25 @@ func _ready() -> void:
 
 func save_options() -> void:
 	var config = ConfigFile.new()
+	#region Save Display
 	config.set_value("window", "fullscreen",	fullscreen)
 	config.set_value("window", "borderless", 	borderless)
 	config.set_value("window", "pixel_perfect", pixel_perfect)
 	config.set_value("window", "window_pos",	DisplayServer.window_get_position())
 	config.set_value("window", "window_size",	DisplayServer.window_get_size())
 	config.set_value("window", "window_screen", DisplayServer.window_get_current_screen())
+	#endregion
+	#region Save Audio
 	config.set_value("audio", "Master", AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))
 	config.set_value("audio", "SFX",	AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX")))
 	config.set_value("audio", "EFX", 	AudioServer.get_bus_volume_db(AudioServer.get_bus_index("EFX")))
 	config.set_value("audio", "BGM", 	AudioServer.get_bus_volume_db(AudioServer.get_bus_index("BGM")))
+	#endregion
+	#region Noise
 	config.set_value("noise", "enabled",	Ge.noise_enabled)
 	config.set_value("noise", "color",		Ge.noise_color)
+	#endregion
+	config.set_value("gameplay", "show_tutorials", Ge.show_tutorials)
 	config.save(config_path)
 func load_options() -> int:
 	var config = ConfigFile.new()
@@ -85,6 +92,7 @@ func load_options() -> int:
 		Ge.noise_enabled	= config.get_value("noise", "enabled", false)
 		Ge.noise_color		= config.get_value("noise", "color", false)
 		#endregion
+	Ge.show_tutorials = config.get_value("gameplay", "show_tutorials", false)
 	return err
 
 func _notification(what: int) -> void:

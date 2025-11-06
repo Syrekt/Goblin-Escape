@@ -1,0 +1,96 @@
+[gd_scene load_steps=15 format=3 uid="uid://coepyhipjelue"]
+
+[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="1_15wre"]
+[ext_resource type="Texture2D" uid="uid://cfwmxwk10j6i2" path="res://UI/Inventory/Inventory panel1_background.png" id="1_a36go"]
+[ext_resource type="Script" uid="uid://df3e5glbv71cj" path="res://Tutorial/tutorial_continue_prompt.gd" id="2_a36go"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u8p21"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qyxpq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a8x3e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1sm6s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dhwhg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_svash"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_58xym"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_731fa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kosgc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bffpu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nd3wd"]
+
+[node name="Button" type="Button"]
+z_index = 10
+offset_left = 394.0
+offset_top = 289.0
+offset_right = 617.0
+offset_bottom = 338.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u8p21")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qyxpq")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_a8x3e")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_1sm6s")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dhwhg")
+script = ExtResource("2_a36go")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_a36go")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16.015)
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("1_15wre")
+bbcode_enabled = true
+text = "to continue."
+scroll_active = false
+
+[node name="CheckButton" type="CheckButton" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_15wre")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_svash")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_58xym")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_731fa")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_kosgc")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bffpu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nd3wd")
+button_pressed = true
+text = "Show Future Tutorials"
+
+[connection signal="toggled" from="NinePatchRect/MarginContainer/VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]

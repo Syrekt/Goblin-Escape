@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://bbdbmfiw7rvtk" path="res://UI/arrow_button1.png" id="18_pvmit"]
 [ext_resource type="Script" uid="uid://dt6p5xyi7h0ui" path="res://Scripts/button.gd" id="19_o4paq"]
 [ext_resource type="Texture2D" uid="uid://bbqpi1e7rckoc" path="res://UI/arrow_button2.png" id="20_vp7wv"]
-[ext_resource type="Texture2D" uid="uid://1cx04mfn7355" path="res://UI/button_cross.png" id="21_fd2qs"]
+[ext_resource type="PackedScene" uid="uid://coepyhipjelue" path="res://Tutorial/tutorial_continue_prompt.tscn" id="23_a3epk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0t240"]
 atlas = ExtResource("4_55qrs")
@@ -1035,23 +1035,5 @@ offset_bottom = 336.0
 theme = ExtResource("2_alokh")
 text = "1/2"
 
-[node name="Close" type="Button" parent="ColorControl/Control"]
-layout_mode = 0
-offset_left = 584.0
-offset_top = 31.0
-offset_right = 606.0
-offset_bottom = 53.6875
-theme = ExtResource("17_hawqj")
-icon = ExtResource("21_fd2qs")
-expand_icon = true
-script = ExtResource("19_o4paq")
-
-[node name="ContinuePrompt" type="RichTextLabel" parent="."]
+[node name="TutorialContinuePrompt" parent="." instance=ExtResource("23_a3epk")]
 visible = false
-offset_left = 464.0
-offset_top = 288.0
-offset_right = 624.0
-offset_bottom = 320.0
-theme = ExtResource("2_alokh")
-bbcode_enabled = true
-text = "Press [img]res://UI/Buttons/button_keyboard_space.png[/img]key to continue"

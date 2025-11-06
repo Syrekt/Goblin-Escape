@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="10_bwjpn"]
 [ext_resource type="PackedScene" uid="uid://dxvqnc0144rnv" path="res://Scenes/tutorial.tscn" id="12_4blnk"]
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="12_ibmi3"]
-[ext_resource type="PackedScene" uid="uid://cg2vx6oh1c1lc" path="res://Tutorial/environment_kill_tutorial.tscn" id="13_tnimv"]
+[ext_resource type="PackedScene" uid="uid://vma4r5yyfdym" path="res://Tutorial/combat_tutorial.tscn" id="13_4blnk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oho3u"]
 size = Vector2(1025.5, 384)
@@ -72,4 +72,4 @@ has_defensive_stance = true
 
 [node name="Tutorial" parent="." instance=ExtResource("12_4blnk")]
 position = Vector2(531, 222)
-tutorial = ExtResource("13_tnimv")
+tutorial = ExtResource("13_4blnk")
