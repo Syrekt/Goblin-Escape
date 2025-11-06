@@ -614,9 +614,9 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			grabbed_by = null
 		"corner_climb", "corner_climb_quick":
 			#global_position += Vector2(26*facing, -35)
-			await get_tree().physics_frame
+			#await get_tree().physics_frame
 			if can_stand_up():
-				state.finished.emit("idle", {"just_climbed": true})
+				state.finished.emit("idle")
 			else:
 				state.finished.emit("crouch")
 		"slide":
@@ -662,6 +662,7 @@ func _ready() -> void:
 	enter_abyss.connect(_on_abyss_entered)
 	fullscreen_panel_opened.connect(_on_fullscreen_panel_opened)
 	fullscreen_panel_closed.connect(_on_fullscreen_panel_closed)
+	Ge.player = self
 	#get_tree().current_scene.emit_signal("player_ready", self) #owner should be root node
 #endregion
 #region Physics

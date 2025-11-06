@@ -35,8 +35,3 @@ func exit() -> void:
 
 	tween_player.kill();
 	tween_sprite.kill();
-
-	#if tween_player.is_running():
-	#	tween_player.custom_step(9999.0)
-	#if tween_sprite.is_running():
-	#	tween_sprite.custom_step(9999.0)

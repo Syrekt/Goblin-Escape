@@ -17,14 +17,20 @@ func _ready() -> void:
 	button_control.hide()
 
 	color_control.modulate = Color(1.0, 1.0, 1.0, 0.0)
+
 	var tween = create_tween().bind_node(self)
 	tween.tween_property(color_control, "modulate", Color(1.0, 1.0, 1.0, 1.0), 2)
-	tween.tween_callback(show_controls)
 
 	container.tab_changed.connect(_on_tab_container_tab_changed)
 	$Timer.timeout.connect(_on_timer_timeout)
 
 	get_tree().paused = true
+
+	if container.current_tab == container.get_tab_count() - 1:
+		$Timer.start()
+	else:
+		tween.tween_callback(show_controls)
+
 
 
 func _process(delta: float) -> void:

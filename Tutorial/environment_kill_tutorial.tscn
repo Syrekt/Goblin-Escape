@@ -84,9 +84,9 @@ layout_mode = 0
 offset_left = 24.0
 offset_top = 89.0
 offset_right = 278.0
-offset_bottom = 166.0
+offset_bottom = 160.0
 bbcode_enabled = true
-text = "You can shove enemies into traps to kill them. Walk crouched to approach them silently, press attack key([img]res://UI/Buttons/button_keyboard_j.png[/img]) to perform [color=red]bash[/color] attack."
+text = "You can shove enemies into traps to kill them. Walk crouched to approach them silently, press attack key([img]res://UI/Buttons/button_keyboard_j.png[/img]) to perform [color=red]bash[/color] attack. "
 
 [node name="Control" type="Control" parent="ColorControl"]
 anchors_preset = 0
