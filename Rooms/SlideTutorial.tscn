@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_618dy"]
 [ext_resource type="PackedScene" uid="uid://dkyt1q4ive1yi" path="res://Map/Props/stairs_long.tscn" id="3_keedp"]
 [ext_resource type="PackedScene" uid="uid://hxoxl4bcalr3" path="res://Map/Props/lever.tscn" id="4_83kn6"]
-[ext_resource type="PackedScene" uid="uid://cwfcttxnm8ov1" path="res://Map/Props/gate.tscn" id="5_83kn6"]
+[ext_resource type="PackedScene" uid="uid://bnf3rd1nfdher" path="res://Map/Props/iron_bars.tscn" id="5_83kn6"]
 [ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="6_83kn6"]
 
 [node name="Room" type="Node2D"]
@@ -51,11 +51,10 @@ position = Vector2(1464, 328)
 
 [node name="Lever" parent="." node_paths=PackedStringArray("target_door") instance=ExtResource("4_83kn6")]
 position = Vector2(1328, 368)
-target_door = NodePath("../Gate2")
+target_door = NodePath("../IronBars")
 
-[node name="Gate2" parent="." instance=ExtResource("5_83kn6")]
-position = Vector2(1820, 358)
-closed_dialogue = "There should be a lever around here to open this."
+[node name="IronBars" parent="." instance=ExtResource("5_83kn6")]
+position = Vector2(1824, 320)
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(25, 251)

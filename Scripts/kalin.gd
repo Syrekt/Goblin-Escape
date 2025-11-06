@@ -594,7 +594,10 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 				else:
 					state.finished.emit("stance_light")
 		"bash_no_sword":
-			state.finished.emit("idle")
+			if has_sword && combat_target:
+				state.finished.emit("stance_light")
+			else:
+				state.finished.emit("idle")
 		"break_free":
 			if has_sword:
 				state.finished.emit("stance_light")

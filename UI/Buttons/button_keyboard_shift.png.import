@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://m7nh73e11edg"
-path="res://.godot/imported/button_keyboard_special4.png-a210e60e5b722c45d0694c5f7b881a36.ctex"
+path="res://.godot/imported/button_keyboard_shift.png-b78ead2bf1e392dc8b55557a9fd1054a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Buttons/button_keyboard_special4.png"
-dest_files=["res://.godot/imported/button_keyboard_special4.png-a210e60e5b722c45d0694c5f7b881a36.ctex"]
+source_file="res://UI/Buttons/button_keyboard_shift.png"
+dest_files=["res://.godot/imported/button_keyboard_shift.png-b78ead2bf1e392dc8b55557a9fd1054a.ctex"]
 
 [params]
 

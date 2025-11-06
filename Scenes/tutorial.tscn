@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxvqnc0144rnv"]
+
+[ext_resource type="Script" uid="uid://d1k3jde2ovvdj" path="res://Scripts/tutorial.gd" id="1_ka2pi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feyax"]
+size = Vector2(20, 39)
+
+[node name="Tutorial" type="Area2D"]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("1_ka2pi")
+auto = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 9.5)
+shape = SubResource("RectangleShape2D_feyax")

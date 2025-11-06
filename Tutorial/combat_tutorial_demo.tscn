@@ -1128,4 +1128,4 @@ offset_right = 624.0
 offset_bottom = 320.0
 theme = ExtResource("2_jcgw0")
 bbcode_enabled = true
-text = "Press [stance] key to continue"
+text = "Press [img]res://UI/Buttons/button_keyboard_space.png[/img]key to continue"

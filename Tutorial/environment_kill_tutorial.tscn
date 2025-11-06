@@ -1,0 +1,149 @@
+[gd_scene load_steps=11 format=3 uid="uid://cg2vx6oh1c1lc"]
+
+[ext_resource type="Script" uid="uid://c7nq5lemywc53" path="res://Tutorial/tabbed_tutorial.gd" id="1_cptcu"]
+[ext_resource type="Texture2D" uid="uid://vcedblhvcdqh" path="res://Others/stealth_example.png" id="4_4hyem"]
+[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="5_fmw7y"]
+[ext_resource type="Texture2D" uid="uid://djagbf46iq42p" path="res://Tutorial/environment_kill.png" id="6_fqvai"]
+[ext_resource type="Theme" uid="uid://d06uownpg5ssx" path="res://UI/theme_icon.tres" id="10_jcgot"]
+[ext_resource type="Texture2D" uid="uid://bbdbmfiw7rvtk" path="res://UI/arrow_button1.png" id="11_uwkmi"]
+[ext_resource type="Script" uid="uid://dt6p5xyi7h0ui" path="res://Scripts/button.gd" id="12_ug41n"]
+[ext_resource type="Texture2D" uid="uid://bbqpi1e7rckoc" path="res://UI/arrow_button2.png" id="13_3yw0x"]
+[ext_resource type="Texture2D" uid="uid://1cx04mfn7355" path="res://UI/button_cross.png" id="14_j6gds"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6a3fo"]
+
+[node name="stealth_tutorial" type="CanvasLayer" groups=["FullscreenPanel"]]
+process_mode = 2
+script = ExtResource("1_cptcu")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ColorControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ColorControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.16565639, 0.16565642, 0.16565636, 0.6745098)
+
+[node name="TabContainer" type="TabContainer" parent="ColorControl"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 1
+tabs_visible = false
+
+[node name="Page1" type="Control" parent="ColorControl/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="StealthExample" type="Sprite2D" parent="ColorControl/TabContainer/Page1"]
+position = Vector2(150, 129)
+scale = Vector2(0.518692, 0.518692)
+texture = ExtResource("4_4hyem")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorControl/TabContainer/Page1"]
+layout_mode = 0
+offset_left = 279.0
+offset_top = 83.0
+offset_right = 580.0
+offset_bottom = 175.0
+theme = ExtResource("5_fmw7y")
+bbcode_enabled = true
+text = "Certain actions make noise, drawing attention of the enemies. Distance of the noise is indicated by the [color=red]white circle[/color] around objects.
+
+Kalin will make sound while performing most acts, but you can walk crouched to move silently."
+
+[node name="Page2" type="Control" parent="ColorControl/TabContainer"]
+layout_mode = 2
+theme = ExtResource("5_fmw7y")
+metadata/_tab_index = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="ColorControl/TabContainer/Page2"]
+position = Vector2(424.75098, 122.1875)
+scale = Vector2(0.48222342, 0.48222345)
+texture = ExtResource("6_fqvai")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 89.0
+offset_right = 278.0
+offset_bottom = 166.0
+bbcode_enabled = true
+text = "You can shove enemies into traps to kill them. Walk crouched to approach them silently, press attack key([img]res://UI/Buttons/button_keyboard_j.png[/img]) to perform [color=red]bash[/color] attack."
+
+[node name="Control" type="Control" parent="ColorControl"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Left" type="Button" parent="ColorControl/Control"]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 323.0
+offset_right = 302.0
+offset_bottom = 337.0
+theme = ExtResource("10_jcgot")
+icon = ExtResource("11_uwkmi")
+script = ExtResource("12_ug41n")
+
+[node name="Right" type="Button" parent="ColorControl/Control"]
+layout_mode = 0
+offset_left = 326.0
+offset_top = 323.0
+offset_right = 342.0
+offset_bottom = 337.0
+theme = ExtResource("10_jcgot")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6a3fo")
+icon = ExtResource("13_3yw0x")
+script = ExtResource("12_ug41n")
+
+[node name="Label" type="Label" parent="ColorControl/Control"]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 322.0
+offset_right = 321.0
+offset_bottom = 336.0
+theme = ExtResource("5_fmw7y")
+text = "1/2"
+
+[node name="Close" type="Button" parent="ColorControl/Control"]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 31.0
+offset_right = 606.0
+offset_bottom = 53.6875
+theme = ExtResource("10_jcgot")
+icon = ExtResource("14_j6gds")
+expand_icon = true
+script = ExtResource("12_ug41n")
+
+[node name="ContinuePrompt" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 464.0
+offset_top = 288.0
+offset_right = 624.0
+offset_bottom = 320.0
+theme = ExtResource("5_fmw7y")
+bbcode_enabled = true
+text = "Press [img]res://UI/Buttons/button_keyboard_space.png[/img]key to continue"
+
+[connection signal="pressed" from="ColorControl/Control/Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="ColorControl/Control/Right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="ColorControl/Control/Close" to="." method="_on_button_pressed"]

@@ -1,22 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dx4ougi4grdc2"]
+[gd_scene load_steps=5 format=3 uid="uid://dx4ougi4grdc2"]
 
 [ext_resource type="Texture2D" uid="uid://daup5g81ikh6t" path="res://Inventory/Sprites/ Potions-export28.png" id="1_56wb5"]
 [ext_resource type="Script" uid="uid://cliq1akrpj5ng" path="res://Scripts/item_pickup.gd" id="2_ilk23"]
 [ext_resource type="Resource" uid="uid://b2e8awdp8f23e" path="res://Inventory/Resources/stenchbane.tres" id="3_ilk23"]
-[ext_resource type="Script" uid="uid://cmq4j7er6fkpl" path="res://Inventory/item_pickup_area.gd" id="4_2ikxx"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ql57a"]
+[ext_resource type="PackedScene" uid="uid://cyuk5qsesuyn8" path="res://Inventory/Pickup Objects/item_pickup_area.tscn" id="4_56wb5"]
 
 [node name="PickupStenchbane" type="Sprite2D"]
 texture = ExtResource("1_56wb5")
 script = ExtResource("2_ilk23")
 item = ExtResource("3_ilk23")
 
-[node name="ItemPickupArea" type="Area2D" parent="."]
-visible = false
-collision_layer = 64
-collision_mask = 0
-script = ExtResource("4_2ikxx")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPickupArea"]
-shape = SubResource("RectangleShape2D_ql57a")
+[node name="ItemPickupArea" parent="." instance=ExtResource("4_56wb5")]

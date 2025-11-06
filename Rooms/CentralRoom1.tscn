@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://dhe315co0sjxw"]
+[gd_scene load_steps=13 format=4 uid="uid://dhe315co0sjxw"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_5ep3j"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_713km"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://24ijy2g2jylp" path="res://Objects/hiding_spot.tscn" id="7_tq3i4"]
 [ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Enemy/GoblinWarrior/goblin_warrior.tscn" id="8_dpdta"]
 [ext_resource type="PackedScene" uid="uid://hxoxl4bcalr3" path="res://Map/Props/lever.tscn" id="10_h1lsh"]
+[ext_resource type="PackedScene" uid="uid://2prh5eduxlje" path="res://Objects/condition_checker.tscn" id="11_uwnxm"]
+[ext_resource type="PackedScene" uid="uid://b45030hb2anpy" path="res://Objects/simple_dialogue.tscn" id="12_uwnxm"]
 
 [node name="CentralRoom1" type="Node2D"]
 
@@ -63,7 +65,7 @@ tile_set = ExtResource("1_5ep3j")
 spawn_point = NodePath("../SpawnPoint")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
-position = Vector2(1927, 67)
+position = Vector2(1823, 426)
 
 [node name="StairsMedium" parent="." instance=ExtResource("3_1edel")]
 position = Vector2(344, 567)
@@ -107,3 +109,13 @@ scale = Vector2(-1, 1)
 
 [node name="Lever" parent="." instance=ExtResource("10_h1lsh")]
 position = Vector2(2181, 75)
+
+[node name="ConditionChecker" parent="." instance=ExtResource("11_uwnxm")]
+position = Vector2(1680, 437)
+result_target_path = NodePath("SimpleDialogue")
+parameters = Array[String](["has_sword"])
+results = [false]
+
+[node name="SimpleDialogue" parent="ConditionChecker" instance=ExtResource("12_uwnxm")]
+text = "I can't fight without a weapon. I should find a sword first."
+auto = true
