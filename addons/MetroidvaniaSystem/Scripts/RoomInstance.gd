@@ -51,7 +51,8 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	if MetSys.current_room == self:
 		MetSys.current_room = null
-	Game.get_singleton().save_room()
+	if !Engine.is_editor_hint():
+		Game.get_singleton().save_room()
 
 func _update_assigned_scene():
 	queue_redraw()

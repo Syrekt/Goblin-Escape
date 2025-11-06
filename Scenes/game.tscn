@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c3ce8mt521wb5"]
+[gd_scene load_steps=10 format=3 uid="uid://c3ce8mt521wb5"]
 
 [ext_resource type="PackedScene" uid="uid://h2hwfpjw4rte" path="res://Objects/kalin.tscn" id="1_v3ybc"]
 [ext_resource type="Script" uid="uid://ckr03m8hdsnts" path="res://Scripts/game.gd" id="1_wrm1d"]
@@ -8,10 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://45snbjkrrgyc" path="res://UI/death_screen.tscn" id="3_v158k"]
 [ext_resource type="Script" uid="uid://c6l4itv8om7oy" path="res://Scripts/map_window.gd" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://bxgqi0q1okfjx" path="res://Objects/screen_fade.tscn" id="4_h4fw4"]
+[ext_resource type="AudioStream" uid="uid://dkgt8hqnqcgaj" path="res://BGM/juanjo_sound - Do we need a reason.wav" id="6_h4fw4"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wrm1d")
-starting_map = "CentralRoom1.tscn"
+starting_map = "StartingRoom.tscn"
 
 [node name="LoadingScreen" parent="." instance=ExtResource("2_1l0tm")]
 unique_name_in_owner = true
@@ -28,16 +29,26 @@ unique_name_in_owner = true
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.8, 0.760784, 1, 1)
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_h4fw4")
+
 [node name="Kalin" parent="." instance=ExtResource("1_v3ybc")]
 unique_name_in_owner = true
 position = Vector2(320, 181)
+metadata/_edit_lock_ = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Minimap" parent="CanvasLayer" instance=ExtResource("3_3dryh")]
+[node name="Minimap" parent="UI" instance=ExtResource("3_3dryh")]
 unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -144.0
+offset_right = 0.0
+grow_horizontal = 0
 
-[node name="Background" type="Panel" parent="CanvasLayer/Minimap"]
+[node name="Background" type="Panel" parent="UI/Minimap"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -46,7 +57,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MapWindow" type="Panel" parent="CanvasLayer"]
+[node name="MapWindow" type="Panel" parent="UI"]
 unique_name_in_owner = true
 visible = false
 clip_contents = true
@@ -63,13 +74,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_3dryh")
 
-[node name="Percent" type="Label" parent="CanvasLayer/MapWindow"]
+[node name="Percent" type="Label" parent="UI/MapWindow"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "%0"
 
-[node name="TopDraw" type="Control" parent="CanvasLayer/MapWindow"]
+[node name="TopDraw" type="Control" parent="UI/MapWindow"]
 z_index = 5
 anchors_preset = 0
 offset_right = 40.0

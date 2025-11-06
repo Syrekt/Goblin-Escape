@@ -3,16 +3,12 @@
 [ext_resource type="Script" uid="uid://caldklojsd6il" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.gd" id="1_0twsr"]
 
 [node name="Minimap" type="Control"]
+clip_contents = true
 layout_mode = 3
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -143.0
-offset_right = 1.0
+anchors_preset = 0
+offset_right = 144.0
 offset_bottom = 96.0
-grow_horizontal = 0
 script = ExtResource("1_0twsr")
 smooth_scroll = true
-display_player_location = true
 
 [node name="Drawer" type="Node2D" parent="."]

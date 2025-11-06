@@ -12,7 +12,7 @@ func update(delta: float) -> void:
 
 	if !player.is_on_floor():
 		finished.emit("fall")
-	elif player.pressed("run") && player.stamina.has_enough(1.0):
+	elif !player.pressed("walk"):
 		finished.emit("run")
 	elif player.pressed("down"):
 		finished.emit("crouch")

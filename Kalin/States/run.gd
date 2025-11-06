@@ -1,26 +1,33 @@
 extends PlayerState
 
+
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
-	player.set_floor_snap_length(2.0)
 	player.set_facing(player.get_movement_dir())
+func exit() -> void:
+	player.sprinting = false
+	player.animation_player.speed_scale = 1.0
+	player.set_floor_snap_length(12.0)
 
 func update(delta: float) -> void:
-	player.fatigue.add(0.0006)
-	if player.combat_target:
-		if !player.stamina.spend(0.01, 0.001):
-			finished.emit("run_stop")
+	player.sprinting = player.pressed("sprint") && player.stamina.has_enough(0.1)
+	if player.sprinting:
+		player.stamina.spend(0.01, 0.001)
+		player.animation_player.speed_scale = 1.25
+		player.set_floor_snap_length(3.0)
 	else:
-		player.stamina.spend(0.00, 0.001)
+		player.animation_player.speed_scale = 1.0
+		player.set_floor_snap_length(2.0)
+
 
 func physics_update(delta: float) -> void:
 	player.check_movable();
 	var floor_angle = player.get_floor_angle()
 
-	if !player.pressed("run") || player.get_movement_dir() != player.facing || player.velocity.x == 0:
+	if player.pressed("walk") || (!player.pressed("left") && !player.pressed("right")):
 		finished.emit("run_stop")
 	elif player.pressed("down") && floor_angle == 0:
-		finished.emit("slide")
+		finished.emit("slide", {"sprinting": player.sprinting})
 	elif !player.is_on_floor():
 		finished.emit("fall")
 	elif player.just_pressed("jump"):
@@ -31,4 +38,5 @@ func physics_update(delta: float) -> void:
 		finished.emit("bash_no_sword")
 
 func play_footsteps() -> void:
-	Ge.play_audio_from_string_array(player.global_position, 1, "res://SFX/Kalin/Footsteps Soft/")
+	if player.sprinting:
+		Ge.play_audio_from_string_array(player.global_position, 1, "res://SFX/Kalin/Footsteps Soft/")

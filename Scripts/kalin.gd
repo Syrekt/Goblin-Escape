@@ -4,9 +4,11 @@ class_name Player extends CharacterBody2D
 #region Movement
 @export var run_speed			:= 100.0 * 60.0
 @export var walk_speed			:= 50.0 * 60.0
+@export var sprint_speed		:= 150.0 * 60.0
 @export var stance_walk_speed	:= 30.0 * 60.0
 @export var crouch_speed		:= 45.0 * 60.0
 @export var push_pull_speed 	:= 25.0 * 60.0
+@export var sprint_slide_speed  := 7.0 * 60.0
 @export var slide_speed			:= 5.0 * 60.0
 @export var slide_dec			:= 7.0
 @export var gravity				:= 500.0
@@ -25,6 +27,7 @@ var facing := 1
 var ignore_corners := false
 var controls_disabled := false # Disables movement and UI input for player
 var movement_disabled := false # Only disables movement input
+var sprinting := false
 
 var noise_muffle := 0.0
 
@@ -608,6 +611,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			grabbed_by = null
 		"corner_climb", "corner_climb_quick":
 			#global_position += Vector2(26*facing, -35)
+			await get_tree().physics_frame
 			if can_stand_up():
 				state.finished.emit("idle", {"just_climbed": true})
 			else:
@@ -699,7 +703,10 @@ func _physics_process(delta: float) -> void:
 		"stance_walk":
 			move_speed = stance_walk_speed * dir_x
 		"run":
-			move_speed = run_speed * dir_x
+			if sprinting:
+				move_speed = sprint_speed * dir_x
+			else:
+				move_speed = run_speed * dir_x
 		#"rise", "fall":
 		#	move_speed = stance_walk_speed * dir_x
 		"push_idle":
@@ -736,7 +743,7 @@ func _physics_process(delta: float) -> void:
 		"stance_light", "stance_heavy", "stance_defensive":
 			move_speed = 0
 			velocity = Vector2.ZERO
-	var being_careful = state_name == "stance_walk" || state_name == "crouch_walk" || state_name == "rise"
+	var being_careful = state_name == "stance_walk" || state_name == "crouch_walk" || state_name == "rise" || state_name == "walk"
 	$ThreatCollider.monitoring = (velocity.x != 0 || velocity.y > 0) && !being_careful
 
 

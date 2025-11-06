@@ -28,6 +28,11 @@ func exit() -> void:
 	player.sprite.offset = Vector2.ZERO
 	player.climb_start_position = Vector2.ZERO
 
+	await get_tree().physics_frame
+
+	if !player.can_stand_up():
+		player.global_position.x += 8 * player.facing
+
 	tween_player.kill();
 	tween_sprite.kill();
 
