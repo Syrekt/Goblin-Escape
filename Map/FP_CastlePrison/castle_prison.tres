@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=143 format=3 uid="uid://1quahlg1y22o"]
+[gd_resource type="TileSet" load_steps=144 format=3 uid="uid://1quahlg1y22o"]
 
 [ext_resource type="Texture2D" uid="uid://bqtpx8ja2r3ni" path="res://Map/FP_CastlePrison/background_obj.png" id="1_leifh"]
 [ext_resource type="Texture2D" uid="uid://d46bcae481s6" path="res://Map/FP_CastlePrison/mainlevbuildB.png" id="2_qy7eu"]
@@ -135,6 +135,9 @@ tile_data = PackedInt32Array(0, 1966082, 14, 65536, 1966082, 15, 131072, 1966082
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_im3to"]
 tile_data = PackedInt32Array(0, 1376258, 22, 65536, 1376258, 23, 1, 1441794, 22)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_aqryw"]
+tile_data = PackedInt32Array(0, 1310722, 33, 65536, 1310722, 34, 131072, 1507330, 30, 196608, 1507330, 31, 262144, 1507330, 32, 1, 1376258, 33, 65537, 1376258, 34, 131073, 1572866, 30, 196609, 1572866, 31, 262145, 1572866, 32, 2, 1441794, 33, 65538, 1441794, 34, 131074, 1638402, 30, 196610, 1638402, 31, 262146, 1638402, 32)
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_55f7i"]
 tile_data = PackedInt32Array(0, 1966082, 42, 65536, 1966082, 43, 131072, 1966082, 44, 1, 2031618, 42, 65537, 2031618, 43, 131073, 2031618, 44, 2, 2097154, 42, 65538, 2097154, 43, 131074, 2097154, 44)
@@ -4116,6 +4119,20 @@ texture = ExtResource("3_usbtt")
 32:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 32:27/0 = 0
 32:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+23:0/0 = 0
+23:1/0 = 0
+23:2/0 = 0
+23:3/0 = 0
+23:4/0 = 0
+23:5/0 = 0
+23:6/0 = 0
+21:5/0 = 0
+21:4/0 = 0
+21:3/0 = 0
+21:2/0 = 0
+21:1/0 = 0
+21:0/0 = 0
+22:0/0 = 0
 
 [resource]
 occlusion_layer_0/light_mask = 1
@@ -4179,3 +4196,4 @@ pattern_45 = SubResource("TileMapPattern_krvo0")
 pattern_46 = SubResource("TileMapPattern_i8dxc")
 pattern_47 = SubResource("TileMapPattern_d61jr")
 pattern_48 = SubResource("TileMapPattern_im3to")
+pattern_49 = SubResource("TileMapPattern_aqryw")
