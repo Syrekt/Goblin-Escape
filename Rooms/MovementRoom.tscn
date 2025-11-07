@@ -49,7 +49,7 @@ thougth = "It's chaos out there.. It all went to hell after the war started. "
 
 [node name="ThoughtTrigger2" parent="." instance=ExtResource("4_qi3xb")]
 position = Vector2(1592.5409, 265.4027)
-thougth = "Hopefully my will turn around in here. It's been a while since I raided a dungeon like this."
+thougth = "Hopefully my luck will turn around in here. It's been a while since I raided a dungeon like this."
 
 [node name="KeyPrompt" parent="." instance=ExtResource("4_2kxco")]
 position = Vector2(178.2301, 341.58286)

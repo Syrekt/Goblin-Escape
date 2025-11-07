@@ -553,8 +553,10 @@ func prevent_corner_grab() -> void:
 	ignore_corners = false
 func ignore_platforms() -> void:
 	set_collision_mask_value(17, false)
+	set_collision_mask_value(14, false)
 	await get_tree().create_timer(0.5).timeout
 	set_collision_mask_value(17, true)
+	set_collision_mask_value(14, true)
 func unlock_skill(_name: String) -> void:
 	print("Unlocked skill: %s" % _name)
 	set(_name, true)
@@ -575,6 +577,9 @@ func on_enter() -> void:
 		# Disabled since fall damage on room change might work
 		#"fall":
 		#	state_node.state.fall_start_y = global_position.y
+	pcam.follow_damping = false
+	await get_tree().create_timer(0.5).timeout
+	pcam.follow_damping = true
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -695,9 +700,7 @@ func _physics_process(delta: float) -> void:
 		set_collision_mask_value(14, true)
 	elif !ray_stairs_path.is_colliding():
 		set_collision_mask_value(14, false)
-	if !is_on_floor():
-		set_collision_mask_value(14, true)
-	elif get_floor_angle() != 0.0:
+	if get_floor_angle() != 0.0:
 		set_collision_mask_value(14, false)
 
 	match state_name:
@@ -847,7 +850,7 @@ func _process(delta: float) -> void:
 			pcam.set_follow_targets([self, combat_target] as Array[Node2D])
 			#pcam.draw_limits = false
 		elif pcam.follow_mode == pcam.FollowMode.GROUP:
-			pcam.follow_mode = pcam.FollowMode.SIMPLE
+			pcam.follow_mode = pcam.FollowMode.GLUED
 			pcam.set_follow_target(self)
 			#if pcam.limit_target:
 			#	pcam.draw_limits = true
@@ -913,9 +916,9 @@ func _on_abyss_entered(abyss: Area2D) -> void:
 		take_damage(fall_damage) # To make sure voices don't overlap with fall voice(?)
 	else:
 		state_node.state.finished.emit("land_hurt", {"fall_damage": fall_damage})
-	pcam.follow_axis_lock = PhantomCamera2D.FollowLockAxis.XY
-	await get_tree().create_timer(1.0).timeout
-	pcam.follow_axis_lock = PhantomCamera2D.FollowLockAxis.NONE
+	#pcam.follow_axis_lock = PhantomCamera2D.FollowLockAxis.XY
+	#await get_tree().create_timer(1.0).timeout
+	#pcam.follow_axis_lock = PhantomCamera2D.FollowLockAxis.NONE
 func _on_fullscreen_panel_opened() -> void:
 	var huds = get_tree().get_nodes_in_group("HUD")
 	print("Hide HUD")

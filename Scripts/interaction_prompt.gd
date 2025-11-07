@@ -48,6 +48,10 @@ func _process(delta: float) -> void:
 		visible = false
 
 func _show(action, title := "") -> void:
+	if !Ge.show_interaction_prompts:
+		print("Interaction prompt is disabled")
+		return
+
 	var interaction_prompt = ""
 	var events = InputMap.action_get_events(action)
 	label.text = title

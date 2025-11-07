@@ -98,5 +98,9 @@ text = "walk"
 [node name="CollisionShape2D" parent="KeyPrompt" index="1"]
 scale = Vector2(2.76, 1)
 
+[node name="KeyPrompt2" parent="." instance=ExtResource("9_o420l")]
+position = Vector2(1635, 887)
+text = "down,jump"
+
 [editable path="Hint"]
 [editable path="KeyPrompt"]

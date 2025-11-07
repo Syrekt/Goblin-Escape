@@ -16,11 +16,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 4
+current_tab = 0
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -50,7 +49,7 @@ custom_minimum_size = Vector2(86, 0)
 layout_mode = 2
 text = "Fullscreen"
 
-[node name="Fullscreen" type="CheckButton" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="Fullscreen" type="CheckBox" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 script = ExtResource("2_ucjbo")
 
@@ -81,7 +80,7 @@ custom_minimum_size = Vector2(86, 0)
 layout_mode = 2
 text = "Pixel Perfect"
 
-[node name="PixelPerfect" type="CheckButton" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+[node name="PixelPerfect" type="CheckBox" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 script = ExtResource("2_ucjbo")
 
@@ -93,7 +92,7 @@ custom_minimum_size = Vector2(86, 0)
 layout_mode = 2
 text = "Borderless"
 
-[node name="Borderless" type="CheckButton" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+[node name="Borderless" type="CheckBox" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 script = ExtResource("2_ucjbo")
 
@@ -264,11 +263,11 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/NoiseToggle"]
-custom_minimum_size = Vector2(125, 0)
+custom_minimum_size = Vector2(141, 0)
 layout_mode = 2
 text = "Enabled"
 
-[node name="NoiseToggleCheckButton" type="CheckButton" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/NoiseToggle"]
+[node name="NoiseToggleCheckButton" type="CheckBox" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/NoiseToggle"]
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer"]
@@ -355,6 +354,7 @@ max_value = 255.0
 ticks_position = 3
 
 [node name="Gameplay" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
@@ -379,22 +379,33 @@ size_flags_vertical = 0
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer"]
-custom_minimum_size = Vector2(64, 0)
+custom_minimum_size = Vector2(124, 0)
 layout_mode = 2
 text = "Show Tutorials"
 
-[node name="ShowTutorials" type="CheckButton" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer"]
+[node name="ShowTutorials" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer"]
 layout_mode = 2
 
 [node name="HSplitContainer2" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2"]
-custom_minimum_size = Vector2(64, 0)
+custom_minimum_size = Vector2(124, 0)
 layout_mode = 2
 text = "Show Hints"
 
-[node name="ShowHints" type="CheckButton" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2"]
+[node name="ShowHints" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2"]
+layout_mode = 2
+
+[node name="HSplitContainer3" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer3"]
+custom_minimum_size = Vector2(124, 0)
+layout_mode = 2
+text = "Show Interaction Prompts"
+
+[node name="ShowInteractionPrompts" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer3"]
 layout_mode = 2
 
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
@@ -415,3 +426,4 @@ layout_mode = 2
 [connection signal="drag_ended" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Alpha/NoiseColorAlphaSlider" to="." method="_on_noise_color_alpha_slider_drag_ended"]
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer/ShowTutorials" to="." method="_on_show_tutorials_toggled"]
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2/ShowHints" to="." method="_on_show_hints_toggled"]
+[connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer3/ShowInteractionPrompts" to="." method="_on_show_interaction_prompts_toggled"]

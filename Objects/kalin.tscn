@@ -45,7 +45,7 @@
 [ext_resource type="Texture2D" uid="uid://bxgpgvblnjqhg" path="res://Kalin/Sprites/Kalin-Walk.png" id="22_vnsvi"]
 [ext_resource type="Script" uid="uid://bgnnyj7i10wbg" path="res://Kalin/States/walk.gd" id="28_1dko0"]
 [ext_resource type="Texture2D" uid="uid://bq334bamr3mgu" path="res://Kalin/Sprites/Kalin-Slide.png" id="29_qnnkd"]
-[ext_resource type="Resource" uid="uid://br6rhvsa0swrd" path="res://Inventory/Resources/player_inventory_filled.tres" id="29_towol"]
+[ext_resource type="Resource" uid="uid://buieik1hf8xh2" path="res://Inventory/Resources/player_inventory.tres" id="29_y4shw"]
 [ext_resource type="AudioStream" uid="uid://ds7af8tnix0pc" path="res://Sex/Sex Female Moan Soft.wav" id="31_cfvac"]
 [ext_resource type="Texture2D" uid="uid://bl5jujtf6kegu" path="res://UI/Inventory/Inventory panel1_with background.png" id="31_nhuj2"]
 [ext_resource type="PackedScene" uid="uid://cd3svdt2crxap" path="res://Inventory/inv_button.tscn" id="32_fb5pj"]
@@ -4555,10 +4555,14 @@ slide_speed = 200.0
 snap_offset = Vector2(-17, 3)
 save_list = Array[String](["vitality", "strength", "endurance", "level", "has_sword", "experience_point", "has_heavy_stance", "has_defensive_stance"])
 
-[node name="PhantomCamera2D" type="Node2D" parent="."]
+[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+top_level = true
 script = ExtResource("2_y4shw")
+follow_mode = 1
+follow_target = NodePath("..")
 snap_to_pixel = true
 tween_resource = SubResource("Resource_3pkug")
+follow_damping = true
 draw_limits = true
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
@@ -4706,7 +4710,7 @@ mouse_filter = 1
 theme = ExtResource("72_qdj7c")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_exvqe")
 script = ExtResource("73_ugwbb")
-inventory = ExtResource("29_towol")
+inventory = ExtResource("29_y4shw")
 
 [node name="FG" type="NinePatchRect" parent="UI/InventoryPanel"]
 layout_mode = 2

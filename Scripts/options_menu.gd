@@ -8,9 +8,9 @@ extends TabContainer
 @onready var noise_color_b : HSlider = find_child("NoiseColorBlueSlider")
 @onready var noise_color_a : HSlider = find_child("NoiseColorAlphaSlider")
 
-@onready var noise_toggle : CheckButton = find_child("NoiseToggleCheckButton")
-@onready var borderless_toggle : CheckButton = find_child("Borderless")
-@onready var fullscreen_toggle : CheckButton = find_child("Fullscreen")
+@onready var noise_toggle : CheckBox = find_child("NoiseToggleCheckButton")
+@onready var borderless_toggle : CheckBox = find_child("Borderless")
+@onready var fullscreen_toggle : CheckBox = find_child("Fullscreen")
 
 @onready var slider_red_label : Label = find_child("Red").find_child("Label")
 @onready var slider_green_label : Label = find_child("Green").find_child("Label")
@@ -30,8 +30,9 @@ extends TabContainer
 @onready var efx_volume_slider 		: HSlider = find_child("EFXVolume")
 @onready var bgm_volume_slider 		: HSlider = find_child("BGMVolume")
 
-@onready var tutorial_toggle	: CheckButton = find_child("ShowTutorials")
-@onready var hint_toggle		: CheckButton = find_child("ShowHints")
+@onready var tutorial_toggle	: CheckBox = find_child("ShowTutorials")
+@onready var hint_toggle		: CheckBox = find_child("ShowHints")
+@onready var interaction_prompts_toggle	: CheckBox = find_child("ShowInteractionPrompts")
 
 var default_keybindings : Dictionary = {
 	"up"		: [KEY_A],
@@ -72,6 +73,7 @@ func _ready() -> void:
 
 	tutorial_toggle.button_pressed	= Ge.show_tutorials
 	hint_toggle.button_pressed		= Ge.show_hints
+	interaction_prompts_toggle.button_pressed = Ge.show_interaction_prompts
 
 
 func _process(delta: float) -> void:
@@ -216,3 +218,8 @@ func _on_show_tutorials_toggled(toggled_on: bool) -> void:
 
 func _on_show_hints_toggled(toggled_on: bool) -> void:
 	Ge.show_hints = toggled_on
+
+
+func _on_show_interaction_prompts_toggled(toggled_on: bool) -> void:
+	print("toggled_on: "+str(toggled_on))
+	Ge.show_interaction_prompts = toggled_on

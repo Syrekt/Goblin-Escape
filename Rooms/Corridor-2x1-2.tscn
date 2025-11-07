@@ -46,6 +46,7 @@ spawn_point = NodePath("../Marker2D")
 
 [node name="StairsLong" parent="." instance=ExtResource("3_fdxp8")]
 position = Vector2(808, 136)
+collision_layer = 2049
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(1189.8313, 159.97467)

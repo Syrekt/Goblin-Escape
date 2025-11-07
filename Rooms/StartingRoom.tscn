@@ -74,6 +74,9 @@ position = Vector2(123, 156)
 text = "I can't.. They are waiting for me outside. "
 repeat = true
 
+[node name="CollisionShape2D" parent="SimpleDialogue" index="0"]
+position = Vector2(0, 16.5)
+
 [node name="Sprite2D" type="Sprite2D" parent="SimpleDialogue"]
 texture = ExtResource("7_u8lx0")
 region_enabled = true
@@ -86,3 +89,5 @@ text = "jump"
 [node name="KeyPrompt2" parent="." instance=ExtResource("4_u8lx0")]
 position = Vector2(1975, 327)
 text = "jump"
+
+[editable path="SimpleDialogue"]

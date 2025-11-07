@@ -14,10 +14,10 @@ func _process(delta: float) -> void:
 	$Label.text = str(item.amount)
 
 func use() -> bool:
-	if !item.consumable: return false
-	#returns destroyed
+	#returns true if destroyed
 
-	item.inventory.item_reduce(item)
+	if item.consumable:
+		item.inventory.item_reduce(item)
 
 	return item.amount <= 0
 
@@ -33,5 +33,13 @@ func _on_pressed() -> void:
 			print("Use Stenchbane")
 			owner.smell.value = 0;
 			owner.smell.add_buff(-10, 10)
+		"Urgent Letter":
+			var thought = [
+				"I shouldn't read this.",
+				"I might be too late but I can't open this."
+			].pick_random()
+			owner.think(thought)
+		"_":
+			print("This item has no use")
 	if use():
 		queue_free()
