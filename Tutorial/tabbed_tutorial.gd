@@ -40,6 +40,9 @@ func _ready() -> void:
 	else:
 		tween.tween_callback(show_controls)
 
+	var button = $TutorialContinuePrompt/NinePatchRect/MarginContainer/VBoxContainer/Button
+	button.pressed.connect(_on_button_pressed)
+
 
 
 func _process(delta: float) -> void:

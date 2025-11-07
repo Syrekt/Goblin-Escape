@@ -954,5 +954,3 @@ text = "1/2"
 
 [node name="TutorialContinuePrompt" parent="." instance=ExtResource("22_5q4r8")]
 visible = false
-
-[connection signal="pressed" from="TutorialContinuePrompt" to="." method="_on_button_pressed"]

@@ -26,18 +26,18 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nd3wd"]
 
-[node name="Button" type="Button"]
-z_index = 10
-offset_left = 394.0
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 462.0
 offset_top = 289.0
-offset_right = 617.0
-offset_bottom = 338.0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_u8p21")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_qyxpq")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_a8x3e")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_1sm6s")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_dhwhg")
-script = ExtResource("2_a36go")
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource("1_15wre")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 show_behind_parent = true
@@ -70,18 +70,31 @@ theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = -5
+theme_override_constants/separation = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 16.015)
+[node name="Button" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
-mouse_filter = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u8p21")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qyxpq")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_a8x3e")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_1sm6s")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dhwhg")
+script = ExtResource("2_a36go")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Button"]
+custom_minimum_size = Vector2(0, 16.015)
+layout_mode = 0
+offset_right = 121.0
+offset_bottom = 16.015
+mouse_filter = 1
 theme = ExtResource("1_15wre")
 bbcode_enabled = true
 text = "to continue."
 scroll_active = false
+vertical_alignment = 1
 
-[node name="CheckButton" type="CheckButton" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="CheckButton" type="CheckBox" parent="NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_15wre")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_svash")
@@ -93,4 +106,4 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_nd3wd")
 button_pressed = true
 text = "Show Future Tutorials"
 
-[connection signal="toggled" from="NinePatchRect/MarginContainer/VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="toggled" from="NinePatchRect/MarginContainer/VBoxContainer/CheckButton" to="NinePatchRect/MarginContainer/VBoxContainer/Button" method="_on_check_button_toggled"]

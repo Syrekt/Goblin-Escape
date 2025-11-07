@@ -12,3 +12,6 @@ func _ready() -> void:
 
 func _on_check_button_toggled(toggled_on: bool) -> void:
 	Ge.show_tutorials = toggled_on
+
+#func _draw() -> void:
+#	draw_rect(Rect2(Vector2.ZERO, size), Color(1, 0, 0, 1))
