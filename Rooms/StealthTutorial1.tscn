@@ -68,7 +68,7 @@ position = Vector2(2513, 352)
 
 [node name="Hint" parent="." instance=ExtResource("7_d3m8v")]
 position = Vector2(2512.5684, 344.37152)
-text = "[img]res://UI/Buttons/button_keyboard_l.png[/img]to grab and move objects."
+text = "You can grab and move some objects."
 
 [node name="Goblin" parent="." instance=ExtResource("8_r43xl")]
 position = Vector2(2715, 256)

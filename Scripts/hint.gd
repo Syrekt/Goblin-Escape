@@ -1,4 +1,4 @@
-class_name InputPrompt extends Area2D
+class_name Hint extends Area2D
 
 @export_multiline var text : String
 
@@ -7,6 +7,10 @@ var text_tween : Tween
 
 
 func _ready() -> void:
+	if !Ge.show_hints:
+		queue_free()
+		return
+
 	label.text = text
 
 

@@ -20,10 +20,19 @@ var save_slot := "save1"
 
 var BALLOON = preload("res://Objects/balloon.tscn")
 
-var noise_enabled	:= false
-var noise_color : Color = Color(1, 1, 1, 0.05)
+var noise_enabled := false:
+	set(v):
+		Options.save_options()
+var noise_color : Color = Color(1, 1, 1, 0.05):
+	set(v):
+		Options.save_options()
 
-var show_tutorials := true
+var show_tutorials := true:
+	set(v):
+		Options.save_options()
+var show_hints := true:
+	set(v):
+		Options.save_options()
 
 signal show_combat_tutorial
 signal show_stealth_tutorial
@@ -355,3 +364,8 @@ func one_shot_dialogue(text: String) -> void:
 	var balloon = BALLOON.instantiate()
 	get_tree().current_scene.add_child(balloon)
 	balloon.start(dialogue_resource, "title")
+func get_action_keycode(action:String) -> String:
+	var action_events = InputMap.action_get_events(action)
+	var action_event = action_events[0]
+	var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
+	return action_keycode

@@ -58,6 +58,7 @@ func save_options() -> void:
 	config.set_value("noise", "color",		Ge.noise_color)
 	#endregion
 	config.set_value("gameplay", "show_tutorials", Ge.show_tutorials)
+	config.set_value("gameplay", "show_hints", Ge.show_hints)
 	config.save(config_path)
 func load_options() -> int:
 	var config = ConfigFile.new()
@@ -92,7 +93,8 @@ func load_options() -> int:
 		Ge.noise_enabled	= config.get_value("noise", "enabled", false)
 		Ge.noise_color		= config.get_value("noise", "color", false)
 		#endregion
-	Ge.show_tutorials = config.get_value("gameplay", "show_tutorials", false)
+	Ge.show_tutorials	= config.get_value("gameplay", "show_tutorials", false)
+	Ge.show_hints		= config.get_value("gameplay", "show_hints", false)
 	return err
 
 func _notification(what: int) -> void:

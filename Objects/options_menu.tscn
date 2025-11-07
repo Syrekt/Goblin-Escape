@@ -386,6 +386,17 @@ text = "Show Tutorials"
 [node name="ShowTutorials" type="CheckButton" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer"]
 layout_mode = 2
 
+[node name="HSplitContainer2" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Show Hints"
+
+[node name="ShowHints" type="CheckButton" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2"]
+layout_mode = 2
+
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="item_selected" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/Resolution" to="." method="_on_option_button_item_selected"]
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/PixelPerfect" to="." method="_on_pixel_perfect_toggled"]
@@ -403,3 +414,4 @@ layout_mode = 2
 [connection signal="drag_ended" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Blue/NoiseColorBlueSlider" to="." method="_on_noise_color_blue_slider_drag_ended"]
 [connection signal="drag_ended" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Alpha/NoiseColorAlphaSlider" to="." method="_on_noise_color_alpha_slider_drag_ended"]
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer/ShowTutorials" to="." method="_on_show_tutorials_toggled"]
+[connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2/ShowHints" to="." method="_on_show_hints_toggled"]

@@ -3,8 +3,8 @@
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_eyrgu"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_ra578"]
 [ext_resource type="PackedScene" uid="uid://dkyt1q4ive1yi" path="res://Map/Props/stairs_long.tscn" id="3_k0chd"]
+[ext_resource type="PackedScene" uid="uid://bl26mmlff752e" path="res://Objects/key_prompt.tscn" id="4_u8lx0"]
 [ext_resource type="PackedScene" uid="uid://ly85t11hp5u3" path="res://Objects/thought_trigger.tscn" id="4_uwpfy"]
-[ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="5_wokl4"]
 [ext_resource type="PackedScene" uid="uid://b45030hb2anpy" path="res://Objects/simple_dialogue.tscn" id="6_xok6r"]
 [ext_resource type="Texture2D" uid="uid://o0lgckqd1cqs" path="res://Map/Props/spr_lever_strip5t.png" id="7_u8lx0"]
 
@@ -54,22 +54,16 @@ position = Vector2(328, 232)
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(152, 194)
 
-[node name="Hint" parent="SpawnPoint" instance=ExtResource("5_wokl4")]
-text = "[img]res://UI/Buttons/button_keyboard_w.png[/img]
-[img]res://UI/Buttons/button_keyboard_a.png[/img][img]res://UI/Buttons/button_keyboard_s.png[/img][img]res://UI/Buttons/button_keyboard_d.png[/img]
-"
+[node name="KeyPrompt" parent="SpawnPoint" instance=ExtResource("4_u8lx0")]
+position = Vector2(0, -18)
+text = "up"
+
+[node name="KeyPrompt2" parent="SpawnPoint" instance=ExtResource("4_u8lx0")]
+text = "left,down,right"
 
 [node name="ThoughtTrigger" parent="." instance=ExtResource("4_uwpfy")]
 position = Vector2(531, 281)
 thougth = "Phew... just made it in time..."
-
-[node name="Hint" parent="." instance=ExtResource("5_wokl4")]
-position = Vector2(1597, 392)
-text = "[img]res://UI/Buttons/button_keyboard_k.png[/img]"
-
-[node name="Hint2" parent="." instance=ExtResource("5_wokl4")]
-position = Vector2(1994, 317)
-text = "[img]res://UI/Buttons/button_keyboard_k.png[/img]"
 
 [node name="ThoughtTrigger2" parent="." instance=ExtResource("4_uwpfy")]
 position = Vector2(945.1803, 285.7303)
@@ -84,3 +78,11 @@ repeat = true
 texture = ExtResource("7_u8lx0")
 region_enabled = true
 region_rect = Rect2(74, 3, 11, 18)
+
+[node name="KeyPrompt" parent="." instance=ExtResource("4_u8lx0")]
+position = Vector2(1592, 392)
+text = "jump"
+
+[node name="KeyPrompt2" parent="." instance=ExtResource("4_u8lx0")]
+position = Vector2(1975, 327)
+text = "jump"

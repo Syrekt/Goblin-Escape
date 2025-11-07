@@ -317,7 +317,7 @@ size = Vector2(105, 32)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bs037"]
 shader = ExtResource("34_wxg5w")
 shader_parameter/outline_color = Color(1, 1, 1, 0)
-shader_parameter/width = 1.5000000712500001
+shader_parameter/width = 1.50000007125
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
@@ -964,7 +964,7 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.5000000712500001]
+"values": [1.50000007125]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -5256,6 +5256,17 @@ visible = false
 target_position = Vector2(0, 39)
 collision_mask = 2049
 
+[node name="RayUpstairsCheck" type="RayCast2D" parent="." groups=["Flip"]]
+visible = false
+position = Vector2(0, 23)
+target_position = Vector2(43, 0)
+collision_mask = 2048
+
+[node name="RayStairsPath" type="RayCast2D" parent="."]
+visible = false
+target_position = Vector2(0, 35)
+collision_mask = 8192
+
 [node name="ColBehind" type="Area2D" parent="." groups=["Flip"]]
 visible = false
 collision_layer = 0
@@ -5312,7 +5323,7 @@ shape = SubResource("RectangleShape2D_qqpcq")
 [node name="CornerHangCheck" type="Area2D" parent="." groups=["Flip"]]
 visible = false
 collision_layer = 0
-collision_mask = 67585
+collision_mask = 75777
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CornerHangCheck"]
 position = Vector2(22, 61)
@@ -5369,12 +5380,6 @@ collision_mask = 2048
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StairCheck"]
 shape = SubResource("RectangleShape2D_n1k6j")
-
-[node name="RayUpstairsCheck" type="RayCast2D" parent="."]
-visible = false
-position = Vector2(0, 23)
-target_position = Vector2(43, 0)
-collision_mask = 2048
 
 [connection signal="pressed" from="UI/CharacterPanel/MarginContainer/VBoxContainer/Close" to="UI/CharacterPanel" method="_on_close_pressed"]
 [connection signal="attack_frame" from="StateMachine/slash" to="StateMachine/slash" method="_on_attack_frame"]

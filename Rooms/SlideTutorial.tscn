@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://dkyrshpnxkdcs"]
+[gd_scene load_steps=8 format=4 uid="uid://dkyrshpnxkdcs"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_57x6s"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_618dy"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://hxoxl4bcalr3" path="res://Map/Props/lever.tscn" id="4_83kn6"]
 [ext_resource type="PackedScene" uid="uid://bnf3rd1nfdher" path="res://Map/Props/iron_bars.tscn" id="5_83kn6"]
 [ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="6_83kn6"]
+[ext_resource type="PackedScene" uid="uid://bl26mmlff752e" path="res://Objects/key_prompt.tscn" id="7_kpgh2"]
 
 [node name="Room" type="Node2D"]
 
@@ -59,15 +60,15 @@ position = Vector2(1824, 320)
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(25, 251)
 
-[node name="Hint" parent="." instance=ExtResource("6_83kn6")]
-position = Vector2(334, 247)
-text = "[img]res://UI/Buttons/button_keyboard_s.png[/img]"
-
 [node name="Hint2" parent="." instance=ExtResource("6_83kn6")]
 position = Vector2(1152, 255)
-text = "[img]res://UI/Buttons/button_keyboard_s.png[/img] while running to slide"
+text = "Crouch while running to slide"
 
 [node name="CollisionShape2D" parent="Hint2" index="1"]
 position = Vector2(0, 1)
+
+[node name="KeyPrompt" parent="." instance=ExtResource("7_kpgh2")]
+position = Vector2(344, 250)
+text = "down"
 
 [editable path="Hint2"]

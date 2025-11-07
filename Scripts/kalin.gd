@@ -68,6 +68,7 @@ var experience_required := 100
 @onready var ray_movable : RayCast2D = $MovableCheck
 @onready var ray_corner_grab_check : RayCast2D = $CornerGrabCheck
 @onready var ray_auto_climb : RayCast2D = $CornerAutoClimb
+@onready var ray_stairs_path : RayCast2D = $RayStairsPath
 @onready var col_behind : Area2D = $ColBehind
 @onready var col_corner_grab_prevent : Area2D = $CornerGrabPrevent
 @onready var col_quick_climb_prevent : Area2D = $QuickClimbPrevent
@@ -681,7 +682,7 @@ func _physics_process(delta: float) -> void:
 		# If ray isn't colliding with upstairs
 		# And StairCheck is colliding with downstairs
 		set_collision_mask_value(12, true)
-	elif get_floor_angle() == 0.0:
+	elif get_floor_angle() == 0.0 && !$RayUpstairsCheck.is_colliding():
 		# Disable upstairs collision if Kalin is on flat ground
 		set_collision_mask_value(12, false)
 
@@ -690,11 +691,13 @@ func _physics_process(delta: float) -> void:
 		set_collision_mask_value(12, true)
 
 
-	if Input.is_action_pressed("up"):
+	if Input.is_action_pressed("up") || Input.is_action_pressed("sprint"):
 		set_collision_mask_value(14, true)
-	elif Input.is_action_pressed("down"):
+	elif !ray_stairs_path.is_colliding():
 		set_collision_mask_value(14, false)
-	if get_floor_angle() != 0.0:
+	if !is_on_floor():
+		set_collision_mask_value(14, true)
+	elif get_floor_angle() != 0.0:
 		set_collision_mask_value(14, false)
 
 	match state_name:

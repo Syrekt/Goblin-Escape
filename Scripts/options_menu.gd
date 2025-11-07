@@ -30,7 +30,8 @@ extends TabContainer
 @onready var efx_volume_slider 		: HSlider = find_child("EFXVolume")
 @onready var bgm_volume_slider 		: HSlider = find_child("BGMVolume")
 
-@onready var tutorial_toggle : CheckButton = find_child("ShowTutorials")
+@onready var tutorial_toggle	: CheckButton = find_child("ShowTutorials")
+@onready var hint_toggle		: CheckButton = find_child("ShowHints")
 
 var default_keybindings : Dictionary = {
 	"up"		: [KEY_A],
@@ -69,7 +70,8 @@ func _ready() -> void:
 	efx_volume_slider.value 	= AudioServer.get_bus_volume_db(efx_bus_id)
 	bgm_volume_slider.value 	= AudioServer.get_bus_volume_db(bgm_bus_id)
 
-	tutorial_toggle.button_pressed = Ge.show_tutorials
+	tutorial_toggle.button_pressed	= Ge.show_tutorials
+	hint_toggle.button_pressed		= Ge.show_hints
 
 
 func _process(delta: float) -> void:
@@ -210,3 +212,7 @@ func _on_bgm_volume_value_changed(value: float) -> void:
 
 func _on_show_tutorials_toggled(toggled_on: bool) -> void:
 	Ge.show_tutorials = toggled_on
+
+
+func _on_show_hints_toggled(toggled_on: bool) -> void:
+	Ge.show_hints = toggled_on
