@@ -51,7 +51,7 @@ func _input(event: InputEvent) -> void:
 			# Toggle visibility when pressing M.
 			if event.keycode == KEY_M:
 				visible = not visible
-				minimap.visible = not visible # Make minimap invisible when full map is visible.
+				# minimap.visible = not visible # Make minimap invisible when full map is visible.
 				
 				if visible:
 					# Pause the player when opening map.
@@ -60,20 +60,20 @@ func _input(event: InputEvent) -> void:
 					update_offset()
 				else:
 					player.process_mode = Node.PROCESS_MODE_INHERIT
-			elif event.keycode == KEY_D:
-				# D toggles position tracking (delta vector).
-				show_delta = not show_delta
-				top_draw.queue_redraw()
+			#elif event.keycode == KEY_D:
+			#	# D toggles position tracking (delta vector).
+			#	show_delta = not show_delta
+			#	top_draw.queue_redraw()
 			elif visible:
 				# Move with arrow keys.
 				var move_offset: Vector2i
-				if event.keycode == KEY_LEFT:
+				if Input.is_action_just_pressed("left"):
 					move_offset = Vector2i.LEFT
-				elif event.keycode == KEY_RIGHT:
+				elif Input.is_action_just_pressed("right"):
 					move_offset = Vector2i.RIGHT
-				elif event.keycode == KEY_UP:
+				elif Input.is_action_just_pressed("up"):
 					move_offset = Vector2i.UP
-				elif event.keycode == KEY_DOWN:
+				elif Input.is_action_just_pressed("down"):
 					move_offset = Vector2i.DOWN
 				
 				# This moves the MapView's visible area, ensuring that only newly visible cells are redrawn.

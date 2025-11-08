@@ -12,6 +12,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 func exit() -> void:
 	_exit()
 	player.set_collision_mask_value(4, false)
+	player.power_crush = false
 
 func update(delta: float) -> void:
 	_update(delta)

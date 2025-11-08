@@ -44,10 +44,15 @@ func send_player() -> void:
 	player.dead = false
 	player.experience.drop_experience()
 	finished.emit("get_up")
-	if Ge.last_checkpoint:
-		player.global_position = Ge.last_checkpoint.global_position
-	else:
-		print("No last checkpoint found")
+	
+	var game = Game.get_singleton()
+	if game.checkpoint:
+		var checkpoint_data = game.checkpoint
+		game.load_room(checkpoint_data.room + ".tscn")
+		await game.room_loaded
+		var checkpoint = game.map.find_child(checkpoint_data.name)
+		player.position = checkpoint.position
+
 
 func update(delta: float) -> void:
 	if player.dead:

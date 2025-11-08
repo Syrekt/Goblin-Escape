@@ -46,9 +46,6 @@ func _update(delta: float) -> bool:
 	if !enemy.chase_target:
 		enemy.lost_target()
 		return true
-	elif enemy.chase_target.dead:
-		finished.emit("laugh")
-		return true
 	in_combat_range = enemy.attack_detector.has_overlapping_bodies()
 	target_stunned = enemy.chase_target.combat_properties.stunned
 	target_state = enemy.chase_target.state_node.state.name

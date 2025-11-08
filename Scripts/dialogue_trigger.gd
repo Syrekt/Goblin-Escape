@@ -12,6 +12,9 @@ func _ready():
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended);
 	if camera_focus_path: camera_focus = get_node(camera_focus_path)
 
+	if Game.get_singleton().get_data_in_room(name):
+		queue_free()
+
 #region Methods
 func activate() -> void:
 	Ge.camera_focus = camera_focus
@@ -23,7 +26,6 @@ func activate() -> void:
 	balloon.start(dialogue_resource, dialogue_start)
 
 	active = true;
-
 
 func update(player : Player) -> void:
 	if auto:
@@ -39,5 +41,6 @@ func _on_dialogue_ended(resource: DialogueResource) -> void:
 	if active:
 		active = false
 		if !repeat:
+			Game.get_singleton().save_data_in_room(name, {"destroyed": true})
 			queue_free()
 #engregion

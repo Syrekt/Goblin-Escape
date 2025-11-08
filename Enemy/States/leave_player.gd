@@ -4,7 +4,7 @@ var move_dir : int
 
 func enter(previous_state_path : String, data := {}) -> void:
 	enemy.call_deferred("update_animation", "run");
-	move_dir = sign(enemy.global_position.x - enemy.player.global_position.x)
+	move_dir = sign(enemy.global_position.x - enemy.chase_target.global_position.x)
 	$Timer.start()
 func exit() -> void:
 	$Timer.stop()

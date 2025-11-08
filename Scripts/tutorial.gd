@@ -2,7 +2,14 @@ extends Interaction
 
 @export var tutorial : PackedScene
 
+func _enter_tree() -> void:
+	if Game.get_singleton().get_data_in_room(name):
+		queue_free()
+
 func activate() -> void:
+	if !Ge.show_tutorials:
+		return
+
 	if active:
 		print("Activating dialogue while it's already active!")
 
@@ -14,8 +21,11 @@ func activate() -> void:
 
 	queue_free()
 
+	Game.get_singleton().save_data_in_room(name, {"destroyed": true})
+
 
 func update(player : Player) -> void:
+	await tree_entered # Make sure it doesn't run before check the save data in _enter_tree
 	if auto:
 		if !active && !waiting_player_exit:
 			waiting_player_exit = true

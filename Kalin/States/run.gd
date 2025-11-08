@@ -25,11 +25,12 @@ func physics_update(delta: float) -> void:
 	player.check_movable();
 	var floor_angle = player.get_floor_angle()
 
-	if player.pressed("walk") || (!player.pressed("left") && !player.pressed("right")):
+	if player.sprinting && (player.pressed("walk") || (!player.pressed("left") && !player.pressed("right"))):
 		finished.emit("run_stop")
-	elif player.pressed("down") && floor_angle == 0:
-		print("elapsed_time: "+str(elapsed_time))
-		if elapsed_time >= 0.5:
+	elif player.pressed("walk"):
+		finished.emit("walk")
+	elif player.pressed("down"):
+		if elapsed_time >= 0.5 && floor_angle == 0:
 			finished.emit("slide", {"sprinting": player.sprinting})
 		else:
 			finished.emit("crouch")

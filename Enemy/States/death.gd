@@ -14,7 +14,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 			child.set_deferred("monitoring", false)
 			child.set_deferred("monitorable", false)
 	
-	if !Ge.loading:
+	if !data.get("loading", false):
 		Ge.play_audio_from_string_array(enemy.global_position, -10, "res://SFX/Goblin/Death")
 		var player = get_tree().current_scene.find_child("Kalin")
 		player.experience.add(enemy.experience_drop)

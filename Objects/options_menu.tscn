@@ -16,10 +16,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 0
+current_tab = 3
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -237,7 +238,6 @@ layout_mode = 2
 text = "Reset Keybindings"
 
 [node name="Noise Indicator" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 
@@ -421,9 +421,13 @@ layout_mode = 2
 [connection signal="toggled" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/NoiseToggle/NoiseToggleCheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="pressed" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer/ResetColor" to="." method="_on_reset_color_pressed"]
 [connection signal="drag_ended" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Red/NoiseColorRedSlider" to="." method="_on_noise_color_red_slider_drag_ended"]
+[connection signal="value_changed" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Red/NoiseColorRedSlider" to="." method="_on_noise_color_red_slider_value_changed"]
 [connection signal="drag_ended" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Green/NoiseColorGreenSlider" to="." method="_on_noise_color_green_slider_drag_ended"]
+[connection signal="value_changed" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Green/NoiseColorGreenSlider" to="." method="_on_noise_color_green_slider_value_changed"]
 [connection signal="drag_ended" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Blue/NoiseColorBlueSlider" to="." method="_on_noise_color_blue_slider_drag_ended"]
+[connection signal="value_changed" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Blue/NoiseColorBlueSlider" to="." method="_on_noise_color_blue_slider_value_changed"]
 [connection signal="drag_ended" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Alpha/NoiseColorAlphaSlider" to="." method="_on_noise_color_alpha_slider_drag_ended"]
+[connection signal="value_changed" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Alpha/NoiseColorAlphaSlider" to="." method="_on_noise_color_alpha_slider_value_changed"]
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer/ShowTutorials" to="." method="_on_show_tutorials_toggled"]
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2/ShowHints" to="." method="_on_show_hints_toggled"]
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer3/ShowInteractionPrompts" to="." method="_on_show_interaction_prompts_toggled"]

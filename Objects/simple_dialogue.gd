@@ -11,6 +11,9 @@ func _ready() -> void:
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended);
 	dialogue_resource = DialogueManager.create_resource_from_text("~ title\n" + text)
 
+	if Game.get_singleton().get_data_in_room(name):
+		queue_free()
+
 #region Methods
 func activate() -> void:
 	if active:
@@ -35,5 +38,6 @@ func _on_dialogue_ended(resource: DialogueResource) -> void:
 	if active:
 		active = false
 		if !repeat:
+			Game.get_singleton().save_data_in_room(name, {"destroyed": true})
 			queue_free()
 #engregion

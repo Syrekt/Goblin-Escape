@@ -20,6 +20,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if !result_target:
+		print("Can't find result target, free instance")
+		queue_free()
 	if !is_instance_valid(condition_target) || !is_instance_valid(result_target):
 		Debugger.printui("Condition checker invalid targets, " + str(condition_target) + "-" + str(result_target))
 		return

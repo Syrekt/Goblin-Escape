@@ -28,14 +28,9 @@ func activate() -> void:
 	inert = false
 	$Light.enabled = true
 	$Sprite.play("active")
-	save()
+	Game.get_singleton().save_data_in_room(name, {"inert": false})
 func use() -> void:
 	pass
-
-func save() -> Dictionary:
-	return {
-		"inert": false,
-	}
 func load(data: Dictionary) -> void:
 	inert = data.get(inert, true)
 	if !inert:

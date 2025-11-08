@@ -71,4 +71,8 @@ position = Vector2(0, 1)
 position = Vector2(344, 250)
 text = "down"
 
+[node name="KeyPrompt2" parent="." instance=ExtResource("7_kpgh2")]
+position = Vector2(1511.5099, 311.99396)
+text = "down,jump"
+
 [editable path="Hint2"]

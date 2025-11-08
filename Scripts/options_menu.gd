@@ -161,23 +161,26 @@ func _on_center_window_pressed() -> void:
 
 
 func _on_noise_color_red_slider_drag_ended(value_changed: bool) -> void:
-	print("noise_color_r.value: "+str(noise_color_r.value));
 	Ge.noise_color.r = noise_color_r.value / 255.0
-
+func _on_noise_color_red_slider_value_changed(value: float) -> void:
+	Ge.noise_color.r = value / 255.0
 
 func _on_noise_color_green_slider_drag_ended(value_changed: bool) -> void:
-	print("noise_color_g.value: "+str(noise_color_g.value));
 	Ge.noise_color.g = noise_color_g.value / 255.0
-
+func _on_noise_color_green_slider_value_changed(value: float) -> void:
+	Ge.noise_color.g = value / 255.0
 
 func _on_noise_color_blue_slider_drag_ended(value_changed: bool) -> void:
 	print("noise_color_b.value: "+str(noise_color_b.value));
 	Ge.noise_color.b = noise_color_b.value / 255.0
+func _on_noise_color_blue_slider_value_changed(value: float) -> void:
+	Ge.noise_color.b = value / 255.0
 
 
 func _on_noise_color_alpha_slider_drag_ended(value_changed: bool) -> void:
-	print("noise_color_a.value: "+str(noise_color_a.value));
 	Ge.noise_color.a = noise_color_a.value / 255.0
+func _on_noise_color_alpha_slider_value_changed(value: float) -> void:
+	Ge.noise_color.a = value / 255.0
 
 
 func _on_check_button_toggled(toggled_on: bool) -> void:

@@ -14,7 +14,6 @@ var timer : Timer
 func _ready() -> void:
 	rest_menu.hide()
 	print("Checkpoint ready")
-
 #region VFX lights
 	for node in get_children():
 		if node.is_in_group("lights"):
@@ -25,6 +24,10 @@ func _ready() -> void:
 	timer.start(randf_range(5, 10))
 #endregion
 
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("stance"):
+		rest_menu.hide()
+
 func update(_player : Player) -> void:
 	player = _player
 	#$CanvasLayer.layer = 10
@@ -32,12 +35,19 @@ func update(_player : Player) -> void:
 		#get_tree().current_scene.reset_scene()
 		#Ge.last_checkpoint = self
 		#Ge.save_game()
-		Game.get_singleton().save_game()
 		player.smell.value = 0
 		player.smell.dirt_amount = 0
 		player.arousal.value = 0
 		player.health.value = player.health.max_value
 
+		var game = Game.get_singleton()
+		game.world_refreshed.emit()
+		game.checkpoint = {
+			"name": name,
+			"room": game.map.name,
+		}
+
+		game.save_game()
 		upper_sprite.play("save")
 
 		var save_effect : AnimatedSprite2D = save_effect_scene.instantiate()

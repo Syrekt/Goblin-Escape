@@ -18,7 +18,8 @@ func update(delta):
 		enemy.lost_target()
 		return
 	# If dead or unconscious
-	if target.unconscious:
+	if enemy.dealth_finishing_blow:
+		enemy.dealth_finishing_blow = false
 		print("target dead or unconscious")
 		finished.emit("laugh")
 		return

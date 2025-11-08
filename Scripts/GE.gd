@@ -13,8 +13,6 @@ var loading := false
 
 var camera_focus : Node2D
 
-var last_checkpoint : Checkpoint
-
 var save_data : Dictionary
 var save_slot := "save1"
 
@@ -22,9 +20,11 @@ var BALLOON = preload("res://Objects/balloon.tscn")
 
 var noise_enabled := false:
 	set(v):
+		noise_enabled = v
 		Options.save_options()
 var noise_color : Color = Color(1, 1, 1, 0.05):
 	set(v):
+		noise_color = v
 		Options.save_options()
 
 var show_tutorials := true:
@@ -133,14 +133,6 @@ func save_node(node, data: Dictionary) -> void:
 func save_game() -> void:
 	print("Saving...")
 	var save_file = FileAccess.open("user://"+save_slot+".ge", FileAccess.WRITE)
-
-	if last_checkpoint:
-		save_data["globals"] = {
-			"last checkpoint" : {
-				"parent": last_checkpoint.get_parent().get_path(),
-				"filename": last_checkpoint.get_scene_file_path(),
-			}
-		}
 
 	var save_nodes = get_tree().get_nodes_in_group("Persistent")
 	for node in save_nodes:

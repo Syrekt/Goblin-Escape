@@ -13,11 +13,6 @@ var faded_in := false
 
 
 func _ready() -> void:
-	print("Ge.show_tutorials: "+str(Ge.show_tutorials));
-	if !Ge.show_tutorials:
-		queue_free()
-		return
-
 	left.pressed.connect(_on_left_pressed)
 	right.pressed.connect(_on_right_pressed)
 

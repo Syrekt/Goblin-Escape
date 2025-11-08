@@ -371,8 +371,28 @@ func sex_begin(participants: Array, _position: String) -> void:
 		participant.state_node.state.finished.emit("sex")
 	state_node.state.finished.emit("sex")
 	call_deferred("update_animation", _position)
-func emit_noise(offset : Vector2, amount : float) -> void:
+func emit_noise(offset:Vector2, amount := 0.0) -> void:
 	var _noise = noise.instantiate()
+	if amount == 0.0:
+		match state_node.state.name:
+			"run":
+				amount = 50.0 if sprinting else 30.0
+			"walk":
+				amount = 10.0
+			"stab":
+				amount = 10.0
+			"slash":
+				amount = 20.0
+			"block":
+				amount = 30.0
+			"bash", "bash_running", "bash_no_sword":
+				amount = 20.0
+			"land_hurt":
+				amount = 20.0
+			"land_short":
+				amount = 5.0
+			"land":
+				amount = 10.0
 
 	_noise.amount_max = amount - noise_muffle
 	_noise.global_position = global_position + offset
@@ -740,7 +760,7 @@ func _physics_process(delta: float) -> void:
 		"corner_grab", "corner_climb", "corner_hang":
 			move_speed = 0
 			velocity = Vector2.ZERO
-		"hurt":
+		"hurt", "hurt_no_sword":
 			velocity.x = 0
 			move_speed = 0
 			accelaration = slide_dec

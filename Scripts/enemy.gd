@@ -222,9 +222,9 @@ func save() -> Dictionary:
 		else:
 			print("Unkown value on save " + i)
 	return save_data
-func load(data: Dictionary) -> void:
+func load_data(data: Dictionary) -> void:
 	health.value	= data.health
-	state_node.state.finished.emit(data.state)
+	state_node.state.finished.emit(data.state, {"loading":true})
 
 	data.erase("health")
 	data.erase("state")
@@ -396,6 +396,14 @@ func _ready() -> void:
 
 	chase_detector.body_entered.connect(_on_chase_detector_body_entered)
 	$ChaseRange.body_exited.connect(_on_chase_range_body_exited)
+
+	await get_tree().process_frame
+	var enemies = Game.get_singleton().get_data_in_room("Enemies")
+	print("enemies: "+str(enemies))
+	if enemies:
+		var enemy = enemies.get(name)
+		if enemy:
+			load_data(enemy)
 func _process(delta: float) -> void:
 	if debug: Debugger.printui("target_in_sight: "+str(target_in_sight))
 	# Check if there is anything that stops the gameplay
