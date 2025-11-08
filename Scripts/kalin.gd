@@ -841,7 +841,7 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("left_mouse_button"):
+	if Input.is_action_pressed("sprint") && Input.is_action_just_pressed("left_mouse_button"):
 		global_position = get_global_mouse_position()
 	if just_pressed("quick save"):
 		Game.get_singleton().save_game()

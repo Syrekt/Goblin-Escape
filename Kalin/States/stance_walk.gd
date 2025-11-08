@@ -18,7 +18,7 @@ func update(delta):
 		finished.emit("fall")
 	elif !lock_stance_button && player.just_pressed("stance"):
 		finished.emit("walk")
-	elif player.pressed("run") && player.stamina.has_enough(1.0):
+	elif player.pressed("sprint"):
 		finished.emit("run")
 	elif player.pressed("attack") && player.stamina.spend(player.STAB_STAMINA_COST, 1.0):
 		finished.emit("stab")

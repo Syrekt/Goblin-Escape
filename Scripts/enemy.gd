@@ -200,6 +200,7 @@ func hear_noise(noise: Node2D) -> void:
 func smell(source: Player):
 	if !chase_target: match state_node.state.name:
 		"idle", "chat_lead", "patrol":
+			set_facing(source.global_position.x  - global_position.x)
 			state_node.state.finished.emit("smell")
 
 func lost_target() -> void:

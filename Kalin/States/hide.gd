@@ -12,7 +12,6 @@ func enter(previous_state_path : String, data := {}) -> void:
 	var distance = target_position - player.global_position
 	tween_step.tween_property(player, "global_position", player.global_position + distance/2, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 
-	player.hiding = true
 
 func leave() -> void:
 	tween.kill()
