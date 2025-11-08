@@ -14,6 +14,13 @@ var player : Player
 func _ready() -> void:
 	$BarricadeCollider.health = barricade_health
 
+	var game = Game.get_singleton()
+	await game.room_loaded
+	var save_data = game.get_data_in_room(name)
+	if save_data:
+		load_data(save_data)
+
+
 func update(_player: Player) -> void:
 	player = _player
 	if Input.is_action_just_pressed("interact"):
@@ -49,10 +56,9 @@ func _process(delta: float) -> void:
 			fading = false
 
 func save() -> void:
-	Ge.save_node(self, {
-		"barricaded"	: barricaded,
-	})
-func load(data: Dictionary) -> void:
+	var game = Game.get_singleton()
+	game.save_data_in_room(name, {"barricaded": barricaded})
+func load_data(data: Dictionary) -> void:
 	var value = data.get("barricaded")
 	print(name + " value(barricaded): "+str(value))
 	if value:

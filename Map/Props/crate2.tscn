@@ -61,7 +61,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5srt2"]
 size = Vector2(44, 20)
 
-[node name="Crate2" type="CharacterBody2D"]
+[node name="Crate2" type="CharacterBody2D" groups=["Crate"]]
 collision_layer = 0
 script = ExtResource("1_f4hnl")
 destructable = true

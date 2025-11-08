@@ -6,6 +6,7 @@ const SAVE_PATH = "user://save1.ge"
 
 @export var starting_map : String
 
+var loading := false
 var generated_rooms : Array[Vector3i]
 var events : Array[String]
 var custom_run : bool
@@ -92,6 +93,7 @@ func save_room() -> void:
 	rooms.set(map.name, room_data)
 
 func load_game():
+	loading = true
 	if FileAccess.file_exists(SAVE_PATH):
 		%LoadingScreen.tween_in()
 
@@ -125,6 +127,9 @@ func load_game():
 	else:
 		# If no data exists, set empty one.
 		MetSys.set_save_data()
+	
+	await get_tree().create_timer(0.1).timeout
+	loading = false
 
 
 func reset_map_starting_coords() -> void:

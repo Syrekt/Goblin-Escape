@@ -10,6 +10,7 @@ var draw_on_map := true
 var move_speed	:= 0.0
 var force_x		:= 0.0
 var force_tween : Tween
+var last_ground_y := 0.0
 @export var chase_move_speed	:= 100
 @export var patrol_move_speed	:= 75
 @export var combat_move_speed	:= 50
@@ -113,6 +114,7 @@ func take_damage(_damage : int, _source: Node2D = null, critical := false):
 		return
 
 	health.value -= _damage
+	print("health.value: "+str(health.value));
 	if health.value <= 0:
 		emit_signal("health_depleted")
 	else:
@@ -463,6 +465,17 @@ func _physics_process(delta: float) -> void:
 	#region Y Movement
 	if !is_on_floor() && state_node.state.name != "death":
 		velocity.y += gravity * delta
+	if is_on_floor():
+		if last_ground_y == 0: last_ground_y = position.y # Means this is the first physics frame
+		var fall_damage := 0.0
+		var fall_distance := position.y - last_ground_y
+		if fall_distance > 0:
+			print("fall_distance: "+str(fall_distance))
+			fall_damage = round(fall_distance/8)
+			print("fall_damage: "+str(fall_damage))
+			take_damage(fall_damage)
+
+		last_ground_y = position.y
 	#endregion
 	#region Finalize
 	floor_max_angle = 1

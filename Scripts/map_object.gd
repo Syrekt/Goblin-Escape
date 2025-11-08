@@ -27,6 +27,14 @@ func _ready() -> void:
 	health_max = health
 	health_cur = health
 
+	var game = Game.get_singleton()
+	await game.room_loaded
+	print("game.loading: "+str(game.loading));
+	if game.loading || !is_in_group("Crate"):
+		var save_data = game.get_data_in_room(name)
+		if save_data:
+			load_data(save_data)
+
 func _physics_process(delta: float) -> void:
 	falling = velocity.y != 0
 	if falling && is_on_floor_only():
@@ -55,6 +63,7 @@ func take_damage(damage: int, source) -> void:
 		set_collision_layer_value(1, false)
 		set_collision_layer_value(8, false)
 		if light_occuler: light_occuler.queue_free()
+	save()
 func drop_loot() -> void:
 	var path = "res://Inventory/Pickup Objects"
 	var array : Array = DirAccess.get_files_at(path)
@@ -65,13 +74,12 @@ func drop_loot() -> void:
 	get_tree().current_scene.add_child(loot)
 
 func save() -> void:
-	Ge.save_node(self,{
-		"health_cur": health_cur,
+	Game.get_singleton().save_data_in_room(name, {
+		"health": health_cur,
+		"frame": sprite.frame,
 	})
-func load(data: Dictionary) -> void:
-	health_cur = data.get(health_cur, true)
-	var frame_count = float(sprite.sprite_frames.get_frame_count(sprite.animation))
-	if health_cur > 0:
-		sprite.frame = (1 - (health_cur / health_max)) * frame_count
-	else:
-		sprite.frame = frame_count
+func load_data(data: Dictionary) -> void:
+	health_cur		= data.get("health", true)
+	sprite.frame	= data.get("frame", 0)
+	set_collision_layer_value(1, health_cur > 0)
+	set_collision_layer_value(8, health_cur > 0)

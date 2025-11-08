@@ -6,10 +6,18 @@ var draw_on_map := true
 
 @onready var map_scene : PackedScene = preload("res://UI/map.tscn")
 
+func _ready() -> void:
+	var game = Game.get_singleton()
+	await game.room_loaded
+	var save_data = game.get_data_in_room(name)
+	if save_data:
+		load_data(save_data)
+	
 
 func update(player: Player) -> void:
 	active = !inert
 	draw_on_map = !inert
+
 
 	if player.just_pressed("interact"):
 		if inert:
@@ -31,7 +39,7 @@ func activate() -> void:
 	Game.get_singleton().save_data_in_room(name, {"inert": false})
 func use() -> void:
 	pass
-func load(data: Dictionary) -> void:
+func load_data(data: Dictionary) -> void:
 	inert = data.get(inert, true)
 	if !inert:
 		$Sprite.play("active")

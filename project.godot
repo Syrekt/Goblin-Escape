@@ -80,6 +80,7 @@ Enemy=""
 HUD="Contains HUD elements that should be toggled together"
 MapNode="These nodes will be drawn on minimap"
 "Camera Region"=""
+Crate="Crates can drop loot and get restored when room changes"
 
 [input]
 

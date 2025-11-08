@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://dhe315co0sjxw"]
+[gd_scene load_steps=14 format=4 uid="uid://dhe315co0sjxw"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_5ep3j"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_713km"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Enemy/GoblinWarrior/goblin_warrior.tscn" id="8_dpdta"]
 [ext_resource type="PackedScene" uid="uid://2prh5eduxlje" path="res://Objects/condition_checker.tscn" id="11_uwnxm"]
 [ext_resource type="PackedScene" uid="uid://b45030hb2anpy" path="res://Objects/simple_dialogue.tscn" id="12_uwnxm"]
+[ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="13_7gos6"]
 [ext_resource type="PackedScene" uid="uid://ly85t11hp5u3" path="res://Objects/thought_trigger.tscn" id="13_gdxww"]
 
 [node name="CentralRoom1" type="Node2D"]
@@ -68,7 +69,7 @@ position = Vector2(1576, 888)
 spawn_point = NodePath("../SpawnPoint")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
-position = Vector2(687, 562)
+position = Vector2(57, 502)
 
 [node name="StairsMedium" parent="." instance=ExtResource("3_1edel")]
 position = Vector2(344, 567)
@@ -128,3 +129,6 @@ thougth = "All other paths are blocked, maybe I can find a weapon here."
 [node name="StairsLong4" parent="." instance=ExtResource("5_ymrwc")]
 position = Vector2(1384, 792)
 collision_layer = 2049
+
+[node name="Crate1" parent="." instance=ExtResource("13_7gos6")]
+position = Vector2(46, 531)

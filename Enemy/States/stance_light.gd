@@ -31,7 +31,7 @@ func update(delta: float):
 
 	if enemy.player_proximity.has_overlapping_bodies():
 		enemy.counter_attack = true
-		if get_node_or_null("StateMachine/stance_defensive"):
+		if get_node_or_null("../stance_defensive"):
 			finished.emit("bash")
 		else:
 			finished.emit("slash")
