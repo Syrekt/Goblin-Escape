@@ -51,6 +51,12 @@ func load_room(path: String):
 	map = load(path).instantiate()
 	print("map: "+str(map))
 	add_child(map)
+	Ge.show_noise_this_room = false
+	for child in map.get_children():
+		if child is Enemy:
+			Ge.show_noise_this_room = true
+			child.assign_player(player)
+			break
 	
 	MetSys.current_layer = MetSys.get_current_room_instance().get_layer()
 	map_changing = false

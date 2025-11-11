@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://gtabytws0xr3"]
+[gd_scene load_steps=6 format=4 uid="uid://gtabytws0xr3"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_xkxwg"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_i6r63"]
 [ext_resource type="PackedScene" uid="uid://bl26mmlff752e" path="res://Objects/key_prompt.tscn" id="4_2kxco"]
 [ext_resource type="PackedScene" uid="uid://ly85t11hp5u3" path="res://Objects/thought_trigger.tscn" id="4_qi3xb"]
+[ext_resource type="PackedScene" uid="uid://bajfhcfhuagof" path="res://Objects/platform_collider.tscn" id="5_2kxco"]
 
 [node name="Room" type="Node2D"]
 
@@ -58,3 +59,11 @@ text = "jump"
 [node name="KeyPrompt2" parent="." instance=ExtResource("4_2kxco")]
 position = Vector2(1361.0963, 351.27646)
 text = "jump"
+
+[node name="PlatformCollider" parent="." instance=ExtResource("5_2kxco")]
+position = Vector2(1920.0001, 306.00003)
+scale = Vector2(0.6664972, 1.085035)
+
+[node name="PlatformCollider2" parent="." instance=ExtResource("5_2kxco")]
+position = Vector2(2080, 306.00003)
+scale = Vector2(0.6664972, 1.085035)

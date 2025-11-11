@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://dfrfcb6a181d0"]
+[gd_scene load_steps=5 format=4 uid="uid://dfrfcb6a181d0"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_f5ogh"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_s341x"]
 [ext_resource type="PackedScene" uid="uid://dkyt1q4ive1yi" path="res://Map/Props/stairs_long.tscn" id="3_fdxp8"]
+[ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="4_pw7t4"]
 
 [node name="Room" type="Node2D"]
 
@@ -50,3 +51,7 @@ collision_layer = 2049
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(1189.8313, 159.97467)
+
+[node name="Hint" parent="." instance=ExtResource("4_pw7t4")]
+position = Vector2(1443, 248)
+text = "You can drop down while hanging from corners by pressing down."

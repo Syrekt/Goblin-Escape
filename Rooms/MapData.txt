@@ -102,3 +102,15 @@ $ln;Dungeon
 -1,0,-1,0|||SwordRoom.tscn
 [26,-3,0]
 0,0,-1,0||4|SwordRoom.tscn
+[15,2,0]
+-1,-1,0,0|||CentralRoom2.tscn
+[16,2,0]
+-1,-1,-1,0|||CentralRoom2.tscn
+[15,3,0]
+-1,0,0,-1|||CentralRoom2.tscn
+[16,3,0]
+-1,0,-1,-1|||CentralRoom2.tscn
+[17,2,0]
+0,-1,-1,0|||CentralRoom2.tscn
+[17,3,0]
+0,0,-1,-1|||CentralRoom2.tscn

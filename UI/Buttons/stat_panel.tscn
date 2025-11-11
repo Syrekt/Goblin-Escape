@@ -1,18 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://bf7nobsdrpasm"]
+[gd_scene load_steps=14 format=3 uid="uid://dfus8vjt4jvau"]
 
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="1_qmd1x"]
 [ext_resource type="Script" uid="uid://bkwqrxfebqxun" path="res://Scripts/stat_panel.gd" id="2_pc5kx"]
 [ext_resource type="Texture2D" uid="uid://c0dcoth0u6wbm" path="res://UI/arrow_button4.png" id="3_tfpey"]
 [ext_resource type="Texture2D" uid="uid://bp6xxlabmlpm1" path="res://UI/arrow_button3.png" id="4_i4h3f"]
 [ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://UI/theme_button.tres" id="4_pc5kx"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pc5kx"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tfpey"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i4h3f"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l7b8g"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8mvb0"]
 
@@ -22,8 +14,16 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2t5ff"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pc5kx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tfpey"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i4h3f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l7b8g"]
+
 [node name="StatPanel" type="HBoxContainer"]
-offset_right = 132.0
+offset_right = 146.0
 offset_bottom = 14.0
 theme = ExtResource("1_qmd1x")
 script = ExtResource("2_pc5kx")
@@ -36,13 +36,19 @@ layout_mode = 2
 layout_mode = 2
 text = "Stat Name"
 
-[node name="ValueContainer" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(25.045, 0)
+[node name="Increase" type="Button" parent="."]
+custom_minimum_size = Vector2(59.27, 0)
 layout_mode = 2
-
-[node name="Value" type="Label" parent="ValueContainer"]
-layout_mode = 2
+theme = ExtResource("4_pc5kx")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8mvb0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_v4pq3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3cnye")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2t5ff")
 text = "0"
+icon = ExtResource("4_i4h3f")
+flat = true
+alignment = 0
+icon_alignment = 2
 
 [node name="Decrease" type="Button" parent="."]
 visible = false
@@ -54,14 +60,4 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_tfpey")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_i4h3f")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_l7b8g")
 icon = ExtResource("3_tfpey")
-flat = true
-
-[node name="Increase" type="Button" parent="."]
-layout_mode = 2
-theme = ExtResource("4_pc5kx")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8mvb0")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_v4pq3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_3cnye")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_2t5ff")
-icon = ExtResource("4_i4h3f")
 flat = true

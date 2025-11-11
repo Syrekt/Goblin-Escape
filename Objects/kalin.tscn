@@ -1,4 +1,4 @@
-[gd_scene load_steps=253 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=257 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://b5p67lby0k2d0" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -17,7 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://drtos83imulyy" path="res://Kalin/Sprites/Kalin-Landing.png" id="4_7ft60"]
 [ext_resource type="Texture2D" uid="uid://b8a7c6m81s28t" path="res://Kalin/Sprites/Kalin-Death.png" id="4_g6dya"]
 [ext_resource type="Texture2D" uid="uid://cxy7gxvy3yrma" path="res://Kalin/Sprites/Kalin-Climb.png" id="4_xyrfg"]
+[ext_resource type="Texture2D" uid="uid://qh08oomof7hu" path="res://UI/Map Markers/map_marker_goblin.png" id="6_aajsm"]
 [ext_resource type="Texture2D" uid="uid://bx4id7wgw6s38" path="res://Kalin/Sprites/Kalin-Heavy Attack.png" id="6_ju88f"]
+[ext_resource type="Texture2D" uid="uid://gkkdovm54mtx" path="res://UI/Map Markers/map_marker_goblin_warrior.png" id="7_ken0u"]
 [ext_resource type="Script" uid="uid://bh5b7s4u5leyi" path="res://Scripts/ui.gd" id="8_4oj65"]
 [ext_resource type="Script" uid="uid://dhtgp18026dx7" path="res://Scripts/hud.gd" id="8_cv3n5"]
 [ext_resource type="Texture2D" uid="uid://dl4uq2pkst8rp" path="res://Kalin/Sprites/Kalin-Light Attack.png" id="9_2a2iq"]
@@ -81,7 +83,7 @@
 [ext_resource type="Texture2D" uid="uid://cnjxqb8coj4wg" path="res://UI/Sliders/spr_healthbar_light.png" id="47_80r2e"]
 [ext_resource type="Script" uid="uid://7g1nk1glip7t" path="res://Kalin/States/push_idle.gd" id="48_mwqkq"]
 [ext_resource type="Texture2D" uid="uid://bysj6ond8blq7" path="res://UI/Sliders/spr_healthbar_full.png" id="48_rbk27"]
-[ext_resource type="PackedScene" path="res://UI/Buttons/stat_panel.tscn" id="48_t42fh"]
+[ext_resource type="PackedScene" uid="uid://dfus8vjt4jvau" path="res://UI/Buttons/stat_panel.tscn" id="48_t42fh"]
 [ext_resource type="Script" uid="uid://bkhxntb5d6xm5" path="res://Scripts/arousal.gd" id="48_yekxk"]
 [ext_resource type="Script" uid="uid://csoiaj7ta1d2b" path="res://Scripts/thought_container.gd" id="49_b2c13"]
 [ext_resource type="Script" uid="uid://cahuc4po87bew" path="res://Kalin/States/block.gd" id="49_sprrr"]
@@ -156,6 +158,28 @@
 
 [sub_resource type="Resource" id="Resource_3pkug"]
 script = ExtResource("3_n1k6j")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ken0u"]
+shader = ExtResource("34_wxg5w")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
+shader_parameter/tint_color = Color(1, 1, 1, 0)
+shader_parameter/alpha = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r14np"]
+shader = ExtResource("34_wxg5w")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
+shader_parameter/tint_color = Color(1, 1, 1, 0)
+shader_parameter/alpha = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_47a0d"]
 shader = ExtResource("45_cbw7l")
@@ -4581,6 +4605,20 @@ process_physics_priority = 300
 script = ExtResource("2_0bx81")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
+[node name="GoblinMarker" type="Sprite2D" parent="Camera2D"]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_ken0u")
+position = Vector2(54, 23)
+texture = ExtResource("6_aajsm")
+
+[node name="GoblinWarriorMarker" type="Sprite2D" parent="Camera2D"]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_r14np")
+position = Vector2(54, 23)
+texture = ExtResource("7_ken0u")
+
 [node name="Overlays" type="CanvasLayer" parent="."]
 
 [node name="UIFocus" type="ColorRect" parent="Overlays"]
@@ -5250,7 +5288,6 @@ visible = false
 position = Vector2(0, -15)
 target_position = Vector2(14, 1.90735e-06)
 collision_mask = 65537
-hit_from_inside = true
 
 [node name="CornerAutoClimb" type="RayCast2D" parent="." groups=["Flip"]]
 visible = false

@@ -2,13 +2,12 @@ extends Control
 
 @onready var stat_name : String = name
 @onready var name_label : Label = get_node("NameContainer/Name")
-@onready var value_label : Label = get_node("ValueContainer/Value")
 @onready var button_increase : Button = get_node("Increase")
 @onready var button_decrease : Button = get_node("Decrease")
 
 func _process(delta: float) -> void:
 	name_label.text = stat_name
-	value_label.text = str(owner.get(stat_name.to_lower()))
+	button_increase.text = str(owner.get(stat_name.to_lower()))
 	if owner.experience_point >= owner.experience_required:
 		button_increase.visible = true
 	else:

@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Enemy/GoblinWarrior/goblin_warrior.tscn" id="8_dpdta"]
 [ext_resource type="PackedScene" uid="uid://2prh5eduxlje" path="res://Objects/condition_checker.tscn" id="11_uwnxm"]
 [ext_resource type="PackedScene" uid="uid://b45030hb2anpy" path="res://Objects/simple_dialogue.tscn" id="12_uwnxm"]
-[ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="13_7gos6"]
+[ext_resource type="PackedScene" uid="uid://bajfhcfhuagof" path="res://Objects/platform_collider.tscn" id="13_7gos6"]
 [ext_resource type="PackedScene" uid="uid://ly85t11hp5u3" path="res://Objects/thought_trigger.tscn" id="13_gdxww"]
 
 [node name="CentralRoom1" type="Node2D"]
@@ -130,5 +130,5 @@ thougth = "All other paths are blocked, maybe I can find a weapon here."
 position = Vector2(1384, 792)
 collision_layer = 2049
 
-[node name="Crate1" parent="." instance=ExtResource("13_7gos6")]
-position = Vector2(46, 531)
+[node name="PlatformCollider" parent="." instance=ExtResource("13_7gos6")]
+position = Vector2(1536, 1088)

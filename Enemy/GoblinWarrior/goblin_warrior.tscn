@@ -1178,7 +1178,7 @@ z_index = 1
 collision_layer = 8
 collision_mask = 65545
 script = ExtResource("1_nnmw3")
-map_icon = "enemy"
+map_icon = "goblin_warrior"
 experience_drop = 120
 slash_damage = 20
 stab_damage = 15
@@ -1348,7 +1348,6 @@ one_shot = true
 script = ExtResource("39_n4d2d")
 
 [node name="Collider" type="CollisionShape2D" parent="." groups=["Flip"]]
-visible = false
 position = Vector2(-1, -5.5)
 shape = SubResource("RectangleShape2D_cqw5a")
 

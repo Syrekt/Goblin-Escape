@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://c26h8155hvjs3"]
+[gd_scene load_steps=6 format=4 uid="uid://c26h8155hvjs3"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_07e8a"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_s21e8"]
 [ext_resource type="PackedScene" uid="uid://dkyt1q4ive1yi" path="res://Map/Props/stairs_long.tscn" id="3_s21e8"]
 [ext_resource type="PackedScene" uid="uid://dw2d8bu1vlvv6" path="res://Enemy/Goblin/goblin.tscn" id="4_l0afd"]
+[ext_resource type="PackedScene" uid="uid://bajfhcfhuagof" path="res://Objects/platform_collider.tscn" id="5_pm3av"]
 
 [node name="Room" type="Node2D"]
 
@@ -63,3 +64,11 @@ patrolling = true
 [node name="StairsLong2" parent="." instance=ExtResource("3_s21e8")]
 position = Vector2(968, 600)
 scale = Vector2(-1, 1)
+
+[node name="PlatformCollider" parent="." instance=ExtResource("5_pm3av")]
+position = Vector2(528, 928)
+scale = Vector2(0.66690236, 1)
+
+[node name="PlatformCollider2" parent="." instance=ExtResource("5_pm3av")]
+position = Vector2(688, 928)
+scale = Vector2(0.66690236, 1)

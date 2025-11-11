@@ -16,6 +16,8 @@ var camera_focus : Node2D
 var save_data : Dictionary
 var save_slot := "save1"
 
+var show_noise_this_room := true
+
 var BALLOON = preload("res://Objects/balloon.tscn")
 
 var noise_enabled := false:

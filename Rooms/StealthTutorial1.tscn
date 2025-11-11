@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://sitlgpgjk877"]
+[gd_scene load_steps=14 format=4 uid="uid://sitlgpgjk877"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_y5k7f"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_hh4n8"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cg2vx6oh1c1lc" path="res://Tutorial/environment_kill_tutorial.tscn" id="11_ri75p"]
 [ext_resource type="PackedScene" uid="uid://c8uuwyqh6p5lx" path="res://Tutorial/enemy_patrol_tutorial.tscn" id="12_niydt"]
 [ext_resource type="PackedScene" uid="uid://bpj2k5beannxk" path="res://Objects/dialogue_trigger.tscn" id="12_ri75p"]
+[ext_resource type="PackedScene" uid="uid://bajfhcfhuagof" path="res://Objects/platform_collider.tscn" id="13_f0tg6"]
 [ext_resource type="Resource" uid="uid://57f3ouwjl4a0" path="res://Dialogues/demo_stage.dialogue" id="13_niydt"]
 [ext_resource type="PackedScene" uid="uid://dkyt1q4ive1yi" path="res://Map/Props/stairs_long.tscn" id="13_qu2mt"]
 
@@ -113,3 +114,15 @@ collision_layer = 2049
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(1438, 192)
+
+[node name="PlatformCollider" parent="." instance=ExtResource("13_f0tg6")]
+position = Vector2(1648, 240)
+scale = Vector2(0.6690803, 1)
+
+[node name="PlatformCollider2" parent="." instance=ExtResource("13_f0tg6")]
+position = Vector2(1791.9999, 240)
+scale = Vector2(0.6690803, 1)
+
+[node name="PlatformCollider3" parent="." instance=ExtResource("13_f0tg6")]
+position = Vector2(3183.9998, 464)
+scale = Vector2(0.6690803, 1)

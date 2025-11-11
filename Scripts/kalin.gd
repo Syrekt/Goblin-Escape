@@ -479,6 +479,7 @@ func save(save_manager: RefCounted) -> void:
 		"arousal"	: arousal.value,
 		"smell"		: smell.value,
 		"fatigue"	: fatigue.value,
+		"experience": experience.amount,
 	}
 
 	for i in save_list:
@@ -497,6 +498,7 @@ func load(data: Dictionary) -> void:
 	arousal.value	= data.arousal
 	smell.value		= data.smell
 	fatigue.value	= data.fatigue
+	experience.amount = data.experience
 
 	data.erase("health")
 	data.erase("stamina")
