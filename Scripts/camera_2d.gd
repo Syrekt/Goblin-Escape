@@ -9,26 +9,6 @@ extends Camera2D
 }
 var markers = {}
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	await get_tree().process_frame
-	var game = Game.get_singleton()
-	game.room_loaded.connect(_on_room_load)
-
-func _on_room_load() -> void:
-	for marker in markers:
-		marker.queue_free()
-	var game = Game.get_singleton()
-	for child in game.map.get_children():
-		if child is Enemy:
-			var new_marker = icons[child.map_icon].duplicate()
-			add_child(new_marker)
-			markers[child] = new_marker
-	print("markers: "+str(markers))
-
-
-
-
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,16 +28,41 @@ func _process(delta: float) -> void:
 		if !node:
 			markers[node].queue_free()
 			markers.erase(node)
-	for node in markers:
+	for node : Node2D in markers:
+		# Hide if in view
 		var enemy_in_view = viewport_rect.has_point(node.global_position)
-		if enemy_in_view:
+		if enemy_in_view || node.health.value <= 0:
 			markers[node].hide()
 			continue
 		markers[node].show()
+
+		# Awareness check
 		if node.aware:
 			markers[node].material.set_shader_parameter("outline_color", Color(1, 0, 0, 1))
 		else:
 			markers[node].material.set_shader_parameter("outline_color", Color(1, 1, 1, 1))
+
+		# Get distance and set alpha values of markers
+		var t = node.position.distance_to(game.player.position)
+		var min_dist = 512
+		var max_dist = 1024
+		t = clamp((t - min_dist) / (max_dist - min_dist), 0.0, 1.0)
+		var alpha = lerp(1.0, 0.0, t)
+		markers[node].material.set_shader_parameter("alpha", alpha)
+
+		
+
 		markers[node].position = node.global_position - game.player.pcam.global_position
 		markers[node].position.x = clamp(markers[node].position.x, -viewport_rect.size.x/2 + padding, viewport_rect.size.x/2 - padding)
 		markers[node].position.y = clamp(markers[node].position.y, -viewport_rect.size.y/2 + padding, viewport_rect.size.y/2 - padding)
+
+func _on_room_load() -> void:
+	for marker in markers:
+		marker.queue_free()
+	var game = Game.get_singleton()
+	for child in game.map.get_children():
+		if child is Enemy:
+			var new_marker = icons[child.map_icon].duplicate()
+			add_child(new_marker)
+			new_marker.material = new_marker.material.duplicate()
+			markers[child] = new_marker

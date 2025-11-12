@@ -28,6 +28,7 @@ func _ready() -> void:
 	set_player($Kalin)
 
 	room_loaded.connect(init_room, CONNECT_DEFERRED)
+	room_loaded.connect(player.camera._on_room_load, CONNECT_DEFERRED)
 	load_room(starting_map)
 
 	if MetSys.current_room && MetSys.current_room.spawn_point:

@@ -67,7 +67,7 @@ theme = ExtResource("5_fmw7y")
 bbcode_enabled = true
 text = "Certain actions make noise, drawing attention of the enemies. Distance of the noise is indicated by the [color=red]white circle[/color] around objects.
 
-Kalin will make sound while performing most acts, but you can walk crouched to move silently."
+Kalin will make sound while performing most acts, but you can walk crouched to move silently. Obstacles will block any sound."
 
 [node name="Page2" type="Control" parent="ColorControl/TabContainer"]
 layout_mode = 2

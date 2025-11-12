@@ -48,6 +48,6 @@ func _on_bash_hitbox_body_entered(defender: Node2D) -> void:
 			Ge.play_audio_from_string_array(player.global_position, 0, "res://SFX/Sword hit shield")
 	else:
 		defender.take_damage(0, player)
-		finished.emit("hurt")
+		finished.emit("hurt" if player.has_sword else "hurt_no_sword")
 		Ge.play_audio_from_string_array(player.global_position, -2, "res://SFX/Kalin/Hurt")
 		player.think(["Ouch!", "Bad idea", "I should use a weapon"].pick_random())

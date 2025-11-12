@@ -25,7 +25,6 @@ func activate() -> void:
 
 
 func update(player : Player) -> void:
-	await tree_entered # Make sure it doesn't run before check the save data in _enter_tree
 	if auto:
 		if !active && !waiting_player_exit:
 			waiting_player_exit = true

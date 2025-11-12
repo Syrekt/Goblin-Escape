@@ -184,7 +184,7 @@ func hear_noise(noise: Node2D) -> void:
 	ray.target_position = ray.to_local(pos)
 	ray.force_raycast_update()
 	if ray.is_colliding():
-		print("Raycast blocked, can't hear player")
+		if debug: print("Raycast blocked, can't hear player")
 		ray.queue_free()
 		return
 	ray.queue_free()

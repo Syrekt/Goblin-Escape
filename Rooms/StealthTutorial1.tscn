@@ -94,7 +94,7 @@ position = Vector2(224, 5)
 position = Vector2(1514.7219, 207.47482)
 
 [node name="Tutorial" parent="." instance=ExtResource("10_r43xl")]
-position = Vector2(1325, 113)
+position = Vector2(1152, 188)
 tutorial = ExtResource("11_ri75p")
 
 [node name="Tutorial2" parent="." instance=ExtResource("10_r43xl")]
@@ -113,7 +113,7 @@ position = Vector2(872, 72)
 collision_layer = 2049
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(1438, 192)
+position = Vector2(964, 123)
 
 [node name="PlatformCollider" parent="." instance=ExtResource("13_f0tg6")]
 position = Vector2(1648, 240)
