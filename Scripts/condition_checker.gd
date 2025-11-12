@@ -1,6 +1,8 @@
 extends Node2D
 
+@export var condition_target_path : NodePath
 @export var result_target_path : NodePath
+@export var player_check := true
 var condition_target : Node2D
 var result_target : Node2D
 
@@ -11,7 +13,13 @@ var result_target : Node2D
 func _ready() -> void:
 	hide()
 
-	condition_target = Game.get_singleton().player
+	if player_check:
+		condition_target = Game.get_singleton().player
+	else:
+		if has_node(condition_target_path):
+			condition_target = get_node(condition_target_path)
+		else:
+			push_error("Result target path is invalid: " + str(condition_target_path))
 	
 	if has_node(result_target_path):
 		result_target = get_node(result_target_path)
@@ -20,6 +28,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if !condition_target:
+		print("Can't find result target, free instance")
+		queue_free()
 	if !result_target:
 		print("Can't find result target, free instance")
 		queue_free()

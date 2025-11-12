@@ -179,7 +179,7 @@ func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 func hear_noise(noise: Node2D) -> void:
 	var ray = RayCast2D.new()
 	add_child(ray)
-	var pos = player.hurtbox.global_position
+	var pos = noise.global_position
 	pos.y -= 10
 	ray.target_position = ray.to_local(pos)
 	ray.force_raycast_update()

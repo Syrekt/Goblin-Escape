@@ -58,7 +58,7 @@ func _process(delta: float) -> void:
 
 func _on_room_load() -> void:
 	for marker in markers:
-		marker.queue_free()
+		if marker: marker.queue_free()
 	var game = Game.get_singleton()
 	for child in game.map.get_children():
 		if child is Enemy:

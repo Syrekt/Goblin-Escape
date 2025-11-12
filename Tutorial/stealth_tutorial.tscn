@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://bfrfvr3f2ii41"]
+[gd_scene load_steps=17 format=3 uid="uid://bfrfvr3f2ii41"]
 
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="1_ma4oc"]
 [ext_resource type="Script" uid="uid://c7nq5lemywc53" path="res://Tutorial/tabbed_tutorial.gd" id="1_ommnr"]
 [ext_resource type="Texture2D" uid="uid://vcedblhvcdqh" path="res://Others/stealth_example.png" id="4_ccby3"]
 [ext_resource type="Texture2D" uid="uid://yymtfpkr47q8" path="res://Kalin/Sprites/Kalin_idle_unarmed.png" id="6_ccby3"]
 [ext_resource type="Shader" uid="uid://bxgu8io4cdpn7" path="res://Shaders/outline.gdshader" id="7_7laq5"]
+[ext_resource type="Texture2D" uid="uid://cgn2aiihvqrn5" path="res://Tutorial/noise_obstacle.png" id="8_06lct"]
 [ext_resource type="Texture2D" uid="uid://dml38qkt4kasw" path="res://Map/Props/spr_crevice1.png" id="8_m1uw2"]
 [ext_resource type="Texture2D" uid="uid://ce082w3owvsra" path="res://Kalin/Sprites/kalin_hide_spritesheet.png" id="9_5w06g"]
 [ext_resource type="Theme" uid="uid://d06uownpg5ssx" path="res://UI/theme_icon.tres" id="10_nh8aq"]
@@ -118,7 +119,7 @@ offset_top = 88.0
 offset_right = 298.0
 offset_bottom = 135.0
 bbcode_enabled = true
-text = "Kalin is [color=red]invisible[/color] in darkness, but goblins can still smell her. Use [color=cyan]Stenchbane[/color] or clean her in checkpoint to get rid of the bodily odor."
+text = "Kalin is [color=red]invisible[/color] in darkness, but goblins can still smell her. Use [color=cyan]Stenchbane[/color] or use checkpoint to get rid of the bodily odor."
 
 [node name="Sprite2D" type="Sprite2D" parent="ColorControl/TabContainer/Page2"]
 position = Vector2(104, 192)
@@ -170,12 +171,25 @@ metadata/_tab_index = 2
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="ColorControl/TabContainer/Page3"]
 layout_mode = 0
-offset_left = 164.0
-offset_top = 131.0
-offset_right = 454.0
-offset_bottom = 216.0
+offset_left = 176.0
+offset_top = 208.0
+offset_right = 466.0
+offset_bottom = 293.0
 bbcode_enabled = true
-text = "Noise indicator is now toggled on. You can toggle it off from options or change it's color."
+text = "Noise indicator is now toggled on. You can toggle it off from options or change it's color. Noise indicator won't show when there are no enemies in the map."
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorControl/TabContainer/Page3"]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 40.0
+offset_right = 608.0
+offset_bottom = 176.0
+text = "Enviroment can block the sound. Enemies won't hear the sounds coming behind the solid objects."
+
+[node name="NoiseObstacle" type="Sprite2D" parent="ColorControl/TabContainer/Page3"]
+position = Vector2(174, 107)
+scale = Vector2(0.47923875, 0.47923875)
+texture = ExtResource("8_06lct")
 
 [node name="Control" type="Control" parent="ColorControl"]
 anchors_preset = 0
