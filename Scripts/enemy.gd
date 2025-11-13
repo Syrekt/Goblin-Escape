@@ -34,7 +34,7 @@ var current_patrol_point : Marker2D
 
 var patrol_amount := 0
 
-@export var facing := 1
+@export_enum("Left:0", "Right:1") var facing : int
 var player_in_range := false
 var chase_target : Player
 var target_in_sight := false
@@ -107,6 +107,12 @@ func set_facing(dir: int):
 			node.scale.x = facing
 func get_movement_dir():
 	return sign(velocity.x)
+func enviroment_kill(anim:String) -> void:
+	stop_force_x()
+	health.value = 0
+	Ge.play_audio_from_string_array(global_position, 0, "res://SFX/Kalin/Finishers/")
+	Ge.bleed_gush(global_position, 1)
+	state_node.state.finished.emit("death", {"animation": anim})
 func take_damage(_damage : int, _source: Node2D = null, critical := false):
 	stop_force_x()
 	if state_node.state.name == "death":
@@ -536,10 +542,13 @@ func _on_awareness_timer_timeout() -> void:
 	if debug: print("Lost awareness")
 	aware = false
 func _on_threat_collider_body_entered(body:Node2D) -> void:
-	print("threat collider")
-	take_damage(health.max_value)
-	Ge.play_audio_from_string_array(global_position, 0, "res://SFX/Kalin/Finishers/")
-	Ge.bleed_gush(global_position, 1)
+	enviroment_kill("death")
+func _on_spike_ground_collider_body_entered(body: Node2D) -> void:
+	enviroment_kill("death_on_spike_ground")
+func _on_spike_wall_check_body_entered(body: Node2D) -> void:
+	print("Spike wall")
+	global_position.x += sign(combat_properties.pushback_vector.x) * 16
+	enviroment_kill("death_on_spike_wall")
 func _on_player_proximity_body_entered(body:Player) -> void:
 	if !body.hiding:
 		if debug: print("Start chase by proximity trigger")

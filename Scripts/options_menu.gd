@@ -224,5 +224,4 @@ func _on_show_hints_toggled(toggled_on: bool) -> void:
 
 
 func _on_show_interaction_prompts_toggled(toggled_on: bool) -> void:
-	print("toggled_on: "+str(toggled_on))
 	Ge.show_interaction_prompts = toggled_on

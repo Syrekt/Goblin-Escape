@@ -42,14 +42,14 @@ func set_action_name() -> void:
 			label.text = "Run"
 
 func set_text_for_key() -> void:
-	print("Set text for key: " + name)
+	#print("Set text for key: " + name)
 	var action_events = InputMap.action_get_events(action_name)
 	var action_event = action_events[0]
-	print("action_event: "+str(action_event.physical_keycode))
+	#print("action_event: "+str(action_event.physical_keycode))
 	var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
 
 	button.text = action_keycode;
-	print(action_keycode)
+	#print(action_keycode)
 
 
 func _on_button_toggled(_button_pressed: bool) -> void:
@@ -72,8 +72,8 @@ func _on_button_toggled(_button_pressed: bool) -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey && event.pressed:
-		print("event.keycode: "+str(event.keycode));
-		print("KEY_ESCAPE: "+str(KEY_ESCAPE))
+		#print("event.keycode: "+str(event.keycode));
+		#print("KEY_ESCAPE: "+str(KEY_ESCAPE))
 		if event.keycode == KEY_ESCAPE:
 			set_action_name()
 			button.button_pressed = false

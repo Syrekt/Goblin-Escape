@@ -5392,7 +5392,7 @@ autostart = true
 [node name="ThreatCollider" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
-collision_mask = 256
+collision_mask = 196864
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ThreatCollider"]
 position = Vector2(0.5, 14)

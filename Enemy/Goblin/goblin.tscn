@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://dw2d8bu1vlvv6"]
+[gd_scene load_steps=74 format=3 uid="uid://dw2d8bu1vlvv6"]
 
 [ext_resource type="Script" uid="uid://bb3qdl7k1v8ae" path="res://Enemy/Goblin/goblin.gd" id="1_poooq"]
 [ext_resource type="Texture2D" uid="uid://bcs17g4yh13l4" path="res://Enemy/Goblin/goblin-idle_strip6.png" id="2_mqpvv"]
@@ -15,8 +15,10 @@
 [ext_resource type="Script" uid="uid://c2ochiubx250v" path="res://Enemy/States/struggle.gd" id="14_a23rd"]
 [ext_resource type="Shader" uid="uid://dgty7bsbniivw" path="res://Scripts/flash.gdshader" id="14_qitlx"]
 [ext_resource type="Texture2D" uid="uid://bsj7ehkx2r4xm" path="res://Enemy/Goblin/struggle_transition_goblin_strip18.png" id="15_fstx2"]
+[ext_resource type="Texture2D" uid="uid://cuenq4ide527y" path="res://Enemy/Goblin/goblin-stake-death_strip7.png" id="15_qhfhj"]
 [ext_resource type="Texture2D" uid="uid://yh6p23n7un5u" path="res://UI/Sliders/cur_health.png" id="15_upc2x"]
 [ext_resource type="PackedScene" uid="uid://b23mtnfp7xuec" path="res://Objects/emote.tscn" id="16_57o4q"]
+[ext_resource type="Texture2D" uid="uid://3oi6wlr186jp" path="res://Enemy/Goblin/goblin-stake-death2_strip9-sheet.png" id="16_nhj6x"]
 [ext_resource type="PackedScene" uid="uid://b02rwb4cvvhr4" path="res://Objects/state_machine.tscn" id="17_cbc7y"]
 [ext_resource type="Script" uid="uid://cp0i8c1llur63" path="res://Enemy/States/idle.gd" id="18_4ubag"]
 [ext_resource type="Script" uid="uid://j4axxy1utgo5" path="res://Enemy/States/patrol.gd" id="19_445xe"]
@@ -187,6 +189,88 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [13]
+}
+
+[sub_resource type="Animation" id="Animation_0cmu8"]
+resource_name = "death_on_spike_ground"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("15_qhfhj")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
+[sub_resource type="Animation" id="Animation_nhj6x"]
+resource_name = "death_on_spike_wall"
+length = 0.9
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("16_nhj6x")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
 }
 
 [sub_resource type="Animation" id="Animation_p8gmb"]
@@ -925,6 +1009,8 @@ tracks/3/keys = {
 _data = {
 &"RESET": SubResource("Animation_p3exd"),
 &"death": SubResource("Animation_iprve"),
+&"death_on_spike_ground": SubResource("Animation_0cmu8"),
+&"death_on_spike_wall": SubResource("Animation_nhj6x"),
 &"grab": SubResource("Animation_p8gmb"),
 &"hurt": SubResource("Animation_kbkgb"),
 &"idle": SubResource("Animation_csflc"),
@@ -961,6 +1047,12 @@ size = Vector2(18, 11)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cyoxu"]
 size = Vector2(20, 36)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nhj6x"]
+size = Vector2(20, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0cmu8"]
+size = Vector2(20, 36)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rha5u"]
 size = Vector2(20, 32)
 
@@ -973,7 +1065,7 @@ size = Vector2(31, 26)
 [node name="Goblin" type="CharacterBody2D" node_paths=PackedStringArray("main_stance") groups=["Enemy", "MapNode"]]
 z_index = 1
 collision_layer = 8
-collision_mask = 65545
+collision_mask = 9
 script = ExtResource("1_poooq")
 map_icon = "goblin"
 experience_drop = 100
@@ -1232,13 +1324,28 @@ one_shot = true
 autostart = true
 
 [node name="ThreatCollider" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ThreatCollider"]
 position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_cyoxu")
+
+[node name="SpikeGroundCollider" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 262144
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpikeGroundCollider"]
+position = Vector2(-1, -2)
+shape = SubResource("RectangleShape2D_nhj6x")
+
+[node name="SpikeWallCheck" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 131072
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpikeWallCheck"]
+position = Vector2(-1, -2)
+shape = SubResource("RectangleShape2D_0cmu8")
 
 [node name="AttackDetector" type="Area2D" parent="."]
 visible = false
@@ -1281,6 +1388,8 @@ shape = SubResource("RectangleShape2D_qhfhj")
 [connection signal="body_entered" from="CrushCheck" to="." method="_on_crush_check_body_entered"]
 [connection signal="timeout" from="AwarenessTimer" to="." method="_on_awareness_timer_timeout"]
 [connection signal="body_entered" from="ThreatCollider" to="." method="_on_threat_collider_body_entered"]
+[connection signal="body_entered" from="SpikeGroundCollider" to="." method="_on_spike_ground_collider_body_entered"]
+[connection signal="body_entered" from="SpikeWallCheck" to="." method="_on_spike_wall_check_body_entered"]
 [connection signal="body_entered" from="AttackDetector" to="StateMachine/chase" method="_on_attack_detector_body_entered"]
 [connection signal="body_exited" from="AttackDetector" to="." method="_on_attack_detector_body_exited"]
 
