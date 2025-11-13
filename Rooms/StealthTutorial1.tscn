@@ -82,6 +82,7 @@ position = Vector2(4033, 421)
 
 [node name="Goblin2" parent="." node_paths=PackedStringArray("patrol_points") instance=ExtResource("8_r43xl")]
 position = Vector2(4033, 443)
+patrolling = true
 patrol_points = [NodePath("Marker2D"), NodePath("Marker2D2")]
 
 [node name="Marker2D" type="Marker2D" parent="Goblin2"]
@@ -98,7 +99,7 @@ position = Vector2(1152, 188)
 tutorial = ExtResource("11_ri75p")
 
 [node name="Tutorial2" parent="." instance=ExtResource("10_r43xl")]
-position = Vector2(2619, 352)
+position = Vector2(2480, 352)
 tutorial = ExtResource("12_niydt")
 
 [node name="DialogueTrigger" parent="." instance=ExtResource("12_ri75p")]

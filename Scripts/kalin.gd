@@ -602,6 +602,16 @@ func on_enter() -> void:
 	pcam.follow_damping = false
 	await get_tree().create_timer(0.5).timeout
 	pcam.follow_damping = true
+func toggle_pause_menu() -> void:
+		var ui_nodes = get_tree().get_nodes_in_group("FullscreenPanel")
+		var node_found := false
+		for node in ui_nodes:
+			if node.visible:
+				return
+		var open_menu : MainMenu = get_tree().current_scene.get_node_or_null("IngameMenu")
+		if !open_menu:
+			open_menu = ingame_menu.instantiate()
+			get_tree().current_scene.add_child(open_menu)
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -726,8 +736,8 @@ func _physics_process(delta: float) -> void:
 		set_collision_mask_value(14, false)
 
 	match state_name:
-		"idle":
-			move_speed = walk_speed * dir_x
+		"idle", "crouch":
+			move_speed = 0
 		"crouch_walk":
 			move_speed = crouch_speed * dir_x
 		"walk":
@@ -803,7 +813,10 @@ func _physics_process(delta: float) -> void:
 				velocity.y += gravity * delta
 	else:
 		if state_node.state.is_in_group("position_reliable"):
-			last_ground_position = Vector2(global_position.x - facing*32, global_position.y)
+			if get_floor_angle() == 0:
+				last_ground_position = Vector2(global_position.x - facing*32, global_position.y)
+			else:
+				last_ground_position = Vector2(global_position.x, global_position.y)
 
 	#endregion
 	#region Finalize movement
@@ -881,12 +894,7 @@ func _process(delta: float) -> void:
 	#	get_tree().reload_current_scene()
 	#region Open menu & Inventory
 	if !controls_disabled && Input.is_action_just_pressed("ui_cancel"):
-		var map : Map = get_tree().current_scene.get_node_or_null("Map")
-		var open_menu : MainMenu = get_tree().current_scene.get_node_or_null("IngameMenu")
-		if map: map.queue_free()
-		elif !open_menu:
-			open_menu = ingame_menu.instantiate()
-			get_tree().current_scene.add_child(open_menu)
+		toggle_pause_menu()
 	if Input.is_action_just_pressed("inventory"):
 		toggle_inventory()
 	#if Input.is_action_just_pressed("map"):
@@ -895,7 +903,8 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
-		take_damage(90)
+		#take_damage(90)
+		experience.add(100)
 
 	check_interactable()
 #endregion
@@ -933,6 +942,7 @@ func _on_smell_collider_body_entered(body: Node2D) -> void:
 		body.smell(self)
 func _on_abyss_entered(abyss: Area2D) -> void:
 	global_position = last_ground_position
+	velocity.y = 0
 	var fall_damage = abyss.damage
 	if health.value <= fall_damage:
 		take_damage(fall_damage) # To make sure voices don't overlap with fall voice(?)

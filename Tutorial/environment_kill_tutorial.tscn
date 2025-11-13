@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://cg2vx6oh1c1lc"]
+[gd_scene load_steps=10 format=3 uid="uid://cg2vx6oh1c1lc"]
 
 [ext_resource type="Script" uid="uid://c7nq5lemywc53" path="res://Tutorial/tabbed_tutorial.gd" id="1_cptcu"]
-[ext_resource type="Texture2D" uid="uid://vcedblhvcdqh" path="res://Others/stealth_example.png" id="4_4hyem"]
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="5_fmw7y"]
 [ext_resource type="Texture2D" uid="uid://djagbf46iq42p" path="res://Tutorial/environment_kill.png" id="6_fqvai"]
 [ext_resource type="PackedScene" uid="uid://coepyhipjelue" path="res://Tutorial/tutorial_continue_prompt.tscn" id="9_lmu4g"]
@@ -44,49 +43,27 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 1
+current_tab = 0
 tabs_visible = false
 
 [node name="Page1" type="Control" parent="ColorControl/TabContainer"]
-visible = false
 layout_mode = 2
+theme = ExtResource("5_fmw7y")
 metadata/_tab_index = 0
 
-[node name="StealthExample" type="Sprite2D" parent="ColorControl/TabContainer/Page1"]
-position = Vector2(150, 129)
-scale = Vector2(0.518692, 0.518692)
-texture = ExtResource("4_4hyem")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="ColorControl/TabContainer/Page1"]
-layout_mode = 0
-offset_left = 279.0
-offset_top = 83.0
-offset_right = 580.0
-offset_bottom = 175.0
-theme = ExtResource("5_fmw7y")
-bbcode_enabled = true
-text = "Certain actions make noise, drawing attention of the enemies. Distance of the noise is indicated by the [color=red]white circle[/color] around objects.
-
-Kalin will make sound while performing most acts, but you can walk crouched to move silently. Obstacles will block any sound."
-
-[node name="Page2" type="Control" parent="ColorControl/TabContainer"]
-layout_mode = 2
-theme = ExtResource("5_fmw7y")
-metadata/_tab_index = 1
-
-[node name="Sprite2D" type="Sprite2D" parent="ColorControl/TabContainer/Page2"]
+[node name="Sprite2D" type="Sprite2D" parent="ColorControl/TabContainer/Page1"]
 position = Vector2(424.75098, 122.1875)
 scale = Vector2(0.48222342, 0.48222345)
 texture = ExtResource("6_fqvai")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorControl/TabContainer/Page1"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 89.0
 offset_right = 278.0
 offset_bottom = 160.0
 bbcode_enabled = true
-text = "You can shove enemies into traps to kill them. Walk crouched to approach them silently, press attack key([img]res://UI/Buttons/button_keyboard_j.png[/img]) to perform [color=red]bash[/color] attack. "
+text = "You can shove enemies into traps to kill them. Walk crouched to approach them [color=red]silently[/color], press attack key([img]res://UI/Buttons/button_keyboard_j.png[/img]) while unarmed to perform [color=red]bash[/color] attack. "
 
 [node name="Control" type="Control" parent="ColorControl"]
 anchors_preset = 0

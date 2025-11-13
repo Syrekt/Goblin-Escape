@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bfrfvr3f2ii41"]
+[gd_scene load_steps=18 format=3 uid="uid://bfrfvr3f2ii41"]
 
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="1_ma4oc"]
 [ext_resource type="Script" uid="uid://c7nq5lemywc53" path="res://Tutorial/tabbed_tutorial.gd" id="1_ommnr"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://bxgu8io4cdpn7" path="res://Shaders/outline.gdshader" id="7_7laq5"]
 [ext_resource type="Texture2D" uid="uid://cgn2aiihvqrn5" path="res://Tutorial/noise_obstacle.png" id="8_06lct"]
 [ext_resource type="Texture2D" uid="uid://dml38qkt4kasw" path="res://Map/Props/spr_crevice1.png" id="8_m1uw2"]
+[ext_resource type="Texture2D" uid="uid://bv7mju8hk7yy2" path="res://Map/Props/spr_statue1.png" id="9_2qk3m"]
 [ext_resource type="Texture2D" uid="uid://ce082w3owvsra" path="res://Kalin/Sprites/kalin_hide_spritesheet.png" id="9_5w06g"]
 [ext_resource type="Theme" uid="uid://d06uownpg5ssx" path="res://UI/theme_icon.tres" id="10_nh8aq"]
 [ext_resource type="Texture2D" uid="uid://bbdbmfiw7rvtk" path="res://UI/arrow_button1.png" id="11_06lct"]
@@ -70,10 +71,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 0
+current_tab = 2
 tabs_visible = false
 
 [node name="Page1" type="Control" parent="ColorControl/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -164,7 +166,6 @@ text = "Kalin can hide inside the cavities in the wall to become [color=red]unde
 You can use these cavities to avoid enemy patrols."
 
 [node name="Page3" type="Control" parent="ColorControl/TabContainer"]
-visible = false
 layout_mode = 2
 theme = ExtResource("1_ma4oc")
 metadata/_tab_index = 2
@@ -184,12 +185,17 @@ offset_left = 336.0
 offset_top = 40.0
 offset_right = 608.0
 offset_bottom = 176.0
-text = "Enviroment can block the sound. Enemies won't hear the sounds coming behind the solid objects."
+bbcode_enabled = true
+text = "Enviroment can block the sound. Enemies won't hear the sounds coming behind the solid objects. Only exception is the heavy objects like [color=red]Statues[/color]."
 
 [node name="NoiseObstacle" type="Sprite2D" parent="ColorControl/TabContainer/Page3"]
 position = Vector2(174, 107)
 scale = Vector2(0.47923875, 0.47923875)
 texture = ExtResource("8_06lct")
+
+[node name="SprStatue1" type="Sprite2D" parent="ColorControl/TabContainer/Page3"]
+position = Vector2(537, 126)
+texture = ExtResource("9_2qk3m")
 
 [node name="Control" type="Control" parent="ColorControl"]
 anchors_preset = 0

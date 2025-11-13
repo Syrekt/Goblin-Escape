@@ -22,7 +22,7 @@ func update(_delta: float) -> void:
 		finished.emit("bash_no_sword")
 	elif player.has_sword && !lock_stance_button && (player.just_pressed("stance") || player.just_pressed("attack")):
 		finished.emit("stance_light")
-	elif player.velocity.x != 0:
+	elif !is_equal_approx(player.get_movement_dir(), 0.0):
 		if player.pressed("walk"):
 			finished.emit("walk")
 		else:

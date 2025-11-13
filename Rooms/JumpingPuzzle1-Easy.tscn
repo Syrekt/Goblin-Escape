@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://bwq6w3vi5prn2"]
+[gd_scene load_steps=13 format=4 uid="uid://bwq6w3vi5prn2"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_3tq1u"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_8jyxn"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="8_vcqxd"]
 [ext_resource type="PackedScene" uid="uid://bl26mmlff752e" path="res://Objects/key_prompt.tscn" id="9_o420l"]
 [ext_resource type="PackedScene" uid="uid://bajfhcfhuagof" path="res://Objects/platform_collider.tscn" id="10_secw8"]
+[ext_resource type="PackedScene" uid="uid://djk8oskwq3mdn" path="res://Inventory/Pickup Objects/pickup_health.tscn" id="11_urbfg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_secw8"]
 size = Vector2(1025.7107, 96.99994)
@@ -59,6 +60,7 @@ position = Vector2(968, 755)
 
 [node name="Stairs4" parent="." instance=ExtResource("4_hsrr8")]
 position = Vector2(1049, 820)
+collision_layer = 2049
 
 [node name="Stairs3" parent="." instance=ExtResource("3_ml6lt")]
 position = Vector2(1160, 851)
@@ -83,7 +85,7 @@ position = Vector2(1616, 1224)
 position = Vector2(1632, 1195)
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(1257.3083, 872.1579)
+position = Vector2(915.74225, 703.62286)
 
 [node name="Hint" parent="." instance=ExtResource("8_vcqxd")]
 position = Vector2(347, 501)
@@ -118,6 +120,13 @@ scale = Vector2(1.3363343, 1)
 [node name="PlatformCollider4" parent="." instance=ExtResource("10_secw8")]
 position = Vector2(1632.0001, 1088)
 scale = Vector2(1.3363343, 1)
+
+[node name="PickupHealth" parent="." instance=ExtResource("11_urbfg")]
+position = Vector2(1436, 592)
+
+[node name="Crate5" parent="." instance=ExtResource("7_o420l")]
+position = Vector2(1436, 616)
+collidable = false
 
 [editable path="Hint"]
 [editable path="KeyPrompt"]

@@ -13,13 +13,15 @@ var result_target : Node2D
 func _ready() -> void:
 	hide()
 
+	var game = Game.get_singleton()
+	print("Condition check in room %s, condition target: %s - result target: %s" %[game.map.name, condition_target_path, result_target_path])
 	if player_check:
 		condition_target = Game.get_singleton().player
 	else:
 		if has_node(condition_target_path):
 			condition_target = get_node(condition_target_path)
 		else:
-			push_error("Result target path is invalid: " + str(condition_target_path))
+			push_error("Condition target path is invalid: " + str(condition_target_path))
 	
 	if has_node(result_target_path):
 		result_target = get_node(result_target_path)
@@ -32,7 +34,7 @@ func _process(delta: float) -> void:
 		print("Can't find result target, free instance")
 		queue_free()
 	if !result_target:
-		print("Can't find result target, free instance")
+		print("Can't find resresultult target, free instance")
 		queue_free()
 	if !is_instance_valid(condition_target) || !is_instance_valid(result_target):
 		Debugger.printui("Condition checker invalid targets, " + str(condition_target) + "-" + str(result_target))

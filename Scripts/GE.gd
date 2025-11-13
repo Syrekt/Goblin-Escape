@@ -116,13 +116,21 @@ func play_audio_free(volume: int, audio_path: String) -> void:
 	audio_emitter.bus = "SFX"
 	audio_emitter.finished.connect(audio_emitter.queue_free)
 	audio_emitter.play()
-func EmitNoise(source: CharacterBody2D, position: Vector2, amount: float) -> void:
+func EmitNoise(source: CharacterBody2D, position: Vector2, amount: float, loud := false) -> void:
 	var noise = load("res://Objects/noise.tscn").instantiate()
 	noise.amount_max = amount
 	noise.position = position
 	noise.source = source
+	noise.loud = loud
 
 	get_tree().current_scene.add_child(noise)
+func UpdateNoiseIndicator() -> void:
+	Ge.show_noise_this_room = false
+	var game = Game.get_singleton()
+	for child in game.map.get_children():
+		if child is Enemy && child.state_node.state.name != "death":
+			Ge.show_noise_this_room = true
+			child.assign_player(player)
 func save_node(node, data: Dictionary) -> void:
 	print("Save node: %s" % node.name)
 	var json = JSON.stringify(data)
@@ -357,8 +365,9 @@ func get_closest_node(from, group) -> Node:
 	return closest
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		print("Save game before quitting")
-		save_game()
+		if !Debugger.debug_mode:
+			print("Save game before quitting")
+			Game.get_singleton().save_game()
 func one_shot_dialogue(text: String) -> void:
 	var dialogue_resource = DialogueManager.create_resource_from_text("~ title\n" + text)
 	var balloon = BALLOON.instantiate()

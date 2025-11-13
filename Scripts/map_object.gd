@@ -11,7 +11,7 @@ var health_cur 		:= 0.0
 
 @export var destructable	:= false
 @export var collidable		:= false
-@export var drop_random_loot := false
+@export var drop_random_loot:= false
 
 @export var gravity := 300 * 60
 @export var y_acc := 5

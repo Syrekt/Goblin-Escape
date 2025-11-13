@@ -25,7 +25,7 @@ func _on_pressed() -> void:
 	match text:
 		"Health Potion":
 			print("Drink health potion")
-			owner.health.value += 6
+			owner.health.value += 50
 		"Water":
 			print("Drink water")
 			owner.stamina.add_buff(0.5, 10.0)

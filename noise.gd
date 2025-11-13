@@ -7,6 +7,7 @@ var source : CharacterBody2D
 var lifetime := 1.0
 var tween_method = Tween.EASE_OUT
 var color : Color
+var loud := false
 
 
 @onready var collider = $Area2D

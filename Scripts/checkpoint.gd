@@ -25,16 +25,13 @@ func _ready() -> void:
 #endregion
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("stance"):
+	if Input.is_action_just_pressed("stance") || Input.is_action_just_pressed("ui_cancel"):
 		rest_menu.hide()
 
 func update(_player : Player) -> void:
 	player = _player
 	#$CanvasLayer.layer = 10
 	if player.pressed("interact"):
-		#get_tree().current_scene.reset_scene()
-		#Ge.last_checkpoint = self
-		#Ge.save_game()
 		player.smell.value = 0
 		player.smell.dirt_amount = 0
 		player.arousal.value = 0

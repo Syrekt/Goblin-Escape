@@ -7,7 +7,7 @@ extends Camera2D
 	"goblin" : goblin_marker,
 	"goblin_warrior" : goblin_warrior_marker,
 }
-var markers = {}
+var markers := {}
 
 
 
@@ -24,11 +24,11 @@ func _process(delta: float) -> void:
 	var room_size = Vector2(map_size * tile_size)
 	var padding = 10;
 	
-	for node in markers:
-		if !node:
+	for node in markers.keys():
+		if !is_instance_valid(node):
 			markers[node].queue_free()
 			markers.erase(node)
-	for node : Node2D in markers:
+	for node : Node2D in markers.keys():
 		# Hide if in view
 		var enemy_in_view = viewport_rect.has_point(node.global_position)
 		if enemy_in_view || node.health.value <= 0:

@@ -177,17 +177,18 @@ func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 		animation_player.play(anim, -1, speed, from_end)
 		animation_player.advance(0)
 func hear_noise(noise: Node2D) -> void:
-	var ray = RayCast2D.new()
-	add_child(ray)
-	var pos = noise.global_position
-	pos.y -= 10
-	ray.target_position = ray.to_local(pos)
-	ray.force_raycast_update()
-	if ray.is_colliding():
-		if debug: print("Raycast blocked, can't hear player")
+	if !noise.loud:
+		var ray = RayCast2D.new()
+		add_child(ray)
+		var pos = noise.global_position
+		pos.y -= 10
+		ray.target_position = ray.to_local(pos)
+		ray.force_raycast_update()
+		if ray.is_colliding():
+			if debug: print("Raycast blocked, can't hear player")
+			ray.queue_free()
+			return
 		ray.queue_free()
-		return
-	ray.queue_free()
 
 	aware = true
 	if !$NoiseIgnoreTimer.is_stopped():

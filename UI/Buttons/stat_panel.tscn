@@ -61,3 +61,6 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_i4h3f")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_l7b8g")
 icon = ExtResource("3_tfpey")
 flat = true
+
+[connection signal="pressed" from="Increase" to="." method="_on_increase_pressed"]
+[connection signal="pressed" from="Decrease" to="." method="_on_decrease_pressed"]

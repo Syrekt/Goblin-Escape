@@ -5,11 +5,12 @@ class_name Movable extends CharacterBody2D
 @onready var collider := $CollisionShape2D
 @onready var interaction_prompt : AnimatedSprite2D = $InteractionPrompt
 
-@export var drop_sfx : String = "res://SFX/stone_drop2.wav"
-@export var slide_sfx : Resource = load("res://SFX/stone_slide1.wav")
-@export var gravity := 300 * 60
-@export var y_acc := 5
-@export var noise_offset : Vector2
+@export var drop_sfx	: String = "res://SFX/stone_drop2.wav"
+@export var slide_sfx	: Resource = load("res://SFX/stone_slide1.wav")
+@export var gravity		:= 300 * 60
+@export var y_acc		:= 5
+@export var noise_offset: Vector2
+@export var loud_object	:= false
 
 var grabbed := false
 var falling := false
@@ -37,7 +38,7 @@ func _physics_process(delta: float) -> void:
 		if spawn_fall_protection:
 			spawn_fall_protection = false
 		else:
-			Ge.EmitNoise(self, global_position + noise_offset, 20)
+			Ge.EmitNoise(self, global_position + noise_offset, 20, loud_object)
 			Ge.play_audio(audio_emitter, 0, drop_sfx)
 	falling = velocity.y != 0
 func _process(delta: float) -> void:
@@ -55,4 +56,4 @@ func _process(delta: float) -> void:
 
 
 func _on_timer_timeout() -> void:
-	Ge.EmitNoise(self, global_position + noise_offset, 20)
+	Ge.EmitNoise(self, global_position + noise_offset, 20, loud_object)

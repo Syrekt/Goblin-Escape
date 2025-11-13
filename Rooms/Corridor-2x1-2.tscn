@@ -55,3 +55,7 @@ position = Vector2(1189.8313, 159.97467)
 [node name="Hint" parent="." instance=ExtResource("4_pw7t4")]
 position = Vector2(1443, 248)
 text = "You can drop down while hanging from corners by pressing down."
+
+[node name="Hint2" parent="." instance=ExtResource("4_pw7t4")]
+position = Vector2(1188, 177)
+text = "Jump while sprinting to cover more distance."
