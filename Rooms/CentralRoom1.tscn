@@ -69,7 +69,7 @@ position = Vector2(1576, 888)
 spawn_point = NodePath("../SpawnPoint")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
-position = Vector2(57, 502)
+position = Vector2(729, 566)
 
 [node name="StairsMedium" parent="." instance=ExtResource("3_1edel")]
 position = Vector2(344, 567)

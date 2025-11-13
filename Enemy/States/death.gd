@@ -1,10 +1,10 @@
 extends EnemyState
 
-func enter(previous_state_path: String, data := {"animation": "death"}) -> void:
+func enter(previous_state_path: String, data := {}) -> void:
 	enemy.set_collision_layer_value(4, false)
 	enemy.set_collision_mask_value(2, false)
 	enemy.set_collision_mask_value(4, false)
-	enemy.call_deferred("update_animation", data.get("animation"))
+	enemy.call_deferred("update_animation", data.get("animation", "death"))
 	enemy.states_locked = true
 	enemy.velocity.x = 0
 	enemy.combat_properties.pushback_reset();
