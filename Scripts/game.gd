@@ -54,7 +54,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("restart"):
-		MetSys.set_player_position(player.position)
+		print("restart")
+		player.position = MetSys.current_room.spawn_point.position
 
 
 

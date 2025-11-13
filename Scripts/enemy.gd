@@ -34,7 +34,7 @@ var current_patrol_point : Marker2D
 
 var patrol_amount := 0
 
-@export_enum("Left:0", "Right:1") var facing : int
+@export_enum("Left:-1", "Right:1") var facing : int = -1
 var player_in_range := false
 var chase_target : Player
 var target_in_sight := false
@@ -392,6 +392,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 #endregion
 #region Node Process
 func _ready() -> void:
+	set_floor_snap_length(12.0)
 	line_of_sight = RayCast2D.new()
 	line_of_sight.collide_with_bodies = true
 	line_of_sight.position = face_location.position
@@ -427,6 +428,7 @@ func _ready() -> void:
 		if enemy:
 			load_data(enemy)
 func _process(delta: float) -> void:
+	if debug: Debugger.printui("facing: "+str(facing))
 	if debug: Debugger.printui("target_in_sight: "+str(target_in_sight))
 	# Check if there is anything that stops the gameplay
 	var ui_nodes = get_tree().get_nodes_in_group("UIPanel")
@@ -466,6 +468,7 @@ func _physics_process(delta: float) -> void:
 	#region X Movement
 	if debug:
 		Debugger.printui("force_x: "+str(force_x))
+	if debug: Debugger.printui("move_speed: "+str(move_speed))
 	velocity.x = (move_speed + force_x) * delta * 60
 	move_speed = 0.0; # Reset move speed since, this needs setting each frame
 	var dir_x = get_movement_dir() if !direction_locked else facing
@@ -488,7 +491,7 @@ func _physics_process(delta: float) -> void:
 		if last_ground_y == 0: last_ground_y = position.y # Means this is the first physics frame
 		var fall_damage := 0.0
 		var fall_distance := position.y - last_ground_y
-		if fall_distance > 0:
+		if fall_distance > 32:
 			print("fall_distance: "+str(fall_distance))
 			fall_damage = round(fall_distance/8)
 			print("fall_damage: "+str(fall_damage))
@@ -544,11 +547,11 @@ func _on_awareness_timer_timeout() -> void:
 func _on_threat_collider_body_entered(body:Node2D) -> void:
 	enviroment_kill("death")
 func _on_spike_ground_collider_body_entered(body: Node2D) -> void:
-	enviroment_kill("death_on_spike_ground")
+	enviroment_kill("death_spike_ground")
 func _on_spike_wall_check_body_entered(body: Node2D) -> void:
 	print("Spike wall")
 	global_position.x += sign(combat_properties.pushback_vector.x) * 16
-	enviroment_kill("death_on_spike_wall")
+	enviroment_kill("death_spike_wall")
 func _on_player_proximity_body_entered(body:Player) -> void:
 	if !body.hiding:
 		if debug: print("Start chase by proximity trigger")

@@ -69,7 +69,7 @@ position = Vector2(1576, 888)
 spawn_point = NodePath("../SpawnPoint")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
-position = Vector2(729, 566)
+position = Vector2(1658, 431)
 
 [node name="StairsMedium" parent="." instance=ExtResource("3_1edel")]
 position = Vector2(344, 567)
@@ -101,9 +101,16 @@ collision_layer = 2049
 [node name="HidingSpot" parent="." instance=ExtResource("7_tq3i4")]
 position = Vector2(1380, 357)
 
-[node name="GoblinWarrior" parent="." instance=ExtResource("8_dpdta")]
-position = Vector2(1296, 384)
+[node name="GoblinWarrior" parent="." node_paths=PackedStringArray("patrol_points") instance=ExtResource("8_dpdta")]
+position = Vector2(1307, 380)
 patrolling = true
+patrol_points = [NodePath("Marker2D"), NodePath("Marker2D2")]
+
+[node name="Marker2D" type="Marker2D" parent="GoblinWarrior"]
+position = Vector2(-99, 4)
+
+[node name="Marker2D2" type="Marker2D" parent="GoblinWarrior"]
+position = Vector2(189, 4)
 
 [node name="StairsMedium4" parent="." instance=ExtResource("3_1edel")]
 position = Vector2(1704, 216)

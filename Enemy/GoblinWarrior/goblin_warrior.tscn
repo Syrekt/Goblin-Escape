@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene load_steps=81 format=3 uid="uid://iuj1jg31a55f"]
 
 [ext_resource type="Script" uid="uid://ebjwqqd047wq" path="res://Enemy/GoblinWarrior/goblin_warrior.gd" id="1_nnmw3"]
 [ext_resource type="Shader" uid="uid://dgty7bsbniivw" path="res://Scripts/flash.gdshader" id="2_ec1cy"]
@@ -19,8 +19,10 @@
 [ext_resource type="Script" uid="uid://c2ochiubx250v" path="res://Enemy/States/struggle.gd" id="16_n4d2d"]
 [ext_resource type="Texture2D" uid="uid://bsj7ehkx2r4xm" path="res://Enemy/Goblin/struggle_transition_goblin_strip18.png" id="16_u0j70"]
 [ext_resource type="Script" uid="uid://dfiqyt2s88kmb" path="res://Enemy/States/triggered.gd" id="16_vd4fl"]
+[ext_resource type="Texture2D" uid="uid://cuenq4ide527y" path="res://Enemy/Goblin/goblin-stake-death_strip7.png" id="17_btc06"]
 [ext_resource type="PackedScene" uid="uid://b02rwb4cvvhr4" path="res://Objects/state_machine.tscn" id="17_n2jyc"]
 [ext_resource type="Script" uid="uid://dj1baauawjtyy" path="res://Enemy/States/bash.gd" id="17_ru5w7"]
+[ext_resource type="Texture2D" uid="uid://3oi6wlr186jp" path="res://Enemy/Goblin/goblin-stake-death2_strip9-sheet.png" id="18_45d84"]
 [ext_resource type="Script" uid="uid://j4axxy1utgo5" path="res://Enemy/States/patrol.gd" id="18_pn3ih"]
 [ext_resource type="Script" uid="uid://bhwnkjtvdjwgs" path="res://Enemy/States/hurt.gd" id="19_xl5vi"]
 [ext_resource type="Script" uid="uid://3m1a1sihw7qa" path="res://Enemy/States/death.gd" id="20_4po4b"]
@@ -1121,12 +1123,96 @@ tracks/3/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_45d84"]
+resource_name = "death_spike_ground"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_btc06")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
+[sub_resource type="Animation" id="Animation_46sg8"]
+resource_name = "death_spike_wall"
+length = 0.9
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.79466826),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("18_45d84")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uyvhu"]
 _data = {
 &"RESET": SubResource("Animation_p3exd"),
 &"bash": SubResource("Animation_iufq0"),
 &"block": SubResource("Animation_3i20h"),
 &"death": SubResource("Animation_iprve"),
+&"death_spike_ground": SubResource("Animation_45d84"),
+&"death_spike_wall": SubResource("Animation_46sg8"),
 &"grab": SubResource("Animation_ybwgh"),
 &"hurt": SubResource("Animation_kbkgb"),
 &"idle": SubResource("Animation_csflc"),
@@ -1377,23 +1463,25 @@ pushback_duration = 0.5
 visible = false
 position = Vector2(0, -10)
 target_position = Vector2(9, 47)
+collision_mask = 393473
 
 [node name="FallCheckLeft" type="RayCast2D" parent="."]
 visible = false
 position = Vector2(0, -10)
 target_position = Vector2(-11, 47)
+collision_mask = 393473
 
 [node name="WallCheckRight" type="RayCast2D" parent="."]
 visible = false
 position = Vector2(0, 1)
 target_position = Vector2(20, 0)
-collision_mask = 257
+collision_mask = 393473
 
 [node name="WallCheckLeft" type="RayCast2D" parent="."]
 visible = false
 position = Vector2(0, 1)
 target_position = Vector2(-20, 0)
-collision_mask = 257
+collision_mask = 393473
 
 [node name="ChaseDetector" type="Area2D" parent="." groups=["Flip"]]
 visible = false
@@ -1458,6 +1546,7 @@ position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_cyoxu")
 
 [node name="SpikeGroundCollider" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 262144
 
@@ -1466,6 +1555,7 @@ position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_btc06")
 
 [node name="SpikeWallCheck" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 131072
 
@@ -1515,6 +1605,8 @@ shape = SubResource("RectangleShape2D_ec1cy")
 [connection signal="body_entered" from="CrushCheck" to="." method="_on_crush_check_body_entered"]
 [connection signal="timeout" from="AwarenessTimer" to="." method="_on_awareness_timer_timeout"]
 [connection signal="body_entered" from="ThreatCollider" to="." method="_on_threat_collider_body_entered"]
+[connection signal="body_entered" from="SpikeGroundCollider" to="." method="_on_spike_ground_collider_body_entered"]
+[connection signal="body_entered" from="SpikeWallCheck" to="." method="_on_spike_wall_check_body_entered"]
 [connection signal="body_entered" from="AttackDetector" to="StateMachine/chase" method="_on_attack_detector_body_entered"]
 [connection signal="body_exited" from="AttackDetector" to="." method="_on_attack_detector_body_exited"]
 
