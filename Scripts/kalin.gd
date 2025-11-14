@@ -1,4 +1,4 @@
-@icon("res://SVGIcons/man-svgrepo-com.svg")
+@icon("res://UI/Map Markers/map_marker_kalin.png")
 class_name Player extends CharacterBody2D
 
 #region Movement

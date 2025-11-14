@@ -190,6 +190,11 @@ func hear_noise(noise: Node2D) -> void:
 		pos.y -= 10
 		ray.target_position = ray.to_local(pos)
 		ray.force_raycast_update()
+		var collider = ray.get_collider()
+		if collider && collider is CollisionObject2D:
+			var owner_id = collider.get_shape_owners()[0]
+			if collider.is_shape_owner_one_way_collision_enabled(owner_id):
+				ray.add_exception(collider)
 		if ray.is_colliding():
 			if debug: print("Raycast blocked, can't hear player")
 			ray.queue_free()
