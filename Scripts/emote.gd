@@ -6,10 +6,14 @@ func _ready() -> void:
 	visible = false
 
 func play(anim : String) -> void:
-	if !$AnimatedSprite2D.sprite_frames.has_animation(anim):
+	if !sprite.sprite_frames.has_animation(anim):
 		print("Animation invalid: " + str(anim))
 	sprite.play(anim, 1.0)
 	visible = true
+
+func stop() -> void:
+	sprite.stop()
+	hide()
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	visible = false

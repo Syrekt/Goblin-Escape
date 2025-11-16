@@ -3,7 +3,21 @@ extends EnemyState
 var chase_dir := 0;
 
 @onready var emote_timer : Timer = $EmoteTimer
+var chatter_timer : Timer
 
+
+func enter(previous_state_path:String, data := {}) -> void:
+	chatter_timer = Timer.new()
+	add_child(chatter_timer)
+	chatter_timer.start(5)
+	chatter_timer.one_shot = true
+
+	enemy.emote_emitter.sprite.sprite_frames = preload("res://Resources/emote_lewd.tres")
+	enemy.emote_emitter.stop()
+
+func exit() -> void:
+	chatter_timer.queue_free()
+	enemy.emote_emitter.sprite.sprite_frames = preload("res://Resources/emote_all.tres")
 
 func update(delta):
 	var target = enemy.chase_target
@@ -59,3 +73,7 @@ func update(delta):
 	else:
 		enemy.update_animation("idle")
 		enemy.velocity.x = 0
+		if chatter_timer.is_stopped():
+			Ge.play_audio_from_string_array(enemy.global_position, -10, "res://SFX/Goblin/Chatter/")
+			chatter_timer.start()
+			enemy.play_chatter_emote()

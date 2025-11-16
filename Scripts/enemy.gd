@@ -345,6 +345,11 @@ func pick_attack_state(state_array: Array, target: Player) -> String:
 		state = state_array.pick_random().name
 	print("Returning attack state %s" %state)
 	return state
+func play_chatter_emote() -> void:
+	var frames = emote_emitter.sprite.sprite_frames
+	var animation_names = frames.get_animation_names()
+	var emote = animation_names[randi() % animation_names.size()]
+	emote_emitter.play(emote)
 #endregion
 #region Animation end
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
