@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="8_di3q0"]
 [ext_resource type="PackedScene" uid="uid://bl26mmlff752e" path="res://Objects/key_prompt.tscn" id="9_2oolj"]
 
-[node name="Room" type="Node2D"]
+[node name="Corridor-2x1-1" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

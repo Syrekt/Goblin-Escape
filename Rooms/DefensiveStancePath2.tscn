@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Enemy/GoblinWarrior/goblin_warrior.tscn" id="7_pjbqo"]
 [ext_resource type="PackedScene" uid="uid://djk8oskwq3mdn" path="res://Inventory/Pickup Objects/pickup_health.tscn" id="8_4852d"]
 
-[node name="Room" type="Node2D"]
+[node name="DefensiveStancePath2" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

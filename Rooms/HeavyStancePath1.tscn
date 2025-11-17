@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://hxoxl4bcalr3" path="res://Map/Props/lever.tscn" id="9_iwd73"]
 [ext_resource type="PackedScene" uid="uid://bnf3rd1nfdher" path="res://Map/Props/iron_bars.tscn" id="10_ilr5h"]
 
-[node name="Room" type="Node2D"]
+[node name="HeavyStancePath1" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

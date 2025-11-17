@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b4vewnv73flk4" path="res://Map/Props/Movable/statue.tscn" id="4_h62mv"]
 [ext_resource type="PackedScene" uid="uid://bajfhcfhuagof" path="res://Objects/platform_collider.tscn" id="5_xn4bs"]
 
-[node name="Room" type="Node2D"]
+[node name="HeavyStancePath4" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

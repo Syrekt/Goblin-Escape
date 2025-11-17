@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Enemy/GoblinWarrior/goblin_warrior.tscn" id="6_r26kl"]
 [ext_resource type="PackedScene" uid="uid://cqoy45uj81eut" path="res://Map/Props/barricade.tscn" id="7_t0843"]
 
-[node name="Room" type="Node2D"]
+[node name="HeavyStanceRoom" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

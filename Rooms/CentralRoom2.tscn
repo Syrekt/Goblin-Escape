@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dxriomae5diar" path="res://Objects/checkpoint.tscn" id="3_1axbl"]
 [ext_resource type="PackedScene" uid="uid://h2hwfpjw4rte" path="res://Objects/kalin.tscn" id="4_ebhcx"]
 
-[node name="Room" type="Node2D"]
+[node name="CentralRoom2" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

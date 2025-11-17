@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://24ijy2g2jylp" path="res://Objects/hiding_spot.tscn" id="10_1jrc2"]
 [ext_resource type="PackedScene" uid="uid://dw2d8bu1vlvv6" path="res://Enemy/Goblin/goblin.tscn" id="10_y1qaw"]
 
-[node name="Room" type="Node2D"]
+[node name="DefensiveStancePath3" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

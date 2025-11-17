@@ -15,7 +15,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h25kt"]
 size = Vector2(416, 192)
 
-[node name="Room" type="Node2D"]
+[node name="SlideTutorial" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

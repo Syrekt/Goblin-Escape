@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_bxo78"]
 [ext_resource type="PackedScene" uid="uid://dkyt1q4ive1yi" path="res://Map/Props/stairs_long.tscn" id="3_bxo78"]
 
-[node name="Room" type="Node2D"]
+[node name="DefensiveStanceRoom" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

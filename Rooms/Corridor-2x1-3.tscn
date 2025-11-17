@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://24ijy2g2jylp" path="res://Objects/hiding_spot.tscn" id="7_uvwha"]
 [ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="8_75ulu"]
 
-[node name="Room" type="Node2D"]
+[node name="Corridor-2x1-3" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

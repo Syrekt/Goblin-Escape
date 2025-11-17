@@ -88,6 +88,7 @@ func save_room() -> void:
 	# Save each enemy to enemy data
 	var enemy_data : Dictionary
 	for enemy in enemies:
+		print("Save %s" %enemy.name)
 		enemy_data.set(enemy.name, enemy.save())
 	# Give enemy data to room data
 	room_data.set("Enemies", enemy_data)

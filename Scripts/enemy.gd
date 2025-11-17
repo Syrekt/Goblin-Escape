@@ -432,7 +432,6 @@ func _ready() -> void:
 
 	await get_tree().process_frame
 	var enemies = Game.get_singleton().get_data_in_room("Enemies")
-	print("enemies: "+str(enemies))
 	if enemies:
 		var enemy = enemies.get(name)
 		if enemy:

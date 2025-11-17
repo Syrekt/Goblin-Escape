@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dxriomae5diar" path="res://Objects/checkpoint.tscn" id="3_o8jq5"]
 [ext_resource type="PackedScene" uid="uid://h6taionkkj78" path="res://Map/Fast Travel/tunnel_entrance.tscn" id="4_vy5f0"]
 
-[node name="Room" type="Node2D"]
+[node name="DefensiveStancePath4" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

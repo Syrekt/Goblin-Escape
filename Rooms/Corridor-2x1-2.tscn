@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dkyt1q4ive1yi" path="res://Map/Props/stairs_long.tscn" id="3_fdxp8"]
 [ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="4_pw7t4"]
 
-[node name="Room" type="Node2D"]
+[node name="Corridor-2x1-2" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

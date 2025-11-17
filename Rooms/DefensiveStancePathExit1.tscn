@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bnf3rd1nfdher" path="res://Map/Props/iron_bars.tscn" id="6_usqht"]
 [ext_resource type="PackedScene" uid="uid://hxoxl4bcalr3" path="res://Map/Props/lever.tscn" id="7_ujqv5"]
 
-[node name="Room" type="Node2D"]
+[node name="DefensiveStancePathExit1" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

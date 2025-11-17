@@ -49,6 +49,7 @@ func _enter_tree() -> void:
 		_update_neighbor_previews()
 
 func _exit_tree() -> void:
+	print("Destroy room instance")
 	if MetSys.current_room == self:
 		MetSys.current_room = null
 	if !Engine.is_editor_hint():

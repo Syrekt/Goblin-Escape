@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dkyt1q4ive1yi" path="res://Map/Props/stairs_long.tscn" id="3_xkbw6"]
 [ext_resource type="PackedScene" uid="uid://b4vewnv73flk4" path="res://Map/Props/Movable/statue.tscn" id="4_6d0ha"]
 
-[node name="Room" type="Node2D"]
+[node name="DefensiveStancePathExit2" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

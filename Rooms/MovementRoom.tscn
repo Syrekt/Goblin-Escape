@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ly85t11hp5u3" path="res://Objects/thought_trigger.tscn" id="4_qi3xb"]
 [ext_resource type="PackedScene" uid="uid://bajfhcfhuagof" path="res://Objects/platform_collider.tscn" id="5_2kxco"]
 
-[node name="Room" type="Node2D"]
+[node name="MovementRoom" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

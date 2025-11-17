@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dkyt1q4ive1yi" path="res://Map/Props/stairs_long.tscn" id="3_u1qq6"]
 [ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Enemy/GoblinWarrior/goblin_warrior.tscn" id="4_vhvcp"]
 
-[node name="Room" type="Node2D"]
+[node name="DefensiveStancePath1" type="Node2D"]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 
