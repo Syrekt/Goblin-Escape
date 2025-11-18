@@ -13,6 +13,9 @@ var markers := {}
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if !get_tree().current_scene.find_child("Game"):
+		return
+
 	var game = Game.get_singleton()
 	var viewport_rect = Rect2(
 		get_screen_center_position() - get_viewport_rect().size / 2 / zoom,

@@ -15,6 +15,7 @@ class_name Movable extends CharacterBody2D
 var grabbed := false
 var falling := false
 var was_moving := false
+var is_moving := false
 var spawn_fall_protection := true
 
 func grab() -> void:
@@ -42,7 +43,7 @@ func _physics_process(delta: float) -> void:
 			Ge.play_audio(audio_emitter, 0, drop_sfx)
 	falling = velocity.y != 0
 func _process(delta: float) -> void:
-	var is_moving = velocity.x != 0
+	is_moving = velocity.x != 0
 	if is_moving && !was_moving:
 		if !audio_emitter.playing:
 			audio_emitter.stream = slide_sfx

@@ -14,7 +14,8 @@ func update(delta: float) -> void:
 		player.movable.release()
 
 	var dir = Input.get_axis("left", "right")
-	if dir == player.facing:
+	# Stop if movable is on wall
+	if dir == player.facing && !player.movable.is_on_wall():
 		if player.stamina.has_enough(0.1):
 			finished.emit("push")
 	elif dir == -player.facing:

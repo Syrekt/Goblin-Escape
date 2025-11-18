@@ -19,6 +19,10 @@ func update(delta: float) -> void:
 	if !player.movable.grabbed:
 		finished.emit("idle")
 
+	#Stop on wall
+	if player.movable.is_on_wall():
+		finished.emit("push_idle")
+
 	if player.just_pressed("grab"):
 		finished.emit("idle");
 		player.movable.release()

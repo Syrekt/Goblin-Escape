@@ -754,7 +754,13 @@ func _physics_process(delta: float) -> void:
 		"push_idle":
 			move_speed = 0
 		"push", "pull":
-			move_speed = push_pull_speed * dir_x
+			if state_name == "push" && movable.is_on_wall():
+				move_speed = 0
+			elif pressed("sprint") && stamina.has_enough(0.1):
+				stamina.spend(0.02, 0.01)
+				move_speed = push_pull_speed * 2 * dir_x
+			else:
+				move_speed = push_pull_speed * dir_x
 		"run_stop":
 			#Make sure that player can't start moving again if it's stopped by an obstacle in this state
 			move_speed = walk_speed * dir_x if velocity.x == 0.0 else 0.0
