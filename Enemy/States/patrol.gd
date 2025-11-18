@@ -3,10 +3,12 @@ extends EnemyState
 
 var patrol_dir : int
 @onready var timer := $PatrolTimer
+signal hear_noise
 
 
 
 func enter(previous_state_path: String, data := {}) -> void:
+	hear_noise.connect(_on_hear_noise)
 	if !timer.timeout.is_connected(_on_patrol_timer_timeout):
 		timer.timeout.connect(_on_patrol_timer_timeout)
 	enemy.velocity.x = 0.0
@@ -22,6 +24,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 		else:
 			patrol_dir = enemy.facing
 func exit() -> void:
+	hear_noise.disconnect(_on_hear_noise)
 	if timer.timeout.is_connected(_on_patrol_timer_timeout):
 		timer.timeout.disconnect(_on_patrol_timer_timeout)
 	timer.stop()
@@ -59,3 +62,6 @@ func _on_patrol_timer_timeout() -> void:
 	#Idea
 	#if enemy.patrol_amount == 0:
 	#	enemy.emote_emitter.play("idle")
+
+func _on_hear_noise(noise:Node2D) -> void:
+	patrol_dir = sign(noise.global_position.x - enemy.global_position.x)

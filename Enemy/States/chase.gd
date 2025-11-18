@@ -16,6 +16,7 @@ func enter(previous_state_path:String, data := {}) -> void:
 	enemy.emote_emitter.stop()
 
 func exit() -> void:
+	enemy.emote_emitter.stop()
 	chatter_timer.queue_free()
 	enemy.emote_emitter.sprite.sprite_frames = preload("res://Resources/emote_all.tres")
 

@@ -4,6 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://o0lgckqd1cqs" path="res://Map/Props/spr_lever_strip5t.png" id="2_fl2ed"]
 [ext_resource type="AudioStream" uid="uid://dbtm20d8ydk48" path="res://SFX/sfx_lever1.wav" id="3_fl2ed"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_b40rm"]
+atlas = ExtResource("2_fl2ed")
+region = Rect2(0, 0, 17, 21)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_e5ord"]
 atlas = ExtResource("2_fl2ed")
 region = Rect2(68, 0, 17, 21)
@@ -20,12 +24,16 @@ region = Rect2(34, 0, 17, 21)
 atlas = ExtResource("2_fl2ed")
 region = Rect2(17, 0, 17, 21)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b40rm"]
-atlas = ExtResource("2_fl2ed")
-region = Rect2(0, 0, 17, 21)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_vet6y"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b40rm")
+}],
+"loop": false,
+"name": &"closed",
+"speed": 9.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_e5ord")
@@ -44,6 +52,14 @@ animations = [{
 }],
 "loop": false,
 "name": &"closing",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5ord")
+}],
+"loop": false,
+"name": &"open",
 "speed": 9.0
 }, {
 "frames": [{

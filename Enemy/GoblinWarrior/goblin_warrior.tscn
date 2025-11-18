@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene load_steps=80 format=3 uid="uid://iuj1jg31a55f"]
 
 [ext_resource type="Script" uid="uid://ebjwqqd047wq" path="res://Enemy/GoblinWarrior/goblin_warrior.gd" id="1_nnmw3"]
 [ext_resource type="Shader" uid="uid://dgty7bsbniivw" path="res://Scripts/flash.gdshader" id="2_ec1cy"]
@@ -1239,10 +1239,7 @@ size = Vector2(20, 43)
 size = Vector2(42, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qsl2l"]
-size = Vector2(18.461548, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_404n7"]
-size = Vector2(313, 46)
+size = Vector2(24.615395, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wgea4"]
 size = Vector2(18, 11)
@@ -1317,7 +1314,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="IgnoreTimer" type="Timer" parent="StateMachine/triggered"]
-wait_time = 4.0
+wait_time = 6.0
 one_shot = true
 
 [node name="hurt" type="Node" parent="StateMachine" groups=["CombatStance"]]
@@ -1440,6 +1437,7 @@ one_shot = true
 script = ExtResource("39_n4d2d")
 
 [node name="Collider" type="CollisionShape2D" parent="." groups=["Flip"]]
+visible = false
 position = Vector2(-1, -5.5)
 shape = SubResource("RectangleShape2D_cqw5a")
 
@@ -1490,19 +1488,9 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseDetector"]
-position = Vector2(95.99995, -16)
+position = Vector2(127.999954, -16)
 scale = Vector2(10.4, 1.64)
 shape = SubResource("RectangleShape2D_qsl2l")
-
-[node name="ChaseRange" type="Area2D" parent="."]
-visible = false
-position = Vector2(0, 16)
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseRange"]
-position = Vector2(-0.5, -23)
-shape = SubResource("RectangleShape2D_404n7")
 
 [node name="NoiseIgnoreTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -1518,7 +1506,6 @@ value = 100.0
 texture_progress = ExtResource("26_ifl3v")
 
 [node name="Emote" parent="." instance=ExtResource("30_tjqy8")]
-visible = false
 position = Vector2(2, -47)
 
 [node name="CrushCheck" type="Area2D" parent="."]

@@ -378,7 +378,7 @@ func emit_noise(offset:Vector2, amount := 0.0) -> void:
 			"run":
 				amount = 50.0 if sprinting else 30.0
 			"walk":
-				amount = 10.0
+				amount = 00.0
 			"stab":
 				amount = 10.0
 			"slash":
@@ -394,7 +394,7 @@ func emit_noise(offset:Vector2, amount := 0.0) -> void:
 			"land":
 				amount = 10.0
 
-	_noise.amount_max = amount - noise_muffle
+	_noise.amount_max = max(amount - noise_muffle, 0)
 	_noise.global_position = global_position + offset
 	_noise.source = self
 
@@ -933,6 +933,9 @@ func _on_leave_shadow() -> void:
 	create_tween().bind_node(self).tween_property(%Sprite2D.material, "shader_parameter/tint_color", current_tint, 0.2)
 	create_tween().bind_node(self).tween_property(vignette.material, "shader_parameter/alpha", 0.0, 0.2)
 func _on_threat_collider_body_entered(body:Node2D) -> void:
+	if power_crush:
+		power_crush = false
+		print("Power crush disabled by threat")
 	take_damage(10)
 	velocity.x = 0
 	move_speed = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://dw2d8bu1vlvv6"]
+[gd_scene load_steps=73 format=3 uid="uid://dw2d8bu1vlvv6"]
 
 [ext_resource type="Script" uid="uid://bb3qdl7k1v8ae" path="res://Enemy/Goblin/goblin.gd" id="1_poooq"]
 [ext_resource type="Texture2D" uid="uid://bcs17g4yh13l4" path="res://Enemy/Goblin/goblin-idle_strip6.png" id="2_mqpvv"]
@@ -1036,10 +1036,7 @@ size = Vector2(20, 43)
 size = Vector2(42, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qsl2l"]
-size = Vector2(18.461548, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_404n7"]
-size = Vector2(313, 46)
+size = Vector2(24.615395, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wgea4"]
 size = Vector2(18, 11)
@@ -1114,7 +1111,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="IgnoreTimer" type="Timer" parent="StateMachine/triggered"]
-wait_time = 4.0
+wait_time = 6.0
 one_shot = true
 
 [node name="hurt" type="Node" parent="StateMachine" groups=["CombatStance"]]
@@ -1276,19 +1273,9 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseDetector"]
-position = Vector2(95.99995, -16)
+position = Vector2(127.999954, -16)
 scale = Vector2(10.4, 1.64)
 shape = SubResource("RectangleShape2D_qsl2l")
-
-[node name="ChaseRange" type="Area2D" parent="."]
-visible = false
-position = Vector2(0, 16)
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseRange"]
-position = Vector2(-0.5, -23)
-shape = SubResource("RectangleShape2D_404n7")
 
 [node name="NoiseIgnoreTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -1305,7 +1292,6 @@ value = 50.0
 texture_progress = ExtResource("15_upc2x")
 
 [node name="Emote" parent="." instance=ExtResource("16_57o4q")]
-visible = false
 position = Vector2(2, -47)
 
 [node name="CrushCheck" type="Area2D" parent="."]
@@ -1324,6 +1310,7 @@ one_shot = true
 autostart = true
 
 [node name="ThreatCollider" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 256
 
@@ -1332,6 +1319,7 @@ position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_cyoxu")
 
 [node name="SpikeGroundCollider" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 262144
 
@@ -1340,6 +1328,7 @@ position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_nhj6x")
 
 [node name="SpikeWallCheck" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 131072
 

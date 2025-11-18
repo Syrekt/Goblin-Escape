@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 	for node : Node2D in markers.keys():
 		# Hide if in view
 		var enemy_in_view = viewport_rect.has_point(node.global_position)
-		if enemy_in_view || node.health.value <= 0:
+		if enemy_in_view || node.is_dead:
 			markers[node].hide()
 			continue
 		markers[node].show()

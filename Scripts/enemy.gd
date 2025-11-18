@@ -22,7 +22,7 @@ var last_ground_y := 0.0
 @export var stab_damage		:= 1
 @export var bash_damage		:= 1
 @export var in_combat := false
-@export var patrolling := false
+@export var patrolling := true
 @export var main_stance : EnemyState
 #The one with the assigned values will control the conversation and behavior
 @export var chatting := false ##Only one enemy should have this
@@ -45,7 +45,8 @@ var anim_speed := 1.0
 var chase_disabled := false ## Disabled in struggle state
 var catched_player := false
 
-var states_locked := false
+var states_locked	:= false
+var is_dead			:= false
 
 var counter_attack := false
 var dealth_finishing_blow := false
@@ -207,6 +208,8 @@ func hear_noise(noise: Node2D) -> void:
 
 	print("noise.source: "+str(noise.source));
 	if !chase_target && noise.source is Player:
+		if state_node.state.name == "patrol":
+			state_node.state.hear_noise.emit(noise)
 		print("noise.global_position: "+str(noise.global_position));
 		var dir = sign(noise.global_position.x - global_position.x)
 		set_facing(noise.global_position.x  - global_position.x)
@@ -308,6 +311,7 @@ func drop_chase_target() -> void:
 		if chase_target.combat_target == self:
 			chase_target.combat_target = null
 	chase_target = null
+	if debug: print("Drop chase target")
 func assign_player(node:Player) -> void:
 	if debug: print("player: "+str(player))
 	if debug: print("Assigning player node: " + node.name)
@@ -428,7 +432,7 @@ func _ready() -> void:
 	awareness_timer.stop()
 
 	chase_detector.body_entered.connect(_on_chase_detector_body_entered)
-	$ChaseRange.body_exited.connect(_on_chase_range_body_exited)
+	chase_detector.body_exited.connect(_on_chase_range_body_exited)
 
 	await get_tree().process_frame
 	var enemies = Game.get_singleton().get_data_in_room("Enemies")
@@ -478,6 +482,8 @@ func _physics_process(delta: float) -> void:
 	if debug:
 		Debugger.printui("force_x: "+str(force_x))
 	if debug: Debugger.printui("move_speed: "+str(move_speed))
+	if !next_step_free(facing):
+		stop_force_x()
 	velocity.x = (move_speed + force_x) * delta * 60
 	move_speed = 0.0; # Reset move speed since, this needs setting each frame
 	var dir_x = get_movement_dir() if !direction_locked else facing

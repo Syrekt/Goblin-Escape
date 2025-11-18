@@ -2100,6 +2100,20 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0)
 }
 tracks/4/use_blend = true
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Sprite2D/..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [Vector2(0, 32), 0.0],
+"method": &"emit_noise"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_2d1nf"]
 resource_name = "hurt_no_sword"
@@ -2168,6 +2182,20 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0)
 }
 tracks/4/use_blend = true
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Sprite2D/..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [Vector2(0, 32), 0.0],
+"method": &"emit_noise"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_dkbxi"]
 resource_name = "idle"
@@ -5272,7 +5300,6 @@ lifetime = 5.0
 process_material = ExtResource("38_yofsr")
 
 [node name="Emote" parent="." instance=ExtResource("40_2d1nf")]
-visible = false
 position = Vector2(0, -36)
 
 [node name="ColliderStanding" type="CollisionShape2D" parent="." groups=["Flip"]]

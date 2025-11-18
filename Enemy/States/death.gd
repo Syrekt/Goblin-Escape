@@ -6,8 +6,9 @@ func enter(previous_state_path: String, data := {}) -> void:
 	enemy.set_collision_mask_value(4, false)
 	enemy.call_deferred("update_animation", data.get("animation", "death"))
 	enemy.states_locked = true
+	enemy.is_dead = true
 	enemy.velocity.x = 0
-	enemy.combat_properties.pushback_reset();
+	enemy.combat_properties.pushback_reset()
 	var children = enemy.get_children()
 	for child in children:
 		if child is Area2D:
@@ -33,3 +34,5 @@ func exit() -> void:
 	enemy.set_collision_layer_value(4, true)
 
 	Ge.show_noise_this_room = true
+
+	enemy.is_dead = false
