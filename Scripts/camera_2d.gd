@@ -13,7 +13,8 @@ var markers := {}
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if !get_tree().current_scene.find_child("Game"):
+	if !get_node_or_null("/root/Game"):
+		Debugger.printui("No Game instance found")
 		return
 
 	var game = Game.get_singleton()

@@ -99,7 +99,7 @@ $ln;Dungeon
 [21,1,0]
 0,1,0,1|||DefensiveStancePath2.tscn
 [16,-2,0]
-0,0,0,-1|||DefensiveStancePath4.tscn
+0,0,0,-1||0|DefensiveStancePath4.tscn
 [17,-3,0]
 -1,0,1,0|||DefensiveStancePath3.tscn
 [18,-3,0]

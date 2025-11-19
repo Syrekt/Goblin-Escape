@@ -12,7 +12,7 @@
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wrm1d")
-starting_map = "DefensiveStancePathExit2.tscn"
+starting_map = "DefensiveStancePath4.tscn"
 
 [node name="LoadingScreen" parent="." instance=ExtResource("2_1l0tm")]
 unique_name_in_owner = true
@@ -36,6 +36,7 @@ stream = ExtResource("6_h4fw4")
 unique_name_in_owner = true
 position = Vector2(320, 181)
 has_sword = true
+has_heavy_stance = true
 metadata/_edit_lock_ = true
 
 [node name="UI" type="CanvasLayer" parent="."]
