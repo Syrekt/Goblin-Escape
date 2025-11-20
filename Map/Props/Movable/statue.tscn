@@ -12,6 +12,7 @@ size = Vector2(29, 55)
 size = Vector2(29, 8)
 
 [node name="Statue" type="CharacterBody2D" groups=["OneWayColliders"]]
+z_index = 1
 collision_layer = 33
 collision_mask = 33
 script = ExtResource("1_b23wp")

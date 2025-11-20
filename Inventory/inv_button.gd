@@ -33,6 +33,14 @@ func _on_pressed() -> void:
 			print("Use Stenchbane")
 			owner.smell.value = 0;
 			owner.smell.add_buff(-10, 10)
+		"Feather Step":
+			print("Use feather step")
+		"Bandage":
+			print("Use bandage")
+		"Minor Rejuvenation Draught":
+			print("Use Minor Rejuvenation Draught")
+		"Pher Potion":
+			print("Use Pher Potion")
 		"Urgent Letter":
 			var thought = [
 				"I shouldn't read this.",

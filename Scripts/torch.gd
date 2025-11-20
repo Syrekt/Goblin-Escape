@@ -13,6 +13,7 @@ func _ready() -> void:
 	if !lit:
 		lit_area.scale = Vector2(0, 0)
 		point_light.scale = Vector2(0, 0)
+		sprite.play("unlit")
 	ray = RayCast2D.new()
 	ray.collide_with_areas = true
 	add_child(ray)
@@ -35,14 +36,17 @@ func toggle_light() -> void:
 
 
 func save() -> void:
-	var data = {
-		"lit": lit,
-	}
-	Ge.save_node(self, data)
+	Game.get_singleton().save_data_in_room(name, { "lit": lit, })
 
-func load(data: Dictionary) -> void:
-	if data.lit:
-		toggle_light()
+func load() -> void:
+	var save_data = Game.get_singleton().get_data_in_room(name)
+	if save_data:
+		lit = save_data.get("lit", lit)
+		if !lit:
+			lit_area.scale = Vector2(0, 0)
+			point_light.scale = Vector2(0, 0)
+			sprite.play("unlit")
+
 
 func _on_body_entered(body: CharacterBody2D) -> void:
 	if body is Player || body is Enemy:

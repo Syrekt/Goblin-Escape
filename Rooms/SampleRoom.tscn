@@ -33,7 +33,7 @@ tile_set = ExtResource("1_odkvd")
 z_index = -2
 tile_set = ExtResource("1_odkvd")
 
-[node name="BG-1-Columns" type="TileMapLayer" parent="Tilemaps"]
+[node name="BG-1-Columns-OnWall" type="TileMapLayer" parent="Tilemaps"]
 z_index = -1
 tile_set = ExtResource("1_odkvd")
 

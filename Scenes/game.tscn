@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c3ce8mt521wb5"]
+[gd_scene load_steps=12 format=3 uid="uid://c3ce8mt521wb5"]
 
 [ext_resource type="PackedScene" uid="uid://h2hwfpjw4rte" path="res://Objects/kalin.tscn" id="1_v3ybc"]
 [ext_resource type="Script" uid="uid://ckr03m8hdsnts" path="res://Scripts/game.gd" id="1_wrm1d"]
@@ -9,6 +9,15 @@
 [ext_resource type="Script" uid="uid://c6l4itv8om7oy" path="res://Scripts/map_window.gd" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://bxgqi0q1okfjx" path="res://Objects/screen_fade.tscn" id="4_h4fw4"]
 [ext_resource type="AudioStream" uid="uid://dkgt8hqnqcgaj" path="res://BGM/juanjo_sound - Do we need a reason.wav" id="6_h4fw4"]
+[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="10_ldgsr"]
+
+[sub_resource type="GDScript" id="GDScript_h4fw4"]
+resource_name = "version"
+script/source = "extends Label
+
+func _ready() -> void:
+	text = ProjectSettings.get_setting(\"application/config/version\")
+"
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wrm1d")
@@ -29,14 +38,13 @@ unique_name_in_owner = true
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.8, 0.760784, 1, 1)
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_h4fw4")
+bus = &"BGM"
 
 [node name="Kalin" parent="." instance=ExtResource("1_v3ybc")]
 unique_name_in_owner = true
 position = Vector2(320, 181)
-has_sword = true
-has_heavy_stance = true
 metadata/_edit_lock_ = true
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -88,3 +96,15 @@ z_index = 5
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -14.0
+offset_right = 40.0
+grow_vertical = 0
+theme = ExtResource("10_ldgsr")
+theme_override_colors/font_color = Color(1, 1, 1, 0.1254902)
+text = "v: 0.0"
+script = SubResource("GDScript_h4fw4")

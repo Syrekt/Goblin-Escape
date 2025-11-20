@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://cfgeong3784bf"]
+[gd_scene load_steps=14 format=4 uid="uid://cfgeong3784bf"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_f04tq"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_8qh65"]
@@ -8,6 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://cv0mgpbgnl1q1" path="res://Objects/abyss.tscn" id="6_dqdwn"]
 [ext_resource type="PackedScene" uid="uid://bajfhcfhuagof" path="res://Objects/platform_collider.tscn" id="7_fdukx"]
 [ext_resource type="PackedScene" uid="uid://hxoxl4bcalr3" path="res://Map/Props/lever.tscn" id="8_d1u52"]
+[ext_resource type="PackedScene" uid="uid://dw2d8bu1vlvv6" path="res://Enemy/Goblin/goblin.tscn" id="9_8ybyu"]
+[ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="10_cqlwc"]
+[ext_resource type="PackedScene" uid="uid://24ijy2g2jylp" path="res://Objects/hiding_spot.tscn" id="11_kcxmx"]
+[ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="12_6cmcr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fdukx"]
 size = Vector2(880, 85)
@@ -101,3 +105,18 @@ scale = Vector2(0.83121556, 1)
 [node name="Lever" parent="." node_paths=PackedStringArray("target_door") instance=ExtResource("8_d1u52")]
 position = Vector2(1808, 560)
 target_door = NodePath("../IronBars")
+
+[node name="Goblin" parent="." instance=ExtResource("9_8ybyu")]
+position = Vector2(1488, 592)
+
+[node name="Crate1" parent="." instance=ExtResource("10_cqlwc")]
+position = Vector2(1377, 600)
+
+[node name="HidingSpot" parent="." instance=ExtResource("11_kcxmx")]
+position = Vector2(1536, 565)
+
+[node name="Torch" parent="." instance=ExtResource("12_6cmcr")]
+position = Vector2(1488, 560)
+
+[node name="Torch2" parent="." instance=ExtResource("12_6cmcr")]
+position = Vector2(1696, 560)

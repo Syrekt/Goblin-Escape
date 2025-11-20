@@ -1,6 +1,6 @@
 $ln;Dungeon
 0;Heavy Stance Area:20,-7,0:20,-6,0:21,-7,0:22,-7,0:22,-5,0:21,-5,0
-1;Defensive Stance Area:18,-4,0:17,-4,0:16,-4,0:21,1,0:16,-2,0:16,-2,0:17,-3,0:18,-3,0:20,1,0:19,1,0:15,-3,0
+1;Defensive Stance Area:18,-4,0:17,-4,0:16,-4,0:16,-2,0:16,-2,0:17,-3,0:18,-3,0:15,-3,0
 2;Sword Area:24,-3,0:25,-3,0:26,-3,0
 3;Starting Area:8,-8,0:7,-8,0:9,-8,0:10,-8,0:11,-8,0:12,-8,0:13,-8,0:13,-7,0:14,-7,0:14,-8,0:15,-7,0:16,-7,0:16,-6,0:17,-6,0
 14,-7,0//1x1
@@ -80,34 +80,16 @@ $ln;Dungeon
 -1,0,-1,0|||SwordRoom.tscn
 [26,-3,0]
 0,0,-1,0||4|SwordRoom.tscn
-[15,2,0]
--1,-1,0,0|||CentralRoom2.tscn
-[16,2,0]
--1,-1,-1,0|||CentralRoom2.tscn
-[15,3,0]
--1,0,0,-1|||CentralRoom2.tscn
-[16,3,0]
--1,0,-1,-1|||CentralRoom2.tscn
-[17,2,0]
-0,-1,-1,0|||CentralRoom2.tscn
-[17,3,0]
-0,0,-1,-1|||CentralRoom2.tscn
 [22,-6,0]
 -1,1,0,1|||HeavyStancePath3.tscn
 [23,-6,0]
 0,0,-1,0|||HeavyStancePath3.tscn
-[21,1,0]
-0,1,0,1|||DefensiveStancePath2.tscn
 [16,-2,0]
 0,0,0,-1||0|DefensiveStancePath4.tscn
 [17,-3,0]
 -1,0,1,0|||DefensiveStancePath3.tscn
 [18,-3,0]
 0,0,-1,1|||DefensiveStancePath3.tscn
-[20,1,0]
-0,0,-1,1|||DefensiveStancePathExit1.tscn
-[19,1,0]
--1,1,0,0|||DefensiveStancePathExit1.tscn
 [15,-3,0]
 1,0,0,0||4|DefensiveStanceRoom.tscn
 [16,-3,0]

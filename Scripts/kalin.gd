@@ -372,13 +372,12 @@ func sex_begin(participants: Array, _position: String) -> void:
 	state_node.state.finished.emit("sex")
 	call_deferred("update_animation", _position)
 func emit_noise(offset:Vector2, amount := 0.0) -> void:
-	var _noise = noise.instantiate()
 	if amount == 0.0:
 		match state_node.state.name:
 			"run":
 				amount = 50.0 if sprinting else 30.0
 			"walk":
-				amount = 00.0
+				amount = 0.0
 			"stab":
 				amount = 10.0
 			"slash":
@@ -394,11 +393,13 @@ func emit_noise(offset:Vector2, amount := 0.0) -> void:
 			"land":
 				amount = 10.0
 
-	_noise.amount_max = max(amount - noise_muffle, 0)
-	_noise.global_position = global_position + offset
-	_noise.source = self
+	if(amount != 0.0):
+		var _noise = noise.instantiate()
+		_noise.amount_max = max(amount - noise_muffle, 0)
+		_noise.global_position = global_position + offset
+		_noise.source = self
 
-	add_sibling(_noise)
+		add_sibling(_noise)
 func toggle_inventory():
 	if controls_disabled: return
 	inventory_panel.toggle()

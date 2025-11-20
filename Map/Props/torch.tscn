@@ -63,6 +63,7 @@ animation = &"lit"
 
 [node name="LitArea" type="CollisionShape2D" parent="."]
 visible = false
+z_index = -1
 shape = SubResource("CircleShape2D_rr5ik")
 
 [node name="Interaction" type="Area2D" parent="."]
