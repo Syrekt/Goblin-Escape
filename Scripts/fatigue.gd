@@ -1,7 +1,7 @@
 extends TextureProgressBar
 
 func _process(delta: float) -> void:
-	pass
+	value += 0.00001
 
 func add(amount: float) -> void:
 	if amount < 0:
@@ -10,7 +10,6 @@ func add(amount: float) -> void:
 	value += amount
 func perform(action: String) -> void:
 	var p = owner
-	print("action: "+str(action))
 	match action:
 		"slash":
 			value += p.SLASH_FATIGUE * ((p.strength * p.SLASH_FATIGUE_STRENGTH_MOD) / (p.endurance * p.SLASH_FATIGUE_ENDURANCE_MOD))
@@ -18,3 +17,4 @@ func perform(action: String) -> void:
 			value += p.STAB_FATIGUE * ((p.strength * p.STAB_FATIGUE_STRENGTH_MOD) / (p.endurance * p.STAB_FATIGUE_ENDURANCE_MOD))
 		"bash":
 			value += p.BASH_FATIGUE * ((p.strength * p.BASH_FATIGUE_STRENGTH_MOD) / (p.endurance * p.BASH_FATIGUE_ENDURANCE_MOD))
+	print("action: %s - fatigue: %d" %[action, value])

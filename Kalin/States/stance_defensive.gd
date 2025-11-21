@@ -1,5 +1,6 @@
 extends PlayerState
 
+
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
 	$ParryTimer.start()
@@ -13,7 +14,7 @@ func physics_update(delta: float) -> void:
 		finished.emit("stance_heavy")
 	elif !player.pressed("down"):
 		finished.emit("stance_light")
-	elif player.pressed("attack") && player.stamina.spend(player.BASH_STAMINA_COST, 1.5):
+	elif player.pressed("attack") && player.stamina.spend(player.bash_cost, 1.5):
 		finished.emit("bash")
 	elif not is_equal_approx(player.get_movement_dir(), 0.0):
 		finished.emit("stance_walk")

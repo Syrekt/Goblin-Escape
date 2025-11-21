@@ -14,11 +14,13 @@ func update(delta: float) -> void:
 	player.sprinting = player.pressed("sprint") && player.stamina.has_enough(0.1)
 	if player.sprinting:
 		player.stamina.spend(0.01, 0.001)
+		player.fatigue.add(0.001)
 		player.animation_player.speed_scale = 1.25
 		player.set_floor_snap_length(3.0)
 	else:
 		player.animation_player.speed_scale = 1.0
 		player.set_floor_snap_length(2.0)
+		player.fatigue.add(0.0001)
 
 
 func physics_update(delta: float) -> void:
@@ -40,7 +42,7 @@ func physics_update(delta: float) -> void:
 		finished.emit("rise")
 	elif is_equal_approx(Input.get_axis("left", "right"), 0.0):
 		finished.emit("idle")
-	elif player.just_pressed("attack") && player.stamina.spend(1.0):
+	elif player.just_pressed("attack") && player.stamina.spend(player.bash_cost):
 		finished.emit("bash_no_sword")
 
 func play_footsteps() -> void:

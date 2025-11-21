@@ -134,9 +134,13 @@ var parried			:= false
 @export var power_crush	:= false
 var absorbed_damage := false
 var enemies_on_chase: Array[Enemy]
+var can_be_grabbed := false
 var grabbed_by : Enemy
 @export var has_heavy_stance		:= false
 @export var has_defensive_stance	:= false
+var slash_cost	: float
+var stab_cost	: float
+var bash_cost 	: float
 #endregion
 #region Others
 @export var debug				:= false
@@ -846,6 +850,7 @@ func _physics_process(delta: float) -> void:
 			elif collider.is_in_group("OneWayColliders"):
 				is_on_one_way_collider = true
 
+	can_be_grabbed = is_on_floor() && get_floor_angle() == 0
 	#endregion
 	#region Light raycast
 	var in_shadow := false
@@ -863,6 +868,16 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
+	Debugger.printui("SLASH_FATIGUE: "+str(SLASH_FATIGUE))
+	Debugger.printui("SLASH_FATIGUE_STRENGTH_MOD: "+str(SLASH_FATIGUE_STRENGTH_MOD))
+	Debugger.printui("SLASH_FATIGUE_ENDURANCE_MOD: "+str(SLASH_FATIGUE_ENDURANCE_MOD))
+	slash_cost	= SLASH_FATIGUE * pow(strength, SLASH_FATIGUE_STRENGTH_MOD)/pow(endurance, SLASH_FATIGUE_ENDURANCE_MOD)
+	stab_cost	= STAB_FATIGUE * pow(strength, STAB_FATIGUE_STRENGTH_MOD)/pow(endurance, STAB_FATIGUE_ENDURANCE_MOD)
+	bash_cost 	= BASH_FATIGUE * pow(strength, BASH_FATIGUE_STRENGTH_MOD)/pow(endurance, BASH_FATIGUE_ENDURANCE_MOD)
+	Debugger.printui("slash_cost: "+str(slash_cost))
+	Debugger.printui("stab_cost: "+str(stab_cost))
+	Debugger.printui("bash_cost: "+str(bash_cost))
+	Debugger.printui("fatigue.value: "+str(fatigue.value));
 	if Input.is_action_pressed("sprint") && Input.is_action_just_pressed("left_mouse_button"):
 		global_position = get_global_mouse_position()
 	if just_pressed("quick save"):
@@ -911,7 +926,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
 		#take_damage(90)
-		experience.add(100)
+		experience.add(1000)
 
 	check_interactable()
 #endregion

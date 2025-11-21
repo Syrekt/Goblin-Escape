@@ -80,13 +80,14 @@ func _on_stance_timer_timeout() -> void:
 		else:
 			finished.emit("idle")
 		return
+
 	enemy.wait_animation_transition = true
 	if debug_stance != "":
 		finished.emit(debug_stance)
 	else:
-		finished.emit("stance_walk", {"time": 0.5, "backwards": true})
-		#timer.start()
-		#finished.emit(transitions.pick_random().name)
+		#finished.emit("stance_walk", {"time": 0.5, "backwards": true})
+		timer.start()
+		finished.emit(transitions.pick_random().name)
 func _on_attack_timer_timeout() -> void:
 	if enemy.debug: print("Attack timer timeout");
 	if !enemy.attack_detector.has_overlapping_bodies():

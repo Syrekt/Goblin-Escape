@@ -42,6 +42,8 @@ var show_interaction_prompts := true:
 		show_interaction_prompts = v
 		Options.save_options()
 
+var adult_content_enabled := false
+
 signal show_combat_tutorial
 signal show_stealth_tutorial
 

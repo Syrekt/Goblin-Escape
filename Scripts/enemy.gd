@@ -68,7 +68,7 @@ var wait_animation_transition := false
 @onready var animation_player		: AnimationPlayer = $AnimationPlayer
 @onready var sprite			    	:= $Sprite2D
 @onready var state_node		    	:= $StateMachine
-@onready var health			    	:= $Health
+@onready var health			    	:= $EnemyHealth
 @onready var combat_properties  	:= $CombatProperties
 @onready var player_proximity		:= $PlayerProximity
 @onready var awareness_timer		: Timer = $AwarenessTimer
@@ -122,6 +122,7 @@ func take_damage(_damage : int, _source: Node2D = null, critical := false):
 
 	health.value -= _damage
 	print("health.value: "+str(health.value));
+	#health.take_damage()
 	if health.value <= 0:
 		emit_signal("health_depleted")
 	else:
@@ -344,8 +345,9 @@ func pick_attack_state(state_array: Array, target: Player) -> String:
 	print("state_array: "+str(state_array))
 	var state = state_array.pick_random().name
 	print("state: "+str(state))
-	while state == "grab" && global_position.y != target.global_position.y:
-		print("y position doesn't match the target, dismiss grab attack")
+	while state == "grab" && (!target.can_be_grabbed || get_floor_angle() != 0) :
+		if !target.can_be_grabbed: print("Target can't be grabbed")
+		if get_floor_angle() != 0: print("Can't grab, not on flat floor")
 		state = state_array.pick_random().name
 	print("Returning attack state %s" %state)
 	return state

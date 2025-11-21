@@ -4670,7 +4670,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UI" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("8_4oj65")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="UI"]
@@ -4928,7 +4927,6 @@ bbcode_enabled = true
 text = "[color=red]This is the description text[/color]"
 
 [node name="CharacterPanel" type="PanelContainer" parent="UI" groups=["UIPanel"]]
-visible = false
 offset_left = 12.0
 offset_top = 104.0
 offset_right = 172.0

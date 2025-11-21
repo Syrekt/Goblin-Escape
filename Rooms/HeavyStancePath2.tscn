@@ -74,7 +74,7 @@ position = Vector2(2152, 435)
 scale = Vector2(-1, 1)
 
 [node name="RoomInstance" parent="." node_paths=PackedStringArray("spawn_point") instance=ExtResource("2_ehrja")]
-spawn_point = NodePath("../Marker2D2")
+spawn_point = NodePath("../Marker2D")
 
 [node name="Goblin" parent="." instance=ExtResource("3_ehrja")]
 position = Vector2(288, 480)
@@ -85,7 +85,7 @@ scale = Vector2(-1, 1)
 collision_layer = 2049
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(788.1289, 47.30538)
+position = Vector2(579, 271)
 
 [node name="Statue" parent="." instance=ExtResource("5_t1jeh")]
 position = Vector2(1408, 368)
@@ -119,10 +119,6 @@ scale = Vector2(0.66690236, 1)
 
 [node name="PlatformCollider5" parent="." instance=ExtResource("7_13bdd")]
 position = Vector2(528, 928)
-scale = Vector2(0.66690236, 1)
-
-[node name="Marker2D2" type="Marker2D" parent="."]
-position = Vector2(578.1022, 288.50488)
 scale = Vector2(0.66690236, 1)
 
 [node name="Torch" parent="." instance=ExtResource("9_n5dbx")]

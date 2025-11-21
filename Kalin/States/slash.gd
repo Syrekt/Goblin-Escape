@@ -6,6 +6,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	_enter()
 	charge_up = data.get("charge_up", 0)
 	player.fatigue.perform("slash")
+	print("player.slash_cost: "+str(player.slash_cost));
 func exit() -> void:
 	_exit()
 

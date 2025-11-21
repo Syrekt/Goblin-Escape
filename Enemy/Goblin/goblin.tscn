@@ -16,7 +16,6 @@
 [ext_resource type="Shader" uid="uid://dgty7bsbniivw" path="res://Scripts/flash.gdshader" id="14_qitlx"]
 [ext_resource type="Texture2D" uid="uid://bsj7ehkx2r4xm" path="res://Enemy/Goblin/struggle_transition_goblin_strip18.png" id="15_fstx2"]
 [ext_resource type="Texture2D" uid="uid://cuenq4ide527y" path="res://Enemy/Goblin/goblin-stake-death_strip7.png" id="15_qhfhj"]
-[ext_resource type="Texture2D" uid="uid://yh6p23n7un5u" path="res://UI/Sliders/cur_health.png" id="15_upc2x"]
 [ext_resource type="PackedScene" uid="uid://b23mtnfp7xuec" path="res://Objects/emote.tscn" id="16_57o4q"]
 [ext_resource type="Texture2D" uid="uid://3oi6wlr186jp" path="res://Enemy/Goblin/goblin-stake-death2_strip9-sheet.png" id="16_nhj6x"]
 [ext_resource type="PackedScene" uid="uid://b02rwb4cvvhr4" path="res://Objects/state_machine.tscn" id="17_cbc7y"]
@@ -42,6 +41,7 @@
 [ext_resource type="Script" uid="uid://cod1srgspwwqu" path="res://Enemy/States/chat_lead.gd" id="35_e5h4s"]
 [ext_resource type="Script" uid="uid://b74vkmyvk4tmq" path="res://Enemy/States/smell.gd" id="36_mo1fh"]
 [ext_resource type="Script" uid="uid://3lerje1i52sl" path="res://Enemy/States/animation_state_enemy.gd" id="36_ynrxc"]
+[ext_resource type="PackedScene" uid="uid://c7vtfpkl3olvb" path="res://Enemy/enemy_health.tscn" id="41_qhfhj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xhuvx"]
 resource_local_to_scene = true
@@ -1281,15 +1281,12 @@ shape = SubResource("RectangleShape2D_qsl2l")
 wait_time = 2.0
 one_shot = true
 
-[node name="Health" type="TextureProgressBar" parent="."]
+[node name="EnemyHealth" parent="." instance=ExtResource("41_qhfhj")]
 visible = false
-offset_left = -26.0
-offset_top = 19.0
-offset_right = 26.0
-offset_bottom = 59.0
-max_value = 50.0
-value = 50.0
-texture_progress = ExtResource("15_upc2x")
+offset_left = -12.0
+offset_top = 17.0
+offset_right = 12.0
+offset_bottom = 20.0
 
 [node name="Emote" parent="." instance=ExtResource("16_57o4q")]
 position = Vector2(2, -47)
