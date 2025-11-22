@@ -113,9 +113,9 @@ const BASH_COST_PER_ENDURANCE	:= 0.08
 const SLASH_SWEAT	:= 0.2
 const STAB_SWEAT	:= 0.1
 const BASH_SWEAT	:= 0.1
-const SLASH_FATIGUE	:= 1.0
-const STAB_FATIGUE	:= 0.5
-const BASH_FATIGUE	:= 1.0
+const MAX_SLASH_FATIGUE	:= 2.0
+const MAX_STAB_FATIGUE	:= 1.5
+const MAX_BASH_FATIGUE	:= 2.0
 const SLASH_FATIGUE_STRENGTH_MOD	:= 0.5
 const SLASH_FATIGUE_ENDURANCE_MOD	:= 0.8
 const STAB_FATIGUE_STRENGTH_MOD		:= 0.4
@@ -520,13 +520,13 @@ func check_buffered_state() -> bool:
 	if buffered_state:
 		match buffered_state:
 			"slash":
-				if has_heavy_stance && stamina.spend(SLASH_STAMINA_COST, get_slash_sweat_cost()):
+				if has_heavy_stance && stamina.spend(slash_cost, get_slash_sweat_cost()):
 					state_to_switch = "slash"
 			"stab":
-				if stamina.spend(STAB_STAMINA_COST, get_stab_sweat_cost()):
+				if stamina.spend(stab_cost, get_stab_sweat_cost()):
 					state_to_switch = "stab"
 			"bash":
-				if has_defensive_stance && stamina.spend(BASH_STAMINA_COST, get_bash_sweat_cost()):
+				if has_defensive_stance && stamina.spend(bash_cost, get_bash_sweat_cost()):
 					state_to_switch = "bash"
 	buffered_state = ""
 	if state_to_switch:
@@ -868,16 +868,13 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
-	Debugger.printui("SLASH_FATIGUE: "+str(SLASH_FATIGUE))
-	Debugger.printui("SLASH_FATIGUE_STRENGTH_MOD: "+str(SLASH_FATIGUE_STRENGTH_MOD))
-	Debugger.printui("SLASH_FATIGUE_ENDURANCE_MOD: "+str(SLASH_FATIGUE_ENDURANCE_MOD))
-	slash_cost	= SLASH_FATIGUE * pow(strength, SLASH_FATIGUE_STRENGTH_MOD)/pow(endurance, SLASH_FATIGUE_ENDURANCE_MOD)
-	stab_cost	= STAB_FATIGUE * pow(strength, STAB_FATIGUE_STRENGTH_MOD)/pow(endurance, STAB_FATIGUE_ENDURANCE_MOD)
-	bash_cost 	= BASH_FATIGUE * pow(strength, BASH_FATIGUE_STRENGTH_MOD)/pow(endurance, BASH_FATIGUE_ENDURANCE_MOD)
-	Debugger.printui("slash_cost: "+str(slash_cost))
-	Debugger.printui("stab_cost: "+str(stab_cost))
-	Debugger.printui("bash_cost: "+str(bash_cost))
-	Debugger.printui("fatigue.value: "+str(fatigue.value));
+	slash_cost	= lerp(1.0, MAX_SLASH_FATIGUE, fatigue.value/100) * pow(strength, SLASH_FATIGUE_STRENGTH_MOD)/pow(endurance, SLASH_FATIGUE_ENDURANCE_MOD)
+	stab_cost	= lerp(0.5, MAX_STAB_FATIGUE, fatigue.value/100) * pow(strength, STAB_FATIGUE_STRENGTH_MOD)/pow(endurance, STAB_FATIGUE_ENDURANCE_MOD)
+	bash_cost 	= lerp(1.0, MAX_BASH_FATIGUE, fatigue.value/100) * pow(strength, BASH_FATIGUE_STRENGTH_MOD)/pow(endurance, BASH_FATIGUE_ENDURANCE_MOD)
+	#Debugger.printui("slash_cost: "+str(slash_cost))
+	#Debugger.printui("stab_cost: "+str(stab_cost))
+	#Debugger.printui("bash_cost: "+str(bash_cost))
+	#Debugger.printui("fatigue.value: "+str(fatigue.value));
 	if Input.is_action_pressed("sprint") && Input.is_action_just_pressed("left_mouse_button"):
 		global_position = get_global_mouse_position()
 	if just_pressed("quick save"):

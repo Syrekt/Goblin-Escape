@@ -20,7 +20,7 @@ func update(delta):
 		finished.emit("walk")
 	elif player.pressed("sprint"):
 		finished.emit("run")
-	elif player.pressed("attack") && player.stamina.spend(player.STAB_STAMINA_COST, 1.0):
+	elif player.pressed("attack") && player.stamina.spend(player.stab_cost, 1.0):
 		finished.emit("stab")
 	elif player.get_movement_dir() == 0:
 		finished.emit("stance_light")

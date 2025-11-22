@@ -33,7 +33,7 @@ func physics_update(delta: float) -> void:
 		finished.emit("stance_light")
 	elif player.pressed("down"):
 		finished.emit("stance_defensive")
-	elif player.just_released("attack") && player.stamina.spend(player.SLASH_STAMINA_COST, 2.0):
+	elif player.just_released("attack") && player.stamina.spend(player.slash_cost, 2.0):
 		finished.emit("slash", {
 				"charge_up" : charge_up
 			})

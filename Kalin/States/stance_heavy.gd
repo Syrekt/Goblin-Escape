@@ -8,6 +8,7 @@ var c_normal = Color(0, 0, 0, 0)
 
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
+	print("player.slash_cost: "+str(player.slash_cost));
 func exit() -> void:
 	if tween: tween.kill()
 	tween = null
@@ -16,7 +17,7 @@ func exit() -> void:
 
 func physics_update(delta: float) -> void:
 	# Charge up the attack
-	if player.pressed("attack") && player.stamina.has_enough(player.SLASH_STAMINA_COST):
+	if player.pressed("attack") && player.stamina.has_enough(player.slash_cost):
 		charge_up = move_toward(charge_up, 100, 2)
 		if charge_up > 10:
 			# Switch to charging state

@@ -8,7 +8,7 @@ func exit() -> void:
 func update(delta: float) -> void:
 	if player.parried && player.just_pressed("attack"):
 		Ge.kill_slow_mo()
-		if player.stamina.spend(player.SLASH_STAMINA_COST, 1.0):
+		if player.stamina.spend(player.stab_cost, 1.0):
 			finished.emit("slash")
-		elif player.stamina.spend(player.STAB_STAMINA_COST, 1.0):
+		elif player.stamina.spend(player.stab_cost, 1.0):
 			finished.emit("stab")
