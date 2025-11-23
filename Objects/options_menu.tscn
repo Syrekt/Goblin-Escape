@@ -16,7 +16,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 3
+current_tab = 4
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
@@ -238,6 +238,7 @@ layout_mode = 2
 text = "Reset Keybindings"
 
 [node name="Noise Indicator" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 
@@ -354,7 +355,6 @@ max_value = 255.0
 ticks_position = 3
 
 [node name="Gameplay" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
@@ -408,6 +408,36 @@ text = "Show Interaction Prompts"
 [node name="ShowInteractionPrompts" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer3"]
 layout_mode = 2
 
+[node name="HSplitContainer4" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer4"]
+custom_minimum_size = Vector2(111, 0)
+layout_mode = 2
+text = "HUD Scale"
+
+[node name="HudScaleOption" type="OptionButton" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer4"]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "1x"
+popup/item_0/id = 0
+popup/item_1/text = "2x"
+popup/item_1/id = 1
+
+[node name="HSplitContainer5" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer5"]
+custom_minimum_size = Vector2(76, 0)
+layout_mode = 2
+text = "Shadow Intensity"
+
+[node name="ShadowIntensity" type="HSlider" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer5"]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="item_selected" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/Resolution" to="." method="_on_option_button_item_selected"]
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/PixelPerfect" to="." method="_on_pixel_perfect_toggled"]
@@ -431,3 +461,5 @@ layout_mode = 2
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer/ShowTutorials" to="." method="_on_show_tutorials_toggled"]
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2/ShowHints" to="." method="_on_show_hints_toggled"]
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer3/ShowInteractionPrompts" to="." method="_on_show_interaction_prompts_toggled"]
+[connection signal="item_selected" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer4/HudScaleOption" to="." method="_on_hud_scale_option_item_selected"]
+[connection signal="drag_ended" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer5/ShadowIntensity" to="." method="_on_shadow_intensity_drag_ended"]

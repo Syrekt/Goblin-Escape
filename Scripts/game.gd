@@ -56,6 +56,8 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("restart"):
 		print("restart")
 		player.position = MetSys.current_room.spawn_point.position
+	$CanvasModulate.color.r = 0.63 + 0.10 * Options.shadow_intensity
+	$CanvasModulate.color.g = 0.52 + 0.15 * Options.shadow_intensity
 
 
 

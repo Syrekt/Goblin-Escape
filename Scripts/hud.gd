@@ -14,3 +14,5 @@ func _process(delta: float) -> void:
 	else:
 		if !fullscreen_panel_open:
 			show()
+
+	$Scaled.scale = Vector2(Options.hud_scale, Options.hud_scale)

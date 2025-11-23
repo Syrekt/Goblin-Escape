@@ -189,9 +189,9 @@ shader_parameter/alpha = 0.2
 shader_parameter/inner_radius = 0.515
 shader_parameter/outer_radius = 0.995
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_exvqe"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8gxoc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_exvqe"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cbw7l"]
 
@@ -4682,11 +4682,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 2)
 mouse_filter = 2
 script = ExtResource("8_cv3n5")
 
-[node name="Health" type="TextureProgressBar" parent="UI/HUD" groups=["HUD"]]
+[node name="Scaled" type="Control" parent="UI/HUD"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health" type="TextureProgressBar" parent="UI/HUD/Scaled" groups=["HUD"]]
 layout_mode = 0
 offset_left = 0.5
 offset_top = 7.0
@@ -4701,12 +4705,12 @@ script = ExtResource("43_uhoyi")
 buff_sprite = ExtResource("10_pxbrw")
 debuff_sprite = ExtResource("11_4inu4")
 
-[node name="Stamina" type="TextureProgressBar" parent="UI/HUD" groups=["HUD"]]
+[node name="Stamina" type="TextureProgressBar" parent="UI/HUD/Scaled" groups=["HUD"]]
 layout_mode = 0
 offset_left = 22.5
 offset_top = 28.0
-offset_right = 150.5
-offset_bottom = 46.0
+offset_right = 86.5
+offset_bottom = 37.0
 max_value = 5.0
 step = 0.0
 value = 5.0
@@ -4715,14 +4719,15 @@ texture_over = ExtResource("51_1yslh")
 texture_progress = ExtResource("52_5atg1")
 tint_progress = Color(0.7372549, 0.5058824, 0.06666667, 1)
 script = ExtResource("60_2ksh1")
+fade_out_col = Color(0.7279944, 0.497293, 0.06500047, 1)
 buff_sprite = ExtResource("10_pxbrw")
 debuff_sprite = ExtResource("11_4inu4")
 
-[node name="Timer" type="Timer" parent="UI/HUD/Stamina"]
+[node name="Timer" type="Timer" parent="UI/HUD/Scaled/Stamina"]
 one_shot = true
 autostart = true
 
-[node name="BuffContainer" type="HBoxContainer" parent="UI/HUD/Stamina"]
+[node name="BuffContainer" type="HBoxContainer" parent="UI/HUD/Scaled/Stamina"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.028
@@ -4735,19 +4740,18 @@ offset_right = 57.920006
 offset_bottom = -0.50699997
 scale = Vector2(0.5, 0.5)
 
-[node name="Fatigue" type="TextureProgressBar" parent="UI/HUD" groups=["HUD"]]
+[node name="Fatigue" type="TextureProgressBar" parent="UI/HUD/Scaled" groups=["HUD"]]
 layout_mode = 0
 offset_left = 21.0
 offset_top = 23.0
-offset_right = 233.0
-offset_bottom = 31.0
+offset_right = 74.0
+offset_bottom = 25.0
 step = 0.0
 texture_under = ExtResource("54_80r2e")
 texture_progress = ExtResource("55_rbk27")
-tint_progress = Color(0.199724, 0.454105, 0.22321, 1)
 script = ExtResource("21_sklaw")
 
-[node name="Arousal" type="TextureProgressBar" parent="UI/HUD" groups=["HUD"]]
+[node name="Arousal" type="TextureProgressBar" parent="UI/HUD/Scaled" groups=["HUD"]]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 15.0
@@ -4758,7 +4762,7 @@ texture_progress = ExtResource("58_yofsr")
 tint_progress = Color(0.474366, 0.00173617, 0.698302, 1)
 script = ExtResource("48_yekxk")
 
-[node name="Smell" type="TextureProgressBar" parent="UI/HUD" groups=["HUD"]]
+[node name="Smell" type="TextureProgressBar" parent="UI/HUD/Scaled" groups=["HUD"]]
 layout_mode = 0
 offset_left = 51.0
 offset_top = 13.5
@@ -4769,6 +4773,40 @@ tint_progress = Color(0.679805, 0.262423, 0, 1)
 script = ExtResource("55_h4isg")
 buff_sprite = ExtResource("10_pxbrw")
 debuff_sprite = ExtResource("11_4inu4")
+
+[node name="ExpTypeBox" type="PanelContainer" parent="UI/HUD" groups=["HUD"]]
+layout_mode = 0
+offset_left = 563.0
+offset_top = 324.0
+offset_right = 632.0
+offset_bottom = 353.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_8gxoc")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/HUD/ExpTypeBox"]
+layout_mode = 2
+texture = ExtResource("34_s3ngn")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="Experience" type="Label" parent="UI/HUD/ExpTypeBox/NinePatchRect"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 4.0
+offset_right = 65.0
+offset_bottom = 25.0
+theme = ExtResource("56_ghu8e")
+theme_override_font_sizes/font_size = 16
+vertical_alignment = 1
+clip_text = true
+script = ExtResource("50_083qx")
+
+[node name="Timer" type="Timer" parent="UI/HUD/ExpTypeBox/NinePatchRect/Experience"]
+one_shot = true
 
 [node name="InventoryPanel" type="PanelContainer" parent="UI" groups=["UIPanel"]]
 custom_minimum_size = Vector2(122, 264)
@@ -4846,39 +4884,6 @@ alignment = 2
 
 [node name="AmountLabel" parent="UI/ExpAmountContainer" instance=ExtResource("34_8gxoc")]
 layout_mode = 2
-
-[node name="ExpTypeBox" type="PanelContainer" parent="UI" groups=["HUD"]]
-offset_left = 563.0
-offset_top = 324.0
-offset_right = 632.0
-offset_bottom = 353.0
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_8gxoc")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="UI/ExpTypeBox"]
-layout_mode = 2
-texture = ExtResource("34_s3ngn")
-patch_margin_left = 4
-patch_margin_top = 4
-patch_margin_right = 4
-patch_margin_bottom = 4
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
-
-[node name="Experience" type="Label" parent="UI/ExpTypeBox/NinePatchRect"]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 4.0
-offset_right = 65.0
-offset_bottom = 25.0
-theme = ExtResource("56_ghu8e")
-theme_override_font_sizes/font_size = 16
-vertical_alignment = 1
-clip_text = true
-script = ExtResource("50_083qx")
-
-[node name="Timer" type="Timer" parent="UI/ExpTypeBox/NinePatchRect/Experience"]
-one_shot = true
 
 [node name="DescriptionPanel" type="PanelContainer" parent="UI"]
 custom_minimum_size = Vector2(224, 95)
@@ -5303,7 +5308,6 @@ process_material = ExtResource("38_yofsr")
 position = Vector2(0, -36)
 
 [node name="ColliderStanding" type="CollisionShape2D" parent="." groups=["Flip"]]
-visible = false
 position = Vector2(0, 5.5)
 scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_y6qte")
@@ -5314,9 +5318,8 @@ target_position = Vector2(17, 0)
 collision_mask = 32
 
 [node name="CornerGrabCheck" type="RayCast2D" parent="." groups=["Flip"]]
-visible = false
-position = Vector2(0, -15)
-target_position = Vector2(14, 1.90735e-06)
+position = Vector2(8, -28)
+target_position = Vector2(0, 18)
 collision_mask = 65537
 
 [node name="CornerAutoClimb" type="RayCast2D" parent="." groups=["Flip"]]

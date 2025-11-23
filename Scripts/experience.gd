@@ -5,8 +5,8 @@ var visible_amount := 0
 var amount := 0
 var experience_drop = preload("res://Objects/dropped_experience.tscn")
 var previous_drop : Area2D ## Keeps track of previously dropped exp
-@onready var amount_container = $"../../../ExpAmountContainer"
-@onready var amount_label = $"../../../ExpAmountContainer/AmountLabel"
+@onready var amount_container = $"../../../../ExpAmountContainer"
+@onready var amount_label = $"../../../../ExpAmountContainer/AmountLabel"
 
 @onready var timer : Timer = $Timer
 

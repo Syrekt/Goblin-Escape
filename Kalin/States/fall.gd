@@ -44,7 +44,7 @@ func physics_update(delta: float) -> void:
 			finished.emit("idle")
 
 	# Corner grab
-	if !player.pressed("down") && grab_timer.is_stopped() && player.can_grab_corner() && player.ray_corner_grab_check.is_colliding():
+	if !player.pressed("down") && grab_timer.is_stopped() && player.can_grab_corner() && player.is_on_wall() && player.ray_corner_grab_check.is_colliding():
 		if player.col_auto_climb_bottom.has_overlapping_bodies():
 			player.snap_to_corner(player.ray_corner_grab_check.get_collision_point())
 			player.quick_climb()

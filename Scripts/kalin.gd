@@ -58,7 +58,7 @@ var experience_required := 100
 @onready var health		: TextureProgressBar = find_child("Health") #$CanvasLayer/HUD/HBoxContainer/Health
 @onready var stamina	: TextureProgressBar = find_child("Stamina") #$CanvasLayer/HUD/HBoxContainer/Stamina
 @onready var experience : Label = find_child("Experience")
-@onready var fatigue	: TextureProgressBar = $UI/HUD/Fatigue
+@onready var fatigue	: TextureProgressBar = find_child("Fatigue")
 @onready var smell		: TextureProgressBar = find_child("Smell")
 @onready var arousal	: TextureProgressBar = find_child("Arousal")
 @onready var smell_particles : GPUParticles2D = $SmellParticles
@@ -89,7 +89,7 @@ var experience_required := 100
 @onready var smell_collider : Area2D = $SmellCollider
 @onready var cell_check : RayCast2D = $CellCheck
 @onready var interaction_prompt : AnimatedSprite2D = $InteractionPrompt
-@onready var buff_container : HBoxContainer = $UI/HUD/Stamina/BuffContainer
+@onready var buff_container : HBoxContainer = find_child("BuffContainer")
 @onready var map_scene : PackedScene = preload("res://UI/map.tscn")
 @onready var hurtbox : CollisionShape2D = $ColliderStanding
 #endregion
@@ -168,6 +168,7 @@ var map_icon := "player"
 var draw_on_map := true
 var potential_movable : Movable
 var disable_camera_damping_on_spawn := true
+var hud_tween : Tween
 #endregion
 #region Signals
 signal enter_shadow
@@ -185,7 +186,9 @@ func set_facing(dir: int):
 	facing = sign(dir)
 	var local_nodes = find_children("*", "Node", true).filter(func(n): return n.is_in_group("Flip"))
 	for node in local_nodes:
-		if node is Sprite2D:
+		if node == ray_corner_grab_check:
+			node.position.x = 8 * facing
+		elif node is Sprite2D:
 			node.flip_h = facing == -1
 		else:
 			node.scale.x = facing
@@ -942,11 +945,25 @@ func _on_interactor_area_exited(area: Area2D) -> void:
 		interaction_target = null
 		interaction_prompt._hide()
 func _on_enter_shadow() -> void:
+	print("enter shadow")
+	if hud_tween: hud_tween.kill()
+	hud_tween = create_tween().bind_node(self)
+	hud_tween.tween_property(hud, "modulate", Color(0.5, 0.5, 0.5, 1.0), 1.0)
+	health.fade_out()
+	stamina.fade_out()
+
 	invisible = true
 	current_tint = Color(0.1, 0.1, 0.1, 0.5)
 	create_tween().bind_node(self).tween_property(%Sprite2D.material, "shader_parameter/tint_color", current_tint, 0.2)
 	create_tween().bind_node(self).tween_property(vignette.material, "shader_parameter/alpha", 0.2, 0.2)
 func _on_leave_shadow() -> void:
+	print("leave shadow")
+	if hud_tween: hud_tween.kill()
+	hud_tween = create_tween().bind_node(self)
+	hud_tween.tween_property(hud, "modulate", Color.WHITE, 1.0)
+	health.fade_in()
+	stamina.fade_in()
+
 	invisible = false
 	current_tint = Color(0.0, 0.0, 0.0, 0.0)
 	create_tween().bind_node(self).tween_property(%Sprite2D.material, "shader_parameter/tint_color", current_tint, 0.2)

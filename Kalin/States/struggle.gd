@@ -3,7 +3,7 @@ extends PlayerState
 @onready var timer : Timer = $Timer
 @onready var progression_bar : TextureProgressBar = $"../../StruggleProgressBar"
 @onready var struggle_prompt : AnimatedSprite2D = $"../../StruggleProgressBar/AnimatedSprite2D"
-@onready var arousal_bar : TextureProgressBar = $"../../UI/HUD/Arousal"
+@onready var arousal_bar : TextureProgressBar = $"../../UI/HUD/Scaled/Arousal"
 
 var tween : Tween
 

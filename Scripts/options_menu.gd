@@ -34,6 +34,10 @@ extends TabContainer
 @onready var hint_toggle		: CheckBox = find_child("ShowHints")
 @onready var interaction_prompts_toggle	: CheckBox = find_child("ShowInteractionPrompts")
 
+@onready var hud_scale_option   : OptionButton = find_child("HudScaleOption")
+
+@onready var shadow_intensity_slider   : HSlider = find_child("ShadowIntensity")
+
 var default_keybindings : Dictionary = {
 	"up"		: [KEY_A],
 	"down"		: [KEY_S],
@@ -74,6 +78,17 @@ func _ready() -> void:
 	tutorial_toggle.button_pressed	= Ge.show_tutorials
 	hint_toggle.button_pressed		= Ge.show_hints
 	interaction_prompts_toggle.button_pressed = Ge.show_interaction_prompts
+
+	var hud_scale = Options.hud_scale
+	match hud_scale:
+		1:
+			hud_scale_option.selected = 0
+		2:
+			hud_scale_option.selected = 1
+
+	var shadow_intensity = Options.shadow_intensity
+	shadow_intensity_slider.value = shadow_intensity
+
 
 
 func _process(delta: float) -> void:
@@ -225,3 +240,16 @@ func _on_show_hints_toggled(toggled_on: bool) -> void:
 
 func _on_show_interaction_prompts_toggled(toggled_on: bool) -> void:
 	Ge.show_interaction_prompts = toggled_on
+
+
+func _on_hud_scale_option_item_selected(index: int) -> void:
+	match index:
+		0:
+			Options.hud_scale = 1
+		1:
+			Options.hud_scale = 2
+	Options.save_options()
+
+
+func _on_shadow_intensity_drag_ended(value_changed: bool) -> void:
+	Options.shadow_intensity = shadow_intensity_slider.value
