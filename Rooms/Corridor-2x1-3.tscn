@@ -90,7 +90,7 @@ position = Vector2(1583, 562)
 
 [node name="Hint" parent="." instance=ExtResource("8_75ulu")]
 position = Vector2(1191, 338)
-text = "Hiding in cavities will make you undetectable.  Alerted enemies will force you out of it."
+text = "Hiding in cavities will make you undetectable.  You can't hide if you are detected."
 
 [node name="Torch" parent="." instance=ExtResource("8_ah6pm")]
 position = Vector2(1024, 240)

@@ -99,11 +99,11 @@ position = Vector2(1632, 1195)
 position = Vector2(915.74225, 703.62286)
 
 [node name="Hint" parent="." instance=ExtResource("8_vcqxd")]
-position = Vector2(347, 501)
+position = Vector2(371, 502)
 text = "Walk or crouch to move safely through spikes."
 
 [node name="CollisionShape2D" parent="Hint" index="1"]
-position = Vector2(6.5, 33.5)
+position = Vector2(31, 33.5)
 
 [node name="KeyPrompt" parent="." instance=ExtResource("9_o420l")]
 position = Vector2(1392, 963)
@@ -162,39 +162,39 @@ autoplay = true
 max_distance = 128.0
 bus = &"EFX"
 
+[node name="Wind,ext,alley,urban,howl,pronounced,metal,clinking3" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(293, 320)
+stream = ExtResource("13_pfgfl")
+autoplay = true
+max_distance = 768.0
+bus = &"EFX"
+
+[node name="Wind,ext,alley,urban,howl,pronounced,metal,clinking4" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(669, 365)
+stream = ExtResource("13_pfgfl")
+autoplay = true
+max_distance = 768.0
+bus = &"EFX"
+
+[node name="Wind,ext,alley,urban,howl,pronounced,metal,clinking5" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(1056, 522)
+stream = ExtResource("13_pfgfl")
+autoplay = true
+max_distance = 768.0
+bus = &"EFX"
+
+[node name="Wind,ext,alley,urban,howl,pronounced,metal,clinking6" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(1071, 795)
+stream = ExtResource("13_pfgfl")
+autoplay = true
+max_distance = 768.0
+bus = &"EFX"
+
 [node name="Wind,ext,alley,urban,howl,pronounced,metal,clinking2" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(1912, 1195)
 stream = ExtResource("13_pfgfl")
 autoplay = true
 max_distance = 128.0
-bus = &"EFX"
-
-[node name="Wind,ext,alley,urban,howl,pronounced,metal,clinking2" type="AudioStreamPlayer2D" parent="Wind,ext,alley,urban,howl,pronounced,metal,clinking2"]
-position = Vector2(-1619, -875)
-stream = ExtResource("13_pfgfl")
-autoplay = true
-max_distance = 768.0
-bus = &"EFX"
-
-[node name="Wind,ext,alley,urban,howl,pronounced,metal,clinking3" type="AudioStreamPlayer2D" parent="Wind,ext,alley,urban,howl,pronounced,metal,clinking2"]
-position = Vector2(-1243, -830)
-stream = ExtResource("13_pfgfl")
-autoplay = true
-max_distance = 768.0
-bus = &"EFX"
-
-[node name="Wind,ext,alley,urban,howl,pronounced,metal,clinking4" type="AudioStreamPlayer2D" parent="Wind,ext,alley,urban,howl,pronounced,metal,clinking2"]
-position = Vector2(-856, -673)
-stream = ExtResource("13_pfgfl")
-autoplay = true
-max_distance = 768.0
-bus = &"EFX"
-
-[node name="Wind,ext,alley,urban,howl,pronounced,metal,clinking5" type="AudioStreamPlayer2D" parent="Wind,ext,alley,urban,howl,pronounced,metal,clinking2"]
-position = Vector2(-841, -400)
-stream = ExtResource("13_pfgfl")
-autoplay = true
-max_distance = 768.0
 bus = &"EFX"
 
 [editable path="Hint"]

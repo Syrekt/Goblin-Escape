@@ -52,6 +52,8 @@ func send_player() -> void:
 		await game.room_loaded
 		var checkpoint = game.map.find_child(checkpoint_data.name)
 		player.position = checkpoint.position
+		player.fatigue.value = 0
+		player.smell.value = 0
 
 
 func update(delta: float) -> void:

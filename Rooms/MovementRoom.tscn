@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://gtabytws0xr3"]
+[gd_scene load_steps=11 format=4 uid="uid://gtabytws0xr3"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_xkxwg"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_i6r63"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="7_a1dwu"]
 [ext_resource type="PackedScene" uid="uid://bi5awk2sr2hdw" path="res://Map/Props/crate2.tscn" id="8_afs67"]
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="9_oc6gl"]
+[ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="10_oc6gl"]
 
 [node name="MovementRoom" type="Node2D"]
 
@@ -119,3 +120,11 @@ position = Vector2(2143, 456)
 
 [node name="Crate4" parent="." instance=ExtResource("8_afs67")]
 position = Vector2(2003, 456)
+
+[node name="Hint" parent="." instance=ExtResource("10_oc6gl")]
+position = Vector2(1450, 263)
+text = "Sprinting consumes stamina."
+
+[node name="KeyPrompt3" parent="." instance=ExtResource("4_2kxco")]
+position = Vector2(1450, 246)
+text = "sprint"

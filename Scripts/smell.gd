@@ -3,7 +3,7 @@ extends StatBar
 @export var generation_speed := 0.0
 
 var dirt_amount := 0.0
-var semen_amount := 0.0
+var semen_amount := 0.0 # Suppress the smell?
 
 func _process(delta: float) -> void:
 	var final_generation_speed = clampf(generation_speed + dirt_amount - semen_amount, 0, 5)

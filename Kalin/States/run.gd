@@ -48,3 +48,6 @@ func physics_update(delta: float) -> void:
 func play_footsteps() -> void:
 	if player.sprinting:
 		Ge.play_audio_from_string_array(player.global_position, 1, "res://SFX/Kalin/Footsteps Soft/")
+	else:
+		Ge.play_audio_from_string_array(player.global_position, -10, "res://SFX/Kalin/Footsteps Soft/")
+

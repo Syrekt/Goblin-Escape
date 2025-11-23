@@ -1,8 +1,8 @@
 extends Node2D
 
-@export var condition_target_path : NodePath
+@export var condition_target_path : NodePath ## Disabled if player_check
 @export var result_target_path : NodePath
-@export var player_check := true
+@export var player_check := true ## Uses player objects as condition target
 var condition_target : Node2D
 var result_target : Node2D
 

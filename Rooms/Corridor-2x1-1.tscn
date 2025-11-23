@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://byvj80lvnid06"]
+[gd_scene load_steps=12 format=4 uid="uid://byvj80lvnid06"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_hxi5b"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="2_6b1vt"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="7_fvwh6"]
 [ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="8_di3q0"]
 [ext_resource type="PackedScene" uid="uid://bl26mmlff752e" path="res://Objects/key_prompt.tscn" id="9_2oolj"]
+[ext_resource type="AudioStream" uid="uid://llhantu0gpcf" path="res://SFX/Wind,Ext,Alley,Urban,Howl,Pronounced,Metal,Clinking.wav" id="11_bmi46"]
 
 [node name="Corridor-2x1-1" type="Node2D"]
 
@@ -112,14 +113,6 @@ collidable = false
 position = Vector2(652, 383)
 collidable = false
 
-[node name="Hint" parent="." instance=ExtResource("8_di3q0")]
-position = Vector2(123, 544)
-text = "Sprinting consumes stamina."
-
-[node name="KeyPrompt" parent="." instance=ExtResource("9_2oolj")]
-position = Vector2(123, 531)
-text = "sprint"
-
 [node name="Hint2" parent="." instance=ExtResource("8_di3q0")]
 position = Vector2(618, 547)
 text = "Press up to move upstairs."
@@ -135,3 +128,10 @@ text = "up"
 [node name="KeyPrompt3" parent="." instance=ExtResource("9_2oolj")]
 position = Vector2(833, 345)
 text = "up"
+
+[node name="Wind,ext,alley,urban,howl,pronounced,metal,clinking" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(475, 454)
+stream = ExtResource("11_bmi46")
+autoplay = true
+max_distance = 256.0
+bus = &"EFX"
