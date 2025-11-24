@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://djslnafv4ueeb"]
+
+[ext_resource type="Texture2D" uid="uid://b42s603m0k2sk" path="res://Inventory/Sprites/bread.png" id="1_ilqo0"]
+[ext_resource type="Script" uid="uid://nrl1858h0shp" path="res://Inventory/inv_item.gd" id="2_2pbe6"]
+
+[resource]
+script = ExtResource("2_2pbe6")
+name = "Bread"
+icon = ExtResource("1_ilqo0")
+description = "Recovers small amount of health."
+metadata/_custom_type_script = "uid://nrl1858h0shp"

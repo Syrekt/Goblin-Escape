@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://bl1ep3ybwt3rw"]
+
+[ext_resource type="Texture2D" uid="uid://cj2jdwmdwqwkd" path="res://Inventory/Sprites/dried_fish.png" id="1_jx2gq"]
+[ext_resource type="Script" uid="uid://nrl1858h0shp" path="res://Inventory/inv_item.gd" id="2_ks0hc"]
+
+[resource]
+script = ExtResource("2_ks0hc")
+name = "Dried Fish"
+icon = ExtResource("1_jx2gq")
+description = "Recovers small amount of health."
+metadata/_custom_type_script = "uid://nrl1858h0shp"

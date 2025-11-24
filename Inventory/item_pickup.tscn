@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dk84lu71fcjkl"]
 
 [ext_resource type="Script" uid="uid://cliq1akrpj5ng" path="res://Scripts/item_pickup.gd" id="1_apof6"]
-[ext_resource type="PackedScene" uid="uid://cyuk5qsesuyn8" path="res://Inventory/Pickup Objects/item_pickup_area.tscn" id="2_3j7d5"]
+[ext_resource type="PackedScene" uid="uid://cyuk5qsesuyn8" path="res://Inventory/item_pickup_area.tscn" id="2_3j7d5"]
 
 [node name="ItemPickup" type="Sprite2D"]
 script = ExtResource("1_apof6")

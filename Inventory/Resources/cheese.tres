@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://bnl1o3wewqx81"]
+
+[ext_resource type="Texture2D" uid="uid://b77maaxdsw38" path="res://Inventory/Sprites/cheese.png" id="1_v2k4x"]
+[ext_resource type="Script" uid="uid://nrl1858h0shp" path="res://Inventory/inv_item.gd" id="2_j276i"]
+
+[resource]
+script = ExtResource("2_j276i")
+name = "Cheese"
+icon = ExtResource("1_v2k4x")
+description = "Restores small amount of health."
+metadata/_custom_type_script = "uid://nrl1858h0shp"

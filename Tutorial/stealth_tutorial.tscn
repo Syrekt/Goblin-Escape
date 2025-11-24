@@ -139,9 +139,9 @@ layout_mode = 0
 offset_left = 16.0
 offset_top = 240.0
 offset_right = 249.0
-offset_bottom = 281.0
+offset_bottom = 292.0
 bbcode_enabled = true
-text = "While [color=red]invisible[/color], Kalin will look darker and screen will also have a dark overlay around the edges. "
+text = "While [color=red]invisible[/color], Kalin will look darker and Health and Stamina bars will also get darker as an indicator. "
 
 [node name="Sprite2D4" type="Sprite2D" parent="ColorControl/TabContainer/Page2"]
 position = Vector2(472, 107)
@@ -177,7 +177,7 @@ offset_top = 208.0
 offset_right = 466.0
 offset_bottom = 293.0
 bbcode_enabled = true
-text = "Noise indicator is now toggled on. You can toggle it off from options or change it's color. Noise indicator won't show when there are no enemies in the map."
+text = "Noise indicator is now toggled on. You can toggle it off from options menu or change it's color. Noise indicator won't show when there are no enemies in the map."
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ColorControl/TabContainer/Page3"]
 layout_mode = 0
@@ -186,7 +186,7 @@ offset_top = 40.0
 offset_right = 608.0
 offset_bottom = 176.0
 bbcode_enabled = true
-text = "Enviroment can block the sound. Enemies won't hear the sounds coming behind the solid objects. Only exception is the heavy objects like [color=red]Statues[/color]."
+text = "Enviroment can block the sound. Enemies won't hear the sounds coming behind the solid objects. Only exception is the heavy objects like [color=red]Statues[/color]. They can hear sounds made by heavy objects regardless of the terrain in between."
 
 [node name="NoiseObstacle" type="Sprite2D" parent="ColorControl/TabContainer/Page3"]
 position = Vector2(174, 107)
@@ -194,7 +194,7 @@ scale = Vector2(0.47923875, 0.47923875)
 texture = ExtResource("8_06lct")
 
 [node name="SprStatue1" type="Sprite2D" parent="ColorControl/TabContainer/Page3"]
-position = Vector2(537, 126)
+position = Vector2(537, 144)
 texture = ExtResource("9_2qk3m")
 
 [node name="Control" type="Control" parent="ColorControl"]

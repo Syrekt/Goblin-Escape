@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=3 uid="uid://bp8dehh5gawrb"]
+
+[ext_resource type="Texture2D" uid="uid://b42s603m0k2sk" path="res://Inventory/Sprites/bread.png" id="1_0bgrv"]
+[ext_resource type="Script" uid="uid://cliq1akrpj5ng" path="res://Scripts/item_pickup.gd" id="1_mdlkl"]
+[ext_resource type="PackedScene" uid="uid://cyuk5qsesuyn8" path="res://Inventory/item_pickup_area.tscn" id="2_a8v51"]
+[ext_resource type="Resource" uid="uid://djslnafv4ueeb" path="res://Inventory/Resources/bread.tres" id="3_1t524"]
+
+[node name="PickupBread" type="Sprite2D"]
+texture = ExtResource("1_0bgrv")
+script = ExtResource("1_mdlkl")
+item = ExtResource("3_1t524")
+
+[node name="ItemPickupArea" parent="." instance=ExtResource("2_a8v51")]

@@ -95,6 +95,7 @@ position = Vector2(175, 5)
 
 [node name="Goblin3" parent="." instance=ExtResource("8_r43xl")]
 position = Vector2(1514, 207)
+patrolling = false
 facing = 1
 
 [node name="Tutorial" parent="." instance=ExtResource("10_r43xl")]

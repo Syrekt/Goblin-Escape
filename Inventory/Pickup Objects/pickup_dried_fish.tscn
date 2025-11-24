@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=3 uid="uid://dj8e0h5e18pbr"]
+
+[ext_resource type="Script" uid="uid://cliq1akrpj5ng" path="res://Scripts/item_pickup.gd" id="1_mlwwa"]
+[ext_resource type="Texture2D" uid="uid://cj2jdwmdwqwkd" path="res://Inventory/Sprites/dried_fish.png" id="1_r046r"]
+[ext_resource type="PackedScene" uid="uid://cyuk5qsesuyn8" path="res://Inventory/item_pickup_area.tscn" id="2_q8vdd"]
+[ext_resource type="Resource" uid="uid://bl1ep3ybwt3rw" path="res://Inventory/Resources/dried_fish.tres" id="3_yh2gb"]
+
+[node name="PickupDriedFish" type="Sprite2D"]
+texture = ExtResource("1_r046r")
+script = ExtResource("1_mlwwa")
+item = ExtResource("3_yh2gb")
+
+[node name="ItemPickupArea" parent="." instance=ExtResource("2_q8vdd")]

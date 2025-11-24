@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 
 	var arr : Array = get_children()
 	for child in arr:
-		if child is Buff:
+		if child is StatusEffect:
 			final_regeneration_speed += child.value
 
 	if timer.time_left == 0 && !owner.dead && !owner.unconscious:
@@ -47,12 +47,6 @@ func spend(amount: float, smell := 0.0, allow_vfx := true) -> bool:
 func has_enough(amount: float) -> bool:
 	if value < amount: blink(TINT_KALIN, TINT_SPRITE)
 	return value >= amount
-
-
-func add_buff(_value : float, _time : float) -> void:
-	var buff = buff_scene.instantiate()
-	add_child(buff)
-	buff.setup(_value, _time)
 
 
 func fade_out() -> void:

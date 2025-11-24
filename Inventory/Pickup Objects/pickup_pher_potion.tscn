@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://4s6u2ndoyh16" path="res://Inventory/Sprites/ Potions-export4.png" id="1_lni0t"]
 [ext_resource type="Script" uid="uid://cliq1akrpj5ng" path="res://Scripts/item_pickup.gd" id="2_djcwb"]
 [ext_resource type="Resource" uid="uid://b30py087tp8p4" path="res://Inventory/Resources/pher_potion.tres" id="3_ep2dg"]
-[ext_resource type="PackedScene" uid="uid://cyuk5qsesuyn8" path="res://Inventory/Pickup Objects/item_pickup_area.tscn" id="4_lni0t"]
+[ext_resource type="PackedScene" uid="uid://cyuk5qsesuyn8" path="res://Inventory/item_pickup_area.tscn" id="4_lni0t"]
 
 [node name="PickupPher" type="Sprite2D"]
 texture = ExtResource("1_lni0t")

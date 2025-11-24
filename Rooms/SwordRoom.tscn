@@ -77,6 +77,7 @@ spawn_point = NodePath("../Marker2D2")
 [node name="Goblin" parent="." instance=ExtResource("4_t0jww")]
 position = Vector2(1968, 160)
 patrolling = false
+facing = 1
 
 [node name="IronBars2" parent="." instance=ExtResource("5_pg22i")]
 position = Vector2(2960, 480)

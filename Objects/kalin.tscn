@@ -45,6 +45,7 @@
 [ext_resource type="Script" uid="uid://bm8wfeg4wwdvr" path="res://Scripts/fatigue.gd" id="21_sklaw"]
 [ext_resource type="Texture2D" uid="uid://whea0khot8nb" path="res://Sex/kalin+goblin-loop.png" id="22_bs037"]
 [ext_resource type="Texture2D" uid="uid://bxgpgvblnjqhg" path="res://Kalin/Sprites/Kalin-Walk.png" id="22_vnsvi"]
+[ext_resource type="Script" uid="uid://cygaa231g4i0v" path="res://Scripts/buff_container.gd" id="23_r14np"]
 [ext_resource type="Script" uid="uid://bgnnyj7i10wbg" path="res://Kalin/States/walk.gd" id="28_1dko0"]
 [ext_resource type="Texture2D" uid="uid://bq334bamr3mgu" path="res://Kalin/Sprites/Kalin-Slide.png" id="29_qnnkd"]
 [ext_resource type="Resource" uid="uid://buieik1hf8xh2" path="res://Inventory/Resources/player_inventory.tres" id="29_y4shw"]
@@ -202,8 +203,6 @@ shader_parameter/outer_radius = 0.995
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n1k6j"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3pkug"]
-
-[sub_resource type="GDScript" id="GDScript_4jgp1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t42fh"]
 
@@ -4670,7 +4669,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UI" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("8_4oj65")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="UI"]
@@ -4702,8 +4700,6 @@ texture_under = ExtResource("46_586st")
 texture_over = ExtResource("47_80r2e")
 texture_progress = ExtResource("48_rbk27")
 script = ExtResource("43_uhoyi")
-buff_sprite = ExtResource("10_pxbrw")
-debuff_sprite = ExtResource("11_4inu4")
 
 [node name="Stamina" type="TextureProgressBar" parent="UI/HUD/Scaled" groups=["HUD"]]
 layout_mode = 0
@@ -4720,25 +4716,24 @@ texture_progress = ExtResource("52_5atg1")
 tint_progress = Color(0.7372549, 0.5058824, 0.06666667, 1)
 script = ExtResource("60_2ksh1")
 fade_out_col = Color(0.7279944, 0.497293, 0.06500047, 1)
-buff_sprite = ExtResource("10_pxbrw")
-debuff_sprite = ExtResource("11_4inu4")
 
 [node name="Timer" type="Timer" parent="UI/HUD/Scaled/Stamina"]
 one_shot = true
 autostart = true
 
-[node name="BuffContainer" type="HBoxContainer" parent="UI/HUD/Scaled/Stamina"]
+[node name="StatusEffectContainer" type="HBoxContainer" parent="UI/HUD/Scaled/Stamina"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.028
 anchor_top = 0.917
 anchor_right = 0.565
 anchor_bottom = 1.806
-offset_left = -0.083999634
-offset_top = -8.505999
-offset_right = 57.920006
-offset_bottom = -0.50699997
+offset_left = 0.7080002
+offset_top = 1.7469997
+offset_right = 84.34
+offset_bottom = 9.746
 scale = Vector2(0.5, 0.5)
+script = ExtResource("23_r14np")
 
 [node name="Fatigue" type="TextureProgressBar" parent="UI/HUD/Scaled" groups=["HUD"]]
 layout_mode = 0
@@ -4749,6 +4744,7 @@ offset_bottom = 25.0
 step = 0.0
 texture_under = ExtResource("54_80r2e")
 texture_progress = ExtResource("55_rbk27")
+tint_progress = Color(0, 0.81812185, 0, 1)
 script = ExtResource("21_sklaw")
 
 [node name="Arousal" type="TextureProgressBar" parent="UI/HUD/Scaled" groups=["HUD"]]
@@ -4932,16 +4928,20 @@ layout_mode = 2
 bbcode_enabled = true
 text = "[color=red]This is the description text[/color]"
 
-[node name="CharacterPanel" type="PanelContainer" parent="UI" groups=["UIPanel"]]
-visible = false
-offset_left = 12.0
-offset_top = 104.0
-offset_right = 172.0
-offset_bottom = 276.0
-theme = ExtResource("56_ghu8e")
+[node name="CharacterPanel" type="HSplitContainer" parent="UI" groups=["UIPanel"]]
+offset_left = 13.0
+offset_top = 134.0
+offset_right = 320.0
+offset_bottom = 300.0
+mouse_filter = 2
+dragging_enabled = false
 script = ExtResource("39_y4shw")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="UI/CharacterPanel"]
+[node name="Stats" type="PanelContainer" parent="UI/CharacterPanel"]
+layout_mode = 2
+theme = ExtResource("56_ghu8e")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/CharacterPanel/Stats"]
 layout_mode = 2
 texture = ExtResource("73_qdj7c")
 region_rect = Rect2(0, 0, 44, 44)
@@ -4953,19 +4953,20 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/CharacterPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/CharacterPanel/Stats"]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/CharacterPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CharacterPanel/Stats/MarginContainer"]
+custom_minimum_size = Vector2(144, 0)
 layout_mode = 2
 tooltip_text = "Level up using this panel"
 theme_override_constants/separation = 8
 
-[node name="Close" type="Button" parent="UI/CharacterPanel/MarginContainer/VBoxContainer"]
+[node name="Close" type="Button" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("41_3pkug")
@@ -4975,24 +4976,23 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_n1k6j")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3pkug")
 icon = ExtResource("40_as7pt")
 flat = true
-script = SubResource("GDScript_4jgp1")
 
-[node name="LevelLabel" type="Label" parent="UI/CharacterPanel/MarginContainer/VBoxContainer"]
+[node name="LevelLabel" type="Label" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Level: "
 
-[node name="HSeparator" type="HSeparator" parent="UI/CharacterPanel/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_t42fh")
 
-[node name="Strength" parent="UI/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+[node name="Strength" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
 layout_mode = 2
 size_flags_horizontal = 0
 tooltip_text = "- Adds damage but increases Fatigue over time.
 - Increases stamina cost of attacks
 "
 
-[node name="Endurance" parent="UI/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+[node name="Endurance" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
 layout_mode = 2
 size_flags_horizontal = 0
 tooltip_text = "- Adds stamina and reduces Fatigue but increases smell build up.
@@ -5000,19 +5000,45 @@ tooltip_text = "- Adds stamina and reduces Fatigue but increases smell build up.
 - Decreases general stamina costs
 "
 
-[node name="Vitality" parent="UI/CharacterPanel/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+[node name="Vitality" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
 layout_mode = 2
 size_flags_horizontal = 0
 tooltip_text = "- Increases health and stamina.
 "
 
-[node name="HSeparator2" type="HSeparator" parent="UI/CharacterPanel/MarginContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_t42fh")
 
-[node name="ExpRequired" type="Label" parent="UI/CharacterPanel/MarginContainer/VBoxContainer"]
+[node name="ExpRequired" type="Label" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Required Exp: "
+text = "Required XP: "
+
+[node name="ExpAfterLevelUp" type="Label" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "XP Left:"
+
+[node name="Confirm" type="Button" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Confirm"
+
+[node name="Details" type="PanelContainer" parent="UI/CharacterPanel"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/CharacterPanel/Details"]
+layout_mode = 2
+texture = ExtResource("73_qdj7c")
+region_rect = Rect2(0, 0, 44, 44)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/CharacterPanel/Details"]
+layout_mode = 2
 
 [node name="ThoughtContainer" type="VBoxContainer" parent="UI" groups=["HUD"]]
 anchors_preset = 15
@@ -5308,6 +5334,7 @@ process_material = ExtResource("38_yofsr")
 position = Vector2(0, -36)
 
 [node name="ColliderStanding" type="CollisionShape2D" parent="." groups=["Flip"]]
+visible = false
 position = Vector2(0, 5.5)
 scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_y6qte")
@@ -5318,6 +5345,7 @@ target_position = Vector2(17, 0)
 collision_mask = 32
 
 [node name="CornerGrabCheck" type="RayCast2D" parent="." groups=["Flip"]]
+visible = false
 position = Vector2(8, -28)
 target_position = Vector2(0, 18)
 collision_mask = 65537
@@ -5430,7 +5458,6 @@ position = Vector2(0.5, 14)
 shape = SubResource("RectangleShape2D_586st")
 
 [node name="SmellCollider" type="Area2D" parent="."]
-visible = false
 scale = Vector2(1e-05, 1e-05)
 collision_layer = 0
 collision_mask = 8
@@ -5457,7 +5484,8 @@ collision_mask = 2048
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StairCheck"]
 shape = SubResource("RectangleShape2D_n1k6j")
 
-[connection signal="pressed" from="UI/CharacterPanel/MarginContainer/VBoxContainer/Close" to="UI/CharacterPanel" method="_on_close_pressed"]
+[connection signal="pressed" from="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer/Close" to="UI/CharacterPanel/Stats" method="_on_close_pressed"]
+[connection signal="pressed" from="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer/Confirm" to="UI/CharacterPanel" method="_on_confirm_pressed"]
 [connection signal="attack_frame" from="StateMachine/slash" to="StateMachine/slash" method="_on_attack_frame"]
 [connection signal="attack_frame" from="StateMachine/stab" to="StateMachine/stab" method="_on_attack_frame"]
 [connection signal="body_entered" from="StateMachine/bash/BashHitbox" to="StateMachine/bash" method="_on_bash_hitbox_body_entered"]

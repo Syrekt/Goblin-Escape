@@ -10,7 +10,7 @@ func _process(delta: float) -> void:
 
 	var arr : Array = get_children()
 	for child in arr:
-		if child is Buff:
+		if child is StatusEffect:
 			final_generation_speed += child.value
 
 	value = move_toward(value, max_value, final_generation_speed * delta)

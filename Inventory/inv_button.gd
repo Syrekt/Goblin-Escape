@@ -23,20 +23,25 @@ func use() -> bool:
 
 func _on_pressed() -> void:
 	match text:
+		"Cheese", "Bread", "Dried Fish":
+			owner.health.value += 10
 		"Health Potion":
 			print("Drink health potion")
 			owner.health.value += 50
 		"Water":
 			print("Drink water")
-			owner.stamina.add_buff(0.5, 10.0)
+			#owner.stamina.add_buff(0.5, 10.0)
 		"Stenchbane":
 			print("Use Stenchbane")
 			owner.smell.value = 0;
-			owner.smell.add_buff(-10, 10)
+			#owner.smell.add_buff(-10, 10)
 		"Feather Step":
 			print("Use feather step")
 		"Bandage":
-			print("Use bandage")
+			if owner.status_effect_container.has_status_effect():
+				owner.status_effect_container.remove_status_effect("Bleed")
+			else:
+				owner.think(["I don't need this", "I'm not bleeding"].pick_random())
 		"Minor Rejuvenation Draught":
 			print("Use Minor Rejuvenation Draught")
 		"Pher Potion":

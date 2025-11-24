@@ -1,7 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://cx6tcje3rwlkx"]
+[gd_scene load_steps=17 format=3 uid="uid://cx6tcje3rwlkx"]
 
 [ext_resource type="Texture2D" uid="uid://d4mhe71q2jbdl" path="res://Map/Props/spr_crates1_strip5.png" id="2_catkl"]
+[ext_resource type="PackedScene" uid="uid://dejaaa7dsd8yv" path="res://Inventory/Pickup Objects/pickup_water.tscn" id="2_ov6fu"]
+[ext_resource type="PackedScene" uid="uid://b1sxvt550tr3y" path="res://Inventory/Pickup Objects/pickup_minor_rejuvenation_draught.tscn" id="3_7lo2c"]
 [ext_resource type="Script" uid="uid://2psqd5pwfxyk" path="res://Scripts/map_object.gd" id="4_1d6uj"]
+[ext_resource type="PackedScene" uid="uid://cqa1nagpe2ny6" path="res://Inventory/Pickup Objects/pickup_bandage.tscn" id="4_vmhp0"]
+[ext_resource type="PackedScene" uid="uid://dj8e0h5e18pbr" path="res://Inventory/Pickup Objects/pickup_dried_fish.tscn" id="5_7040n"]
+[ext_resource type="PackedScene" uid="uid://cr37dk6lwgop6" path="res://Inventory/Pickup Objects/pickup_cheese.tscn" id="6_chavw"]
+[ext_resource type="PackedScene" uid="uid://bp8dehh5gawrb" path="res://Inventory/Pickup Objects/pickup_bread.tscn" id="7_xqyx0"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4n3rg"]
 polygon = PackedVector2Array(-16, -14, -12, -17, 14, -16, 16, -14, 16, 13, 12, 16, -16, 16)
@@ -64,7 +70,7 @@ collision_mask = 4097
 script = ExtResource("4_1d6uj")
 destructable = true
 collidable = true
-gravity = 0
+random_drops = Array[PackedScene]([ExtResource("2_ov6fu"), ExtResource("3_7lo2c"), ExtResource("4_vmhp0"), ExtResource("5_7040n"), ExtResource("6_chavw"), ExtResource("7_xqyx0")])
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_4n3rg")

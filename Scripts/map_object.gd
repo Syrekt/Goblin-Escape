@@ -8,6 +8,7 @@ class_name MapObject extends CharacterBody2D
 @export var health	:= 50.0
 var health_max		:= 0.0
 var health_cur 		:= 0.0
+var was_destroyed	:= false ## Indicated that this is not the first time this create has been destroyed
 
 @export var destructable	:= false
 @export var collidable		:= false
@@ -15,6 +16,10 @@ var health_cur 		:= 0.0
 
 @export var gravity := 300 * 60
 @export var y_acc := 5
+
+@export var debug := false
+
+@export var random_drops : Array[PackedScene]
 
 var damage_taken := 0
 var falling := false
@@ -30,7 +35,7 @@ func _ready() -> void:
 	var game = Game.get_singleton()
 	await game.room_loaded
 	print("game.loading: "+str(game.loading));
-	if game.loading || !is_in_group("Crate"):
+	if game.loading || is_in_group("Crate"):
 		var save_data = game.get_data_in_room(name)
 		if save_data:
 			load_data(save_data)
@@ -40,7 +45,7 @@ func _physics_process(delta: float) -> void:
 	if falling && is_on_floor_only():
 		Ge.EmitNoise(self, global_position + drop_marker.position, 20)
 		Ge.play_audio(audio_emitter, 0, "res://SFX/Hit on wood/")
-	if !is_on_floor():
+	if !is_on_floor() && health_cur <= 0:
 		velocity.y = move_toward(velocity.y, gravity * delta, y_acc)
 	move_and_slide()
 
@@ -57,19 +62,23 @@ func take_damage(damage: int, source) -> void:
 	else:
 		sprite.frame = frame_count
 		Ge.play_audio_free(0, "res://SFX/wood break.mp3")
-		if drop_random_loot:
-			drop_loot()
+		print("was_destroyed: "+str(was_destroyed))
+		drop_loot()
+		#if was_destroyed: #drop_random_loot:
+		#	drop_loot()
+		#else:
+		#	was_destroyed = true
 
 		set_collision_layer_value(1, false)
 		set_collision_layer_value(8, false)
+		set_collision_layer_value(13, false)
 		if light_occuler: light_occuler.queue_free()
 	save()
 func drop_loot() -> void:
-	var path = "res://Inventory/Pickup Objects"
-	var array : Array = DirAccess.get_files_at(path)
-	var scene = array.pick_random()
+	print("Drop loot")
+	var scene : PackedScene = random_drops.pick_random()
 	print("scene: "+str(scene))
-	var loot = load(path + "/" + scene).instantiate()
+	var loot = scene.instantiate()
 	loot.global_position = global_position
 	get_tree().current_scene.add_child(loot)
 
@@ -80,6 +89,11 @@ func save() -> void:
 	})
 func load_data(data: Dictionary) -> void:
 	health_cur		= data.get("health", true)
-	sprite.frame	= data.get("frame", 0)
+	if health_cur <= 0:
+		was_destroyed = true
+		health_cur = health_max
+	else:
+		sprite.frame	= data.get("frame", 0)
 	set_collision_layer_value(1, health_cur > 0)
 	set_collision_layer_value(8, health_cur > 0)
+	set_collision_layer_value(13, health_cur > 0)

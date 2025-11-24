@@ -42,11 +42,14 @@ var climb_start_position : Vector2 ## When Kalin takes damage, she is moved to t
 #region Stats & EXP
 const HEALTH_PER_VIT	:= 10
 const STAMINA_PER_VIT	:= 2
+const LEVEL_UP_BASE_EXP_REQUIREMENT	:= 100
+const LEVEL_UP_MOD			:= 10.0
+const LEVEL_UP_GROWTH		:= 3.0
 
 @export var vitality := 1
 @export var strength := 1
 @export var endurance := 1
-@export var level := 0
+@export var level := 1
 @export var experience_point := 0
 var experience_required := 100
 #endregion
@@ -89,7 +92,7 @@ var experience_required := 100
 @onready var smell_collider : Area2D = $SmellCollider
 @onready var cell_check : RayCast2D = $CellCheck
 @onready var interaction_prompt : AnimatedSprite2D = $InteractionPrompt
-@onready var buff_container : HBoxContainer = find_child("BuffContainer")
+@onready var status_effect_container : HBoxContainer = find_child("StatusEffectContainer")
 @onready var map_scene : PackedScene = preload("res://UI/map.tscn")
 @onready var hurtbox : CollisionShape2D = $ColliderStanding
 #endregion
@@ -412,7 +415,10 @@ func toggle_inventory():
 	inventory_panel.toggle()
 func toggle_character_panel():
 	if controls_disabled: return
-	character_panel.visible = !character_panel.visible
+	if !character_panel.visible:
+		character_panel.open()
+	else:
+		character_panel.close()
 func toggle_map():
 	if controls_disabled: return
 	var map : Map = get_tree().current_scene.get_node_or_null("Map")
@@ -543,14 +549,17 @@ func break_grab() -> void:
 	state_node.state.finished.emit("break_free")
 	grabbed_by = null # Enemy will change it's state to 'shoved'
 func level_up() -> void:
-	var base_requirement := 100
-	var mod		:= 10.0
-	var growth	:= 3.0
 	experience_point -= experience_required
 	experience.lose(experience_required)
 	level += 1
-	experience_required = ceil(base_requirement * level + mod * pow(level, growth));
+	experience_required = get_exp_required_for_level(level + 1)
 	print("Experience required for the next level: "+str(experience_required))
+func get_exp_required_for_level(_level:int) -> int:
+	print("Get level requiredment for %d" %_level)
+	var base_requirement := 100
+	var mod		:= 10.0
+	var growth	:= 3.0
+	return ceil(LEVEL_UP_BASE_EXP_REQUIREMENT * _level + LEVEL_UP_MOD * pow(_level, LEVEL_UP_GROWTH))
 func calculate_stats() -> void:
 	health.value_max = 100 + HEALTH_PER_VIT * vitality
 	stamina.value_max = 5 + STAMINA_PER_VIT * vitality
@@ -871,6 +880,7 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
+	Debugger.printui("experience_required: "+str(experience_required))
 	slash_cost	= lerp(1.0, MAX_SLASH_FATIGUE, fatigue.value/100) * pow(strength, SLASH_FATIGUE_STRENGTH_MOD)/pow(endurance, SLASH_FATIGUE_ENDURANCE_MOD)
 	stab_cost	= lerp(0.5, MAX_STAB_FATIGUE, fatigue.value/100) * pow(strength, STAB_FATIGUE_STRENGTH_MOD)/pow(endurance, STAB_FATIGUE_ENDURANCE_MOD)
 	bash_cost 	= lerp(1.0, MAX_BASH_FATIGUE, fatigue.value/100) * pow(strength, BASH_FATIGUE_STRENGTH_MOD)/pow(endurance, BASH_FATIGUE_ENDURANCE_MOD)
@@ -925,8 +935,10 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
+		#status_effect_container.add_status_effect("Death's Door")
 		#take_damage(90)
-		experience.add(1000)
+		experience.add(99999)
+		toggle_character_panel()
 
 	check_interactable()
 #endregion
@@ -1001,3 +1013,11 @@ func _on_fullscreen_panel_closed() -> void:
 	for panel in huds:
 		panel.show()
 #endregion
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.is_pressed():
+		print("event: "+str(event))
+		match event.keycode:
+			KEY_U:
+				toggle_character_panel()
+			KEY_O:
+				experience.add(9999)

@@ -16,13 +16,11 @@ func enter(previous_state_path: String, data := {}) -> void:
 		player.dead = true
 		player.unconscious = false
 	else:
-		for buff in player.buff_container.get_children():
-			if buff.effect == "death's door":
-				player.dead = true
-				player.unconscious = false
-				buff.queue_free()
-				break
+		if player.status_effect_container.has_status_effect("Death's Door"):
+			player.dead = true
+			player.unconscious = false
 
+	player.status_effect_container.remove_status_effect("Death's Door")
 	if player.dead:
 		print("Dead")
 		death_timer.start()

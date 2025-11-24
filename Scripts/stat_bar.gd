@@ -1,21 +1,7 @@
 class_name StatBar extends TextureProgressBar
 
-var buff_scene = preload("res://Objects/buff.tscn")
-
-@export var buff_sprite : Texture2D
-@export var debuff_sprite : Texture2D
-
-@onready var buff_container = owner.find_child("BuffContainer")
-
 var tween_tint		: Tween
 var tween_sprite	: Tween
-
-func add_buff(_value : float, _time : float) -> void:
-	var buff = buff_scene.instantiate()
-	if _value < 0:
-		buff.texture = debuff_sprite
-	buff_container.add_child(buff)
-	buff.setup(_value, _time)
 
 func blink(tint_kalin: Color, tint_sprite: Color) -> void:
 	if tween_tint && tween_tint.is_running(): return 

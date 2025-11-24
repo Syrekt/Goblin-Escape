@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2ua4l2mwowr5"
-path="res://.godot/imported/death.png-971b6c02f5423ba222f25a2217e9d295.ctex"
+uid="uid://cj2jdwmdwqwkd"
+path="res://.godot/imported/dried_fish.png-3d34248ce1de8fb1a78f6d4c521d4a2d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Buffs/death.png"
-dest_files=["res://.godot/imported/death.png-971b6c02f5423ba222f25a2217e9d295.ctex"]
+source_file="res://Inventory/Sprites/dried_fish.png"
+dest_files=["res://.godot/imported/dried_fish.png-3d34248ce1de8fb1a78f6d4c521d4a2d.ctex"]
 
 [params]
 

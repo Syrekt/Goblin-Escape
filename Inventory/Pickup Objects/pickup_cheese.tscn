@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=3 uid="uid://cr37dk6lwgop6"]
+
+[ext_resource type="Texture2D" uid="uid://b77maaxdsw38" path="res://Inventory/Sprites/cheese.png" id="1_k6q7j"]
+[ext_resource type="Script" uid="uid://cliq1akrpj5ng" path="res://Scripts/item_pickup.gd" id="1_xd3vf"]
+[ext_resource type="PackedScene" uid="uid://cyuk5qsesuyn8" path="res://Inventory/item_pickup_area.tscn" id="2_4fg3d"]
+[ext_resource type="Resource" uid="uid://bnl1o3wewqx81" path="res://Inventory/Resources/cheese.tres" id="3_pch3b"]
+
+[node name="PickupCheese" type="Sprite2D"]
+texture = ExtResource("1_k6q7j")
+script = ExtResource("1_xd3vf")
+item = ExtResource("3_pch3b")
+
+[node name="ItemPickupArea" parent="." instance=ExtResource("2_4fg3d")]
