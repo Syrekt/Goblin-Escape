@@ -92,7 +92,7 @@ var experience_required := 100
 @onready var smell_collider : Area2D = $SmellCollider
 @onready var cell_check : RayCast2D = $CellCheck
 @onready var interaction_prompt : AnimatedSprite2D = $InteractionPrompt
-@onready var status_effect_container : HBoxContainer = find_child("StatusEffectContainer")
+@onready var status_effect_container : StatusEffectContainer = find_child("StatusEffectContainer")
 @onready var map_scene : PackedScene = preload("res://UI/map.tscn")
 @onready var hurtbox : CollisionShape2D = $ColliderStanding
 #endregion
@@ -125,9 +125,9 @@ const STAB_FATIGUE_STRENGTH_MOD		:= 0.4
 const STAB_FATIGUE_ENDURANCE_MOD	:= 0.7
 const BASH_FATIGUE_STRENGTH_MOD		:= 0.5
 const BASH_FATIGUE_ENDURANCE_MOD	:= 0.8
-const SLASH_SWEAT_PER_STRENGHT	:= 0.06
-const STAB_SWEAT_PER_STRENGHT	:= 0.02
-const BASH_SWEAT_PER_STRENGHT	:= 0.06
+const SLASH_SWEAT_PER_STRENGTH	:= 0.06
+const STAB_SWEAT_PER_STRENGTH	:= 0.02
+const BASH_SWEAT_PER_STRENGTH	:= 0.06
 
 @export var has_sword := false #false for release
 var in_combat_state := false
@@ -564,11 +564,11 @@ func calculate_stats() -> void:
 	health.value_max = 100 + HEALTH_PER_VIT * vitality
 	stamina.value_max = 5 + STAMINA_PER_VIT * vitality
 func get_slash_sweat_cost() -> float:
-	return SLASH_SWEAT + log((SLASH_SWEAT_PER_STRENGHT * strength) + 1)
+	return SLASH_SWEAT + log((SLASH_SWEAT_PER_STRENGTH * strength) + 1)
 func get_stab_sweat_cost() -> float:
-	return STAB_SWEAT + log((STAB_SWEAT_PER_STRENGHT * strength) + 1)
+	return STAB_SWEAT + log((STAB_SWEAT_PER_STRENGTH * strength) + 1)
 func get_bash_sweat_cost() -> float:
-	return BASH_SWEAT + log((BASH_SWEAT_PER_STRENGHT * strength) + 1)
+	return BASH_SWEAT + log((BASH_SWEAT_PER_STRENGTH * strength) + 1)
 func can_be_attacked() -> bool: ## Returns false when player is in 'sex_state' or 'strugle_state'
 	var groups = state_node.state.get_groups()
 	for group in groups:
@@ -629,6 +629,30 @@ func toggle_pause_menu() -> void:
 		if !open_menu:
 			open_menu = ingame_menu.instantiate()
 			get_tree().current_scene.add_child(open_menu)
+func get_slash_damage(_str:=strength) -> float:
+	return SLASH_DAMAGE + _str * SLASH_DAMAGE_PER_STRENGTH
+func get_stab_damage(_str:=strength) -> float:
+	return STAB_DAMAGE + _str * STAB_DAMAGE_PER_STRENGTH
+func get_bash_damage(_str:=strength) -> float:
+	return BASH_DAMAGE + _str * BASH_DAMAGE_PER_STRENGTH
+func get_slash_stamina_cost(_str:=strength,end:=endurance) -> float:
+	return SLASH_STAMINA_COST + _str * SLASH_COST_PER_STRENGTH - end * SLASH_COST_PER_ENDURANCE
+func get_stab_stamina_cost(_str:=strength,end:=endurance) -> float:
+	return STAB_STAMINA_COST + _str * STAB_COST_PER_STRENGTH - end * STAB_COST_PER_ENDURANCE
+func get_bash_stamina_cost(_str:=strength,end:=endurance) -> float:
+	return BASH_STAMINA_COST + _str * BASH_COST_PER_STRENGTH - end * BASH_COST_PER_ENDURANCE
+func get_slash_sweat_buildup(_str:=strength) -> float:
+	return SLASH_SWEAT + log(_str * SLASH_SWEAT_PER_STRENGTH + 1)
+func get_stab_sweat_buildup(_str:=strength) -> float:
+	return STAB_SWEAT + log(_str * STAB_SWEAT_PER_STRENGTH + 1)
+func get_bash_sweat_buildup(_str:=strength) -> float:
+	return BASH_SWEAT + log(_str * BASH_SWEAT_PER_STRENGTH + 1)
+func get_slash_fatigue(_str:=strength,end:=endurance) -> float:
+	return (float(_str) / float(_str + end)) * MAX_SLASH_FATIGUE
+func get_stab_fatigue(_str:=strength,end:=endurance) -> float:
+	return (float(_str) / float(_str + end)) * MAX_STAB_FATIGUE
+func get_bash_fatigue(_str:=strength,end:=endurance) -> float:
+	return (float(_str) / float(_str + end)) * MAX_BASH_FATIGUE
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -877,10 +901,19 @@ func _physics_process(delta: float) -> void:
 		else:
 			leave_shadow.emit()
 	#endregion
+#region Interactions
+	var interactions = col_interaction.get_overlapping_areas()
+	if interactions.size() == 0:
+		interaction_prompt._hide()
+		interaction_target = null
+	for interaction : Interaction in interactions:
+		if !interaction.auto && interaction.interactable:
+			interaction_prompt._show("interact", interaction.title)
+			interaction_target = interaction
+#endregion
 #endregion
 #region Process
 func _process(delta: float) -> void:
-	Debugger.printui("experience_required: "+str(experience_required))
 	slash_cost	= lerp(1.0, MAX_SLASH_FATIGUE, fatigue.value/100) * pow(strength, SLASH_FATIGUE_STRENGTH_MOD)/pow(endurance, SLASH_FATIGUE_ENDURANCE_MOD)
 	stab_cost	= lerp(0.5, MAX_STAB_FATIGUE, fatigue.value/100) * pow(strength, STAB_FATIGUE_STRENGTH_MOD)/pow(endurance, STAB_FATIGUE_ENDURANCE_MOD)
 	bash_cost 	= lerp(1.0, MAX_BASH_FATIGUE, fatigue.value/100) * pow(strength, BASH_FATIGUE_STRENGTH_MOD)/pow(endurance, BASH_FATIGUE_ENDURANCE_MOD)
@@ -946,11 +979,12 @@ func _process(delta: float) -> void:
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	print(area)
 func _on_interactor_area_entered(area: Area2D) -> void:
-	print("interactor area entered")
-	print("area: "+str(area.name))
-	interaction_target = area
-	if !interaction_target.auto && interaction_target.interactable:
-		interaction_prompt._show("interact", area.title)
+	return
+	#print("interactor area entered")
+	#print("area: "+str(area.name))
+	#interaction_target = area
+	#if !interaction_target.auto && interaction_target.interactable:
+	#	interaction_prompt._show("interact", area.title)
 func _on_interactor_area_exited(area: Area2D) -> void:
 	if interaction_target == area:
 		interaction_target.waiting_player_exit = false
@@ -1015,7 +1049,6 @@ func _on_fullscreen_panel_closed() -> void:
 #endregion
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_pressed():
-		print("event: "+str(event))
 		match event.keycode:
 			KEY_U:
 				toggle_character_panel()

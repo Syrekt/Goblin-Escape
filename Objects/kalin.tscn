@@ -1,4 +1,4 @@
-[gd_scene load_steps=257 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=255 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://b5p67lby0k2d0" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -26,10 +26,8 @@
 [ext_resource type="Texture2D" uid="uid://p3oh0wc2s34d" path="res://Kalin/Sprites/Kalin-Hurt.png" id="9_e3nxf"]
 [ext_resource type="PackedScene" uid="uid://b02rwb4cvvhr4" path="res://Objects/state_machine.tscn" id="9_ojhio"]
 [ext_resource type="Script" uid="uid://mtruxnn62ila" path="res://Kalin/States/idle.gd" id="10_4yl4h"]
-[ext_resource type="Texture2D" uid="uid://xoyfqo8f1wal" path="res://UI/Buffs/buff.png" id="10_pxbrw"]
 [ext_resource type="Texture2D" uid="uid://x5i4gyyapuxd" path="res://Kalin/Sprites/Kalin-Pull.png" id="10_qartl"]
 [ext_resource type="Texture2D" uid="uid://cocmax1vh70kr" path="res://Kalin/Sprites/Kalin-Push.png" id="11_0xxw0"]
-[ext_resource type="Texture2D" uid="uid://b4hs0qesl2jhr" path="res://UI/Buffs/debuff.png" id="11_4inu4"]
 [ext_resource type="Script" uid="uid://jcdm00a4m2ox" path="res://Kalin/States/rise.gd" id="11_10o18"]
 [ext_resource type="AudioStream" uid="uid://de85i38j41fnf" path="res://SFX/Goblin/DAMAGE 01.wav" id="11_s52bw"]
 [ext_resource type="Texture2D" uid="uid://yicqhor234bv" path="res://Kalin/Sprites/Kalin-Light Walk.png" id="12_cbigf"]
@@ -45,10 +43,10 @@
 [ext_resource type="Script" uid="uid://bm8wfeg4wwdvr" path="res://Scripts/fatigue.gd" id="21_sklaw"]
 [ext_resource type="Texture2D" uid="uid://whea0khot8nb" path="res://Sex/kalin+goblin-loop.png" id="22_bs037"]
 [ext_resource type="Texture2D" uid="uid://bxgpgvblnjqhg" path="res://Kalin/Sprites/Kalin-Walk.png" id="22_vnsvi"]
-[ext_resource type="Script" uid="uid://cygaa231g4i0v" path="res://Scripts/buff_container.gd" id="23_r14np"]
+[ext_resource type="Script" uid="uid://cygaa231g4i0v" path="res://Scripts/status_effect_container.gd" id="23_r14np"]
 [ext_resource type="Script" uid="uid://bgnnyj7i10wbg" path="res://Kalin/States/walk.gd" id="28_1dko0"]
 [ext_resource type="Texture2D" uid="uid://bq334bamr3mgu" path="res://Kalin/Sprites/Kalin-Slide.png" id="29_qnnkd"]
-[ext_resource type="Resource" uid="uid://buieik1hf8xh2" path="res://Inventory/Resources/player_inventory.tres" id="29_y4shw"]
+[ext_resource type="Resource" uid="uid://buieik1hf8xh2" path="res://Inventory/player_inventory.tres" id="29_y4shw"]
 [ext_resource type="AudioStream" uid="uid://ds7af8tnix0pc" path="res://Sex/Sex Female Moan Soft.wav" id="31_cfvac"]
 [ext_resource type="Texture2D" uid="uid://bl5jujtf6kegu" path="res://UI/Inventory/Inventory panel1_with background.png" id="31_nhuj2"]
 [ext_resource type="PackedScene" uid="uid://cd3svdt2crxap" path="res://Inventory/inv_button.tscn" id="32_fb5pj"]
@@ -4669,6 +4667,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UI" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("8_4oj65")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="UI"]
@@ -4767,8 +4766,6 @@ offset_bottom = 16.5
 texture_progress = ExtResource("61_5atg1")
 tint_progress = Color(0.679805, 0.262423, 0, 1)
 script = ExtResource("55_h4isg")
-buff_sprite = ExtResource("10_pxbrw")
-debuff_sprite = ExtResource("11_4inu4")
 
 [node name="ExpTypeBox" type="PanelContainer" parent="UI/HUD" groups=["HUD"]]
 layout_mode = 0
@@ -4929,11 +4926,13 @@ bbcode_enabled = true
 text = "[color=red]This is the description text[/color]"
 
 [node name="CharacterPanel" type="HSplitContainer" parent="UI" groups=["UIPanel"]]
-offset_left = 13.0
-offset_top = 134.0
-offset_right = 320.0
-offset_bottom = 300.0
+visible = false
+offset_left = 5.0
+offset_top = 94.0
+offset_right = 356.0
+offset_bottom = 312.0
 mouse_filter = 2
+theme = ExtResource("56_ghu8e")
 dragging_enabled = false
 script = ExtResource("39_y4shw")
 
@@ -5039,6 +5038,20 @@ metadata/_edit_lock_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/CharacterPanel/Details"]
 layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CharacterPanel/Details/MarginContainer"]
+layout_mode = 2
+
+[node name="DetailsLabel" type="RichTextLabel" parent="UI/CharacterPanel/Details/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
 
 [node name="ThoughtContainer" type="VBoxContainer" parent="UI" groups=["HUD"]]
 anchors_preset = 15

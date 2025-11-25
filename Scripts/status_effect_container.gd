@@ -1,4 +1,4 @@
-extends HBoxContainer
+class_name StatusEffectContainer extends HBoxContainer
 
 var status_effect_scene := preload("res://Objects/status_effect.tscn")
 

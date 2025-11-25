@@ -22,6 +22,7 @@ func use() -> bool:
 	return item.amount <= 0
 
 func _on_pressed() -> void:
+	var used = true
 	match text:
 		"Cheese", "Bread", "Dried Fish":
 			owner.health.value += 10
@@ -38,9 +39,10 @@ func _on_pressed() -> void:
 		"Feather Step":
 			print("Use feather step")
 		"Bandage":
-			if owner.status_effect_container.has_status_effect():
+			if owner.status_effect_container.has_status_effect("Bleed"):
 				owner.status_effect_container.remove_status_effect("Bleed")
 			else:
+				used = false
 				owner.think(["I don't need this", "I'm not bleeding"].pick_random())
 		"Minor Rejuvenation Draught":
 			print("Use Minor Rejuvenation Draught")
@@ -54,5 +56,5 @@ func _on_pressed() -> void:
 			owner.think(thought)
 		"_":
 			print("This item has no use")
-	if use():
+	if used && use():
 		queue_free()
