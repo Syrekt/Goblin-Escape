@@ -504,6 +504,8 @@ func save(save_manager: RefCounted) -> void:
 		else:
 			print("Unkown value, can't save " + i)
 	#Ge.save_node(self, save_data)
+	inventory_panel.save(save_data)
+	status_effect_container.save(save_data)
 	save_manager.set_value("kalin", save_data)
 func load(data: Dictionary) -> void:
 	print("Loaded player data: "+str(data))
@@ -524,6 +526,8 @@ func load(data: Dictionary) -> void:
 		set(key, data[key])
 	disable_camera_damping_on_spawn = true
 	global_position = Vector2(data.pos_x, data.pos_y)
+	inventory_panel.load(data)
+	status_effect_container.load(data.get("Status Effects"))
 func check_buffered_state() -> bool:
 	var state_to_switch : String
 	if buffered_state:
@@ -968,10 +972,11 @@ func _process(delta: float) -> void:
 	#endregion
 	if Input.is_action_just_pressed("debug1"):
 		print("debug1")
-		#status_effect_container.add_status_effect("Death's Door")
+		status_effect_container.add_status_effect("Death's Door")
+		status_effect_container.add_status_effect("Bleed", 5.0, 0.1)
 		#take_damage(90)
-		experience.add(99999)
-		toggle_character_panel()
+		#experience.add(99999)
+		#toggle_character_panel()
 
 	check_interactable()
 #endregion
@@ -1054,3 +1059,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 				toggle_character_panel()
 			KEY_O:
 				experience.add(9999)
+			KEY_V:
+				var items = inventory_panel.inventory.items
+				for item in items:
+					print("item.name: "+str(item.name));

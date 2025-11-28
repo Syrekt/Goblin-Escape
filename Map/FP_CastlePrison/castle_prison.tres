@@ -4158,6 +4158,9 @@ texture = ExtResource("3_usbtt")
 21:1/0 = 0
 21:0/0 = 0
 22:0/0 = 0
+1:17/0 = 0
+1:18/0 = 0
+1:19/0 = 0
 
 [resource]
 occlusion_layer_0/light_mask = 1

@@ -2,22 +2,24 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b28nl6yaw76ct"
-path="res://.godot/imported/ Potions-export8.png-b3f1796f5fc184545ee2f17b5ab8af09.ctex"
+uid="uid://c72jyub2opmw8"
+path="res://.godot/imported/health_potion.png-738b547fa85e3d6971053d6a3eb6b02b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Inventory/Sprites/ Potions-export8.png"
-dest_files=["res://.godot/imported/ Potions-export8.png-b3f1796f5fc184545ee2f17b5ab8af09.ctex"]
+source_file="res://Inventory/Sprites/health_potion.png"
+dest_files=["res://.godot/imported/health_potion.png-738b547fa85e3d6971053d6a3eb6b02b.ctex"]
 
 [params]
 
 compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
@@ -25,6 +27,10 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
+process/channel_remap/red=0
+process/channel_remap/green=1
+process/channel_remap/blue=2
+process/channel_remap/alpha=3
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

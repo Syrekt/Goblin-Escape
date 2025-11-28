@@ -8,17 +8,20 @@ func has_item(item: InventoryItem) -> bool:
 		if inv_item.name == item.name:
 			return true
 	return false
-func item_add(item: InventoryItem, amount := 1) -> void:
+func item_add(item, amount := 1) -> void:
 	for inv_item in items:
-		if inv_item && inv_item.name == item.name:
+		if inv_item && inv_item.name == item.item_name:
 			inv_item.amount += amount
 			return
 
-	var item_to_add : InventoryItem = item.duplicate()
-	item_to_add.amount = amount
+	var item_to_add : InventoryItem = InventoryItem.new()
+	item_to_add.name = item.item_name
+	item_to_add.description = item.item_description
+	item_to_add.icon = load(item.icon_path)
 	item_to_add.inventory = self
+
 	items.append(item_to_add)
-func item_reduce(item: InventoryItem, amount := 1) -> void:
+func item_reduce(item:InventoryItem, amount := 1) -> void:
 	for inv_item in items:
 		if inv_item && inv_item.name == item.name:
 			inv_item.amount -= 1

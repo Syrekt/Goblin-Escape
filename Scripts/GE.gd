@@ -1,7 +1,7 @@
 extends Node
 
 
-var inputs : Dictionary 
+var inputs : Dictionary
 var jump_key	: String
 var attack_key	: String
 var stance_key 	: String
@@ -42,7 +42,6 @@ var show_interaction_prompts := true:
 		show_interaction_prompts = v
 		Options.save_options()
 
-var adult_content_enabled := false
 
 signal show_combat_tutorial
 signal show_stealth_tutorial
@@ -97,7 +96,7 @@ func play_audio_from_string_array(position: Vector2, volume: float, path: String
 	var sound = string_array_get_random(array)
 	if sound.ends_with(".import"):
 		sound = sound.get_basename()
-	
+
 	emitter.volume_db = volume
 	emitter.stream = load(path + "/" + sound)
 	emitter.play()
@@ -136,8 +135,8 @@ func UpdateNoiseIndicator() -> void:
 func save_node(node, data: Dictionary) -> void:
 	print("Save node: %s" % node.name)
 	var json = JSON.stringify(data)
-	data["filename"] = node.get_scene_file_path() 
-	data["parent"] = node.get_parent().get_path() 
+	data["filename"] = node.get_scene_file_path()
+	data["parent"] = node.get_parent().get_path()
 	data["name"] = node.name
 	data["pos_x"] = node.position.x;
 	data["pos_y"] = node.position.y
@@ -209,9 +208,9 @@ func load_game() -> void:
 	print("save_nodes: "+str(save_nodes))
 	for i in save_nodes:
 		i.queue_free()
-	
+
 	await get_tree().process_frame
-	
+
 
 	# Load the file line by line and process that dictionary to restore
 	# the object it represents.

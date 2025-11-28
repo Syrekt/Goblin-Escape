@@ -375,6 +375,17 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
+[node name="HSplitContainer6" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer6"]
+custom_minimum_size = Vector2(124, 0)
+layout_mode = 2
+text = "Adult Content"
+
+[node name="AdultContent" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer6"]
+layout_mode = 2
+
 [node name="HSplitContainer" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -458,6 +469,7 @@ step = 0.1
 [connection signal="value_changed" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Blue/NoiseColorBlueSlider" to="." method="_on_noise_color_blue_slider_value_changed"]
 [connection signal="drag_ended" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Alpha/NoiseColorAlphaSlider" to="." method="_on_noise_color_alpha_slider_drag_ended"]
 [connection signal="value_changed" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Alpha/NoiseColorAlphaSlider" to="." method="_on_noise_color_alpha_slider_value_changed"]
+[connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer6/AdultContent" to="." method="_on_adult_content_toggled"]
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer/ShowTutorials" to="." method="_on_show_tutorials_toggled"]
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2/ShowHints" to="." method="_on_show_hints_toggled"]
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer3/ShowInteractionPrompts" to="." method="_on_show_interaction_prompts_toggled"]

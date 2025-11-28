@@ -1,13 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqa1nagpe2ny6"]
+[gd_scene load_steps=4 format=3 uid="uid://cqa1nagpe2ny6"]
 
 [ext_resource type="Texture2D" uid="uid://bjt5ics7rvdth" path="res://Inventory/Sprites/bandage.png" id="1_53qtc"]
-[ext_resource type="Script" uid="uid://cliq1akrpj5ng" path="res://Scripts/item_pickup.gd" id="2_3m0mq"]
-[ext_resource type="Resource" uid="uid://d4ctodhxrgntr" path="res://Inventory/Resources/bandage.tres" id="3_53qtc"]
+[ext_resource type="Script" uid="uid://cliq1akrpj5ng" path="res://Inventory/item_pickup.gd" id="2_3m0mq"]
 [ext_resource type="PackedScene" uid="uid://cyuk5qsesuyn8" path="res://Inventory/item_pickup_area.tscn" id="4_3m0mq"]
 
 [node name="PickupHealth" type="Sprite2D"]
 texture = ExtResource("1_53qtc")
 script = ExtResource("2_3m0mq")
-item = ExtResource("3_53qtc")
+item_name = "Bandage"
 
 [node name="ItemPickupArea" parent="." instance=ExtResource("4_3m0mq")]

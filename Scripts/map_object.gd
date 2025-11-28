@@ -34,7 +34,6 @@ func _ready() -> void:
 
 	var game = Game.get_singleton()
 	await game.room_loaded
-	print("game.loading: "+str(game.loading));
 	if game.loading || is_in_group("Crate"):
 		var save_data = game.get_data_in_room(name)
 		if save_data:
@@ -79,6 +78,7 @@ func drop_loot() -> void:
 	var scene : PackedScene = random_drops.pick_random()
 	print("scene: "+str(scene))
 	var loot = scene.instantiate()
+	loot.instantiated = true
 	loot.global_position = global_position
 	get_tree().current_scene.add_child(loot)
 

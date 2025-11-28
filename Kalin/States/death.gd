@@ -12,7 +12,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	player.velocity.x = 0
 	var source = data.get("source")
 
-	if !source || !Ge.adult_content_enabled:
+	if !source || !Options.adult_content_enabled:
 		player.dead = true
 		player.unconscious = false
 	else:
@@ -99,7 +99,7 @@ func _on_recovery_timer_timeout() -> void:
 
 func _on_sex_timer_timeout() -> void:
 	print("Sex timer timeout")
-	if !Ge.adult_content_enabled:
+	if !Options.adult_content_enabled:
 		print("Adult content disabled, aborting")
 		return
 	player.can_have_sex = true

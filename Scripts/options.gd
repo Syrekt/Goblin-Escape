@@ -11,6 +11,7 @@ var window_screen := 0
 var current_screen := 0
 var hud_scale := 1
 var shadow_intensity = 1.0
+var adult_content_enabled := true
 
 func _set_window_position() -> void:
 	DisplayServer.window_set_position(window_pos)
@@ -64,6 +65,7 @@ func save_options() -> void:
 	config.set_value("gameplay", "show_interaction_prompts", Ge.show_interaction_prompts)
 	config.set_value("gameplay", "hud_scale", hud_scale)
 	config.set_value("gameplay", "shadow_intensity", shadow_intensity)
+	config.set_value("gameplay", "adult_content_enabled", adult_content_enabled)
 	
 	config.save(config_path)
 func load_options() -> int:
@@ -105,6 +107,7 @@ func load_options() -> int:
 		Ge.show_interaction_prompts	= config.get_value("gameplay", "show_interaction_prompts", true)
 		hud_scale			= config.get_value("gameplay", "hud_scale", 1)
 		shadow_intensity	= config.get_value("gameplay", "shadow_intensity", 1.0)
+		adult_content_enabled	= config.get_value("gameplay", "adult_content_enabled", 1.0)
 		#endregion
 	return err
 

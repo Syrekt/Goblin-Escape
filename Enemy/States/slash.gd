@@ -15,7 +15,7 @@ func _on_slash_hitbox_body_entered(node: Node2D) -> void:
 
 			defender.take_damage(enemy.slash_damage, enemy, true)
 			defender.combat_properties.pushback_apply(enemy.global_position, 50)
-			defender.status_effect_container.add_status_effect("Bleed")
+			defender.status_effect_container.add_status_effect("Bleed", 5.0, 0.1)
 		else:
 			defender.take_damage(enemy.slash_damage, enemy)
 

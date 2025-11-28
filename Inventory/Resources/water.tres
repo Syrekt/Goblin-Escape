@@ -1,13 +1,11 @@
 [gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://cpm88cy10scla"]
 
-[ext_resource type="Texture2D" uid="uid://c4tusp4o5tj8f" path="res://Inventory/Sprites/ Potions-export1.png" id="1_v6c6r"]
+[ext_resource type="Texture2D" uid="uid://c4tusp4o5tj8f" path="res://Inventory/Sprites/water.png" id="1_v6c6r"]
 [ext_resource type="Script" uid="uid://nrl1858h0shp" path="res://Inventory/inv_item.gd" id="2_hrv3e"]
 
 [resource]
 script = ExtResource("2_hrv3e")
 name = "Water"
 icon = ExtResource("1_v6c6r")
-amount = 1
-consumable = true
 description = "Negates the effects of other drinks and increases stamina recovery "
 metadata/_custom_type_script = "uid://nrl1858h0shp"

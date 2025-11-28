@@ -1,0 +1,86 @@
+{
+  "Water": {
+    "item_name": "Water",
+    "item_description": "Negates the effects of other drinks and increases stamina recovery",
+    "consumable": true,
+    "icon_path": "res://Inventory/Sprites/water.png"
+  },
+  "Stenchbane": {
+    "item_name": "Stenchbane",
+    "item_description": "Suppresses the body odor, preventing creatures from sniffing me out.",
+    "consumable": true,
+    "icon_path": "res://Inventory/Sprites/stenchbane.png"
+  },
+  "Seed of the Weak": {
+    "item_name": "Seed of the Weak",
+    "item_description": "Collected seed of a weak soul.",
+    "consumable": true,
+    "icon_path": "res://Inventory/Sprites/seed_of_the_weak.png"
+  },
+  "Pher Potion": {
+    "item_name": "Pher Potion",
+    "item_description": "Supresses body odor, reduces stamina generation.",
+    "consumable": true,
+    "icon_path": "res://Inventory/Sprites/pher_potion.png"
+  },
+  "Minor Rejuvenation Draught": {
+    "item_name": "Minor Rejuvenation Draught",
+    "item_description": "Regenerates small amount of health overtime.",
+    "consumable": true,
+    "icon_path": "res://Inventory/Sprites/minor_rejuvenation_draught.png"
+  },
+  "Urgent Letter": {
+    "item_name": "Urgent Letter",
+    "item_description": "The King said it was urgent but maybe I'm already too late...",
+    "consumable": false,
+    "icon_path": "res://Inventory/Sprites/letter_scroll_unread.png"
+  },
+  "Key": {
+    "item_name": "Key",
+    "item_description": "Unlocks something.",
+    "consumable": false,
+    "icon_path": "res://Inventory/Keys/key items1.png"
+  },
+  "Infertility Potion": {
+    "item_name": "Infertility Potion",
+    "item_description": "Prevents pregnancy for a while",
+    "consumable": true,
+    "icon_path": "res://Inventory/Sprites/infertility_potion.png"
+  },
+  "Health Potion": {
+    "item_name": "Health Potion",
+    "item_description": "Fully recovers [color=red]health[/color]",
+    "consumable": true,
+    "icon_path": "res://Inventory/Sprites/health_potion.png"
+  },
+  "Feather Step": {
+    "item_name": "Feather Step",
+    "item_description": "Reduces the [color=yellow]movement[/color] sounds you make.",
+    "consumable": true,
+    "icon_path": "res://Inventory/Sprites/feather_step.png"
+  },
+  "Dried Fish": {
+    "item_name": "Dried Fish",
+    "item_description": "Recovers small amount of health.",
+    "consumable": true,
+    "icon_path": "res://Inventory/Sprites/dried_fish.png"
+  },
+  "Cheese": {
+    "item_name": "Cheese",
+    "item_description": "Restores small amount of health.",
+    "consumable": true,
+    "icon_path": "res://Inventory/Sprites/cheese.png"
+  },
+  "Bread": {
+    "item_name": "Bread",
+    "item_description": "Recovers small amount of health.",
+    "consumable": true,
+    "icon_path": "res://Inventory/Sprites/bread.png"
+  },
+  "Bandage": {
+    "item_name": "Bandage",
+    "item_description": "Stops the bleeding.",
+    "consumable": true,
+    "icon_path": "res://Inventory/Sprites/bandage.png"
+  }
+}

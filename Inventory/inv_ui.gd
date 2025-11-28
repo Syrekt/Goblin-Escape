@@ -53,3 +53,18 @@ func _on_focus_entered(item : InventoryItem) -> void:
 	if item:
 		description_text.text = item.description
 #endregion
+
+func save(save_data) -> void:
+	var game = Game.get_singleton()
+	var player_inventory : Array[Dictionary]
+	for item in inventory.items:
+		print("Save item: " + str(item))
+		player_inventory.append({"name":item.name, "amount":item.amount})
+	save_data.set("inventory", player_inventory)
+func load(data: Dictionary) -> void:
+	inventory = Inventory.new()
+	item_list = inventory.items
+	var loaded_inventory = data.inventory
+	for item in loaded_inventory:
+		print("Add item: " + item.name)
+		inventory.item_add(ImportData.item_data.get(item.name), item.amount)

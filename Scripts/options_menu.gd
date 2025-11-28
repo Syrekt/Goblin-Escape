@@ -38,6 +38,8 @@ extends TabContainer
 
 @onready var shadow_intensity_slider   : HSlider = find_child("ShadowIntensity")
 
+@onready var adult_content_toggle : CheckBox = find_child("AdultContent")
+
 var default_keybindings : Dictionary = {
 	"up"		: [KEY_A],
 	"down"		: [KEY_S],
@@ -89,6 +91,7 @@ func _ready() -> void:
 	var shadow_intensity = Options.shadow_intensity
 	shadow_intensity_slider.value = shadow_intensity
 
+	adult_content_toggle.button_pressed = Options.adult_content_enabled
 
 
 func _process(delta: float) -> void:
@@ -232,14 +235,17 @@ func _on_bgm_volume_value_changed(value: float) -> void:
 
 func _on_show_tutorials_toggled(toggled_on: bool) -> void:
 	Ge.show_tutorials = toggled_on
+	Options.save_options()
 
 
 func _on_show_hints_toggled(toggled_on: bool) -> void:
 	Ge.show_hints = toggled_on
+	Options.save_options()
 
 
 func _on_show_interaction_prompts_toggled(toggled_on: bool) -> void:
 	Ge.show_interaction_prompts = toggled_on
+	Options.save_options()
 
 
 func _on_hud_scale_option_item_selected(index: int) -> void:
@@ -253,3 +259,9 @@ func _on_hud_scale_option_item_selected(index: int) -> void:
 
 func _on_shadow_intensity_drag_ended(value_changed: bool) -> void:
 	Options.shadow_intensity = shadow_intensity_slider.value
+	Options.save_options()
+
+
+func _on_adult_content_toggled(toggled_on: bool) -> void:
+	Options.adult_content_enabled = toggled_on
+	Options.save_options()

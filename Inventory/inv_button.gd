@@ -1,6 +1,6 @@
 extends Button
 
-var item : InventoryItem
+var item
 
 func _process(delta: float) -> void:
 	if !item:
@@ -25,17 +25,25 @@ func _on_pressed() -> void:
 	var used = true
 	match text:
 		"Cheese", "Bread", "Dried Fish":
-			owner.health.value += 10
+			if owner.health.value == owner.health.value_max:
+				owner.think("I'm not hungry")
+			else:
+				owner.health.value += 10
 		"Health Potion":
-			print("Drink health potion")
-			owner.health.value += 50
+			if owner.health.value == owner.health.value_max:
+				owner.think("I don't need this")
+			else:
+				owner.health.value += 50
 		"Water":
 			print("Drink water")
 			#owner.stamina.add_buff(0.5, 10.0)
 		"Stenchbane":
-			print("Use Stenchbane")
-			owner.smell.value = 0;
-			#owner.smell.add_buff(-10, 10)
+			if owner.smell.value == 0:
+				owner.think("I don't need this")
+			else:
+				print("Use Stenchbane")
+				owner.smell.value = 0;
+				#owner.smell.add_buff(-10, 10)
 		"Feather Step":
 			print("Use feather step")
 		"Bandage":
