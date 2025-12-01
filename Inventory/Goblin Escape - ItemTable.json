@@ -82,5 +82,11 @@
     "item_description": "Stops the bleeding.",
     "consumable": true,
     "icon_path": "res://Inventory/Sprites/bandage.png"
+  },
+  "Revenant's Draught": {
+    "item_name": "Revenant's Draught",
+    "item_description": "Return to the last checkpoint.",
+    "consumable": true,
+    "icon_path": "res://Inventory/Sprites/revenants_draught.png"
   }
 }

@@ -445,8 +445,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if debug: Debugger.printui("facing: "+str(facing))
 	if debug: Debugger.printui("target_in_sight: "+str(target_in_sight))
-	# Check if there is anything that stops the gameplay
-	var ui_nodes = get_tree().get_nodes_in_group("UIPanel")
 func _physics_process(delta: float) -> void:
 	if chase_target:
 		var pos := chase_target.hurtbox.global_position

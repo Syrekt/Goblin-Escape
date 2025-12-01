@@ -17,14 +17,14 @@
 [ext_resource type="Texture2D" uid="uid://dve47hweqogj1" path="res://UI/Inventory/scroll_normal.png" id="13_x3eo3"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q7dot"]
-texture = ExtResource("4_i22i6")
+texture = ExtResource("2_cqags")
 texture_margin_left = 4.0
 texture_margin_top = 4.0
 texture_margin_right = 4.0
 texture_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jwmfk"]
-texture = ExtResource("2_cqags")
+texture = ExtResource("3_pkxtr")
 texture_margin_left = 4.0
 texture_margin_top = 4.0
 texture_margin_right = 4.0
@@ -84,6 +84,7 @@ texture = ExtResource("13_x3eo3")
 texture = ExtResource("12_36ber")
 
 [resource]
+Button/colors/font_focus_color = Color(0.7921569, 0.41960785, 0.15686275, 1)
 Button/colors/font_hover_color = Color(0.790768, 0.419579, 0.156451, 1)
 Button/colors/font_hover_pressed_color = Color(0.606493, 0.047253, 0.609392, 1)
 Button/fonts/font = ExtResource("1_5s48r")

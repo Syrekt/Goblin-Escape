@@ -2,6 +2,8 @@ extends Button
 
 var item
 
+@onready var suicide_confirm := preload("res://UI/suicide_confirm.tscn")
+
 func _process(delta: float) -> void:
 	if !item:
 		print("destroy button")
@@ -62,6 +64,11 @@ func _on_pressed() -> void:
 				"I might be too late but I can't open this."
 			].pick_random()
 			owner.think(thought)
+		"Revenant's Draught":
+			print("Use revenant's draught")
+			get_tree().current_scene.add_child(suicide_confirm.instantiate())
+			owner.inventory_panel.toggle()
+			used = false
 		"_":
 			print("This item has no use")
 	if used && use():

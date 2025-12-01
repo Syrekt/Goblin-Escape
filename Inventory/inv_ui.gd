@@ -30,16 +30,26 @@ func toggle() -> void:
 	description_panel.visible = visible
 
 	if visible:
-		ui_focus.fade_in()
-		for item in item_list:
-			if item:
-				create_button(item)
-		if vbox.get_child_count() > 0:
-			vbox.get_child(0).grab_focus()
+		open()
 	else:
-		ui_focus.fade_out()
-		for child in vbox.get_children():
-			child.queue_free()
+		close()
+func open() -> void:
+	visible = true
+	description_panel.visible = true
+
+	ui_focus.fade_in()
+	for item in item_list:
+		if item:
+			create_button(item)
+	if vbox.get_child_count() > 0:
+		vbox.get_child(0).grab_focus()
+func close() -> void:
+	visible = false
+	description_panel.visible = false
+
+	ui_focus.fade_out()
+	for child in vbox.get_children():
+		child.queue_free()
 func create_button(item : InventoryItem) -> void:
 	var button : Button = button_scene.instantiate()
 	vbox.add_child(button)
