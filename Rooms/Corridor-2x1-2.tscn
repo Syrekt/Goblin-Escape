@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://dfrfcb6a181d0"]
+[gd_scene load_steps=7 format=4 uid="uid://dfrfcb6a181d0"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_f5ogh"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_s341x"]
 [ext_resource type="PackedScene" uid="uid://dkyt1q4ive1yi" path="res://Map/Props/stairs_long.tscn" id="3_fdxp8"]
 [ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="4_pw7t4"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="5_dfjb2"]
+[ext_resource type="PackedScene" uid="uid://ly85t11hp5u3" path="res://Objects/thought_trigger.tscn" id="6_ol4tx"]
 
 [node name="Corridor-2x1-2" type="Node2D"]
 
@@ -87,3 +88,7 @@ lit = false
 [node name="Torch5" parent="." instance=ExtResource("5_dfjb2")]
 position = Vector2(1792, 416)
 lit = false
+
+[node name="ThoughtTrigger" parent="." instance=ExtResource("6_ol4tx")]
+position = Vector2(1220, 190)
+thougth = "I see trap below, I should be careful."

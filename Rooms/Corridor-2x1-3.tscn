@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://rcnqxi4vw2tp"]
+[gd_scene load_steps=12 format=4 uid="uid://rcnqxi4vw2tp"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_l7e5f"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_obk5u"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="8_75ulu"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="8_ah6pm"]
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="9_ah6pm"]
+[ext_resource type="PackedScene" uid="uid://ly85t11hp5u3" path="res://Objects/thought_trigger.tscn" id="10_0ount"]
+[ext_resource type="PackedScene" uid="uid://2prh5eduxlje" path="res://Objects/condition_checker.tscn" id="11_k4164"]
 
 [node name="Corridor-2x1-3" type="Node2D"]
 
@@ -127,3 +129,17 @@ position = Vector2(97, 504)
 
 [node name="Crate4" parent="." instance=ExtResource("9_ah6pm")]
 position = Vector2(64, 504)
+
+[node name="ThoughtTrigger" parent="." instance=ExtResource("10_0ount")]
+position = Vector2(1196, 361)
+thougth = "I think I can hide in here, could come in handy."
+
+[node name="ConditionChecker" parent="." instance=ExtResource("11_k4164")]
+position = Vector2(1759, 513)
+result_target_path = NodePath("ThoughtTrigger2")
+parameters = Array[String](["has_sword"])
+results = [false]
+
+[node name="ThoughtTrigger2" parent="ConditionChecker" instance=ExtResource("10_0ount")]
+position = Vector2(18.780273, -0.7741699)
+thougth = "I need to find a weapon to be able to break this barricade."

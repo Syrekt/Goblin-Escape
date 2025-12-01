@@ -45,6 +45,7 @@ var show_interaction_prompts := true:
 
 signal show_combat_tutorial
 signal show_stealth_tutorial
+signal show_patrol_tutorial
 
 var player : Player
 
@@ -54,6 +55,7 @@ func _ready() -> void:
 
 	show_combat_tutorial.connect(_show_combat_tutorial)
 	show_stealth_tutorial.connect(_show_stealth_tutorial)
+	show_patrol_tutorial.connect(_show_patrol_tutorial)
 
 	assign_key("jump", "jump_key")
 	assign_key("attack", "attack_key")
@@ -79,6 +81,11 @@ func _show_stealth_tutorial():
 	var stealth_tutorial_scene := load("res://Tutorial/stealth_tutorial.tscn")
 	var stealth_tutorial = stealth_tutorial_scene.instantiate()
 	get_tree().current_scene.add_child(stealth_tutorial)
+func _show_patrol_tutorial():
+	print("Show patrol tutorial")
+	var patrol_tutorial_scene := load("res://Tutorial/enemy_patrol_tutorial.tscn")
+	var patrol_tutorial = patrol_tutorial_scene.instantiate()
+	get_tree().current_scene.add_child(patrol_tutorial)
 
 
 func string_array_get_random(array: PackedStringArray) -> String:

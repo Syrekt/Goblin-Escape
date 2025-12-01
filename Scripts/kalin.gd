@@ -161,7 +161,6 @@ var invisible := false ## Can't be seen in dark
 var current_tint : Color = Color(0.0, 0.0, 0.0, 1.0)
 var ladder : Area2D
 const ingame_menu = preload("res://UI/ingame_menu.tscn")
-var interaction_target : Area2D = null
 var corner_quick_climb := false
 var sex_participants : Array
 var light_source : Area2D
@@ -307,8 +306,14 @@ func check_movable():
 		state_node.state.finished.emit("push_idle")
 
 func check_interactable() -> void:
-	if interaction_target && interaction_target.interactable && !in_combat_state:
-		interaction_target.update(self)
+	if !in_combat_state:
+		var interactions = col_interaction.get_overlapping_areas()
+		if interactions.size() == 0:
+			interaction_prompt._hide()
+		for interaction : Interaction in interactions:
+			interaction.update(self)
+			if !interaction.auto && interaction.interactable:
+				interaction_prompt._show("interact", interaction.title)
 func can_grab_corner(rising := false) -> bool:
 	var grab_prevent = col_corner_grab_prevent.has_overlapping_bodies()
 
@@ -906,14 +911,7 @@ func _physics_process(delta: float) -> void:
 			leave_shadow.emit()
 	#endregion
 #region Interactions
-	var interactions = col_interaction.get_overlapping_areas()
-	if interactions.size() == 0:
-		interaction_prompt._hide()
-		interaction_target = null
-	for interaction : Interaction in interactions:
-		if !interaction.auto && interaction.interactable:
-			interaction_prompt._show("interact", interaction.title)
-			interaction_target = interaction
+	check_interactable()
 #endregion
 #endregion
 #region Process
@@ -977,24 +975,10 @@ func _process(delta: float) -> void:
 		#take_damage(90)
 		#experience.add(99999)
 		#toggle_character_panel()
-
-	check_interactable()
 #endregion
 #region Listeners
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	print(area)
-func _on_interactor_area_entered(area: Area2D) -> void:
-	return
-	#print("interactor area entered")
-	#print("area: "+str(area.name))
-	#interaction_target = area
-	#if !interaction_target.auto && interaction_target.interactable:
-	#	interaction_prompt._show("interact", area.title)
-func _on_interactor_area_exited(area: Area2D) -> void:
-	if interaction_target == area:
-		interaction_target.waiting_player_exit = false
-		interaction_target = null
-		interaction_prompt._hide()
 func _on_enter_shadow() -> void:
 	print("enter shadow")
 	if hud_tween: hud_tween.kill()

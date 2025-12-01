@@ -125,7 +125,7 @@ parameters = Array[String](["has_sword"])
 results = [false]
 
 [node name="DialogueNeedSword" parent="ConditionChecker" instance=ExtResource("12_uwnxm")]
-text = "I can't fight without a weapon. I should find a sword first."
+text = "I can't fight without a weapon. I should look for a sword first."
 auto = true
 
 [node name="ThoughtTrigger" parent="." instance=ExtResource("13_gdxww")]

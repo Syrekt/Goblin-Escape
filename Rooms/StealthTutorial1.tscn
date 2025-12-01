@@ -103,7 +103,7 @@ position = Vector2(1320, 114)
 tutorial = ExtResource("11_ri75p")
 
 [node name="Tutorial2" parent="." instance=ExtResource("10_r43xl")]
-position = Vector2(2480, 352)
+position = Vector2(2449, 465)
 tutorial = ExtResource("12_niydt")
 
 [node name="DialogueTrigger" parent="." instance=ExtResource("12_ri75p")]
@@ -118,7 +118,7 @@ position = Vector2(872, 72)
 collision_layer = 2049
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(1471, 192)
+position = Vector2(2385, 357)
 
 [node name="PlatformCollider" parent="." instance=ExtResource("13_f0tg6")]
 position = Vector2(1648, 240)
@@ -168,3 +168,17 @@ position = Vector2(4400, 400)
 [node name="Torch12" parent="." instance=ExtResource("14_f0tg6")]
 position = Vector2(976, 80)
 lit = false
+
+[node name="DialogueTrigger2" parent="." instance=ExtResource("12_ri75p")]
+position = Vector2(990, 126)
+dialogue_resource = ExtResource("13_niydt")
+dialogue_start = "first_encounter"
+camera_focus_path = NodePath("../Goblin3")
+auto = true
+
+[node name="DialogueTrigger3" parent="." instance=ExtResource("12_ri75p")]
+position = Vector2(2448, 367)
+dialogue_resource = ExtResource("13_niydt")
+dialogue_start = "enemy_patrol"
+camera_focus_path = NodePath("../Goblin")
+auto = true

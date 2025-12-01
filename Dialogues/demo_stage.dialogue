@@ -1,8 +1,3 @@
-~ jump
-Press ({{Ge.jump_key}}) to jump.
-
-=> END
-
 ~ fall_damage
 Kalin: I will hurt myself if I fall from this heigth.
 Kalin: I can hang from ledges to shorten the fall.
@@ -30,9 +25,6 @@ Hold down ({{Ge.crouch_key}}) to sneak up on enemies. Make sure Kalin doesn't sm
 Without weapon, you can press ({{Ge.attack_key}}) to push, you can use enviroment to your advantage.
 => END
 
-~ push
-While touching the statue from the side, press ({{Ge.grab_key}}) to grab and move the objects.
-=> END
 
 ~ combat
 #Kalin: Finally, these fuckers don't stand a chance against me.
@@ -74,15 +66,26 @@ Kalin: Dark, cold, smells like bones... Still better than getting stripped and g
 #Maybe make Kalin walk?
 Kalin: If they are not entering, they are probably waiting to ambush me... can't take the risk.
 Kalin: I need to pass time. Seems like nobody has been here for a long time. Wonder what I could find here?
-
-~ exploring_the_dungeon
-Kalin: Great.. I guess I found the source of the smell.
+=> END
 
 
 ~ barricade
 Kalin: Looks like someone wants to keep something out... or in. I doubt this is the work of goblins.
 Kalin: Barricade seems solid, wood looks fresh. It's not just goblins living in this dungeon. 
 Kalin: I have to find who is living here amongst the goblins.
+=> END
 
-~ demo_end
-This is the end of the demo.
+~ first_encounter
+Kalin: Seems like this dungeon isn't abandoned after all. Though I didn't expect Goblins to be the one whose living in here. Wonder what drew them here?
+do Ge.set_camera_focus()
+Kalin: I don't have a sword yet so I should be careful.
+do Ge.reset_camera_focus()
+=> END
+
+~ enemy_patrol
+Kalin: There is an enemy patrol ahead, I'll need to hide while it's not looking.
+do Ge.set_camera_focus()
+Kalin: Seems like he's not moving, I'll have to distract him somehow.
+do Ge.reset_camera_focus()
+do Ge.show_patrol_tutorial.emit()
+=> END

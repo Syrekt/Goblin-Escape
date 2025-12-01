@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://byvj80lvnid06"]
+[gd_scene load_steps=13 format=4 uid="uid://byvj80lvnid06"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_hxi5b"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="2_6b1vt"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="8_di3q0"]
 [ext_resource type="PackedScene" uid="uid://bl26mmlff752e" path="res://Objects/key_prompt.tscn" id="9_2oolj"]
 [ext_resource type="AudioStream" uid="uid://llhantu0gpcf" path="res://SFX/Wind,Ext,Alley,Urban,Howl,Pronounced,Metal,Clinking.wav" id="11_bmi46"]
+[ext_resource type="PackedScene" uid="uid://ly85t11hp5u3" path="res://Objects/thought_trigger.tscn" id="12_jfpsl"]
 
 [node name="Corridor-2x1-1" type="Node2D"]
 
@@ -136,3 +137,7 @@ stream = ExtResource("11_bmi46")
 autoplay = true
 max_distance = 256.0
 bus = &"EFX"
+
+[node name="ThoughtTrigger" parent="." instance=ExtResource("12_jfpsl")]
+position = Vector2(66, 574)
+thougth = "This dungeon is huge. Looks like it’s abandoned for a long time as well, wonder if I can find anything valuable in here."
