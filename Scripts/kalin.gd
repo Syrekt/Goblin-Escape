@@ -224,8 +224,10 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 			parry_active = !parry_timer.is_stopped()
 			perfect_parry = parry_timer.time_left >= perfect_parry_window
 
-		if defending:
+		if !incoming_attack != "slash" && defending:
 			if !parry_active && !perfect_parry && !stamina.spend(1, 1.0):
+				# Guard broken
+				Ge.play_audio_free(-4, "res://SFX/Kalin/block_break3.wav")
 				defending = false
 
 		#See if attack has broken our defense

@@ -4,7 +4,63 @@ class_name Game extends "res://addons/MetroidvaniaSystem/Template/Scripts/MetSys
 const SaveManager = preload("res://addons/MetroidvaniaSystem/Template/Scripts/SaveManager.gd")
 const SAVE_PATH = "user://save1.ge"
 
-@export var starting_map : String
+
+enum map_list {
+	TestRoom,
+	StartingRoom,
+	SwordRoom,
+	StealthTutorial1,
+	SlideTutorial,
+	MovementRoom,
+	JumpingPuzzle1,
+	HeavyStanceRoom,
+	HeavyStancePath1,
+	HeavyStancePath2,
+	HeavyStancePath3,
+	HeavyStancePath4,
+	DemoLastRoom,
+	DefensiveStanceRoom,
+	DefensiveStancePath1,
+	DefensiveStancePath2,
+	DefensiveStancePath3,
+	DefensiveStancePath4,
+	DefensiveStancePathExit1,
+	DefensiveStancePathExit2,
+	Corridor1,
+	Corridor2,
+	Corridor3,
+	CentralRoom1,
+	CentralRoom2,
+}
+@export var starting_map : map_list = map_list.StartingRoom
+
+var scenes = {
+	map_list.TestRoom : "res://Rooms/TestRoom.tscn",
+	map_list.StartingRoom : "res://Rooms/StartingRoom.tscn",
+	map_list.SwordRoom : "res://Rooms/SwordRoom.tscn",
+	map_list.StealthTutorial1 : "res://Rooms/StealthTutorial1.tscn",
+	map_list.SlideTutorial : "res://Rooms/SlideTutorial.tscn",
+	map_list.MovementRoom : "res://Rooms/MovementRoom.tscn",
+	map_list.JumpingPuzzle1 : "res://Rooms/JumpingPuzzle1.tscn",
+	map_list.HeavyStanceRoom : "res://Rooms/HeavyStanceRoom.tscn",
+	map_list.HeavyStancePath1 : "res://Rooms/HeavyStancePath1.tscn",
+	map_list.HeavyStancePath2 : "res://Rooms/HeavyStancePath2.tscn",
+	map_list.HeavyStancePath3 : "res://Rooms/HeavyStancePath3.tscn",
+	map_list.HeavyStancePath4 : "res://Rooms/HeavyStancePath4.tscn",
+	map_list.DemoLastRoom : "res://Rooms/DemoLastRoom.tscn",
+	map_list.DefensiveStanceRoom : "res://Rooms/DefensiveStanceRoom.tscn",
+	map_list.DefensiveStancePath1 : "res://Rooms/DefensiveStancePath1.tscn",
+	map_list.DefensiveStancePath2 : "res://Rooms/DefensiveStancePath2.tscn",
+	map_list.DefensiveStancePath3 : "res://Rooms/DefensiveStancePath3.tscn",
+	map_list.DefensiveStancePath4 : "res://Rooms/DefensiveStancePath4.tscn",
+	map_list.DefensiveStancePathExit1 : "res://Rooms/DefensiveStancePathExit1.tscn",
+	map_list.DefensiveStancePathExit2 : "res://Rooms/DefensiveStancePathExit2.tscn",
+	map_list.Corridor1 : "res://Rooms/Corridor1.tscn",
+	map_list.Corridor2 : "res://Rooms/Corridor2.tscn",
+	map_list.Corridor3 : "res://Rooms/Corridor3.tscn",
+	map_list.CentralRoom1 : "res://Rooms/CentralRoom1.tscn",
+	map_list.CentralRoom2 : "res://Rooms/CentralRoom2.tscn",
+}
 
 var loading := false
 var generated_rooms : Array[Vector3i]
@@ -29,7 +85,7 @@ func _ready() -> void:
 
 	room_loaded.connect(init_room, CONNECT_DEFERRED)
 	room_loaded.connect(player.camera._on_room_load, CONNECT_DEFERRED)
-	load_room(starting_map)
+	load_room(scenes[starting_map])
 
 	if MetSys.current_room && MetSys.current_room.spawn_point:
 		player.position = MetSys.current_room.spawn_point.position
@@ -106,11 +162,12 @@ func load_game():
 		var save_manager := SaveManager.new()
 		save_manager.load_from_text(SAVE_PATH)
 		# Load room
+		var room = scenes[starting_map]
 		if not custom_run:
 			var loaded_starting_map: String = save_manager.get_value("current_room")
 			if not loaded_starting_map.is_empty(): # Some compatibility problem.
-				starting_map = loaded_starting_map
-		await load_room(starting_map)
+				room = scenes[loaded_starting_map]
+		await load_room(room)
 		# Assign loaded values.
 		generated_rooms.assign(save_manager.get_value("generated_rooms"))
 		events.assign(save_manager.get_value("events"))
