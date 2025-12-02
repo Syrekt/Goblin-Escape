@@ -39,9 +39,10 @@ shader_parameter/alpha = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6a3fo"]
 
-[node name="stealth_tutorial" type="CanvasLayer" groups=["FullscreenPanel"]]
+[node name="Stealth Tutorial" type="CanvasLayer" groups=["FullscreenPanel"]]
 process_mode = 2
 script = ExtResource("1_ommnr")
+code = "Stealth"
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

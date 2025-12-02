@@ -618,6 +618,7 @@ animations = [{
 [node name="Combat Tutorial" type="CanvasLayer" groups=["FullscreenPanel"]]
 process_mode = 2
 script = ExtResource("1_oxxag")
+code = "Combat"
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

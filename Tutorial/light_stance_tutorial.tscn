@@ -618,6 +618,7 @@ animations = [{
 [node name="Light Stance Tutorial" type="CanvasLayer" groups=["FullscreenPanel"]]
 process_mode = 2
 script = ExtResource("1_dkav4")
+code = "Light Stance"
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

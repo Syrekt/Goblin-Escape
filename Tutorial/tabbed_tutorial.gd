@@ -5,6 +5,8 @@ var faded_in := false
 
 var from_options_menu := false ## Means player opened the tutorial from options menu
 
+@export var code : String
+
 @onready var label			:= $ColorControl/Control/Label
 @onready var container		:= $ColorControl/TabContainer
 @onready var color_control	:= $ColorControl
@@ -81,3 +83,6 @@ func _on_button_pressed() -> void:
 	if !from_options_menu: get_tree().paused = false
 	queue_free()
 #endregion
+
+func _exit_tree() -> void:
+	Game.get_singleton().persistent_values.set("Tutorial-" + code, true)

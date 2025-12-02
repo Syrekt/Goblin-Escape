@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dw2d8bu1vlvv6" path="res://Enemy/Goblin/goblin.tscn" id="8_r43xl"]
 [ext_resource type="PackedScene" uid="uid://24ijy2g2jylp" path="res://Objects/hiding_spot.tscn" id="9_ri75p"]
 [ext_resource type="PackedScene" uid="uid://dxvqnc0144rnv" path="res://Scenes/tutorial.tscn" id="10_r43xl"]
-[ext_resource type="PackedScene" uid="uid://cg2vx6oh1c1lc" path="res://Tutorial/environment_kill_tutorial.tscn" id="11_ri75p"]
+[ext_resource type="PackedScene" uid="uid://cg2vx6oh1c1lc" path="res://Tutorial/environmental_kill_tutorial.tscn" id="11_ri75p"]
 [ext_resource type="PackedScene" uid="uid://c8uuwyqh6p5lx" path="res://Tutorial/enemy_patrol_tutorial.tscn" id="12_niydt"]
 [ext_resource type="PackedScene" uid="uid://bpj2k5beannxk" path="res://Objects/dialogue_trigger.tscn" id="12_ri75p"]
 [ext_resource type="PackedScene" uid="uid://bajfhcfhuagof" path="res://Objects/platform_collider.tscn" id="13_f0tg6"]
@@ -103,7 +103,7 @@ position = Vector2(1320, 114)
 tutorial = ExtResource("11_ri75p")
 
 [node name="Tutorial2" parent="." instance=ExtResource("10_r43xl")]
-position = Vector2(2449, 465)
+position = Vector2(2423, 464)
 tutorial = ExtResource("12_niydt")
 
 [node name="DialogueTrigger" parent="." instance=ExtResource("12_ri75p")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://fgj6dmvmrowh"]
+[gd_scene load_steps=11 format=3 uid="uid://fgj6dmvmrowh"]
 
 [ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://UI/theme_button.tres" id="1_ucjbo"]
 [ext_resource type="Script" uid="uid://rjdyb70dvpio" path="res://Scripts/options_menu.gd" id="2_iopgn"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://vma4r5yyfdym" path="res://Tutorial/combat_tutorial.tscn" id="6_gicec"]
 [ext_resource type="PackedScene" uid="uid://dfkk47r5weiwp" path="res://Tutorial/heavy_stance_tutorial.tscn" id="7_dxxl1"]
 [ext_resource type="PackedScene" uid="uid://1k5wph27mvep" path="res://Tutorial/light_stance_tutorial.tscn" id="8_3hwek"]
+[ext_resource type="PackedScene" uid="uid://cg2vx6oh1c1lc" path="res://Tutorial/environmental_kill_tutorial.tscn" id="9_3hwek"]
+[ext_resource type="PackedScene" uid="uid://c8uuwyqh6p5lx" path="res://Tutorial/enemy_patrol_tutorial.tscn" id="10_845id"]
 
 [node name="OptionsMenu" type="TabContainer"]
 process_mode = 3
@@ -472,31 +474,75 @@ theme_override_constants/margin_bottom = 12
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Tutorials/MarginContainer"]
 layout_mode = 2
+
+[node name="TutorialInfo" type="RichTextLabel" parent="Tutorials/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+bbcode_enabled = true
+text = "Unlocked tutorials will added here."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tutorials/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="CombatTutorial" type="Button" parent="Tutorials/MarginContainer/VBoxContainer"]
+[node name="StealthTutorial" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Stealth"
+script = ExtResource("5_iopgn")
+tutorial_code = "Stealth"
+
+[node name="EnvironmentalKill" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Environmental Kill"
+script = ExtResource("5_iopgn")
+tutorial_scene = ExtResource("9_3hwek")
+tutorial_code = "Environmental Kill"
+
+[node name="EnemyPatrol" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Enemy Patrol
+"
+script = ExtResource("5_iopgn")
+tutorial_scene = ExtResource("10_845id")
+tutorial_code = "Enemy Patrol"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="CombatTutorial" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Combat"
 script = ExtResource("5_iopgn")
 tutorial_scene = ExtResource("6_gicec")
+tutorial_code = "Combat"
 
-[node name="StealthTutorial" type="Button" parent="Tutorials/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Stealth"
-script = ExtResource("5_iopgn")
-
-[node name="HeavyStance" type="Button" parent="Tutorials/MarginContainer/VBoxContainer"]
+[node name="HeavyStance" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Heavy Stance"
 script = ExtResource("5_iopgn")
 tutorial_scene = ExtResource("7_dxxl1")
+tutorial_code = "Heavy Stance"
 
-[node name="LightStance" type="Button" parent="Tutorials/MarginContainer/VBoxContainer"]
+[node name="LightStance" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Light Stance"
 script = ExtResource("5_iopgn")
 tutorial_scene = ExtResource("8_3hwek")
+tutorial_code = "Light Stance"
+
+[node name="DefensiveStance" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Defensive Stance"
+script = ExtResource("5_iopgn")
+tutorial_scene = ExtResource("8_3hwek")
+tutorial_code = "Defensive Stance"
 
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="item_selected" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/Resolution" to="." method="_on_option_button_item_selected"]

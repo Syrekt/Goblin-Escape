@@ -147,12 +147,12 @@ autoplay = true
 max_distance = 512.0
 bus = &"EFX"
 
-[node name="Torch" parent="." instance=ExtResource("12_vb76h")]
-position = Vector2(1616, 336)
+[node name="Torch2" parent="." instance=ExtResource("12_vb76h")]
+position = Vector2(208, 240)
 lit = false
 
-[node name="Torch" parent="Torch" instance=ExtResource("12_vb76h")]
-position = Vector2(-1408, -96)
+[node name="Torch" parent="." instance=ExtResource("12_vb76h")]
+position = Vector2(1616, 336)
 lit = false
 
 [node name="KeyPrompt3" parent="." instance=ExtResource("7_kpgh2")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://dhe315co0sjxw"]
+[gd_scene load_steps=21 format=4 uid="uid://dhe315co0sjxw"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_5ep3j"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_713km"]
@@ -18,6 +18,8 @@
 [ext_resource type="PackedScene" uid="uid://djk8oskwq3mdn" path="res://Inventory/Pickup Objects/pickup_health.tscn" id="16_bupn0"]
 [ext_resource type="AudioStream" uid="uid://llhantu0gpcf" path="res://SFX/Wind,Ext,Alley,Urban,Howl,Pronounced,Metal,Clinking.wav" id="17_bihtp"]
 [ext_resource type="PackedScene" uid="uid://sbe7n6eecpl2" path="res://Inventory/Pickup Objects/pickup_revenants_draught.tscn" id="18_ouyvj"]
+[ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="19_avktj"]
+[ext_resource type="PackedScene" uid="uid://bl26mmlff752e" path="res://Objects/key_prompt.tscn" id="20_lsp8e"]
 
 [node name="CentralRoom1" type="Node2D"]
 
@@ -240,3 +242,11 @@ lit = false
 
 [node name="PickupRevenantsDraught" parent="." instance=ExtResource("18_ouyvj")]
 position = Vector2(2257, 988)
+
+[node name="Hint" parent="." instance=ExtResource("19_avktj")]
+position = Vector2(248, 523)
+text = "Open map"
+
+[node name="KeyPrompt" parent="." instance=ExtResource("20_lsp8e")]
+position = Vector2(244, 511)
+text = "map"

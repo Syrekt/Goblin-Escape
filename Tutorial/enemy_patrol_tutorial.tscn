@@ -11,9 +11,10 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6a3fo"]
 
-[node name="stealth_tutorial" type="CanvasLayer" groups=["FullscreenPanel"]]
+[node name="Enemy Patrol" type="CanvasLayer" groups=["FullscreenPanel"]]
 process_mode = 2
 script = ExtResource("1_n3176")
+code = "Enemy Patrol"
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

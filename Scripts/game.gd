@@ -166,7 +166,7 @@ func load_game():
 		if not custom_run:
 			var loaded_starting_map: String = save_manager.get_value("current_room")
 			if not loaded_starting_map.is_empty(): # Some compatibility problem.
-				room = scenes[loaded_starting_map]
+				room = loaded_starting_map
 		await load_room(room)
 		# Assign loaded values.
 		generated_rooms.assign(save_manager.get_value("generated_rooms"))

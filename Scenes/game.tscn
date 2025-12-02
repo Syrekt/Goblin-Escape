@@ -21,7 +21,6 @@ func _ready() -> void:
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wrm1d")
-starting_map = 0
 
 [node name="LoadingScreen" parent="." instance=ExtResource("2_1l0tm")]
 unique_name_in_owner = true
@@ -63,6 +62,7 @@ offset_right = 0.0
 grow_horizontal = 0
 
 [node name="Background" type="Panel" parent="UI/Minimap"]
+visible = false
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -89,6 +89,7 @@ grow_vertical = 2
 script = ExtResource("4_3dryh")
 
 [node name="Percent" type="Label" parent="UI/MapWindow"]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
