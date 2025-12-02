@@ -3,6 +3,8 @@ extends CanvasLayer
 var finished := false
 var faded_in := false
 
+var from_options_menu := false ## Means player opened the tutorial from options menu
+
 @onready var label			:= $ColorControl/Control/Label
 @onready var container		:= $ColorControl/TabContainer
 @onready var color_control	:= $ColorControl
@@ -23,7 +25,11 @@ func _ready() -> void:
 	color_control.modulate = Color(1.0, 1.0, 1.0, 0.0)
 
 	var tween = create_tween().bind_node(self)
-	tween.tween_property(color_control, "modulate", Color(1.0, 1.0, 1.0, 1.0), 2)
+	if from_options_menu:
+		tween.tween_property(color_control, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.0)
+		$Timer.wait_time = 0.1
+	else:
+		tween.tween_property(color_control, "modulate", Color(1.0, 1.0, 1.0, 1.0), 2)
 
 	container.tab_changed.connect(_on_tab_container_tab_changed)
 	$Timer.timeout.connect(_on_timer_timeout)
@@ -49,9 +55,9 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("right"):
 			container.select_next_available()
 
-	if finished && (Input.is_action_just_pressed("stance") || Input.is_action_just_pressed("ui_cancel")):
-		get_tree().paused = false
-		queue_free()
+	if finished:
+		if Input.is_action_just_pressed("stance"): _on_button_pressed()
+		if !from_options_menu && Input.is_action_just_pressed("ui_cancel"): _on_button_pressed()
 
 func show_controls() -> void:
 	button_control.visible = true
@@ -72,6 +78,6 @@ func _on_left_pressed() -> void:
 	print("left pressed")
 	container.select_previous_available()
 func _on_button_pressed() -> void:
-	get_tree().paused = false
+	if !from_options_menu: get_tree().paused = false
 	queue_free()
 #endregion

@@ -40,6 +40,8 @@ extends TabContainer
 
 @onready var adult_content_toggle : CheckBox = find_child("AdultContent")
 
+var open_tutorial : CanvasLayer
+
 var default_keybindings : Dictionary = {
 	"up"		: [KEY_A],
 	"down"		: [KEY_S],
@@ -265,3 +267,11 @@ func _on_shadow_intensity_drag_ended(value_changed: bool) -> void:
 func _on_adult_content_toggled(toggled_on: bool) -> void:
 	Options.adult_content_enabled = toggled_on
 	Options.save_options()
+
+
+func _on_tutorial_button_pressed(tutorial_scene:PackedScene) -> void:
+	print("Show combat tutorial")
+	open_tutorial = tutorial_scene.instantiate()
+	open_tutorial.from_options_menu = true
+	open_tutorial.layer = 2
+	add_child(open_tutorial)

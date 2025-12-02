@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://rrnk862o0mdw"]
+[gd_scene load_steps=11 format=4 uid="uid://rrnk862o0mdw"]
 
 [ext_resource type="Script" uid="uid://ysqa4fxfxicu" path="res://Scripts/scene_manager.gd" id="1_7vf4x"]
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="2_mubwj"]
@@ -8,18 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cxu1p2ap15mlj" path="res://Objects/skill_pickup.tscn" id="7_24s5e"]
 [ext_resource type="Texture2D" uid="uid://wcoq7ay5eurm" path="res://UI/rpg_icon_pack.png" id="8_lyr0d"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="9_lpws4"]
-[ext_resource type="Shader" uid="uid://dgty7bsbniivw" path="res://Scripts/flash.gdshader" id="11_o0wdf"]
 [ext_resource type="PackedScene" uid="uid://b4vewnv73flk4" path="res://Map/Props/Movable/statue.tscn" id="12_k6jnn"]
-[ext_resource type="PackedScene" uid="uid://dw2d8bu1vlvv6" path="res://Enemy/Goblin/goblin.tscn" id="13_m0fwn"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="14_mubwj"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7vf4x"]
-resource_local_to_scene = true
-shader = ExtResource("11_o0wdf")
-shader_parameter/flash_intensity = 0.0
-shader_parameter/flash_color = Color(1, 1, 1, 1)
-shader_parameter/tint_color = Color(1, 1, 1, 0)
-shader_parameter/alpha = 1.0
 
 [node name="TestRoom" type="Node2D"]
 script = ExtResource("1_7vf4x")
@@ -101,16 +91,3 @@ spawn_point = NodePath("../SpawnPoint")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(560, 203)
-
-[node name="Goblin" parent="." instance=ExtResource("13_m0fwn")]
-position = Vector2(512.05133, 217.71852)
-
-[node name="Sprite2D" parent="Goblin" index="0"]
-material = SubResource("ShaderMaterial_7vf4x")
-
-[node name="stance_light" parent="Goblin/StateMachine" index="8"]
-debug_stance = "stab"
-
-[editable path="Goblin"]
-[editable path="Goblin/StateMachine/slash/SlashHitbox"]
-[editable path="Goblin/StateMachine/stab/StabHitbox"]
