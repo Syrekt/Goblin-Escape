@@ -39,6 +39,7 @@ color = Color(0.6340837, 0.5231031, 0.999996, 1)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_h4fw4")
+autoplay = true
 bus = &"BGM"
 
 [node name="Kalin" parent="." instance=ExtResource("1_v3ybc")]

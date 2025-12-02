@@ -64,15 +64,16 @@ spawn_point = NodePath("../SpawnPoint")
 [node name="StairsLong" parent="." instance=ExtResource("3_k0chd")]
 position = Vector2(328, 232)
 
-[node name="SpawnPoint" type="Marker2D" parent="."]
-position = Vector2(152, 194)
-
-[node name="KeyPrompt" parent="SpawnPoint" instance=ExtResource("4_u8lx0")]
-position = Vector2(0, -18)
+[node name="KeyPrompt3" parent="." instance=ExtResource("4_u8lx0")]
+position = Vector2(152, 176)
 text = "up"
 
-[node name="KeyPrompt2" parent="SpawnPoint" instance=ExtResource("4_u8lx0")]
+[node name="KeyPrompt4" parent="." instance=ExtResource("4_u8lx0")]
+position = Vector2(152, 194)
 text = "left,down,right"
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(152, 173)
 
 [node name="ThoughtTrigger" parent="." instance=ExtResource("4_uwpfy")]
 position = Vector2(531, 281)

@@ -3,6 +3,7 @@ class_name Portal extends Interaction
 @export var inert := true
 var map_icon := "portal"
 var draw_on_map := true
+@export_file("room_link") var target_map : String
 
 @onready var map_scene : PackedScene = preload("res://UI/map.tscn")
 

@@ -87,7 +87,11 @@ func load_options() -> int:
 		var master_bus	= [AudioServer.get_bus_index("Master"), config.get_value("audio", "Master", 0)]
 		var sfx_bus		= [AudioServer.get_bus_index("SFX"), config.get_value("audio", "SFX", 0)]
 		var efx_bus		= [AudioServer.get_bus_index("EFX"), config.get_value("audio", "EFX", 0)]
-		var bgm_bus		= [AudioServer.get_bus_index("BGM"), config.get_value("audio", "BGM", 0)]
+		var bgm_bus
+		if OS.is_debug_build():
+			bgm_bus		= [AudioServer.get_bus_index("BGM"), 0]
+		else:
+			bgm_bus		= [AudioServer.get_bus_index("BGM"), config.get_value("audio", "BGM", 0)]
 		AudioServer.set_bus_volume_db(master_bus[0], master_bus[1])
 		AudioServer.set_bus_volume_db(sfx_bus[0], sfx_bus[1])
 		AudioServer.set_bus_volume_db(efx_bus[0], efx_bus[1])
