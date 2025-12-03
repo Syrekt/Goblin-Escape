@@ -89,7 +89,7 @@ func load_options() -> int:
 		var efx_bus		= [AudioServer.get_bus_index("EFX"), config.get_value("audio", "EFX", 0)]
 		var bgm_bus
 		if OS.is_debug_build():
-			bgm_bus		= [AudioServer.get_bus_index("BGM"), 0]
+			bgm_bus		= [AudioServer.get_bus_index("BGM"), -10]
 		else:
 			bgm_bus		= [AudioServer.get_bus_index("BGM"), config.get_value("audio", "BGM", 0)]
 		AudioServer.set_bus_volume_db(master_bus[0], master_bus[1])

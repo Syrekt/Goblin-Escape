@@ -22,11 +22,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 5
+current_tab = 0
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -104,7 +103,6 @@ layout_mode = 2
 script = ExtResource("2_ucjbo")
 
 [node name="CenterWindow" type="Button" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
-visible = false
 layout_mode = 2
 text = "Center Window"
 
@@ -201,47 +199,51 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="GridContainer" type="GridContainer" parent="Controls/MarginContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="Controls/MarginContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 212
-theme_override_constants/v_separation = 32
-columns = 2
+dragging_enabled = false
 
-[node name="ButtonKeybind" parent="Controls/MarginContainer/GridContainer" instance=ExtResource("3_iopgn")]
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/MarginContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="ButtonKeybind" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
 action_name = "up"
 
-[node name="ButtonKeybind2" parent="Controls/MarginContainer/GridContainer" instance=ExtResource("3_iopgn")]
-layout_mode = 2
-action_name = "down"
-
-[node name="ButtonKeybind3" parent="Controls/MarginContainer/GridContainer" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind3" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
 action_name = "left"
 
-[node name="ButtonKeybind4" parent="Controls/MarginContainer/GridContainer" instance=ExtResource("3_iopgn")]
-layout_mode = 2
-action_name = "right"
-
-[node name="ButtonKeybind6" parent="Controls/MarginContainer/GridContainer" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind6" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
 action_name = "attack"
 
-[node name="ButtonKeybind7" parent="Controls/MarginContainer/GridContainer" instance=ExtResource("3_iopgn")]
-layout_mode = 2
-action_name = "sprint"
-
-[node name="ButtonKeybind8" parent="Controls/MarginContainer/GridContainer" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind8" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
 action_name = "stance"
 
-[node name="ButtonKeybind9" parent="Controls/MarginContainer/GridContainer" instance=ExtResource("3_iopgn")]
-layout_mode = 2
-action_name = "walk"
-
-[node name="ResetKeybindings" type="Button" parent="Controls/MarginContainer/GridContainer"]
+[node name="ResetKeybindings" type="Button" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer"]
 layout_mode = 2
 text = "Reset Keybindings"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Controls/MarginContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="ButtonKeybind2" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" instance=ExtResource("3_iopgn")]
+layout_mode = 2
+action_name = "down"
+
+[node name="ButtonKeybind4" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" instance=ExtResource("3_iopgn")]
+layout_mode = 2
+action_name = "right"
+
+[node name="ButtonKeybind7" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" instance=ExtResource("3_iopgn")]
+layout_mode = 2
+action_name = "sprint"
+
+[node name="ButtonKeybind9" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" instance=ExtResource("3_iopgn")]
+layout_mode = 2
+action_name = "walk"
 
 [node name="Noise Indicator" type="TabBar" parent="."]
 visible = false
@@ -457,6 +459,7 @@ max_value = 1.0
 step = 0.1
 
 [node name="Tutorials" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 5
 
@@ -553,7 +556,7 @@ tutorial_code = "Defensive Stance"
 [connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/SFXVolumeContainer/SFXVolume" to="." method="_on_sfx_volume_value_changed"]
 [connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/BGMVolumeContainer/BGMVolume" to="." method="_on_bgm_volume_value_changed"]
 [connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/EFXVolumeContainer/EFXVolume" to="." method="_on_efx_volume_value_changed"]
-[connection signal="pressed" from="Controls/MarginContainer/GridContainer/ResetKeybindings" to="." method="_on_reset_keybindings_pressed"]
+[connection signal="pressed" from="Controls/MarginContainer/HSplitContainer/VBoxContainer/ResetKeybindings" to="." method="_on_reset_keybindings_pressed"]
 [connection signal="toggled" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/NoiseToggle/NoiseToggleCheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="pressed" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer/ResetColor" to="." method="_on_reset_color_pressed"]
 [connection signal="drag_ended" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Red/NoiseColorRedSlider" to="." method="_on_noise_color_red_slider_drag_ended"]

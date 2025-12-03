@@ -198,7 +198,7 @@ func get_movement_dir() -> float:
 	if movement_disabled:
 		return int(remote_control_input.has("right")) - int(remote_control_input.has("left"))
 	else:
-		return Input.get_axis("left", "right")
+		return sign(Input.get_axis("left", "right"))
 func fall(delta):
 	velocity.y += gravity * delta
 	move_and_slide()
@@ -921,16 +921,13 @@ func _process(delta: float) -> void:
 	slash_cost	= lerp(1.0, MAX_SLASH_FATIGUE, fatigue.value/100) * pow(strength, SLASH_FATIGUE_STRENGTH_MOD)/pow(endurance, SLASH_FATIGUE_ENDURANCE_MOD)
 	stab_cost	= lerp(0.5, MAX_STAB_FATIGUE, fatigue.value/100) * pow(strength, STAB_FATIGUE_STRENGTH_MOD)/pow(endurance, STAB_FATIGUE_ENDURANCE_MOD)
 	bash_cost 	= lerp(1.0, MAX_BASH_FATIGUE, fatigue.value/100) * pow(strength, BASH_FATIGUE_STRENGTH_MOD)/pow(endurance, BASH_FATIGUE_ENDURANCE_MOD)
-	#Debugger.printui("slash_cost: "+str(slash_cost))
-	#Debugger.printui("stab_cost: "+str(stab_cost))
-	#Debugger.printui("bash_cost: "+str(bash_cost))
-	#Debugger.printui("fatigue.value: "+str(fatigue.value));
-	if Input.is_action_pressed("sprint") && Input.is_action_just_pressed("left_mouse_button"):
-		global_position = get_global_mouse_position()
-	if just_pressed("quick save"):
-		Game.get_singleton().save_game()
-	if just_pressed("quick load"):
-		Game.get_singleton().load_game()
+	if OS.is_debug_build():
+		if Input.is_action_pressed("sprint") && Input.is_action_just_pressed("left_mouse_button"):
+			global_position = get_global_mouse_position()
+		if just_pressed("quick save"):
+			Game.get_singleton().save_game()
+		if just_pressed("quick load"):
+			Game.get_singleton().load_game()
 	var s = %Sprite2D
 	if debug: Debugger.printui(str(state_node.state.name))
 
@@ -959,8 +956,6 @@ func _process(delta: float) -> void:
 			#if pcam.limit_target:
 			#	pcam.draw_limits = true
 	#endregion
-	#if Input.is_action_pressed("restart"):
-	#	get_tree().reload_current_scene()
 	#region Open menu & Inventory
 	if !controls_disabled && Input.is_action_just_pressed("ui_cancel"):
 		toggle_pause_menu()
@@ -970,7 +965,7 @@ func _process(delta: float) -> void:
 	#	toggle_map()
 
 	#endregion
-	if Input.is_action_just_pressed("debug1"):
+	if OS.is_debug_build() && Input.is_action_just_pressed("debug1"):
 		print("debug1")
 		status_effect_container.add_status_effect("Death's Door")
 		status_effect_container.add_status_effect("Bleed", 5.0, 0.1)
@@ -1039,7 +1034,7 @@ func _on_fullscreen_panel_closed() -> void:
 		panel.show()
 #endregion
 func _unhandled_key_input(event: InputEvent) -> void:
-	if event.is_pressed():
+	if OS.is_debug_build() && event.is_pressed():
 		match event.keycode:
 			KEY_U:
 				toggle_character_panel()

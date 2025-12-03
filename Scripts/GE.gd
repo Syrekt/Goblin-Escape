@@ -2,6 +2,7 @@ extends Node
 
 
 var inputs : Dictionary
+var last_input_type := "keyboard"
 var jump_key	: String
 var attack_key	: String
 var stance_key 	: String
@@ -383,6 +384,17 @@ func one_shot_dialogue(text: String) -> void:
 	balloon.start(dialogue_resource, "title")
 func get_action_keycode(action:String) -> String:
 	var action_events = InputMap.action_get_events(action)
-	var action_event = action_events[0]
-	var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
+	var action_keycode
+	if action_events.size() > 0:
+		for event in action_events:
+			if event is InputEventKey && last_input_type == "keyboard":
+				action_keycode = OS.get_keycode_string(event.physical_keycode)
+			elif event is InputEventJoypadButton && last_input_type == "gamepad":
+				action_keycode = str(event.button_index)
 	return action_keycode
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventJoypadButton || event is InputEventJoypadMotion:
+		last_input_type = "gamepad"
+	elif event is InputEventKey || event is InputEventMouse:
+		last_input_type = "keyboard"

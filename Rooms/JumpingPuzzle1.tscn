@@ -114,7 +114,11 @@ text = "walk"
 scale = Vector2(2.76, 1)
 
 [node name="KeyPrompt2" parent="." instance=ExtResource("9_o420l")]
-position = Vector2(1635, 887)
+position = Vector2(1632, 893)
+text = "down,jump"
+
+[node name="KeyPrompt3" parent="." instance=ExtResource("9_o420l")]
+position = Vector2(892, 614)
 text = "down,jump"
 
 [node name="PlatformCollider" parent="." instance=ExtResource("10_secw8")]

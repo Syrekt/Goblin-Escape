@@ -1,8 +1,8 @@
 class_name KeyRebindButton
 extends Control
 
-@onready var button = get_child(0).get_node("Button") as Button
-@onready var label  = get_child(0).get_node("Label") as Label
+@onready var button := $Button
+@onready var label  := $Label
 
 @export var action_name := ""
 
@@ -38,8 +38,10 @@ func set_action_name() -> void:
 			label.text = "Stance"
 		"jump":
 			label.text = "Jump"
-		"run":
-			label.text = "Run"
+		"sprint":
+			label.text = "Sprint"
+		"walk":
+			label.text = "Walk"
 
 func set_text_for_key() -> void:
 	#print("Set text for key: " + name)

@@ -43,14 +43,15 @@ extends TabContainer
 var open_tutorial : CanvasLayer
 
 var default_keybindings : Dictionary = {
-	"up"		: [KEY_A],
+	"up"		: [KEY_W],
 	"down"		: [KEY_S],
 	"left" 		: [KEY_A],
 	"right"		: [KEY_D],
 	"attack"	: [KEY_J],
 	"stance" 	: [KEY_SPACE],
 	"jump"		: [KEY_K],
-	"run"		: [KEY_SHIFT],
+	"sprint"	: [KEY_SHIFT],
+	"walk"		: [KEY_ALT],
 }
 
 

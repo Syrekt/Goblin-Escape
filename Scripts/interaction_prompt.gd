@@ -56,17 +56,12 @@ func _show(action, title := "") -> void:
 	var events = InputMap.action_get_events(action)
 	label.text = title
 
-	if events.size() > 0:
-		for event in events:
-			if event is InputEventKey:
-				interaction_prompt = OS.get_keycode_string(event.physical_keycode)
-				if last_input_type == "keyboard":
-					play("keyboard")
-					frame = keyboard[interaction_prompt]
-			elif event is InputEventJoypadButton:
-				if last_input_type == "gamepad":
-					play("xbox")
-					frame = event.button_index
+	if Ge.last_input_type == "keyboard":
+		play("keyboard")
+		frame = keyboard[Ge.get_action_keycode(action)]
+	elif Ge.last_input_type == "gamepad":
+		play("xbox")
+		frame = int(Ge.get_action_keycode(action))
 
 	_draw = true
 func _hide() -> void:

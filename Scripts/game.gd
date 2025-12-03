@@ -109,8 +109,7 @@ func _ready() -> void:
 	world_refreshed.connect(_on_world_refreshed)
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("restart"):
-		print("restart")
+	if OS.is_debug_build() && Input.is_action_just_pressed("restart"):
 		player.position = MetSys.current_room.spawn_point.position
 	$CanvasModulate.color.r = 0.63 + 0.10 * Options.shadow_intensity
 	$CanvasModulate.color.g = 0.52 + 0.15 * Options.shadow_intensity
