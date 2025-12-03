@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cliq1akrpj5ng" path="res://Inventory/item_pickup.gd" id="2_sqv8c"]
 [ext_resource type="PackedScene" uid="uid://cyuk5qsesuyn8" path="res://Inventory/item_pickup_area.tscn" id="4_ux4el"]
 
-[node name="PickupKey" type="Sprite2D"]
+[node name="PickupWater" type="Sprite2D"]
 texture = ExtResource("1_ux4el")
 script = ExtResource("2_sqv8c")
 item_name = "Water"

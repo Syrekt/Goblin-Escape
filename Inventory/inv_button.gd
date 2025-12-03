@@ -27,21 +27,24 @@ func _on_pressed() -> void:
 	var used = true
 	match text:
 		"Cheese", "Bread", "Dried Fish":
-			if owner.health.value == owner.health.value_max:
-				owner.think("I'm not hungry")
+			if owner.health.value == owner.health.max_value:
+				owner.think("I'm not hungry.")
 			else:
 				owner.health.value += 10
 		"Health Potion":
-			if owner.health.value == owner.health.value_max:
-				owner.think("I don't need this")
+			if owner.health.value == owner.health.max_value:
+				owner.think("I don't need this.")
 			else:
 				owner.health.value += 50
 		"Water":
 			print("Drink water")
-			#owner.stamina.add_buff(0.5, 10.0)
+			if owner.status_effect_container.has_status_effect("Hydrated"):
+				owner.think("I'm not thirsty.. yet.")
+			else:
+				owner.status_effect_container.add_status_effect("Hydrated", 60.0, 0.1)
 		"Stenchbane":
 			if owner.smell.value == 0:
-				owner.think("I don't need this")
+				owner.think("I don't need this.")
 			else:
 				print("Use Stenchbane")
 				owner.smell.value = 0;
@@ -56,8 +59,17 @@ func _on_pressed() -> void:
 				owner.think(["I don't need this", "I'm not bleeding"].pick_random())
 		"Minor Rejuvenation Draught":
 			print("Use Minor Rejuvenation Draught")
+			if owner.status_effect_container.has_status_effect("Minor Rejuvenation"):
+				owner.think("I shouldn't drink this too much.")
+			else:
+				owner.status_effect_container.add_status_effect("Minor Rejuvenation", 60.0, 0.1)
 		"Pher Potion":
 			print("Use Pher Potion")
+			if owner.smell.value < owner.smell.max_value:
+				owner.smell.value += 100
+				owner.think("Not sure if this is a good idea...")
+			else:
+				owner.think("I don't need this.")
 		"Urgent Letter":
 			var thought = [
 				"I shouldn't read this.",

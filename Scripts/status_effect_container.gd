@@ -13,22 +13,29 @@ func add_status_effect(status_effect_name:String,lifetime:=0.0,tick_time:=0.0) -
 
 	if !status_effect_found:
 		var status_effect : StatusEffect = status_effect_scene.instantiate()
+		status_effect.name = status_effect_name
 		add_child(status_effect)
 
 		match status_effect_name:
 			"Bleed":
-				status_effect.name = "Bleed"
 				status_effect.texture = load("res://UI/Buffs/se_bleed.png")
-				add_lifetime(lifetime, status_effect_name, status_effect)
+				add_lifetime(lifetime, status_effect)
+				add_tick_timer(tick_time, status_effect, _on_bleed_tick)
 
-				var effect_timer := Timer.new()
-				effect_timer.name = "Effect Timer"
-				effect_timer.timeout.connect(_on_bleed_tick)
-				status_effect.add_child(effect_timer)
-				effect_timer.start(tick_time)
+				#var effect_timer := Timer.new()
+				#effect_timer.name = "Effect Timer"
+				#effect_timer.timeout.connect(_on_bleed_tick)
+				#status_effect.add_child(effect_timer)
+				#effect_timer.start(tick_time)
 			"Death's Door":
-				status_effect.name = "Death's Door"
 				status_effect.texture = load("res://UI/Buffs/se_death.png")
+				add_lifetime(lifetime, status_effect)
+			"Minor Rejuvenation":
+				status_effect.texture = load("res://UI/Buffs/minor_rejuvenation_buff.png")
+				add_tick_timer(tick_time, status_effect, _on_minor_rejuvenation_tick)
+			"Hydrated":
+				status_effect.texture = load("res://UI/Buffs/stamina_buff.png")
+				add_tick_timer(tick_time, status_effect, _on_hydration_buff_tick)
 
 
 func has_status_effect(_name:String) -> bool:
@@ -46,13 +53,20 @@ func remove_status_effect(_name:String) -> bool: ## Return true if status effect
 
 	return false
 
-func add_lifetime(time:float,_name:String,status_effect:StatusEffect) -> void:
+func add_lifetime(time:float,status_effect:StatusEffect) -> void:
 	var lifetime : Timer = Timer.new()
 	lifetime.name = "Lifetime"
 	status_effect.add_child(lifetime)
 	lifetime.one_shot = true
 	lifetime.start(time)
-	lifetime.timeout.connect(_on_lifetime_timeout.bind(_name))
+	lifetime.timeout.connect(_on_lifetime_timeout.bind(status_effect.name))
+
+func add_tick_timer(time:float,status_effect:StatusEffect,signal_event:Callable) -> void:
+	var timer := Timer.new()
+	timer.name = status_effect.name + " Tick Timer"
+	timer.timeout.connect(signal_event)
+	status_effect.add_child(timer)
+	timer.start(time)
 
 
 func _on_lifetime_timeout(_name) -> void:
@@ -63,6 +77,10 @@ func _on_lifetime_timeout(_name) -> void:
 
 func _on_bleed_tick() -> void:
 	owner.health.value -= 0.5
+func _on_minor_rejuvenation_tick() -> void:
+	owner.health.value += 0.1
+func _on_hydration_buff_tick() -> void:
+	owner.stamina.value += 0.1
 
 func save(save_data:Dictionary) -> void:
 	var effects := {}
