@@ -25,7 +25,8 @@ func _ready() -> void:
 #endregion
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("stance") || Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_cancel"):
+		player.character_panel.hide()
 		rest_menu.hide()
 
 func update(_player : Player) -> void:

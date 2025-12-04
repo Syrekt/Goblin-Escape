@@ -2,11 +2,11 @@ extends CheckBox
 
 
 func _ready() -> void:
-	print("name: "+str(name))
+	print("Toggle button name: "+str(name))
 	match name:
 		"Fullscreen":
-			button_pressed = DisplayServer.window_get_mode()
+			set_pressed_no_signal(DisplayServer.window_get_mode())
 		"PixelPerfect":
-			button_pressed = get_window().get_content_scale_aspect() == Window.CONTENT_SCALE_ASPECT_KEEP
+			set_pressed_no_signal(get_window().get_content_scale_aspect() == Window.CONTENT_SCALE_ASPECT_KEEP)
 		"Borderless":
-			button_pressed = DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_BORDERLESS)
+			set_pressed_no_signal(DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_BORDERLESS))

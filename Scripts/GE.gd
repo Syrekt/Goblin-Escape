@@ -69,7 +69,7 @@ func assign_key(action: String, value: String) -> void:
 	var events = InputMap.action_get_events(action)
 	for event in events:
 		if event is InputEventKey:
-			set(value, OS.get_keycode_string(event.physical_keycode).to_upper())
+			set(value, OS.get_keycode_string(event.keycode).to_upper())
 			print(action + "_key: " + str(run_key))
 
 func _show_combat_tutorial():
@@ -383,14 +383,36 @@ func one_shot_dialogue(text: String) -> void:
 	get_tree().current_scene.add_child(balloon)
 	balloon.start(dialogue_resource, "title")
 func get_action_keycode(action:String) -> String:
+	#print("Get action keycode: "+str(action))
 	var action_events = InputMap.action_get_events(action)
+	#print("action_events: "+str(action_events))
 	var action_keycode
 	if action_events.size() > 0:
 		for event in action_events:
+			#print("event: "+str(event))
 			if event is InputEventKey && last_input_type == "keyboard":
-				action_keycode = OS.get_keycode_string(event.physical_keycode)
+				if event.keycode != 0:
+					action_keycode = OS.get_keycode_string(event.keycode)
+				elif event.physical_keycode != 0:
+					action_keycode = OS.get_keycode_string(event.physical_keycode)
+				break
 			elif event is InputEventJoypadButton && last_input_type == "gamepad":
 				action_keycode = str(event.button_index)
+				break
+
+#region Log
+	#var crumb := SentryBreadcrumb.create("Get action keycode")
+	#crumb.category = "Input"
+	#crumb.level = SentrySDK.LEVEL_INFO
+	#crumb.type = "info"
+	#crumb.data = {
+	#	"action": action,
+	#	"action_keycode": action_keycode,
+	#	"action_events": action_events,
+	#}
+	#SentrySDK.add_breadcrumb(crumb)
+#endregion
+
 	return action_keycode
 
 func _unhandled_input(event: InputEvent) -> void:

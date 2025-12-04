@@ -5,10 +5,19 @@ extends Button
 
 @onready var tutorial_info : RichTextLabel = $"../../../TutorialInfo"
 
+var tutorial_seen := false
+
 func _ready() -> void:
-	var tutorial_seen = Game.get_singleton().persistent_values.get("Tutorial-" + tutorial_code, false)
-	if !tutorial_seen:
-		hide()
-	else:
-		pressed.connect(owner._on_tutorial_button_pressed.bind(tutorial_scene))
+	tutorial_seen = Game.get_singleton().persistent_values.get("Tutorial-" + tutorial_code, false)
+	pressed.connect(owner._on_tutorial_button_pressed.bind(tutorial_scene))
+
+func _process(delta: float) -> void:
+	if !Ge.show_tutorials:
+		show()
 		tutorial_info.hide()
+	else:
+		if !tutorial_seen:
+			hide()
+			tutorial_info.show()
+		else:
+			tutorial_info.hide()

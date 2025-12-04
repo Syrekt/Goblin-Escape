@@ -7,6 +7,8 @@ class_name KeyRebindButton extends Control
 
 var button_pressed := false
 
+const CONFIG_FILE = "user://config.ini"
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -48,15 +50,19 @@ func set_text_for_key() -> void:
 	#print("Set text for key: " + name)
 	var action_events = InputMap.action_get_events(action_name)
 	var action_event = action_events[0]
-	#print("action_event: "+str(action_event.physical_keycode))
-	var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
+	#print("action_event: "+str(action_event.keycode))
+	var action_keycode = OS.get_keycode_string(action_event.keycode)
 
 	button.text = action_keycode;
+	var config = ConfigFile.new()
+	if FileAccess.file_exists(CONFIG_FILE):
+		config.load(CONFIG_FILE)
+	config.set_value("Keyboard", action_name, action_event.keycode)
+	config.save(CONFIG_FILE)
 	#print(action_keycode)
 
 
 func _on_button_toggled(_button_pressed: bool) -> void:
-	owner.owner.prevent_closing = true
 	if _button_pressed:
 		button.text = "Press any key..."
 		set_process_unhandled_key_input(_button_pressed)
@@ -72,6 +78,7 @@ func _on_button_toggled(_button_pressed: bool) -> void:
 				i.set_process_unhandled_key_input(false)
 
 		set_text_for_key()
+
 		
 
 
@@ -83,10 +90,10 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			set_action_name()
 			button.button_pressed = false
 			accept_event()
+			owner.owner.skip_first_event = true
 		else:
 			rebind_action_key(event)
 			button.button_pressed = false
-		owner.owner.prevent_closing = false
 
 func rebind_action_key(event) -> void:
 	InputMap.action_erase_events(action_name)

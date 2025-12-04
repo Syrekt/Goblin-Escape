@@ -645,9 +645,10 @@ func on_enter() -> void:
 func toggle_pause_menu() -> void:
 		var ui_nodes = get_tree().get_nodes_in_group("FullscreenPanel")
 		var node_found := false
-		for node in ui_nodes:
-			if node.visible:
-				return
+		for node in ui_nodes: if node.visible: return
+		ui_nodes = get_tree().get_nodes_in_group("UIPanel")
+		for node in ui_nodes: if node.visible: return
+
 		var open_menu : MainMenu = get_tree().current_scene.get_node_or_null("IngameMenu")
 		if !open_menu:
 			open_menu = ingame_menu.instantiate()

@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://fgj6dmvmrowh"]
 
 [ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://UI/theme_button.tres" id="1_ucjbo"]
-[ext_resource type="Script" uid="uid://rjdyb70dvpio" path="res://Scripts/options_menu.gd" id="2_iopgn"]
+[ext_resource type="Script" uid="uid://bnymdbpnxf6a0" path="res://Scripts/options_menu.gd" id="2_iopgn"]
 [ext_resource type="Script" uid="uid://bfd22kixp4ppo" path="res://Scripts/toggle_button.gd" id="2_ucjbo"]
 [ext_resource type="PackedScene" uid="uid://hvdtjmpwq6ji" path="res://UI/Buttons/button_keybind.tscn" id="3_iopgn"]
 [ext_resource type="Script" uid="uid://cbsarrmo5l05n" path="res://Scripts/tutorial_button.gd" id="5_iopgn"]
@@ -22,11 +22,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 2
+current_tab = 0
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -71,13 +70,15 @@ text = "Resolution"
 [node name="Resolution" type="OptionButton" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 selected = 0
-item_count = 3
+item_count = 4
 popup/item_0/text = "640x360"
 popup/item_0/id = 0
 popup/item_1/text = "1280x720"
 popup/item_1/id = 1
 popup/item_2/text = "1920x1080"
 popup/item_2/id = 2
+popup/item_3/text = "2560x1440"
+popup/item_3/id = 3
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -89,6 +90,7 @@ text = "Pixel Perfect"
 
 [node name="PixelPerfect" type="CheckBox" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
+tooltip_text = "When disabled, increases viewport size to keep visuals pixel perfect. Enable if you are seeing distorted pixels."
 script = ExtResource("2_ucjbo")
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
@@ -183,6 +185,7 @@ min_value = -10.0
 max_value = 0.0
 
 [node name="Controls" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -204,6 +207,7 @@ layout_mode = 2
 dragging_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Controls/MarginContainer/HSplitContainer"]
+custom_minimum_size = Vector2(152, 0)
 layout_mode = 2
 
 [node name="ButtonKeybind" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
@@ -231,6 +235,7 @@ layout_mode = 2
 text = "Reset Keybindings"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Controls/MarginContainer/HSplitContainer"]
+custom_minimum_size = Vector2(152, 0)
 layout_mode = 2
 
 [node name="ButtonKeybind2" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" instance=ExtResource("3_iopgn")]
@@ -409,6 +414,7 @@ text = "Show Tutorials"
 
 [node name="ShowTutorials" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer"]
 layout_mode = 2
+tooltip_text = "Disabling this will unlock all the available tutorials in 'Tutorials' section."
 
 [node name="HSplitContainer2" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -420,6 +426,7 @@ text = "Show Hints"
 
 [node name="ShowHints" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2"]
 layout_mode = 2
+tooltip_text = "Show gameplay tips."
 
 [node name="HSplitContainer3" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -431,6 +438,7 @@ text = "Show Interaction Prompts"
 
 [node name="ShowInteractionPrompts" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer3"]
 layout_mode = 2
+tooltip_text = "Shows the interaction key above Kalin when in range of interactables."
 
 [node name="HSplitContainer4" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2

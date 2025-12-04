@@ -3,7 +3,8 @@ extends Button
 @onready var label : RichTextLabel = find_child("RichTextLabel")
 
 func _ready() -> void:
-	var action_keycode = Ge.get_action_keycode("stance")
+	var action_keycode = Ge.get_action_keycode("ui_cancel")
+	print("action_keycode: "+str(action_keycode))
 	if Ge.last_input_type == "keyboard":
 		var filepath : String = "res://UI/Buttons/button_keyboard_" + action_keycode + ".png"
 		if FileAccess.file_exists(filepath):

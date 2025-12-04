@@ -57,6 +57,7 @@ var default_keybindings : Dictionary = {
 
 
 func _ready() -> void:
+	print("options menu ready")
 	current_tab = 0
 	get_tree().paused = true
 	var screen_size : Vector2 = DisplayServer.window_get_size()
@@ -67,23 +68,25 @@ func _ready() -> void:
 			resolution.selected = 1
 		Vector2(1920, 1080):
 			resolution.selected = 2
+		Vector2(2560, 1440):
+			resolution.selected = 3
 
 	noise_color_r.value = Ge.noise_color.r * 255.0
 	noise_color_g.value = Ge.noise_color.g * 255.0
 	noise_color_b.value = Ge.noise_color.b * 255.0
 	noise_color_a.value = Ge.noise_color.a * 255.0
 
-	noise_toggle.button_pressed = Ge.noise_enabled
-	borderless_toggle.button_pressed = Options.borderless
+	noise_toggle.set_pressed_no_signal(Ge.noise_enabled)
+	borderless_toggle.set_pressed_no_signal(Options.borderless)
 
 	master_volume_slider.value	= AudioServer.get_bus_volume_db(master_bus_id)
 	sfx_volume_slider.value		= AudioServer.get_bus_volume_db(sfx_bus_id)
 	efx_volume_slider.value 	= AudioServer.get_bus_volume_db(efx_bus_id)
 	bgm_volume_slider.value 	= AudioServer.get_bus_volume_db(bgm_bus_id)
 
-	tutorial_toggle.button_pressed	= Ge.show_tutorials
-	hint_toggle.button_pressed		= Ge.show_hints
-	interaction_prompts_toggle.button_pressed = Ge.show_interaction_prompts
+	tutorial_toggle.set_pressed_no_signal(Ge.show_tutorials)
+	hint_toggle.set_pressed_no_signal(Ge.show_hints)
+	interaction_prompts_toggle.set_pressed_no_signal(Ge.show_interaction_prompts)
 
 	var hud_scale = Options.hud_scale
 	match hud_scale:
@@ -95,7 +98,7 @@ func _ready() -> void:
 	var shadow_intensity = Options.shadow_intensity
 	shadow_intensity_slider.value = shadow_intensity
 
-	adult_content_toggle.button_pressed = Options.adult_content_enabled
+	adult_content_toggle.set_pressed_no_signal(Options.adult_content_enabled)
 
 
 func _process(delta: float) -> void:
@@ -119,8 +122,6 @@ func _on_fullscreen_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN )
 	else:
-		#_on_borderless_toggled(false)
-		#borderless_toggle.button_pressed = Options.borderless
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	Options.fullscreen = toggled_on
 	notification(NOTIFICATION_WM_SIZE_CHANGED)
@@ -134,6 +135,8 @@ func _on_option_button_item_selected(index: int) -> void:
 			new_size = Vector2(1280, 720)
 		2:
 			new_size = Vector2i(1920, 1080)
+		3:
+			new_size = Vector2i(2560, 1440)
 
 	DisplayServer.window_set_size(new_size)
 	Options.window_size = new_size
@@ -216,7 +219,7 @@ func _on_reset_keybindings_pressed() -> void:
 		InputMap.action_erase_events(action)
 		for key in default_keybindings[action]:
 			var ev := InputEventKey.new()
-			ev.physical_keycode = key
+			ev.keycode = key
 			print("key: "+str(key))
 			print("ev: "+str(ev))
 			InputMap.action_add_event(action, ev)

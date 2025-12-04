@@ -1,6 +1,6 @@
 extends Node
 
-var config_path := "user://options.cfg"
+var config_path := "user://options.ini"
 
 var fullscreen := false
 var borderless := false
@@ -39,9 +39,26 @@ func _ready() -> void:
 		notification(NOTIFICATION_WM_SIZE_CHANGED)
 	#endregion
 
+	if FileAccess.file_exists("user://config.ini"):
+		var config := ConfigFile.new()
+		config.load("user://config.ini")
+		var keys = config.get_section_keys("Keyboard")
+		print("keys: "+str(keys))
+		for key in keys:
+			print("key: "+str(key))
+			var saved_input = config.get_value("Keyboard", key)
+			var ev := InputEventKey.new()
+			ev.keycode = saved_input
+			print("saved_input: "+str(saved_input))
+			if saved_input:
+				InputMap.action_erase_events(key)
+				InputMap.action_add_event(key, ev)
+
+
 
 func save_options() -> void:
 	var config = ConfigFile.new()
+	config.set_value("Game", "version", OS.get_version())
 	#region Save Display
 	config.set_value("window", "fullscreen",	fullscreen)
 	config.set_value("window", "borderless", 	borderless)

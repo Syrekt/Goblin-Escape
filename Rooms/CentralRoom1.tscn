@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://dhe315co0sjxw"]
+[gd_scene load_steps=23 format=4 uid="uid://dhe315co0sjxw"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_5ep3j"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_713km"]
@@ -22,8 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://dxvqnc0144rnv" path="res://Scenes/tutorial.tscn" id="21_sx3uk"]
 [ext_resource type="PackedScene" uid="uid://bkj14myaccvt3" path="res://Tutorial/fatigue_smell_tutorial.tscn" id="22_r1hhn"]
 [ext_resource type="Texture2D" uid="uid://bnfof7wdfl67g" path="res://Map/Fast Travel/portal_inert.png" id="23_k2fmh"]
-[ext_resource type="PackedScene" uid="uid://dx4ougi4grdc2" path="res://Inventory/Pickup Objects/pickup_stenchbane.tscn" id="23_r1hhn"]
-[ext_resource type="PackedScene" uid="uid://dejaaa7dsd8yv" path="res://Inventory/Pickup Objects/pickup_water.tscn" id="24_iitk7"]
 
 [node name="CentralRoom1" type="Node2D"]
 
@@ -256,15 +254,6 @@ text = "map"
 position = Vector2(607, 577)
 tutorial = ExtResource("22_r1hhn")
 
-[node name="PickupStenchbane" parent="." instance=ExtResource("23_r1hhn")]
-position = Vector2(521, 571)
-
 [node name="PortalInert" type="Sprite2D" parent="."]
 position = Vector2(512, 704)
 texture = ExtResource("23_k2fmh")
-
-[node name="PickupWater" parent="." instance=ExtResource("24_iitk7")]
-position = Vector2(499, 571)
-
-[node name="PickupRevenantsDraught2" parent="." instance=ExtResource("18_ouyvj")]
-position = Vector2(467, 568)

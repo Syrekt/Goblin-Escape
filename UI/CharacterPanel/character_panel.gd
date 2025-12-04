@@ -40,51 +40,51 @@ func _process(delta: float) -> void:
 
 	var slash_damage_prv	= owner.get_slash_damage()
 	var slash_damage_cur 	= owner.get_slash_damage(strength.value_temporary)
-	var slash_damage_text	= return_colored_text("Slash Damage", slash_damage_prv, slash_damage_cur)
+	var slash_damage_text	= return_colored_text("Damage", slash_damage_prv, slash_damage_cur)
 
 	var stab_damage_prv		= owner.get_stab_damage()
 	var stab_damage_cur 	= owner.get_stab_damage(strength.value_temporary)
-	var stab_damage_text	= return_colored_text("Stab Damage", stab_damage_prv, stab_damage_cur)
+	var stab_damage_text	= return_colored_text("Damage", stab_damage_prv, stab_damage_cur)
 
 	var bash_damage_prv 	= owner.get_bash_damage()
 	var bash_damage_cur 	= owner.get_bash_damage(strength.value_temporary)
-	var bash_damage_text	= return_colored_text("Bash Damage", bash_damage_prv, bash_damage_cur)
+	var bash_damage_text	= return_colored_text("Damage", bash_damage_prv, bash_damage_cur)
 
 	var slash_stamina_cost_prv	= owner.get_slash_stamina_cost()
 	var slash_stamina_cost_cur 	= owner.get_slash_stamina_cost(strength.value_temporary, endurance.value_temporary)
-	var slash_stamina_cost_text	= return_colored_text("Slash Stamina Cost", slash_stamina_cost_prv, slash_stamina_cost_cur, true)
+	var slash_stamina_cost_text	= return_colored_text("Stamina Cost", slash_stamina_cost_prv, slash_stamina_cost_cur, true)
 
 	var stab_stamina_cost_prv	= owner.get_stab_stamina_cost()
 	var stab_stamina_cost_cur 	= owner.get_stab_stamina_cost(strength.value_temporary, endurance.value_temporary)
-	var stab_stamina_cost_text	= return_colored_text("Stab Stamina Cost", stab_stamina_cost_prv, stab_stamina_cost_cur, true)
+	var stab_stamina_cost_text	= return_colored_text("Stamina Cost", stab_stamina_cost_prv, stab_stamina_cost_cur, true)
 
 	var bash_stamina_cost_prv 	= owner.get_bash_stamina_cost()
 	var bash_stamina_cost_cur 	= owner.get_bash_stamina_cost(strength.value_temporary, endurance.value_temporary)
-	var bash_stamina_cost_text	= return_colored_text("Bash Stamina Cost", bash_stamina_cost_prv, bash_stamina_cost_cur, true)
+	var bash_stamina_cost_text	= return_colored_text("Stamina Cost", bash_stamina_cost_prv, bash_stamina_cost_cur, true)
 
 	var slash_sweat_buildup_prv = owner.get_slash_sweat_buildup()
 	var slash_sweat_buildup_cur = owner.get_slash_sweat_buildup(strength.value_temporary)
-	var slash_sweat_buildup_text= return_colored_text("Slash Sweat Buildup", slash_sweat_buildup_prv, slash_sweat_buildup_cur, true)
+	var slash_sweat_buildup_text= return_colored_text("Sweat Buildup", slash_sweat_buildup_prv, slash_sweat_buildup_cur, true)
 
 	var stab_sweat_buildup_prv	= owner.get_stab_sweat_buildup()
 	var stab_sweat_buildup_cur 	= owner.get_stab_sweat_buildup(strength.value_temporary)
-	var stab_sweat_buildup_text	= return_colored_text("Stab Sweat Buildup", stab_sweat_buildup_prv, stab_sweat_buildup_cur, true)
+	var stab_sweat_buildup_text	= return_colored_text("Sweat Buildup", stab_sweat_buildup_prv, stab_sweat_buildup_cur, true)
 
 	var bash_sweat_buildup_prv 	= owner.get_bash_sweat_buildup()
 	var bash_sweat_buildup_cur 	= owner.get_bash_sweat_buildup(strength.value_temporary)
-	var bash_sweat_buildup_text	= return_colored_text("Bash Sweat Buildup", bash_sweat_buildup_prv, bash_sweat_buildup_cur, true)
+	var bash_sweat_buildup_text	= return_colored_text("Sweat Buildup", bash_sweat_buildup_prv, bash_sweat_buildup_cur, true)
 
 	var slash_fatigue_prv	= owner.get_slash_fatigue()
 	var slash_fatigue_cur 	= owner.get_slash_fatigue(strength.value_temporary, endurance.value_temporary)
-	var slash_fatigue_text	= return_colored_text("Slash Fatigue", slash_fatigue_prv, slash_fatigue_cur, true)
+	var slash_fatigue_text	= return_colored_text("Fatigue", slash_fatigue_prv, slash_fatigue_cur, true)
 	
 	var stab_fatigue_prv	= owner.get_stab_fatigue()
 	var stab_fatigue_cur 	= owner.get_stab_fatigue(strength.value_temporary, endurance.value_temporary)
-	var stab_fatigue_text	= return_colored_text("Stab Fatigue", stab_fatigue_prv, stab_fatigue_cur, true)
+	var stab_fatigue_text	= return_colored_text("Fatigue", stab_fatigue_prv, stab_fatigue_cur, true)
 
 	var bash_fatigue_prv 	= owner.get_bash_fatigue()
 	var bash_fatigue_cur 	= owner.get_bash_fatigue(strength.value_temporary, endurance.value_temporary)
-	var bash_fatigue_text	= return_colored_text("Bash Fatigue", bash_fatigue_prv, bash_fatigue_cur, true)
+	var bash_fatigue_text	= return_colored_text("Fatigue", bash_fatigue_prv, bash_fatigue_cur, true)
 
 	var str_details = "SLASH"
 	str_details += "\n" + slash_damage_text
