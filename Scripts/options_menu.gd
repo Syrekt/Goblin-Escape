@@ -51,7 +51,8 @@ var default_keybindings : Dictionary = {
 	"stance" 	: [KEY_SPACE],
 	"jump"		: [KEY_K],
 	"sprint"	: [KEY_SHIFT],
-	"walk"		: [KEY_ALT],
+	"walk"		: [KEY_CTRL],
+	"interact"	: [KEY_E],
 }
 
 

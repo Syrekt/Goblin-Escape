@@ -1,5 +1,4 @@
-class_name KeyRebindButton
-extends Control
+class_name KeyRebindButton extends Control
 
 @onready var button := $Button
 @onready var label  := $Label
@@ -42,6 +41,8 @@ func set_action_name() -> void:
 			label.text = "Sprint"
 		"walk":
 			label.text = "Walk"
+		"interact":
+			label.text = "Interact"
 
 func set_text_for_key() -> void:
 	#print("Set text for key: " + name)
@@ -55,6 +56,7 @@ func set_text_for_key() -> void:
 
 
 func _on_button_toggled(_button_pressed: bool) -> void:
+	owner.owner.prevent_closing = true
 	if _button_pressed:
 		button.text = "Press any key..."
 		set_process_unhandled_key_input(_button_pressed)
@@ -70,6 +72,7 @@ func _on_button_toggled(_button_pressed: bool) -> void:
 				i.set_process_unhandled_key_input(false)
 
 		set_text_for_key()
+		
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -79,9 +82,11 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		if event.keycode == KEY_ESCAPE:
 			set_action_name()
 			button.button_pressed = false
+			accept_event()
 		else:
 			rebind_action_key(event)
 			button.button_pressed = false
+		owner.owner.prevent_closing = false
 
 func rebind_action_key(event) -> void:
 	InputMap.action_erase_events(action_name)

@@ -22,10 +22,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 0
+current_tab = 2
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -182,7 +183,6 @@ min_value = -10.0
 max_value = 0.0
 
 [node name="Controls" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -221,6 +221,10 @@ action_name = "attack"
 [node name="ButtonKeybind8" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
 action_name = "stance"
+
+[node name="ButtonKeybind9" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+layout_mode = 2
+action_name = "interact"
 
 [node name="ResetKeybindings" type="Button" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer"]
 layout_mode = 2
