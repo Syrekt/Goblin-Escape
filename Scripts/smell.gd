@@ -7,13 +7,8 @@ var semen_amount := 0.0 # Suppress the smell?
 
 func _process(delta: float) -> void:
 	var final_generation_speed = clampf(generation_speed + dirt_amount - semen_amount, 0, 5)
-
-	var arr : Array = get_children()
-	for child in arr:
-		if child is StatusEffect:
-			final_generation_speed += child.value
-
-	value = move_toward(value, max_value, final_generation_speed * delta)
+	if !owner.status_effect_container.has_status_effect("Stenchbane"):
+		value = move_toward(value, max_value, final_generation_speed * delta)
 
 	var particles : GPUParticles2D = owner.smell_particles
 	particles.amount_ratio = (value / max_value)

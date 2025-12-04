@@ -29,7 +29,6 @@ var controls_disabled := false # Disables movement and UI input for player
 var movement_disabled := false # Only disables movement input
 var sprinting := false
 
-var noise_muffle := 0.0
 
 var last_ground_position : Vector2
 
@@ -313,9 +312,11 @@ func check_interactable() -> void:
 		if interactions.size() == 0:
 			interaction_prompt._hide()
 		for interaction : Interaction in interactions:
-			interaction.update(self)
+			if interaction.interactable:
+				interaction.update(self)
 			if !interaction.auto && interaction.interactable:
 				interaction_prompt._show("interact", interaction.title)
+				break
 func can_grab_corner(rising := false) -> bool:
 	var grab_prevent = col_corner_grab_prevent.has_overlapping_bodies()
 
@@ -389,10 +390,16 @@ func sex_begin(participants: Array, _position: String) -> void:
 	state_node.state.finished.emit("sex")
 	call_deferred("update_animation", _position)
 func emit_noise(offset:Vector2, amount := 0.0) -> void:
+	var feather_step = status_effect_container.has_status_effect("Feather Step")
+	# Muffle
+	var noise_muffle := 0.0
+
+	# Noise
 	if amount == 0.0:
 		match state_node.state.name:
 			"run":
 				amount = 50.0 if sprinting else 30.0
+				if feather_step: amount = 0.0
 			"walk":
 				amount = 0.0
 			"stab":
@@ -403,14 +410,19 @@ func emit_noise(offset:Vector2, amount := 0.0) -> void:
 				amount = 30.0
 			"bash", "bash_running", "bash_no_sword":
 				amount = 20.0
+				if feather_step: amount = 0.0
 			"land_hurt":
 				amount = 20.0
+				if feather_step: amount = 0.0
 			"land_short":
 				amount = 5.0
+				if feather_step: amount = 0.0
 			"land":
 				amount = 10.0
+				if feather_step: amount = 0.0
 
-	if(amount != 0.0):
+	#Finalize
+	if(amount - noise_muffle > 0.0):
 		var _noise = noise.instantiate()
 		_noise.amount_max = max(amount - noise_muffle, 0)
 		_noise.global_position = global_position + offset

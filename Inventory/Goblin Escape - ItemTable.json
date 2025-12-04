@@ -1,13 +1,13 @@
 {
   "Water": {
     "item_name": "Water",
-    "item_description": "Negates the effects of other drinks and increases stamina recovery",
+    "item_description": "Increases [color=yellow]stamina[/color] recovery speed but makes you sweat more.",
     "consumable": true,
     "icon_path": "res://Inventory/Sprites/water.png"
   },
   "Stenchbane": {
     "item_name": "Stenchbane",
-    "item_description": "Suppresses the body odor, preventing creatures from sniffing me out.",
+    "item_description": "Suppresses the body odor at the cost of reduced [color=yellow]stamina[/color] recovery.",
     "consumable": true,
     "icon_path": "res://Inventory/Sprites/stenchbane.png"
   },
@@ -19,7 +19,7 @@
   },
   "Pher Potion": {
     "item_name": "Pher Potion",
-    "item_description": "Supresses body odor, reduces stamina generation.",
+    "item_description": "Goblins love this smell, not sure if this is a good idea.",
     "consumable": true,
     "icon_path": "res://Inventory/Sprites/pher_potion.png"
   },
@@ -43,7 +43,7 @@
   },
   "Infertility Potion": {
     "item_name": "Infertility Potion",
-    "item_description": "Prevents pregnancy for a while",
+    "item_description": "Prevents pregnancy until you rest.",
     "consumable": true,
     "icon_path": "res://Inventory/Sprites/infertility_potion.png"
   },
@@ -55,13 +55,13 @@
   },
   "Feather Step": {
     "item_name": "Feather Step",
-    "item_description": "Reduces the [color=yellow]movement[/color] sounds you make.",
+    "item_description": "Your footsteps makes no sound.",
     "consumable": true,
     "icon_path": "res://Inventory/Sprites/feather_step.png"
   },
   "Dried Fish": {
     "item_name": "Dried Fish",
-    "item_description": "Recovers small amount of health.",
+    "item_description": "Restores small amount of health.",
     "consumable": true,
     "icon_path": "res://Inventory/Sprites/dried_fish.png"
   },
@@ -73,7 +73,7 @@
   },
   "Bread": {
     "item_name": "Bread",
-    "item_description": "Recovers small amount of health.",
+    "item_description": "Restores small amount of health.",
     "consumable": true,
     "icon_path": "res://Inventory/Sprites/bread.png"
   },

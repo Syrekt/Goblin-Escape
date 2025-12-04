@@ -10,32 +10,31 @@ func add_status_effect(status_effect_name:String,lifetime:=0.0,tick_time:=0.0) -
 		if child.name == status_effect_name:
 			status_effect_found = true
 			print("Status effect already exists")
+			return
 
-	if !status_effect_found:
-		var status_effect : StatusEffect = status_effect_scene.instantiate()
-		status_effect.name = status_effect_name
-		add_child(status_effect)
+	var status_effect : StatusEffect = status_effect_scene.instantiate()
+	status_effect.name = status_effect_name
+	if lifetime != 0.0: add_lifetime(lifetime, status_effect)
+	add_child(status_effect)
 
-		match status_effect_name:
-			"Bleed":
-				status_effect.texture = load("res://UI/Buffs/se_bleed.png")
-				add_lifetime(lifetime, status_effect)
-				add_tick_timer(tick_time, status_effect, _on_bleed_tick)
-
-				#var effect_timer := Timer.new()
-				#effect_timer.name = "Effect Timer"
-				#effect_timer.timeout.connect(_on_bleed_tick)
-				#status_effect.add_child(effect_timer)
-				#effect_timer.start(tick_time)
-			"Death's Door":
-				status_effect.texture = load("res://UI/Buffs/se_death.png")
-				add_lifetime(lifetime, status_effect)
-			"Minor Rejuvenation":
-				status_effect.texture = load("res://UI/Buffs/minor_rejuvenation_buff.png")
-				add_tick_timer(tick_time, status_effect, _on_minor_rejuvenation_tick)
-			"Hydrated":
-				status_effect.texture = load("res://UI/Buffs/stamina_buff.png")
-				add_tick_timer(tick_time, status_effect, _on_hydration_buff_tick)
+	match status_effect_name:
+		"Bleed":
+			status_effect.texture = load("res://UI/Buffs/se_bleed.png")
+			add_lifetime(lifetime, status_effect)
+			add_tick_timer(tick_time, status_effect, _on_bleed_tick)
+		"Death's Door":
+			status_effect.texture = load("res://UI/Buffs/se_death.png")
+		"Minor Rejuvenation":
+			status_effect.texture = load("res://UI/Buffs/se_minor_rejuvenation.png")
+			add_tick_timer(tick_time, status_effect, _on_minor_rejuvenation_tick)
+		"Hydrated":
+			status_effect.texture = load("res://UI/Buffs/se_minor_stamina_regeneration.png")
+		"Feather Step":
+			status_effect.texture = load("res://UI/Buffs/se_feather_step.png")
+		"Infertility":
+			pass
+		"Stenchbane":
+			status_effect.texture = load("res://UI/Buffs/se_stenchbane.png")
 
 
 func has_status_effect(_name:String) -> bool:
@@ -52,6 +51,10 @@ func remove_status_effect(_name:String) -> bool: ## Return true if status effect
 			return true
 
 	return false
+
+func rest() -> void:
+	for se in get_children():
+		if !se.persistent: se.queue_free()
 
 func add_lifetime(time:float,status_effect:StatusEffect) -> void:
 	var lifetime : Timer = Timer.new()
@@ -79,8 +82,6 @@ func _on_bleed_tick() -> void:
 	owner.health.value -= 0.5
 func _on_minor_rejuvenation_tick() -> void:
 	owner.health.value += 0.1
-func _on_hydration_buff_tick() -> void:
-	owner.stamina.value += 0.1
 
 func save(save_data:Dictionary) -> void:
 	var effects := {}

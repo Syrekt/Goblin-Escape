@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxsu0pg7ly8qp"]
 
 [ext_resource type="Texture2D" uid="uid://xoyfqo8f1wal" path="res://UI/Buffs/buff.png" id="1_y617c"]
-[ext_resource type="Script" uid="uid://cpv5kddk2hlvd" path="res://Scripts/buff.gd" id="2_lsq5q"]
+[ext_resource type="Script" uid="uid://cpv5kddk2hlvd" path="res://Scripts/status_effect.gd" id="2_lsq5q"]
 
 [node name="StatusEffect" type="TextureRect"]
 offset_right = 16.0

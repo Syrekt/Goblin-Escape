@@ -43,14 +43,11 @@ func _on_pressed() -> void:
 			else:
 				owner.status_effect_container.add_status_effect("Hydrated", 60.0, 0.1)
 		"Stenchbane":
-			if owner.smell.value == 0:
-				owner.think("I don't need this.")
-			else:
-				print("Use Stenchbane")
-				owner.smell.value = 0;
-				#owner.smell.add_buff(-10, 10)
+			print("Use stenchbane")
+			owner.status_effect_container.add_status_effect("Stenchbane")
 		"Feather Step":
 			print("Use feather step")
+			owner.status_effect_container.add_status_effect("Feather Step", 10*60)
 		"Bandage":
 			if owner.status_effect_container.has_status_effect("Bleed"):
 				owner.status_effect_container.remove_status_effect("Bleed")
@@ -81,6 +78,8 @@ func _on_pressed() -> void:
 			get_tree().current_scene.add_child(suicide_confirm.instantiate())
 			owner.inventory_panel.toggle()
 			used = false
+		"Infertility Potion":
+			print("Used infertility potion")
 		"_":
 			print("This item has no use")
 	if used && use():

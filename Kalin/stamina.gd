@@ -13,6 +13,8 @@ var tint_over_tween  : Tween
 
 func _process(delta: float) -> void:
 	var final_regeneration_speed = regeneration_speed
+	if owner.status_effect_container.has_status_effect("Hydrated"):
+		final_regeneration_speed += 0.1
 
 	var arr : Array = get_children()
 	for child in arr:

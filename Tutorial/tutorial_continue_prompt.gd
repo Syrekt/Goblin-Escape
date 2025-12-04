@@ -4,10 +4,18 @@ extends Button
 
 func _ready() -> void:
 	var action_keycode = Ge.get_action_keycode("stance")
-	
-	var filepath : String = "res://UI/Buttons/button_keyboard_" + action_keycode + ".png"
-	if FileAccess.file_exists(filepath):
-		label.text = "[img]" + filepath + "[/img]" + label.text
+	if Ge.last_input_type == "keyboard":
+		var filepath : String = "res://UI/Buttons/button_keyboard_" + action_keycode + ".png"
+		if FileAccess.file_exists(filepath):
+			label.text = "[img]" + filepath + "[/img]" + label.text
+		else:
+			print("File doesn't exists %s" % filepath)
+	elif Ge.last_input_type == "gamepad":
+		var filepath : String = "res://UI/Buttons/buttons_xbox" + action_keycode + ".png"
+		if FileAccess.file_exists(filepath):
+			label.text = "[img]" + filepath + "[/img]" + label.text
+		else:
+			print("File doesn't exists %s" % filepath)
 
 
 func _on_check_button_toggled(toggled_on: bool) -> void:
