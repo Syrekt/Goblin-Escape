@@ -9,6 +9,8 @@ var ray : RayCast2D
 @onready var point_light : PointLight2D = $PointLight2D
 @onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
 
+var player : Player
+
 func _ready() -> void:
 	if !lit:
 		lit_area.scale = Vector2(0, 0)
@@ -34,6 +36,13 @@ func toggle_light() -> void:
 		sprite.play("lit")
 	save()
 
+func _physics_process(delta: float) -> void:
+	if player:
+		ray.target_position = ray.to_local(player.global_position)
+		player.light_source = self
+
+
+
 
 func save() -> void:
 	Game.get_singleton().save_data_in_room(name, { "lit": lit, })
@@ -49,6 +58,8 @@ func load() -> void:
 
 
 func _on_body_entered(body: CharacterBody2D) -> void:
+	if body is Player:
+		player = body
 	if body is Player || body is Enemy:
 		ray.target_position = ray.to_local(body.global_position)
 		await get_tree().physics_frame
@@ -56,6 +67,8 @@ func _on_body_entered(body: CharacterBody2D) -> void:
 			body.light_source = self
 
 func _on_body_exited(body: CharacterBody2D) -> void:
+	if body is Player:
+		player = null
 	if body is Player || body is Enemy:
 		if body.light_source == self:
 			body.light_source = null
