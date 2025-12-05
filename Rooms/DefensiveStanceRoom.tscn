@@ -70,7 +70,7 @@ position = Vector2(297, 283)
 scale = Vector2(-1, 1)
 
 [node name="SkillPickup2" parent="." instance=ExtResource("6_m10yo")]
-position = Vector2(610, 407)
+position = Vector2(611, 418)
 texture = ExtResource("7_0adsn")
 region_enabled = true
 region_rect = Rect2(128, 320, 16, 16)

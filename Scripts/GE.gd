@@ -51,9 +51,6 @@ signal show_patrol_tutorial
 var player : Player
 
 func _ready() -> void:
-	if !OS.is_debug_build():
-		SentryOptions.logger_enabled = true
-
 	show_combat_tutorial.connect(_show_combat_tutorial)
 	show_stealth_tutorial.connect(_show_stealth_tutorial)
 	show_patrol_tutorial.connect(_show_patrol_tutorial)
@@ -64,6 +61,8 @@ func _ready() -> void:
 	assign_key("down", "down_key")
 	assign_key("grab", "grab_key")
 	assign_key("run", "run_key")
+
+
 
 func assign_key(action: String, value: String) -> void:
 	var events = InputMap.action_get_events(action)

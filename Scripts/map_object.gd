@@ -57,18 +57,20 @@ func take_damage(damage: int, source) -> void:
 		Ge.play_audio_from_string_array(source.global_position, 0, "res://SFX/Hit on wood/")
 
 		damage_taken = damage_taken + damage
-		sprite.frame = (1 - (health_cur / health_max)) * frame_count
+		sprite.frame = min(frame_count - 2, (1 - (health_cur / health_max)) * frame_count)
 	else:
 		sprite.frame = frame_count
 		Ge.play_audio_free(0, "res://SFX/wood break.mp3")
 		print("was_destroyed: "+str(was_destroyed))
-		if randi() % 2:
+		if drop_random_loot && randi() % 2:
 			drop_loot()
 
 		set_collision_layer_value(1, false)
 		set_collision_layer_value(8, false)
 		set_collision_layer_value(13, false)
-		if light_occuler: light_occuler.queue_free()
+		for child in get_children():
+			if child is LightOccluder2D:
+				child.queue_free()
 	save()
 func drop_loot() -> void:
 	print("Drop loot")

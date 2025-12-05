@@ -31,7 +31,7 @@ func physics_update(delta: float) -> void:
 		finished.emit("run_stop")
 	elif player.pressed("walk"):
 		finished.emit("walk")
-	elif player.just_pressed("stance"):
+	elif player.has_sword && player.just_pressed("stance"):
 		finished.emit("stance_walk")
 	elif player.pressed("down"):
 		if elapsed_time >= 0.5 && floor_angle == 0:

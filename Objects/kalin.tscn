@@ -4667,6 +4667,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UI" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("8_4oj65")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="UI"]

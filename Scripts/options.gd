@@ -9,7 +9,7 @@ var window_size := Vector2(1280, 720)
 var window_pos := Vector2(0, 0)
 var window_screen := 0
 var current_screen := 0
-var hud_scale := 1
+var hud_scale := 2
 var shadow_intensity = 1.0
 var adult_content_enabled := true
 
@@ -20,6 +20,7 @@ func _ready() -> void:
 	#region Setup display
 	#Load display
 	var options_loaded = load_options()
+	print("options_loaded: "+str(options_loaded))
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, borderless)
 	DisplayServer.window_set_size(window_size)
 	DisplayServer.window_set_current_screen(window_screen)
@@ -37,6 +38,7 @@ func _ready() -> void:
 
 	if options_loaded != OK:
 		notification(NOTIFICATION_WM_SIZE_CHANGED)
+		DisplayServer.window_set_position((DisplayServer.screen_get_size() - DisplayServer.window_get_size())/2)
 	#endregion
 
 	if FileAccess.file_exists("user://config.ini"):
@@ -105,10 +107,8 @@ func load_options() -> int:
 		var sfx_bus		= [AudioServer.get_bus_index("SFX"), config.get_value("audio", "SFX", 0)]
 		var efx_bus		= [AudioServer.get_bus_index("EFX"), config.get_value("audio", "EFX", 0)]
 		var bgm_bus
-		if OS.is_debug_build():
-			bgm_bus		= [AudioServer.get_bus_index("BGM"), -10]
-		else:
-			bgm_bus		= [AudioServer.get_bus_index("BGM"), config.get_value("audio", "BGM", 0)]
+		if OS.is_debug_build(): bgm_bus	= [AudioServer.get_bus_index("BGM"), -10]
+		else:					bgm_bus	= [AudioServer.get_bus_index("BGM"), config.get_value("audio", "BGM", 0)]
 		AudioServer.set_bus_volume_db(master_bus[0], master_bus[1])
 		AudioServer.set_bus_volume_db(sfx_bus[0], sfx_bus[1])
 		AudioServer.set_bus_volume_db(efx_bus[0], efx_bus[1])
@@ -130,6 +130,11 @@ func load_options() -> int:
 		shadow_intensity	= config.get_value("gameplay", "shadow_intensity", 1.0)
 		adult_content_enabled	= config.get_value("gameplay", "adult_content_enabled", 1.0)
 		#endregion
+	else:
+		var bgm_bus : Array
+		if OS.is_debug_build(): bgm_bus	= [AudioServer.get_bus_index("BGM"), -10]
+		else:					bgm_bus	= [AudioServer.get_bus_index("BGM"), config.get_value("audio", "BGM", 0)]
+		AudioServer.set_bus_volume_db(bgm_bus[0], bgm_bus[1])
 	return err
 
 func _notification(what: int) -> void:

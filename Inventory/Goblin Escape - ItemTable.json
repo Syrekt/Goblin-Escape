@@ -49,7 +49,7 @@
   },
   "Health Potion": {
     "item_name": "Health Potion",
-    "item_description": "Fully recovers [color=red]health[/color]",
+    "item_description": "Recovers some [color=red]health.[/color]",
     "consumable": true,
     "icon_path": "res://Inventory/Sprites/health_potion.png"
   },

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://rrnk862o0mdw"]
+[gd_scene load_steps=12 format=4 uid="uid://rrnk862o0mdw"]
 
 [ext_resource type="Script" uid="uid://ysqa4fxfxicu" path="res://Scripts/scene_manager.gd" id="1_7vf4x"]
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="2_mubwj"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cxu1p2ap15mlj" path="res://Objects/skill_pickup.tscn" id="7_24s5e"]
 [ext_resource type="Texture2D" uid="uid://wcoq7ay5eurm" path="res://UI/rpg_icon_pack.png" id="8_lyr0d"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="9_lpws4"]
+[ext_resource type="PackedScene" uid="uid://cqoy45uj81eut" path="res://Map/Props/barricade.tscn" id="11_oqx7d"]
 [ext_resource type="PackedScene" uid="uid://b4vewnv73flk4" path="res://Map/Props/Movable/statue.tscn" id="12_k6jnn"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="14_mubwj"]
 
@@ -91,3 +92,7 @@ spawn_point = NodePath("../SpawnPoint")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(560, 203)
+
+[node name="Barricade" parent="." instance=ExtResource("11_oqx7d")]
+position = Vector2(495, 216)
+scale = Vector2(-1, 1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://c26h8155hvjs3"]
+[gd_scene load_steps=13 format=4 uid="uid://c26h8155hvjs3"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_07e8a"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_s21e8"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://hxoxl4bcalr3" path="res://Map/Props/lever.tscn" id="9_iwd73"]
 [ext_resource type="PackedScene" uid="uid://bnf3rd1nfdher" path="res://Map/Props/iron_bars.tscn" id="10_ilr5h"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="11_iwd73"]
+[ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Enemy/GoblinWarrior/goblin_warrior.tscn" id="12_7jvia"]
 
 [node name="HeavyStancePath1" type="Node2D"]
 
@@ -100,16 +101,6 @@ position = Vector2(640, 1008)
 [node name="HidingSpot" parent="." instance=ExtResource("8_ilr5h")]
 position = Vector2(912, 1093)
 
-[node name="Goblin2" parent="." node_paths=PackedStringArray("patrol_points") instance=ExtResource("4_l0afd")]
-position = Vector2(912, 1120)
-patrol_points = [NodePath("Marker2D"), NodePath("Marker2D2")]
-
-[node name="Marker2D" type="Marker2D" parent="Goblin2"]
-position = Vector2(-160, 0)
-
-[node name="Marker2D2" type="Marker2D" parent="Goblin2"]
-position = Vector2(144, 0)
-
 [node name="Lever" parent="." node_paths=PackedStringArray("target_door") instance=ExtResource("9_iwd73")]
 position = Vector2(1031, 1094)
 target_door = NodePath("../IronBars")
@@ -137,3 +128,13 @@ position = Vector2(448, 608)
 
 [node name="Torch6" parent="." instance=ExtResource("11_iwd73")]
 position = Vector2(736, 608)
+
+[node name="GoblinWarrior" parent="." node_paths=PackedStringArray("patrol_points") instance=ExtResource("12_7jvia")]
+position = Vector2(912, 1120)
+patrol_points = [NodePath("Marker2D"), NodePath("Marker2D2")]
+
+[node name="Marker2D" type="Marker2D" parent="GoblinWarrior"]
+position = Vector2(-160, 0)
+
+[node name="Marker2D2" type="Marker2D" parent="GoblinWarrior"]
+position = Vector2(144, 0)

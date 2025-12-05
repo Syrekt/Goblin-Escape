@@ -26,7 +26,8 @@ func update_input() -> void:
 	for action : String in array:
 		print("action: "+str(action))
 		if Ge.last_input_type == "keyboard":
-			var action_keycode = Ge.get_action_keycode(action)
+			var action_keycode = Ge.get_action_keycode(action).to_lower()
+			print("action_keycode: "+str(action_keycode))
 			icon_string += "[img]res://UI/Buttons/button_keyboard_" + action_keycode + ".png[/img]"
 		elif Ge.last_input_type == "gamepad":
 			var gamepad_button_index = Ge.get_action_keycode(action)
