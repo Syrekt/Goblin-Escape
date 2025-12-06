@@ -22,15 +22,20 @@ func add_status_effect(status_effect_name:String,lifetime:=0.0,tick_time:=0.0) -
 			status_effect.texture = load("res://UI/Buffs/se_bleed.png")
 			add_lifetime(lifetime, status_effect)
 			add_tick_timer(tick_time, status_effect, _on_bleed_tick)
+			status_effect.tooltip_text = "Losing health over time"
 		"Death's Door":
 			status_effect.texture = load("res://UI/Buffs/se_death.png")
+			status_effect.tooltip_text = "Can't resist death"
 		"Minor Rejuvenation":
 			status_effect.texture = load("res://UI/Buffs/se_minor_rejuvenation.png")
 			add_tick_timer(tick_time, status_effect, _on_minor_rejuvenation_tick)
+			status_effect.tooltip_text = "Regenerates health over time"
 		"Hydrated":
 			status_effect.texture = load("res://UI/Buffs/se_minor_stamina_regeneration.png")
+			status_effect.tooltip_text = "Increased stamina regeneration"
 		"Feather Step":
 			status_effect.texture = load("res://UI/Buffs/se_feather_step.png")
+			status_effect.tooltip_text = "Prevents footstep sounds"
 		"Infertility":
 			pass
 		"Stenchbane":
