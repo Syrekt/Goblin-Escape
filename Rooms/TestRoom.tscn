@@ -1,15 +1,17 @@
-[gd_scene load_steps=12 format=4 uid="uid://rrnk862o0mdw"]
+[gd_scene load_steps=14 format=4 uid="uid://rrnk862o0mdw"]
 
 [ext_resource type="Script" uid="uid://ysqa4fxfxicu" path="res://Scripts/scene_manager.gd" id="1_7vf4x"]
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="2_mubwj"]
 [ext_resource type="PackedScene" uid="uid://d1ido0af5r23x" path="res://Objects/loading_screen.tscn" id="3_yqoo0"]
 [ext_resource type="PackedScene" uid="uid://45snbjkrrgyc" path="res://UI/death_screen.tscn" id="4_yut4v"]
 [ext_resource type="PackedScene" uid="uid://bxgqi0q1okfjx" path="res://Objects/screen_fade.tscn" id="5_kvfyn"]
-[ext_resource type="PackedScene" uid="uid://cxu1p2ap15mlj" path="res://Objects/skill_pickup.tscn" id="7_24s5e"]
-[ext_resource type="Texture2D" uid="uid://wcoq7ay5eurm" path="res://UI/rpg_icon_pack.png" id="8_lyr0d"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="9_lpws4"]
-[ext_resource type="PackedScene" uid="uid://cqoy45uj81eut" path="res://Map/Props/barricade.tscn" id="11_oqx7d"]
+[ext_resource type="PackedScene" uid="uid://dx4ougi4grdc2" path="res://Inventory/Pickup Objects/pickup_stenchbane.tscn" id="11_7vf4x"]
+[ext_resource type="PackedScene" uid="uid://dw2d8bu1vlvv6" path="res://Enemy/Goblin/goblin.tscn" id="12_7vf4x"]
 [ext_resource type="PackedScene" uid="uid://b4vewnv73flk4" path="res://Map/Props/Movable/statue.tscn" id="12_k6jnn"]
+[ext_resource type="PackedScene" uid="uid://sbe7n6eecpl2" path="res://Inventory/Pickup Objects/pickup_revenants_draught.tscn" id="12_mubwj"]
+[ext_resource type="PackedScene" uid="uid://b4ng1a32l05nl" path="res://Objects/goblin_spawn_tunnel.tscn" id="12_o0wdf"]
+[ext_resource type="PackedScene" uid="uid://cy0k8vepu16km" path="res://Inventory/Pickup Objects/pickup_pher_potion.tscn" id="13_yqoo0"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="14_mubwj"]
 
 [node name="TestRoom" type="Node2D"]
@@ -67,20 +69,6 @@ visible = false
 
 [node name="ScreenFade" parent="." instance=ExtResource("5_kvfyn")]
 
-[node name="SkillPickup" parent="." instance=ExtResource("7_24s5e")]
-position = Vector2(584, 224)
-texture = ExtResource("8_lyr0d")
-region_enabled = true
-region_rect = Rect2(80, 320, 16, 16)
-skill_name = "has_heavy_stance"
-
-[node name="SkillPickup2" parent="." instance=ExtResource("7_24s5e")]
-position = Vector2(456, 224)
-texture = ExtResource("8_lyr0d")
-region_enabled = true
-region_rect = Rect2(128, 320, 16, 16)
-skill_name = "has_defensive_stance"
-
 [node name="Torch" parent="." instance=ExtResource("9_lpws4")]
 position = Vector2(464, 176)
 
@@ -93,6 +81,15 @@ spawn_point = NodePath("../SpawnPoint")
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(560, 203)
 
-[node name="Barricade" parent="." instance=ExtResource("11_oqx7d")]
-position = Vector2(495, 216)
-scale = Vector2(-1, 1)
+[node name="GoblinSpawnTunnel" parent="." instance=ExtResource("12_o0wdf")]
+position = Vector2(409, 212)
+enemy = ExtResource("12_7vf4x")
+
+[node name="PickupStenchbane" parent="." instance=ExtResource("11_7vf4x")]
+position = Vector2(441, 211)
+
+[node name="PickupRevenantsDraught" parent="." instance=ExtResource("12_mubwj")]
+position = Vector2(469, 210)
+
+[node name="PickupPher" parent="." instance=ExtResource("13_yqoo0")]
+position = Vector2(497, 209)

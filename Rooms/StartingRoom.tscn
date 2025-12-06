@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://vbsxvjodryce"]
+[gd_scene load_steps=13 format=4 uid="uid://vbsxvjodryce"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_eyrgu"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_ra578"]
@@ -10,6 +10,8 @@
 [ext_resource type="AudioStream" uid="uid://llhantu0gpcf" path="res://SFX/Wind,Ext,Alley,Urban,Howl,Pronounced,Metal,Clinking.wav" id="8_u8lx0"]
 [ext_resource type="Texture2D" uid="uid://bw11n7ht0gpj1" path="res://Map/Props/spr_skeleton3.png" id="9_g3vmj"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="10_k8dhd"]
+[ext_resource type="PackedScene" uid="uid://cy0k8vepu16km" path="res://Inventory/Pickup Objects/pickup_pher_potion.tscn" id="11_jyr06"]
+[ext_resource type="PackedScene" uid="uid://sbe7n6eecpl2" path="res://Inventory/Pickup Objects/pickup_revenants_draught.tscn" id="12_k5ck5"]
 
 [node name="StartingRoom" type="Node2D"]
 
@@ -148,5 +150,11 @@ lit = false
 [node name="Torch4" parent="." instance=ExtResource("10_k8dhd")]
 position = Vector2(2128, 240)
 lit = false
+
+[node name="PickupPher" parent="." instance=ExtResource("11_jyr06")]
+position = Vector2(220, 179)
+
+[node name="PickupRevenantsDraught" parent="." instance=ExtResource("12_k5ck5")]
+position = Vector2(259, 177)
 
 [editable path="SimpleDialogue"]

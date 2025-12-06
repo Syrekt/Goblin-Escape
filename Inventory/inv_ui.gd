@@ -54,12 +54,14 @@ func create_button(item : InventoryItem) -> void:
 	var button : Button = button_scene.instantiate()
 	vbox.add_child(button)
 	button.owner = owner
-	button.focus_entered.connect(_on_focus_entered.bind(item))
+	button.focus_entered.connect(_on_focus_entered.bind(button, item))
+	button.mouse_entered.connect(_on_focus_entered.bind(button, item))
 
 	button.item = item
 #endregion
 #region Signals
-func _on_focus_entered(item : InventoryItem) -> void:
+func _on_focus_entered(button,item : InventoryItem) -> void:
+	button.grab_focus()
 	if item:
 		description_text.text = item.description
 #endregion

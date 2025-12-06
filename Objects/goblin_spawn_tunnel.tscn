@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://b4ng1a32l05nl"]
+
+[ext_resource type="Script" uid="uid://b5d1y1giqf77s" path="res://Objects/goblin_spawn_tunnel.gd" id="1_884mb"]
+[ext_resource type="Texture2D" uid="uid://b4g1fe5cafrg2" path="res://Objects/goblin_spawn_tunnel_strip3.png" id="2_t3qco"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btwow"]
+atlas = ExtResource("2_t3qco")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0ihb"]
+atlas = ExtResource("2_t3qco")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_116nh"]
+atlas = ExtResource("2_t3qco")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7x5ay"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btwow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0ihb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_116nh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ftya8"]
+size = Vector2(37, 32)
+
+[node name="GoblinSpawnTunnel" type="Area2D"]
+z_index = -1
+script = ExtResource("1_884mb")
+interactable = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7x5ay")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(2.5, -2)
+shape = SubResource("RectangleShape2D_ftya8")

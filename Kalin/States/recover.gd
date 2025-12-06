@@ -6,4 +6,5 @@ func enter(previous_state_name: String, data := {}) -> void:
 	player.can_have_sex = false
 	player.unconscious = false
 
-	player.status_effect_container.add_status_effect("Death's Door")
+	if previous_state_name == "death":
+		player.status_effect_container.add_status_effect("Death's Door")
