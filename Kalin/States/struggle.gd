@@ -25,14 +25,20 @@ func exit() -> void:
 	tween.kill()
 
 
-func physics_update(delta: float) -> void:
+func physics_update(delta:float) -> void:
+	player.stamina.spend(0.01)
+
 	progression_bar.value = move_toward(progression_bar.value, 0, 40 * delta)
+	# Make sure player is looking towards enemy
 	player.set_facing(player.grabbed_by.global_position.x - player.global_position.x)
+
+	# High arousal makes it harder to break
 	var arousal_modifier = (arousal_bar.value / arousal_bar.max_value) * 5.0
-	if Input.is_action_just_pressed("attack"):
+
+	if Input.is_action_just_pressed("attack"): # Struggle
 		progression_bar.value += 20.0 - arousal_modifier
-	if progression_bar.value >= progression_bar.max_value:
+	if progression_bar.value >= progression_bar.max_value: # Break free
 		player.break_grab()
-	elif progression_bar.value <= 0.0:
+	elif progression_bar.value <= 0.0 || !player.stamina.has_enough(0.1): # Lose struggle
 		player.grabbed_by.state_node.state.finished.emit(player.grabbed_by.transition_state)
 		finished.emit(player.grabbed_by.transition_state)
