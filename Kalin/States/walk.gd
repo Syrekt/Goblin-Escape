@@ -29,4 +29,5 @@ func physics_update(delta: float) -> void:
 	player.check_movable();
 
 func play_footsteps() -> void:
-	Ge.play_audio_from_string_array(player.global_position, -10, "res://SFX/Kalin/Footsteps Soft/")
+	if !player.status_effect_container.has_status_effect("Feather Step"):
+		Ge.play_audio_from_string_array(player.global_position, -10, "res://SFX/Kalin/Footsteps Soft/")
