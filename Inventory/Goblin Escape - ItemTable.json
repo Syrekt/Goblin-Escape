@@ -88,5 +88,17 @@
     "item_description": "Return to the last checkpoint.",
     "consumable": true,
     "icon_path": "res://Inventory/Sprites/revenants_draught.png"
+  },
+  "Elixir of Renewal": {
+    "item_name": "Elixir of Renewal",
+    "item_description": "Decreases fatigue",
+    "consumable": true,
+    "icon_path": "res://Inventory/Sprites/elixir_of_renewal.png"
+  },
+  "Elixir of Resilience": {
+    "item_name": "Elixir of Resilience",
+    "item_description": "Decreases fatigue buildup",
+    "consumable": true,
+    "icon_path": "res://Inventory/Sprites/elixir_of_resilience.png"
   }
 }

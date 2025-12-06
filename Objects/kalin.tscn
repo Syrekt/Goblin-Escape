@@ -4732,6 +4732,7 @@ offset_top = 1.7469997
 offset_right = 84.34
 offset_bottom = 3.7460003
 scale = Vector2(0.5, 0.5)
+theme = ExtResource("72_qdj7c")
 script = ExtResource("23_r14np")
 
 [node name="Fatigue" type="TextureProgressBar" parent="UI/HUD/Scaled" groups=["HUD"]]
@@ -4875,9 +4876,6 @@ clip_contents = true
 layout_mode = 2
 text = "waterasdaasdasdsa"
 text_overrun_behavior = 3
-
-[node name="Label" parent="UI/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer/ButtonContainer/Button" index="0"]
-layout_mode = 0
 
 [node name="ExpAmountContainer" type="VBoxContainer" parent="UI" groups=["HUD"]]
 offset_left = 563.0

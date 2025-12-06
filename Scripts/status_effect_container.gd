@@ -35,6 +35,10 @@ func add_status_effect(status_effect_name:String,lifetime:=0.0,tick_time:=0.0) -
 			pass
 		"Stenchbane":
 			status_effect.texture = load("res://UI/Buffs/se_stenchbane.png")
+		"Resilience":
+			status_effect.texture = load("res://UI/Buffs/se_resilience.png")
+			status_effect.tooltip_text = "Reduces fatigue buildup"
+			
 
 
 func has_status_effect(_name:String) -> bool:

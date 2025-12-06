@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1apt5o7fktb3"]
+
+[ext_resource type="Texture2D" uid="uid://cvtgwpnjlnj0h" path="res://Inventory/Sprites/elixir_of_renewal.png" id="1_j5jov"]
+[ext_resource type="Script" uid="uid://cliq1akrpj5ng" path="res://Inventory/item_pickup.gd" id="2_g6834"]
+[ext_resource type="PackedScene" uid="uid://cyuk5qsesuyn8" path="res://Inventory/item_pickup_area.tscn" id="3_djudb"]
+
+[node name="PickupElixirOfRenewal" type="Sprite2D"]
+texture = ExtResource("1_j5jov")
+script = ExtResource("2_g6834")
+item_name = "Elixir of Renewal"
+
+[node name="ItemPickupArea" parent="." instance=ExtResource("3_djudb")]

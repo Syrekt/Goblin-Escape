@@ -766,6 +766,10 @@ func _ready() -> void:
 	fullscreen_panel_opened.connect(_on_fullscreen_panel_opened)
 	fullscreen_panel_closed.connect(_on_fullscreen_panel_closed)
 	Ge.player = self
+	if OS.is_debug_build():
+		has_sword = true
+		has_heavy_stance = true
+		has_defensive_stance = true
 	#get_tree().current_scene.emit_signal("player_ready", self) #owner should be root node
 #endregion
 #region Physics

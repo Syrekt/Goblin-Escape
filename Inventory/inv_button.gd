@@ -53,7 +53,7 @@ func _on_pressed() -> void:
 				owner.status_effect_container.remove_status_effect("Bleed")
 			else:
 				used = false
-				owner.think(["I don't need this", "I'm not bleeding"].pick_random())
+				owner.think(["I don't need this.", "I'm not bleeding."].pick_random())
 		"Minor Rejuvenation Draught":
 			print("Use Minor Rejuvenation Draught")
 			if owner.status_effect_container.has_status_effect("Minor Rejuvenation"):
@@ -74,12 +74,17 @@ func _on_pressed() -> void:
 			].pick_random()
 			owner.think(thought)
 		"Revenant's Draught":
-			print("Use revenant's draught")
+			print("Use revenant's draught.")
 			get_tree().current_scene.add_child(suicide_confirm.instantiate())
 			owner.inventory_panel.toggle()
 			used = false
 		"Infertility Potion":
 			print("Used infertility potion")
+		"Elixir of Renewal":
+			owner.think("I feel refreshed.")
+			owner.fatigue.value -= 20
+		"Elixir of Resilience":
+			owner.status_effect_container.add_status_effect("Resilience")
 		"_":
 			print("This item has no use")
 	if used && use():
