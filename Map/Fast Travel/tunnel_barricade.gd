@@ -4,10 +4,6 @@ var health : float
 
 @onready var sprite := $BarricadeSprite
 
-func _process(delta: float) -> void:
-	Debugger.printui("sprite.frame: "+str(sprite.frame));
-	Debugger.printui("health: "+str(health))
-
 func take_damage(damage: int, source=null) -> void:
 	# Play sfx and particle effects
 	if damage > 0 && source:

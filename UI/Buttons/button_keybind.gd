@@ -52,6 +52,8 @@ func set_text_for_key() -> void:
 	var action_event = action_events[0]
 	#print("action_event: "+str(action_event.keycode))
 	var action_keycode = OS.get_keycode_string(action_event.keycode)
+	if action_keycode == "":
+		action_keycode = OS.get_keycode_string(action_event.physical_keycode)
 
 	button.text = action_keycode;
 	var config = ConfigFile.new()
@@ -59,7 +61,7 @@ func set_text_for_key() -> void:
 		config.load(CONFIG_FILE)
 	config.set_value("Keyboard", action_name, action_event.keycode)
 	config.save(CONFIG_FILE)
-	#print(action_keycode)
+	print("Action event keycode: " + str(action_event.keycode))
 
 
 func _on_button_toggled(_button_pressed: bool) -> void:
