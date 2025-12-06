@@ -160,6 +160,17 @@ func load_game():
 		# If save data exists, load it using MetSys SaveManager.
 		var save_manager := SaveManager.new()
 		save_manager.load_from_text(SAVE_PATH)
+
+		# Get instance values in the rooms
+		rooms = save_manager.get_value("rooms")
+		# Assign loaded values.
+		generated_rooms.assign(save_manager.get_value("generated_rooms"))
+		events.assign(save_manager.get_value("events"))
+		persistent_values = save_manager.get_value("persistent_values")
+		if save_manager.get_value("checkpoint"):
+			checkpoint = save_manager.get_value("checkpoint")
+		player.load(save_manager.get_value("kalin"))
+
 		# Load room
 		var room = scenes[starting_map]
 		if not custom_run:
@@ -167,14 +178,7 @@ func load_game():
 			if not loaded_starting_map.is_empty(): # Some compatibility problem.
 				room = loaded_starting_map
 		await load_room(room)
-		# Assign loaded values.
-		generated_rooms.assign(save_manager.get_value("generated_rooms"))
-		events.assign(save_manager.get_value("events"))
-		rooms = save_manager.get_value("rooms")
-		persistent_values = save_manager.get_value("persistent_values")
-		if save_manager.get_value("checkpoint"):
-			checkpoint = save_manager.get_value("checkpoint")
-		player.load(save_manager.get_value("kalin"))
+
 
 		var room_data : Dictionary = rooms.get(map.name)
 		if room_data:

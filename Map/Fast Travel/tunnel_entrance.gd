@@ -6,32 +6,43 @@ class_name TunnelEntrance extends Interaction
 
 @onready var fade : CanvasLayer = get_tree().current_scene.find_child("ScreenFade")
 
+@onready var goblin := preload("res://Enemy/Goblin/goblin.tscn")
+@onready var goblin_warrior := preload("res://Enemy/GoblinWarrior/goblin_warrior.tscn")
+
+@onready var spawn_timer := $SpawnTimer
+@onready var barricade := $Barricade
 
 var fading := false
 
 var player : Player
 
 func _ready() -> void:
-	$BarricadeCollider.health = barricade_health
+	if !barricaded: barricade.queue_free()
+	else:			barricade.health = barricade_health
 
 	var game = Game.get_singleton()
 	await game.room_loaded
 	var save_data = game.get_data_in_room(name)
 	if save_data:
 		load_data(save_data)
+	
+	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
+
 
 
 func update(_player: Player) -> void:
 	player = _player
+
+
 	if Input.is_action_just_pressed("interact"):
-		if target_entrance.barricaded:
+		if target_entrance.barricade && target_entrance.barricade.health >= 0:
 			var thoughts = [
 				"It's blocked on the other end.",
 				"I should clear it's exit first.",
 				"I don't want to get stuck in there.",
 			]
 			player.think(thoughts.pick_random())
-		elif barricaded:
+		elif barricade && barricade.health > 0:
 			var thoughts = [
 				"I should destroy the barricade.",
 				"The barricade’s blocking the way. I need to break it.",
@@ -39,16 +50,16 @@ func update(_player: Player) -> void:
 				"I’ll have to clear this blockade first.",
 			]
 			player.think(thoughts.pick_random())
-		else:
+		elif !barricade || (barricade && barricade.health <= 0):
 			fade.fade_in()
 			player.state_node.state.finished.emit("crawl_in")
 			create_tween().tween_property(player, "global_position:x", global_position.x, 0.2).set_trans(Tween.TRANS_LINEAR)
 			fading = true
 
 func _process(delta: float) -> void:
-	$BarricadeCollider.set_collision_layer_value(16, barricaded)
 	if fading && player:
 		if fade.tween_finished:
+			target_entrance.spawn_timer.start(3.0)
 			player.global_position = target_entrance.global_position
 			player.state_node.state.finished.emit("crawl_out")
 			player.col_interaction.interact()
@@ -57,9 +68,21 @@ func _process(delta: float) -> void:
 
 func save() -> void:
 	var game = Game.get_singleton()
-	game.save_data_in_room(name, {"barricaded": barricaded})
+	game.save_data_in_room(name, {"barricade_health": barricade.health})
 func load_data(data: Dictionary) -> void:
-	var value = data.get("barricaded")
-	print(name + " value(barricaded): "+str(value))
-	if value:
-		barricaded = value
+	print("Load tunnel data: "+str(data))
+	if barricaded:
+		if barricade:
+			barricade.health = data.get("barricade_health", barricade_health)
+			barricade.take_damage(0) # Update sprite
+		else:
+			printerr("Can't find barricade")
+	else:
+		barricade.queue_free()
+
+func _on_spawn_timer_timeout() -> void:
+	if randf() > 0.9:
+		var enemy = [goblin, goblin_warrior].pick_random().instantiate()
+		enemy.global_position = global_position
+		enemy.assign_player(Game.get_singleton().player)
+		add_sibling(enemy)

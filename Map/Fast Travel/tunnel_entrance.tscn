@@ -1,133 +1,51 @@
-[gd_scene load_steps=18 format=3 uid="uid://h6taionkkj78"]
+[gd_scene load_steps=12 format=3 uid="uid://h6taionkkj78"]
 
 [ext_resource type="Script" uid="uid://be7aagsl8mw7d" path="res://Map/Fast Travel/tunnel_entrance.gd" id="1_yixon"]
-[ext_resource type="Texture2D" uid="uid://ciigqibwhkoi8" path="res://Map/Props/tunnel_blocked.png" id="3_pf4f5"]
 [ext_resource type="Texture2D" uid="uid://chlvsvcgsvshg" path="res://Map/Props/tunnel_free.png" id="4_osw5i"]
 [ext_resource type="Script" uid="uid://b4su3xwfcan5v" path="res://Map/Fast Travel/tunnel_barricade.gd" id="4_pf4f5"]
+[ext_resource type="Texture2D" uid="uid://blimi6wumxqnx" path="res://Map/Fast Travel/spr_tunnel_barricade1.png" id="5_osw5i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jeyjq"]
 size = Vector2(36, 38)
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8x0af"]
-animation = &"barricaded"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8npva"]
-animation = &"free"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ea2t0"]
-advance_mode = 2
-advance_expression = "!barricaded"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y33kx"]
-advance_mode = 2
-advance_expression = "barricaded"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xkvo5"]
-advance_mode = 2
-advance_expression = "!barricaded"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_obtxx"]
-advance_mode = 2
-advance_expression = "barricaded"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_yixon"]
-states/Start/position = Vector2(205, 45)
-states/barricaded/node = SubResource("AnimationNodeAnimation_8x0af")
-states/barricaded/position = Vector2(318, 133)
-states/free/node = SubResource("AnimationNodeAnimation_8npva")
-states/free/position = Vector2(398, 45)
-transitions = ["Start", "free", SubResource("AnimationNodeStateMachineTransition_ea2t0"), "free", "barricaded", SubResource("AnimationNodeStateMachineTransition_y33kx"), "barricaded", "free", SubResource("AnimationNodeStateMachineTransition_xkvo5"), "Start", "barricaded", SubResource("AnimationNodeStateMachineTransition_obtxx")]
-
-[sub_resource type="Animation" id="Animation_osw5i"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_osw5i")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:interactable")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_wdjsy"]
-resource_name = "barricaded"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_pf4f5")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:interactable")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_pf4f5"]
-resource_name = "free"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_osw5i")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:interactable")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8x0af"]
-_data = {
-&"RESET": SubResource("Animation_osw5i"),
-&"barricaded": SubResource("Animation_wdjsy"),
-&"free": SubResource("Animation_pf4f5")
-}
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_osw5i"]
 size = Vector2(36, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8x0af"]
+atlas = ExtResource("5_osw5i")
+region = Rect2(192, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8npva"]
+atlas = ExtResource("5_osw5i")
+region = Rect2(128, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ea2t0"]
+atlas = ExtResource("5_osw5i")
+region = Rect2(64, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y33kx"]
+atlas = ExtResource("5_osw5i")
+region = Rect2(0, 0, 64, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xkvo5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8x0af")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8npva")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ea2t0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y33kx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="TunnelEntrance" type="Area2D"]
 z_index = -1
@@ -143,21 +61,17 @@ region_rect = Rect2(320, 208, 64, 48)
 visible = false
 shape = SubResource("RectangleShape2D_jeyjq")
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_yixon")
-advance_expression_base_node = NodePath("..")
-anim_player = NodePath("../AnimationPlayer")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_8x0af")
-}
-
-[node name="BarricadeCollider" type="CharacterBody2D" parent="."]
-visible = false
+[node name="Barricade" type="CharacterBody2D" parent="."]
 collision_layer = 32768
 collision_mask = 0
 script = ExtResource("4_pf4f5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BarricadeCollider"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barricade"]
+visible = false
 shape = SubResource("RectangleShape2D_osw5i")
+
+[node name="BarricadeSprite" type="AnimatedSprite2D" parent="Barricade"]
+sprite_frames = SubResource("SpriteFrames_xkvo5")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+one_shot = true
