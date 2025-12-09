@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://etpjt41sihua"
+path="res://.godot/imported/meeting_graktu.dialogue-dfd50d2d7c41c91392b8ccd168a74a04.tres"
+
+[deps]
+
+source_file="res://Dialogues/meeting_graktu.dialogue"
+dest_files=["res://.godot/imported/meeting_graktu.dialogue-dfd50d2d7c41c91392b8ccd168a74a04.tres"]
+
+[params]
+
+defaults=true

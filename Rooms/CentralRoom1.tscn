@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://sbe7n6eecpl2" path="res://Inventory/Pickup Objects/pickup_revenants_draught.tscn" id="18_ouyvj"]
 [ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="19_avktj"]
 [ext_resource type="PackedScene" uid="uid://bl26mmlff752e" path="res://Objects/key_prompt.tscn" id="20_lsp8e"]
-[ext_resource type="PackedScene" uid="uid://dxvqnc0144rnv" path="res://Scenes/tutorial.tscn" id="21_sx3uk"]
+[ext_resource type="PackedScene" uid="uid://dxvqnc0144rnv" path="res://Objects/tutorial.tscn" id="21_sx3uk"]
 [ext_resource type="PackedScene" uid="uid://bkj14myaccvt3" path="res://Tutorial/fatigue_smell_tutorial.tscn" id="22_r1hhn"]
 [ext_resource type="Texture2D" uid="uid://bnfof7wdfl67g" path="res://Map/Fast Travel/portal_inert.png" id="23_k2fmh"]
 
