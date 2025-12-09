@@ -18,6 +18,11 @@ func move(actor,target) -> void:
 	await target.body_entered
 
 
+func move_player(target) -> void:
+	var dir = sign(target.position.x - player.position.x)
+	player.remote_control_input.append("left")
+	await target.body_entered
+	player.remote_control_input.erase("left")
 
 
 func spawn_goblins() -> void:
@@ -26,6 +31,7 @@ func spawn_goblins() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
+	DialogueManager.get_current_scene = func(): return self
 	player = body
 
 	var balloon := BALLOON.instantiate()

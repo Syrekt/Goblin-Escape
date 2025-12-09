@@ -2,27 +2,21 @@
 Graktu: I was curious who was causing all this ruckus, turns out it’s a sole female warrior.
 Can’t imagine worse fate than to be stuck with bunch of goblins in a dungeon for you. 
 
-do move(player, player_move_target)
+do move_player(player_move_target)
 
 Kalin: You... can talk?
 
-Graktu: It’s something we are keeping to ourselves for now, how about we make this a secret 
-between us? It’s not like you’ll ever leave this dungeon alive, ke-ke-ke-ke
+Graktu: It’s something we are keeping to ourselves for now, how about we make this a secret between us? It’s not like you’ll ever leave this dungeon alive, ke-ke-ke-ke
 
 Kalin: How... who did this to you? Is it magic?
 
-Graktu: I’ve been chosen to serve our Master, he gave me this power. By his powers, I’ve been reborn
-as a higher being from the rest of my kin. My intellect is equal to of an human. Considering how you 
-entered this dungeon alone, it’s probably higher than yours, ke-ke-ke-ke
+Graktu: I’ve been chosen to serve our Master, he gave me this power. By his powers, I’ve been reborn as a higher being from the rest of my kin. My intellect is equal to of an human. Considering how you entered this dungeon alone, it’s probably higher than yours, ke-ke-ke-ke
 
-Kalin: Cut the crap! I can butcher you all one-handedly! Get me to your master or I’ll cut your tiny dick and 
-hang you until you bleed out!
+Kalin: Cut the crap! I can butcher you all one-handedly! Get me to your master or I’ll cut your tiny dick and hang you until you bleed out!
 
-Graktu: Ke-ke-ke-ke, it seems we got really lucky with you, you’ll be invaluable once we broke you. You have
-the spirit and the willpower we need. 
+Graktu: Ke-ke-ke-ke, it seems we got really lucky with you, you’ll be invaluable once we broke you. You have the spirit and the willpower we need. 
 
-Graktu: Feel free to follow me if you want to meet our Master... if you can. *whistles and turns back, goblins spawn
-from the tunnels*
+Graktu: Feel free to follow me if you want to meet our Master... if you can. *whistles and turns back, goblins spawn from the tunnels*
 
 do move(shaman, shaman_move_target)
 => END

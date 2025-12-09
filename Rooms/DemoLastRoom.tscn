@@ -93,11 +93,13 @@ shape = SubResource("RectangleShape2D_vekdv")
 
 [node name="PlayerTarget" type="Area2D" parent="Cutscene"]
 position = Vector2(538, 496)
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cutscene/PlayerTarget"]
 shape = SubResource("RectangleShape2D_26h6f")
 
 [node name="SpawnPosition" type="Marker2D" parent="."]
-position = Vector2(1021, 479)
+position = Vector2(672, 477)
 
 [connection signal="body_entered" from="Cutscene" to="Cutscene" method="_on_body_entered"]
