@@ -1,10 +1,12 @@
-[gd_scene load_steps=54 format=3 uid="uid://dwmhdexiecm88"]
+[gd_scene load_steps=56 format=3 uid="uid://dwmhdexiecm88"]
 
 [ext_resource type="Script" uid="uid://ds8ot5t8s8evr" path="res://Map/Fast Travel/portal.gd" id="1_art86"]
 [ext_resource type="Texture2D" uid="uid://c1j4iwbkx0kvh" path="res://Map/Fast Travel/spr_portal_spawn_strip11.png" id="2_txi0j"]
 [ext_resource type="Texture2D" uid="uid://ilomgp76udcg" path="res://Map/Fast Travel/spr_portal_loop_strip20.png" id="3_l8lqn"]
 [ext_resource type="Texture2D" uid="uid://d2uhikpas8u7s" path="res://Others/light.png" id="4_rer87"]
 [ext_resource type="Texture2D" uid="uid://c540knydx8b6n" path="res://Map/Fast Travel/spr_portal_strip12.png" id="4_u57fy"]
+[ext_resource type="Texture2D" uid="uid://cfwmxwk10j6i2" path="res://UI/Inventory/Inventory panel1_background.png" id="6_l8lqn"]
+[ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://UI/theme_button.tres" id="6_u57fy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vfb0c"]
 atlas = ExtResource("2_txi0j")
@@ -375,5 +377,54 @@ texture = ExtResource("4_rer87")
 [node name="LitArea" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CircleShape2D_rer87")
+
+[node name="TeleportMenu" type="CanvasLayer" parent="." groups=["UIPanel"]]
+visible = false
+
+[node name="Control" type="Control" parent="TeleportMenu"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_u57fy")
+
+[node name="PanelContainer" type="PanelContainer" parent="TeleportMenu/Control"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 112.0
+offset_right = 166.0
+offset_bottom = 267.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="TeleportMenu/Control/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("6_l8lqn")
+region_rect = Rect2(7, 7, 46, 46)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TeleportMenu/Control/PanelContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TeleportMenu/Control/PanelContainer/NinePatchRect/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TeleportMenu/Control/PanelContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Choose a Location"
 
 [connection signal="animation_finished" from="BackgroundSprite" to="." method="_on_background_sprite_animation_finished"]

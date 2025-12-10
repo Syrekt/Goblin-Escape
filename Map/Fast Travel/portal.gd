@@ -1,16 +1,13 @@
 class_name Portal extends Interaction
 
 @export var inert := true
-var map_icon := "portal"
-var draw_on_map := true
-@export_file("room_link") var target_map : String
-
-@onready var map_scene : PackedScene = preload("res://UI/map.tscn")
 
 @onready var background_sprite : AnimatedSprite2D = $BackgroundSprite
 @onready var base_sprite : AnimatedSprite2D = $BaseSprite
+@onready var teleport_menu : CanvasLayer = $TeleportMenu
 
 func _ready() -> void:
+	teleport_menu.hide()
 	var game = Game.get_singleton()
 	await game.room_loaded
 	var save_data = game.get_data_in_room(name)
@@ -21,15 +18,24 @@ func _ready() -> void:
 	
 
 func update(player: Player) -> void:
-	active = !inert
-	draw_on_map = !inert
-
+	if player.just_pressed("back"):
+		if teleport_menu.visible:
+			teleport_menu.hide()
+			return
 
 	if player.just_pressed("interact"):
-		if inert:
-			activate()
+		if teleport_menu.visible:
+			print("interact with teleport menu")
 		else:
-			print("Use portal")
+			if inert:
+				activate()
+			else:
+				teleport_menu.show()
+		return
+
+	if teleport_menu.visible && Input.is_action_just_pressed("back"):
+		teleport_menu.hide()
+		return
 
 	if inert:
 		return

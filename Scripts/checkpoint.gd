@@ -24,10 +24,6 @@ func _ready() -> void:
 	timer.start(randf_range(5, 10))
 #endregion
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_cancel"):
-		player.character_panel.hide()
-		rest_menu.hide()
 
 func update(_player : Player) -> void:
 	player = _player
@@ -63,6 +59,11 @@ func update(_player : Player) -> void:
 
 		rest_menu.show()
 		#Play some VFX and reset enemies
+
+	if rest_menu.visible:
+		if Input.is_action_just_pressed("back"):
+			player.character_panel.hide()
+			rest_menu.hide()
 
 
 #region Methods
