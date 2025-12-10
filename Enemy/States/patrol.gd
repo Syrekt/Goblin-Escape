@@ -30,8 +30,9 @@ func exit() -> void:
 	timer.stop()
 func update(delta : float) -> void:
 	var moving := false
-	if enemy.chase_target:
-		if enemy.player_detected():
+	var target : Player = enemy.chase_target
+	if target:
+		if target.can_be_attacked() && enemy.player_detected():
 			enemy.start_chase()
 			return
 	if enemy.current_patrol_point: 

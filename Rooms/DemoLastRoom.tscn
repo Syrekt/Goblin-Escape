@@ -1,17 +1,23 @@
-[gd_scene load_steps=10 format=4 uid="uid://bndr8iy3o8vij"]
+[gd_scene load_steps=13 format=4 uid="uid://bndr8iy3o8vij"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_gd6ft"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_43ts2"]
 [ext_resource type="PackedScene" uid="uid://b4ng1a32l05nl" path="res://Objects/goblin_spawn_tunnel.tscn" id="3_43ts2"]
 [ext_resource type="PackedScene" uid="uid://r2h3owwiiqw3" path="res://Cutscenes/cutscene_shaman.tscn" id="4_3mdeb"]
+[ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Enemy/GoblinWarrior/goblin_warrior.tscn" id="4_26h6f"]
 [ext_resource type="Script" uid="uid://c8tbpl46syur8" path="res://Cutscenes/cs_demo_last_room.gd" id="5_5l1q0"]
 [ext_resource type="Resource" uid="uid://etpjt41sihua" path="res://Dialogues/meeting_graktu.dialogue" id="5_vekdv"]
+[ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="8_is5nm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5l1q0"]
+size = Vector2(20, 54)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vekdv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_26h6f"]
+size = Vector2(41, 63)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_is5nm"]
 
 [node name="DemoLastRoom" type="Node2D"]
 
@@ -64,42 +70,62 @@ spawn_point = NodePath("../SpawnPosition")
 
 [node name="GoblinSpawnTunnel" parent="." instance=ExtResource("3_43ts2")]
 position = Vector2(656, 480)
+enemy = ExtResource("4_26h6f")
 
 [node name="GoblinSpawnTunnel2" parent="." instance=ExtResource("3_43ts2")]
 position = Vector2(336, 480)
+enemy = ExtResource("4_26h6f")
 
-[node name="Cutscene" type="Area2D" parent="." node_paths=PackedStringArray("tunnels", "shaman", "player_move_target", "shaman_move_target")]
+[node name="Cutscene" type="Area2D" parent="." node_paths=PackedStringArray("tunnels", "shaman", "player_move_target1", "player_move_target2", "shaman_move_target")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("5_5l1q0")
 dialogue_resource = ExtResource("5_vekdv")
 tunnels = [NodePath("../GoblinSpawnTunnel"), NodePath("../GoblinSpawnTunnel2")]
 shaman = NodePath("CutsceneShaman")
-player_move_target = NodePath("PlayerTarget")
+player_move_target1 = NodePath("PlayerTarget1")
+player_move_target2 = NodePath("PlayerTarget2")
 shaman_move_target = NodePath("ShamanTarget")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cutscene"]
-position = Vector2(618, 497)
+position = Vector2(899, 512)
 shape = SubResource("RectangleShape2D_5l1q0")
 
 [node name="CutsceneShaman" parent="Cutscene" instance=ExtResource("4_3mdeb")]
 position = Vector2(491, 476)
+collision_mask = 0
 
 [node name="ShamanTarget" type="Area2D" parent="Cutscene"]
-position = Vector2(383.1213, 487.8167)
+position = Vector2(87, 494)
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cutscene/ShamanTarget"]
 shape = SubResource("RectangleShape2D_vekdv")
 
-[node name="PlayerTarget" type="Area2D" parent="Cutscene"]
-position = Vector2(538, 496)
+[node name="PlayerTarget1" type="Area2D" parent="Cutscene"]
+position = Vector2(656, 494)
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Cutscene/PlayerTarget"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cutscene/PlayerTarget1"]
+position = Vector2(2.5, -1.5)
 shape = SubResource("RectangleShape2D_26h6f")
+
+[node name="PlayerTarget2" type="Area2D" parent="Cutscene"]
+position = Vector2(496, 496)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cutscene/PlayerTarget2"]
+shape = SubResource("RectangleShape2D_is5nm")
 
 [node name="SpawnPosition" type="Marker2D" parent="."]
 position = Vector2(672, 477)
+
+[node name="Torch" parent="." instance=ExtResource("8_is5nm")]
+position = Vector2(400, 464)
+
+[node name="Torch2" parent="." instance=ExtResource("8_is5nm")]
+position = Vector2(608, 464)
 
 [connection signal="body_entered" from="Cutscene" to="Cutscene" method="_on_body_entered"]

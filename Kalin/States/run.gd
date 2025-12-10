@@ -42,7 +42,8 @@ func physics_update(delta: float) -> void:
 		finished.emit("fall")
 	elif player.just_pressed("jump"):
 		finished.emit("rise")
-	elif is_equal_approx(Input.get_axis("left", "right"), 0.0):
+	#elif is_equal_approx(Input.get_axis("left", "right"), 0.0):
+	elif player.get_movement_dir() == 0:
 		finished.emit("idle")
 	elif player.just_pressed("attack") && player.stamina.spend(player.bash_cost):
 		finished.emit("bash_no_sword")

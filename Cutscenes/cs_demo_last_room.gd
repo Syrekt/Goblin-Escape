@@ -4,18 +4,21 @@ extends Area2D
 @export var dialogue_resource : DialogueResource
 
 var player	: Player
+var cam		: PhantomCamera2D
 
 
 @export var tunnels : Array[GoblinSpawnTunnel]
 @export var shaman	: CharacterBody2D
 
-@export var player_move_target : Area2D
+@export var player_move_target1 : Area2D
+@export var player_move_target2 : Area2D
 @export var shaman_move_target : Area2D
 
 func move(actor,target) -> void:
 	var dir = sign(target.position.x - actor.position.x)
 	actor.move(dir)
 	await target.body_entered
+	actor.stop()
 
 
 func move_player(target) -> void:
@@ -29,10 +32,13 @@ func spawn_goblins() -> void:
 	for tunnel in tunnels:
 		tunnel.spawn_enemy.emit()
 
+func end_scene() -> void:
+	queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
 	DialogueManager.get_current_scene = func(): return self
 	player = body
+	cam = player.pcam
 
 	var balloon := BALLOON.instantiate()
 	add_sibling(balloon)

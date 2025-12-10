@@ -11,7 +11,7 @@ func exit() -> void:
 
 func update(delta : float) -> void:
 	if enemy.chase_target:
-		if enemy.player_detected():
+		if enemy.player_detected() && enemy.chase_target.can_be_attacked():
 			enemy.start_chase()
 			return
 	if enemy.chatting:

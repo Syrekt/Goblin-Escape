@@ -2,13 +2,14 @@ extends EnemyState
 
 
 @onready var grab_collider : Area2D = $GrabCollider
-var step_forward : bool
+var step_forward := false
 
 func enter(previous_state_path: String, data := {}) -> void:
 	enemy.call_deferred("update_animation", name)
 	enemy.velocity.x = 0
 
-	step_forward = data.get("step_forward", false)
+	if enemy.position.distance_to(enemy.chase_target.position) > 32:
+		step_forward = true
 
 func exit() -> void:
 	enemy.catched_player = false

@@ -8,6 +8,7 @@ func enter(previous_state_path : String, data := {}) -> void:
 	$Timer.start()
 func exit() -> void:
 	$Timer.stop()
+	enemy.dealth_finishing_blow = false
 
 func update(delta: float) -> void:
 	if !enemy.move(enemy.patrol_move_speed, move_dir):

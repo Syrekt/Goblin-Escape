@@ -70,8 +70,10 @@ func add_lifetime(time:float,status_effect:StatusEffect) -> void:
 	lifetime.name = "Lifetime"
 	status_effect.add_child(lifetime)
 	lifetime.one_shot = true
-	lifetime.start(time)
+
 	lifetime.timeout.connect(_on_lifetime_timeout.bind(status_effect.name))
+
+	lifetime.call_deferred("start", time)
 
 func add_tick_timer(time:float,status_effect:StatusEffect,signal_event:Callable) -> void:
 	var timer := Timer.new()

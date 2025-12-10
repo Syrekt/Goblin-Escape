@@ -300,9 +300,7 @@ func drop_chase() -> void:
 		chase_target.enemies_on_chase.erase(self)
 	drop_chase_target()
 	player_in_range = false
-	if !awareness_timer.is_inside_tree():
-		printerr("Awareness timer isn't inside tree")
-	awareness_timer.start()
+	awareness_timer.call_deferred("start")
 func assign_chase_target(target) -> void:
 	chase_target = target
 	if !chase_target.combat_target:

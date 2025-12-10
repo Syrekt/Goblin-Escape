@@ -11,11 +11,14 @@ func update(delta: float):
 		return
 
 	if enemy.chase_target:
-		if target.is_in_sex_state():
+		if target.is_in_state_group("sex_state"):
 			finished.emit("idle")
 			return
-		if target.unconscious || target.dead:
-			finished.emit("chase")
+		if target.unconscious:
+			if enemy.dealth_finishing_blow:
+				finished.emit("chase")
+			else:
+				finished.emit("idle")
 			return
 		enemy.set_facing(sign(enemy.chase_target.global_position.x - enemy.global_position.x))
 		if in_combat_range:

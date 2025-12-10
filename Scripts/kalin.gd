@@ -599,10 +599,10 @@ func can_be_attacked() -> bool: ## Returns false when player is in 'sex_state' o
 			return false
 
 	return true
-func is_in_sex_state() -> bool:
+func is_in_state_group(group_name:String) -> bool:
 	var groups = state_node.state.get_groups()
 	for group in groups:
-		if group == "sex_state":
+		if group == group_name:
 			return true
 
 	return false

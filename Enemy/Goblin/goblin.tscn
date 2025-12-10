@@ -1053,8 +1053,8 @@ size = Vector2(20, 36)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rha5u"]
 size = Vector2(20, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_su4u7"]
-size = Vector2(71, 31.5)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0j70"]
+size = Vector2(84, 31.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhfhj"]
 size = Vector2(31, 26)
@@ -1350,8 +1350,8 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyProximity"]
-position = Vector2(35.5, -0.25)
-shape = SubResource("RectangleShape2D_su4u7")
+position = Vector2(42, -0.25)
+shape = SubResource("RectangleShape2D_u0j70")
 
 [node name="DestructableCollider" type="Area2D" parent="." groups=["Flip"]]
 visible = false

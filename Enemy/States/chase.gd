@@ -33,8 +33,7 @@ func update(delta):
 		enemy.lost_target()
 		return
 	# If dead or unconscious
-	if enemy.dealth_finishing_blow:
-		enemy.dealth_finishing_blow = false
+	if enemy.dealth_finishing_blow && (target.unconscious || target.dead):
 		print("target dead or unconscious")
 		finished.emit("laugh")
 		return
@@ -42,9 +41,18 @@ func update(delta):
 	if !enemy.target_in_sight:
 		enemy.lost_target()
 		return
-	if enemy.has_enemy_in_proximity():
+	# Kalin having sex
+	if target.is_in_state_group("sex_state"):
+		finished.emit("leave_player")
+		return
+	if target.is_in_state_group("struggle_state"):
 		enemy.update_animation("idle")
 		enemy.velocity.x = 0
+		return
+	# Enemy in proximity
+	if enemy.has_enemy_in_proximity():
+		finished.emit("stance_walk", {"time" : 0.1, "backwards" : true})
+		print("Has another enemy in it's proximity detector")
 		return
 
 

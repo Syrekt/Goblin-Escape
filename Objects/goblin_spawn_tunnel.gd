@@ -7,7 +7,7 @@ signal spawn_enemy
 
 
 func _ready() -> void:
-	spawn_enemy.connect(_on_spawn_enemy)
+	spawn_enemy.connect(_on_spawn_enemy, CONNECT_DEFERRED)
 
 func _on_spawn_enemy() -> void:
 	print("Spawn enemy: " + str(enemy))
