@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://dg3j7pu1kh1et"]
+[gd_scene load_steps=15 format=4 uid="uid://dg3j7pu1kh1et"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_7lu8w"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_2souy"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cwfcttxnm8ov1" path="res://Map/Props/gate.tscn" id="11_36v3d"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="12_tr5im"]
 [ext_resource type="PackedScene" uid="uid://bajfhcfhuagof" path="res://Objects/platform_collider.tscn" id="13_pv851"]
+[ext_resource type="PackedScene" uid="uid://b4vewnv73flk4" path="res://Map/Props/Movable/statue.tscn" id="14_21bmp"]
 
 [node name="HeavyStanceRoom" type="Node2D"]
 
@@ -131,3 +132,6 @@ position = Vector2(560, 144)
 
 [node name="Torch3" parent="." instance=ExtResource("12_tr5im")]
 position = Vector2(1232, 128)
+
+[node name="Statue" parent="." instance=ExtResource("14_21bmp")]
+position = Vector2(1312, 240)

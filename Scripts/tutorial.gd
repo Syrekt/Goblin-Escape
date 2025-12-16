@@ -8,6 +8,7 @@ func _enter_tree() -> void:
 
 func activate() -> void:
 	if !Ge.show_tutorials:
+		print("Tutorials are disabled, skipping")
 		return
 
 	if active:

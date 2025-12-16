@@ -156,7 +156,7 @@ position = Vector2(2256, 1016)
 position = Vector2(2223, 1016)
 
 [node name="Crate6" parent="." instance=ExtResource("15_u0kkm")]
-position = Vector2(2224, 986)
+position = Vector2(2235, 986)
 debug = true
 
 [node name="StairsLong2" parent="." instance=ExtResource("5_ymrwc")]

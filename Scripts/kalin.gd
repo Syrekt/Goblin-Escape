@@ -984,9 +984,9 @@ func _process(delta: float) -> void:
 	#endregion
 	if OS.is_debug_build() && Input.is_action_just_pressed("debug1"):
 		print("debug1")
-		status_effect_container.add_status_effect("Death's Door")
-		status_effect_container.add_status_effect("Bleed", 5.0, 0.1)
-		#take_damage(90)
+		#status_effect_container.add_status_effect("Death's Door")
+		#status_effect_container.add_status_effect("Bleed", 5.0, 0.1)
+		take_damage(90)
 		#experience.add(99999)
 		#toggle_character_panel()
 #endregion

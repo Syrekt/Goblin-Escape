@@ -32,6 +32,7 @@ func update(_player : Player) -> void:
 		player.smell.value = 0
 		player.smell.dirt_amount = 0
 		player.arousal.value = 0
+		player.fatigue.value = 0
 		player.health.value = player.health.max_value
 		player.status_effect_container.rest()
 

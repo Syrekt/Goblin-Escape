@@ -1,13 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://fgj6dmvmrowh"]
+[gd_scene load_steps=13 format=3 uid="uid://fgj6dmvmrowh"]
 
 [ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://UI/theme_button.tres" id="1_ucjbo"]
 [ext_resource type="Script" uid="uid://bnymdbpnxf6a0" path="res://Scripts/options_menu.gd" id="2_iopgn"]
 [ext_resource type="Script" uid="uid://bfd22kixp4ppo" path="res://Scripts/toggle_button.gd" id="2_ucjbo"]
 [ext_resource type="PackedScene" uid="uid://hvdtjmpwq6ji" path="res://UI/Buttons/button_keybind.tscn" id="3_iopgn"]
 [ext_resource type="Script" uid="uid://cbsarrmo5l05n" path="res://Scripts/tutorial_button.gd" id="5_iopgn"]
+[ext_resource type="PackedScene" uid="uid://bfrfvr3f2ii41" path="res://Tutorial/stealth_tutorial.tscn" id="6_1amdw"]
 [ext_resource type="PackedScene" uid="uid://vma4r5yyfdym" path="res://Tutorial/combat_tutorial.tscn" id="6_gicec"]
 [ext_resource type="PackedScene" uid="uid://dfkk47r5weiwp" path="res://Tutorial/heavy_stance_tutorial.tscn" id="7_dxxl1"]
 [ext_resource type="PackedScene" uid="uid://1k5wph27mvep" path="res://Tutorial/light_stance_tutorial.tscn" id="8_3hwek"]
+[ext_resource type="PackedScene" uid="uid://bkj14myaccvt3" path="res://Tutorial/fatigue_smell_tutorial.tscn" id="8_b20id"]
 [ext_resource type="PackedScene" uid="uid://cg2vx6oh1c1lc" path="res://Tutorial/environmental_kill_tutorial.tscn" id="9_3hwek"]
 [ext_resource type="PackedScene" uid="uid://c8uuwyqh6p5lx" path="res://Tutorial/enemy_patrol_tutorial.tscn" id="10_845id"]
 
@@ -22,10 +24,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 0
+current_tab = 5
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -471,7 +474,6 @@ max_value = 1.0
 step = 0.1
 
 [node name="Tutorials" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 5
 
@@ -494,7 +496,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 bbcode_enabled = true
-text = "Unlocked tutorials will added here."
+text = "Unlocked tutorials will be added here."
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -511,6 +513,7 @@ size_flags_vertical = 0
 layout_mode = 2
 text = "Stealth"
 script = ExtResource("5_iopgn")
+tutorial_scene = ExtResource("6_1amdw")
 tutorial_code = "Stealth"
 
 [node name="EnvironmentalKill" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
@@ -527,6 +530,13 @@ text = "Enemy Patrol
 script = ExtResource("5_iopgn")
 tutorial_scene = ExtResource("10_845id")
 tutorial_code = "Enemy Patrol"
+
+[node name="Checkpoint" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Kalin's Status"
+script = ExtResource("5_iopgn")
+tutorial_scene = ExtResource("8_b20id")
+tutorial_code = "Kalin's Status"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
