@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://deh784rf260r2"]
+[gd_scene load_steps=15 format=4 uid="uid://deh784rf260r2"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_y2f3n"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_jadjv"]
@@ -10,8 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://hk23fmyof4sb" path="res://Objects/sword.tscn" id="10_d2tek"]
 [ext_resource type="PackedScene" uid="uid://2prh5eduxlje" path="res://Objects/condition_checker.tscn" id="11_6vjkm"]
 [ext_resource type="PackedScene" uid="uid://b45030hb2anpy" path="res://Objects/simple_dialogue.tscn" id="11_vwrrh"]
-[ext_resource type="PackedScene" uid="uid://dxvqnc0144rnv" path="res://Objects/tutorial.tscn" id="12_h0t0a"]
-[ext_resource type="PackedScene" uid="uid://1k5wph27mvep" path="res://Tutorial/light_stance_tutorial.tscn" id="13_diob3"]
 [ext_resource type="PackedScene" uid="uid://bajfhcfhuagof" path="res://Objects/platform_collider.tscn" id="13_h0t0a"]
 [ext_resource type="PackedScene" uid="uid://b4vewnv73flk4" path="res://Map/Props/Movable/statue.tscn" id="14_diob3"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="15_inj1l"]
@@ -133,16 +131,6 @@ results = [true]
 position = Vector2(44, -3)
 text = "Finally found a weapon. It doesn't look like it's in great shape but I guess it's than nothing."
 auto = true
-
-[node name="ConditionChecker2" parent="." instance=ExtResource("11_6vjkm")]
-position = Vector2(2702, 539)
-result_target_path = NodePath("Tutorial")
-parameters = Array[String](["has_sword"])
-results = [true]
-
-[node name="Tutorial" parent="ConditionChecker2" instance=ExtResource("12_h0t0a")]
-position = Vector2(31, -9)
-tutorial = ExtResource("13_diob3")
 
 [node name="PlatformCollider2" parent="." instance=ExtResource("13_h0t0a")]
 position = Vector2(2816, 464)

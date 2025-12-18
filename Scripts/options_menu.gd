@@ -120,7 +120,7 @@ func _exit_tree() -> void:
 
 func _on_fullscreen_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN )
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	Options.fullscreen = toggled_on
@@ -138,8 +138,10 @@ func _on_option_button_item_selected(index: int) -> void:
 		3:
 			new_size = Vector2i(2560, 1440)
 
+	print("Update resolution")
 	DisplayServer.window_set_size(new_size)
 	Options.window_size = new_size
+	print("Options.window_size: "+str(Options.window_size));
 	notification(NOTIFICATION_WM_SIZE_CHANGED)
 
 func _on_pixel_perfect_toggled(toggled_on: bool) -> void:
@@ -167,18 +169,28 @@ func _on_reset_color_pressed() -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_SIZE_CHANGED:
-		print("Center window")
+		Options.current_screen	= DisplayServer.window_get_current_screen()
+		var screen := Options.current_screen
+		print("screen: "+str(screen))
+		DisplayServer.window_set_current_screen(screen)
+
+		await get_tree().process_frame
+
+		# Skip centering in fullscreen
+		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+			Options.save_options()
+			return
+
 		DisplayServer.window_set_size(Options.window_size)
-		var window_size = DisplayServer.window_get_size()
-		var display_size = DisplayServer.screen_get_size()
+		await get_tree().process_frame
+
+		var window_size := DisplayServer.window_get_size()
+		var display_size := DisplayServer.screen_get_size(screen)
 		print("window_size: "+str(window_size))
 		print("display_size: "+str(display_size))
 
-		await get_tree().process_frame
-		DisplayServer.window_set_position((display_size - window_size)/2)
+		DisplayServer.window_set_position((display_size - window_size) / 2)
 
-		DisplayServer.window_set_current_screen(Options.current_screen)
-		await get_tree().process_frame
 		Options.save_options()
 
 func _on_center_window_pressed() -> void:

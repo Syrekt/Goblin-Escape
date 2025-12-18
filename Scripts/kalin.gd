@@ -128,7 +128,17 @@ const SLASH_SWEAT_PER_STRENGTH	:= 0.06
 const STAB_SWEAT_PER_STRENGTH	:= 0.02
 const BASH_SWEAT_PER_STRENGTH	:= 0.06
 
-@export var has_sword := false #false for release
+var had_sword := false ## Variable to track if player got a sword at any point
+@export var has_sword := false: ## False for release
+	set(value):
+		if !has_sword && value && Ge.show_tutorials:
+			var tutorial = load("res://Tutorial/combat_tutorial.tscn").instantiate()
+			#get_tree().current_scene.add_child.call_deferred("tutorial")
+		has_sword = value
+		if has_sword: had_sword = true
+	get:
+		return has_sword
+	
 var in_combat_state := false
 var combat_target	: CharacterBody2D = null
 var buffered_state  : String
@@ -624,13 +634,15 @@ func unlock_skill(_name: String) -> void:
 	set(_name, true)
 	match _name:
 		"has_heavy_stance":
-			var tutorial = load("res://Tutorial/heavy_stance_tutorial.tscn").instantiate()
-			get_tree().current_scene.add_child(tutorial)
-			await tutorial.tree_exited
-			think("I can break the barricades now.")
+			if Ge.show_tutorials:
+				var tutorial = load("res://Tutorial/heavy_stance_tutorial.tscn").instantiate()
+				get_tree().current_scene.add_child(tutorial)
+				await tutorial.tree_exited
+				think("I can break the barricades now.")
 		"has_defensive_stance":
-			var tutorial = load("res://Tutorial/defensive_stance_tutorial.tscn").instantiate()
-			get_tree().current_scene.add_child(tutorial)
+			if Ge.show_tutorials:
+				var tutorial = load("res://Tutorial/defensive_stance_tutorial.tscn").instantiate()
+				get_tree().current_scene.add_child(tutorial)
 func on_enter() -> void:
 	var state = state_node.state.name
 	match state:
