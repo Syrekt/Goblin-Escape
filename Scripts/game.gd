@@ -114,6 +114,11 @@ func _process(delta: float) -> void:
 	$CanvasModulate.color.r = 0.63 + 0.10 * Options.shadow_intensity
 	$CanvasModulate.color.g = 0.52 + 0.15 * Options.shadow_intensity
 
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.is_pressed():
+		match event.keycode:
+			KEY_QUOTELEFT:
+				%Console.visible = !%Console.visible
 
 
 static func get_singleton() -> Game:

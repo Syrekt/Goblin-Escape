@@ -88,7 +88,7 @@ skill_name = "has_heavy_stance"
 position = Vector2(2223, 231)
 
 [node name="GoblinWarrior" parent="." instance=ExtResource("6_r26kl")]
-position = Vector2(1894, 306)
+position = Vector2(1984, 256)
 
 [node name="GoblinWarrior2" parent="." instance=ExtResource("6_r26kl")]
 position = Vector2(1728, 384)

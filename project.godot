@@ -285,4 +285,5 @@ viewport/hdr_2d=true
 
 options/dsn="https://afff980a93f2922ed1f62f47b7b9cac6@o432685.ingest.us.sentry.io/4510251418910720"
 options/attach_scene_tree=true
+logger/logger_enabled=false
 experimental/attach_screenshot=true

@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://uvws5mlmgmab"]
+
+[ext_resource type="Script" uid="uid://cyg4iy84iscy3" path="res://Scripts/console.gd" id="1_oepvc"]
+[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="2_60edj"]
+
+[node name="Console" type="CanvasLayer" groups=["UIPanel"]]
+script = ExtResource("1_oepvc")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_60edj")
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -97.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Control/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+dragging_enabled = false
+
+[node name="ConsoleOutput" type="RichTextLabel" parent="Control/Panel/MarginContainer/VSplitContainer"]
+custom_minimum_size = Vector2(0, 73.15)
+layout_mode = 2
+vertical_alignment = 2
+
+[node name="ConsoleInput" type="LineEdit" parent="Control/Panel/MarginContainer/VSplitContainer"]
+layout_mode = 2
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="editing_toggled" from="Control/Panel/MarginContainer/VSplitContainer/ConsoleInput" to="." method="_on_console_input_editing_toggled"]
+[connection signal="gui_input" from="Control/Panel/MarginContainer/VSplitContainer/ConsoleInput" to="." method="_on_console_input_gui_input"]
+[connection signal="text_submitted" from="Control/Panel/MarginContainer/VSplitContainer/ConsoleInput" to="." method="_on_console_input_text_submitted"]

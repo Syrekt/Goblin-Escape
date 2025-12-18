@@ -13,5 +13,6 @@ ItemList/fonts/font = ExtResource("1_21byg")
 ItemList/styles/panel = SubResource("StyleBoxEmpty_lmlv6")
 Label/font_sizes/font_size = 16
 Label/fonts/font = ExtResource("1_21byg")
+LineEdit/fonts/font = ExtResource("1_21byg")
 PanelContainer/styles/panel = SubResource("StyleBoxEmpty_3i26i")
 RichTextLabel/fonts/normal_font = ExtResource("1_21byg")
