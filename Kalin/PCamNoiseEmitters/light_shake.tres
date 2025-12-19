@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PhantomCameraNoise2D" load_steps=2 format=3 uid="uid://bpapsbayctc3v"]
+
+[ext_resource type="Script" uid="uid://dimvdouy8g0sv" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd" id="1_h8p4m"]
+
+[resource]
+script = ExtResource("1_h8p4m")
+frequency = 20.0
+randomize_noise_seed = 1
+noise_seed = 608
+metadata/_custom_type_script = "uid://dimvdouy8g0sv"

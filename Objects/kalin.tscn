@@ -1,4 +1,4 @@
-[gd_scene load_steps=255 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=257 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://b5p67lby0k2d0" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -19,7 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://cxy7gxvy3yrma" path="res://Kalin/Sprites/Kalin-Climb.png" id="4_xyrfg"]
 [ext_resource type="Texture2D" uid="uid://qh08oomof7hu" path="res://UI/Map Markers/map_marker_goblin.png" id="6_aajsm"]
 [ext_resource type="Texture2D" uid="uid://bx4id7wgw6s38" path="res://Kalin/Sprites/Kalin-Heavy Attack.png" id="6_ju88f"]
+[ext_resource type="Script" uid="uid://bhd4nuiu23e7l" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_2d.gd" id="6_r14np"]
 [ext_resource type="Texture2D" uid="uid://gkkdovm54mtx" path="res://UI/Map Markers/map_marker_goblin_warrior.png" id="7_ken0u"]
+[ext_resource type="Resource" uid="uid://dfph0m3581rx4" path="res://Kalin/PCamNoiseEmitters/heavy_shake.tres" id="7_r14np"]
 [ext_resource type="Script" uid="uid://bh5b7s4u5leyi" path="res://Scripts/ui.gd" id="8_4oj65"]
 [ext_resource type="Script" uid="uid://dhtgp18026dx7" path="res://Scripts/hud.gd" id="8_cv3n5"]
 [ext_resource type="Texture2D" uid="uid://dl4uq2pkst8rp" path="res://Kalin/Sprites/Kalin-Light Attack.png" id="9_2a2iq"]
@@ -4617,6 +4619,8 @@ snap_to_pixel = true
 tween_resource = SubResource("Resource_3pkug")
 follow_damping = true
 draw_limits = true
+_preview_noise = false
+noise_emitter_layer = 1
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -4631,6 +4635,14 @@ process_priority = 300
 process_physics_priority = 300
 script = ExtResource("2_0bx81")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="PhantomCameraNoiseEmitter2D" type="Node2D" parent="Camera2D"]
+script = ExtResource("6_r14np")
+noise = ExtResource("7_r14np")
+growth_time = 0.01
+duration = 0.05
+decay_time = 0.2
+metadata/_custom_type_script = "uid://bhd4nuiu23e7l"
 
 [node name="GoblinMarker" type="Sprite2D" parent="Camera2D"]
 visible = false

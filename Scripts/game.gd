@@ -117,7 +117,7 @@ func _process(delta: float) -> void:
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_pressed():
 		match event.keycode:
-			KEY_QUOTELEFT:
+			KEY_QUOTELEFT: if OS.is_debug_build():
 				%Console.visible = !%Console.visible
 
 

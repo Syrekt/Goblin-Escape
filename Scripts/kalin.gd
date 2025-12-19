@@ -154,6 +154,11 @@ var slash_cost	: float
 var stab_cost	: float
 var bash_cost 	: float
 #endregion
+#region Camera
+@onready var pcam_noise_emitter : PhantomCameraNoiseEmitter2D = find_child("PhantomCameraNoiseEmitter2D")
+@onready var noise_emitter_light_shake : PhantomCameraNoise2D = preload("res://Kalin/PCamNoiseEmitters/light_shake.tres")
+@onready var noise_emitter_heavy_shake : PhantomCameraNoise2D = preload("res://Kalin/PCamNoiseEmitters/heavy_shake.tres")
+#endregion
 #region Others
 @export var debug				:= false
 @export var dead				:= false ## Health == 0
@@ -212,6 +217,8 @@ func fall(delta):
 	velocity.y += gravity * delta
 	move_and_slide()
 func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := true, attack := {}):
+	var noise_type = noise_emitter_light_shake
+
 	var state_name = state_node.state.name
 	if !can_be_attacked():
 		return
@@ -226,6 +233,12 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 	#Parry
 	if _source:
 		var incoming_attack = _source.state_node.state.name
+
+		match incoming_attack:
+			"slash", "bash":
+				noise_type = noise_emitter_heavy_shake
+
+
 		var parry_active := false
 		var perfect_parry := false
 		var perfect_parry_window : float = parry_timer.wait_time / 5 * 4
@@ -266,7 +279,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 					play_hurt_animation = false
 					defended = false
 #endregion
-	#Take damage
+	#Take damage (abort if dead)
 	if !defended:
 		smell.get_dirty(6.0)
 		if power_crush:# && stamina.spend(_damage, 1.0):
@@ -284,6 +297,8 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 		else:
 			Ge.slow_mo(0, 0.1)
 		health.value -= _damage
+		pcam_noise_emitter.set_noise(noise_type)
+		pcam_noise_emitter.emit()
 		if health.value <= 0.1:
 			print("Health depleted")
 			if _source:
@@ -998,9 +1013,10 @@ func _process(delta: float) -> void:
 		print("debug1")
 		#status_effect_container.add_status_effect("Death's Door")
 		#status_effect_container.add_status_effect("Bleed", 5.0, 0.1)
-		take_damage(90)
+		#take_damage(90)
 		#experience.add(99999)
 		#toggle_character_panel()
+		pcam_noise_emitter.emit()
 #endregion
 #region Listeners
 func _on_hurtbox_area_entered(area: Area2D) -> void:
