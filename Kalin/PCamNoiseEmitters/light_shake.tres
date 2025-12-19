@@ -6,5 +6,7 @@
 script = ExtResource("1_h8p4m")
 frequency = 20.0
 randomize_noise_seed = 1
-noise_seed = 608
+noise_seed = 448
+rotational_noise = true
+rotational_multiplier = 0.1
 metadata/_custom_type_script = "uid://dimvdouy8g0sv"
