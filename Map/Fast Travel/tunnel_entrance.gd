@@ -1,10 +1,12 @@
 class_name TunnelEntrance extends Interaction
 
+@export var can_spawn_goblin := true
+
 @export var target_entrance : TunnelEntrance
 @export var barricaded := false
 @export var barricade_health := 50
 
-@onready var fade : CanvasLayer = get_tree().current_scene.find_child("ScreenFade")
+@onready var fade : ScreenFade = get_tree().current_scene.find_child("ScreenFade")
 
 @onready var goblin := preload("res://Enemy/Goblin/goblin.tscn")
 @onready var goblin_warrior := preload("res://Enemy/GoblinWarrior/goblin_warrior.tscn")
@@ -26,7 +28,8 @@ func _ready() -> void:
 	if save_data:
 		load_data(save_data)
 	
-	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
+	if can_spawn_goblin:
+		spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 
 
 
@@ -51,20 +54,32 @@ func update(_player: Player) -> void:
 			]
 			player.think(thoughts.pick_random())
 		elif !barricade || (barricade && barricade.health <= 0):
-			fade.fade_in()
+			player.animation_player.play("crouch_walk")
+
+			var tween = create_tween().bind_node(self)
+			tween.tween_property(player, "global_position:x", global_position.x, 0.2).set_trans(Tween.TRANS_LINEAR)
+			await tween.finished
+
 			player.state_node.state.finished.emit("crawl_in")
-			create_tween().tween_property(player, "global_position:x", global_position.x, 0.2).set_trans(Tween.TRANS_LINEAR)
+
+			await player.animation_player.animation_finished
+
+			fade.fade_in_finished.connect(_on_fade_in_finished)
+			fade.fade_out_finished.connect(_on_fade_out_finished)
+			fade.fade_in()
 			fading = true
 
-func _process(delta: float) -> void:
-	if fading && player:
-		if fade.tween_finished:
-			target_entrance.spawn_timer.start(3.0)
-			player.global_position = target_entrance.global_position
-			player.state_node.state.finished.emit("crawl_out")
-			player.col_interaction.interact()
-			fade.fade_out()
-			fading = false
+func _on_fade_in_finished() -> void:
+	player.global_position = target_entrance.global_position
+	player.col_interaction.interact()
+	fade.fade_out()
+	fade.fade_in_finished.disconnect(_on_fade_in_finished)
+
+func _on_fade_out_finished() -> void:
+	player.state_node.state.finished.emit("crawl_out")
+	target_entrance.spawn_timer.start(3.0)
+	fade.fade_out_finished.disconnect(_on_fade_out_finished)
+
 
 func save() -> void:
 	var game = Game.get_singleton()

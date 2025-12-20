@@ -94,6 +94,7 @@ var experience_required := 100
 @onready var status_effect_container : StatusEffectContainer = find_child("StatusEffectContainer")
 @onready var map_scene : PackedScene = preload("res://UI/map.tscn")
 @onready var hurtbox : CollisionShape2D = $ColliderStanding
+@onready var screen_fade : CanvasLayer = get_tree().current_scene.find_child("ScreenFade")
 #endregion
 #region Combat
 const SLASH_DAMAGE	:= 15
@@ -765,8 +766,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			state.finished.emit("idle")
 		"grab_goblin":
 			state.finished.emit("struggle_goblin")
-		"crawl_in":
-			state.finished.emit("crawl_out")
 		"crawl_out":
 			state.finished.emit("get_up")
 		"get_up":

@@ -1,4 +1,4 @@
-[gd_scene load_steps=257 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=259 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://b5p67lby0k2d0" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -111,8 +111,10 @@
 [ext_resource type="Script" uid="uid://cda7lryh5gipg" path="res://Kalin/States/land_short.gd" id="59_n1k6j"]
 [ext_resource type="Script" uid="uid://cytac4sg8onjk" path="res://Kalin/States/corner_hang.gd" id="59_osr06"]
 [ext_resource type="Script" uid="uid://c3rllm222ckui" path="res://Kalin/stamina.gd" id="60_2ksh1"]
+[ext_resource type="Texture2D" uid="uid://cxppuc1aikxlu" path="res://Kalin/Sprites/kalin_crawl_in.png" id="60_037bc"]
 [ext_resource type="Texture2D" uid="uid://dvos4uam82cch" path="res://UI/Sliders/smell_progress.png" id="61_5atg1"]
 [ext_resource type="Script" uid="uid://42mhp8ajoulq" path="res://Kalin/States/orgasm.gd" id="61_c6www"]
+[ext_resource type="Texture2D" uid="uid://cbvfy0rq1kn4v" path="res://Kalin/Sprites/kalin_crawl_out.png" id="61_lc2pc"]
 [ext_resource type="Script" uid="uid://bys0lif7s6ub7" path="res://Kalin/States/hiding.gd" id="68_73qvi"]
 [ext_resource type="Script" uid="uid://dx8nksauci2pa" path="res://Kalin/States/hide.gd" id="68_y0qhg"]
 [ext_resource type="Texture2D" uid="uid://ivtf26n1fq7g" path="res://UI/Inventory/Inventory panel1_no background.png" id="69_wl0wu"]
@@ -338,9 +340,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfvac"]
-size = Vector2(105, 32)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bs037"]
 shader = ExtResource("34_wxg5w")
 shader_parameter/outline_color = Color(1, 1, 1, 0)
@@ -465,7 +464,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/9/path = NodePath("../AnimationPlayer:speed_scale")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -1302,7 +1301,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/4/path = NodePath("../AnimationPlayer:speed_scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1396,7 +1395,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_4oj65"]
 resource_name = "crawl_in"
-loop_mode = 1
+length = 1.8
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1408,7 +1407,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_sa02y")]
+"values": [ExtResource("60_037bc")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1420,7 +1419,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [10]
+"values": [18]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1429,14 +1428,15 @@ tracks/2/path = NodePath(".:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
 }
 
 [sub_resource type="Animation" id="Animation_as7pt"]
 resource_name = "crawl_out"
+length = 1.8
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1448,7 +1448,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_sa02y")]
+"values": [ExtResource("61_lc2pc")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1460,7 +1460,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [10]
+"values": [18]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1469,10 +1469,10 @@ tracks/2/path = NodePath(".:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
 }
 
 [sub_resource type="Animation" id="Animation_qdaj2"]
@@ -1531,7 +1531,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/4/path = NodePath("../AnimationPlayer:speed_scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1964,7 +1964,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/3/path = NodePath("../AnimationPlayer:speed_scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -2942,7 +2942,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/5/path = NodePath("../AnimationPlayer:speed_scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -3435,7 +3435,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/5/path = NodePath("../AnimationPlayer:speed_scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -3513,7 +3513,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/5/path = NodePath("../AnimationPlayer:speed_scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -3773,7 +3773,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/5/path = NodePath("../AnimationPlayer:speed_scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -3851,7 +3851,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/5/path = NodePath("../AnimationPlayer:speed_scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -3929,7 +3929,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("%Sprite2D/../AnimationPlayer:speed_scale")
+tracks/5/path = NodePath("../AnimationPlayer:speed_scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -4562,6 +4562,9 @@ _data = {
 &"wallslide": SubResource("Animation_1pm5w")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfvac"]
+size = Vector2(105, 32)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6qte"]
 size = Vector2(15, 24.5)
 
@@ -5115,6 +5118,18 @@ animation = &"charged"
 frame = 2
 frame_progress = 0.76164
 
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_bs037")
+texture = ExtResource("3_b6tj0")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+&"": SubResource("AnimationLibrary_cuohi")
+}
+
 [node name="StateMachine" parent="." groups=["Flip"] instance=ExtResource("9_ojhio")]
 visible = false
 position = Vector2(-4, 34)
@@ -5336,18 +5351,6 @@ script = ExtResource("40_xirjq")
 [node name="InteractionPrompt" parent="." instance=ExtResource("99_y4shw")]
 position = Vector2(0, -41)
 
-[node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_bs037")
-texture = ExtResource("3_b6tj0")
-hframes = 6
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D")
-libraries = {
-&"": SubResource("AnimationLibrary_cuohi")
-}
-
 [node name="AnimationAudioStreamer" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 bus = &"SFX"
@@ -5522,13 +5525,13 @@ shape = SubResource("RectangleShape2D_n1k6j")
 
 [connection signal="pressed" from="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer/Close" to="UI/CharacterPanel/Stats" method="_on_close_pressed"]
 [connection signal="pressed" from="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer/Confirm" to="UI/CharacterPanel" method="_on_confirm_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="attack_frame" from="StateMachine/slash" to="StateMachine/slash" method="_on_attack_frame"]
 [connection signal="attack_frame" from="StateMachine/stab" to="StateMachine/stab" method="_on_attack_frame"]
 [connection signal="body_entered" from="StateMachine/bash/BashHitbox" to="StateMachine/bash" method="_on_bash_hitbox_body_entered"]
 [connection signal="body_entered" from="StateMachine/bash_no_sword/Hitbox" to="StateMachine/bash_no_sword" method="_on_hitbox_body_entered"]
 [connection signal="timeout" from="StateMachine/death/RecoveryTimer" to="StateMachine/death" method="_on_recovery_timer_timeout"]
 [connection signal="timeout" from="StateMachine/death/SexTimer" to="StateMachine/death" method="_on_sex_timer_timeout"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Interactor" to="." method="_on_interactor_area_entered"]
 [connection signal="area_exited" from="Interactor" to="." method="_on_interactor_area_exited"]
 [connection signal="body_entered" from="ThreatCollider" to="." method="_on_threat_collider_body_entered"]
