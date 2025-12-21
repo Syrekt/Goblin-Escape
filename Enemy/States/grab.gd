@@ -8,7 +8,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	enemy.call_deferred("update_animation", name)
 	enemy.velocity.x = 0
 
-	if enemy.position.distance_to(enemy.chase_target.position) > 32:
+	if enemy.should_step_on_attack():
 		step_forward = true
 
 func exit() -> void:

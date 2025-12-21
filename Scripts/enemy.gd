@@ -354,6 +354,8 @@ func play_chatter_emote() -> void:
 	var animation_names = frames.get_animation_names()
 	var emote = animation_names[randi() % animation_names.size()]
 	emote_emitter.play(emote)
+func should_step_on_attack() -> bool:
+	return position.distance_to(chase_target.position) > 48
 #endregion
 #region Animation end
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

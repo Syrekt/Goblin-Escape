@@ -46,7 +46,5 @@ vertical_alignment = 2
 [node name="ConsoleInput" type="LineEdit" parent="Control/Panel/MarginContainer/VSplitContainer"]
 layout_mode = 2
 
-[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="editing_toggled" from="Control/Panel/MarginContainer/VSplitContainer/ConsoleInput" to="." method="_on_console_input_editing_toggled"]
 [connection signal="gui_input" from="Control/Panel/MarginContainer/VSplitContainer/ConsoleInput" to="." method="_on_console_input_gui_input"]
 [connection signal="text_submitted" from="Control/Panel/MarginContainer/VSplitContainer/ConsoleInput" to="." method="_on_console_input_text_submitted"]

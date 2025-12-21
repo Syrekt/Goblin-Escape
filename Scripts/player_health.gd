@@ -1,5 +1,10 @@
 extends StatBar
 
+@onready var fmod_heartbeat : FmodEventEmitter2D = $Heartbeat
+@onready var health_vignette : ColorRect = $"../../../../Overlays/HealthVignette"
+
+var health_vignette_tween : Tween
+
 @export var regeneration_speed := 0.01
 
 var tween : Tween
@@ -13,6 +18,13 @@ var faded := false
 
 const TINT_KALIN	= Color.RED
 const TINT_SPRITE	= Color.RED
+
+func _ready() -> void:
+	health_vignette_tween = create_tween().bind_node(health_vignette)
+	health_vignette_tween.tween_property(health_vignette.material, "shader_parameter/outer_radius", 1.5, 1.0)
+	health_vignette_tween.tween_property(health_vignette.material, "shader_parameter/outer_radius", 2.0, 1.0)
+	health_vignette_tween.set_loops(-1)
+
 
 func _process(delta: float) -> void:
 	var final_regeneration_speed = regeneration_speed
@@ -50,3 +62,15 @@ func fade_in() -> void:
 	tint_tween.tween_property(self, "tint_over", Color.WHITE, 1.0)
 	#tint_tween.chain().tween_property(self, "tint_under", Color.WHITE, 1.0)
 	#tint_tween.chain().tween_property(self, "tint_progress", Color.WHITE, 1.0)
+
+
+func _on_value_changed(_value: float) -> void:
+	var game = Game.get_singleton()
+	FmodServer.set_global_parameter_by_name("Health", _value / 100.0)
+	if _value <= max_value * 0.25:
+		fmod_heartbeat.play(false)
+		health_vignette.show()
+	else:
+		fmod_heartbeat.stop()
+		health_vignette.hide()
+	

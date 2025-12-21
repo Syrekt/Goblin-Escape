@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://rrnk862o0mdw"]
+[gd_scene load_steps=8 format=4 uid="uid://rrnk862o0mdw"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="2_mubwj"]
 [ext_resource type="PackedScene" uid="uid://d1ido0af5r23x" path="res://Objects/loading_screen.tscn" id="3_yqoo0"]
 [ext_resource type="PackedScene" uid="uid://45snbjkrrgyc" path="res://UI/death_screen.tscn" id="4_yut4v"]
 [ext_resource type="PackedScene" uid="uid://bxgqi0q1okfjx" path="res://Objects/screen_fade.tscn" id="5_kvfyn"]
 [ext_resource type="PackedScene" uid="uid://h6taionkkj78" path="res://Map/Fast Travel/tunnel_entrance.tscn" id="8_eoe1y"]
-[ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="9_m3pp0"]
 [ext_resource type="PackedScene" uid="uid://b4vewnv73flk4" path="res://Map/Props/Movable/statue.tscn" id="12_k6jnn"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="14_mubwj"]
 
@@ -81,6 +80,3 @@ target_entrance = NodePath("../TunnelEntrance2")
 position = Vector2(313, 211)
 can_spawn_goblin = false
 target_entrance = NodePath("../TunnelEntrance")
-
-[node name="Torch" parent="." instance=ExtResource("9_m3pp0")]
-position = Vector2(400, 192)

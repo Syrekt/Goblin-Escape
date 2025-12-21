@@ -4,6 +4,8 @@ class_name Game extends "res://addons/MetroidvaniaSystem/Template/Scripts/MetSys
 const SaveManager = preload("res://addons/MetroidvaniaSystem/Template/Scripts/SaveManager.gd")
 const SAVE_PATH = "user://save1.ge"
 
+@onready var bgm_event : FmodEventEmitter2D = $FModBGMEvent
+
 
 enum map_list {
 	TestRoom,
@@ -108,18 +110,13 @@ func _ready() -> void:
 
 	world_refreshed.connect(_on_world_refreshed)
 
+	FmodServer.set_global_parameter_by_name("Health", 1.0)
+
 func _process(delta: float) -> void:
 	if OS.is_debug_build() && Input.is_action_just_pressed("restart"):
 		player.position = MetSys.current_room.spawn_point.position
 	$CanvasModulate.color.r = 0.63 + 0.10 * Options.shadow_intensity
 	$CanvasModulate.color.g = 0.52 + 0.15 * Options.shadow_intensity
-
-func _unhandled_key_input(event: InputEvent) -> void:
-	if event.is_pressed():
-		match event.keycode:
-			KEY_QUOTELEFT: if OS.is_debug_build():
-				%Console.visible = !%Console.visible
-
 
 static func get_singleton() -> Game:
 	return (Game as Script).get_meta(&"singleton") as Game

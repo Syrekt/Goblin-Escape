@@ -187,10 +187,12 @@ shader_parameter/tint_color = Color(1, 1, 1, 0)
 shader_parameter/alpha = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_47a0d"]
+resource_local_to_scene = true
 shader = ExtResource("45_cbw7l")
 shader_parameter/alpha = 0.2
 shader_parameter/inner_radius = 0.515
-shader_parameter/outer_radius = 0.995
+shader_parameter/outer_radius = 1.5
+shader_parameter/color = Color(0.7138932, 0, 0.34559187, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8gxoc"]
 
@@ -4613,6 +4615,9 @@ slide_speed = 200.0
 snap_offset = Vector2(-17, 3)
 save_list = Array[String](["vitality", "strength", "endurance", "level", "has_sword", "experience_point", "has_heavy_stance", "has_defensive_stance"])
 
+[node name="FmodBankLoader" type="FmodBankLoader" parent="."]
+bank_paths = ["res://FModBank/Desktop/Kalin.bank"]
+
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
 script = ExtResource("2_y4shw")
@@ -4665,6 +4670,7 @@ texture = ExtResource("7_ken0u")
 [node name="Overlays" type="CanvasLayer" parent="."]
 
 [node name="UIFocus" type="ColorRect" parent="Overlays"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -4675,6 +4681,16 @@ script = ExtResource("44_8nsgr")
 transparency = 0.3
 
 [node name="StealthVignette" type="ColorRect" parent="Overlays"]
+visible = false
+material = SubResource("ShaderMaterial_47a0d")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthVignette" type="ColorRect" parent="Overlays"]
+visible = false
 material = SubResource("ShaderMaterial_47a0d")
 anchors_preset = 15
 anchor_right = 1.0
@@ -4686,7 +4702,7 @@ grow_vertical = 2
 visible = false
 script = ExtResource("8_4oj65")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="UI"]
+[node name="UITint" type="CanvasModulate" parent="UI"]
 
 [node name="HUD" type="Control" parent="UI"]
 layout_mode = 3
@@ -4715,6 +4731,11 @@ texture_under = ExtResource("46_586st")
 texture_over = ExtResource("47_80r2e")
 texture_progress = ExtResource("48_rbk27")
 script = ExtResource("43_uhoyi")
+
+[node name="Heartbeat" type="FmodEventEmitter2D" parent="UI/HUD/Scaled/Health"]
+event_name = "event:/Heartbeat"
+event_guid = "{e3c15821-141c-474d-9cc4-5db7fe062ef1}"
+volume = 2.0
 
 [node name="Stamina" type="TextureProgressBar" parent="UI/HUD/Scaled" groups=["HUD"]]
 layout_mode = 0
@@ -5351,6 +5372,16 @@ script = ExtResource("40_xirjq")
 [node name="InteractionPrompt" parent="." instance=ExtResource("99_y4shw")]
 position = Vector2(0, -41)
 
+[node name="FModBlockEmitter" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Kalin-Block"
+event_guid = "{59e31288-e079-45e6-881e-7866bef7ed24}"
+fmod_parameters/Block/id = 9004215182679738959
+fmod_parameters/Block = "Success"
+fmod_parameters/Block/labels = PackedStringArray("Success", "Fail", "Parry", "Perfect Parry")
+fmod_parameters/Block/variant_type = 4
+
+[node name="FmodListener2D" type="FmodListener2D" parent="."]
+
 [node name="AnimationAudioStreamer" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 bus = &"SFX"
@@ -5523,6 +5554,8 @@ collision_mask = 2048
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StairCheck"]
 shape = SubResource("RectangleShape2D_n1k6j")
 
+[connection signal="value_changed" from="UI/HUD/Scaled/Health" to="UI" method="_on_health_value_changed"]
+[connection signal="value_changed" from="UI/HUD/Scaled/Health" to="UI/HUD/Scaled/Health" method="_on_value_changed"]
 [connection signal="pressed" from="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer/Close" to="UI/CharacterPanel/Stats" method="_on_close_pressed"]
 [connection signal="pressed" from="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer/Confirm" to="UI/CharacterPanel" method="_on_confirm_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

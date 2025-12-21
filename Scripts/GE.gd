@@ -69,8 +69,14 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		if Options.fullscreen:	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 		else:					DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		notification(NOTIFICATION_WM_SIZE_CHANGED)
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventJoypadButton || event is InputEventJoypadMotion:
+		last_input_type = "gamepad"
+	elif event is InputEventKey || event is InputEventMouse:
+		last_input_type = "keyboard"
 
 
+#region Methods
 func assign_key(action: String, value: String) -> void:
 	var events = InputMap.action_get_events(action)
 	for event in events:
@@ -405,7 +411,6 @@ func get_action_keycode(action:String) -> String:
 			elif event is InputEventJoypadButton && last_input_type == "gamepad":
 				action_keycode = str(event.button_index)
 				break
-
 #region Log
 	#var crumb := SentryBreadcrumb.create("Get action keycode")
 	#crumb.category = "Input"
@@ -417,12 +422,16 @@ func get_action_keycode(action:String) -> String:
 	#	"action_events": action_events,
 	#}
 	#SentrySDK.add_breadcrumb(crumb)
-#endregion
-
 	return action_keycode
+#endregion
+func fmod_play_event(event_name:String) -> void:
+	var event = FmodServer.create_event_instance("event:/" + event_name)
+	event.attached = true
+	event.start()
+func fmod_play_event_at(event_name:String,transform:Transform2D) -> void:
+	var event = FmodServer.create_event_instance("event:/" + event_name)
+	event.attached = true
+	event.set_2d_attributes(transform)
+	event.start()
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventJoypadButton || event is InputEventJoypadMotion:
-		last_input_type = "gamepad"
-	elif event is InputEventKey || event is InputEventMouse:
-		last_input_type = "keyboard"
+#endregion

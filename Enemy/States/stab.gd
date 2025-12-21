@@ -13,7 +13,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 		enemy.call_deferred("update_animation", name)
 	enemy.velocity.x = 0
 
-	if !enemy.chase_target.col_behind.has_overlapping_bodies():
+	if !enemy.chase_target.col_behind.has_overlapping_bodies() && enemy.should_step_on_attack():
 		enemy.apply_force_x(50, 0.5)
 
 func exit() -> void:

@@ -14,10 +14,6 @@ func _ready() -> void:
 	console_output.scroll_following = true
 
 
-func _on_visibility_changed() -> void:
-	console_input.grab_focus()
-
-
 func _on_console_input_text_submitted(new_text: String) -> void:
 	submitted_text = new_text
 	print("submitted_text: "+str(submitted_text))
@@ -29,11 +25,22 @@ func _on_console_input_text_submitted(new_text: String) -> void:
 	console_input.text = ""
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and !event.echo:
+		match event.keycode:
+			KEY_QUOTELEFT:
+				if visible:
+					print("Hide")
+					hide()
+					console_input.release_focus()
+				else:
+					print("Show")
+					show()
+					console_input.grab_focus()
+
 func _on_console_input_gui_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		match event.keycode:
-			KEY_QUOTELEFT:
-				hide()
 			KEY_UP:
 				if history_index > 0:
 					history_index -= 1

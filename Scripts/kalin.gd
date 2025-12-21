@@ -55,7 +55,7 @@ var experience_required := 100
 #region Node pointers
 @onready var state_node := $StateMachine
 @onready var ui : CanvasLayer = $UI
-@onready var ui_modulate : CanvasModulate = $UI/CanvasModulate
+@onready var ui_modulate : CanvasModulate = $UI/UITint
 @onready var hud : Control = find_child("HUD")
 @onready var health		: TextureProgressBar = find_child("Health") #$CanvasLayer/HUD/HBoxContainer/Health
 @onready var stamina	: TextureProgressBar = find_child("Stamina") #$CanvasLayer/HUD/HBoxContainer/Stamina
@@ -247,11 +247,19 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 			parry_active = !parry_timer.is_stopped()
 			perfect_parry = parry_timer.time_left >= perfect_parry_window
 
-		if !incoming_attack != "slash" && defending:
-			if !parry_active && !perfect_parry && !stamina.spend(1, 1.0):
-				# Guard broken
-				Ge.play_audio_free(-4, "res://SFX/Kalin/block_break3.wav")
-				defending = false
+		if incoming_attack != "slash" && defending:
+			if !perfect_parry:
+				if !stamina.spend(1, 1.0):
+					$FModBlockEmitter.set_parameter("Block", "Fail")
+					$FModBlockEmitter.play()
+					defending = false
+
+			#if !parry_active && !perfect_parry && !stamina.spend(1, 1.0):
+			#	# Guard broken
+			#	#Ge.play_audio_free(-4, "res://SFX/Kalin/block_break3.wav")
+			#	$FModBlockEmitter.set_parameter("Block", "Fail")
+			#	$FModBlockEmitter.play()
+			#	defending = false
 
 		#See if attack has broken our defense
 		defended = defending
@@ -265,20 +273,25 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 				"stab":
 					play_hurt_animation = false
 					state_node.state.finished.emit("block")
+					$FModBlockEmitter.set_parameter("Block", "Success")
 					if parry_active:
 						parried = true
 						smell.get_dirty(2.0)
 						if perfect_parry:
 							Ge.slow_mo(0.25, 0.50)
-							play_sfx(load("res://SFX/parry1.wav"))
+							#play_sfx(load("res://SFX/parry1.wav"))
+							$FModBlockEmitter.set_parameter("Block", "Perfect Parry")
 						else:
 							Ge.slow_mo(0.25, 0.25)
-							play_sfx(load("res://SFX/parry2.wav"))
+							#play_sfx(load("res://SFX/parry2.wav"))
+							$FModBlockEmitter.set_parameter("Block", "Parry")
 						_source.combat_properties.stun(2.0)
 				"slash":
 					combat_properties.stun(2.0)
 					play_hurt_animation = false
 					defended = false
+					$FModBlockEmitter.set_parameter("Block", "Fail")
+			$FModBlockEmitter.play()
 #endregion
 	#Take damage (abort if dead)
 	if !defended:
@@ -1012,10 +1025,10 @@ func _process(delta: float) -> void:
 		print("debug1")
 		#status_effect_container.add_status_effect("Death's Door")
 		#status_effect_container.add_status_effect("Bleed", 5.0, 0.1)
-		#take_damage(90)
+		take_damage(90)
 		#experience.add(99999)
 		#toggle_character_panel()
-		pcam_noise_emitter.emit()
+		#pcam_noise_emitter.emit()
 #endregion
 #region Listeners
 func _on_hurtbox_area_entered(area: Area2D) -> void:
