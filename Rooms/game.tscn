@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://c3ce8mt521wb5"]
+[gd_scene load_steps=12 format=3 uid="uid://c3ce8mt521wb5"]
 
 [ext_resource type="Script" uid="uid://ckr03m8hdsnts" path="res://Scripts/game.gd" id="1_dthpw"]
 [ext_resource type="PackedScene" uid="uid://d1ido0af5r23x" path="res://Objects/loading_screen.tscn" id="2_1cwbi"]
 [ext_resource type="Script" uid="uid://b8n0tlxkclhds" path="res://Scripts/loading_screen.gd" id="3_aks28"]
 [ext_resource type="PackedScene" uid="uid://45snbjkrrgyc" path="res://UI/death_screen.tscn" id="4_msigw"]
 [ext_resource type="PackedScene" uid="uid://bxgqi0q1okfjx" path="res://Objects/screen_fade.tscn" id="5_qrhvm"]
-[ext_resource type="AudioStream" uid="uid://dkgt8hqnqcgaj" path="res://BGM/juanjo_sound - Do we need a reason.wav" id="6_2cokh"]
 [ext_resource type="PackedScene" uid="uid://h2hwfpjw4rte" path="res://Objects/kalin.tscn" id="7_p4clm"]
 [ext_resource type="PackedScene" uid="uid://cdy3r2d5x6ydm" path="res://UI/minimap.tscn" id="8_fi0gx"]
 [ext_resource type="Script" uid="uid://c6l4itv8om7oy" path="res://Scripts/map_window.gd" id="9_j2sjr"]
@@ -22,7 +21,7 @@ func _ready() -> void:
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_dthpw")
-starting_map = 0
+starting_map = 23
 
 [node name="LoadingScreen" parent="." instance=ExtResource("2_1cwbi")]
 unique_name_in_owner = true
@@ -38,11 +37,6 @@ unique_name_in_owner = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.6340837, 0.5231031, 0.999996, 1)
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_2cokh")
-autoplay = true
-bus = &"BGM"
 
 [node name="Kalin" parent="." instance=ExtResource("7_p4clm")]
 unique_name_in_owner = true
@@ -119,7 +113,7 @@ unique_name_in_owner = true
 visible = false
 
 [node name="FmodBankLoader" type="FmodBankLoader" parent="."]
-bank_paths = ["res://FModBank/Desktop/Master.bank"]
+bank_paths = ["res://FModBank/Desktop/Master.bank", "res://FModBank/Desktop/SFX.bank"]
 
 [node name="FModBGMEvent" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/BGM"

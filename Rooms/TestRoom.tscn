@@ -64,13 +64,13 @@ visible = false
 [node name="ScreenFade" parent="." instance=ExtResource("5_kvfyn")]
 
 [node name="Statue" parent="." instance=ExtResource("12_k6jnn")]
-position = Vector2(672, 208)
+position = Vector2(400, 208)
 
 [node name="RoomInstance" parent="." node_paths=PackedStringArray("spawn_point") instance=ExtResource("14_mubwj")]
 spawn_point = NodePath("../SpawnPoint")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
-position = Vector2(400, 224)
+position = Vector2(448, 208)
 
 [node name="TunnelEntrance" parent="." node_paths=PackedStringArray("target_entrance") instance=ExtResource("8_eoe1y")]
 position = Vector2(482, 212)

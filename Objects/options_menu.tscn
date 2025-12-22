@@ -24,7 +24,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 5
+current_tab = 1
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
@@ -108,12 +108,22 @@ text = "Borderless"
 layout_mode = 2
 script = ExtResource("2_ucjbo")
 
+[node name="HBoxContainer5" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5"]
+custom_minimum_size = Vector2(86, 0)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = "Switch Monitor"
+
 [node name="CenterWindow" type="Button" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 text = "Center Window"
 
 [node name="Audio" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -145,21 +155,9 @@ text = "Master"
 
 [node name="MasterVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/MasterVolumeContainer"]
 layout_mode = 2
-min_value = -10.0
-max_value = 0.0
-
-[node name="SFXVolumeContainer" type="HSplitContainer" parent="Audio/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/SFXVolumeContainer"]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 2
-text = "SFX"
-
-[node name="SFXVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/SFXVolumeContainer"]
-layout_mode = 2
-min_value = -10.0
-max_value = 0.0
+max_value = 1.0
+step = 0.1
+value = 1.0
 
 [node name="BGMVolumeContainer" type="HSplitContainer" parent="Audio/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -167,12 +165,13 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/BGMVolumeContainer"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
-text = "BGM"
+text = "Music"
 
 [node name="BGMVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/BGMVolumeContainer"]
 layout_mode = 2
-min_value = -10.0
-max_value = 0.0
+max_value = 1.0
+step = 0.1
+value = 1.0
 
 [node name="EFXVolumeContainer" type="HSplitContainer" parent="Audio/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -180,12 +179,27 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/EFXVolumeContainer"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
-text = "Enviroment"
+text = "Ambiance"
 
-[node name="EFXVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/EFXVolumeContainer"]
+[node name="AMBVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/EFXVolumeContainer"]
 layout_mode = 2
-min_value = -10.0
-max_value = 0.0
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="SFXVolumeContainer" type="HSplitContainer" parent="Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/SFXVolumeContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Effects"
+
+[node name="SFXVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/SFXVolumeContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 1.0
 
 [node name="Controls" type="TabBar" parent="."]
 visible = false
@@ -474,6 +488,7 @@ max_value = 1.0
 step = 0.1
 
 [node name="Tutorials" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 5
 
@@ -573,11 +588,12 @@ tutorial_code = "Defensive Stance"
 [connection signal="item_selected" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/Resolution" to="." method="_on_option_button_item_selected"]
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/PixelPerfect" to="." method="_on_pixel_perfect_toggled"]
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/Borderless" to="." method="_on_borderless_toggled"]
+[connection signal="pressed" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/CenterWindow" to="." method="_on_center_window_pressed"]
 [connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/MasterVolumeContainer/MasterVolume" to="." method="_on_master_volume_value_changed"]
-[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/SFXVolumeContainer/SFXVolume" to="." method="_on_sfx_volume_value_changed"]
 [connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/BGMVolumeContainer/BGMVolume" to="." method="_on_bgm_volume_value_changed"]
-[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/EFXVolumeContainer/EFXVolume" to="." method="_on_efx_volume_value_changed"]
+[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/EFXVolumeContainer/AMBVolume" to="." method="_on_efx_volume_value_changed"]
+[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/SFXVolumeContainer/SFXVolume" to="." method="_on_sfx_volume_value_changed"]
 [connection signal="pressed" from="Controls/MarginContainer/HSplitContainer/VBoxContainer/ResetKeybindings" to="." method="_on_reset_keybindings_pressed"]
 [connection signal="toggled" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/NoiseToggle/NoiseToggleCheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="pressed" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer/ResetColor" to="." method="_on_reset_color_pressed"]

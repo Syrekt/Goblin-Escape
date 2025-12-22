@@ -95,6 +95,13 @@ var experience_required := 100
 @onready var map_scene : PackedScene = preload("res://UI/map.tscn")
 @onready var hurtbox : CollisionShape2D = $ColliderStanding
 @onready var screen_fade : CanvasLayer = get_tree().current_scene.find_child("ScreenFade")
+
+@onready var fmod_slash_emitter 	: FmodEventEmitter2D = $FMod/FModSlashEmitter
+@onready var fmod_stab_emitter		: FmodEventEmitter2D = $FMod/FModStabEmitter
+@onready var fmod_bash_emitter 		: FmodEventEmitter2D = $FMod/FModBashEmitter
+@onready var fmod_block_emitter		: FmodEventEmitter2D = $FMod/FModBlockEmitter
+@onready var fmod_hurt_emitter 		: FmodEventEmitter2D = $FMod/FModHurtEmitter
+@onready var fmod_sex_emitter		: FmodEventEmitter2D = $FMod/FModSexEmitter
 #endregion
 #region Combat
 const SLASH_DAMAGE	:= 15
@@ -250,15 +257,15 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 		if incoming_attack != "slash" && defending:
 			if !perfect_parry:
 				if !stamina.spend(1, 1.0):
-					$FModBlockEmitter.set_parameter("Block", "Fail")
-					$FModBlockEmitter.play()
+					fmod_block_emitter.set_parameter("Block", "Fail")
+					fmod_block_emitter.play()
 					defending = false
 
 			#if !parry_active && !perfect_parry && !stamina.spend(1, 1.0):
 			#	# Guard broken
 			#	#Ge.play_audio_free(-4, "res://SFX/Kalin/block_break3.wav")
-			#	$FModBlockEmitter.set_parameter("Block", "Fail")
-			#	$FModBlockEmitter.play()
+			#	fmod_block_emitter.set_parameter("Block", "Fail")
+			#	fmod_block_emitter.play()
 			#	defending = false
 
 		#See if attack has broken our defense
@@ -273,25 +280,23 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 				"stab":
 					play_hurt_animation = false
 					state_node.state.finished.emit("block")
-					$FModBlockEmitter.set_parameter("Block", "Success")
+					fmod_block_emitter.set_parameter("Block", "Success")
 					if parry_active:
 						parried = true
 						smell.get_dirty(2.0)
 						if perfect_parry:
 							Ge.slow_mo(0.25, 0.50)
-							#play_sfx(load("res://SFX/parry1.wav"))
-							$FModBlockEmitter.set_parameter("Block", "PerfectParry")
+							fmod_block_emitter.set_parameter("Block", "PerfectParry")
 						else:
 							Ge.slow_mo(0.25, 0.25)
-							#play_sfx(load("res://SFX/parry2.wav"))
-							$FModBlockEmitter.set_parameter("Block", "Parry")
+							fmod_block_emitter.set_parameter("Block", "Parry")
 						_source.combat_properties.stun(2.0)
 				"slash":
 					combat_properties.stun(2.0)
 					play_hurt_animation = false
 					defended = false
-					$FModBlockEmitter.set_parameter("Block", "Fail")
-			$FModBlockEmitter.play()
+					fmod_block_emitter.set_parameter("Block", "Fail")
+			fmod_block_emitter.play()
 #endregion
 	#Take damage (abort if dead)
 	if !defended:
@@ -402,25 +407,6 @@ func play_sfx(sfx) -> void:
 	emitter.play()
 	#audio_emitter.stream = sfx
 	#audio_emitter.play()
-func combat_perform_attack(hitbox: Area2D, _damage: int, whiff_sfx: AudioStreamWAV, hit_sfx: AudioStreamWAV, knockback_force: int) -> void:
-	if hitbox.has_overlapping_bodies():
-		var body = hitbox.get_overlapping_bodies()[0]
-		var was_stunned : bool = body.combat_properties.stunned
-
-		var result : int = Combat.deal_damage(self, _damage, body, knockback_force)
-		match result:
-			Combat.RESULT_STUN:
-				Ge.play_audio(audio_emitter, 1, "res://SFX/Kalin/block_break2.wav")
-			Combat.RESULT_WHIFF:
-				play_sfx(whiff_sfx)
-			Combat.RESULT_HIT:
-				play_sfx(hit_sfx)
-			Combat.RESULT_BLOCK:
-				Ge.play_audio_from_string_array(global_position, 0, "res://SFX/Sword hit shield")
-			Combat.RESULT_DEAD:
-				Ge.play_audio_from_string_array(global_position, 0, "res://SFX/Kalin/Finishers")
-	else:
-		play_sfx(whiff_sfx)
 func sex_begin(participants: Array, _position: String) -> void:
 	sex_participants = participants.duplicate()
 	print("sex_participants: "+str(sex_participants))

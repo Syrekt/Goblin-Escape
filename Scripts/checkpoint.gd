@@ -7,6 +7,7 @@ var player : Player
 @onready var lower_sprite := $LowerSprite
 @onready var fly_spawn_points := $SpawnPoints
 @onready var rest_menu : PanelContainer = $CanvasLayer/RestMenu
+@onready var fountain_sound_emitter : FmodEventEmitter2D = $FountainSound
 
 var fly_scene = preload("res://Others/fly_1.tscn")
 var timer : Timer
@@ -26,6 +27,7 @@ func _ready() -> void:
 
 
 func update(_player : Player) -> void:
+	fountain_sound_emitter.set_parameter("distance", 0.0)
 	player = _player
 	#$CanvasLayer.layer = 10
 	if player.pressed("interact"):

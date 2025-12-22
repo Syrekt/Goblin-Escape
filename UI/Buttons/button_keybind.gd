@@ -7,7 +7,7 @@ class_name KeyRebindButton extends Control
 
 var button_pressed := false
 
-const CONFIG_FILE = "user://config.ini"
+const CONFIG_FILE = "user://options.ini"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -59,7 +59,7 @@ func set_text_for_key() -> void:
 	var config = ConfigFile.new()
 	if FileAccess.file_exists(CONFIG_FILE):
 		config.load(CONFIG_FILE)
-	config.set_value("Keyboard", action_name, action_event.keycode)
+	config.set_value("keyboard", action_name, action_event.keycode)
 	config.save(CONFIG_FILE)
 	print("Action event keycode: " + str(action_event.keycode))
 

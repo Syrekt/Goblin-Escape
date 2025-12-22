@@ -21,13 +21,13 @@ extends TabContainer
 
 @onready var reset_keybindings : Button = find_child("ResetKeybindings")
 
-@onready var master_bus_id	:= AudioServer.get_bus_index("Master")
-@onready var sfx_bus_id		:= AudioServer.get_bus_index("SFX")
-@onready var efx_bus_id 	:= AudioServer.get_bus_index("EFX")
-@onready var bgm_bus_id 	:= AudioServer.get_bus_index("BGM")
+@onready var master_bus_id			:= AudioServer.get_bus_index("Master")
+@onready var sfx_bus_id				:= AudioServer.get_bus_index("SFX")
+@onready var amb_bus_id 			:= AudioServer.get_bus_index("AMB")
+@onready var bgm_bus_id 			:= AudioServer.get_bus_index("BGM")
 @onready var master_volume_slider	: HSlider = find_child("MasterVolume")
 @onready var sfx_volume_slider		: HSlider = find_child("SFXVolume")
-@onready var efx_volume_slider 		: HSlider = find_child("EFXVolume")
+@onready var amb_volume_slider 		: HSlider = find_child("AMBVolume")
 @onready var bgm_volume_slider 		: HSlider = find_child("BGMVolume")
 
 @onready var tutorial_toggle	: CheckBox = find_child("ShowTutorials")
@@ -79,10 +79,10 @@ func _ready() -> void:
 	noise_toggle.set_pressed_no_signal(Ge.noise_enabled)
 	borderless_toggle.set_pressed_no_signal(Options.borderless)
 
-	master_volume_slider.value	= AudioServer.get_bus_volume_db(master_bus_id)
-	sfx_volume_slider.value		= AudioServer.get_bus_volume_db(sfx_bus_id)
-	efx_volume_slider.value 	= AudioServer.get_bus_volume_db(efx_bus_id)
-	bgm_volume_slider.value 	= AudioServer.get_bus_volume_db(bgm_bus_id)
+	master_volume_slider.value	= FmodServer.get_global_parameter_by_name("MASTER_VOLUME")
+	bgm_volume_slider.value		= FmodServer.get_global_parameter_by_name("BGM_VOLUME")
+	amb_volume_slider.value		= FmodServer.get_global_parameter_by_name("AMB_VOLUME")
+	sfx_volume_slider.value		= FmodServer.get_global_parameter_by_name("SFX_VOLUME")
 
 	tutorial_toggle.set_pressed_no_signal(Ge.show_tutorials)
 	hint_toggle.set_pressed_no_signal(Ge.show_hints)
@@ -169,7 +169,7 @@ func _on_reset_color_pressed() -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_SIZE_CHANGED:
-		Options.current_screen	= DisplayServer.window_get_current_screen()
+		Options.current_screen = DisplayServer.window_get_current_screen()
 		var screen := Options.current_screen
 		print("screen: "+str(screen))
 		DisplayServer.window_set_current_screen(screen)
@@ -185,11 +185,11 @@ func _notification(what: int) -> void:
 		await get_tree().process_frame
 
 		var window_size := DisplayServer.window_get_size()
-		var display_size := DisplayServer.screen_get_size(screen)
+		var display_size := DisplayServer.screen_get_size(Options.current_screen)
 		print("window_size: "+str(window_size))
 		print("display_size: "+str(display_size))
 
-		DisplayServer.window_set_position((display_size - window_size) / 2)
+		#DisplayServer.window_set_position((display_size - window_size) / 2)
 
 		Options.save_options()
 
@@ -240,17 +240,17 @@ func _on_reset_keybindings_pressed() -> void:
 
 
 func _on_master_volume_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(master_bus_id, value)
-	AudioServer.set_bus_mute(master_bus_id, value <= -10.0)
-func _on_sfx_volume_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(sfx_bus_id, value)
-	AudioServer.set_bus_mute(sfx_bus_id, value <= -10.0)
-func _on_efx_volume_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(efx_bus_id, value)
-	AudioServer.set_bus_mute(efx_bus_id, value <= -10.0)
+	Options.master_volume = value
+	FmodServer.set_global_parameter_by_name("MASTER_VOLUME", value)
 func _on_bgm_volume_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(bgm_bus_id, value)
-	AudioServer.set_bus_mute(bgm_bus_id, value <= -10.0)
+	Options.bgm_volume = value
+	FmodServer.set_global_parameter_by_name("BGM_VOLUME", value)
+func _on_amb_volume_value_changed(value: float) -> void:
+	Options.amb_volume = value
+	FmodServer.set_global_parameter_by_name("AMB_VOLUME", value)
+func _on_sfx_volume_value_changed(value: float) -> void:
+	Options.sfx_volume = value
+	FmodServer.set_global_parameter_by_name("SFX_VOLUME", value)
 
 func _on_show_tutorials_toggled(toggled_on: bool) -> void:
 	Ge.show_tutorials = toggled_on
@@ -292,3 +292,11 @@ func _on_tutorial_button_pressed(tutorial_scene:PackedScene) -> void:
 	open_tutorial.from_options_menu = true
 	open_tutorial.layer = 2
 	add_child(open_tutorial)
+
+
+func _on_button_pressed() -> void:
+	var display_count = DisplayServer.get_screen_count()
+	print("display_count: "+str(display_count))
+	var current_screen = DisplayServer.window_get_current_screen()
+	print("current_screen: "+str(current_screen))
+	DisplayServer.window_set_current_screen((current_screen + 1) % display_count)

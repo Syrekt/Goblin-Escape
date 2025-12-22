@@ -13,6 +13,11 @@ var hud_scale := 2
 var shadow_intensity = 1.0
 var adult_content_enabled := true
 
+var master_volume := 1.0
+var bgm_volume := 1.0
+var amb_volume := 1.0
+var sfx_volume := 1.0
+
 func _set_window_position() -> void:
 	DisplayServer.window_set_position(window_pos)
 
@@ -41,25 +46,29 @@ func _ready() -> void:
 		DisplayServer.window_set_position((DisplayServer.screen_get_size() - DisplayServer.window_get_size())/2)
 	#endregion
 
-	if FileAccess.file_exists("user://config.ini"):
+	if FileAccess.file_exists(config_path):
 		var config := ConfigFile.new()
-		config.load("user://config.ini")
-		var keys = config.get_section_keys("Keyboard")
-		print("keys: "+str(keys))
-		for key in keys:
-			print("key: "+str(key))
-			var saved_input = config.get_value("Keyboard", key)
-			var ev := InputEventKey.new()
-			ev.keycode = saved_input
-			print("saved_input: "+str(saved_input))
-			if saved_input:
-				InputMap.action_erase_events(key)
-				InputMap.action_add_event(key, ev)
+		config.load(config_path)
+		if config.has_section("keyboard"):
+			var keys = config.get_section_keys("keyboard")
+			print("keys: "+str(keys))
+			for key in keys:
+				print("key: "+str(key))
+				var saved_input = config.get_value("keyboard", key)
+				var ev := InputEventKey.new()
+				ev.keycode = saved_input
+				print("saved_input: "+str(saved_input))
+				if saved_input:
+					InputMap.action_erase_events(key)
+					InputMap.action_add_event(key, ev)
 
 
 
 func save_options() -> void:
-	var config = ConfigFile.new()
+	var config := ConfigFile.new()
+	if FileAccess.file_exists(config_path):
+		config.load(config_path)
+
 	config.set_value("Game", "version", OS.get_version())
 	#region Save Display
 	config.set_value("window", "fullscreen",	fullscreen)
@@ -70,10 +79,10 @@ func save_options() -> void:
 	config.set_value("window", "window_screen", DisplayServer.window_get_current_screen())
 	#endregion
 	#region Save Audio
-	config.set_value("audio", "Master", AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))
-	config.set_value("audio", "SFX",	AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX")))
-	config.set_value("audio", "EFX", 	AudioServer.get_bus_volume_db(AudioServer.get_bus_index("EFX")))
-	config.set_value("audio", "BGM", 	AudioServer.get_bus_volume_db(AudioServer.get_bus_index("BGM")))
+	config.set_value("audio", "Master", master_volume)
+	config.set_value("audio", "BGM", 	bgm_volume)
+	config.set_value("audio", "AMB", 	amb_volume)
+	config.set_value("audio", "SFX",	sfx_volume)
 	#endregion
 	#region Noise
 	config.set_value("noise", "enabled",	Ge.noise_enabled)
@@ -103,20 +112,10 @@ func load_options() -> int:
 		print("window_screen: "+str(window_screen))
 		#endregion
 		#region Load Audio
-		var master_bus	= [AudioServer.get_bus_index("Master"), config.get_value("audio", "Master", 0)]
-		var sfx_bus		= [AudioServer.get_bus_index("SFX"), config.get_value("audio", "SFX", 0)]
-		var efx_bus		= [AudioServer.get_bus_index("EFX"), config.get_value("audio", "EFX", 0)]
-		var bgm_bus
-		if OS.is_debug_build(): bgm_bus	= [AudioServer.get_bus_index("BGM"), -10]
-		else:					bgm_bus	= [AudioServer.get_bus_index("BGM"), config.get_value("audio", "BGM", 0)]
-		AudioServer.set_bus_volume_db(master_bus[0], master_bus[1])
-		AudioServer.set_bus_volume_db(sfx_bus[0], sfx_bus[1])
-		AudioServer.set_bus_volume_db(efx_bus[0], efx_bus[1])
-		AudioServer.set_bus_volume_db(bgm_bus[0], bgm_bus[1])
-		AudioServer.set_bus_mute(master_bus[0], master_bus[1] <= -10.0)
-		AudioServer.set_bus_mute(sfx_bus[0], sfx_bus[1] <= -10.0)
-		AudioServer.set_bus_mute(efx_bus[0], efx_bus[1] <= -10.0)
-		AudioServer.set_bus_mute(bgm_bus[0], bgm_bus[1] <= -10.0)
+		FmodServer.set_global_parameter_by_name("MASTER_VOLUME",	config.get_value("audio", "Master", 1.0))
+		FmodServer.set_global_parameter_by_name("BGM_VOLUME",		config.get_value("audio", "BGM", 1.0))
+		FmodServer.set_global_parameter_by_name("AMB_VOLUME", 		config.get_value("audio", "AMB", 1.0))
+		FmodServer.set_global_parameter_by_name("SFX_VOLUME", 		config.get_value("audio", "SFX", 1.0))
 		#endregion
 		#region Noise
 		Ge.noise_enabled	= config.get_value("noise", "enabled", false)

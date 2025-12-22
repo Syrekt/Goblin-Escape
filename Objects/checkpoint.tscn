@@ -1,7 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://dxriomae5diar"]
+[gd_scene load_steps=24 format=3 uid="uid://dxriomae5diar"]
 
 [ext_resource type="Script" uid="uid://b6kmsohrw028d" path="res://Scripts/checkpoint.gd" id="1_gcwsm"]
-[ext_resource type="AudioStream" uid="uid://b3034fi8yhlhk" path="res://SFX/Water_Fountain_Fienup_002.wav" id="2_4jiqy"]
 [ext_resource type="Texture2D" uid="uid://baxrv6778dioa" path="res://Map/Props/spr_fountain2_stip5.png" id="3_no5uu"]
 [ext_resource type="Texture2D" uid="uid://48ypnvr2g67o" path="res://Map/Props/spr_fountain_stip7.png" id="4_m6be8"]
 [ext_resource type="Texture2D" uid="uid://d2uhikpas8u7s" path="res://Others/light.png" id="5_m6be8"]
@@ -130,12 +129,6 @@ script = ExtResource("1_gcwsm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_bv8qh")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_4jiqy")
-autoplay = true
-max_distance = 256.0
-bus = &"SFX"
 
 [node name="UpperSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ncdgf")

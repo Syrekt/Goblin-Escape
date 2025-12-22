@@ -4619,9 +4619,6 @@ slide_speed = 200.0
 snap_offset = Vector2(-17, 3)
 save_list = Array[String](["vitality", "strength", "endurance", "level", "has_sword", "experience_point", "has_heavy_stance", "has_defensive_stance"])
 
-[node name="FmodBankLoader" type="FmodBankLoader" parent="."]
-bank_paths = ["res://FModBank/Desktop/Kalin.bank"]
-
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
 script = ExtResource("2_y4shw")
@@ -5154,6 +5151,57 @@ libraries = {
 &"": SubResource("AnimationLibrary_cuohi")
 }
 
+[node name="FMod" type="Node" parent="."]
+
+[node name="FmodListener2D" type="FmodListener2D" parent="FMod"]
+
+[node name="FModBlockEmitter" type="FmodEventEmitter2D" parent="FMod"]
+event_name = "event:/Kalin-Block"
+event_guid = "{59e31288-e079-45e6-881e-7866bef7ed24}"
+fmod_parameters/Block/id = 9004215182679738959
+fmod_parameters/Block = "Success"
+fmod_parameters/Block/labels = PackedStringArray("Success", "Fail", "Parry", "Perfect Parry")
+fmod_parameters/Block/variant_type = 4
+
+[node name="FModSlashEmitter" type="FmodEventEmitter2D" parent="FMod"]
+event_name = "event:/Kalin-Slash"
+event_guid = "{40956996-6ef5-4cc2-b16f-699f3f17ef51}"
+fmod_parameters/Attack/id = -1155853257522533842
+fmod_parameters/Attack = "Miss"
+fmod_parameters/Attack/labels = PackedStringArray("Miss", "Hit", "Blocked", "GuardBreak", "Critical", "HitOnWood", "Kill")
+fmod_parameters/Attack/variant_type = 4
+position = Vector2(-4, 34)
+
+[node name="FModStabEmitter" type="FmodEventEmitter2D" parent="FMod"]
+event_name = "event:/Kalin-Stab"
+event_guid = "{7009bef7-bcf1-426a-a7e9-68e1abb45ec7}"
+fmod_parameters/Attack/id = -1155853257522533842
+fmod_parameters/Attack = "Miss"
+fmod_parameters/Attack/labels = PackedStringArray("Miss", "Hit", "Blocked", "GuardBreak", "Critical", "HitOnWood", "Kill")
+fmod_parameters/Attack/variant_type = 4
+position = Vector2(-4, 34)
+
+[node name="FModBashEmitter" type="FmodEventEmitter2D" parent="FMod"]
+event_name = "event:/Kalin-Bash"
+event_guid = "{913d06e0-3242-4e5a-88d8-b5062c29af10}"
+fmod_parameters/Attack/id = -1155853257522533842
+fmod_parameters/Attack = "Miss"
+fmod_parameters/Attack/labels = PackedStringArray("Miss", "Hit", "Blocked", "GuardBreak", "Critical", "HitOnWood", "Kill")
+fmod_parameters/Attack/variant_type = 4
+position = Vector2(-4, 34)
+
+[node name="FModHurtEmitter" type="FmodEventEmitter2D" parent="FMod"]
+event_name = "event:/Kalin-Hurt"
+event_guid = "{1a106e74-bfff-4087-a3b1-066418bf4c4a}"
+fmod_parameters/IncomingDamageType/id = -8654296285145188854
+fmod_parameters/IncomingDamageType = "Fall"
+fmod_parameters/IncomingDamageType/labels = PackedStringArray("Fall", "EnemyAttack", "Spikes")
+fmod_parameters/IncomingDamageType/variant_type = 4
+
+[node name="FModSexEmitter" type="FmodEventEmitter2D" parent="FMod"]
+event_name = "event:/Kalin-Sex"
+event_guid = "{1532fe17-67cb-4b3f-b37f-05a12c1fd81b}"
+
 [node name="StateMachine" parent="." groups=["Flip"] instance=ExtResource("9_ojhio")]
 visible = false
 position = Vector2(-4, 34)
@@ -5374,16 +5422,6 @@ script = ExtResource("40_xirjq")
 
 [node name="InteractionPrompt" parent="." instance=ExtResource("99_y4shw")]
 position = Vector2(0, -41)
-
-[node name="FModBlockEmitter" type="FmodEventEmitter2D" parent="."]
-event_name = "event:/Kalin-Block"
-event_guid = "{59e31288-e079-45e6-881e-7866bef7ed24}"
-fmod_parameters/Block/id = 9004215182679738959
-fmod_parameters/Block = "Success"
-fmod_parameters/Block/labels = PackedStringArray("Success", "Fail", "Parry", "Perfect Parry")
-fmod_parameters/Block/variant_type = 4
-
-[node name="FmodListener2D" type="FmodListener2D" parent="."]
 
 [node name="AnimationAudioStreamer" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
