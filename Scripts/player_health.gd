@@ -15,16 +15,10 @@ var tint_tween : Tween
 var faded := false
 
 @export var fade_out_col : Color = Color(0.125, 0.125, 0.125, 0.0)
+@export var vignette_max_radius := 0.4
 
 const TINT_KALIN	= Color.RED
 const TINT_SPRITE	= Color.RED
-
-func _ready() -> void:
-	health_vignette_tween = create_tween().bind_node(health_vignette)
-	health_vignette_tween.tween_property(health_vignette.material, "shader_parameter/outer_radius", 1.5, 1.0)
-	health_vignette_tween.tween_property(health_vignette.material, "shader_parameter/outer_radius", 2.0, 1.0)
-	health_vignette_tween.set_loops(-1)
-
 
 func _process(delta: float) -> void:
 	var final_regeneration_speed = regeneration_speed
@@ -70,7 +64,19 @@ func _on_value_changed(_value: float) -> void:
 	if _value <= max_value * 0.25:
 		fmod_heartbeat.play(false)
 		health_vignette.show()
+
+		if !health_vignette_tween:
+			health_vignette_tween = create_tween().bind_node(health_vignette)
+			health_vignette_tween.finished.connect(update_tween)
+			health_vignette_tween.tween_property(health_vignette.material, "shader_parameter/outer_radius", 2.0 - vignette_max_radius * (1 - (value / (max_value*0.25))), 1.0).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+			health_vignette_tween.tween_property(health_vignette.material, "shader_parameter/outer_radius", 2.0, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	else:
 		fmod_heartbeat.stop()
 		health_vignette.hide()
 	
+
+func update_tween() -> void:
+	health_vignette_tween.stop()
+	health_vignette_tween.tween_property(health_vignette.material, "shader_parameter/outer_radius", 2.0 - vignette_max_radius * (1 - (value / (max_value*0.25))), 1.0).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	health_vignette_tween.tween_property(health_vignette.material, "shader_parameter/outer_radius", 2.0, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	health_vignette_tween.play()

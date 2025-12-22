@@ -280,7 +280,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 						if perfect_parry:
 							Ge.slow_mo(0.25, 0.50)
 							#play_sfx(load("res://SFX/parry1.wav"))
-							$FModBlockEmitter.set_parameter("Block", "Perfect Parry")
+							$FModBlockEmitter.set_parameter("Block", "PerfectParry")
 						else:
 							Ge.slow_mo(0.25, 0.25)
 							#play_sfx(load("res://SFX/parry2.wav"))
@@ -1044,7 +1044,7 @@ func _on_enter_shadow() -> void:
 	invisible = true
 	current_tint = Color(0.1, 0.1, 0.1, 0.5)
 	create_tween().bind_node(self).tween_property(%Sprite2D.material, "shader_parameter/tint_color", current_tint, 0.2)
-	create_tween().bind_node(self).tween_property(vignette.material, "shader_parameter/alpha", 0.2, 0.2)
+	create_tween().bind_node(self).tween_property(vignette.material, "shader_parameter/color", Color(0, 0, 0, 0.3), 0.2)
 func _on_leave_shadow() -> void:
 	print("leave shadow")
 	if hud_tween: hud_tween.kill()
@@ -1056,7 +1056,7 @@ func _on_leave_shadow() -> void:
 	invisible = false
 	current_tint = Color(0.0, 0.0, 0.0, 0.0)
 	create_tween().bind_node(self).tween_property(%Sprite2D.material, "shader_parameter/tint_color", current_tint, 0.2)
-	create_tween().bind_node(self).tween_property(vignette.material, "shader_parameter/alpha", 0.0, 0.2)
+	create_tween().bind_node(self).tween_property(vignette.material, "shader_parameter/color", Color(0, 0, 0, 0), 0.2)
 func _on_threat_collider_body_entered(body:Node2D) -> void:
 	if power_crush:
 		power_crush = false

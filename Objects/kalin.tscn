@@ -1,4 +1,4 @@
-[gd_scene load_steps=259 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=260 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://b5p67lby0k2d0" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -187,12 +187,16 @@ shader_parameter/tint_color = Color(1, 1, 1, 0)
 shader_parameter/alpha = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_47a0d"]
-resource_local_to_scene = true
 shader = ExtResource("45_cbw7l")
-shader_parameter/alpha = 0.2
 shader_parameter/inner_radius = 0.515
-shader_parameter/outer_radius = 1.5
-shader_parameter/color = Color(0.7138932, 0, 0.34559187, 1)
+shader_parameter/outer_radius = 0.995
+shader_parameter/color = Color(0, 0, 0, 0.2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lc2pc"]
+shader = ExtResource("45_cbw7l")
+shader_parameter/inner_radius = 0.5
+shader_parameter/outer_radius = 2.0
+shader_parameter/color = Color(0.46666667, 0, 0.05882353, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8gxoc"]
 
@@ -345,7 +349,7 @@ animations = [{
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bs037"]
 shader = ExtResource("34_wxg5w")
 shader_parameter/outline_color = Color(1, 1, 1, 0)
-shader_parameter/width = 1.50000007125
+shader_parameter/width = 1.5
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
@@ -4681,7 +4685,6 @@ script = ExtResource("44_8nsgr")
 transparency = 0.3
 
 [node name="StealthVignette" type="ColorRect" parent="Overlays"]
-visible = false
 material = SubResource("ShaderMaterial_47a0d")
 anchors_preset = 15
 anchor_right = 1.0
@@ -4691,7 +4694,7 @@ grow_vertical = 2
 
 [node name="HealthVignette" type="ColorRect" parent="Overlays"]
 visible = false
-material = SubResource("ShaderMaterial_47a0d")
+material = SubResource("ShaderMaterial_lc2pc")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
