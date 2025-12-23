@@ -44,4 +44,10 @@ sprite_frames = SubResource("SpriteFrames_2stkb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5srt2")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="SFXEmitter" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/MapObject"
+event_guid = "{d7c3bd37-e7ed-4d1b-ba78-724db6e8c89e}"
+fmod_parameters/State/id = 1308907289457010719
+fmod_parameters/State = "WoodDamaged"
+fmod_parameters/State/labels = PackedStringArray("WoodTanked", "WoodDamaged", "WoodBroken")
+fmod_parameters/State/variant_type = 4

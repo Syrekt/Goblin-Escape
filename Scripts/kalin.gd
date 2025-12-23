@@ -96,12 +96,8 @@ var experience_required := 100
 @onready var hurtbox : CollisionShape2D = $ColliderStanding
 @onready var screen_fade : CanvasLayer = get_tree().current_scene.find_child("ScreenFade")
 
-@onready var fmod_slash_emitter 	: FmodEventEmitter2D = $FMod/FModSlashEmitter
-@onready var fmod_stab_emitter		: FmodEventEmitter2D = $FMod/FModStabEmitter
-@onready var fmod_bash_emitter 		: FmodEventEmitter2D = $FMod/FModBashEmitter
-@onready var fmod_block_emitter		: FmodEventEmitter2D = $FMod/FModBlockEmitter
-@onready var fmod_hurt_emitter 		: FmodEventEmitter2D = $FMod/FModHurtEmitter
-@onready var fmod_sex_emitter		: FmodEventEmitter2D = $FMod/FModSexEmitter
+@onready var hurt_sfx 	: FmodEventEmitter2D = $Audio/HurtSFX
+@onready var block_sfx 	: FmodEventEmitter2D = $Audio/BlockSFX
 #endregion
 #region Combat
 const SLASH_DAMAGE	:= 15
@@ -257,15 +253,15 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 		if incoming_attack != "slash" && defending:
 			if !perfect_parry:
 				if !stamina.spend(1, 1.0):
-					fmod_block_emitter.set_parameter("Block", "Fail")
-					fmod_block_emitter.play()
+					block_sfx.set_parameter("Block", "Fail")
+					block_sfx.play()
 					defending = false
 
 			#if !parry_active && !perfect_parry && !stamina.spend(1, 1.0):
 			#	# Guard broken
 			#	#Ge.play_audio_free(-4, "res://SFX/Kalin/block_break3.wav")
-			#	fmod_block_emitter.set_parameter("Block", "Fail")
-			#	fmod_block_emitter.play()
+			#	block_sfx.set_parameter("Block", "Fail")
+			#	block_sfx.play()
 			#	defending = false
 
 		#See if attack has broken our defense
@@ -280,23 +276,23 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 				"stab":
 					play_hurt_animation = false
 					state_node.state.finished.emit("block")
-					fmod_block_emitter.set_parameter("Block", "Success")
+					block_sfx.set_parameter("Block", "Success")
 					if parry_active:
 						parried = true
 						smell.get_dirty(2.0)
 						if perfect_parry:
 							Ge.slow_mo(0.25, 0.50)
-							fmod_block_emitter.set_parameter("Block", "PerfectParry")
+							block_sfx.set_parameter("Block", "PerfectParry")
 						else:
 							Ge.slow_mo(0.25, 0.25)
-							fmod_block_emitter.set_parameter("Block", "Parry")
+							block_sfx.set_parameter("Block", "Parry")
 						_source.combat_properties.stun(2.0)
 				"slash":
 					combat_properties.stun(2.0)
 					play_hurt_animation = false
 					defended = false
-					fmod_block_emitter.set_parameter("Block", "Fail")
-			fmod_block_emitter.play()
+					block_sfx.set_parameter("Block", "Fail")
+			block_sfx.play()
 #endregion
 	#Take damage (abort if dead)
 	if !defended:
@@ -304,7 +300,8 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 		if power_crush:# && stamina.spend(_damage, 1.0):
 			play_hurt_animation = false
 			absorbed_damage = true
-			Ge.play_audio_free(-10, "res://SFX/Kalin/Weapon_Hit_Armour_03_With_Echo_Enhancement.wav")
+			hurt_sfx.set_parameter("DamageType", "EnemyAttack")
+			#Ge.play_audio_free(-10, "res://SFX/Kalin/Weapon_Hit_Armour_03_With_Echo_Enhancement.wav")
 			Ge.slow_mo(0, 0.2)
 			var tween_tint = create_tween().bind_node(self)
 			var tween_outline = create_tween().bind_node(self)
@@ -322,7 +319,8 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 			print("Health depleted")
 			if _source:
 				_source.dealth_finishing_blow = true
-			Ge.play_audio_from_string_array(global_position, -2, "res://SFX/Kalin/Hurt")
+			#Ge.play_audio_from_string_array(global_position, -2, "res://SFX/Kalin/Hurt")
+			hurt_sfx.play()
 			state_node.state.finished.emit("death", {"source" = _source})
 			return
 	#Play animation
@@ -334,7 +332,8 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 			state_node.state.finished.emit("hurt")
 		else:
 			state_node.state.finished.emit("hurt_no_sword")
-		Ge.play_audio_from_string_array(global_position, -2, "res://SFX/Kalin/Hurt")
+		hurt_sfx.play()
+		#Ge.play_audio_from_string_array(global_position, -2, "res://SFX/Kalin/Hurt")
 func heal(amount: int) -> void:
 	health.value += amount
 func check_movable():
@@ -397,9 +396,11 @@ func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 func snap_to_corner(ledge_position: Vector2) -> void:
 	global_position = ledge_position + Vector2(snap_offset.x * facing, snap_offset.y)
 func quick_climb() -> void:
-	corner_quick_climb = true
 	state_node.state.finished.emit("corner_climb")
 func play_sfx(sfx) -> void:
+	print("Play sfx is disabled")
+	print_stack()
+	return # Disabled
 	var emitter : AudioStreamPlayer2D = AudioStreamPlayer2D.new()
 	emitter.stream = sfx
 	emitter.finished.connect(emitter.queue_free)

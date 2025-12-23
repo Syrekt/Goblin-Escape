@@ -1,5 +1,8 @@
 extends PlayerAttackState
 
+@onready var stab_sfx : FmodEventEmitter2D = $StabSFX
+
+
 func enter(previous_state_path: String, data := {}) -> void:
 	_enter()
 	player.fatigue.perform("stab")
@@ -20,20 +23,19 @@ func _on_attack_frame() -> void:
 			var defender_state = defender.state_node.state.name
 			if defender_state == "stance_defensive":
 				player.combat_properties.stun(2.0)
-				Ge.play_audio_from_string_array(player.global_position, 0, "res://SFX/Sword hit shield")
+				stab_sfx.set_parameter("AttackResult", "Blocked")
 			else:
 				defender.combat_properties.pushback_apply(player.global_position, pushback_force)
 				defender.take_damage(player_stab_damage, player)
-				player.play_sfx(sfx_hit)
+				stab_sfx.set_parameter("AttackResult", "Hit")
 				Ge.slow_mo(0, 0.05)
 		else:
-			if defender is TunnelBarricade:
-				defender.take_damage(10, player)
+			defender.take_damage(0, player)
+			stab_sfx.set_parameter("AttackResult", "HitOnWood")
+			if !player.has_heavy_stance:
+				player.think("I can't break it yet")
 			else:
-				defender.take_damage(0, player)
-				if !player.has_heavy_stance:
-					player.think("I can't break it yet")
-				else:
-					player.think("I should hit harder")
+				player.think("I should hit harder")
 	else:
-		player.play_sfx(sfx_whiff)
+		stab_sfx.set_parameter("AttackResult", "Miss")
+	stab_sfx.play()

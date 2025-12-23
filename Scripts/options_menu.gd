@@ -101,6 +101,7 @@ func _ready() -> void:
 	adult_content_toggle.set_pressed_no_signal(Options.adult_content_enabled)
 
 
+
 func _process(delta: float) -> void:
 	Options.current_screen		= DisplayServer.window_get_current_screen()
 	resolution.disabled			= Options.fullscreen
@@ -116,6 +117,7 @@ func _process(delta: float) -> void:
 
 func _exit_tree() -> void:
 	get_tree().paused = false
+	Options.save_options()
 
 
 func _on_fullscreen_toggled(toggled_on: bool) -> void:
@@ -178,7 +180,6 @@ func _notification(what: int) -> void:
 
 		# Skip centering in fullscreen
 		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
-			Options.save_options()
 			return
 
 		DisplayServer.window_set_size(Options.window_size)
@@ -190,8 +191,6 @@ func _notification(what: int) -> void:
 		print("display_size: "+str(display_size))
 
 		#DisplayServer.window_set_position((display_size - window_size) / 2)
-
-		Options.save_options()
 
 func _on_center_window_pressed() -> void:
 	notification(NOTIFICATION_WM_SIZE_CHANGED)
@@ -254,18 +253,12 @@ func _on_sfx_volume_value_changed(value: float) -> void:
 
 func _on_show_tutorials_toggled(toggled_on: bool) -> void:
 	Ge.show_tutorials = toggled_on
-	Options.save_options()
-
 
 func _on_show_hints_toggled(toggled_on: bool) -> void:
 	Ge.show_hints = toggled_on
-	Options.save_options()
-
 
 func _on_show_interaction_prompts_toggled(toggled_on: bool) -> void:
 	Ge.show_interaction_prompts = toggled_on
-	Options.save_options()
-
 
 func _on_hud_scale_option_item_selected(index: int) -> void:
 	match index:
@@ -273,18 +266,12 @@ func _on_hud_scale_option_item_selected(index: int) -> void:
 			Options.hud_scale = 1
 		1:
 			Options.hud_scale = 2
-	Options.save_options()
-
 
 func _on_shadow_intensity_drag_ended(value_changed: bool) -> void:
 	Options.shadow_intensity = shadow_intensity_slider.value
-	Options.save_options()
-
 
 func _on_adult_content_toggled(toggled_on: bool) -> void:
 	Options.adult_content_enabled = toggled_on
-	Options.save_options()
-
 
 func _on_tutorial_button_pressed(tutorial_scene:PackedScene) -> void:
 	print("Show combat tutorial")

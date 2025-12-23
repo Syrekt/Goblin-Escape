@@ -2,8 +2,8 @@ class_name MapObject extends CharacterBody2D
 
 @onready var sprite : AnimatedSprite2D = $Sprite
 @onready var drop_marker : Marker2D = $DropMarker
-@onready var audio_emitter : AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var light_occuler : LightOccluder2D = $LightOccluder2D
+@onready var sfx_emitter : FmodEventEmitter2D = $SFXEmitter
 
 @export var health	:= 50.0
 var health_max		:= 0.0
@@ -43,7 +43,8 @@ func _physics_process(delta: float) -> void:
 	falling = velocity.y != 0
 	if falling && is_on_floor_only():
 		Ge.EmitNoise(self, global_position + drop_marker.position, 20)
-		Ge.play_audio(audio_emitter, 0, "res://SFX/Hit on wood/")
+		sfx_emitter.set_parameter("State", "WoodTanked")
+		sfx_emitter.play()
 	if !is_on_floor() && health_cur <= 0:
 		velocity.y = move_toward(velocity.y, gravity * delta, y_acc)
 	move_and_slide()
@@ -52,15 +53,15 @@ func take_damage(damage: int, source) -> void:
 	if damage > 0:
 		Ge.play_particle(load("res://VFX/crate_particles.tscn"), global_position)
 	health_cur -= damage
+	if damage == 0: sfx_emitter.set_parameter("State", "WoodTanked")
+	else:			sfx_emitter.set_parameter("State", "WoodDamaged")
 	var frame_count = float(sprite.sprite_frames.get_frame_count(sprite.animation))
 	if health_cur > 0:
-		Ge.play_audio_from_string_array(source.global_position, 0, "res://SFX/Hit on wood/")
-
 		damage_taken = damage_taken + damage
 		sprite.frame = min(frame_count - 2, (1 - (health_cur / health_max)) * frame_count)
 	else:
 		sprite.frame = frame_count
-		Ge.play_audio_free(0, "res://SFX/wood break.mp3")
+		sfx_emitter.set_parameter("State", "WoodDestroyed")
 		print("was_destroyed: "+str(was_destroyed))
 		if drop_random_loot && randi() % 2:
 			drop_loot()
@@ -71,6 +72,7 @@ func take_damage(damage: int, source) -> void:
 		for child in get_children():
 			if child is LightOccluder2D:
 				child.queue_free()
+	sfx_emitter.play()
 	save()
 func drop_loot() -> void:
 	print("Drop loot")

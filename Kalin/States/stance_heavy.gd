@@ -9,6 +9,8 @@ var c_normal = Color(0, 0, 0, 0)
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
 	print("player.slash_cost: "+str(player.slash_cost));
+	lock_stance_button = true;
+
 func exit() -> void:
 	if tween: tween.kill()
 	tween = null
@@ -16,6 +18,8 @@ func exit() -> void:
 	%Sprite2D.material.set_shader_parameter("outline_color", Color(0, 0, 0, 0))
 
 func physics_update(delta: float) -> void:
+	if lock_stance_button:
+		if !player.pressed("stance"): lock_stance_button = false
 	# Charge up the attack
 	if player.pressed("attack") && player.stamina.has_enough(player.slash_cost):
 		charge_up = move_toward(charge_up, 100, 2)
@@ -31,7 +35,7 @@ func physics_update(delta: float) -> void:
 
 	if !player.is_on_floor():
 		finished.emit("fall")
-	elif player.pressed("stance"):
+	elif !lock_stance_button && player.pressed("stance"):
 		finished.emit("idle")
 	elif !player.pressed("up"):
 		finished.emit("stance_light")

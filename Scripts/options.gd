@@ -25,7 +25,7 @@ func _ready() -> void:
 	#region Setup display
 	#Load display
 	var options_loaded = load_options()
-	print("options_loaded: "+str(options_loaded))
+	print("options_loaded: "+str(options_loaded == OK))
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, borderless)
 	DisplayServer.window_set_size(window_size)
 	DisplayServer.window_set_current_screen(window_screen)
@@ -46,25 +46,10 @@ func _ready() -> void:
 		DisplayServer.window_set_position((DisplayServer.screen_get_size() - DisplayServer.window_get_size())/2)
 	#endregion
 
-	if FileAccess.file_exists(config_path):
-		var config := ConfigFile.new()
-		config.load(config_path)
-		if config.has_section("keyboard"):
-			var keys = config.get_section_keys("keyboard")
-			print("keys: "+str(keys))
-			for key in keys:
-				print("key: "+str(key))
-				var saved_input = config.get_value("keyboard", key)
-				var ev := InputEventKey.new()
-				ev.keycode = saved_input
-				print("saved_input: "+str(saved_input))
-				if saved_input:
-					InputMap.action_erase_events(key)
-					InputMap.action_add_event(key, ev)
-
 
 
 func save_options() -> void:
+	print("Save options")
 	var config := ConfigFile.new()
 	if FileAccess.file_exists(config_path):
 		config.load(config_path)
@@ -129,14 +114,26 @@ func load_options() -> int:
 		shadow_intensity	= config.get_value("gameplay", "shadow_intensity", 1.0)
 		adult_content_enabled	= config.get_value("gameplay", "adult_content_enabled", 1.0)
 		#endregion
+		#region Keybindings
+		if config.has_section("keyboard"):
+			var keys = config.get_section_keys("keyboard")
+			#print("keys: "+str(keys))
+			for key in keys:
+				#print("key: "+str(key))
+				var saved_input = config.get_value("keyboard", key)
+				var ev := InputEventKey.new()
+				ev.keycode = saved_input
+				#print("saved_input: "+str(saved_input))
+				if saved_input:
+					InputMap.action_erase_events(key)
+					InputMap.action_add_event(key, ev)
+		#endregion
 	else:
-		var bgm_bus : Array
-		if OS.is_debug_build(): bgm_bus	= [AudioServer.get_bus_index("BGM"), -10]
-		else:					bgm_bus	= [AudioServer.get_bus_index("BGM"), config.get_value("audio", "BGM", 0)]
-		AudioServer.set_bus_volume_db(bgm_bus[0], bgm_bus[1])
+		pass
 	return err
 
 func _notification(what: int) -> void:
+	return
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		print("Save options")
 		save_options()

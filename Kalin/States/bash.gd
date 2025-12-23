@@ -2,9 +2,12 @@ extends PlayerAttackState
 
 var enemy_ignore_list := [] # Used for bash
 
+@onready var bash_sfx : FmodEventEmitter2D = $BashSFX
+
 func enter(previous_state_path: String, data := {}) -> void:
 	_enter()
-	player.play_sfx(sfx_whiff)
+	bash_sfx.set_parameter("AttackResult", "Miss")
+	bash_sfx.play()
 	enemy_ignore_list = []
 	player.set_collision_mask_value(4, true)
 	player.fatigue.perform("bash")
@@ -37,18 +40,24 @@ func _on_bash_hitbox_body_entered(defender: Node2D) -> void:
 
 	if defender is Enemy:
 		var defender_state = defender.state_node.state.name
-		player.play_sfx(sfx_hit)
 
 		defender.combat_properties.pushback_apply(player.global_position, pushback_force)
-		if !defender.in_combat:
+		if !defender.in_combat: # Stun
 			defender.combat_properties.stun(2.0)
-		elif !defender_state == "stance_defensive":
+			bash_sfx.set_parameter("AttackResult", "Hit")
+		elif !defender_state == "stance_defensive": # Deal damage
 			defender.take_damage(player_bash_damage, player)
 			Ge.slow_mo(0, 0.05)
-		else:
-			Ge.play_audio_from_string_array(player.global_position, 0, "res://SFX/Sword hit shield")
+			bash_sfx.set_parameter("AttackResult", "Hit")
+		else: # Opponent defending
+			bash_sfx.set_parameter("AttackResult", "Blocked")
+		bash_sfx.play()
 	else:
 		defender.take_damage(0, player)
-		finished.emit("hurt" if player.has_sword else "hurt_no_sword")
-		Ge.play_audio_from_string_array(player.global_position, -2, "res://SFX/Kalin/Hurt")
+
+		bash_sfx.set_parameter("AttackResult", "HitOnWood")
+		bash_sfx.play()
+
 		player.think(["Ouch!", "Bad idea", "I should use a weapon"].pick_random())
+
+		finished.emit("hurt" if player.has_sword else "hurt_no_sword")

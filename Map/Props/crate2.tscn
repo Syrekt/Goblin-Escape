@@ -81,4 +81,10 @@ sprite_frames = SubResource("SpriteFrames_2stkb")
 position = Vector2(1, -2)
 shape = SubResource("RectangleShape2D_5srt2")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="SFXEmitter" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/MapObject"
+event_guid = "{d7c3bd37-e7ed-4d1b-ba78-724db6e8c89e}"
+fmod_parameters/State/id = 1308907289457010719
+fmod_parameters/State = "Damaged"
+fmod_parameters/State/labels = PackedStringArray("Tanked", "Damaged", "Broken")
+fmod_parameters/State/variant_type = 4
