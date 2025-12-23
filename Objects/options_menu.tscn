@@ -24,11 +24,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 1
+current_tab = 0
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -115,7 +114,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(86, 0)
 layout_mode = 2
 
-[node name="Button" type="Button" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5"]
+[node name="SwitchMonitor" type="Button" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5"]
 layout_mode = 2
 text = "Switch Monitor"
 
@@ -124,6 +123,7 @@ layout_mode = 2
 text = "Center Window"
 
 [node name="Audio" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -588,7 +588,7 @@ tutorial_code = "Defensive Stance"
 [connection signal="item_selected" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/Resolution" to="." method="_on_option_button_item_selected"]
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/PixelPerfect" to="." method="_on_pixel_perfect_toggled"]
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/Borderless" to="." method="_on_borderless_toggled"]
-[connection signal="pressed" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SwitchMonitor" to="." method="_on_switch_monitor_pressed"]
 [connection signal="pressed" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/CenterWindow" to="." method="_on_center_window_pressed"]
 [connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/MasterVolumeContainer/MasterVolume" to="." method="_on_master_volume_value_changed"]
 [connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/BGMVolumeContainer/BGMVolume" to="." method="_on_bgm_volume_value_changed"]

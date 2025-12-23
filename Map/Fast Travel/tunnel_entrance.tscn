@@ -73,5 +73,13 @@ shape = SubResource("RectangleShape2D_osw5i")
 [node name="BarricadeSprite" type="AnimatedSprite2D" parent="Barricade"]
 sprite_frames = SubResource("SpriteFrames_xkvo5")
 
+[node name="SFXEmitter" type="FmodEventEmitter2D" parent="Barricade"]
+event_name = "event:/MapObject"
+event_guid = "{d7c3bd37-e7ed-4d1b-ba78-724db6e8c89e}"
+fmod_parameters/State/id = 1308907289457010719
+fmod_parameters/State = "WoodDamaged"
+fmod_parameters/State/labels = PackedStringArray("WoodTanked", "WoodDamaged", "WoodBroken")
+fmod_parameters/State/variant_type = 4
+
 [node name="SpawnTimer" type="Timer" parent="."]
 one_shot = true

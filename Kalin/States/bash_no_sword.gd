@@ -3,6 +3,7 @@ extends PlayerAttackState
 var enemy_ignore_list := [] # Used for bash
 
 @onready var bash_sfx : FmodEventEmitter2D = $"../bash/BashSFX"
+@onready var footstep_emitter : FmodEventEmitter2D = $"../bash/Footsteps"
 
 func enter(previous_state_path: String, data := {}) -> void:
 	_enter()
@@ -30,8 +31,7 @@ func update(delta: float) -> void:
 
 
 func play_footsteps() -> void:
-	if !player.status_effect_container.has_status_effect("Feather Step"):
-		Ge.play_audio_from_string_array(player.global_position, 1, "res://SFX/Kalin/Footsteps Soft/")
+	footstep_emitter.play()
 
 func _on_hitbox_body_entered(defender: Node2D) -> void:
 	if enemy_ignore_list.has(defender): return

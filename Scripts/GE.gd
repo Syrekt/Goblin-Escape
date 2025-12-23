@@ -24,24 +24,19 @@ var BALLOON = preload("res://Objects/balloon.tscn")
 var noise_enabled := false:
 	set(v):
 		noise_enabled = v
-		Options.save_options()
 var noise_color : Color = Color(1, 1, 1, 0.05):
 	set(v):
 		noise_color = v
-		Options.save_options()
 
 var show_tutorials := true:
 	set(v):
 		show_tutorials = v
-		Options.save_options()
 var show_hints := true:
 	set(v):
 		show_hints = v
-		Options.save_options()
 var show_interaction_prompts := true:
 	set(v):
 		show_interaction_prompts = v
-		Options.save_options()
 
 
 signal show_combat_tutorial

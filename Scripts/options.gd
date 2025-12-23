@@ -46,10 +46,19 @@ func _ready() -> void:
 		DisplayServer.window_set_position((DisplayServer.screen_get_size() - DisplayServer.window_get_size())/2)
 	#endregion
 
+func _process(delta: float) -> void:
+	# Update current display
+	var screen := DisplayServer.window_get_current_screen()
+	if screen != current_screen:
+		print("Screen changed")
+		current_screen = screen
+		notification(NOTIFICATION_WM_SIZE_CHANGED)
+
 
 
 func save_options() -> void:
 	print("Save options")
+	print_stack()
 	var config := ConfigFile.new()
 	if FileAccess.file_exists(config_path):
 		config.load(config_path)
@@ -97,10 +106,14 @@ func load_options() -> int:
 		print("window_screen: "+str(window_screen))
 		#endregion
 		#region Load Audio
-		FmodServer.set_global_parameter_by_name("MASTER_VOLUME",	config.get_value("audio", "Master", 1.0))
-		FmodServer.set_global_parameter_by_name("BGM_VOLUME",		config.get_value("audio", "BGM", 1.0))
-		FmodServer.set_global_parameter_by_name("AMB_VOLUME", 		config.get_value("audio", "AMB", 1.0))
-		FmodServer.set_global_parameter_by_name("SFX_VOLUME", 		config.get_value("audio", "SFX", 1.0))
+		master_volume	= config.get_value("audio", "Master", 1.0)
+		bgm_volume		= config.get_value("audio", "BGM", 1.0)
+		amb_volume 		= config.get_value("audio", "AMB", 1.0)
+		sfx_volume 		= config.get_value("audio", "SFX", 1.0)
+		FmodServer.set_global_parameter_by_name("MASTER_VOLUME",	master_volume)
+		FmodServer.set_global_parameter_by_name("BGM_VOLUME",		bgm_volume)
+		FmodServer.set_global_parameter_by_name("AMB_VOLUME", 		amb_volume)
+		FmodServer.set_global_parameter_by_name("SFX_VOLUME", 		sfx_volume)
 		#endregion
 		#region Noise
 		Ge.noise_enabled	= config.get_value("noise", "enabled", false)
@@ -133,9 +146,17 @@ func load_options() -> int:
 	return err
 
 func _notification(what: int) -> void:
-	return
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		print("Save options")
-		save_options()
-	if what == NOTIFICATION_WM_POSITION_CHANGED:
-		save_options()
+	if what == NOTIFICATION_WM_SIZE_CHANGED:
+		# Skip centering in fullscreen
+		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+			return
+
+		var screen			:= DisplayServer.window_get_current_screen()
+		var _window_size	:= DisplayServer.window_get_size()
+		var display_size	:= DisplayServer.screen_get_size(screen)
+		print("screen: "+str(screen))
+		print("window_size: "+str(_window_size))
+		print("display_size: "+str(display_size))
+
+		DisplayServer.window_set_position((display_size - _window_size) / 2)
+		DisplayServer.window_set_current_screen(screen)

@@ -103,7 +103,6 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	Options.current_screen		= DisplayServer.window_get_current_screen()
 	resolution.disabled			= Options.fullscreen
 	borderless_toggle.disabled	= Options.fullscreen
 	
@@ -116,10 +115,25 @@ func _process(delta: float) -> void:
 	slider_alpha_label.text	= "Alpha: " + str(int(noise_color_a.value))
 
 func _exit_tree() -> void:
-	get_tree().paused = false
 	Options.save_options()
+	get_tree().paused = false
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_SIZE_CHANGED:
+		# Skip centering in fullscreen
+		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+			return
 
+		var screen			:= DisplayServer.window_get_current_screen()
+		var window_size	:= DisplayServer.window_get_size()
+		var display_size	:= DisplayServer.screen_get_size(screen)
+		print("screen: "+str(screen))
+		print("window_size: "+str(window_size))
+		print("display_size: "+str(display_size))
+
+		DisplayServer.window_set_position((display_size - window_size) / 2)
+		DisplayServer.window_set_current_screen(screen)
+#region Signals
 func _on_fullscreen_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
@@ -169,28 +183,6 @@ func _on_reset_color_pressed() -> void:
 	noise_color_b.value = Ge.noise_color.b * 255.0
 	noise_color_a.value = Ge.noise_color.a * 255.0
 
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_SIZE_CHANGED:
-		Options.current_screen = DisplayServer.window_get_current_screen()
-		var screen := Options.current_screen
-		print("screen: "+str(screen))
-		DisplayServer.window_set_current_screen(screen)
-
-		await get_tree().process_frame
-
-		# Skip centering in fullscreen
-		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
-			return
-
-		DisplayServer.window_set_size(Options.window_size)
-		await get_tree().process_frame
-
-		var window_size := DisplayServer.window_get_size()
-		var display_size := DisplayServer.screen_get_size(Options.current_screen)
-		print("window_size: "+str(window_size))
-		print("display_size: "+str(display_size))
-
-		#DisplayServer.window_set_position((display_size - window_size) / 2)
 
 func _on_center_window_pressed() -> void:
 	notification(NOTIFICATION_WM_SIZE_CHANGED)
@@ -280,10 +272,11 @@ func _on_tutorial_button_pressed(tutorial_scene:PackedScene) -> void:
 	open_tutorial.layer = 2
 	add_child(open_tutorial)
 
-
-func _on_button_pressed() -> void:
+func _on_switch_monitor_pressed() -> void:
 	var display_count = DisplayServer.get_screen_count()
 	print("display_count: "+str(display_count))
 	var current_screen = DisplayServer.window_get_current_screen()
 	print("current_screen: "+str(current_screen))
 	DisplayServer.window_set_current_screen((current_screen + 1) % display_count)
+	notification(NOTIFICATION_WM_SIZE_CHANGED)
+#endregion

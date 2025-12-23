@@ -2,6 +2,8 @@ extends PlayerAttackState
 
 var charge_up := 0.0 # Used for slash
 
+@onready var slash_emitter : FmodEventEmitter2D = $SlashSFX
+
 func enter(previous_state_path: String, data := {}) -> void:
 	_enter()
 	charge_up = data.get("charge_up", 0)
@@ -23,19 +25,21 @@ func _on_attack_frame() -> void:
 		for defender in hitbox.get_overlapping_bodies():
 			print("defender: "+str(defender))
 			if defender is Enemy:
-				#Ge.slow_mo(0, 0.05)
 				Ge.hit_stop(0.1)
 				if !defender.chase_target:
 					damage_dealt *= 2
+
 				var defender_state = defender.state_node.state.name
 				if defender_state == "stance_defensive":
 					defender.combat_properties.stun(2.0)
-					Ge.play_audio(player.audio_emitter, 1, "res://SFX/Kalin/block_break2.wav")
+					slash_emitter.set_parameter("AttackResult", "GuardBreak")
 				else:
 					defender.take_damage(damage_dealt, player, true)
-					player.play_sfx(sfx_hit)
+					slash_emitter.set_parameter("AttackResult", "Hit")
 				defender.combat_properties.pushback_apply(player.global_position, pushback_force)
 			else:
 				defender.take_damage(damage_dealt, player)
 	else:
-		player.play_sfx(sfx_whiff)
+		slash_emitter.set_parameter("AttackResult", "Miss")
+	
+	slash_emitter.play()

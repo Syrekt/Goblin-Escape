@@ -257,13 +257,6 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 					block_sfx.play()
 					defending = false
 
-			#if !parry_active && !perfect_parry && !stamina.spend(1, 1.0):
-			#	# Guard broken
-			#	#Ge.play_audio_free(-4, "res://SFX/Kalin/block_break3.wav")
-			#	block_sfx.set_parameter("Block", "Fail")
-			#	block_sfx.play()
-			#	defending = false
-
 		#See if attack has broken our defense
 		defended = defending
 		#Bleed if not defending
@@ -301,7 +294,6 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 			play_hurt_animation = false
 			absorbed_damage = true
 			hurt_sfx.set_parameter("DamageType", "EnemyAttack")
-			#Ge.play_audio_free(-10, "res://SFX/Kalin/Weapon_Hit_Armour_03_With_Echo_Enhancement.wav")
 			Ge.slow_mo(0, 0.2)
 			var tween_tint = create_tween().bind_node(self)
 			var tween_outline = create_tween().bind_node(self)
@@ -319,7 +311,6 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 			print("Health depleted")
 			if _source:
 				_source.dealth_finishing_blow = true
-			#Ge.play_audio_from_string_array(global_position, -2, "res://SFX/Kalin/Hurt")
 			hurt_sfx.play()
 			state_node.state.finished.emit("death", {"source" = _source})
 			return
@@ -333,7 +324,6 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 		else:
 			state_node.state.finished.emit("hurt_no_sword")
 		hurt_sfx.play()
-		#Ge.play_audio_from_string_array(global_position, -2, "res://SFX/Kalin/Hurt")
 func heal(amount: int) -> void:
 	health.value += amount
 func check_movable():

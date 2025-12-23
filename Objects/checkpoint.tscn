@@ -245,5 +245,14 @@ layout_mode = 2
 theme = ExtResource("8_3qw2p")
 text = "Leave"
 
+[node name="FountainSound" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Fountain"
+event_guid = "{ef79754f-0819-48ee-9aac-3373ea29f117}"
+autoplay = true
+
+[node name="WaterSplash" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/WaterSplash"
+event_guid = "{0927f0a4-ef8a-49aa-9c59-25cfe26736d0}"
+
 [connection signal="pressed" from="CanvasLayer/RestMenu/VBoxContainer/Level Up" to="." method="_on_level_up_pressed"]
 [connection signal="pressed" from="CanvasLayer/RestMenu/VBoxContainer/Leave" to="." method="_on_leave_pressed"]

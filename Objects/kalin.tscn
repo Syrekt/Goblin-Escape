@@ -5184,6 +5184,13 @@ script = ExtResource("28_1dko0")
 [node name="run" type="Node" parent="StateMachine" groups=["position_reliable"]]
 script = ExtResource("3_ejfka")
 
+[node name="Footsteps" type="FmodEventEmitter2D" parent="StateMachine/run"]
+event_name = "event:/Kalin-Footsteps"
+event_guid = "{4cbf6c16-7219-4e3a-a2ac-9fae2f0d6f4e}"
+fmod_parameters/FootstepMuffler/id = -6900928916971729041
+fmod_parameters/FootstepMuffler = 0.0
+fmod_parameters/FootstepMuffler/variant_type = 3
+
 [node name="run_stop" type="Node" parent="StateMachine"]
 script = ExtResource("34_lbmmt")
 
@@ -5232,6 +5239,14 @@ one_shot = true
 
 [node name="block" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction"]]
 script = ExtResource("49_sprrr")
+
+[node name="BlockEmitter" type="FmodEventEmitter2D" parent="StateMachine/block"]
+event_name = "event:/Kalin-Block"
+event_guid = "{59e31288-e079-45e6-881e-7866bef7ed24}"
+fmod_parameters/Block/id = 9004215182679738959
+fmod_parameters/Block = "Success"
+fmod_parameters/Block/labels = PackedStringArray("Success", "Fail", "Parry", "PerfectParry")
+fmod_parameters/Block/variant_type = 4
 
 [node name="stance_walk" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction", "position_reliable"]]
 script = ExtResource("39_rgkp8")
@@ -5294,6 +5309,13 @@ fmod_parameters/AttackResult/id = -1155853257522533842
 fmod_parameters/AttackResult = "Miss"
 fmod_parameters/AttackResult/labels = PackedStringArray("Miss", "Hit", "Blocked", "GuardBreak", "Critical", "HitOnWood", "Kill")
 fmod_parameters/AttackResult/variant_type = 4
+
+[node name="Footsteps" type="FmodEventEmitter2D" parent="StateMachine/bash"]
+event_name = "event:/Kalin-Footsteps"
+event_guid = "{4cbf6c16-7219-4e3a-a2ac-9fae2f0d6f4e}"
+fmod_parameters/FootstepMuffler/id = -6900928916971729041
+fmod_parameters/FootstepMuffler = 0.0
+fmod_parameters/FootstepMuffler/variant_type = 3
 
 [node name="bash_no_sword" type="Node2D" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("58_wl0wu")

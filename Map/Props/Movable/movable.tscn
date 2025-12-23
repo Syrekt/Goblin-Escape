@@ -10,6 +10,11 @@ size = Vector2(26, 65)
 collision_layer = 33
 collision_mask = 33
 script = ExtResource("1_mkwwh")
+drop_sfx = null
+gravity = null
+y_acc = null
+noise_offset = null
+loud_object = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
@@ -20,10 +25,12 @@ shape = SubResource("RectangleShape2D_5nbmp")
 wait_time = 0.5
 autostart = true
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-bus = &"SFX"
-
 [node name="InteractionPrompt" parent="." instance=ExtResource("2_gpfyv")]
 position = Vector2(0, -46)
+
+[node name="DropEmitter" type="FmodEventEmitter2D" parent="."]
+event_guid = "{00000009-0007-0000-0000-00000e000000}"
+
+[node name="SlideEmitter" type="FmodEventEmitter2D" parent="."]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

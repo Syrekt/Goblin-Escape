@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4vewnv73flk4"]
+[gd_scene load_steps=8 format=3 uid="uid://b4vewnv73flk4"]
 
 [ext_resource type="Script" uid="uid://xy0q654a6bmd" path="res://Scripts/movable.gd" id="1_b23wp"]
 [ext_resource type="Texture2D" uid="uid://bv7mju8hk7yy2" path="res://Map/Props/spr_statue1.png" id="2_berpd"]
@@ -10,6 +10,9 @@ size = Vector2(29, 55)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wvdhb"]
 size = Vector2(29, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qimbf"]
+polygon = PackedVector2Array(-15, -32, -15, -24, 14, -24, 14, -32)
 
 [node name="Statue" type="CharacterBody2D" groups=["OneWayColliders"]]
 z_index = 1
@@ -32,11 +35,6 @@ one_way_collision = true
 wait_time = 0.5
 autostart = true
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_berpd")
-max_distance = 246.0
-bus = &"SFX"
-
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_mask = 0
 
@@ -44,7 +42,19 @@ collision_mask = 0
 position = Vector2(-0.5, -28)
 shape = SubResource("RectangleShape2D_wvdhb")
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="CharacterBody2D"]
+occluder = SubResource("OccluderPolygon2D_qimbf")
+
 [node name="InteractionPrompt" parent="." instance=ExtResource("4_qimbf")]
 position = Vector2(0, -47)
+
+[node name="DropEmitter" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/StoneDrop"
+event_guid = "{92f16924-e469-477d-80e9-be28e8d203bd}"
+
+[node name="SlideEmitter" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/StoneSlide"
+event_guid = "{4ea13e8b-026c-4944-98ef-20372d291625}"
+allow_fadeout = false
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,7 +1,8 @@
 class_name Movable extends CharacterBody2D
 
 @onready var timer : Timer = $Timer
-@onready var audio_emitter : AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var drop_emitter : FmodEventEmitter2D = $DropEmitter
+@onready var slide_emitter : FmodEventEmitter2D = $SlideEmitter
 @onready var collider := $CollisionShape2D
 @onready var interaction_prompt : AnimatedSprite2D = $InteractionPrompt
 
@@ -40,17 +41,14 @@ func _physics_process(delta: float) -> void:
 			spawn_fall_protection = false
 		else:
 			Ge.EmitNoise(self, global_position + noise_offset, 20, loud_object)
-			Ge.play_audio(audio_emitter, 0, drop_sfx)
+			drop_emitter.play()
 	falling = velocity.y != 0
 func _process(delta: float) -> void:
 	is_moving = velocity.x != 0
 	if is_moving && !was_moving:
-		if !audio_emitter.playing:
-			audio_emitter.stream = slide_sfx
-			audio_emitter.play()
+		slide_emitter.play()
 	elif !is_moving && was_moving:
-		print("Stop audio")
-		audio_emitter.stop()
+		slide_emitter.stop()
 	was_moving = is_moving
 
 	timer.paused = !is_moving

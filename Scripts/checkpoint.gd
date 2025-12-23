@@ -8,6 +8,7 @@ var player : Player
 @onready var fly_spawn_points := $SpawnPoints
 @onready var rest_menu : PanelContainer = $CanvasLayer/RestMenu
 @onready var fountain_sound_emitter : FmodEventEmitter2D = $FountainSound
+@onready var water_splash_emitter : FmodEventEmitter2D = $WaterSplash
 
 var fly_scene = preload("res://Others/fly_1.tscn")
 var timer : Timer
@@ -23,12 +24,13 @@ func _ready() -> void:
 	timer.timeout.connect(spawn_fly)
 	add_child(timer)
 	timer.start(randf_range(5, 10))
+	player = Game.get_singleton().player
 #endregion
 
+func _process(delta: float) -> void:
+	fountain_sound_emitter.set_parameter("Distance", position.distance_to(player.position))
 
 func update(_player : Player) -> void:
-	fountain_sound_emitter.set_parameter("distance", 0.0)
-	player = _player
 	#$CanvasLayer.layer = 10
 	if player.pressed("interact"):
 		player.smell.value = 0
@@ -53,7 +55,7 @@ func update(_player : Player) -> void:
 		player.add_child(save_effect)
 		player.think("I should be safe now..")
 		
-		Ge.play_audio_free(0, "res://SFX/water_splash1.wav")
+		water_splash_emitter.play()
 
 		for node in get_children():
 			if node.is_in_group("lights"):

@@ -3,7 +3,6 @@ extends PlayerState
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
 	player.movable.grab()
-	print("player.is_on_wall(): "+str(player.is_on_wall()));
 	if player.is_on_wall():
 		#Make sure player is not stuck in object
 		player.position.x -= player.facing
