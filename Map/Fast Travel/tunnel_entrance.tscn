@@ -83,3 +83,7 @@ fmod_parameters/State/variant_type = 4
 
 [node name="SpawnTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="CrawlSFX" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Kalin-TunnelCrawl"
+event_guid = "{28f965f2-0731-49cb-800d-956a24686b5f}"

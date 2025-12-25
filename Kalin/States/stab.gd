@@ -14,7 +14,6 @@ func update(delta: float) -> void:
 
 func _on_attack_frame() -> void:
 	if hitbox.has_overlapping_bodies():
-		print("on_stab_frame")
 		var player_stab_damage = player.STAB_DAMAGE + player.STAB_DAMAGE_PER_STRENGTH * player.strength
 
 		#Allow buffering next attack on hit
@@ -32,7 +31,6 @@ func _on_attack_frame() -> void:
 				Ge.slow_mo(0, 0.05)
 		else:
 			defender.take_damage(0, player)
-			stab_sfx.set_parameter("AttackResult", "HitOnWood")
 			if !player.has_heavy_stance:
 				player.think("I can't break it yet")
 			else:

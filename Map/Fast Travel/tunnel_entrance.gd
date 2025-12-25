@@ -61,6 +61,7 @@ func update(_player: Player) -> void:
 			await tween.finished
 
 			player.state_node.state.finished.emit("crawl_in")
+			$CrawlSFX.play()
 
 			await player.animation_player.animation_finished
 

@@ -54,9 +54,7 @@ func _on_hitbox_body_entered(defender: Node2D) -> void:
 	else:
 		defender.take_damage(0, player)
 
-		bash_sfx.set_parameter("AttackResult", "HitOnWood")
-		bash_sfx.play()
-
+		player.hurt_sfx.play()
 		player.think(["Ouch!", "Bad idea", "I should use a weapon"].pick_random())
 
 		finished.emit("hurt_no_sword")
