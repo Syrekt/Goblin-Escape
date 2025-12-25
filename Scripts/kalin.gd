@@ -96,8 +96,11 @@ var experience_required := 100
 @onready var hurtbox : CollisionShape2D = $ColliderStanding
 @onready var screen_fade : CanvasLayer = get_tree().current_scene.find_child("ScreenFade")
 
+#endregion
+#region Audio
 @onready var hurt_sfx 	: FmodEventEmitter2D = $Audio/HurtSFX
 @onready var block_sfx 	: FmodEventEmitter2D = $Audio/BlockSFX
+@onready var experience_drop_sfx : FmodEventEmitter2D = $Audio/ExperienceGain
 #endregion
 #region Combat
 const SLASH_DAMAGE	:= 15

@@ -11,3 +11,7 @@ func save() -> void:
 		"value"	: value,
 	}
 	Ge.save_node(self, save_data)
+
+
+func _on_value_changed(_value: float) -> void:
+	FmodServer.set_global_parameter_by_name("Arousal", _value / 100.0)

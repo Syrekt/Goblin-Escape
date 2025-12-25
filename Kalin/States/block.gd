@@ -1,10 +1,7 @@
 extends PlayerState
 
-@onready var block_emitter : FmodEventEmitter2D = $BlockEmitter
-
 func enter(previous_state_path : String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
-	block_emitter.play()
 func exit() -> void:
 	player.parried = false
 func update(delta: float) -> void:

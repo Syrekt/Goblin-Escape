@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://dw2d8bu1vlvv6"]
+[gd_scene load_steps=71 format=3 uid="uid://dw2d8bu1vlvv6"]
 
 [ext_resource type="Script" uid="uid://bb3qdl7k1v8ae" path="res://Enemy/Goblin/goblin.gd" id="1_poooq"]
 [ext_resource type="Texture2D" uid="uid://bcs17g4yh13l4" path="res://Enemy/Goblin/goblin-idle_strip6.png" id="2_mqpvv"]
@@ -6,8 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://cv4dnrs85bg7f" path="res://Enemy/Goblin/goblin-hurt_strip6.png" id="5_6vclp"]
 [ext_resource type="Texture2D" uid="uid://b5mnbcx6ypteq" path="res://Enemy/Goblin/goblin-walk_strip8.png" id="6_a23rd"]
 [ext_resource type="Texture2D" uid="uid://boq47wepf3bhx" path="res://Enemy/Goblin/goblin-slash_strip10.png" id="7_ynrxc"]
-[ext_resource type="AudioStream" uid="uid://fgclj6nvftu7" path="res://SFX/Kalin/Other/Sword Woosh 1.wav" id="9_3sjaq"]
-[ext_resource type="AudioStream" uid="uid://c50be1pxoc3bn" path="res://SFX/Kalin/Sword Woosh 12.wav" id="10_54bff"]
 [ext_resource type="Texture2D" uid="uid://d32k3acadprmm" path="res://Enemy/Goblin/goblin-attack_strip8.png" id="10_fstx2"]
 [ext_resource type="Texture2D" uid="uid://bcr3cshvkgvya" path="res://Enemy/Goblin/goblin-stun_strip10.png" id="11_su4u7"]
 [ext_resource type="Script" uid="uid://cpjipgg4mh1mh" path="res://Enemy/States/grab.gd" id="13_6vclp"]
@@ -603,32 +601,13 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true]
 }
-tracks/4/type = "audio"
+tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../SFX")
+tracks/4/path = NodePath("..:in_combat")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"clips": [{
-"end_offset": 0.51969,
-"start_offset": 0.0,
-"stream": ExtResource("9_3sjaq")
-}, {
-"end_offset": 0.503895,
-"start_offset": 0.0,
-"stream": ExtResource("10_54bff")
-}],
-"times": PackedFloat32Array(0.4, 0.8)
-}
-tracks/4/use_blend = true
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("..:in_combat")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -687,28 +666,13 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true]
 }
-tracks/4/type = "audio"
+tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../SFX")
+tracks/4/path = NodePath("..:in_combat")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"clips": [{
-"end_offset": 0.428158,
-"start_offset": 0.0,
-"stream": ExtResource("10_54bff")
-}],
-"times": PackedFloat32Array(0.4)
-}
-tracks/4/use_blend = true
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("..:in_combat")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1227,11 +1191,6 @@ visible = false
 position = Vector2(-1, -5.5)
 shape = SubResource("RectangleShape2D_cqw5a")
 
-[node name="SFX" type="AudioStreamPlayer2D" parent="."]
-process_mode = 3
-max_distance = 256.0
-bus = &"SFX"
-
 [node name="PlayerProximity" type="Area2D" parent="."]
 visible = false
 scale = Vector2(0.86, 1)
@@ -1361,6 +1320,14 @@ collision_mask = 128
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DestructableCollider"]
 position = Vector2(15.5, 3)
 shape = SubResource("RectangleShape2D_qhfhj")
+
+[node name="SFXEmitter" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Goblin"
+event_guid = "{2c2521ce-50de-47b4-b780-a15da0ac037c}"
+fmod_parameters/EnemySound/id = 8432838190148965714
+fmod_parameters/EnemySound = "Chatter"
+fmod_parameters/EnemySound/labels = PackedStringArray("Chatter", "Death", "Groan", "Laugh", "Hurt", "SpikeDeath", "CounterAttack")
+fmod_parameters/EnemySound/variant_type = 4
 
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

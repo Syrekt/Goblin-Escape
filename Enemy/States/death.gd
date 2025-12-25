@@ -16,9 +16,10 @@ func enter(previous_state_path: String, data := {}) -> void:
 			child.set_deferred("monitorable", false)
 	
 	if !data.get("loading", false):
-		Ge.play_audio_from_string_array(enemy.global_position, -10, "res://SFX/Goblin/Death")
+		enemy.sfx_emitter.set_parameter("EnemySound", "Death")
+		enemy.sfx_emitter.play()
 		enemy.player.experience.add(enemy.experience_drop)
-		Ge.play_audio_free(0, "res://SFX/sfx_experience_drop.wav")
+		enemy.player.experience_drop_sfx.play()
 
 	Ge.UpdateNoiseIndicator()
 

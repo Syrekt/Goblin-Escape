@@ -1,12 +1,9 @@
-[gd_scene load_steps=80 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene load_steps=77 format=3 uid="uid://iuj1jg31a55f"]
 
 [ext_resource type="Script" uid="uid://ebjwqqd047wq" path="res://Enemy/GoblinWarrior/goblin_warrior.gd" id="1_nnmw3"]
 [ext_resource type="Shader" uid="uid://dgty7bsbniivw" path="res://Scripts/flash.gdshader" id="2_ec1cy"]
-[ext_resource type="AudioStream" uid="uid://bx6vdt8wts4xf" path="res://SFX/Kalin/Other/kick_short_whoosh_12.wav" id="6_ifl3v"]
 [ext_resource type="PackedScene" uid="uid://cpogcou30wxcj" path="res://UI/combat_properties.tscn" id="7_7ej0e"]
 [ext_resource type="Texture2D" uid="uid://bxfbcd2o3tqam" path="res://Enemy/GoblinWarrior/goblin-idle.png" id="9_3g55t"]
-[ext_resource type="AudioStream" uid="uid://fgclj6nvftu7" path="res://SFX/Kalin/Other/Sword Woosh 1.wav" id="10_u0rn5"]
-[ext_resource type="AudioStream" uid="uid://c50be1pxoc3bn" path="res://SFX/Kalin/Sword Woosh 12.wav" id="11_ifl3v"]
 [ext_resource type="Texture2D" uid="uid://c6nifh0i54h6f" path="res://Enemy/GoblinWarrior/goblin-bash.png" id="11_wrk2e"]
 [ext_resource type="Texture2D" uid="uid://6tgko0bjud38" path="res://Enemy/GoblinWarrior/goblin_stun.png" id="12_goln1"]
 [ext_resource type="Texture2D" uid="uid://ppmeb6xgbtin" path="res://Enemy/GoblinWarrior/goblin-death.png" id="12_to5id"]
@@ -217,21 +214,6 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true]
 }
-tracks/4/type = "audio"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../SFX")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.1605,
-"stream": ExtResource("6_ifl3v")
-}],
-"times": PackedFloat32Array(0.4)
-}
-tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_3i20h"]
 resource_name = "block"
@@ -726,32 +708,13 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true]
 }
-tracks/4/type = "audio"
+tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../SFX")
+tracks/4/path = NodePath("..:in_combat")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"clips": [{
-"end_offset": 0.51969,
-"start_offset": 0.0,
-"stream": ExtResource("10_u0rn5")
-}, {
-"end_offset": 0.503895,
-"start_offset": 0.0,
-"stream": ExtResource("11_ifl3v")
-}],
-"times": PackedFloat32Array(0.4, 0.8)
-}
-tracks/4/use_blend = true
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("..:in_combat")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -810,28 +773,13 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true]
 }
-tracks/4/type = "audio"
+tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../SFX")
+tracks/4/path = NodePath("..:in_combat")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"clips": [{
-"end_offset": 0.428158,
-"start_offset": 0.0,
-"stream": ExtResource("11_ifl3v")
-}],
-"times": PackedFloat32Array(0.4)
-}
-tracks/4/use_blend = true
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("..:in_combat")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1445,10 +1393,6 @@ visible = false
 position = Vector2(-1, -5.5)
 shape = SubResource("RectangleShape2D_cqw5a")
 
-[node name="SFX" type="AudioStreamPlayer2D" parent="."]
-max_distance = 256.0
-bus = &"SFX"
-
 [node name="PlayerProximity" type="Area2D" parent="."]
 visible = false
 scale = Vector2(0.9, 1)
@@ -1580,6 +1524,14 @@ collision_mask = 128
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DestructableCollider"]
 position = Vector2(15.5, 3)
 shape = SubResource("RectangleShape2D_ec1cy")
+
+[node name="SFXEmitter" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Goblin"
+event_guid = "{2c2521ce-50de-47b4-b780-a15da0ac037c}"
+fmod_parameters/EnemySound/id = 8432838190148965714
+fmod_parameters/EnemySound = "Chatter"
+fmod_parameters/EnemySound/labels = PackedStringArray("Chatter", "Death", "Groan", "Laugh", "Hurt", "SpikeDeath", "CounterAttack")
+fmod_parameters/EnemySound/variant_type = 4
 
 [connection signal="health_depleted" from="." to="." method="_on_health_depleted"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

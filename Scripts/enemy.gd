@@ -78,7 +78,7 @@ var wait_animation_transition := false
 @onready var destructable_detector	: Area2D = $DestructableCollider
 
 @onready var cp	= combat_properties
-@onready var audio_emitter = $SFX
+@onready var sfx_emitter : FmodEventEmitter2D = $SFXEmitter
 @onready var emote_emitter = $Emote
 @onready var face_location = $FaceMarker
 @onready var player : Player
@@ -111,7 +111,9 @@ func get_movement_dir():
 func enviroment_kill(anim:String) -> void:
 	stop_force_x()
 	health.value = 0
-	Ge.play_audio_from_string_array(global_position, 0, "res://SFX/Kalin/Finishers/")
+	sfx_emitter.set_parameter("EnemySound", "SpikeDeath")
+	sfx_emitter.play()
+
 	Ge.bleed_gush(global_position, 1)
 	state_node.state.finished.emit("death", {"animation": anim})
 func take_damage(_damage : int, _source: Node2D = null, critical := false):
@@ -122,11 +124,11 @@ func take_damage(_damage : int, _source: Node2D = null, critical := false):
 
 	health.value -= _damage
 	print("health.value: "+str(health.value));
-	#health.take_damage()
 	if health.value <= 0:
 		emit_signal("health_depleted")
 	else:
-		Ge.play_audio_from_string_array(global_position, 0, "res://SFX/Goblin/Hurt/")
+		sfx_emitter.set_parameter("EnemySound", "Hurt")
+		sfx_emitter.play()
 		state_node.state.finished.emit("hurt")
 	
 	if _source:

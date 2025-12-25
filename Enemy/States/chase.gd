@@ -83,6 +83,7 @@ func update(delta):
 		enemy.update_animation("idle")
 		enemy.velocity.x = 0
 		if chatter_timer.is_stopped():
-			Ge.play_audio_from_string_array(enemy.global_position, -10, "res://SFX/Goblin/Chatter/")
+			enemy.sfx_emitter.set_parameter("EnemySound", "Chatter")
+			enemy.sfx_emitter.play()
 			chatter_timer.start()
 			enemy.play_chatter_emote()

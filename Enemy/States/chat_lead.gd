@@ -31,7 +31,8 @@ func _on_lead_timer_timeout() -> void:
 	print("lead timer timeout")
 	var emote = animation_names[randi() % animation_names.size()]
 	enemy.emote_emitter.play(emote)
-	Ge.play_audio_from_string_array(enemy.global_position, -10, "res://SFX/Goblin/Chatter/")
+	enemy.sfx_emitter.set_parameter("EnemySound", "Chatter")
+	enemy.sfx_emitter.play()
 	secondary_timer.start()
 
 
@@ -39,5 +40,6 @@ func _on_secondary_timer_timeout() -> void:
 	print("friend timer timeout")
 	var emote = animation_names[randi() % animation_names.size()]
 	friend.emote_emitter.play(emote)
-	Ge.play_audio_from_string_array(friend.global_position, -10, "res://SFX/Goblin/Chatter/")
+	friend.sfx_emitter.set_parameter("EnemySound", "Chatter")
+	friend.sfx_emitter.play()
 	lead_timer.start()

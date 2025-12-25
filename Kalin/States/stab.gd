@@ -14,6 +14,7 @@ func update(delta: float) -> void:
 
 func _on_attack_frame() -> void:
 	if hitbox.has_overlapping_bodies():
+		print("on_stab_frame")
 		var player_stab_damage = player.STAB_DAMAGE + player.STAB_DAMAGE_PER_STRENGTH * player.strength
 
 		#Allow buffering next attack on hit

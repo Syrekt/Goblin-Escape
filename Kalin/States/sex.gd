@@ -1,8 +1,5 @@
 extends PlayerState
 
-var slap_emitter : AudioStreamPlayer2D
-var moan_emitter : AudioStreamPlayer2D
-
 @export var animation_counter_max := 6
 @export var animation_counter_min := 3
 var animation_number : int
@@ -30,6 +27,6 @@ func count_animation() -> void:
 	if animation_counter >= animation_number:
 		finished.emit("orgasm")
 func play_random_slap_sound() -> void:
-	Ge.play_audio_from_string_array(player.global_position, 0, "res://Sex/Slap/")
+	$Slap.play()
 func play_random_moan_sound() -> void:
-	Ge.play_audio_from_string_array(player.global_position, 0, "res://Sex/Moan/")
+	$Moan.play()
