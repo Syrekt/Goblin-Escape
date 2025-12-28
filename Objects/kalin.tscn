@@ -5178,6 +5178,23 @@ event_name = "event:/ExperienceGain"
 event_guid = "{570e41a6-8bdd-4097-8cee-3649b416b958}"
 attached = false
 
+[node name="PickupSFX" type="FmodEventEmitter2D" parent="Audio"]
+event_name = "event:/ItemPickup"
+event_guid = "{e6c1c945-f2be-4abc-adc4-456bf9bafe4c}"
+
+[node name="DrinkSFX" type="FmodEventEmitter2D" parent="Audio"]
+event_name = "event:/Kalin-Drink"
+event_guid = "{cdfdb25f-9a62-4d3e-9915-7515bb4238ba}"
+
+[node name="EatSFX" type="FmodEventEmitter2D" parent="Audio"]
+event_name = "event:/Kalin-Eat"
+event_guid = "{cf28a120-265f-417f-81b4-340051ceaef5}"
+
+[node name="TutorialSFX" type="FmodEventEmitter2D" parent="Audio"]
+event_name = "event:/TutorialOpened"
+event_guid = "{d0561104-b8a1-4004-b1e1-37e6435d8cb9}"
+process_mode = 3
+
 [node name="StateMachine" parent="." groups=["Flip"] instance=ExtResource("9_ojhio")]
 visible = false
 position = Vector2(-4, 34)

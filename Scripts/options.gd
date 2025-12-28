@@ -53,6 +53,7 @@ func _process(delta: float) -> void:
 		print("Screen changed")
 		current_screen = screen
 		notification(NOTIFICATION_WM_SIZE_CHANGED)
+		save_options()
 
 
 

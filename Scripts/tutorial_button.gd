@@ -12,10 +12,10 @@ func _ready() -> void:
 	pressed.connect(owner._on_tutorial_button_pressed.bind(tutorial_scene))
 
 func _process(delta: float) -> void:
-	if !Ge.show_tutorials:
+	if !Ge.show_tutorials: ## Enable every tutorial if tutorials are disabled by player
 		show()
 		tutorial_info.hide()
-	else:
+	else: ## Otherwise, only show unlocked options
 		if !tutorial_seen:
 			hide()
 			tutorial_info.show()

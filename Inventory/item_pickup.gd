@@ -3,7 +3,6 @@ extends Sprite2D
 var tween : Tween
 var item
 var instantiated := false
-@export var pickup_sound : String = "res://SFX/Notes Scrunched In Wallet.wav"
 @export var item_name : String
 
 func _ready() -> void:

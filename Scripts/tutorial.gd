@@ -33,3 +33,4 @@ func update(player : Player) -> void:
 	else:
 		if !active && Input.is_action_just_pressed("interact"):
 			activate()
+			player.tutorial_sfx.play()

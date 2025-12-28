@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dkyt1q4ive1yi" path="res://Map/Props/stairs_long.tscn" id="3_bxo78"]
 [ext_resource type="PackedScene" uid="uid://bj1frlho00hma" path="res://Map/Props/stairs2.tscn" id="4_k6808"]
 [ext_resource type="PackedScene" uid="uid://cxfo6i1wohv7w" path="res://Map/Props/stairs4.tscn" id="5_jrxjx"]
-[ext_resource type="PackedScene" uid="uid://cxu1p2ap15mlj" path="res://Objects/skill_pickup.tscn" id="6_m10yo"]
+[ext_resource type="PackedScene" uid="uid://cxu1p2ap15mlj" path="res://Inventory/Pickup Objects/skill_pickup.tscn" id="6_m10yo"]
 [ext_resource type="Texture2D" uid="uid://wcoq7ay5eurm" path="res://UI/rpg_icon_pack.png" id="7_0adsn"]
 [ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Enemy/GoblinWarrior/goblin_warrior.tscn" id="8_0adsn"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="9_awogg"]

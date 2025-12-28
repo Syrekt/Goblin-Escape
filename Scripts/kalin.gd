@@ -101,6 +101,10 @@ var experience_required := 100
 @onready var hurt_sfx 	: FmodEventEmitter2D = $Audio/HurtSFX
 @onready var block_sfx 	: FmodEventEmitter2D = $Audio/BlockSFX
 @onready var experience_drop_sfx : FmodEventEmitter2D = $Audio/ExperienceGain
+@onready var pickup_sfx : FmodEventEmitter2D = $Audio/PickupSFX
+@onready var drink_sfx	: FmodEventEmitter2D = $Audio/DrinkSFX
+@onready var eat_sfx	: FmodEventEmitter2D = $Audio/EatSFX
+@onready var tutorial_sfx	: FmodEventEmitter2D = $Audio/TutorialSFX
 #endregion
 #region Combat
 const SLASH_DAMAGE	:= 15
@@ -390,17 +394,6 @@ func snap_to_corner(ledge_position: Vector2) -> void:
 	global_position = ledge_position + Vector2(snap_offset.x * facing, snap_offset.y)
 func quick_climb() -> void:
 	state_node.state.finished.emit("corner_climb")
-func play_sfx(sfx) -> void:
-	print("Play sfx is disabled")
-	print_stack()
-	return # Disabled
-	var emitter : AudioStreamPlayer2D = AudioStreamPlayer2D.new()
-	emitter.stream = sfx
-	emitter.finished.connect(emitter.queue_free)
-	add_child(emitter)
-	emitter.play()
-	#audio_emitter.stream = sfx
-	#audio_emitter.play()
 func sex_begin(participants: Array, _position: String) -> void:
 	sex_participants = participants.duplicate()
 	print("sex_participants: "+str(sex_participants))

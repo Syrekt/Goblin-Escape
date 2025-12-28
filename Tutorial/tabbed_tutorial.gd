@@ -5,6 +5,8 @@ var faded_in := false
 
 var from_options_menu := false ## Means player opened the tutorial from options menu
 
+var silent := false ## Disable opening sfx when it's opened from tutorials tab
+
 @export var code : String
 
 @onready var label			:= $ColorControl/Control/Label
@@ -17,6 +19,9 @@ var from_options_menu := false ## Means player opened the tutorial from options 
 
 
 func _ready() -> void:
+	if !get_tree().paused: ## Means that we are in menu so don't play sfx
+		Game.get_singleton().player.tutorial_sfx.play()
+
 	left.pressed.connect(_on_left_pressed)
 	right.pressed.connect(_on_right_pressed)
 

@@ -13,7 +13,3 @@ script = ExtResource("1_ukgaw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 11)
 shape = SubResource("RectangleShape2D_irovo")
-
-[node name="SFXEmitter" type="FmodEventEmitter2D" parent="."]
-event_name = "event:/ItemPickup"
-event_guid = "{e6c1c945-f2be-4abc-adc4-456bf9bafe4c}"

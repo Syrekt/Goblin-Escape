@@ -420,7 +420,7 @@ func get_action_keycode(action:String) -> String:
 	return action_keycode
 #endregion
 func fmod_play_event(event_name:String) -> void:
-	var event = FmodServer.create_event_instance("event:/" + event_name)
+	var event : FmodEvent = FmodServer.create_event_instance("event:/" + event_name)
 	event.attached = false
 	event.start()
 func fmod_play_event_at(event_name:String,transform:Transform2D) -> void:

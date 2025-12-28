@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://rrnk862o0mdw"]
+[gd_scene load_steps=13 format=4 uid="uid://rrnk862o0mdw"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="2_mubwj"]
 [ext_resource type="PackedScene" uid="uid://d1ido0af5r23x" path="res://Objects/loading_screen.tscn" id="3_yqoo0"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://h6taionkkj78" path="res://Map/Fast Travel/tunnel_entrance.tscn" id="8_eoe1y"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="8_m3pp0"]
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="9_m3pp0"]
+[ext_resource type="PackedScene" uid="uid://dejaaa7dsd8yv" path="res://Inventory/Pickup Objects/pickup_water.tscn" id="10_kgm4x"]
+[ext_resource type="Texture2D" uid="uid://wcoq7ay5eurm" path="res://UI/rpg_icon_pack.png" id="11_o0wdf"]
+[ext_resource type="PackedScene" path="res://Inventory/Pickup Objects/skill_pickup.tscn" id="11_oqx7d"]
 [ext_resource type="PackedScene" uid="uid://b4vewnv73flk4" path="res://Map/Props/Movable/statue.tscn" id="12_k6jnn"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="14_mubwj"]
 
@@ -88,3 +91,13 @@ position = Vector2(400, 176)
 
 [node name="Crate1" parent="." instance=ExtResource("9_m3pp0")]
 position = Vector2(608, 224)
+
+[node name="SkillPickup" parent="." instance=ExtResource("11_oqx7d")]
+position = Vector2(563, 202)
+texture = ExtResource("11_o0wdf")
+region_enabled = true
+region_rect = Rect2(80, 320, 16, 16)
+skill_name = "has_heavy_stance"
+
+[node name="PickupWater" parent="." instance=ExtResource("10_kgm4x")]
+position = Vector2(524, 200)
