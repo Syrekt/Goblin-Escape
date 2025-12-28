@@ -57,6 +57,18 @@ func _ready() -> void:
 	assign_key("grab", "grab_key")
 	assign_key("run", "run_key")
 
+	Input.joy_connection_changed.connect(_on_joy_connection_changed)
+
+func _on_joy_connection_changed(device_id:int,connected:bool) -> void:
+	if connected:
+		print("Gamepad connected: %s" %device_id)
+	else:
+		print("Gamepad disconnected: %s" %device_id)
+		if !get_tree().current_scene.find_child("IngameMenu"):
+			var menu = load("res://UI/ingame_menu.tscn").instantiate()
+			add_child(menu)
+
+
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("toggle_fullscreen"):
@@ -420,9 +432,10 @@ func get_action_keycode(action:String) -> String:
 	return action_keycode
 #endregion
 func fmod_play_event(event_name:String) -> void:
-	var event : FmodEvent = FmodServer.create_event_instance("event:/" + event_name)
-	event.attached = false
-	event.start()
+	FmodServer.play_one_shot("event:/" + event_name)
+	#var event : FmodEvent = FmodServer.create_event_instance("event:/" + event_name)
+	#event.attached = false
+	#event.start()
 func fmod_play_event_at(event_name:String,transform:Transform2D) -> void:
 	var event = FmodServer.create_event_instance("event:/" + event_name)
 	event.attached = true

@@ -16,6 +16,7 @@ var max_cell := Vector2i.MIN
 var layer: int
 
 @export var spawn_point : Node2D
+@export_enum("Hostile", "Safe", "Silent") var area : String = "Hostile"
 
 signal previews_updated
 
@@ -47,6 +48,12 @@ func _enter_tree() -> void:
 	
 	if Engine.is_editor_hint():
 		_update_neighbor_previews()
+
+	var game = Game.get_singleton()
+	if area == "Silent":
+		game.bgm_event.paused = true
+	else:
+		game.bgm_event.paused = false
 
 func _exit_tree() -> void:
 	print("Destroy room instance")

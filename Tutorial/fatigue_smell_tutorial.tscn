@@ -114,7 +114,27 @@ offset_top = 48.0
 offset_right = 440.0
 offset_bottom = 79.0
 bbcode_enabled = true
-text = "Kalin can rest and clean herself up at [color=cyan]checkpoints[/color]. Resting will reset her [color=orange]body odor[/color], [color=green]fatigue[/color] and [color=purple]arousal[/color]"
+text = "Kalin can rest and clean herself up at [color=cyan]fountains[/color]. Resting will reset her [color=orange]body odor[/color], [color=green]fatigue[/color] and [color=purple]arousal[/color]"
+scroll_active = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="ColorControl/TabContainer/Page3"]
+layout_mode = 0
+offset_left = 426.0
+offset_top = 100.0
+offset_right = 629.0
+offset_bottom = 142.0
+bbcode_enabled = true
+text = "Most condition effects effects are [color=yellow]reset on using fountains[/color]. Dying also resets them. "
+scroll_active = false
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="ColorControl/TabContainer/Page3"]
+layout_mode = 0
+offset_left = 425.0
+offset_top = 146.0
+offset_right = 628.0
+offset_bottom = 188.0
+bbcode_enabled = true
+text = "Healing and damaging effects pass over time."
 scroll_active = false
 
 [node name="Control" type="Control" parent="ColorControl"]
