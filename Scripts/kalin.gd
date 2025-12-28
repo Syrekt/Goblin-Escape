@@ -29,7 +29,6 @@ var controls_disabled := false # Disables movement and UI input for player
 var movement_disabled := false # Only disables movement input
 var sprinting := false
 
-
 var last_ground_position : Vector2
 
 var is_on_one_way_collider := false
@@ -37,6 +36,9 @@ var is_on_one_way_collider := false
 var remote_control_input : Array[String]
 
 var climb_start_position : Vector2 ## When Kalin takes damage, she is moved to this position
+
+var was_on_floor := false
+var coyote := false
 #endregion
 #region Stats & EXP
 const HEALTH_PER_VIT	:= 10
@@ -908,6 +910,12 @@ func _physics_process(delta: float) -> void:
 	#endregion
 	#region Finalize movement
 	move_and_slide()
+	#region Coyote
+	if !is_on_floor() && was_on_floor:
+		coyote = true
+		$CoyoteTimer.start()
+	was_on_floor = is_on_floor()
+	#endregion
 	if cp.pushback_timer > 0:
 			set_facing(-sign(cp.pushback_vector.x))
 	else:
@@ -947,28 +955,23 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
+	#region Attack costs
 	slash_cost	= lerp(1.0, MAX_SLASH_FATIGUE, fatigue.value/100) * pow(strength, SLASH_FATIGUE_STRENGTH_MOD)/pow(endurance, SLASH_FATIGUE_ENDURANCE_MOD)
 	stab_cost	= lerp(0.5, MAX_STAB_FATIGUE, fatigue.value/100) * pow(strength, STAB_FATIGUE_STRENGTH_MOD)/pow(endurance, STAB_FATIGUE_ENDURANCE_MOD)
 	bash_cost 	= lerp(1.0, MAX_BASH_FATIGUE, fatigue.value/100) * pow(strength, BASH_FATIGUE_STRENGTH_MOD)/pow(endurance, BASH_FATIGUE_ENDURANCE_MOD)
-	if OS.is_debug_build():
-		if Input.is_action_pressed("sprint") && Input.is_action_just_pressed("left_mouse_button"):
-			global_position = get_global_mouse_position()
-		if just_pressed("quick save"):
-			Game.get_singleton().save_game()
-		if just_pressed("quick load"):
-			Game.get_singleton().load_game()
-	var s = %Sprite2D
-	if debug: Debugger.printui(str(state_node.state.name))
-
+	#endregion
+	#region Movement and Interaction prompt
 	# Movement and control checks change interaction_prompt.supress value
 	var no_interaction = state_node.state.is_in_group("no_interaction")
 	interaction_prompt.supress = false
 	controls_disabled = check_controls_disabled()
 	movement_disabled = check_movement_disabled()
 	if no_interaction: interaction_prompt.supress = true
-
+	#endregion
+	#region Auto climb
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
+	#endregion
 	#region Camera combat position
 	if combat_target:
 		if combat_target.state_node.state.name == "death": combat_target = null
@@ -994,6 +997,15 @@ func _process(delta: float) -> void:
 	#	toggle_map()
 
 	#endregion
+	#region Debug
+	if OS.is_debug_build():
+		if debug: Debugger.printui(str(state_node.state.name))
+		if Input.is_action_pressed("sprint") && Input.is_action_just_pressed("left_mouse_button"):
+			global_position = get_global_mouse_position()
+		if just_pressed("quick save"):
+			Game.get_singleton().save_game()
+		if just_pressed("quick load"):
+			Game.get_singleton().load_game()
 	if OS.is_debug_build() && Input.is_action_just_pressed("debug1"):
 		print("debug1")
 		#status_effect_container.add_status_effect("Death's Door")
@@ -1002,6 +1014,7 @@ func _process(delta: float) -> void:
 		#experience.add(99999)
 		#toggle_character_panel()
 		#pcam_noise_emitter.emit()
+	#endregion
 #endregion
 #region Listeners
 func _on_hurtbox_area_entered(area: Area2D) -> void:
@@ -1062,6 +1075,9 @@ func _on_fullscreen_panel_closed() -> void:
 	print("Show HUD")
 	for panel in huds:
 		panel.show()
+func _on_coyote_timer_timeout() -> void:
+	coyote = false
+	print("Coyote timer timeout")
 #endregion
 func _unhandled_key_input(event: InputEvent) -> void:
 	if OS.is_debug_build() && event.is_pressed():

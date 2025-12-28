@@ -40,7 +40,7 @@ func physics_update(delta: float) -> void:
 			finished.emit("slide", {"sprinting": player.sprinting})
 		else:
 			finished.emit("crouch")
-	elif !player.is_on_floor():
+	elif !player.is_on_floor() && !player.coyote:
 		finished.emit("fall")
 	elif player.just_pressed("jump"):
 		finished.emit("rise")

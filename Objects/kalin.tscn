@@ -5656,6 +5656,10 @@ collision_mask = 2048
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StairCheck"]
 shape = SubResource("RectangleShape2D_n1k6j")
 
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="value_changed" from="UI/HUD/Scaled/Health" to="UI" method="_on_health_value_changed"]
 [connection signal="value_changed" from="UI/HUD/Scaled/Health" to="UI/HUD/Scaled/Health" method="_on_value_changed"]
 [connection signal="value_changed" from="UI/HUD/Scaled/Arousal" to="UI/HUD/Scaled/Arousal" method="_on_value_changed"]
@@ -5672,6 +5676,7 @@ shape = SubResource("RectangleShape2D_n1k6j")
 [connection signal="area_exited" from="Interactor" to="." method="_on_interactor_area_exited"]
 [connection signal="body_entered" from="ThreatCollider" to="." method="_on_threat_collider_body_entered"]
 [connection signal="body_entered" from="SmellCollider" to="." method="_on_smell_collider_body_entered"]
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 
 [editable path="UI/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer/ButtonContainer/Button"]
 [editable path="StateMachine/slash/SlashHitbox"]

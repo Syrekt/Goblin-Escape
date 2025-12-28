@@ -10,7 +10,7 @@ func update(delta: float) -> void:
 	if lock_stance_button:
 		if !player.pressed("stance"): lock_stance_button = false
 
-	if !player.is_on_floor():
+	if !player.is_on_floor() && !player.coyote:
 		finished.emit("fall")
 	elif !player.pressed("walk"):
 		finished.emit("run")
