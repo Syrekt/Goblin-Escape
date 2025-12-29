@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://b6qm74u7443qb"]
+
+[ext_resource type="Script" uid="uid://nrl1858h0shp" path="res://Inventory/inv_item.gd" id="1_dh2rt"]
+[ext_resource type="Texture2D" uid="uid://cgy2t60wlyk8h" path="res://Inventory/Sprites/journal.png" id="1_uhcgp"]
+
+[resource]
+script = ExtResource("1_dh2rt")
+name = "Journal"
+icon = ExtResource("1_uhcgp")
+consumable = false
+description = "Collected dairy pages are kept here.
+"
+metadata/_custom_type_script = "uid://nrl1858h0shp"

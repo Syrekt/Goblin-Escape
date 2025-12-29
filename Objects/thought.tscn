@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://byxhm37twn184" path="res://Scripts/thought.gd" id="1_kgof5"]
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="1_wd0ya"]
-[ext_resource type="Texture2D" uid="uid://bi3soe8ckc231" path="res://UI/Kalin.png" id="2_v5quw"]
+[ext_resource type="Texture2D" uid="uid://cb1i4pulvjau3" path="res://UI/kalin_thought_box.png" id="2_v5quw"]
 
 [node name="HBoxContainer" type="HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
@@ -30,8 +30,8 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = ExtResource("1_wd0ya")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
 theme_override_constants/line_separation = 0
+theme_override_constants/outline_size = 4
 bbcode_enabled = true
 text = "I'm hungry"
 fit_content = true

@@ -3,6 +3,7 @@ extends Button
 var item
 
 @onready var suicide_confirm := preload("res://UI/suicide_confirm.tscn")
+@onready var journal_scene := preload("res://Objects/journal.tscn")
 
 func _process(delta: float) -> void:
 	if !item:
@@ -83,6 +84,9 @@ func _on_pressed() -> void:
 				"I might be too late but I can't open this."
 			].pick_random()
 			owner.think(thought)
+		"Journal":
+			var journal = journal_scene.instantiate()
+			get_tree().current_scene.add_child(journal)
 		"Revenant's Draught":
 			print("Use revenant's draught.")
 			get_tree().current_scene.add_child(suicide_confirm.instantiate())

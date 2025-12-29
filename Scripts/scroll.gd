@@ -2,7 +2,7 @@ extends Interaction
 
 @export_multiline var text : String
 
-@onready var book : CanvasLayer = $Book
+@onready var book := preload("res://Objects/logbook.tscn")
 @onready var interaction_prompt : AnimatedSprite2D = find_child("InteractionPrompt")
 
 func _ready() -> void:

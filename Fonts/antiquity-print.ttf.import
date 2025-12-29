@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bmoddrn0g7wak"
-path="res://.godot/imported/Ohrenstead.ttf-0826573f35d5edc8fa2fb3665ae52714.fontdata"
+uid="uid://csqmycib1f50u"
+path="res://.godot/imported/antiquity-print.ttf-ebc7d90ed71888f7d7506e0c9bada1e9.fontdata"
 
 [deps]
 
-source_file="res://Others/Ohrenstead.ttf"
-dest_files=["res://.godot/imported/Ohrenstead.ttf-0826573f35d5edc8fa2fb3665ae52714.fontdata"]
+source_file="res://Fonts/antiquity-print.ttf"
+dest_files=["res://.godot/imported/antiquity-print.ttf-ebc7d90ed71888f7d7506e0c9bada1e9.fontdata"]
 
 [params]
 
@@ -21,8 +21,9 @@ msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
+modulate_color_glyphs=false
 hinting=1
-subpixel_positioning=1
+subpixel_positioning=4
 keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null

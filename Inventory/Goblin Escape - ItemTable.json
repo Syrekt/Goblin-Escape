@@ -91,14 +91,20 @@
   },
   "Elixir of Renewal": {
     "item_name": "Elixir of Renewal",
-    "item_description": "Decreases fatigue",
+    "item_description": "Decreases fatigue.",
     "consumable": true,
     "icon_path": "res://Inventory/Sprites/elixir_of_renewal.png"
   },
   "Elixir of Resilience": {
     "item_name": "Elixir of Resilience",
-    "item_description": "Decreases fatigue buildup",
+    "item_description": "Decreases fatigue buildup.",
     "consumable": true,
     "icon_path": "res://Inventory/Sprites/elixir_of_resilience.png"
+  },
+  "Journal": {
+    "item_name": "Journal",
+    "item_description": "Collected dairy pages are kept here.",
+    "consumable": false,
+    "icon_path": "res://Inventory/Sprites/journal.png"
   }
 }

@@ -70,6 +70,7 @@ var events : Array[String]
 var custom_run : bool
 var rooms : Dictionary
 var persistent_values : Dictionary
+var logs : Dictionary
 var checkpoint : Dictionary
 var experience_drop = preload("res://Objects/dropped_experience.tscn")
 var dropped_exp : Dictionary
@@ -129,6 +130,7 @@ func save_game() -> void:
 	save_manager.set_value("current_room", MetSys.get_current_room_name())
 	save_manager.set_value("rooms", rooms)
 	save_manager.set_value("persistent_values", persistent_values)
+	save_manager.set_value("logs", logs)
 	save_manager.set_value("checkpoint", checkpoint)
 	player.save(save_manager)
 	save_room()
@@ -169,6 +171,7 @@ func load_game():
 		generated_rooms.assign(save_manager.get_value("generated_rooms"))
 		events.assign(save_manager.get_value("events"))
 		persistent_values = save_manager.get_value("persistent_values")
+		logs = save_manager.get_value("logs")
 		if save_manager.get_value("checkpoint"):
 			checkpoint = save_manager.get_value("checkpoint")
 		player.load(save_manager.get_value("kalin"))

@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://whcgauo3krnm"]
+
+[ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Fonts/Ohrenstead.ttf" id="1_3t4tc"]
+[ext_resource type="FontFile" uid="uid://d1arubnr4isbm" path="res://Fonts/High_Birth.ttf" id="2_alhuw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lmlv6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3i26i"]
+
+[resource]
+default_font_size = 0
+Button/fonts/font = ExtResource("1_3t4tc")
+ItemList/fonts/font = ExtResource("1_3t4tc")
+ItemList/styles/panel = SubResource("StyleBoxEmpty_lmlv6")
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 8
+Label/fonts/font = ExtResource("2_alhuw")
+LineEdit/fonts/font = ExtResource("1_3t4tc")
+PanelContainer/styles/panel = SubResource("StyleBoxEmpty_3i26i")
+RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+RichTextLabel/font_sizes/normal_font_size = 8
+RichTextLabel/fonts/normal_font = ExtResource("2_alhuw")

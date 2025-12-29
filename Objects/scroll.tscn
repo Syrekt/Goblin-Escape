@@ -1,11 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8rlvg8w53iwn"]
+[gd_scene load_steps=7 format=3 uid="uid://b8rlvg8w53iwn"]
 
 [ext_resource type="Script" uid="uid://dvnalqik5wysn" path="res://Scripts/scroll.gd" id="1_r6cjm"]
 [ext_resource type="Texture2D" uid="uid://ba12vc8prg2h1" path="res://Inventory/Sprites/items_sheet.png" id="2_4vief"]
-[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="3_0nkf5"]
-[ext_resource type="Texture2D" uid="uid://cdbaknodlx4a2" path="res://UI/Super GUI Bundle 3 Paper Pack v1.0/Books/Book 1/Static Book/0.png" id="4_x5qcj"]
-[ext_resource type="SpriteFrames" uid="uid://tad7af6w5gxb" path="res://Sprite Frames/input_prompts.tres" id="5_4vief"]
-[ext_resource type="Script" uid="uid://cqgh8iyg4ujbk" path="res://Scripts/interaction_prompt.gd" id="8_fg11j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6cjm"]
 
@@ -68,50 +64,3 @@ region_rect = Rect2(33, 225, 14, 14)
 libraries = {
 &"": SubResource("AnimationLibrary_x5qcj")
 }
-
-[node name="Book" type="CanvasLayer" parent="." groups=["UIPanel"]]
-visible = false
-
-[node name="TextureRect" type="TextureRect" parent="Book"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -431.0
-offset_top = -227.0
-offset_right = 431.0
-offset_bottom = 227.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("3_0nkf5")
-texture = ExtResource("4_x5qcj")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Book/TextureRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -280.0
-offset_top = -152.0
-offset_right = -16.0
-offset_bottom = 160.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-bbcode_enabled = true
-
-[node name="InteractionPrompt" type="AnimatedSprite2D" parent="Book"]
-position = Vector2(888, 509)
-sprite_frames = ExtResource("5_4vief")
-animation = &"xbox"
-script = ExtResource("8_fg11j")
-
-[node name="Label" type="Label" parent="Book"]
-offset_left = 904.0
-offset_top = 496.0
-offset_right = 946.0
-offset_bottom = 519.0
-text = "Close"

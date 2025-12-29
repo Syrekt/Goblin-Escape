@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://vnirbc7r1ho0"]
+
+[ext_resource type="Script" uid="uid://c6amentcq2g7q" path="res://Scripts/log_page.gd" id="1_yun3d"]
+
+[node name="LogPage" type="TabBar"]
+script = ExtResource("1_yun3d")
+metadata/_tab_index = 0
+
+[node name="VSplitContainer" type="VSplitContainer" parent="."]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 426.0
+offset_bottom = 248.0
+
+[node name="Pages" type="HSplitContainer" parent="VSplitContainer"]
+custom_minimum_size = Vector2(0, 226)
+layout_mode = 2
+theme_override_constants/separation = 60
+dragging_enabled = false
+
+[node name="LeftPage" type="RichTextLabel" parent="VSplitContainer/Pages"]
+custom_minimum_size = Vector2(188, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "Folk think I go out only to gather berries, but truly I come here instead, and it makes my heart race so. They say goblins are wicked things, yet none show love as they do. Once a body grows used to it, there is no easy turning away, and men above seem wanting after.
+
+"
+scroll_active = false
+
+[node name="RightPage" type="RichTextLabel" parent="VSplitContainer/Pages"]
+custom_minimum_size = Vector2(188, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "The way they move is all thoughtless and natural, as beasts are, and there is something honest in it that I cannot put from my mind."
+scroll_active = false
+
+[node name="PageNumbers" type="HSplitContainer" parent="VSplitContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+split_offset = 200
+dragging_enabled = false
+
+[node name="LeftPageNumber" type="Label" parent="VSplitContainer/PageNumbers"]
+layout_mode = 2
+text = "1"
+horizontal_alignment = 1
+
+[node name="RightPageNumber" type="Label" parent="VSplitContainer/PageNumbers"]
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1

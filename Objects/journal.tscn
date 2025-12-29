@@ -1,0 +1,224 @@
+[gd_scene load_steps=13 format=3 uid="uid://cjtl1frwj4tmm"]
+
+[ext_resource type="Script" uid="uid://dtfsuxh618lnw" path="res://Scripts/journal.gd" id="1_ofsdi"]
+[ext_resource type="Theme" uid="uid://whcgauo3krnm" path="res://UI/journal.tres" id="2_314v7"]
+[ext_resource type="Texture2D" uid="uid://cdbaknodlx4a2" path="res://UI/Super GUI Bundle 3 Paper Pack v1.0/Books/Book 1/Static Book/0.png" id="3_hs5q5"]
+[ext_resource type="Script" uid="uid://c6amentcq2g7q" path="res://Scripts/log_page.gd" id="4_a5aj4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1bqal"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ww3uv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_peu8u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_emj02"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qq747"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6n3ro"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lvcnm"]
+
+[sub_resource type="GDScript" id="GDScript_4djfu"]
+resource_name = "exit_button"
+script/source = "extends Button
+
+@onready var label : RichTextLabel = find_child(\"RichTextLabel\")
+
+func _ready() -> void:
+	var action_keycode = Ge.get_action_keycode(\"ui_cancel\")
+	print(\"action_keycode: \"+str(action_keycode))
+	if Ge.last_input_type == \"keyboard\":
+		var filepath : String = \"res://UI/Buttons/button_keyboard_\" + action_keycode + \".png\"
+		if FileAccess.file_exists(filepath):
+			label.text = \"[img]\" + filepath + \"[/img]\" + label.text
+		else:
+			print(\"File doesn't exists %s\" % filepath)
+	elif Ge.last_input_type == \"gamepad\":
+		var filepath : String = \"res://UI/Buttons/buttons_xbox\" + action_keycode + \".png\"
+		if FileAccess.file_exists(filepath):
+			label.text = \"[img]\" + filepath + \"[/img]\" + label.text
+		else:
+			print(\"File doesn't exists %s\" % filepath)
+
+
+func _on_check_button_toggled(toggled_on: bool) -> void:
+	Ge.show_tutorials = toggled_on
+
+#func _draw() -> void:
+#	draw_rect(Rect2(Vector2.ZERO, size), Color(1, 0, 0, 1))
+"
+
+[node name="Journal" type="CanvasLayer" groups=["UIPanel"]]
+script = ExtResource("1_ofsdi")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_314v7")
+texture = ExtResource("3_hs5q5")
+expand_mode = 1
+
+[node name="TabContainer" type="TabContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 119.0
+offset_top = 58.0
+offset_right = -96.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_1bqal")
+current_tab = 0
+tabs_visible = false
+
+[node name="Ann" type="TabContainer" parent="TextureRect/TabContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ww3uv")
+current_tab = 1
+tabs_visible = false
+metadata/_tab_index = 0
+
+[node name="Page1" type="TabBar" parent="TextureRect/TabContainer/Ann"]
+visible = false
+layout_mode = 2
+script = ExtResource("4_a5aj4")
+metadata/_tab_index = 0
+
+[node name="VSplitContainer" type="VSplitContainer" parent="TextureRect/TabContainer/Ann/Page1"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 426.0
+offset_bottom = 248.0
+
+[node name="Pages" type="HSplitContainer" parent="TextureRect/TabContainer/Ann/Page1/VSplitContainer"]
+custom_minimum_size = Vector2(0, 226)
+layout_mode = 2
+theme_override_constants/separation = 60
+dragging_enabled = false
+
+[node name="LeftPage" type="RichTextLabel" parent="TextureRect/TabContainer/Ann/Page1/VSplitContainer/Pages"]
+custom_minimum_size = Vector2(188, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "Folk think I go out only to gather berries, but truly I come here instead, and it makes my heart race so. They say goblins are wicked things, yet none show love as they do. Once a body grows used to it, there is no easy turning away, and men above seem wanting after.
+
+"
+scroll_active = false
+
+[node name="RightPage" type="RichTextLabel" parent="TextureRect/TabContainer/Ann/Page1/VSplitContainer/Pages"]
+custom_minimum_size = Vector2(188, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "The way they move is all thoughtless and natural, as beasts are, and there is something honest in it that I cannot put from my mind."
+scroll_active = false
+
+[node name="PageNumbers" type="HSplitContainer" parent="TextureRect/TabContainer/Ann/Page1/VSplitContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+split_offset = 200
+dragging_enabled = false
+
+[node name="LeftPageNumber" type="Label" parent="TextureRect/TabContainer/Ann/Page1/VSplitContainer/PageNumbers"]
+layout_mode = 2
+text = "1"
+horizontal_alignment = 1
+
+[node name="RightPageNumber" type="Label" parent="TextureRect/TabContainer/Ann/Page1/VSplitContainer/PageNumbers"]
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+
+[node name="Page2" type="TabBar" parent="TextureRect/TabContainer/Ann"]
+layout_mode = 2
+script = ExtResource("4_a5aj4")
+metadata/_tab_index = 1
+
+[node name="VSplitContainer" type="VSplitContainer" parent="TextureRect/TabContainer/Ann/Page2"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 426.0
+offset_bottom = 248.0
+
+[node name="Pages" type="HSplitContainer" parent="TextureRect/TabContainer/Ann/Page2/VSplitContainer"]
+custom_minimum_size = Vector2(0, 226)
+layout_mode = 2
+theme_override_constants/separation = 60
+dragging_enabled = false
+
+[node name="LeftPage" type="RichTextLabel" parent="TextureRect/TabContainer/Ann/Page2/VSplitContainer/Pages"]
+custom_minimum_size = Vector2(188, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "I think I am lost. I have walked this same passage four times now. I should never have strayed so far in. I am in a dreadful mess.
+
+"
+scroll_active = false
+
+[node name="RightPage" type="RichTextLabel" parent="TextureRect/TabContainer/Ann/Page2/VSplitContainer/Pages"]
+custom_minimum_size = Vector2(188, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "If the Village Elder learns of my secret wanderings, he will be sorely angered and forbid me from ever coming again. I must find my way back, I must."
+scroll_active = false
+
+[node name="PageNumbers" type="HSplitContainer" parent="TextureRect/TabContainer/Ann/Page2/VSplitContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+split_offset = 200
+dragging_enabled = false
+
+[node name="LeftPageNumber" type="Label" parent="TextureRect/TabContainer/Ann/Page2/VSplitContainer/PageNumbers"]
+layout_mode = 2
+text = "3"
+horizontal_alignment = 1
+
+[node name="RightPageNumber" type="Label" parent="TextureRect/TabContainer/Ann/Page2/VSplitContainer/PageNumbers"]
+layout_mode = 2
+text = "4"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="TextureRect"]
+custom_minimum_size = Vector2(93.465, 22)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -204.0
+offset_top = -335.0
+offset_right = -110.535034
+offset_bottom = -313.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_peu8u")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_emj02")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qq747")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6n3ro")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lvcnm")
+icon_alignment = 2
+script = SubResource("GDScript_4djfu")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureRect/Button"]
+custom_minimum_size = Vector2(0, 16.015)
+layout_mode = 0
+offset_right = 121.0
+offset_bottom = 16.015
+mouse_filter = 1
+theme = ExtResource("2_314v7")
+bbcode_enabled = true
+scroll_active = false
+horizontal_alignment = 2
+vertical_alignment = 1
