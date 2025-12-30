@@ -1,11 +1,35 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://whcgauo3krnm"]
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://whcgauo3krnm"]
 
 [ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Fonts/Ohrenstead.ttf" id="1_3t4tc"]
 [ext_resource type="FontFile" uid="uid://d1arubnr4isbm" path="res://Fonts/High_Birth.ttf" id="2_alhuw"]
+[ext_resource type="Texture2D" uid="uid://cut8wmip0sosr" path="res://UI/bookmark3.png" id="3_amkgv"]
+[ext_resource type="Texture2D" uid="uid://bn5dybwj3dhk0" path="res://UI/bookmark1.png" id="3_v04ka"]
+[ext_resource type="Texture2D" uid="uid://co3dw1igt5yus" path="res://UI/bookmark2.png" id="4_ytdwn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lmlv6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3i26i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ytdwn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_amkgv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8pj85"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uyjsy"]
+texture = ExtResource("3_amkgv")
+texture_margin_left = 8.0
+texture_margin_right = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_amkgv"]
+texture = ExtResource("3_v04ka")
+texture_margin_left = 8.0
+texture_margin_right = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8pj85"]
+texture = ExtResource("4_ytdwn")
+texture_margin_left = 8.0
+texture_margin_right = 8.0
 
 [resource]
 default_font_size = 0
@@ -20,3 +44,9 @@ PanelContainer/styles/panel = SubResource("StyleBoxEmpty_3i26i")
 RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
 RichTextLabel/font_sizes/normal_font_size = 8
 RichTextLabel/fonts/normal_font = ExtResource("2_alhuw")
+TabContainer/styles/panel = SubResource("StyleBoxEmpty_ytdwn")
+TabContainer/styles/tab_disabled = SubResource("StyleBoxEmpty_amkgv")
+TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_8pj85")
+TabContainer/styles/tab_hovered = SubResource("StyleBoxTexture_uyjsy")
+TabContainer/styles/tab_selected = SubResource("StyleBoxTexture_amkgv")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxTexture_8pj85")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cjtl1frwj4tmm"]
+[gd_scene load_steps=24 format=3 uid="uid://cjtl1frwj4tmm"]
 
 [ext_resource type="Script" uid="uid://dtfsuxh618lnw" path="res://Scripts/journal.gd" id="1_ofsdi"]
 [ext_resource type="Theme" uid="uid://whcgauo3krnm" path="res://UI/journal.tres" id="2_314v7"]
@@ -18,6 +18,64 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qb4kw"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_w4han")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_aguiy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ye5ua")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kwvva")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_aguiy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ye5ua")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kwvva")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_nkxv3")
+}],
+"loop": false,
+"name": &"change_header_left",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_y0ixr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_lte4h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_o5v5g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_or0ic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_lte4h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_o5v5g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_or0ic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_v7gn0")
+}],
+"loop": false,
+"name": &"change_header_right",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_w4han")
@@ -58,8 +116,6 @@ animations = [{
 "name": &"right",
 "speed": 8.0
 }]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1bqal"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ww3uv"]
 
@@ -105,6 +161,10 @@ script = ExtResource("1_ofsdi")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 17.0
+offset_right = -37.888916
+offset_bottom = -15.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_314v7")
@@ -112,10 +172,10 @@ texture = ExtResource("3_hs5q5")
 expand_mode = 1
 
 [node name="PageAnimation" type="AnimatedSprite2D" parent="TextureRect"]
-position = Vector2(333.16934, 175)
-scale = Vector2(0.74020815, 0.791587)
+position = Vector2(304, 160.00002)
+scale = Vector2(0.67494833, 0.72179735)
 sprite_frames = SubResource("SpriteFrames_qb4kw")
-animation = &"left"
+animation = &"change_header_left"
 
 [node name="TabContainer" type="TabContainer" parent="TextureRect"]
 layout_mode = 1
@@ -123,16 +183,15 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 119.0
-offset_top = 58.0
+offset_top = -3.0
 offset_right = -96.0
 offset_bottom = -49.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_1bqal")
-current_tab = 0
-tabs_visible = false
+current_tab = 1
 
 [node name="Ann" type="TabContainer" parent="TextureRect/TabContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -148,19 +207,20 @@ metadata/_tab_index = 0
 
 [node name="VSplitContainer" type="VSplitContainer" parent="TextureRect/TabContainer/Ann/Page1"]
 layout_mode = 0
-offset_left = -3.0
-offset_top = -3.0
-offset_right = 426.0
-offset_bottom = 248.0
+offset_left = -15.0
+offset_top = 29.0
+offset_right = 377.0
+offset_bottom = 275.0
+dragging_enabled = false
 
 [node name="Pages" type="HSplitContainer" parent="TextureRect/TabContainer/Ann/Page1/VSplitContainer"]
-custom_minimum_size = Vector2(0, 226)
+custom_minimum_size = Vector2(0, 218.255)
 layout_mode = 2
-theme_override_constants/separation = 60
+theme_override_constants/separation = 40
 dragging_enabled = false
 
 [node name="LeftPage" type="RichTextLabel" parent="TextureRect/TabContainer/Ann/Page1/VSplitContainer/Pages"]
-custom_minimum_size = Vector2(188, 0)
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 bbcode_enabled = true
 text = "Folk think I go out only to gather berries, but truly I come here instead, and it makes my heart race so. They say goblins are wicked things, yet none show love as they do. Once a body grows used to it, there is no easy turning away, and men above seem wanting after.
@@ -169,7 +229,7 @@ text = "Folk think I go out only to gather berries, but truly I come here instea
 scroll_active = false
 
 [node name="RightPage" type="RichTextLabel" parent="TextureRect/TabContainer/Ann/Page1/VSplitContainer/Pages"]
-custom_minimum_size = Vector2(188, 0)
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 bbcode_enabled = true
 text = "The way they move is all thoughtless and natural, as beasts are, and there is something honest in it that I cannot put from my mind."
@@ -177,8 +237,8 @@ scroll_active = false
 
 [node name="PageNumbers" type="HSplitContainer" parent="TextureRect/TabContainer/Ann/Page1/VSplitContainer"]
 layout_mode = 2
-theme_override_constants/separation = 32
-split_offset = 200
+theme_override_constants/separation = 64
+split_offset = 164
 dragging_enabled = false
 
 [node name="LeftPageNumber" type="Label" parent="TextureRect/TabContainer/Ann/Page1/VSplitContainer/PageNumbers"]
@@ -199,37 +259,36 @@ metadata/_tab_index = 1
 
 [node name="VSplitContainer" type="VSplitContainer" parent="TextureRect/TabContainer/Ann/Page2"]
 layout_mode = 0
-offset_left = -3.0
-offset_top = -3.0
-offset_right = 426.0
-offset_bottom = 248.0
+offset_left = -15.0
+offset_top = 29.0
+offset_right = 377.0
+offset_bottom = 275.0
+dragging_enabled = false
 
 [node name="Pages" type="HSplitContainer" parent="TextureRect/TabContainer/Ann/Page2/VSplitContainer"]
-custom_minimum_size = Vector2(0, 226)
+custom_minimum_size = Vector2(0, 218.255)
 layout_mode = 2
-theme_override_constants/separation = 60
+theme_override_constants/separation = 40
 dragging_enabled = false
 
 [node name="LeftPage" type="RichTextLabel" parent="TextureRect/TabContainer/Ann/Page2/VSplitContainer/Pages"]
-custom_minimum_size = Vector2(188, 0)
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 bbcode_enabled = true
-text = "I think I am lost. I have walked this same passage four times now. I should never have strayed so far in. I am in a dreadful mess.
-
-"
+text = "I think I’m lost, I’ve passed this corridor 4 times now. I shouldn’t have wandered this deep, I’m screwed. "
 scroll_active = false
 
 [node name="RightPage" type="RichTextLabel" parent="TextureRect/TabContainer/Ann/Page2/VSplitContainer/Pages"]
-custom_minimum_size = Vector2(188, 0)
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 bbcode_enabled = true
-text = "If the Village Elder learns of my secret wanderings, he will be sorely angered and forbid me from ever coming again. I must find my way back, I must."
+text = "Village Elder will be mad if he hears about my secret adventures and I won’t be allowed anymore, I have to find my way back!"
 scroll_active = false
 
 [node name="PageNumbers" type="HSplitContainer" parent="TextureRect/TabContainer/Ann/Page2/VSplitContainer"]
 layout_mode = 2
-theme_override_constants/separation = 32
-split_offset = 200
+theme_override_constants/separation = 64
+split_offset = 164
 dragging_enabled = false
 
 [node name="LeftPageNumber" type="Label" parent="TextureRect/TabContainer/Ann/Page2/VSplitContainer/PageNumbers"]
@@ -242,6 +301,64 @@ layout_mode = 2
 text = "4"
 horizontal_alignment = 1
 
+[node name="Gawath" type="TabContainer" parent="TextureRect/TabContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ww3uv")
+current_tab = 0
+tabs_visible = false
+metadata/_tab_index = 0
+
+[node name="Page1" type="TabBar" parent="TextureRect/TabContainer/Gawath"]
+layout_mode = 2
+script = ExtResource("4_a5aj4")
+metadata/_tab_index = 0
+
+[node name="VSplitContainer" type="VSplitContainer" parent="TextureRect/TabContainer/Gawath/Page1"]
+layout_mode = 0
+offset_left = -15.0
+offset_top = 29.0
+offset_right = 377.0
+offset_bottom = 275.0
+dragging_enabled = false
+
+[node name="Pages" type="HSplitContainer" parent="TextureRect/TabContainer/Gawath/Page1/VSplitContainer"]
+custom_minimum_size = Vector2(0, 218.255)
+layout_mode = 2
+theme_override_constants/separation = 40
+dragging_enabled = false
+
+[node name="LeftPage" type="RichTextLabel" parent="TextureRect/TabContainer/Gawath/Page1/VSplitContainer/Pages"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "Where is muh wife"
+scroll_active = false
+
+[node name="RightPage" type="RichTextLabel" parent="TextureRect/TabContainer/Gawath/Page1/VSplitContainer/Pages"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "Where?"
+scroll_active = false
+
+[node name="PageNumbers" type="HSplitContainer" parent="TextureRect/TabContainer/Gawath/Page1/VSplitContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+split_offset = 164
+dragging_enabled = false
+
+[node name="LeftPageNumber" type="Label" parent="TextureRect/TabContainer/Gawath/Page1/VSplitContainer/PageNumbers"]
+layout_mode = 2
+text = "1"
+horizontal_alignment = 1
+
+[node name="RightPageNumber" type="Label" parent="TextureRect/TabContainer/Gawath/Page1/VSplitContainer/PageNumbers"]
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+
 [node name="CloseButton" type="Button" parent="TextureRect"]
 layout_mode = 1
 anchors_preset = 3
@@ -249,10 +366,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -103.0
-offset_top = -328.0
-offset_right = -94.0
-offset_bottom = -319.0
+offset_left = -91.111084
+offset_top = -303.0
+offset_right = -82.111084
+offset_bottom = -294.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8

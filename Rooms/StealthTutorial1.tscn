@@ -191,5 +191,5 @@ diary_page = 1
 
 [node name="Scroll2" parent="." instance=ExtResource("15_clw2p")]
 position = Vector2(2281, 358)
-diary_owner = "Ann"
-diary_page = 2
+diary_owner = "Gawath"
+diary_page = 1

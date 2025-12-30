@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cagelwsx65evq"
-path="res://.godot/imported/24.png-1b48b8ec9d9dcf2901ae069069f4cbcc.ctex"
+uid="uid://co3dw1igt5yus"
+path="res://.godot/imported/bookmark2.png-757fb815802a18594269cf9488c8bffb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Super GUI Bundle 3 Paper Pack v1.0/Paper UI/Headers/Small/24.png"
-dest_files=["res://.godot/imported/24.png-1b48b8ec9d9dcf2901ae069069f4cbcc.ctex"]
+source_file="res://UI/bookmark2.png"
+dest_files=["res://.godot/imported/bookmark2.png-757fb815802a18594269cf9488c8bffb.ctex"]
 
 [params]
 

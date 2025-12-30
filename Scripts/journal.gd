@@ -7,6 +7,9 @@ extends CanvasLayer
 var current_logbook : TabContainer
 
 func _ready() -> void:
+	for i in range(tab_container.get_tab_count()):
+		tab_container.set_tab_title(i, " ")
+
 	var game = Game.get_singleton()
 	for diary_owner in tab_container.get_children():
 		var pages = game.logs.get(diary_owner.name)
@@ -19,28 +22,34 @@ func _ready() -> void:
 					diary_owner.get_child(i).queue_free()
 
 
+
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("down"):
-		tab_container.select_next_available()
+		if tab_container.select_next_available():
+			start_page_animation("change_header_left")
 	elif Input.is_action_just_pressed("up"):
-		tab_container.select_previous_available()
+		if tab_container.select_previous_available():
+			start_page_animation("change_header_right")
 
 	current_logbook = tab_container.get_current_tab_control()
 
 	if current_logbook:
 		if Input.is_action_just_pressed("left"):
 			if current_logbook.select_previous_available():
-				tab_container.hide()
-				close_button.hide()
-				page_animation.play("left")
+				start_page_animation("left")
 		elif Input.is_action_just_pressed("right"):
 			if current_logbook.select_next_available():
-				tab_container.hide()
-				close_button.hide()
-				page_animation.play("right")
+				start_page_animation("right")
 
 	if Input.is_action_just_pressed("ui_cancel"):
 		_on_close_button_pressed()
+
+
+func start_page_animation(anim:String):
+	tab_container.hide()
+	close_button.hide()
+	page_animation.play(anim)
 
 
 func _on_page_animation_animation_finished() -> void:
