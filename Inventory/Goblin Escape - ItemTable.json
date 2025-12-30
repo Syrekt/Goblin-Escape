@@ -103,7 +103,7 @@
   },
   "Journal": {
     "item_name": "Journal",
-    "item_description": "Collected dairy pages are kept here.",
+    "item_description": "Collected diary pages are kept here.",
     "consumable": false,
     "icon_path": "res://Inventory/Sprites/journal.png"
   }

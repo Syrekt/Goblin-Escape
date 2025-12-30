@@ -87,6 +87,7 @@ func _on_pressed() -> void:
 		"Journal":
 			var journal = journal_scene.instantiate()
 			get_tree().current_scene.add_child(journal)
+			owner.inventory_panel.toggle()
 		"Revenant's Draught":
 			print("Use revenant's draught.")
 			get_tree().current_scene.add_child(suicide_confirm.instantiate())
