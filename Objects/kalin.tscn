@@ -4439,7 +4439,7 @@ tracks/4/keys = {
 }
 tracks/5/type = "method"
 tracks/5/imported = false
-tracks/5/enabled = true
+tracks/5/enabled = false
 tracks/5/path = NodePath("../StateMachine/walk")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
@@ -5194,6 +5194,14 @@ event_guid = "{cf28a120-265f-417f-81b4-340051ceaef5}"
 event_name = "event:/TutorialOpened"
 event_guid = "{d0561104-b8a1-4004-b1e1-37e6435d8cb9}"
 process_mode = 3
+
+[node name="SlideSFX" type="FmodEventEmitter2D" parent="Audio"]
+event_name = "event:/Kalin-Slide"
+event_guid = "{3e8773ca-2c2a-4386-b1b9-eda7afb70fb4}"
+
+[node name="LandSFX" type="FmodEventEmitter2D" parent="Audio"]
+event_name = "event:/Kalin-Land"
+event_guid = "{35f4280f-fe69-4277-8d2d-56b1e3560f59}"
 
 [node name="StateMachine" parent="." groups=["Flip"] instance=ExtResource("9_ojhio")]
 visible = false

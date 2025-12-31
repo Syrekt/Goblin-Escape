@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bajfhcfhuagof" path="res://Objects/platform_collider.tscn" id="13_h0t0a"]
 [ext_resource type="PackedScene" uid="uid://b4vewnv73flk4" path="res://Map/Props/Movable/statue.tscn" id="14_diob3"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="15_inj1l"]
-[ext_resource type="AudioStream" uid="uid://llhantu0gpcf" path="res://SFX/Wind,Ext,Alley,Urban,Howl,Pronounced,Metal,Clinking.wav" id="16_r50i2"]
+[ext_resource type="PackedScene" uid="uid://cjjojn21p02vb" path="res://Objects/debris_amb.tscn" id="15_r50i2"]
 
 [node name="SwordRoom" type="Node2D"]
 
@@ -167,23 +167,11 @@ position = Vector2(3296, 192)
 position = Vector2(1072, 368)
 lit = false
 
-[node name="Wind,ext,alley,urban,howl,pronounced,metal,clinking" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(1296, 160)
-stream = ExtResource("16_r50i2")
-autoplay = true
-max_distance = 768.0
-bus = &"EFX"
+[node name="DebrisAmb" parent="." instance=ExtResource("15_r50i2")]
+position = Vector2(1276, 188)
 
-[node name="Wind,ext,alley,urban,howl,pronounced,metal,clinking2" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(2176, 160)
-stream = ExtResource("16_r50i2")
-autoplay = true
-max_distance = 768.0
-bus = &"EFX"
+[node name="DebrisAmb2" parent="." instance=ExtResource("15_r50i2")]
+position = Vector2(2187, 170)
 
-[node name="Wind,ext,alley,urban,howl,pronounced,metal,clinking3" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(2768, 288)
-stream = ExtResource("16_r50i2")
-autoplay = true
-max_distance = 768.0
-bus = &"EFX"
+[node name="DebrisAmb3" parent="." instance=ExtResource("15_r50i2")]
+position = Vector2(2808, 342)

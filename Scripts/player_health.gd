@@ -65,6 +65,8 @@ func _on_value_changed(_value: float) -> void:
 		fmod_heartbeat.play(false)
 		health_vignette.show()
 
+		print("health_vignette_tween: "+str(health_vignette_tween))
+
 		if !health_vignette_tween:
 			health_vignette_tween = create_tween().bind_node(health_vignette)
 			health_vignette_tween.finished.connect(update_tween)
@@ -72,7 +74,14 @@ func _on_value_changed(_value: float) -> void:
 			health_vignette_tween.tween_property(health_vignette.material, "shader_parameter/outer_radius", 2.0, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	else:
 		fmod_heartbeat.stop()
-		health_vignette.hide()
+
+		if health_vignette_tween:
+			health_vignette_tween.kill()
+			health_vignette_tween = null
+		var _tween = create_tween().bind_node(health_vignette)
+		_tween.tween_property(health_vignette.material, "shader_parameter/outer_radius", 5.0, 1.0)
+		_tween.tween_callback(health_vignette.hide)
+		_tween.tween_property(health_vignette.material, "shader_parameter/outer_radius", 3.0, 0.1)
 	
 
 func update_tween() -> void:

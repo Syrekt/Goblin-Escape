@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://crwf8yrpxeibp"]
+[gd_scene load_steps=10 format=4 uid="uid://crwf8yrpxeibp"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_qkffn"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_apk2q"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bajfhcfhuagof" path="res://Objects/platform_collider.tscn" id="6_jhhf7"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="7_mart1"]
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="8_qnnt4"]
+[ext_resource type="PackedScene" uid="uid://cjjojn21p02vb" path="res://Objects/debris_amb.tscn" id="9_v8rj2"]
 
 [node name="DefensiveStancePath4" type="Node2D"]
 
@@ -112,3 +113,9 @@ position = Vector2(1103, 1096)
 
 [node name="Crate2" parent="." instance=ExtResource("8_qnnt4")]
 position = Vector2(1070, 1096)
+
+[node name="DebrisAmb" parent="." instance=ExtResource("9_v8rj2")]
+position = Vector2(840, 624)
+
+[node name="DebrisAmb" parent="DebrisAmb" instance=ExtResource("9_v8rj2")]
+position = Vector2(-526, -142)

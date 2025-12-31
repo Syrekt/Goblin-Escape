@@ -553,6 +553,8 @@ func _validate_property(property: Dictionary) -> void:
 		follow_mode == FollowMode.GLUED:
 			property.usage = PROPERTY_USAGE_NO_EDITOR
 
+	if property.name == "follow_damping_value" and not follow_damping:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 	###############
 	## Follow Group
@@ -639,7 +641,6 @@ func _enter_tree() -> void:
 				_should_follow = false
 		FollowMode.GROUP:
 			_follow_targets_size_check()
-			_should_follow_checker()
 		_:
 			_should_follow_checker()
 
@@ -647,7 +648,6 @@ func _enter_tree() -> void:
 		visibility_changed.connect(_check_visibility)
 
 	update_limit_all_sides()
-
 
 
 func _exit_tree() -> void:
@@ -659,18 +659,12 @@ func _exit_tree() -> void:
 
 
 func _ready() -> void:
-	if is_instance_valid(follow_target):
-		_transform_output.origin = _get_target_position_offset()
-	else:
-		_transform_output = global_transform
+	_transform_output = global_transform
 
 	_phantom_camera_manager.noise_2d_emitted.connect(_noise_emitted)
 
 	if not Engine.is_editor_hint():
 		_preview_noise = true
-
-	if follow_mode == FollowMode.GROUP:
-		_follow_targets_size_check()
 
 
 func _process(delta: float) -> void:
@@ -804,6 +798,7 @@ func _set_follow_position() -> void:
 							dead_zone_reached.emit(Vector2(framed_side_offset.x, framed_side_offset.y))
 					else:
 						_follow_framed_offset = _transform_output.origin - _get_target_position_offset()
+						_follow_target_position = global_position
 						return
 			else:
 				_follow_target_position = _get_target_position_offset()
@@ -972,7 +967,7 @@ func _follow_targets_size_check() -> void:
 	_follow_targets = []
 	for i in follow_targets.size():
 		if follow_targets[i] == null: continue
-		if follow_targets[i].is_inside_tree():
+		if is_instance_valid(follow_targets[i]):
 			_follow_targets.append(follow_targets[i])
 			targets_size += 1
 			_follow_targets_single_target_index = i
@@ -1244,8 +1239,6 @@ func get_tween_ease() -> int:
 func set_is_active(node, value) -> void:
 	if node is PhantomCameraHost:
 		_is_active = value
-		if value:
-			_should_follow_checker()
 		queue_redraw()
 	else:
 		printerr("PCams can only be set from the PhantomCameraHost")

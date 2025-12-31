@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://vbsxvjodryce"]
+[gd_scene load_steps=12 format=4 uid="uid://vbsxvjodryce"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_eyrgu"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_ra578"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://llhantu0gpcf" path="res://SFX/Wind,Ext,Alley,Urban,Howl,Pronounced,Metal,Clinking.wav" id="8_u8lx0"]
 [ext_resource type="Texture2D" uid="uid://bw11n7ht0gpj1" path="res://Map/Props/spr_skeleton3.png" id="9_g3vmj"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="10_k8dhd"]
+[ext_resource type="PackedScene" uid="uid://cjjojn21p02vb" path="res://Objects/debris_amb.tscn" id="11_j41o7"]
 
 [node name="StartingRoom" type="Node2D"]
 
@@ -123,13 +124,6 @@ autoplay = true
 max_distance = 128.0
 bus = &"EFX"
 
-[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(1529, 314)
-stream = ExtResource("8_u8lx0")
-autoplay = true
-max_distance = 728.0
-bus = &"EFX"
-
 [node name="SprSkeleton3" type="Sprite2D" parent="."]
 position = Vector2(1559, 431)
 texture = ExtResource("9_g3vmj")
@@ -149,5 +143,8 @@ lit = false
 [node name="Torch4" parent="." instance=ExtResource("10_k8dhd")]
 position = Vector2(2128, 240)
 lit = false
+
+[node name="DebrisAmb" parent="." instance=ExtResource("11_j41o7")]
+position = Vector2(1525, 412)
 
 [editable path="SimpleDialogue"]

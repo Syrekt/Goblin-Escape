@@ -47,6 +47,7 @@ collision_layer = 2049
 
 [node name="RoomInstance" parent="." node_paths=PackedStringArray("spawn_point") instance=ExtResource("2_1hlov")]
 spawn_point = NodePath("../Marker2D")
+metadata/_edit_group_ = true
 
 [node name="StairsLong" parent="." instance=ExtResource("3_u1qq6")]
 position = Vector2(376, -8)

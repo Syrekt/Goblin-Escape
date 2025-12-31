@@ -61,6 +61,7 @@ tile_set = ExtResource("1_xkxwg")
 tile_set = ExtResource("1_xkxwg")
 
 [node name="RoomInstance" parent="." instance=ExtResource("2_i6r63")]
+area = "Silent"
 
 [node name="ThoughtTrigger" parent="." instance=ExtResource("4_qi3xb")]
 position = Vector2(822.194, 199.76367)

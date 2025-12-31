@@ -17,6 +17,7 @@ var master_volume := 1.0
 var bgm_volume := 1.0
 var amb_volume := 1.0
 var sfx_volume := 1.0
+var footsounds_enabled := true
 
 func _set_window_position() -> void:
 	DisplayServer.window_set_position(window_pos)

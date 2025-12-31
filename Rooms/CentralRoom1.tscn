@@ -15,13 +15,13 @@
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="14_7gos6"]
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="15_u0kkm"]
 [ext_resource type="PackedScene" uid="uid://djk8oskwq3mdn" path="res://Inventory/Pickup Objects/pickup_health.tscn" id="16_bupn0"]
-[ext_resource type="AudioStream" uid="uid://llhantu0gpcf" path="res://SFX/Wind,Ext,Alley,Urban,Howl,Pronounced,Metal,Clinking.wav" id="17_bihtp"]
 [ext_resource type="PackedScene" uid="uid://sbe7n6eecpl2" path="res://Inventory/Pickup Objects/pickup_revenants_draught.tscn" id="18_ouyvj"]
 [ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="19_avktj"]
 [ext_resource type="PackedScene" uid="uid://bl26mmlff752e" path="res://Objects/key_prompt.tscn" id="20_lsp8e"]
 [ext_resource type="PackedScene" uid="uid://dxvqnc0144rnv" path="res://Objects/tutorial.tscn" id="21_sx3uk"]
 [ext_resource type="PackedScene" uid="uid://bkj14myaccvt3" path="res://Tutorial/fatigue_smell_tutorial.tscn" id="22_r1hhn"]
 [ext_resource type="PackedScene" uid="uid://dwmhdexiecm88" path="res://Map/Fast Travel/portal.tscn" id="22_sx3uk"]
+[ext_resource type="PackedScene" uid="uid://cjjojn21p02vb" path="res://Objects/debris_amb.tscn" id="23_r1hhn"]
 
 [node name="CentralRoom1" type="Node2D"]
 
@@ -173,13 +173,6 @@ collidable = false
 [node name="PickupHealth" parent="." instance=ExtResource("16_bupn0")]
 position = Vector2(2032, 976)
 
-[node name="Wind,ext,alley,urban,howl,pronounced,metal,clinking" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(1497, 634)
-stream = ExtResource("17_bihtp")
-autoplay = true
-max_distance = 768.0
-bus = &"EFX"
-
 [node name="Torch3" parent="." instance=ExtResource("14_7gos6")]
 position = Vector2(176, 480)
 lit = false
@@ -224,13 +217,6 @@ lit = false
 position = Vector2(1520, 192)
 lit = false
 
-[node name="Wind,ext,alley,urban,howl,pronounced,metal,clinking2" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(1431, 1095)
-stream = ExtResource("17_bihtp")
-autoplay = true
-max_distance = 768.0
-bus = &"EFX"
-
 [node name="Torch14" parent="." instance=ExtResource("14_7gos6")]
 position = Vector2(1776, 1104)
 lit = false
@@ -260,3 +246,12 @@ scale = Vector2(0.94233555, 1)
 
 [node name="Portal" parent="." instance=ExtResource("22_sx3uk")]
 position = Vector2(512, 709)
+
+[node name="DebrisAmb" parent="." instance=ExtResource("23_r1hhn")]
+position = Vector2(1446, 1151)
+
+[node name="DebrisAmb2" parent="." instance=ExtResource("23_r1hhn")]
+position = Vector2(1495.3586, 652.2999)
+
+[node name="DebrisAmb3" parent="." instance=ExtResource("23_r1hhn")]
+position = Vector2(1773, 193)

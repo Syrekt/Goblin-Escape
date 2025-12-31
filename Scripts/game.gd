@@ -114,6 +114,8 @@ func _ready() -> void:
 	FmodServer.set_global_parameter_by_name("Health", 1.0)
 
 func _process(delta: float) -> void:
+	var fmod_health = FmodServer.get_global_parameter_by_name("Health")
+	Debugger.printui("fmod_health: "+str(fmod_health))
 	if OS.is_debug_build() && Input.is_action_just_pressed("restart"):
 		player.position = MetSys.current_room.spawn_point.position
 	$CanvasModulate.color.r = 0.63 + 0.10 * Options.shadow_intensity

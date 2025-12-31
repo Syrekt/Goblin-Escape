@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://cp7rxyc6buewr"]
+[gd_scene load_steps=12 format=4 uid="uid://cp7rxyc6buewr"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_j42xc"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_xkbw6"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://llhantu0gpcf" path="res://SFX/Wind,Ext,Alley,Urban,Howl,Pronounced,Metal,Clinking.wav" id="8_o7bfl"]
 [ext_resource type="PackedScene" uid="uid://24ijy2g2jylp" path="res://Objects/hiding_spot.tscn" id="9_u1w4d"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="10_ovywn"]
+[ext_resource type="PackedScene" uid="uid://cjjojn21p02vb" path="res://Objects/debris_amb.tscn" id="11_ovywn"]
 
 [node name="DefensiveStancePathExit2" type="Node2D"]
 
@@ -106,12 +107,6 @@ scale = Vector2(0.66467667, 1)
 [node name="GoblinWarrior" parent="." instance=ExtResource("7_jve3d")]
 position = Vector2(1680, 496)
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(1681, 362)
-stream = ExtResource("8_o7bfl")
-max_distance = 256.0
-bus = &"EFX"
-
 [node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(1673, 154)
 stream = ExtResource("8_o7bfl")
@@ -156,3 +151,6 @@ lit = false
 [node name="Torch6" parent="." instance=ExtResource("10_ovywn")]
 position = Vector2(2128, 128)
 lit = false
+
+[node name="DebrisAmb" parent="." instance=ExtResource("11_ovywn")]
+position = Vector2(1681, 384)

@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjjojn21p02vb"]
+
+[sub_resource type="GDScript" id="GDScript_d6t4l"]
+script/source = "extends Node2D
+
+var player : Player
+
+func _ready() -> void:
+	player = Game.get_singleton().player
+
+func _process(delta: float) -> void:
+	$FmodEventEmitter2D.set_parameter(\"Distance\", position.distance_to(player.position))
+"
+
+[node name="DebrisAmb" type="Node2D"]
+script = SubResource("GDScript_d6t4l")
+
+[node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/DungeonAmbienceDebris"
+event_guid = "{d81cee63-470e-4bfd-8619-7903fa2e7e0f}"
+autoplay = true
+fmod_parameters/Distance/id = -4481728682611420914
+fmod_parameters/Distance = 512.0
+fmod_parameters/Distance/variant_type = 3

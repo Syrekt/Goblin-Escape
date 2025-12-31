@@ -107,6 +107,8 @@ var experience_required := 100
 @onready var drink_sfx	: FmodEventEmitter2D = $Audio/DrinkSFX
 @onready var eat_sfx	: FmodEventEmitter2D = $Audio/EatSFX
 @onready var tutorial_sfx	: FmodEventEmitter2D = $Audio/TutorialSFX
+@onready var slide_sfx	: FmodEventEmitter2D = $Audio/SlideSFX
+@onready var land_sfx	: FmodEventEmitter2D = $Audio/LandSFX
 #endregion
 #region Combat
 const SLASH_DAMAGE	:= 15

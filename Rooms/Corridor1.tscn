@@ -10,8 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="7_fvwh6"]
 [ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="8_di3q0"]
 [ext_resource type="PackedScene" uid="uid://bl26mmlff752e" path="res://Objects/key_prompt.tscn" id="9_2oolj"]
-[ext_resource type="AudioStream" uid="uid://llhantu0gpcf" path="res://SFX/Wind,Ext,Alley,Urban,Howl,Pronounced,Metal,Clinking.wav" id="11_bmi46"]
 [ext_resource type="PackedScene" uid="uid://ly85t11hp5u3" path="res://Objects/thought_trigger.tscn" id="12_jfpsl"]
+[ext_resource type="PackedScene" uid="uid://cjjojn21p02vb" path="res://Objects/debris_amb.tscn" id="12_ng1ak"]
 
 [node name="Corridor1" type="Node2D"]
 
@@ -131,13 +131,9 @@ text = "up"
 position = Vector2(833, 345)
 text = "up"
 
-[node name="Wind,ext,alley,urban,howl,pronounced,metal,clinking" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(475, 454)
-stream = ExtResource("11_bmi46")
-autoplay = true
-max_distance = 256.0
-bus = &"EFX"
-
 [node name="ThoughtTrigger" parent="." instance=ExtResource("12_jfpsl")]
 position = Vector2(66, 574)
 thougth = "This dungeon is huge. Looks like it’s abandoned for a long time as well, wonder if I can find anything valuable in here."
+
+[node name="DebrisAmb" parent="." instance=ExtResource("12_ng1ak")]
+position = Vector2(476, 454)

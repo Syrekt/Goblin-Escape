@@ -21,7 +21,6 @@ func _ready() -> void:
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_dthpw")
-starting_map = 3
 
 [node name="LoadingScreen" parent="." instance=ExtResource("2_1cwbi")]
 unique_name_in_owner = true
@@ -113,7 +112,7 @@ unique_name_in_owner = true
 visible = false
 
 [node name="FmodBankLoader" type="FmodBankLoader" parent="."]
-bank_paths = ["res://FModBank/Desktop/Master.bank", "res://FModBank/Desktop/SFX.bank"]
+bank_paths = ["res://FModBank/Desktop/Master.bank", "res://FModBank/Desktop/SFX.bank", "res://FModBank/Desktop/AMB.bank"]
 
 [node name="FModBGMEvent" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/BGM"
@@ -123,3 +122,8 @@ fmod_parameters/Area/id = 7326592970747126824
 fmod_parameters/Area = "Hostile"
 fmod_parameters/Area/labels = PackedStringArray("Safe", "Hostile")
 fmod_parameters/Area/variant_type = 4
+
+[node name="FModAMBEvent" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/DungeonAmbience"
+event_guid = "{3230f691-db91-47e3-9e92-db100bdcc92e}"
+autoplay = true

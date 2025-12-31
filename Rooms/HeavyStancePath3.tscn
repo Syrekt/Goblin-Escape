@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://dvw2u73cfhh0v"]
+[gd_scene load_steps=14 format=4 uid="uid://dvw2u73cfhh0v"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_fa81m"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_nfo5d"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://24ijy2g2jylp" path="res://Objects/hiding_spot.tscn" id="10_4ur7m"]
 [ext_resource type="AudioStream" uid="uid://llhantu0gpcf" path="res://SFX/Wind,Ext,Alley,Urban,Howl,Pronounced,Metal,Clinking.wav" id="11_1rlcy"]
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="12_vmw70"]
+[ext_resource type="PackedScene" uid="uid://cjjojn21p02vb" path="res://Objects/debris_amb.tscn" id="13_pm86j"]
 
 [node name="HeavyStancePath3" type="Node2D"]
 
@@ -142,12 +143,6 @@ volume_db = -2.0
 autoplay = true
 max_distance = 128.0
 
-[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(1807, 149)
-stream = ExtResource("11_1rlcy")
-autoplay = true
-max_distance = 400.0
-
 [node name="Torch4" parent="." instance=ExtResource("9_pl3ab")]
 position = Vector2(544, 288)
 
@@ -165,3 +160,6 @@ position = Vector2(208, 344)
 
 [node name="Crate2" parent="." instance=ExtResource("12_vmw70")]
 position = Vector2(240, 344)
+
+[node name="DebrisAmb" parent="." instance=ExtResource("13_pm86j")]
+position = Vector2(1850, 149)
