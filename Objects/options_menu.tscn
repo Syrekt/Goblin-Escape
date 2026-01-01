@@ -24,7 +24,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 5
+current_tab = 4
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
@@ -390,7 +390,6 @@ max_value = 255.0
 ticks_position = 3
 
 [node name="Gameplay" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
@@ -431,6 +430,18 @@ layout_mode = 2
 text = "Show Tutorials"
 
 [node name="ShowTutorials" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+tooltip_text = "Disabling this will unlock all the available tutorials in 'Tutorials' section."
+
+[node name="HSplitContainer7" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer7"]
+custom_minimum_size = Vector2(124, 0)
+layout_mode = 2
+text = "Screenshake"
+
+[node name="Screenshake" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer7"]
 layout_mode = 2
 tooltip_text = "Disabling this will unlock all the available tutorials in 'Tutorials' section."
 
@@ -489,6 +500,7 @@ max_value = 1.0
 step = 0.1
 
 [node name="Tutorials" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 5
 
@@ -607,6 +619,7 @@ tutorial_code = "Defensive Stance"
 [connection signal="value_changed" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Alpha/NoiseColorAlphaSlider" to="." method="_on_noise_color_alpha_slider_value_changed"]
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer6/AdultContent" to="." method="_on_adult_content_toggled"]
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer/ShowTutorials" to="." method="_on_show_tutorials_toggled"]
+[connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer7/Screenshake" to="." method="_on_screenshake_toggled"]
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2/ShowHints" to="." method="_on_show_hints_toggled"]
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer3/ShowInteractionPrompts" to="." method="_on_show_interaction_prompts_toggled"]
 [connection signal="item_selected" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer4/HudScaleOption" to="." method="_on_hud_scale_option_item_selected"]

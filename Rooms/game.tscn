@@ -118,10 +118,6 @@ bank_paths = ["res://FModBank/Desktop/Master.bank", "res://FModBank/Desktop/SFX.
 event_name = "event:/BGM"
 event_guid = "{06ddf1fe-b6ad-4d95-a0e8-8fa130930846}"
 autoplay = true
-fmod_parameters/Area/id = 7326592970747126824
-fmod_parameters/Area = "Hostile"
-fmod_parameters/Area/labels = PackedStringArray("Safe", "Hostile")
-fmod_parameters/Area/variant_type = 4
 
 [node name="FModAMBEvent" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/DungeonAmbience"

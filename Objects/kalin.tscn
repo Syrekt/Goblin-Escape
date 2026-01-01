@@ -4737,6 +4737,14 @@ event_name = "event:/Heartbeat"
 event_guid = "{e3c15821-141c-474d-9cc4-5db7fe062ef1}"
 volume = 2.0
 
+[node name="UpdateHealthTimer" type="Timer" parent="UI/HUD/Scaled/Health"]
+wait_time = 0.5
+autostart = true
+
+[node name="Exhaustion" type="FmodEventEmitter2D" parent="UI/HUD/Scaled/Health"]
+event_name = "event:/Kalin-Exhaustion"
+event_guid = "{507decb8-aa0f-459a-8e3d-bb0020423fc6}"
+
 [node name="Stamina" type="TextureProgressBar" parent="UI/HUD/Scaled" groups=["HUD"]]
 layout_mode = 0
 offset_left = 22.5
@@ -5669,7 +5677,8 @@ wait_time = 0.1
 one_shot = true
 
 [connection signal="value_changed" from="UI/HUD/Scaled/Health" to="UI" method="_on_health_value_changed"]
-[connection signal="value_changed" from="UI/HUD/Scaled/Health" to="UI/HUD/Scaled/Health" method="_on_value_changed"]
+[connection signal="timeout" from="UI/HUD/Scaled/Health/UpdateHealthTimer" to="UI" method="_on_update_health_timer_timeout"]
+[connection signal="timeout" from="UI/HUD/Scaled/Health/UpdateHealthTimer" to="UI/HUD/Scaled/Health" method="_on_update_health_timer_timeout"]
 [connection signal="value_changed" from="UI/HUD/Scaled/Arousal" to="UI/HUD/Scaled/Arousal" method="_on_value_changed"]
 [connection signal="pressed" from="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer/Close" to="UI/CharacterPanel/Stats" method="_on_close_pressed"]
 [connection signal="pressed" from="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer/Confirm" to="UI/CharacterPanel" method="_on_confirm_pressed"]

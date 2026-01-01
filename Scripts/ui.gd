@@ -16,7 +16,7 @@ func fade_in(time := 1.0) -> void:
 	var tween_ui = create_tween().bind_node(self)
 	tween_ui.tween_property(modulator, "color", Color(1.0, 1.0, 1.0, 1.0), time)
 
-	_on_health_value_changed(health.value)
+	_on_update_health_timer_timeout()
 
 func fade_out(time := 1.0) -> void:
 	var tween_ui = create_tween().bind_node(self)
@@ -26,8 +26,8 @@ func fade_out(time := 1.0) -> void:
 		tween_low_health.pause()
 
 
-func _on_health_value_changed(value: float) -> void:
-	if value <= health.max_value * 0.25:
+func _on_update_health_timer_timeout() -> void:
+	if health.value <= health.max_value * 0.25:
 		tween_low_health.play()
 	else:
 		tween_low_health.pause()

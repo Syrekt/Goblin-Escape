@@ -80,6 +80,7 @@ tile_set = ExtResource("1_5ep3j")
 
 [node name="RoomInstance" parent="." node_paths=PackedStringArray("spawn_point") instance=ExtResource("2_713km")]
 spawn_point = NodePath("../SpawnPoint")
+area = 1
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(372, 732)

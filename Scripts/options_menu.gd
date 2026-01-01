@@ -30,15 +30,13 @@ extends TabContainer
 @onready var amb_volume_slider 		: HSlider = find_child("AMBVolume")
 @onready var bgm_volume_slider 		: HSlider = find_child("BGMVolume")
 
-@onready var tutorial_toggle	: CheckBox = find_child("ShowTutorials")
-@onready var hint_toggle		: CheckBox = find_child("ShowHints")
+@onready var tutorial_toggle			: CheckBox = find_child("ShowTutorials")
+@onready var hint_toggle				: CheckBox = find_child("ShowHints")
 @onready var interaction_prompts_toggle	: CheckBox = find_child("ShowInteractionPrompts")
-
-@onready var hud_scale_option   : OptionButton = find_child("HudScaleOption")
-
-@onready var shadow_intensity_slider   : HSlider = find_child("ShadowIntensity")
-
-@onready var adult_content_toggle : CheckBox = find_child("AdultContent")
+@onready var hud_scale_option			: OptionButton = find_child("HudScaleOption")
+@onready var shadow_intensity_slider	: HSlider = find_child("ShadowIntensity")
+@onready var adult_content_toggle		: CheckBox = find_child("AdultContent")
+@onready var screenshake_toggle			: CheckBox = find_child("Screenshake")
 
 var open_tutorial : CanvasLayer
 
@@ -99,6 +97,7 @@ func _ready() -> void:
 	shadow_intensity_slider.value = shadow_intensity
 
 	adult_content_toggle.set_pressed_no_signal(Options.adult_content_enabled)
+	screenshake_toggle.set_pressed_no_signal(Options.screenshake_enabled)
 
 
 
@@ -280,3 +279,6 @@ func _on_switch_monitor_pressed() -> void:
 	DisplayServer.window_set_current_screen((current_screen + 1) % display_count)
 	notification(NOTIFICATION_WM_SIZE_CHANGED)
 #endregion
+
+func _on_screenshake_toggled(toggled_on: bool) -> void:
+	Options.screenshake_enabled = toggled_on

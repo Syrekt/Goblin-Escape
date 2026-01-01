@@ -204,6 +204,11 @@ func save_game() -> void:
 	save_file.close()
 	print("Game saved: %s" % save_file.get_path())
 func load_game() -> void:
+	var save_file = FileAccess.open("user://"+save_slot+".ge", FileAccess.READ)
+	if !save_file:
+		print("Save file corrupt or doesn't exist")
+		return
+
 	#get_tree().change_scene_to_file("res://Scenes/demo_map.tscn")
 	print("Loading...")
 
@@ -212,11 +217,6 @@ func load_game() -> void:
 	for region : PCamLimit in cam_regions:
 		region.disable_tween()
 
-
-	var save_file = FileAccess.open("user://"+save_slot+".ge", FileAccess.READ)
-	if !save_file:
-		print("Save file corrupt or doesn't exist")
-		return
 
 	loading = true
 	get_tree().paused = true

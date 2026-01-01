@@ -61,7 +61,7 @@ tile_set = ExtResource("1_eyrgu")
 
 [node name="RoomInstance" parent="." node_paths=PackedStringArray("spawn_point") instance=ExtResource("2_ra578")]
 spawn_point = NodePath("../SpawnPoint")
-area = "Silent"
+area = 2
 
 [node name="StairsLong" parent="." instance=ExtResource("3_k0chd")]
 position = Vector2(328, 232)

@@ -14,6 +14,9 @@ var tint_progress_tween : Tween
 var tint_tween : Tween
 var faded := false
 
+var low_health_tween := false
+var high_health_tween := false
+
 @export var fade_out_col : Color = Color(0.125, 0.125, 0.125, 0.0)
 @export var vignette_max_radius := 0.4
 
@@ -58,30 +61,34 @@ func fade_in() -> void:
 	#tint_tween.chain().tween_property(self, "tint_progress", Color.WHITE, 1.0)
 
 
-func _on_value_changed(_value: float) -> void:
+func _on_update_health_timer_timeout() -> void:
 	var game = Game.get_singleton()
-	FmodServer.set_global_parameter_by_name("Health", _value / 100.0)
-	if _value <= max_value * 0.25:
+	FmodServer.set_global_parameter_by_name("Health", value / 100.0)
+	if value <= max_value * 0.25 && !low_health_tween:
+		low_health_tween	= true
+		high_health_tween	= false
 		fmod_heartbeat.play(false)
+
 		health_vignette.show()
 
-		print("health_vignette_tween: "+str(health_vignette_tween))
 
 		if !health_vignette_tween:
 			health_vignette_tween = create_tween().bind_node(health_vignette)
 			health_vignette_tween.finished.connect(update_tween)
 			health_vignette_tween.tween_property(health_vignette.material, "shader_parameter/outer_radius", 2.0 - vignette_max_radius * (1 - (value / (max_value*0.25))), 1.0).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 			health_vignette_tween.tween_property(health_vignette.material, "shader_parameter/outer_radius", 2.0, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	else:
+	elif value > max_value * 0.25 && !high_health_tween:
+		$Exhaustion.play()
+		high_health_tween	= true
+		low_health_tween	= false
 		fmod_heartbeat.stop()
 
 		if health_vignette_tween:
 			health_vignette_tween.kill()
 			health_vignette_tween = null
 		var _tween = create_tween().bind_node(health_vignette)
-		_tween.tween_property(health_vignette.material, "shader_parameter/outer_radius", 5.0, 1.0)
-		_tween.tween_callback(health_vignette.hide)
 		_tween.tween_property(health_vignette.material, "shader_parameter/outer_radius", 3.0, 0.1)
+		_tween.tween_callback(health_vignette.hide)
 	
 
 func update_tween() -> void:

@@ -111,11 +111,12 @@ func _ready() -> void:
 
 	world_refreshed.connect(_on_world_refreshed)
 
+
+	load_game()
+
 	FmodServer.set_global_parameter_by_name("Health", 1.0)
 
 func _process(delta: float) -> void:
-	var fmod_health = FmodServer.get_global_parameter_by_name("Health")
-	Debugger.printui("fmod_health: "+str(fmod_health))
 	if OS.is_debug_build() && Input.is_action_just_pressed("restart"):
 		player.position = MetSys.current_room.spawn_point.position
 	$CanvasModulate.color.r = 0.63 + 0.10 * Options.shadow_intensity
@@ -185,6 +186,7 @@ func load_game():
 			if not loaded_starting_map.is_empty(): # Some compatibility problem.
 				room = loaded_starting_map
 		await load_room(room)
+		FmodServer.set_global_parameter_by_name("Area", MetSys.get_current_room_instance().area)
 
 
 		var room_data : Dictionary = rooms.get(map.name)
@@ -209,6 +211,7 @@ func reset_map_starting_coords() -> void:
 
 func init_room() -> void:
 	MetSys.get_current_room_instance().adjust_camera_limits(player.pcam)
+	FmodServer.set_global_parameter_by_name("Area", MetSys.get_current_room_instance().area)
 	player.on_enter()
 
 	if MetSys.last_player_position.x == Vector2i.MAX.x:

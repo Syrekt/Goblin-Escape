@@ -316,8 +316,10 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 		else:
 			Ge.slow_mo(0, 0.1)
 		health.value -= _damage
-		pcam_noise_emitter.set_noise(noise_type)
-		pcam_noise_emitter.emit()
+		health._on_update_health_timer_timeout()
+		if Options.screenshake_enabled:
+			pcam_noise_emitter.set_noise(noise_type)
+			pcam_noise_emitter.emit()
 		if health.value <= 0.1:
 			print("Health depleted")
 			if _source:
