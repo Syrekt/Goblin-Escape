@@ -15,7 +15,7 @@ var tint_tween : Tween
 var faded := false
 
 var low_health_tween := false
-var high_health_tween := false
+var high_health_tween := true
 
 @export var fade_out_col : Color = Color(0.125, 0.125, 0.125, 0.0)
 @export var vignette_max_radius := 0.4

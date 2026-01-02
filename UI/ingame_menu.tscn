@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://br83n515qy8j2" path="res://Scripts/ingame_menu.gd" id="1_cv5li"]
 [ext_resource type="Texture2D" uid="uid://cx2kdkmk8hhg6" path="res://UI/Goblin Escape - Title.png" id="2_4kmue"]
-[ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://UI/theme_button.tres" id="3_17mr3"]
 [ext_resource type="PackedScene" uid="uid://fgj6dmvmrowh" path="res://Objects/options_menu.tscn" id="4_aoygg"]
+[ext_resource type="Texture2D" uid="uid://cjun6ar81elv4" path="res://UI/checkbox_normal.png" id="5_41bdx"]
 
 [node name="IngameMenu" type="CanvasLayer"]
 process_mode = 3
@@ -32,33 +32,6 @@ grow_vertical = 2
 texture = ExtResource("2_4kmue")
 expand_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-visible = false
-anchors_preset = -1
-anchor_left = 0.041
-anchor_top = 0.624
-anchor_right = 0.041
-anchor_bottom = 0.624
-offset_left = -21.24
-offset_top = -152.64
-offset_right = 29.76
-offset_bottom = -78.64
-scale = Vector2(3, 3)
-theme = ExtResource("3_17mr3")
-alignment = 1
-
-[node name="Continue" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Continue"
-
-[node name="Options" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Options"
-
-[node name="ExitGame" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Quit"
-
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -73,6 +46,12 @@ theme_override_constants/margin_bottom = 34
 [node name="OptionsMenu" parent="MarginContainer" instance=ExtResource("4_aoygg")]
 layout_mode = 2
 
-[connection signal="button_up" from="VBoxContainer/Continue" to="." method="_on_continue_button_up"]
-[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="VBoxContainer/ExitGame" to="." method="_on_exit_game_pressed"]
+[node name="Close" type="Button" parent="."]
+offset_left = 542.0
+offset_top = 60.0
+offset_right = 564.0
+offset_bottom = 82.0
+icon = ExtResource("5_41bdx")
+flat = true
+
+[connection signal="pressed" from="Close" to="." method="_on_close_pressed"]

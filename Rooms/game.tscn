@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3ce8mt521wb5"]
+[gd_scene load_steps=13 format=3 uid="uid://c3ce8mt521wb5"]
 
 [ext_resource type="Script" uid="uid://ckr03m8hdsnts" path="res://Scripts/game.gd" id="1_dthpw"]
 [ext_resource type="PackedScene" uid="uid://d1ido0af5r23x" path="res://Objects/loading_screen.tscn" id="2_1cwbi"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://c6l4itv8om7oy" path="res://Scripts/map_window.gd" id="9_j2sjr"]
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="10_3bxcb"]
 [ext_resource type="PackedScene" uid="uid://uvws5mlmgmab" path="res://Objects/Console.tscn" id="11_1cwbi"]
+[ext_resource type="Script" uid="uid://ccf04o6quvok" path="res://Scripts/start_menu.gd" id="11_aks28"]
 
 [sub_resource type="GDScript" id="GDScript_h4fw4"]
 resource_name = "version"
@@ -21,6 +22,7 @@ func _ready() -> void:
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_dthpw")
+starting_map = 3
 
 [node name="LoadingScreen" parent="." instance=ExtResource("2_1cwbi")]
 unique_name_in_owner = true
@@ -123,3 +125,53 @@ autoplay = true
 event_name = "event:/DungeonAmbience"
 event_guid = "{3230f691-db91-47e3-9e92-db100bdcc92e}"
 autoplay = true
+
+[node name="StartMenu" type="CanvasLayer" parent="." groups=["FullscreenPanel"]]
+script = ExtResource("11_aks28")
+
+[node name="Control" type="Control" parent="StartMenu"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_3bxcb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartMenu/Control"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 69.0
+offset_right = 129.0
+offset_bottom = 240.0
+
+[node name="StartGame" type="Button" parent="StartMenu/Control/VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="Options" type="Button" parent="StartMenu/Control/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Steam" type="Button" parent="StartMenu/Control/VBoxContainer"]
+layout_mode = 2
+text = "Steam"
+
+[node name="Itch" type="Button" parent="StartMenu/Control/VBoxContainer"]
+layout_mode = 2
+text = "Itch"
+
+[node name="Discord" type="Button" parent="StartMenu/Control/VBoxContainer"]
+layout_mode = 2
+text = "Discord"
+
+[node name="Exit" type="Button" parent="StartMenu/Control/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="StartMenu/Control/VBoxContainer/StartGame" to="StartMenu" method="_on_start_game_pressed"]
+[connection signal="pressed" from="StartMenu/Control/VBoxContainer/Options" to="StartMenu" method="_on_options_pressed"]
+[connection signal="pressed" from="StartMenu/Control/VBoxContainer/Steam" to="StartMenu" method="_on_steam_pressed"]
+[connection signal="pressed" from="StartMenu/Control/VBoxContainer/Itch" to="StartMenu" method="_on_itch_pressed"]
+[connection signal="pressed" from="StartMenu/Control/VBoxContainer/Discord" to="StartMenu" method="_on_discord_pressed"]
+[connection signal="pressed" from="StartMenu/Control/VBoxContainer/Exit" to="StartMenu" method="_on_exit_pressed"]

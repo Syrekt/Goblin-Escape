@@ -669,7 +669,7 @@ func toggle_pause_menu() -> void:
 		ui_nodes = get_tree().get_nodes_in_group("UIPanel")
 		for node in ui_nodes: if node.visible: return
 
-		var open_menu : MainMenu = get_tree().current_scene.get_node_or_null("IngameMenu")
+		var open_menu : CanvasLayer = get_tree().current_scene.get_node_or_null("IngameMenu")
 		if !open_menu:
 			open_menu = ingame_menu.instantiate()
 			get_tree().current_scene.add_child(open_menu)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://fgj6dmvmrowh"]
+[gd_scene load_steps=15 format=3 uid="uid://fgj6dmvmrowh"]
 
 [ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://UI/theme_button.tres" id="1_ucjbo"]
 [ext_resource type="Script" uid="uid://bnymdbpnxf6a0" path="res://Scripts/options_menu.gd" id="2_iopgn"]
 [ext_resource type="Script" uid="uid://bfd22kixp4ppo" path="res://Scripts/toggle_button.gd" id="2_ucjbo"]
 [ext_resource type="PackedScene" uid="uid://hvdtjmpwq6ji" path="res://UI/Buttons/button_keybind.tscn" id="3_iopgn"]
+[ext_resource type="Texture2D" uid="uid://fyevcw0t8yc" path="res://UI/panel_bg.png" id="5_aqc70"]
 [ext_resource type="Script" uid="uid://cbsarrmo5l05n" path="res://Scripts/tutorial_button.gd" id="5_iopgn"]
 [ext_resource type="PackedScene" uid="uid://bfrfvr3f2ii41" path="res://Tutorial/stealth_tutorial.tscn" id="6_1amdw"]
 [ext_resource type="PackedScene" uid="uid://vma4r5yyfdym" path="res://Tutorial/combat_tutorial.tscn" id="6_gicec"]
@@ -12,6 +13,30 @@
 [ext_resource type="PackedScene" uid="uid://bkj14myaccvt3" path="res://Tutorial/fatigue_smell_tutorial.tscn" id="8_b20id"]
 [ext_resource type="PackedScene" uid="uid://cg2vx6oh1c1lc" path="res://Tutorial/environmental_kill_tutorial.tscn" id="9_3hwek"]
 [ext_resource type="PackedScene" uid="uid://c8uuwyqh6p5lx" path="res://Tutorial/enemy_patrol_tutorial.tscn" id="10_845id"]
+
+[sub_resource type="GDScript" id="GDScript_aqc70"]
+script/source = "extends NinePatchRect
+
+func _ready() -> void:
+	var icon_no = Ge.get_action_keycode(\"ui_cancel\", true)
+	var icon_yes = Ge.get_action_keycode(\"ui_accept\", true)
+	$No.icon = load(icon_no)
+	$Yes.icon = load(icon_yes)
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed(\"ui_accept\"):
+		_on_yes_pressed()
+	elif Input.is_action_just_pressed(\"ui_cancel\"):
+		_on_no_pressed()
+
+func _on_yes_pressed() -> void:
+	if FileAccess.file_exists(\"user://save1.ge\"):
+		DirAccess.remove_absolute(\"user://save1.ge\")
+	get_tree().quit()
+
+func _on_no_pressed() -> void:
+	hide()
+"
 
 [node name="OptionsMenu" type="TabContainer"]
 process_mode = 3
@@ -499,6 +524,59 @@ layout_mode = 2
 max_value = 1.0
 step = 0.1
 
+[node name="ResetSave" type="Button" parent="Gameplay/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Reset Save"
+
+[node name="ResetSaveConfirmation" type="NinePatchRect" parent="Gameplay/MarginContainer/VBoxContainer/ResetSave"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 127.0
+offset_top = -80.0
+offset_right = 327.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_aqc70")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = SubResource("GDScript_aqc70")
+
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/ResetSave/ResetSaveConfirmation"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 8.0
+offset_right = 189.0
+offset_bottom = 39.0
+text = "This will delete the save and quit the game, are you sure?"
+autowrap_mode = 2
+metadata/_edit_group_ = true
+
+[node name="Yes" type="Button" parent="Gameplay/MarginContainer/VBoxContainer/ResetSave/ResetSaveConfirmation"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 41.0
+offset_right = 75.0
+offset_bottom = 63.0
+text = "Yes"
+
+[node name="No" type="Button" parent="Gameplay/MarginContainer/VBoxContainer/ResetSave/ResetSaveConfirmation"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 41.0
+offset_right = 170.0
+offset_bottom = 63.0
+text = "No"
+
 [node name="Tutorials" type="TabBar" parent="."]
 visible = false
 layout_mode = 2
@@ -624,3 +702,6 @@ tutorial_code = "Defensive Stance"
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer3/ShowInteractionPrompts" to="." method="_on_show_interaction_prompts_toggled"]
 [connection signal="item_selected" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer4/HudScaleOption" to="." method="_on_hud_scale_option_item_selected"]
 [connection signal="drag_ended" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer5/ShadowIntensity" to="." method="_on_shadow_intensity_drag_ended"]
+[connection signal="pressed" from="Gameplay/MarginContainer/VBoxContainer/ResetSave" to="." method="_on_reset_save_pressed"]
+[connection signal="pressed" from="Gameplay/MarginContainer/VBoxContainer/ResetSave/ResetSaveConfirmation/Yes" to="Gameplay/MarginContainer/VBoxContainer/ResetSave/ResetSaveConfirmation" method="_on_yes_pressed"]
+[connection signal="pressed" from="Gameplay/MarginContainer/VBoxContainer/ResetSave/ResetSaveConfirmation/No" to="Gameplay/MarginContainer/VBoxContainer/ResetSave/ResetSaveConfirmation" method="_on_no_pressed"]

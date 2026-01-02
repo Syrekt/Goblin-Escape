@@ -32,6 +32,7 @@ offset_left = 224.0
 offset_top = 192.0
 offset_right = 272.0
 offset_bottom = 214.0
+focus_neighbor_right = NodePath("../No")
 text = "Yes"
 
 [node name="No" type="Button" parent="Control"]
@@ -40,6 +41,7 @@ offset_left = 336.0
 offset_top = 192.0
 offset_right = 384.0
 offset_bottom = 214.0
+focus_neighbor_left = NodePath("../Yes")
 text = "No"
 
 [node name="Label" type="Label" parent="Control"]

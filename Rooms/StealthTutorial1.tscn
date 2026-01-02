@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://sitlgpgjk877"]
+[gd_scene load_steps=15 format=4 uid="uid://sitlgpgjk877"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_y5k7f"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_hh4n8"]
@@ -14,7 +14,6 @@
 [ext_resource type="Resource" uid="uid://57f3ouwjl4a0" path="res://Dialogues/demo_stage.dialogue" id="13_niydt"]
 [ext_resource type="PackedScene" uid="uid://dkyt1q4ive1yi" path="res://Map/Props/stairs_long.tscn" id="13_qu2mt"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="14_f0tg6"]
-[ext_resource type="PackedScene" uid="uid://b8rlvg8w53iwn" path="res://Objects/scroll.tscn" id="15_clw2p"]
 
 [node name="StealthTutorial1" type="Node2D"]
 
@@ -119,7 +118,7 @@ position = Vector2(872, 72)
 collision_layer = 2049
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(2385, 357)
+position = Vector2(1321.8698, 37.76236)
 
 [node name="PlatformCollider" parent="." instance=ExtResource("13_f0tg6")]
 position = Vector2(1648, 240)
@@ -183,13 +182,3 @@ dialogue_resource = ExtResource("13_niydt")
 dialogue_start = "enemy_patrol"
 camera_focus_path = NodePath("../Goblin")
 auto = true
-
-[node name="Scroll" parent="." instance=ExtResource("15_clw2p")]
-position = Vector2(2357, 355)
-diary_owner = "Ann"
-diary_page = 1
-
-[node name="Scroll2" parent="." instance=ExtResource("15_clw2p")]
-position = Vector2(2281, 358)
-diary_owner = "Gawath"
-diary_page = 1

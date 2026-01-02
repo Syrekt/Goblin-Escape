@@ -401,7 +401,7 @@ func one_shot_dialogue(text: String) -> void:
 	var balloon = BALLOON.instantiate()
 	get_tree().current_scene.add_child(balloon)
 	balloon.start(dialogue_resource, "title")
-func get_action_keycode(action:String) -> String:
+func get_action_keycode(action:String,return_full_path := false) -> String:
 	#print("Get action keycode: "+str(action))
 	var action_events = InputMap.action_get_events(action)
 	#print("action_events: "+str(action_events))
@@ -429,6 +429,18 @@ func get_action_keycode(action:String) -> String:
 	#	"action_events": action_events,
 	#}
 	#SentrySDK.add_breadcrumb(crumb)
+	if return_full_path:
+		#res://UI/Buttons/
+		var filepath := ""
+		if last_input_type == "keyboard":
+			filepath = "res://UI/Buttons/button_keyboard_" + action_keycode.to_lower() + ".png"
+		elif last_input_type == "gamepad":
+			filepath = "res://UI/Buttons/buttons_xbox" + action_keycode.to_lower() + ".png"
+
+		if !ResourceLoader.exists(filepath):
+			printerr("Can't find input icon %s" % filepath)
+		return filepath
+
 	return action_keycode
 #endregion
 func fmod_play_event(event_name:String) -> void:

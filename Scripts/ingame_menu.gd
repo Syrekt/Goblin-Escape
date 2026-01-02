@@ -1,6 +1,9 @@
-extends MainMenu
+class_name IngameMenu extends CanvasLayer
+
 
 var skip_first_event := true
+
+@onready var close_button : Button = $Close
 
 
 func _process(delta: float) -> void:
@@ -11,6 +14,6 @@ func _process(delta: float) -> void:
 			queue_free()
 	skip_first_event = false
 
-func _on_continue_button_up() -> void:
+func _on_close_pressed() -> void:
 	get_tree().paused = false;
 	queue_free()

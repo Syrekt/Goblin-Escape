@@ -282,3 +282,7 @@ func _on_switch_monitor_pressed() -> void:
 
 func _on_screenshake_toggled(toggled_on: bool) -> void:
 	Options.screenshake_enabled = toggled_on
+
+
+func _on_reset_save_pressed() -> void:
+	$Gameplay/MarginContainer/VBoxContainer/ResetSave/ResetSaveConfirmation.show()

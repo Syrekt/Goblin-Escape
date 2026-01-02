@@ -82,6 +82,8 @@
 [ext_resource type="Texture2D" uid="uid://cywhcouoj6ral" path="res://Kalin/Sprites/Kalin-Stun.png" id="45_pat22"]
 [ext_resource type="Texture2D" uid="uid://bp5grpvcbv7uq" path="res://UI/Sliders/spr_healthbar1_empty.png" id="46_586st"]
 [ext_resource type="Texture2D" uid="uid://cnjxqb8coj4wg" path="res://UI/Sliders/spr_healthbar_light.png" id="47_80r2e"]
+[ext_resource type="Texture2D" uid="uid://4xqhf475s735" path="res://UI/Sliders/struggle_frame.png" id="47_lc2pc"]
+[ext_resource type="Texture2D" uid="uid://cb4lmj68fsv6o" path="res://UI/Sliders/struggle_progress.png" id="48_bve67"]
 [ext_resource type="Script" uid="uid://7g1nk1glip7t" path="res://Kalin/States/push_idle.gd" id="48_mwqkq"]
 [ext_resource type="Texture2D" uid="uid://bysj6ond8blq7" path="res://UI/Sliders/spr_healthbar_full.png" id="48_rbk27"]
 [ext_resource type="PackedScene" uid="uid://dfus8vjt4jvau" path="res://UI/Buttons/stat_panel.tscn" id="48_t42fh"]
@@ -129,8 +131,6 @@
 [ext_resource type="AudioStream" uid="uid://cky5m7018jb2l" path="res://SFX/Kalin/HIT 01.wav" id="81_lsbl4"]
 [ext_resource type="AudioStream" uid="uid://bs6xrkccvjvu7" path="res://SFX/Kalin/Heavy sword woosh 11.wav" id="82_8nsgr"]
 [ext_resource type="Script" uid="uid://ujev05elxx65" path="res://Kalin/States/struggle.gd" id="83_441gv"]
-[ext_resource type="Texture2D" uid="uid://cn50pdxbrvllo" path="res://UI/Sliders/health_frame.png" id="84_8epdb"]
-[ext_resource type="Texture2D" uid="uid://yh6p23n7un5u" path="res://UI/Sliders/cur_health.png" id="85_6ykrs"]
 [ext_resource type="AudioStream" uid="uid://bdqasi1uw1jm5" path="res://SFX/Kalin/stab1.wav" id="85_exvqe"]
 [ext_resource type="AudioStream" uid="uid://c50be1pxoc3bn" path="res://SFX/Kalin/Sword Woosh 12.wav" id="86_cbw7l"]
 [ext_resource type="Script" uid="uid://dle5lttkqb3t8" path="res://Kalin/States/break_free.gd" id="87_6ykrs"]
@@ -5127,8 +5127,8 @@ offset_right = 41.0
 offset_bottom = -20.0
 max_value = 200.0
 value = 22.0
-texture_under = ExtResource("84_8epdb")
-texture_progress = ExtResource("85_6ykrs")
+texture_under = ExtResource("47_lc2pc")
+texture_progress = ExtResource("48_bve67")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="StruggleProgressBar"]
 position = Vector2(26, -11)
