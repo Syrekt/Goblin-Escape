@@ -28,6 +28,12 @@ func _process(delta: float) -> void:
 	var room_size = Vector2(map_size * tile_size)
 	var padding = 10;
 	
+	#region Draw Enemy Markers
+	var ui_nodes = get_tree().get_nodes_in_group("FullscreenPanel")
+	var node_found := false
+	for node in ui_nodes:
+		if node.visible:
+			return
 	for node in markers.keys():
 		if !is_instance_valid(node):
 			markers[node].queue_free()
@@ -59,6 +65,7 @@ func _process(delta: float) -> void:
 		markers[node].position = node.global_position - game.player.pcam.global_position
 		markers[node].position.x = clamp(markers[node].position.x, -viewport_rect.size.x/2 + padding, viewport_rect.size.x/2 - padding)
 		markers[node].position.y = clamp(markers[node].position.y, -viewport_rect.size.y/2 + padding, viewport_rect.size.y/2 - padding)
+	#endregion
 
 func _on_room_load() -> void:
 	for marker in markers:

@@ -1,0 +1,25 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dsrglvwu5v23w"]
+
+[ext_resource type="FontFile" uid="uid://csqmycib1f50u" path="res://Fonts/antiquity-print.ttf" id="1_28yvy"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_28yvy"]
+
+[resource]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(0.5720602, 0.0838807, 0.38955167, 1)
+Button/colors/font_outline_color = Color(0.86666316, 0.74716234, 0.5047333, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0)
+Button/colors/icon_focus_color = Color(1, 1, 1, 0)
+Button/colors/icon_hover_color = Color(1, 1, 1, 0)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 0)
+Button/colors/icon_normal_color = Color(1, 1, 1, 0)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 0)
+Button/constants/outline_size = 3
+Button/font_sizes/font_size = 13
+Button/fonts/font = ExtResource("1_28yvy")
+Button/styles/disabled = null
+Button/styles/focus = SubResource("StyleBoxTexture_28yvy")
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null

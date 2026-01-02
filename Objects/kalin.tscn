@@ -4621,12 +4621,14 @@ save_list = Array[String](["vitality", "strength", "endurance", "level", "has_sw
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
+position = Vector2(-64, 0)
 script = ExtResource("2_y4shw")
-follow_mode = 1
+follow_mode = 2
 follow_target = NodePath("..")
+zoom = Vector2(2, 2)
 snap_to_pixel = true
 tween_resource = SubResource("Resource_3pkug")
-follow_damping = true
+follow_offset = Vector2(-64, 0)
 draw_limits = true
 _preview_noise = false
 noise_emitter_layer = 1
@@ -4634,7 +4636,9 @@ metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
+position = Vector2(-64, 0)
 ignore_rotation = false
+zoom = Vector2(2, 2)
 process_callback = 0
 editor_draw_limits = true
 script = ExtResource("2_0g2co")

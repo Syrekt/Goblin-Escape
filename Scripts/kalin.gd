@@ -959,6 +959,8 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
+	# Reset combat target if player isn't targeted by the combat target
+	if combat_target && !combat_target.chase_target: combat_target = null
 	#region Attack costs
 	slash_cost	= lerp(1.0, MAX_SLASH_FATIGUE, fatigue.value/100) * pow(strength, SLASH_FATIGUE_STRENGTH_MOD)/pow(endurance, SLASH_FATIGUE_ENDURANCE_MOD)
 	stab_cost	= lerp(0.5, MAX_STAB_FATIGUE, fatigue.value/100) * pow(strength, STAB_FATIGUE_STRENGTH_MOD)/pow(endurance, STAB_FATIGUE_ENDURANCE_MOD)
@@ -975,22 +977,6 @@ func _process(delta: float) -> void:
 	#region Auto climb
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
-	#endregion
-	#region Camera combat position
-	if combat_target:
-		if combat_target.state_node.state.name == "death": combat_target = null
-		elif !combat_target.chase_target: combat_target = null
-	if !controls_disabled && pcam:
-		in_combat_state = state_node.state.is_in_group("combat_state")
-		if in_combat_state && combat_target:
-			pcam.follow_mode = pcam.FollowMode.GROUP
-			pcam.set_follow_targets([self, combat_target] as Array[Node2D])
-			#pcam.draw_limits = false
-		elif pcam.follow_mode == pcam.FollowMode.GROUP:
-			pcam.follow_mode = pcam.FollowMode.GLUED
-			pcam.set_follow_target(self)
-			#if pcam.limit_target:
-			#	pcam.draw_limits = true
 	#endregion
 	#region Open menu & Inventory
 	if !controls_disabled && Input.is_action_just_pressed("ui_cancel"):
@@ -1094,3 +1080,25 @@ func _unhandled_key_input(event: InputEvent) -> void:
 				var items = inventory_panel.inventory.items
 				for item in items:
 					print("item.name: "+str(item.name));
+
+
+func _on_state_machine_state_changed(state:State) -> void:
+	if !pcam: return
+	print("pcam.follow_damping: "+str(pcam.follow_damping));
+	print("pcam.follow_mode: "+str(pcam.follow_mode));
+
+	if state.name == "death":
+		combat_target = null
+
+	if state.is_in_group("combat_state"):
+		if combat_target:
+			pcam.follow_mode = pcam.FollowMode.GROUP
+			pcam.set_follow_targets([self, combat_target] as Array[Node2D])
+		elif pcam.follow_mode == pcam.FollowMode.GROUP:
+			pcam.follow_mode = pcam.FollowMode.SIMPLE
+	elif state.is_in_group("sex_state"):
+		pcam.follow_mode = PhantomCamera2D.FollowMode.SIMPLE
+		pcam.set_zoom(Vector2(2, 2))
+	else:
+		pcam.follow_mode = PhantomCamera2D.FollowMode.SIMPLE
+		pcam.set_zoom(Vector2(1, 1))

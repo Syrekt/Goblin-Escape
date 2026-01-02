@@ -4,6 +4,8 @@ class_name FSM extends Node
 var last_state: State = null
 var state_timer: Timer
 
+signal state_changed
+
 @onready var state: State = (func get_initial_state() -> State:
 	return initial_state if initial_state != null else get_child(0)
 ).call()
@@ -53,6 +55,7 @@ func _transition_to_next_state(target_state_path: String, data: Dictionary = {})
 	state.exit()
 	state = get_node(target_state_path)
 	state.enter(previous_state_path, data)
+	state_changed.emit(state)
 
 func _on_state_timer_timeout() -> void:
 	state.elapsed_time += 0.1
