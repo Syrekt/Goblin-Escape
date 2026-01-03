@@ -62,9 +62,17 @@ func fade_in() -> void:
 
 
 func _on_update_health_timer_timeout() -> void:
-	var game = Game.get_singleton()
-	FmodServer.set_global_parameter_by_name("Health", value / 100.0)
-	if value <= max_value * 0.25 && !low_health_tween:
+	var state : State = Game.get_singleton().player.state_node.state
+	if state.is_in_group("sex_state") && Options.disable_low_health_effects_on_sex:
+		FmodServer.set_global_parameter_by_name("Health", 1)
+	else:
+		FmodServer.set_global_parameter_by_name("Health", value / 100.0)
+
+	var activate_low_health_effects : bool = value <= max_value * 0.25 && !low_health_tween
+	var prevent_low_health_effects 	: bool = state.is_in_group("sex_state") && Options.disable_low_health_effects_on_sex
+	var disable_low_health_effects	: bool = (value > max_value * 0.25 || prevent_low_health_effects) && !high_health_tween
+
+	if !prevent_low_health_effects && activate_low_health_effects:
 		low_health_tween	= true
 		high_health_tween	= false
 		fmod_heartbeat.play(false)
@@ -77,7 +85,7 @@ func _on_update_health_timer_timeout() -> void:
 			health_vignette_tween.finished.connect(update_tween)
 			health_vignette_tween.tween_property(health_vignette.material, "shader_parameter/outer_radius", 2.0 - vignette_max_radius * (1 - (value / (max_value*0.25))), 1.0).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 			health_vignette_tween.tween_property(health_vignette.material, "shader_parameter/outer_radius", 2.0, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	elif value > max_value * 0.25 && !high_health_tween:
+	elif disable_low_health_effects:
 		$Exhaustion.play()
 		high_health_tween	= true
 		low_health_tween	= false

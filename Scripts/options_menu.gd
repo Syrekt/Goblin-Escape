@@ -37,6 +37,8 @@ extends TabContainer
 @onready var shadow_intensity_slider	: HSlider = find_child("ShadowIntensity")
 @onready var adult_content_toggle		: CheckBox = find_child("AdultContent")
 @onready var screenshake_toggle			: CheckBox = find_child("Screenshake")
+@onready var low_health_fx				: CheckBox = find_child("LowHealthFX")
+
 
 var open_tutorial : CanvasLayer
 
@@ -98,6 +100,7 @@ func _ready() -> void:
 
 	adult_content_toggle.set_pressed_no_signal(Options.adult_content_enabled)
 	screenshake_toggle.set_pressed_no_signal(Options.screenshake_enabled)
+	low_health_fx.set_pressed_no_signal(Options.disable_low_health_effects_on_sex)
 
 
 
@@ -286,3 +289,7 @@ func _on_screenshake_toggled(toggled_on: bool) -> void:
 
 func _on_reset_save_pressed() -> void:
 	$Gameplay/MarginContainer/VBoxContainer/ResetSave/ResetSaveConfirmation.show()
+
+
+func _on_low_health_fx_toggled(toggled_on: bool) -> void:
+	Options.disable_low_health_effects_on_sex = toggled_on

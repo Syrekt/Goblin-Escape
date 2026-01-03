@@ -437,9 +437,10 @@ size_flags_vertical = 0
 
 [node name="HSplitContainer6" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2
+dragging_enabled = false
 
 [node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer6"]
-custom_minimum_size = Vector2(124, 0)
+custom_minimum_size = Vector2(157, 0)
 layout_mode = 2
 text = "Adult Content"
 
@@ -448,9 +449,10 @@ layout_mode = 2
 
 [node name="HSplitContainer" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2
+dragging_enabled = false
 
 [node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer"]
-custom_minimum_size = Vector2(124, 0)
+custom_minimum_size = Vector2(157, 0)
 layout_mode = 2
 text = "Show Tutorials"
 
@@ -460,9 +462,10 @@ tooltip_text = "Disabling this will unlock all the available tutorials in 'Tutor
 
 [node name="HSplitContainer7" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2
+dragging_enabled = false
 
 [node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer7"]
-custom_minimum_size = Vector2(124, 0)
+custom_minimum_size = Vector2(157, 0)
 layout_mode = 2
 text = "Screenshake"
 
@@ -472,9 +475,10 @@ tooltip_text = "Disabling this will unlock all the available tutorials in 'Tutor
 
 [node name="HSplitContainer2" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2
+dragging_enabled = false
 
 [node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2"]
-custom_minimum_size = Vector2(124, 0)
+custom_minimum_size = Vector2(157, 0)
 layout_mode = 2
 text = "Show Hints"
 
@@ -484,9 +488,10 @@ tooltip_text = "Show gameplay tips."
 
 [node name="HSplitContainer3" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2
+dragging_enabled = false
 
 [node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer3"]
-custom_minimum_size = Vector2(124, 0)
+custom_minimum_size = Vector2(157, 0)
 layout_mode = 2
 text = "Show Interaction Prompts"
 
@@ -494,11 +499,25 @@ text = "Show Interaction Prompts"
 layout_mode = 2
 tooltip_text = "Shows the interaction key above Kalin when in range of interactables."
 
+[node name="HSplitContainer8" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
+layout_mode = 2
+dragging_enabled = false
+
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer8"]
+custom_minimum_size = Vector2(157, 0)
+layout_mode = 2
+text = "Disable Low Health FX on Sex"
+
+[node name="LowHealthFX" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer8"]
+layout_mode = 2
+tooltip_text = "Shows the interaction key above Kalin when in range of interactables."
+
 [node name="HSplitContainer4" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2
+dragging_enabled = false
 
 [node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer4"]
-custom_minimum_size = Vector2(111, 0)
+custom_minimum_size = Vector2(157, 0)
 layout_mode = 2
 text = "HUD Scale"
 
@@ -513,6 +532,7 @@ popup/item_1/id = 1
 
 [node name="HSplitContainer5" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2
+dragging_enabled = false
 
 [node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer5"]
 custom_minimum_size = Vector2(76, 0)
@@ -700,6 +720,7 @@ tutorial_code = "Defensive Stance"
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer7/Screenshake" to="." method="_on_screenshake_toggled"]
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2/ShowHints" to="." method="_on_show_hints_toggled"]
 [connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer3/ShowInteractionPrompts" to="." method="_on_show_interaction_prompts_toggled"]
+[connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer8/LowHealthFX" to="." method="_on_low_health_fx_toggled"]
 [connection signal="item_selected" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer4/HudScaleOption" to="." method="_on_hud_scale_option_item_selected"]
 [connection signal="drag_ended" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer5/ShadowIntensity" to="." method="_on_shadow_intensity_drag_ended"]
 [connection signal="pressed" from="Gameplay/MarginContainer/VBoxContainer/ResetSave" to="." method="_on_reset_save_pressed"]

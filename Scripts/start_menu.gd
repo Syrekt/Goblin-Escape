@@ -4,9 +4,9 @@ class_name StartMenu extends CanvasLayer
 var ingame_menu = preload("res://UI/ingame_menu.tscn")
 var ingame_menu_inst : IngameMenu = null
 
-#func _ready() -> void:
-#	if OS.is_debug_build():
-#		queue_free()
+func _ready() -> void:
+	if OS.is_debug_build():
+		queue_free()
 
 func _on_start_game_pressed() -> void:
 	var player : Player = Game.get_singleton().player

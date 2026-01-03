@@ -788,6 +788,8 @@ func _ready() -> void:
 		has_sword = true
 		has_heavy_stance = true
 		has_defensive_stance = true
+		state_node.state_changed.connect(_on_state_machine_state_changed)
+		pcam.set_follow_offset(Vector2(0, 0))
 	#get_tree().current_scene.emit_signal("player_ready", self) #owner should be root node
 #endregion
 #region Physics
@@ -1068,20 +1070,6 @@ func _on_fullscreen_panel_closed() -> void:
 func _on_coyote_timer_timeout() -> void:
 	coyote = false
 	print("Coyote timer timeout")
-#endregion
-func _unhandled_key_input(event: InputEvent) -> void:
-	if OS.is_debug_build() && event.is_pressed():
-		match event.keycode:
-			KEY_U:
-				toggle_character_panel()
-			KEY_O:
-				experience.add(9999)
-			KEY_V:
-				var items = inventory_panel.inventory.items
-				for item in items:
-					print("item.name: "+str(item.name));
-
-
 func _on_state_machine_state_changed(state:State) -> void:
 	if !pcam: return
 	print("pcam.follow_damping: "+str(pcam.follow_damping));
@@ -1098,7 +1086,23 @@ func _on_state_machine_state_changed(state:State) -> void:
 			pcam.follow_mode = pcam.FollowMode.SIMPLE
 	elif state.is_in_group("sex_state"):
 		pcam.follow_mode = PhantomCamera2D.FollowMode.SIMPLE
-		pcam.set_zoom(Vector2(2, 2))
+		create_tween().tween_property(pcam, "zoom", Vector2(2, 2), 1.0)
+		#pcam.set_zoom(Vector2(2, 2))
 	else:
 		pcam.follow_mode = PhantomCamera2D.FollowMode.SIMPLE
-		pcam.set_zoom(Vector2(1, 1))
+		create_tween().tween_property(pcam, "zoom", Vector2(1, 1), 1.0)
+		#pcam.set_zoom(Vector2(1, 1))
+#endregion
+func _unhandled_key_input(event: InputEvent) -> void:
+	if OS.is_debug_build() && event.is_pressed():
+		match event.keycode:
+			KEY_U:
+				toggle_character_panel()
+			KEY_O:
+				experience.add(9999)
+			KEY_V:
+				var items = inventory_panel.inventory.items
+				for item in items:
+					print("item.name: "+str(item.name));
+
+
