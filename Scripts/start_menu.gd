@@ -41,6 +41,7 @@ func _on_discord_pressed() -> void:
 
 
 func _on_exit_pressed() -> void:
+	print_stack()
 	get_tree().quit()
 
 

@@ -17,12 +17,6 @@ func _ready() -> void:
 	set_text_for_key()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
-
 func set_action_name() -> void:
 	match action_name:
 		"up":

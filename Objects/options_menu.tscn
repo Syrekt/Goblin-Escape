@@ -24,6 +24,8 @@ func _ready() -> void:
 	$Yes.icon = load(icon_yes)
 
 func _process(delta: float) -> void:
+	if !visible: return
+	
 	if Input.is_action_just_pressed(\"ui_accept\"):
 		_on_yes_pressed()
 	elif Input.is_action_just_pressed(\"ui_cancel\"):
@@ -32,6 +34,7 @@ func _process(delta: float) -> void:
 func _on_yes_pressed() -> void:
 	if FileAccess.file_exists(\"user://save1.ge\"):
 		DirAccess.remove_absolute(\"user://save1.ge\")
+	print_stack()
 	get_tree().quit()
 
 func _on_no_pressed() -> void:
@@ -49,7 +52,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 4
+current_tab = 2
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
@@ -228,7 +231,6 @@ step = 0.1
 value = 1.0
 
 [node name="Controls" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -415,6 +417,7 @@ max_value = 255.0
 ticks_position = 3
 
 [node name="Gameplay" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 

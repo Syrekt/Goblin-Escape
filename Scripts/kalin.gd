@@ -1072,8 +1072,6 @@ func _on_coyote_timer_timeout() -> void:
 	print("Coyote timer timeout")
 func _on_state_machine_state_changed(state:State) -> void:
 	if !pcam: return
-	print("pcam.follow_damping: "+str(pcam.follow_damping));
-	print("pcam.follow_mode: "+str(pcam.follow_mode));
 
 	if state.name == "death":
 		combat_target = null
@@ -1087,11 +1085,9 @@ func _on_state_machine_state_changed(state:State) -> void:
 	elif state.is_in_group("sex_state"):
 		pcam.follow_mode = PhantomCamera2D.FollowMode.SIMPLE
 		create_tween().tween_property(pcam, "zoom", Vector2(2, 2), 1.0)
-		#pcam.set_zoom(Vector2(2, 2))
 	else:
 		pcam.follow_mode = PhantomCamera2D.FollowMode.SIMPLE
 		create_tween().tween_property(pcam, "zoom", Vector2(1, 1), 1.0)
-		#pcam.set_zoom(Vector2(1, 1))
 #endregion
 func _unhandled_key_input(event: InputEvent) -> void:
 	if OS.is_debug_build() && event.is_pressed():

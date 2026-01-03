@@ -1,9 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://odampnuj1yqg"]
+[gd_scene load_steps=10 format=3 uid="uid://odampnuj1yqg"]
 
 [ext_resource type="Script" uid="uid://br83n515qy8j2" path="res://Scripts/ingame_menu.gd" id="1_cv5li"]
 [ext_resource type="Texture2D" uid="uid://cx2kdkmk8hhg6" path="res://UI/Goblin Escape - Title.png" id="2_4kmue"]
 [ext_resource type="PackedScene" uid="uid://fgj6dmvmrowh" path="res://Objects/options_menu.tscn" id="4_aoygg"]
 [ext_resource type="Texture2D" uid="uid://cjun6ar81elv4" path="res://UI/checkbox_normal.png" id="5_41bdx"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_41bdx"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aoygg"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_woycq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hu0m6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qhtj3"]
 
 [node name="IngameMenu" type="CanvasLayer"]
 process_mode = 3
@@ -49,8 +59,13 @@ layout_mode = 2
 [node name="Close" type="Button" parent="."]
 offset_left = 542.0
 offset_top = 60.0
-offset_right = 564.0
-offset_bottom = 82.0
+offset_right = 556.0
+offset_bottom = 74.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_41bdx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_aoygg")
+theme_override_styles/hover = SubResource("StyleBoxTexture_woycq")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_hu0m6")
+theme_override_styles/focus = SubResource("StyleBoxTexture_qhtj3")
 icon = ExtResource("5_41bdx")
 flat = true
 

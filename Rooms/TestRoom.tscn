@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://d1ido0af5r23x" path="res://Objects/loading_screen.tscn" id="3_yqoo0"]
 [ext_resource type="PackedScene" uid="uid://45snbjkrrgyc" path="res://UI/death_screen.tscn" id="4_yut4v"]
 [ext_resource type="PackedScene" uid="uid://bxgqi0q1okfjx" path="res://Objects/screen_fade.tscn" id="5_kvfyn"]
-[ext_resource type="PackedScene" uid="uid://h6taionkkj78" path="res://Map/Fast Travel/tunnel_entrance.tscn" id="8_eoe1y"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="8_m3pp0"]
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="9_m3pp0"]
 [ext_resource type="PackedScene" uid="uid://dejaaa7dsd8yv" path="res://Inventory/Pickup Objects/pickup_water.tscn" id="10_kgm4x"]
 [ext_resource type="Texture2D" uid="uid://wcoq7ay5eurm" path="res://UI/rpg_icon_pack.png" id="11_o0wdf"]
-[ext_resource type="PackedScene" path="res://Inventory/Pickup Objects/skill_pickup.tscn" id="11_oqx7d"]
+[ext_resource type="PackedScene" uid="uid://cxu1p2ap15mlj" path="res://Inventory/Pickup Objects/skill_pickup.tscn" id="11_oqx7d"]
 [ext_resource type="PackedScene" uid="uid://b4vewnv73flk4" path="res://Map/Props/Movable/statue.tscn" id="12_k6jnn"]
+[ext_resource type="PackedScene" uid="uid://b8rlvg8w53iwn" path="res://Objects/scroll.tscn" id="13_7vf4x"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="14_mubwj"]
 
 [node name="TestRoom" type="Node2D"]
@@ -76,16 +76,6 @@ spawn_point = NodePath("../SpawnPoint")
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(448, 208)
 
-[node name="TunnelEntrance" parent="." node_paths=PackedStringArray("target_entrance") instance=ExtResource("8_eoe1y")]
-position = Vector2(482, 212)
-can_spawn_goblin = false
-target_entrance = NodePath("../TunnelEntrance2")
-
-[node name="TunnelEntrance2" parent="." node_paths=PackedStringArray("target_entrance") instance=ExtResource("8_eoe1y")]
-position = Vector2(313, 211)
-can_spawn_goblin = false
-target_entrance = NodePath("../TunnelEntrance")
-
 [node name="Torch" parent="." instance=ExtResource("8_m3pp0")]
 position = Vector2(400, 176)
 
@@ -101,3 +91,18 @@ skill_name = "has_heavy_stance"
 
 [node name="PickupWater" parent="." instance=ExtResource("10_kgm4x")]
 position = Vector2(524, 200)
+
+[node name="Scroll" parent="." instance=ExtResource("13_7vf4x")]
+position = Vector2(480, 222)
+diary_owner = "Gawath"
+diary_page = 1
+
+[node name="Scroll2" parent="." instance=ExtResource("13_7vf4x")]
+position = Vector2(418, 225)
+diary_owner = "Ann"
+diary_page = 1
+
+[node name="Scroll3" parent="." instance=ExtResource("13_7vf4x")]
+position = Vector2(450, 223)
+diary_owner = "Ann"
+diary_page = 2

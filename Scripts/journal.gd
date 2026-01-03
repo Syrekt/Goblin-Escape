@@ -7,9 +7,6 @@ extends CanvasLayer
 var current_logbook : TabContainer
 
 func _ready() -> void:
-	for i in range(tab_container.get_tab_count()):
-		tab_container.set_tab_title(i, " ")
-
 	var game = Game.get_singleton()
 	for diary_owner in tab_container.get_children():
 		var pages = game.logs.get(diary_owner.name)
@@ -21,16 +18,27 @@ func _ready() -> void:
 				if !pages.get(i + 1):
 					diary_owner.get_child(i).queue_free()
 
+	for i in range(tab_container.get_tab_count()):
+		tab_container.set_tab_title(i, " ")
+
 
 
 
 func _process(delta: float) -> void:
+	var tab = tab_container.current_tab
+	var tab_count = tab_container.get_tab_count()
 	if Input.is_action_just_pressed("down"):
-		if tab_container.select_next_available():
+		var next = tab_container.current_tab + 1
+		print("next: "+str(next))
+		if next < tab_container.get_tab_count():
 			start_page_animation("change_header_left")
+			tab_container.current_tab = next
 	elif Input.is_action_just_pressed("up"):
-		if tab_container.select_previous_available():
+		var next = tab_container.current_tab - 1
+		print("next: "+str(next))
+		if next > -1:
 			start_page_animation("change_header_right")
+			tab_container.current_tab = next
 
 	current_logbook = tab_container.get_current_tab_control()
 

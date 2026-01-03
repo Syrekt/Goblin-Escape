@@ -127,7 +127,7 @@ func _notification(what: int) -> void:
 			return
 
 		var screen			:= DisplayServer.window_get_current_screen()
-		var window_size	:= DisplayServer.window_get_size()
+		var window_size		:= DisplayServer.window_get_size()
 		var display_size	:= DisplayServer.screen_get_size(screen)
 		print("screen: "+str(screen))
 		print("window_size: "+str(window_size))
@@ -138,10 +138,14 @@ func _notification(what: int) -> void:
 #region Signals
 func _on_fullscreen_toggled(toggled_on: bool) -> void:
 	if toggled_on:
+		_on_borderless_toggled(false)
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 	else:
+		_on_borderless_toggled(false)
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		_on_borderless_toggled(Options.borderless)
 	Options.fullscreen = toggled_on
+	print("Options.fullscreen: "+str(Options.fullscreen));
 	notification(NOTIFICATION_WM_SIZE_CHANGED)
 
 func _on_option_button_item_selected(index: int) -> void:

@@ -1,0 +1,108 @@
+[gd_resource type="Theme" load_steps=24 format=3 uid="uid://c2cihlveptm1x"]
+
+[ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Fonts/Ohrenstead.ttf" id="1_dqcp5"]
+[ext_resource type="Texture2D" uid="uid://bjowu5bqsapub" path="res://UI/button_hover.png" id="2_tp2te"]
+[ext_resource type="Texture2D" uid="uid://bpge6nsa5vqiq" path="res://UI/button_normal.png" id="3_y6x06"]
+[ext_resource type="Texture2D" uid="uid://cxdtwv3bf6wmu" path="res://UI/button_pressed.png" id="4_tqjn3"]
+[ext_resource type="Texture2D" uid="uid://fyevcw0t8yc" path="res://UI/panel_bg.png" id="5_3783v"]
+[ext_resource type="Texture2D" uid="uid://br5edqpdo5eeq" path="res://UI/button_disabled.png" id="6_mi5q3"]
+[ext_resource type="Texture2D" uid="uid://c5p3qrwcq3s36" path="res://UI/button_selected.png" id="7_nxpfx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b30vn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5tl16"]
+texture = ExtResource("2_tp2te")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8xby3"]
+texture = ExtResource("2_tp2te")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v0qww"]
+texture = ExtResource("3_y6x06")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7iji0"]
+texture = ExtResource("4_tqjn3")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1cpqq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dt138"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bi30w"]
+texture = ExtResource("2_tp2te")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g00hn"]
+texture = ExtResource("3_y6x06")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wu7ve"]
+texture = ExtResource("4_tqjn3")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3sudc"]
+texture = ExtResource("5_3783v")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1cmyi"]
+texture = ExtResource("6_mi5q3")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5v6gi"]
+texture = ExtResource("4_tqjn3")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i1f4t"]
+texture = ExtResource("2_tp2te")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h5g0m"]
+texture = ExtResource("7_nxpfx")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2x3wo"]
+texture = ExtResource("3_y6x06")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+
+[resource]
+Button/fonts/font = ExtResource("1_dqcp5")
+Button/styles/disabled = SubResource("StyleBoxEmpty_b30vn")
+Button/styles/focus = SubResource("StyleBoxTexture_5tl16")
+Button/styles/hover = SubResource("StyleBoxTexture_8xby3")
+Button/styles/normal = SubResource("StyleBoxTexture_v0qww")
+Button/styles/pressed = SubResource("StyleBoxTexture_7iji0")
+CheckButton/fonts/font = ExtResource("1_dqcp5")
+Label/fonts/font = ExtResource("1_dqcp5")
+MenuButton/styles/disabled = SubResource("StyleBoxEmpty_1cpqq")
+MenuButton/styles/focus = SubResource("StyleBoxEmpty_dt138")
+MenuButton/styles/hover = SubResource("StyleBoxTexture_bi30w")
+MenuButton/styles/normal = SubResource("StyleBoxTexture_g00hn")
+MenuButton/styles/pressed = SubResource("StyleBoxTexture_wu7ve")
+OptionButton/fonts/font = ExtResource("1_dqcp5")
+RichTextLabel/fonts/normal_font = ExtResource("1_dqcp5")
+TabBar/fonts/font = ExtResource("1_dqcp5")
+TabContainer/fonts/font = ExtResource("1_dqcp5")
+TabContainer/styles/panel = SubResource("StyleBoxTexture_3sudc")
+TabContainer/styles/tab_disabled = SubResource("StyleBoxTexture_1cmyi")
+TabContainer/styles/tab_focus = SubResource("StyleBoxTexture_5v6gi")
+TabContainer/styles/tab_hovered = SubResource("StyleBoxTexture_i1f4t")
+TabContainer/styles/tab_selected = SubResource("StyleBoxTexture_h5g0m")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxTexture_2x3wo")
