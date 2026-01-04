@@ -4,9 +4,11 @@ class_name StartMenu extends CanvasLayer
 var ingame_menu = preload("res://UI/ingame_menu.tscn")
 var ingame_menu_inst : IngameMenu = null
 
-func _ready() -> void:
-	if OS.is_debug_build():
-		queue_free()
+@onready var fmod_bgm_event: FmodEventEmitter2D = $"../FModBGMEvent"
+
+#func _ready() -> void:
+#	if OS.is_debug_build():
+#		queue_free()
 
 func _on_start_game_pressed() -> void:
 	var player : Player = Game.get_singleton().player
@@ -17,7 +19,13 @@ func _on_start_game_pressed() -> void:
 	#pcam.set_follow_offset(Vector2(0, 0))
 	pcam.set_follow_damping_value(Vector2(0.1, 0.1))
 	pcam.set_follow_damping(true)
-	player.state_node.state_changed.connect(player._on_state_machine_state_changed)
+	if !player.state_node.state_changed.is_connected(player._on_state_machine_state_changed):
+		player.state_node.state_changed.connect(player._on_state_machine_state_changed)
+
+	var area = MetSys.get_current_room_instance().area
+	FmodServer.set_global_parameter_by_name("Area", area)
+	fmod_bgm_event.play()
+	fmod_bgm_event.set_parameter("allow_crossfade", 1)
 
 	queue_free()
 

@@ -34,7 +34,7 @@ func _ready() -> void:
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_dthpw")
-starting_map = 0
+starting_map = 23
 
 [node name="LoadingScreen" parent="." instance=ExtResource("2_1cwbi")]
 unique_name_in_owner = true
@@ -131,7 +131,6 @@ bank_paths = ["res://FModBank/Desktop/Master.bank", "res://FModBank/Desktop/SFX.
 [node name="FModBGMEvent" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/BGM"
 event_guid = "{06ddf1fe-b6ad-4d95-a0e8-8fa130930846}"
-autoplay = true
 
 [node name="FModAMBEvent" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/DungeonAmbience"

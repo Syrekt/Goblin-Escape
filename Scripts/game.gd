@@ -211,7 +211,8 @@ func reset_map_starting_coords() -> void:
 
 func init_room() -> void:
 	MetSys.get_current_room_instance().adjust_camera_limits(player.pcam)
-	FmodServer.set_global_parameter_by_name("Area", MetSys.get_current_room_instance().area)
+	var area = MetSys.get_current_room_instance().area
+	FmodServer.set_global_parameter_by_name("Area", area)
 	player.on_enter()
 
 	if MetSys.last_player_position.x == Vector2i.MAX.x:
