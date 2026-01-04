@@ -24,7 +24,6 @@ func _on_start_game_pressed() -> void:
 		player.state_node.state_changed.connect(player._on_state_machine_state_changed)
 
 	var area = MetSys.get_current_room_instance().area
-	print("area: "+str(area))
 	FmodServer.set_global_parameter_by_name("Area", area)
 	fmod_bgm_event.volume = 1.0
 
