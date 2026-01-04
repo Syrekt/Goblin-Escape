@@ -6,9 +6,10 @@ var ingame_menu_inst : IngameMenu = null
 
 @onready var fmod_bgm_event: FmodEventEmitter2D = $"../FModBGMEvent"
 
-#func _ready() -> void:
-#	if OS.is_debug_build():
-#		queue_free()
+func _ready() -> void:
+	return
+	if OS.is_debug_build():
+		queue_free()
 
 func _on_start_game_pressed() -> void:
 	var player : Player = Game.get_singleton().player
@@ -23,9 +24,9 @@ func _on_start_game_pressed() -> void:
 		player.state_node.state_changed.connect(player._on_state_machine_state_changed)
 
 	var area = MetSys.get_current_room_instance().area
+	print("area: "+str(area))
 	FmodServer.set_global_parameter_by_name("Area", area)
-	fmod_bgm_event.play()
-	fmod_bgm_event.set_parameter("allow_crossfade", 1)
+	fmod_bgm_event.volume = 1.0
 
 	queue_free()
 
