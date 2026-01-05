@@ -8,8 +8,9 @@ class_name MapObject extends CharacterBody2D
 @export var health	:= 50.0
 var health_max		:= 0.0
 var health_cur 		:= 0.0
-var was_destroyed	:= false ## Indicated that this is not the first time this create has been destroyed
 
+@export_enum ("Wood") var material_type : String = "Wood"
+@export var persistent		:= false
 @export var destructable	:= false
 @export var collidable		:= false
 @export var drop_random_loot:= false
@@ -20,6 +21,8 @@ var was_destroyed	:= false ## Indicated that this is not the first time this cre
 @export var debug := false
 
 @export var random_drops : Array[PackedScene]
+
+var spawn_fall_protection := true
 
 var damage_taken := 0
 var falling := false
@@ -34,20 +37,23 @@ func _ready() -> void:
 
 	var game = Game.get_singleton()
 	await game.room_loaded
-	if game.loading || is_in_group("Crate"):
-		var save_data = game.get_data_in_room(name)
-		if save_data:
-			load_data(save_data)
+	var save_data = game.get_data_in_room(name)
+	if save_data:
+		load_data(save_data)
 
 func _physics_process(delta: float) -> void:
-	falling = velocity.y != 0
-	if falling && is_on_floor_only():
+	if is_on_floor(): spawn_fall_protection = false
+
+	move_and_slide()
+
+	if !spawn_fall_protection && health_cur > 0 && falling && is_on_floor_only():
 		Ge.EmitNoise(self, global_position + drop_marker.position, 20)
 		sfx_emitter.set_parameter("State", "WoodTanked")
 		sfx_emitter.play()
 	if !is_on_floor() && health_cur <= 0:
 		velocity.y = move_toward(velocity.y, gravity * delta, y_acc)
-	move_and_slide()
+
+	falling = velocity.y != 0
 
 func take_damage(damage: int, source) -> void:
 	if damage > 0:
@@ -62,11 +68,11 @@ func take_damage(damage: int, source) -> void:
 	else:
 		sprite.frame = frame_count
 		sfx_emitter.set_parameter("State", "WoodDestroyed")
-		print("was_destroyed: "+str(was_destroyed))
 		if drop_random_loot && randi() % 2:
 			drop_loot()
 
-		set_collision_layer_value(1, false)
+		if collidable:
+			set_collision_layer_value(1, true)
 		set_collision_layer_value(8, false)
 		set_collision_layer_value(13, false)
 		for child in get_children():
@@ -88,13 +94,16 @@ func save() -> void:
 		"health": health_cur,
 		"frame": sprite.frame,
 	})
+	print(name + " saved.")
 func load_data(data: Dictionary) -> void:
+	print("Load " + name)
 	health_cur		= data.get("health", true)
 	if health_cur <= 0:
-		was_destroyed = true
-		health_cur = health_max
+		if !persistent: health_cur = health_max
+		else: sprite.frame = data.get("frame", 0)
 	else:
 		sprite.frame	= data.get("frame", 0)
-	set_collision_layer_value(1, health_cur > 0)
+	if collidable:
+		set_collision_layer_value(1, health_cur > 0)
 	set_collision_layer_value(8, health_cur > 0)
 	set_collision_layer_value(13, health_cur > 0)

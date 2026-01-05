@@ -1000,10 +1000,10 @@ func _process(delta: float) -> void:
 	if OS.is_debug_build():
 		if Input.is_action_just_pressed("debug1"):
 			print("debug1")
-			if Engine.time_scale == 1.0:
-				Engine.time_scale = 2.0
-			else:
-				Engine.time_scale = 1.0
+			#if Engine.time_scale == 1.0:
+			#	Engine.time_scale = 2.0
+			#else:
+			#	Engine.time_scale = 1.0
 			#status_effect_container.add_status_effect("Death's Door")
 			#status_effect_container.add_status_effect("Bleed", 5.0, 0.1)
 			#take_damage(90)
@@ -1104,5 +1104,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 				var items = inventory_panel.inventory.items
 				for item in items:
 					print("item.name: "+str(item.name));
-
-
+			KEY_BACKSLASH:
+				if Engine.time_scale == 1.0:
+					Engine.time_scale = 2.0
+				else:
+					Engine.time_scale = 1.0

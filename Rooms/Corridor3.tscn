@@ -88,7 +88,7 @@ scale = Vector2(-1, 1)
 position = Vector2(1896, 472)
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(2092, 478)
+position = Vector2(20, 484)
 
 [node name="Hint" parent="." instance=ExtResource("8_75ulu")]
 position = Vector2(1191, 338)
@@ -125,10 +125,12 @@ position = Vector2(786, 296)
 position = Vector2(753, 296)
 
 [node name="Crate3" parent="." instance=ExtResource("9_ah6pm")]
-position = Vector2(97, 504)
+position = Vector2(97, 496)
+collidable = false
 
 [node name="Crate4" parent="." instance=ExtResource("9_ah6pm")]
-position = Vector2(64, 504)
+position = Vector2(64, 496)
+collidable = false
 
 [node name="ThoughtTrigger" parent="." instance=ExtResource("10_0ount")]
 position = Vector2(1196, 361)

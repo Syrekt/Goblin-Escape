@@ -35,9 +35,10 @@ func _on_attack_frame() -> void:
 					slash_emitter.set_parameter("AttackResult", "GuardBreak")
 				else:
 					defender.take_damage(damage_dealt, player, true)
-					slash_emitter.set_parameter("AttackResult", "Hit")
+					slash_emitter.set_parameter("AttackResult", "HitOrganic")
 				defender.combat_properties.pushback_apply(player.global_position, pushback_force)
 			else:
+				slash_emitter.set_parameter("AttackResult", "HitObject")
 				defender.take_damage(damage_dealt, player)
 	else:
 		slash_emitter.set_parameter("AttackResult", "Miss")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c3ce8mt521wb5"]
+[gd_scene load_steps=26 format=3 uid="uid://c3ce8mt521wb5"]
 
 [ext_resource type="Script" uid="uid://ckr03m8hdsnts" path="res://Scripts/game.gd" id="1_dthpw"]
 [ext_resource type="PackedScene" uid="uid://d1ido0af5r23x" path="res://Objects/loading_screen.tscn" id="2_1cwbi"]
@@ -11,6 +11,7 @@
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="10_3bxcb"]
 [ext_resource type="PackedScene" uid="uid://uvws5mlmgmab" path="res://Objects/Console.tscn" id="11_1cwbi"]
 [ext_resource type="Script" uid="uid://ccf04o6quvok" path="res://Scripts/start_menu.gd" id="11_aks28"]
+[ext_resource type="PackedScene" uid="uid://bapa7gs5kak28" path="res://Objects/debug_panel.tscn" id="11_pt6lt"]
 [ext_resource type="Texture2D" uid="uid://ymsbhvfs54lv" path="res://UI/Start Menu/spr_mainui_tilable2.png" id="12_aks28"]
 [ext_resource type="Theme" uid="uid://dsrglvwu5v23w" path="res://UI/start_menu_theme.tres" id="12_t104e"]
 [ext_resource type="Texture2D" uid="uid://c7wo7f6u3f4f7" path="res://UI/Start Menu/spr_mainui_scroll.png" id="13_p4clm"]
@@ -34,7 +35,7 @@ func _ready() -> void:
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_dthpw")
-starting_map = 0
+starting_map = 22
 
 [node name="LoadingScreen" parent="." instance=ExtResource("2_1cwbi")]
 unique_name_in_owner = true
@@ -109,7 +110,8 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="UI"]
+[node name="VersionNumber" type="Label" parent="UI"]
+unique_name_in_owner = true
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -138,6 +140,9 @@ volume = 0.0
 event_name = "event:/DungeonAmbience"
 event_guid = "{3230f691-db91-47e3-9e92-db100bdcc92e}"
 autoplay = true
+
+[node name="DebugPanel" parent="." instance=ExtResource("11_pt6lt")]
+visible = false
 
 [node name="StartMenu" type="CanvasLayer" parent="." groups=["FullscreenPanel"]]
 script = ExtResource("11_aks28")
