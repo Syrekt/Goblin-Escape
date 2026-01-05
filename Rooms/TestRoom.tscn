@@ -1,9 +1,6 @@
-[gd_scene load_steps=13 format=4 uid="uid://rrnk862o0mdw"]
+[gd_scene load_steps=10 format=4 uid="uid://rrnk862o0mdw"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="2_mubwj"]
-[ext_resource type="PackedScene" uid="uid://d1ido0af5r23x" path="res://Objects/loading_screen.tscn" id="3_yqoo0"]
-[ext_resource type="PackedScene" uid="uid://45snbjkrrgyc" path="res://UI/death_screen.tscn" id="4_yut4v"]
-[ext_resource type="PackedScene" uid="uid://bxgqi0q1okfjx" path="res://Objects/screen_fade.tscn" id="5_kvfyn"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="8_m3pp0"]
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="9_m3pp0"]
 [ext_resource type="PackedScene" uid="uid://dejaaa7dsd8yv" path="res://Inventory/Pickup Objects/pickup_water.tscn" id="10_kgm4x"]
@@ -58,14 +55,6 @@ tile_set = ExtResource("2_mubwj")
 [node name="FG-2" type="TileMapLayer" parent="Tilemaps"]
 z_index = 2
 tile_set = ExtResource("2_mubwj")
-
-[node name="LoadingScreen" parent="." instance=ExtResource("3_yqoo0")]
-visible = false
-
-[node name="DeathScreen" parent="." instance=ExtResource("4_yut4v")]
-visible = false
-
-[node name="ScreenFade" parent="." instance=ExtResource("5_kvfyn")]
 
 [node name="Statue" parent="." instance=ExtResource("12_k6jnn")]
 position = Vector2(400, 208)

@@ -29,13 +29,11 @@ func _process(delta: float) -> void:
 	var tab_count = tab_container.get_tab_count()
 	if Input.is_action_just_pressed("down"):
 		var next = tab_container.current_tab + 1
-		print("next: "+str(next))
 		if next < tab_container.get_tab_count():
 			start_page_animation("change_header_left")
 			tab_container.current_tab = next
 	elif Input.is_action_just_pressed("up"):
 		var next = tab_container.current_tab - 1
-		print("next: "+str(next))
 		if next > -1:
 			start_page_animation("change_header_right")
 			tab_container.current_tab = next
@@ -55,6 +53,7 @@ func _process(delta: float) -> void:
 
 
 func start_page_animation(anim:String):
+	$PaperFlipSFX.play()
 	tab_container.hide()
 	close_button.hide()
 	page_animation.play(anim)

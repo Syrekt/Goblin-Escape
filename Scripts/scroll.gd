@@ -20,4 +20,5 @@ func update(player: Player) -> void:
 		print("diary_page: "+str(diary_page))
 		_log.set(diary_page, true)
 		game.logs.set(diary_owner, _log)
+		player.journal_pickup_sfx.play()
 		queue_free()

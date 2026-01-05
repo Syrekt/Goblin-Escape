@@ -29,6 +29,8 @@ $F8::{
 
     if WinExist(gameTitle)
         WinClose
+    else
+        send "{F8}"
 }
 F13::
 {

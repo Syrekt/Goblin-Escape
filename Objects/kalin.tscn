@@ -5132,6 +5132,14 @@ process_mode = 3
 event_name = "event:/Kalin-Slide"
 event_guid = "{3e8773ca-2c2a-4386-b1b9-eda7afb70fb4}"
 
+[node name="LandSFX" type="FmodEventEmitter2D" parent="Audio"]
+event_name = "event:/Kalin-Land"
+event_guid = "{35f4280f-fe69-4277-8d2d-56b1e3560f59}"
+
+[node name="JournalPickupSFX" type="FmodEventEmitter2D" parent="Audio"]
+event_name = "event:/PagePickup"
+event_guid = "{f3d5c71b-4f19-4164-97e9-a62d815e7c7f}"
+
 [node name="StateMachine" parent="." groups=["Flip"] instance=ExtResource("9_ojhio")]
 visible = false
 position = Vector2(-4, 34)

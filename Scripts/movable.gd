@@ -34,16 +34,16 @@ func _physics_process(delta: float) -> void:
 		if grabbed:
 			release()
 		velocity.y = move_toward(velocity.y, gravity * delta, y_acc)
+	else:
+		spawn_fall_protection = false
 
 	move_and_slide()
 
-	if falling && is_on_floor_only():
+	if !spawn_fall_protection && falling && is_on_floor_only():
 		Ge.EmitNoise(self, global_position + noise_offset, 20, loud_object)
 		drop_emitter.play()
 	falling = velocity.y != 0
 
-	if spawn_fall_protection && is_on_floor():
-		spawn_fall_protection = false
 func _process(delta: float) -> void:
 	is_moving = velocity.x != 0
 	if is_moving && !was_moving:

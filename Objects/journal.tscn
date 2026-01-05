@@ -308,7 +308,7 @@ size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ww3uv")
 current_tab = 0
 tabs_visible = false
-metadata/_tab_index = 0
+metadata/_tab_index = 1
 
 [node name="Page1" type="TabBar" parent="TextureRect/TabContainer/Gawath"]
 layout_mode = 2
@@ -382,6 +382,10 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_lvcnm")
 icon = ExtResource("15_aguiy")
 icon_alignment = 2
 script = SubResource("GDScript_4djfu")
+
+[node name="PaperFlipSFX" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/PaperFlip"
+event_guid = "{e87d3c25-d4f8-45b5-97c6-b76132d8320a}"
 
 [connection signal="animation_finished" from="TextureRect/PageAnimation" to="." method="_on_page_animation_animation_finished"]
 [connection signal="pressed" from="TextureRect/CloseButton" to="." method="_on_close_button_pressed"]

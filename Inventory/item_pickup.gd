@@ -4,6 +4,7 @@ var tween : Tween
 var item
 var instantiated := false
 @export var item_name : String
+@export_enum ("General", "JournalPage") var loot_type : String = "General"
 
 func _ready() -> void:
 	# Load item pickup
