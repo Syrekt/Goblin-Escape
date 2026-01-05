@@ -13,6 +13,7 @@ func enter(previous_state_path : String, data := {}) -> void:
 func exit() -> void:
 	player.smell.value = move_toward(player.smell.value, 0, 5)
 	player.smell.semen_amount += 1
+	$PostSexSFX.play()
 
 func play_orgasm_sound() -> void:
 	$Moan.play()

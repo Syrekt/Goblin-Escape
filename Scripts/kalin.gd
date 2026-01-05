@@ -83,7 +83,6 @@ var experience_required := 100
 @onready var col_corner_climb_prevent : Area2D = $CornerClimbPrevent
 @onready var cp = combat_properties
 @onready var camera : Camera2D = $Camera2D
-@onready var audio_emitter : AudioStreamPlayer2D = $MainAudioStreamer
 @onready var inventory_panel = find_child("InventoryPanel")
 @onready var character_panel = find_child("CharacterPanel")
 @onready var thought_container = find_child("ThoughtContainer")
@@ -97,7 +96,6 @@ var experience_required := 100
 @onready var map_scene : PackedScene = preload("res://UI/map.tscn")
 @onready var hurtbox : CollisionShape2D = $ColliderStanding
 @onready var screen_fade : CanvasLayer = get_tree().current_scene.find_child("ScreenFade")
-
 #endregion
 #region Audio
 @onready var hurt_sfx 	: FmodEventEmitter2D = $Audio/HurtSFX
@@ -108,7 +106,6 @@ var experience_required := 100
 @onready var eat_sfx	: FmodEventEmitter2D = $Audio/EatSFX
 @onready var tutorial_sfx	: FmodEventEmitter2D = $Audio/TutorialSFX
 @onready var slide_sfx	: FmodEventEmitter2D = $Audio/SlideSFX
-@onready var land_sfx	: FmodEventEmitter2D = $Audio/LandSFX
 #endregion
 #region Combat
 const SLASH_DAMAGE	:= 15
@@ -998,14 +995,19 @@ func _process(delta: float) -> void:
 			Game.get_singleton().save_game()
 		if just_pressed("quick load"):
 			Game.get_singleton().load_game()
-	if OS.is_debug_build() && Input.is_action_just_pressed("debug1"):
-		print("debug1")
-		#status_effect_container.add_status_effect("Death's Door")
-		#status_effect_container.add_status_effect("Bleed", 5.0, 0.1)
-		take_damage(90)
-		#experience.add(99999)
-		#toggle_character_panel()
-		#pcam_noise_emitter.emit()
+	if OS.is_debug_build():
+		if Input.is_action_just_pressed("debug1"):
+			print("debug1")
+			if Engine.time_scale == 1.0:
+				Engine.time_scale = 2.0
+			else:
+				Engine.time_scale = 1.0
+			#status_effect_container.add_status_effect("Death's Door")
+			#status_effect_container.add_status_effect("Bleed", 5.0, 0.1)
+			#take_damage(90)
+			#experience.add(99999)
+			#toggle_character_panel()
+			#pcam_noise_emitter.emit()
 	#endregion
 #endregion
 #region Listeners

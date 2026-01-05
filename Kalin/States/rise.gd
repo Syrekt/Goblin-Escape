@@ -4,6 +4,7 @@ var jump_boost : float
 var cut_ground_contact : bool
 
 func enter(previous_state_path: String, data := {}) -> void:
+	$JumpSFX.play()
 	player.velocity.y = -player.jump_impulse
 	cut_ground_contact = false
 	if player.can_grab_corner() && player.ray_auto_climb.is_colliding():

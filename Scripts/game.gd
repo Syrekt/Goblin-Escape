@@ -122,6 +122,12 @@ func _process(delta: float) -> void:
 	$CanvasModulate.color.r = 0.63 + 0.10 * Options.shadow_intensity
 	$CanvasModulate.color.g = 0.52 + 0.15 * Options.shadow_intensity
 
+	#if OS.is_debug_build():
+	#	if Input.is_action_just_pressed("debug1"):
+	#		var img = get_viewport().get_texture().get_image()
+	#		var path= OS.get_system_dir(OS.SYSTEM_DIR_PICTURES) + "/Goblin Escape/screenshot.png"
+	#		img.save_png(path)
+
 static func get_singleton() -> Game:
 	return (Game as Script).get_meta(&"singleton") as Game
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=260 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=256 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://blbnh0ve0i73q" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -31,13 +31,11 @@
 [ext_resource type="Texture2D" uid="uid://x5i4gyyapuxd" path="res://Kalin/Sprites/Kalin-Pull.png" id="10_qartl"]
 [ext_resource type="Texture2D" uid="uid://cocmax1vh70kr" path="res://Kalin/Sprites/Kalin-Push.png" id="11_0xxw0"]
 [ext_resource type="Script" uid="uid://jcdm00a4m2ox" path="res://Kalin/States/rise.gd" id="11_10o18"]
-[ext_resource type="AudioStream" uid="uid://de85i38j41fnf" path="res://SFX/Goblin/DAMAGE 01.wav" id="11_s52bw"]
 [ext_resource type="Texture2D" uid="uid://yicqhor234bv" path="res://Kalin/Sprites/Kalin-Light Walk.png" id="12_cbigf"]
 [ext_resource type="Script" uid="uid://bqbk0ddj34sqn" path="res://Kalin/States/fall.gd" id="12_oysea"]
 [ext_resource type="Script" uid="uid://c03gd0js6ef17" path="res://Kalin/States/land.gd" id="14_sgd03"]
 [ext_resource type="Texture2D" uid="uid://bctysgntlwrpo" path="res://Sex/kalin+goblin-orgasm.png" id="14_ujrye"]
 [ext_resource type="Texture2D" uid="uid://dslyx31hbng77" path="res://Kalin/Sprites/Kalin-Run_Stop.png" id="14_uklr6"]
-[ext_resource type="AudioStream" uid="uid://v77psk6rln3o" path="res://SFX/Kalin/Other/Squire Soft1.wav" id="15_2ksh1"]
 [ext_resource type="Texture2D" uid="uid://f1kmjq3olwet" path="res://Sex/kalin_lying.png" id="15_wxg5w"]
 [ext_resource type="Texture2D" uid="uid://bse8dgihy05xu" path="res://Kalin/Sprites/Kalin-Wallslide.png" id="19_dyqvk"]
 [ext_resource type="Script" uid="uid://c7frkek8a6s60" path="res://Kalin/States/crouch_walk.gd" id="21_3t0vr"]
@@ -49,7 +47,6 @@
 [ext_resource type="Script" uid="uid://bgnnyj7i10wbg" path="res://Kalin/States/walk.gd" id="28_1dko0"]
 [ext_resource type="Texture2D" uid="uid://bq334bamr3mgu" path="res://Kalin/Sprites/Kalin-Slide.png" id="29_qnnkd"]
 [ext_resource type="Resource" uid="uid://buieik1hf8xh2" path="res://Inventory/player_inventory.tres" id="29_y4shw"]
-[ext_resource type="AudioStream" uid="uid://ds7af8tnix0pc" path="res://Sex/Sex Female Moan Soft.wav" id="31_cfvac"]
 [ext_resource type="Texture2D" uid="uid://bl5jujtf6kegu" path="res://UI/Inventory/Inventory panel1_with background.png" id="31_nhuj2"]
 [ext_resource type="PackedScene" uid="uid://cd3svdt2crxap" path="res://Inventory/inv_button.tscn" id="32_fb5pj"]
 [ext_resource type="Script" uid="uid://dkwpmjw6yg1bb" path="res://Kalin/States/stance_light.gd" id="33_ao24u"]
@@ -144,7 +141,6 @@
 [ext_resource type="PackedScene" uid="uid://bp6mu0k2u0cjl" path="res://Objects/interaction_prompt.tscn" id="99_y4shw"]
 [ext_resource type="Texture2D" uid="uid://ds7fhf7dvmyyd" path="res://Kalin/Sprites/Kalin-Bash-NoSword.png" id="107_5atg1"]
 [ext_resource type="Texture2D" uid="uid://c2e81afwsiyqs" path="res://Kalin/Sprites/Kalin-Push-idle.png" id="109_cv3n5"]
-[ext_resource type="AudioStream" uid="uid://bswyp2tksy47m" path="res://SFX/Kalin/Other/Squire Soft3.wav" id="111_uxdg2"]
 [ext_resource type="Texture2D" uid="uid://cl1e5kr34nunv" path="res://Kalin/Sprites/spr_Kalin-Def Stance-idle.png" id="114_nhuj2"]
 [ext_resource type="Texture2D" uid="uid://bak1qi78nequa" path="res://Kalin/Sprites/spr_Kalin-Heavy Stance-idle.png" id="115_fb5pj"]
 [ext_resource type="Texture2D" uid="uid://c2qsuxrlu2jq3" path="res://Kalin/Sprites/spr_Kalin-Light Stance-idle.png" id="116_sxqin"]
@@ -2090,28 +2086,13 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
-tracks/4/type = "audio"
+tracks/4/type = "method"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../AnimationAudioStreamer")
+tracks/4/path = NodePath("%Sprite2D/..")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("11_s52bw")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/4/use_blend = true
-tracks/5/type = "method"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("%Sprite2D/..")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -2172,28 +2153,13 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
-tracks/4/type = "audio"
+tracks/4/type = "method"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../AnimationAudioStreamer")
+tracks/4/path = NodePath("%Sprite2D/..")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("11_s52bw")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/4/use_blend = true
-tracks/5/type = "method"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("%Sprite2D/..")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -2411,28 +2377,13 @@ tracks/5/keys = {
 "update": 0,
 "values": [Color(1, 0.346577, 0.280009, 1), Color(1, 0.346577, 0.280009, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
 }
-tracks/6/type = "audio"
+tracks/6/type = "method"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("../AnimationAudioStreamer")
+tracks/6/path = NodePath("%Sprite2D/..")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.045,
-"stream": ExtResource("15_2ksh1")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/6/use_blend = true
-tracks/7/type = "method"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("%Sprite2D/..")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -2733,21 +2684,6 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(9, 0)]
 }
-tracks/4/type = "audio"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("%Sprite2D/../AnimationAudioStreamer")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("31_cfvac")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_mj8sq"]
 resource_name = "pull"
@@ -3087,21 +3023,6 @@ tracks/4/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/5/type = "audio"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("../AnimationAudioStreamer")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0704,
-"stream": ExtResource("111_uxdg2")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/5/use_blend = true
 
 [sub_resource type="Animation" id="Animation_obgsb"]
 resource_name = "run"
@@ -5211,10 +5132,6 @@ process_mode = 3
 event_name = "event:/Kalin-Slide"
 event_guid = "{3e8773ca-2c2a-4386-b1b9-eda7afb70fb4}"
 
-[node name="LandSFX" type="FmodEventEmitter2D" parent="Audio"]
-event_name = "event:/Kalin-Land"
-event_guid = "{35f4280f-fe69-4277-8d2d-56b1e3560f59}"
-
 [node name="StateMachine" parent="." groups=["Flip"] instance=ExtResource("9_ojhio")]
 visible = false
 position = Vector2(-4, 34)
@@ -5245,6 +5162,10 @@ script = ExtResource("34_lbmmt")
 
 [node name="rise" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("11_10o18")
+
+[node name="JumpSFX" type="FmodEventEmitter2D" parent="StateMachine/rise"]
+event_name = "event:/Kalin-Jump"
+event_guid = "{faa59753-3140-4b2b-b00f-54eca9c1c445}"
 
 [node name="fall" type="Node" parent="StateMachine" groups=["no_interaction"]]
 script = ExtResource("12_oysea")
@@ -5464,6 +5385,10 @@ event_guid = "{354e8c0a-937d-4e65-8bb3-361b78512142}"
 event_name = "event:/Kalin-Moan"
 event_guid = "{3ad5e76f-95fd-46f9-bf51-6a2f20fd69f5}"
 
+[node name="PostSexSFX" type="FmodEventEmitter2D" parent="StateMachine/orgasm"]
+event_name = "event:/Kalin-PostSex"
+event_guid = "{db03c105-eeee-4f46-ae2d-c733985d7802}"
+
 [node name="post_sex" type="Node" parent="StateMachine" groups=["no_interaction", "sex_state"]]
 script = ExtResource("40_xirjq")
 
@@ -5506,14 +5431,6 @@ script = ExtResource("40_xirjq")
 
 [node name="InteractionPrompt" parent="." instance=ExtResource("99_y4shw")]
 position = Vector2(0, -41)
-
-[node name="AnimationAudioStreamer" type="AudioStreamPlayer2D" parent="."]
-unique_name_in_owner = true
-bus = &"SFX"
-
-[node name="MainAudioStreamer" type="AudioStreamPlayer2D" parent="."]
-unique_name_in_owner = true
-bus = &"SFX"
 
 [node name="CombatProperties" parent="." instance=ExtResource("2_yetl5")]
 
