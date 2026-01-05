@@ -242,8 +242,12 @@ position = Vector2(607, 577)
 tutorial = ExtResource("22_r1hhn")
 
 [node name="PlatformCollider2" parent="." instance=ExtResource("13_7gos6")]
-position = Vector2(1772.9999, 192)
-scale = Vector2(0.94233555, 1)
+position = Vector2(1767.0001, 192)
+scale = Vector2(0.8367745, 1)
+
+[node name="CollisionShape2D" parent="PlatformCollider2/Platform" index="0"]
+position = Vector2(1.1950684, 2.5)
+scale = Vector2(0.9999999, 0.9999999)
 
 [node name="Portal" parent="." instance=ExtResource("22_sx3uk")]
 position = Vector2(512, 709)
@@ -256,3 +260,5 @@ position = Vector2(1495.3586, 652.2999)
 
 [node name="DebrisAmb3" parent="." instance=ExtResource("23_r1hhn")]
 position = Vector2(1773, 193)
+
+[editable path="PlatformCollider2"]

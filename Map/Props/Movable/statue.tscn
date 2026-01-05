@@ -14,7 +14,7 @@ size = Vector2(29, 8)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qimbf"]
 polygon = PackedVector2Array(-15, -32, -15, -24, 14, -24, 14, -32)
 
-[node name="Statue" type="CharacterBody2D" groups=["OneWayColliders"]]
+[node name="Statue" type="CharacterBody2D" groups=["OneWayColliders", "Persistent"]]
 z_index = 1
 collision_layer = 33
 collision_mask = 33

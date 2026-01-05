@@ -36,13 +36,14 @@ func _physics_process(delta: float) -> void:
 		velocity.y = move_toward(velocity.y, gravity * delta, y_acc)
 
 	move_and_slide()
+
 	if falling && is_on_floor_only():
-		if spawn_fall_protection:
-			spawn_fall_protection = false
-		else:
-			Ge.EmitNoise(self, global_position + noise_offset, 20, loud_object)
-			drop_emitter.play()
+		Ge.EmitNoise(self, global_position + noise_offset, 20, loud_object)
+		drop_emitter.play()
 	falling = velocity.y != 0
+
+	if spawn_fall_protection && is_on_floor():
+		spawn_fall_protection = false
 func _process(delta: float) -> void:
 	is_moving = velocity.x != 0
 	if is_moving && !was_moving:
@@ -56,3 +57,12 @@ func _process(delta: float) -> void:
 
 func _on_timer_timeout() -> void:
 	Ge.EmitNoise(self, global_position + noise_offset, 20, loud_object)
+
+func save() -> Dictionary:
+	return {
+		"pos_x": global_position.x,
+		"pos_y": global_position.y,
+	}
+func load(data: Dictionary) -> void:
+	global_position.x = data.get("pos_x", global_position.x)
+	global_position.y = data.get("pos_y", global_position.y)
