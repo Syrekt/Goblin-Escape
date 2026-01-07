@@ -7,15 +7,12 @@ var text_tween : Tween
 
 
 func _ready() -> void:
-	if !Ge.show_hints:
-		queue_free()
-		return
-
 	label.text = text
 
 
-
 func _on_body_entered(body: Node2D) -> void:
+	if !Ge.show_hints: return
+
 	if text_tween:
 		text_tween.kill()
 	text_tween = create_tween().bind_node(self)

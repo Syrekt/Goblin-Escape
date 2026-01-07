@@ -45,29 +45,6 @@ signal show_patrol_tutorial
 
 var player : Player
 
-## Tip: Set "ProjectMainLoop" as your main loop type in the project settings
-##      under `application/run/main_loop_type`.
-
-func _initialize() -> void:
-	SentrySDK.init(func(options: SentryOptions) -> void:
-		if OS.is_debug_build():
-			options.environment = "debug"
-			options.debug = true
-		options.release = "mygame@1.0.0"
-		options.before_send = _before_send
-	)
-
-func _before_send(event: SentryEvent) -> SentryEvent:
-	if event.environment.contains("editor"):
-		# Discard event if running from the editor.
-		return null
-	var error_message: String = event.get_exception_value(0)
-	if error_message.contains("Bruno"):
-		# Remove sensitive information from the event.
-		var redacted_message := error_message.replace("Bruno", "REDACTED")
-		event.set_exception_value(0, redacted_message)
-	return event
-
 func _ready() -> void:
 	show_combat_tutorial.connect(_show_combat_tutorial)
 	show_stealth_tutorial.connect(_show_stealth_tutorial)

@@ -27,5 +27,6 @@ func take_damage(damage: int, source=null) -> void:
 	else: # Update frame
 		sprite.frame = (1 - (health / owner.barricade_health)) * (frame_count - 1)
 
-	sfx_emitter.play()
+	if damage > 0:
+		sfx_emitter.play()
 	owner.save()
