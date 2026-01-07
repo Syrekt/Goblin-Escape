@@ -112,7 +112,8 @@ func _ready() -> void:
 	world_refreshed.connect(_on_world_refreshed)
 
 
-	load_game()
+	if !OS.is_debug_build():
+		load_game()
 
 	FmodServer.set_global_parameter_by_name("Health", 1.0)
 

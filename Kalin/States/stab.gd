@@ -27,7 +27,7 @@ func _on_attack_frame() -> void:
 			else:
 				defender.combat_properties.pushback_apply(player.global_position, pushback_force)
 				defender.take_damage(player_stab_damage, player)
-				stab_sfx.set_parameter("AttackResult", "Hit")
+				stab_sfx.set_parameter("AttackResult", "HitOrganic")
 				Ge.slow_mo(0, 0.05)
 		else:
 			defender.take_damage(0, player)

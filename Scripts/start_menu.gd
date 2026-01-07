@@ -7,7 +7,6 @@ var ingame_menu_inst : IngameMenu = null
 @onready var fmod_bgm_event: FmodEventEmitter2D = $"../FModBGMEvent"
 
 func _ready() -> void:
-	return
 	if OS.is_debug_build():
 		queue_free()
 

@@ -77,7 +77,7 @@ func _process(delta: float) -> void:
 
 func _show(action, title := "") -> void:
 	if !Ge.show_interaction_prompts:
-		Debugger.printui("Interaction prompt is disabled")
+		#Debugger.printui("Interaction prompt is disabled")
 		return
 
 	var interaction_prompt = ""

@@ -1,3 +1,5 @@
+#SingleInstance Force
+
 ; Global hotkey: F4 (works anywhere)
 $F5::
 {

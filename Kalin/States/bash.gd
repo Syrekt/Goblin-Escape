@@ -44,11 +44,11 @@ func _on_bash_hitbox_body_entered(defender: Node2D) -> void:
 		defender.combat_properties.pushback_apply(player.global_position, pushback_force)
 		if !defender.in_combat: # Stun
 			defender.combat_properties.stun(2.0)
-			bash_sfx.set_parameter("AttackResult", "Hit")
+			bash_sfx.set_parameter("AttackResult", "HitOrganic")
 		elif !defender_state == "stance_defensive": # Deal damage
 			defender.take_damage(player_bash_damage, player)
 			Ge.slow_mo(0, 0.05)
-			bash_sfx.set_parameter("AttackResult", "Hit")
+			bash_sfx.set_parameter("AttackResult", "HitOrganic")
 		else: # Opponent defending
 			bash_sfx.set_parameter("AttackResult", "Blocked")
 		bash_sfx.play()
