@@ -37,7 +37,7 @@ animations = [{
 radius = 103.01942
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fwbi0"]
-size = Vector2(20, 55)
+size = Vector2(7, 32)
 
 [node name="Torch" type="Area2D"]
 collision_layer = 0
@@ -67,7 +67,6 @@ z_index = -1
 shape = SubResource("CircleShape2D_rr5ik")
 
 [node name="Interaction" type="Area2D" parent="."]
-visible = false
 collision_layer = 64
 collision_mask = 0
 script = ExtResource("4_b6k7r")
@@ -76,11 +75,8 @@ title = "Lit/unlit"
 metadata/_custom_type_script = "uid://b7pfro4cp11mh"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
-position = Vector2(0, 17.5)
+position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_fwbi0")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

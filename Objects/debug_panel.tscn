@@ -16,8 +16,8 @@ theme = ExtResource("2_by8bh")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Control"]
 layout_mode = 0
-offset_right = 127.0
-offset_bottom = 153.0
+offset_right = 212.0
+offset_bottom = 165.0
 texture = ExtResource("3_3guvx")
 patch_margin_left = 14
 patch_margin_top = 14
@@ -49,4 +49,31 @@ layout_mode = 2
 button_pressed = true
 text = "Hide Version"
 
+[node name="DealDamage" type="Button" parent="Control/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Deal Damage"
+alignment = 0
+
+[node name="HealKalin" type="Button" parent="Control/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Heal Kalin
+"
+alignment = 0
+
+[node name="GiveExp" type="Button" parent="Control/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Give Exp"
+alignment = 0
+
+[node name="MapSelection" type="OptionButton" parent="Control/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 1
+allow_reselect = true
+item_count = 1
+popup/item_0/id = 0
+
 [connection signal="toggled" from="Control/NinePatchRect/MarginContainer/VBoxContainer/HideVersion" to="." method="_on_hide_version_toggled"]
+[connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/DealDamage" to="." method="_on_deal_damage_pressed"]
+[connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/HealKalin" to="." method="_on_heal_kalin_pressed"]
+[connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/GiveExp" to="." method="_on_give_exp_pressed"]
+[connection signal="item_selected" from="Control/NinePatchRect/MarginContainer/VBoxContainer/MapSelection" to="." method="_on_map_selection_item_selected"]

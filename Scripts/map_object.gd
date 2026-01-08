@@ -72,7 +72,7 @@ func take_damage(damage: int, source) -> void:
 			drop_loot()
 
 		if collidable:
-			set_collision_layer_value(1, true)
+			set_collision_layer_value(1, false)
 		set_collision_layer_value(8, false)
 		set_collision_layer_value(13, false)
 		for child in get_children():

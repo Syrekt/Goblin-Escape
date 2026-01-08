@@ -133,7 +133,7 @@ text = "up"
 
 [node name="ThoughtTrigger" parent="." instance=ExtResource("12_jfpsl")]
 position = Vector2(66, 574)
-thougth = "This dungeon is huge. Looks like it’s abandoned for a long time as well, wonder if I can find anything valuable in here."
+thougth = "This dungeon is huge. There is no way I'm not gonna find something valueable here. Can't miss my chance to get rich. And maybe even famous while I'm at it.."
 
 [node name="DebrisAmb" parent="." instance=ExtResource("12_ng1ak")]
 position = Vector2(476, 454)

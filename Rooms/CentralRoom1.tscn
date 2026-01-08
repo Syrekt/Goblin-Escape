@@ -261,4 +261,15 @@ position = Vector2(1495.3586, 652.2999)
 [node name="DebrisAmb3" parent="." instance=ExtResource("23_r1hhn")]
 position = Vector2(1773, 193)
 
+[node name="Torch16" parent="." instance=ExtResource("14_7gos6")]
+position = Vector2(720, 570)
+monitorable = false
+
+[node name="AnimatedSprite2D" parent="Torch16" index="2"]
+visible = false
+
+[node name="Interaction" parent="Torch16" index="4"]
+interactable = false
+
 [editable path="PlatformCollider2"]
+[editable path="Torch16"]

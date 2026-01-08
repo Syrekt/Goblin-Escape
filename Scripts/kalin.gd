@@ -551,6 +551,7 @@ func load(data: Dictionary) -> void:
 	smell.value		= data.smell
 	fatigue.value	= data.fatigue
 	experience.amount = data.experience
+	experience.visible_amount = experience.amount
 
 	data.erase("health")
 	data.erase("stamina")
