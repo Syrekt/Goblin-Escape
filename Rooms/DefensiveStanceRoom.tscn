@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://b31inh4yf13a"]
+[gd_scene load_steps=11 format=4 uid="uid://b31inh4yf13a"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_d8eyb"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_bxo78"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://wcoq7ay5eurm" path="res://UI/rpg_icon_pack.png" id="7_0adsn"]
 [ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Enemy/GoblinWarrior/goblin_warrior.tscn" id="8_0adsn"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="9_awogg"]
+[ext_resource type="PackedScene" uid="uid://dw2d8bu1vlvv6" path="res://Enemy/Goblin/goblin.tscn" id="10_yec8o"]
 
 [node name="DefensiveStanceRoom" type="Node2D"]
 
@@ -70,7 +71,7 @@ position = Vector2(297, 283)
 scale = Vector2(-1, 1)
 
 [node name="SkillPickup2" parent="." instance=ExtResource("6_m10yo")]
-position = Vector2(611, 418)
+position = Vector2(464, 352)
 texture = ExtResource("7_0adsn")
 region_enabled = true
 region_rect = Rect2(128, 320, 16, 16)
@@ -93,3 +94,6 @@ position = Vector2(784, 144)
 
 [node name="Torch5" parent="." instance=ExtResource("9_awogg")]
 position = Vector2(1056, 480)
+
+[node name="Goblin" parent="." instance=ExtResource("10_yec8o")]
+position = Vector2(704, 432)

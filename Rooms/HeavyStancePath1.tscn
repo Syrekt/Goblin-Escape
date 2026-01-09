@@ -138,3 +138,12 @@ position = Vector2(-160, 0)
 
 [node name="Marker2D2" type="Marker2D" parent="GoblinWarrior"]
 position = Vector2(144, 0)
+
+[node name="Goblin2" parent="." instance=ExtResource("4_l0afd")]
+position = Vector2(592, 656)
+
+[node name="Crate1" parent="Goblin2" instance=ExtResource("6_7j2q2")]
+position = Vector2(464, 8)
+
+[node name="Crate2" parent="Goblin2" instance=ExtResource("6_7j2q2")]
+position = Vector2(496, 8)

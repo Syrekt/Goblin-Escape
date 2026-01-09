@@ -5,7 +5,8 @@ class_name KeyRebindButton extends Control
 
 @export var action_name := ""
 
-var button_pressed := false
+var listening := false
+
 
 const CONFIG_FILE = "user://options.ini"
 
@@ -39,6 +40,8 @@ func set_action_name() -> void:
 			label.text = "Walk"
 		"interact":
 			label.text = "Interact"
+		"inventory":
+			label.text = "Inventory"
 
 func set_text_for_key() -> void:
 	#print("Set text for key: " + name)
@@ -61,7 +64,7 @@ func set_text_for_key() -> void:
 func _on_button_toggled(_button_pressed: bool) -> void:
 	if _button_pressed:
 		button.text = "Press any key..."
-		set_process_unhandled_key_input(_button_pressed)
+		listening	= true
 
 		for i in get_tree().get_nodes_in_group("key_bind_buttons"):
 			if i.action_name != self.action_name:
@@ -78,7 +81,9 @@ func _on_button_toggled(_button_pressed: bool) -> void:
 		
 
 
-func _unhandled_key_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
+	if !listening: return
+
 	if event is InputEventKey && event.pressed:
 		#print("event.keycode: "+str(event.keycode));
 		#print("KEY_ESCAPE: "+str(KEY_ESCAPE))
@@ -90,9 +95,13 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		else:
 			rebind_action_key(event)
 			button.button_pressed = false
+			get_viewport().set_input_as_handled()
+		listening = false
 
-func rebind_action_key(event) -> void:
-	InputMap.action_erase_events(action_name)
+func rebind_action_key(event:InputEventKey) -> void:
+	for _event in InputMap.action_get_events(action_name):
+		if _event is InputEventKey:
+			InputMap.action_erase_event(action_name, _event)
 	InputMap.action_add_event(action_name, event)
 
 	set_process_unhandled_key_input(false)

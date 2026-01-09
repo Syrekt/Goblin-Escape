@@ -7,7 +7,7 @@ var skip_first_event := true
 
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("escape_menu") || Input.is_action_just_pressed("ui_cancel"):
 		if skip_first_event: skip_first_event = false
 		else:
 			get_tree().paused = false;

@@ -52,11 +52,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 2
+current_tab = 0
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -231,6 +230,7 @@ step = 0.1
 value = 1.0
 
 [node name="Controls" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -298,6 +298,10 @@ action_name = "sprint"
 [node name="ButtonKeybind9" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" instance=ExtResource("3_iopgn")]
 layout_mode = 2
 action_name = "walk"
+
+[node name="ButtonKeybind10" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" instance=ExtResource("3_iopgn")]
+layout_mode = 2
+action_name = "inventory"
 
 [node name="Noise Indicator" type="TabBar" parent="."]
 visible = false

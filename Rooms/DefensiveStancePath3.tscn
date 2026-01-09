@@ -111,8 +111,17 @@ target_door = NodePath("../IronBars")
 [node name="Goblin" parent="." instance=ExtResource("9_8ybyu")]
 position = Vector2(1488, 592)
 
+[node name="Crate4" parent="." instance=ExtResource("10_cqlwc")]
+position = Vector2(1856, 504)
+drop_random_loot = true
+
+[node name="Crate5" parent="." instance=ExtResource("10_cqlwc")]
+position = Vector2(1824, 504)
+drop_random_loot = true
+
 [node name="Crate1" parent="." instance=ExtResource("10_cqlwc")]
 position = Vector2(1377, 600)
+drop_random_loot = true
 
 [node name="HidingSpot" parent="." instance=ExtResource("11_kcxmx")]
 position = Vector2(1536, 565)
@@ -146,3 +155,6 @@ barricaded = true
 
 [node name="TunnelEntrance2" parent="." instance=ExtResource("14_kcxmx")]
 position = Vector2(1219, 85)
+
+[node name="Goblin2" parent="." instance=ExtResource("9_8ybyu")]
+position = Vector2(240, 528)

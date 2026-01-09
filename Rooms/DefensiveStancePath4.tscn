@@ -110,9 +110,11 @@ lit = false
 
 [node name="Crate1" parent="." instance=ExtResource("8_qnnt4")]
 position = Vector2(1103, 1096)
+drop_random_loot = true
 
 [node name="Crate2" parent="." instance=ExtResource("8_qnnt4")]
 position = Vector2(1070, 1096)
+drop_random_loot = true
 
 [node name="DebrisAmb" parent="." instance=ExtResource("9_v8rj2")]
 position = Vector2(840, 624)

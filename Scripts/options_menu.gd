@@ -53,6 +53,7 @@ var default_keybindings : Dictionary = {
 	"sprint"	: [KEY_SHIFT],
 	"walk"		: [KEY_CTRL],
 	"interact"	: [KEY_E],
+	"inventory"	: [KEY_I],
 }
 
 
@@ -115,6 +116,12 @@ func _process(delta: float) -> void:
 	slider_green_label.text = "Green: " + str(int(noise_color_g.value))
 	slider_blue_label.text	= "Blue: " + str(int(noise_color_b.value))
 	slider_alpha_label.text	= "Alpha: " + str(int(noise_color_a.value))
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("next_tab"):
+		select_next_available()
+	elif event.is_action_pressed("previous_tab"):
+		select_previous_available()
 
 func _exit_tree() -> void:
 	Options.save_options()

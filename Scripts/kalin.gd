@@ -961,6 +961,8 @@ func _physics_process(delta: float) -> void:
 #endregion
 #region Process
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("attack"):
+		print("Attack pressed")
 	# Reset combat target if player isn't targeted by the combat target
 	if combat_target && !combat_target.chase_target: combat_target = null
 	#region Attack costs
@@ -980,26 +982,24 @@ func _process(delta: float) -> void:
 	if ray_auto_climb.is_colliding():
 		var collider = ray_auto_climb.get_collider()
 	#endregion
-	#region Open menu & Inventory
-	if !controls_disabled && Input.is_action_just_pressed("ui_cancel"):
-		toggle_pause_menu()
-	if Input.is_action_just_pressed("inventory"):
-		toggle_inventory()
-	#if Input.is_action_just_pressed("map"):
-	#	toggle_map()
-
-	#endregion
-	#region Debug
 	if OS.is_debug_build():
 		if debug: Debugger.printui(str(state_node.state.name))
-		if Input.is_action_pressed("sprint") && Input.is_action_just_pressed("left_mouse_button"):
+		if Input.is_action_just_pressed("debug_teleport"):
+			global_position = get_global_mouse_position()
+#endregion
+#region Input
+func _unhandled_input(event: InputEvent) -> void:
+	if !controls_disabled && event.is_action_pressed("escape_menu"):
+		toggle_pause_menu()
+	#region Debug
+	if OS.is_debug_build():
+		if event.is_action_pressed("debug_teleport"):
 			global_position = get_global_mouse_position()
 		if just_pressed("quick save"):
 			Game.get_singleton().save_game()
 		if just_pressed("quick load"):
 			Game.get_singleton().load_game()
-	if OS.is_debug_build():
-		if Input.is_action_just_pressed("debug1"):
+		if event.is_action_pressed("debug1"):
 			print("debug1")
 			#if Engine.time_scale == 1.0:
 			#	Engine.time_scale = 2.0

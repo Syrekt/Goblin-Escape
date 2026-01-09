@@ -67,7 +67,6 @@ alignment = 0
 
 [node name="MapSelection" type="OptionButton" parent="Control/NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-focus_mode = 1
 allow_reselect = true
 item_count = 1
 popup/item_0/id = 0

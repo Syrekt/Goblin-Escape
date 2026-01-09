@@ -84,8 +84,6 @@ RichTextLabel/fonts/normal_font = ExtResource("2_dyqgq")
 [node name="ExampleBalloon" type="CanvasLayer" groups=["FullscreenPanel"]]
 layer = 100
 script = ExtResource("1_36de5")
-next_action = &"grab"
-skip_action = &"grab"
 
 [node name="Balloon" type="Control" parent="."]
 unique_name_in_owner = true

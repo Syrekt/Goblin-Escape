@@ -6,7 +6,7 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -437.0
+offset_right = -365.0
 offset_bottom = -337.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -16,7 +16,7 @@ dragging_enabled = false
 script = ExtResource("1_6efsq")
 
 [node name="Label" type="Label" parent="."]
-custom_minimum_size = Vector2(36, 0)
+custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 text = "Text"
 vertical_alignment = 1

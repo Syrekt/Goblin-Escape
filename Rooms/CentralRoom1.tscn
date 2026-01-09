@@ -149,15 +149,19 @@ position = Vector2(1264, 352)
 
 [node name="Crate1" parent="." instance=ExtResource("15_u0kkm")]
 position = Vector2(1505, 392)
+drop_random_loot = true
 
 [node name="Crate2" parent="." instance=ExtResource("15_u0kkm")]
 position = Vector2(2256, 1016)
+drop_random_loot = true
 
 [node name="Crate5" parent="." instance=ExtResource("15_u0kkm")]
 position = Vector2(2223, 1016)
+drop_random_loot = true
 
 [node name="Crate6" parent="." instance=ExtResource("15_u0kkm")]
 position = Vector2(2235, 986)
+drop_random_loot = true
 debug = true
 
 [node name="StairsLong2" parent="." instance=ExtResource("5_ymrwc")]
@@ -166,10 +170,12 @@ position = Vector2(1576, 888)
 [node name="Crate3" parent="." instance=ExtResource("15_u0kkm")]
 position = Vector2(1952, 1008)
 collidable = false
+drop_random_loot = true
 
 [node name="Crate4" parent="." instance=ExtResource("15_u0kkm")]
 position = Vector2(2032, 1008)
 collidable = false
+drop_random_loot = true
 
 [node name="PickupHealth" parent="." instance=ExtResource("16_bupn0")]
 position = Vector2(2032, 976)
@@ -270,6 +276,14 @@ visible = false
 
 [node name="Interaction" parent="Torch16" index="4"]
 interactable = false
+
+[node name="Crate7" parent="." instance=ExtResource("15_u0kkm")]
+position = Vector2(1200, 1160)
+drop_random_loot = true
+
+[node name="Crate8" parent="." instance=ExtResource("15_u0kkm")]
+position = Vector2(1232, 1160)
+drop_random_loot = true
 
 [editable path="PlatformCollider2"]
 [editable path="Torch16"]

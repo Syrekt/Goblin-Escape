@@ -14,16 +14,21 @@ func update(_delta: float) -> void:
 
 	if !player.is_on_floor():
 		finished.emit("fall")
-	elif player.pressed("down"):
+
+func handle_input(_event: InputEvent) -> void:
+	if player.controls_disabled: return
+	if player.movement_disabled: return
+
+	if _event.is_action_pressed("down"):
 		finished.emit("crouch")
-	elif player.just_pressed("jump"):
+	elif _event.is_action_pressed("jump"):
 		finished.emit("rise")
-	elif player.just_pressed("attack") && player.stamina.spend(1.0):
+	elif _event.is_action_pressed("attack") && player.stamina.spend(1.0):
 		finished.emit("bash_no_sword")
-	elif player.has_sword && !lock_stance_button && player.just_pressed("stance"):
+	elif _event.is_action_pressed("stance") && player.has_sword && !lock_stance_button:
 		finished.emit("stance_light")
 	elif !is_equal_approx(player.get_movement_dir(), 0.0):
-		if player.pressed("walk"):
+		if _event.is_action_pressed("walk"):
 			finished.emit("walk")
 		else:
 			finished.emit("run")

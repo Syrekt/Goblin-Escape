@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://deh784rf260r2"]
+[gd_scene load_steps=16 format=4 uid="uid://deh784rf260r2"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_y2f3n"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_jadjv"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b4vewnv73flk4" path="res://Map/Props/Movable/statue.tscn" id="14_diob3"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="15_inj1l"]
 [ext_resource type="PackedScene" uid="uid://cjjojn21p02vb" path="res://Objects/debris_amb.tscn" id="15_r50i2"]
+[ext_resource type="PackedScene" uid="uid://djk8oskwq3mdn" path="res://Inventory/Pickup Objects/pickup_health.tscn" id="15_rmv73"]
 
 [node name="SwordRoom" type="Node2D"]
 
@@ -175,3 +176,6 @@ position = Vector2(2187, 170)
 
 [node name="DebrisAmb3" parent="." instance=ExtResource("15_r50i2")]
 position = Vector2(2808, 342)
+
+[node name="PickupHealth" parent="." instance=ExtResource("15_rmv73")]
+position = Vector2(1024, 128)

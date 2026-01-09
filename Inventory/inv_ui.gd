@@ -25,6 +25,11 @@ func _process(delta: float) -> void:
 		description_text.text = ""
 		if vbox.get_child_count() > 0:
 			vbox.get_child(0).grab_focus()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("inventory"):
+		if !Game.get_singleton().player.controls_disabled:
+			toggle()
 func toggle() -> void:
 	visible = !visible
 	description_panel.visible = visible

@@ -124,14 +124,6 @@ position = Vector2(786, 296)
 [node name="Crate2" parent="." instance=ExtResource("9_ah6pm")]
 position = Vector2(753, 296)
 
-[node name="Crate3" parent="." instance=ExtResource("9_ah6pm")]
-position = Vector2(97, 496)
-collidable = false
-
-[node name="Crate4" parent="." instance=ExtResource("9_ah6pm")]
-position = Vector2(64, 496)
-collidable = false
-
 [node name="ThoughtTrigger" parent="." instance=ExtResource("10_0ount")]
 position = Vector2(1196, 361)
 thougth = "I think I can hide in here, could come in handy."

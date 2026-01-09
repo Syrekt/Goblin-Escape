@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://cp7rxyc6buewr"]
+[gd_scene load_steps=16 format=4 uid="uid://cp7rxyc6buewr"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_j42xc"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_xkbw6"]
@@ -11,6 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://24ijy2g2jylp" path="res://Objects/hiding_spot.tscn" id="9_u1w4d"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="10_ovywn"]
 [ext_resource type="PackedScene" uid="uid://cjjojn21p02vb" path="res://Objects/debris_amb.tscn" id="11_ovywn"]
+[ext_resource type="PackedScene" uid="uid://b8rlvg8w53iwn" path="res://Objects/scroll.tscn" id="12_km3b5"]
+[ext_resource type="PackedScene" uid="uid://bi5awk2sr2hdw" path="res://Map/Props/crate2.tscn" id="13_ew0b7"]
+[ext_resource type="PackedScene" uid="uid://cy0k8vepu16km" path="res://Inventory/Pickup Objects/pickup_pher_potion.tscn" id="14_ew0b7"]
+[ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="15_3pvsx"]
 
 [node name="DefensiveStancePathExit2" type="Node2D"]
 
@@ -74,7 +78,7 @@ tile_set = ExtResource("1_j42xc")
 spawn_point = NodePath("../Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(765.3997, 540.6559)
+position = Vector2(2157.2961, 341.2645)
 
 [node name="StairsLong" parent="." instance=ExtResource("3_xkbw6")]
 position = Vector2(984, 536)
@@ -94,7 +98,7 @@ position = Vector2(992, 295)
 position = Vector2(1120, 503)
 
 [node name="Statue2" parent="." instance=ExtResource("4_6d0ha")]
-position = Vector2(384, 208)
+position = Vector2(464, 208)
 
 [node name="PlatformCollider" parent="." instance=ExtResource("6_fgs5f")]
 position = Vector2(1792, 112)
@@ -154,3 +158,22 @@ lit = false
 
 [node name="DebrisAmb" parent="." instance=ExtResource("11_ovywn")]
 position = Vector2(1681, 384)
+
+[node name="Scroll" parent="." instance=ExtResource("12_km3b5")]
+position = Vector2(2224, 368)
+
+[node name="Crate2" parent="." instance=ExtResource("13_ew0b7")]
+position = Vector2(2224, 400)
+drop_random_loot = true
+debug = true
+
+[node name="PickupPher" parent="." instance=ExtResource("14_ew0b7")]
+position = Vector2(336, 224)
+
+[node name="Crate1" parent="." instance=ExtResource("15_3pvsx")]
+position = Vector2(1088, 600)
+drop_random_loot = true
+
+[node name="Crate3" parent="." instance=ExtResource("15_3pvsx")]
+position = Vector2(1056, 600)
+drop_random_loot = true
