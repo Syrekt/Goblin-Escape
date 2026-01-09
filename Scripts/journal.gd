@@ -18,8 +18,8 @@ func _ready() -> void:
 				if !pages.get(i + 1):
 					diary_owner.get_child(i).queue_free()
 
-	for i in range(tab_container.get_tab_count()):
-		tab_container.set_tab_title(i, " ")
+	#for i in range(tab_container.get_tab_count()):
+	#	tab_container.set_tab_title(i, " ")
 
 
 

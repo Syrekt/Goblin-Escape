@@ -154,7 +154,7 @@ func _ready() -> void:
 			print(\"File doesn't exists %s\" % filepath)
 "
 
-[node name="Journal" type="CanvasLayer" groups=["UIPanel"]]
+[node name="Journal" type="CanvasLayer" groups=["FullscreenPanel"]]
 script = ExtResource("1_ofsdi")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -183,15 +183,14 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 119.0
-offset_top = -3.0
+offset_top = -12.0
 offset_right = -96.0
 offset_bottom = -49.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 1
+current_tab = 0
 
-[node name="Ann" type="TabContainer" parent="TextureRect/TabContainer"]
-visible = false
+[node name="A" type="TabContainer" parent="TextureRect/TabContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -200,12 +199,12 @@ current_tab = 0
 tabs_visible = false
 metadata/_tab_index = 0
 
-[node name="Page1" type="TabBar" parent="TextureRect/TabContainer/Ann"]
+[node name="Page1" type="TabBar" parent="TextureRect/TabContainer/A"]
 layout_mode = 2
 script = ExtResource("4_a5aj4")
 metadata/_tab_index = 0
 
-[node name="VSplitContainer" type="VSplitContainer" parent="TextureRect/TabContainer/Ann/Page1"]
+[node name="VSplitContainer" type="VSplitContainer" parent="TextureRect/TabContainer/A/Page1"]
 layout_mode = 0
 offset_left = -15.0
 offset_top = 29.0
@@ -213,13 +212,13 @@ offset_right = 377.0
 offset_bottom = 275.0
 dragging_enabled = false
 
-[node name="Pages" type="HSplitContainer" parent="TextureRect/TabContainer/Ann/Page1/VSplitContainer"]
+[node name="Pages" type="HSplitContainer" parent="TextureRect/TabContainer/A/Page1/VSplitContainer"]
 custom_minimum_size = Vector2(0, 218.255)
 layout_mode = 2
 theme_override_constants/separation = 40
 dragging_enabled = false
 
-[node name="LeftPage" type="RichTextLabel" parent="TextureRect/TabContainer/Ann/Page1/VSplitContainer/Pages"]
+[node name="LeftPage" type="RichTextLabel" parent="TextureRect/TabContainer/A/Page1/VSplitContainer/Pages"]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 bbcode_enabled = true
@@ -228,36 +227,36 @@ text = "Folk think I go out only to gather berries, but truly I come here instea
 "
 scroll_active = false
 
-[node name="RightPage" type="RichTextLabel" parent="TextureRect/TabContainer/Ann/Page1/VSplitContainer/Pages"]
+[node name="RightPage" type="RichTextLabel" parent="TextureRect/TabContainer/A/Page1/VSplitContainer/Pages"]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 bbcode_enabled = true
 text = "The way they move is all thoughtless and natural, as beasts are, and there is something honest in it that I cannot put from my mind."
 scroll_active = false
 
-[node name="PageNumbers" type="HSplitContainer" parent="TextureRect/TabContainer/Ann/Page1/VSplitContainer"]
+[node name="PageNumbers" type="HSplitContainer" parent="TextureRect/TabContainer/A/Page1/VSplitContainer"]
 layout_mode = 2
 theme_override_constants/separation = 64
 split_offset = 164
 dragging_enabled = false
 
-[node name="LeftPageNumber" type="Label" parent="TextureRect/TabContainer/Ann/Page1/VSplitContainer/PageNumbers"]
+[node name="LeftPageNumber" type="Label" parent="TextureRect/TabContainer/A/Page1/VSplitContainer/PageNumbers"]
 layout_mode = 2
 text = "1"
 horizontal_alignment = 1
 
-[node name="RightPageNumber" type="Label" parent="TextureRect/TabContainer/Ann/Page1/VSplitContainer/PageNumbers"]
+[node name="RightPageNumber" type="Label" parent="TextureRect/TabContainer/A/Page1/VSplitContainer/PageNumbers"]
 layout_mode = 2
 text = "2"
 horizontal_alignment = 1
 
-[node name="Page2" type="TabBar" parent="TextureRect/TabContainer/Ann"]
+[node name="Page2" type="TabBar" parent="TextureRect/TabContainer/A"]
 visible = false
 layout_mode = 2
 script = ExtResource("4_a5aj4")
 metadata/_tab_index = 1
 
-[node name="VSplitContainer" type="VSplitContainer" parent="TextureRect/TabContainer/Ann/Page2"]
+[node name="VSplitContainer" type="VSplitContainer" parent="TextureRect/TabContainer/A/Page2"]
 layout_mode = 0
 offset_left = -15.0
 offset_top = 29.0
@@ -265,43 +264,44 @@ offset_right = 377.0
 offset_bottom = 275.0
 dragging_enabled = false
 
-[node name="Pages" type="HSplitContainer" parent="TextureRect/TabContainer/Ann/Page2/VSplitContainer"]
+[node name="Pages" type="HSplitContainer" parent="TextureRect/TabContainer/A/Page2/VSplitContainer"]
 custom_minimum_size = Vector2(0, 218.255)
 layout_mode = 2
 theme_override_constants/separation = 40
 dragging_enabled = false
 
-[node name="LeftPage" type="RichTextLabel" parent="TextureRect/TabContainer/Ann/Page2/VSplitContainer/Pages"]
+[node name="LeftPage" type="RichTextLabel" parent="TextureRect/TabContainer/A/Page2/VSplitContainer/Pages"]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 bbcode_enabled = true
 text = "I think I’m lost, I’ve passed this corridor 4 times now. I shouldn’t have wandered this deep, I’m screwed. "
 scroll_active = false
 
-[node name="RightPage" type="RichTextLabel" parent="TextureRect/TabContainer/Ann/Page2/VSplitContainer/Pages"]
+[node name="RightPage" type="RichTextLabel" parent="TextureRect/TabContainer/A/Page2/VSplitContainer/Pages"]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 bbcode_enabled = true
-text = "Village Elder will be mad if he hears about my secret adventures and I won’t be allowed anymore, I have to find my way back!"
+text = "Village Elder will be mad if he hears about my secret adventures. If so may happen, I won’t be allowed anymore. I have to find my way back!"
 scroll_active = false
 
-[node name="PageNumbers" type="HSplitContainer" parent="TextureRect/TabContainer/Ann/Page2/VSplitContainer"]
+[node name="PageNumbers" type="HSplitContainer" parent="TextureRect/TabContainer/A/Page2/VSplitContainer"]
 layout_mode = 2
 theme_override_constants/separation = 64
 split_offset = 164
 dragging_enabled = false
 
-[node name="LeftPageNumber" type="Label" parent="TextureRect/TabContainer/Ann/Page2/VSplitContainer/PageNumbers"]
+[node name="LeftPageNumber" type="Label" parent="TextureRect/TabContainer/A/Page2/VSplitContainer/PageNumbers"]
 layout_mode = 2
 text = "3"
 horizontal_alignment = 1
 
-[node name="RightPageNumber" type="Label" parent="TextureRect/TabContainer/Ann/Page2/VSplitContainer/PageNumbers"]
+[node name="RightPageNumber" type="Label" parent="TextureRect/TabContainer/A/Page2/VSplitContainer/PageNumbers"]
 layout_mode = 2
 text = "4"
 horizontal_alignment = 1
 
-[node name="Gawath" type="TabContainer" parent="TextureRect/TabContainer"]
+[node name="G" type="TabContainer" parent="TextureRect/TabContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -310,12 +310,12 @@ current_tab = 0
 tabs_visible = false
 metadata/_tab_index = 1
 
-[node name="Page1" type="TabBar" parent="TextureRect/TabContainer/Gawath"]
+[node name="Page1" type="TabBar" parent="TextureRect/TabContainer/G"]
 layout_mode = 2
 script = ExtResource("4_a5aj4")
 metadata/_tab_index = 0
 
-[node name="VSplitContainer" type="VSplitContainer" parent="TextureRect/TabContainer/Gawath/Page1"]
+[node name="VSplitContainer" type="VSplitContainer" parent="TextureRect/TabContainer/G/Page1"]
 layout_mode = 0
 offset_left = -15.0
 offset_top = 29.0
@@ -323,38 +323,38 @@ offset_right = 377.0
 offset_bottom = 275.0
 dragging_enabled = false
 
-[node name="Pages" type="HSplitContainer" parent="TextureRect/TabContainer/Gawath/Page1/VSplitContainer"]
+[node name="Pages" type="HSplitContainer" parent="TextureRect/TabContainer/G/Page1/VSplitContainer"]
 custom_minimum_size = Vector2(0, 218.255)
 layout_mode = 2
 theme_override_constants/separation = 40
 dragging_enabled = false
 
-[node name="LeftPage" type="RichTextLabel" parent="TextureRect/TabContainer/Gawath/Page1/VSplitContainer/Pages"]
+[node name="LeftPage" type="RichTextLabel" parent="TextureRect/TabContainer/G/Page1/VSplitContainer/Pages"]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 bbcode_enabled = true
 text = "Where is muh wife"
 scroll_active = false
 
-[node name="RightPage" type="RichTextLabel" parent="TextureRect/TabContainer/Gawath/Page1/VSplitContainer/Pages"]
+[node name="RightPage" type="RichTextLabel" parent="TextureRect/TabContainer/G/Page1/VSplitContainer/Pages"]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 bbcode_enabled = true
 text = "Where?"
 scroll_active = false
 
-[node name="PageNumbers" type="HSplitContainer" parent="TextureRect/TabContainer/Gawath/Page1/VSplitContainer"]
+[node name="PageNumbers" type="HSplitContainer" parent="TextureRect/TabContainer/G/Page1/VSplitContainer"]
 layout_mode = 2
 theme_override_constants/separation = 64
 split_offset = 164
 dragging_enabled = false
 
-[node name="LeftPageNumber" type="Label" parent="TextureRect/TabContainer/Gawath/Page1/VSplitContainer/PageNumbers"]
+[node name="LeftPageNumber" type="Label" parent="TextureRect/TabContainer/G/Page1/VSplitContainer/PageNumbers"]
 layout_mode = 2
 text = "1"
 horizontal_alignment = 1
 
-[node name="RightPageNumber" type="Label" parent="TextureRect/TabContainer/Gawath/Page1/VSplitContainer/PageNumbers"]
+[node name="RightPageNumber" type="Label" parent="TextureRect/TabContainer/G/Page1/VSplitContainer/PageNumbers"]
 layout_mode = 2
 text = "2"
 horizontal_alignment = 1

@@ -160,7 +160,9 @@ lit = false
 position = Vector2(1681, 384)
 
 [node name="Scroll" parent="." instance=ExtResource("12_km3b5")]
-position = Vector2(2224, 368)
+position = Vector2(2447, 361)
+diary_owner = "A"
+diary_page = 1
 
 [node name="Crate2" parent="." instance=ExtResource("13_ew0b7")]
 position = Vector2(2224, 400)

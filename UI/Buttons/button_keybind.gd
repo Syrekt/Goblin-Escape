@@ -46,7 +46,12 @@ func set_action_name() -> void:
 func set_text_for_key() -> void:
 	#print("Set text for key: " + name)
 	var action_events = InputMap.action_get_events(action_name)
-	var action_event = action_events[0]
+	var action_event
+	for event in action_events:
+		if event is InputEventKey:
+			action_event = event
+			break
+
 	#print("action_event: "+str(action_event.keycode))
 	var action_keycode = OS.get_keycode_string(action_event.keycode)
 	if action_keycode == "":
@@ -69,12 +74,12 @@ func _on_button_toggled(_button_pressed: bool) -> void:
 		for i in get_tree().get_nodes_in_group("key_bind_buttons"):
 			if i.action_name != self.action_name:
 				i.button.toggle_mode = false
-				i.set_process_unhandled_key_input(false)
+				i.listening = false
 	else:
 		for i in get_tree().get_nodes_in_group("key_bind_buttons"):
 			if i.action_name != self.action_name:
 				i.button.toggle_mode = true
-				i.set_process_unhandled_key_input(false)
+				i.listening = false
 
 		set_text_for_key()
 

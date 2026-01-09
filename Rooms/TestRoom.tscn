@@ -83,15 +83,15 @@ position = Vector2(524, 200)
 
 [node name="Scroll" parent="." instance=ExtResource("13_7vf4x")]
 position = Vector2(480, 222)
-diary_owner = "Gawath"
+diary_owner = "G"
 diary_page = 1
 
 [node name="Scroll2" parent="." instance=ExtResource("13_7vf4x")]
 position = Vector2(418, 225)
-diary_owner = "Ann"
+diary_owner = "A"
 diary_page = 1
 
 [node name="Scroll3" parent="." instance=ExtResource("13_7vf4x")]
 position = Vector2(450, 223)
-diary_owner = "Ann"
+diary_owner = "A"
 diary_page = 2
