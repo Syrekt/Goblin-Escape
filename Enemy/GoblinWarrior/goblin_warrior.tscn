@@ -1304,17 +1304,18 @@ scale = Vector2(1.905, 1)
 [node name="stance_heavy" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state") groups=["CombatStance"]]
 script = ExtResource("22_7ej28")
 attack_state = [NodePath("../slash")]
+stance_time = 0.1
 
 [node name="stance_light" type="Node" parent="StateMachine" node_paths=PackedStringArray("transitions", "attack_state") groups=["CombatStance"]]
 script = ExtResource("23_j8fla")
 transitions = [NodePath("../stance_heavy"), NodePath("../stance_defensive")]
-attack_state = [NodePath("../grab"), NodePath("../stab")]
-attack_time = 0.75
+attack_state = [NodePath("../grab"), NodePath("../stab"), NodePath("../stab")]
+stance_time = 0.1
 
 [node name="stance_defensive" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state") groups=["CombatStance"]]
 script = ExtResource("24_lox44")
 attack_state = [NodePath("../bash")]
-attack_time = 0.3
+attack_time = 0.4
 
 [node name="stance_walk" type="Node" parent="StateMachine"]
 script = ExtResource("30_ec1cy")

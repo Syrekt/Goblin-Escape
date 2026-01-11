@@ -52,6 +52,7 @@ var counter_attack := false
 var dealth_finishing_blow := false
 
 var attack_type_taken : Array[String]
+@export var stun_state := "stun"
 
 var light_source : Area2D
 var ray_light : RayCast2D

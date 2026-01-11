@@ -21,7 +21,7 @@ func _on_attack_frame() -> void:
 		var defender = hitbox.get_overlapping_bodies()[0]
 		if defender is Enemy:
 			var defender_state = defender.state_node.state.name
-			if defender_state == "stance_defensive":
+			if defender_state == "stance_defensive" || defender_state == "bash":
 				player.combat_properties.stun(2.0)
 				stab_sfx.set_parameter("AttackResult", "Blocked")
 			else:

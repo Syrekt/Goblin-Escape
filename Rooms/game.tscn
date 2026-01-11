@@ -35,7 +35,7 @@ func _ready() -> void:
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_dthpw")
-starting_map = 19
+starting_map = 22
 
 [node name="LoadingScreen" parent="." instance=ExtResource("2_1cwbi")]
 unique_name_in_owner = true
@@ -142,6 +142,7 @@ event_guid = "{3230f691-db91-47e3-9e92-db100bdcc92e}"
 autoplay = true
 
 [node name="DebugPanel" parent="." instance=ExtResource("11_pt6lt")]
+unique_name_in_owner = true
 visible = false
 
 [node name="StartMenu" type="CanvasLayer" parent="." groups=["FullscreenPanel"]]

@@ -1,4 +1,4 @@
-extends CanvasLayer
+class_name DebugPanel extends CanvasLayer
 
 var scenes : Array[String] = [
 	"TestRoom",
@@ -29,8 +29,10 @@ var scenes : Array[String] = [
 ]
 
 @onready var map_selection: OptionButton = $Control/NinePatchRect/MarginContainer/VBoxContainer/MapSelection
+var map_selected := false ## We've selected map from debug panel so teleport player to spawn point in the next room
 
 func _ready() -> void:
+	get_script().set_meta(&"singleton", self)
 	if OS.is_debug_build():
 		%VersionNumber.visible = false
 	else:
@@ -42,6 +44,8 @@ func _ready() -> void:
 		print("i: "+str(i))
 		map_selection.set_item_text(i, scenes[i])
 		
+static func get_singleton() -> DebugPanel:
+	return (DebugPanel as Script).get_meta(&"singleton") as DebugPanel
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("debug1"):
@@ -55,12 +59,21 @@ func _on_deal_damage_pressed() -> void:
 	Game.get_singleton().player.take_damage(90)
 
 
-
 func _on_map_selection_item_selected(index: int) -> void:
 	var game = Game.get_singleton()
 	game.load_room("res://Rooms/" + map_selection.get_item_text(index) + ".tscn")
-	if MetSys.current_room && MetSys.current_room.spawn_point:
-		game.player.position = MetSys.current_room.spawn_point.position
+	map_selected = true
+
+func _on_room_assigned(spawn_point:Node2D) -> void:
+	if !map_selected: return
+
+	if !spawn_point:
+		print("No spawn point assigned in this room")
+		return
+
+	var player = Game.get_singleton().player
+	player.global_position = spawn_point.global_position
+	
 
 
 func _on_heal_kalin_pressed() -> void:

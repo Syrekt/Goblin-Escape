@@ -23,6 +23,8 @@ signal previews_updated
 func _enter_tree() -> void:
 	if not Engine.is_editor_hint():
 		MetSys.current_room = self
+		if spawn_point:
+			DebugPanel.get_singleton()._on_room_assigned(spawn_point)
 	else:
 		if not owner:
 			return

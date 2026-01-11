@@ -2,8 +2,8 @@ class_name EnemyCombatState extends EnemyState
 
 @export var transitions : Array[EnemyCombatState] ##Transition states from main stance only. WARNING: Might choose to attack instead of changing stance
 @export var attack_state : Array[EnemyState]
-@export var stance_time := 0.5
-@export var attack_time := 0.2
+@export var stance_time := 0.5 ## Leave this state, either attack or switch to another state(apply player status checks)
+@export var attack_time := 0.2 ## Attack if player is in range and can be attacked
 @export var debug_stance : String ##Debug stance to transition on stance timer timeout
 
 var timer : Timer

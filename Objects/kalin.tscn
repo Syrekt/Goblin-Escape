@@ -1,4 +1,4 @@
-[gd_scene load_steps=256 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene load_steps=257 format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://blbnh0ve0i73q" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -4430,6 +4430,73 @@ tracks/3/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_lc2pc"]
+resource_name = "hurt_to_stun"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("33_m1g60")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Sprite2D/..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [Vector2(0, 32), 0.0],
+"method": &"emit_noise"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cuohi"]
 _data = {
 &"RESET": SubResource("Animation_5koc5"),
@@ -4456,6 +4523,7 @@ _data = {
 &"hiding": SubResource("Animation_y0qhg"),
 &"hurt": SubResource("Animation_kp5w5"),
 &"hurt_no_sword": SubResource("Animation_2d1nf"),
+&"hurt_to_stun": SubResource("Animation_lc2pc"),
 &"idle": SubResource("Animation_dkbxi"),
 &"land": SubResource("Animation_jxgp1"),
 &"land_hurt": SubResource("Animation_2ksh1"),
@@ -4624,7 +4692,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UI" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("8_4oj65")
 
 [node name="UITint" type="CanvasModulate" parent="UI"]
@@ -4848,10 +4915,10 @@ text = "waterasdaasdasdsa"
 text_overrun_behavior = 3
 
 [node name="ExpAmountContainer" type="VBoxContainer" parent="UI" groups=["HUD"]]
-offset_left = 563.0
-offset_top = 274.0
-offset_right = 632.0
-offset_bottom = 324.0
+offset_left = 558.0
+offset_top = 266.0
+offset_right = 627.0
+offset_bottom = 316.0
 mouse_filter = 2
 alignment = 2
 
@@ -5364,6 +5431,9 @@ script = ExtResource("55_5lcso")
 
 [node name="stun" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction"]]
 script = ExtResource("56_qqpcq")
+
+[node name="hurt_to_stun" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction"]]
+script = ExtResource("40_xirjq")
 
 [node name="sex" type="Node" parent="StateMachine" groups=["no_interaction", "sex_state"]]
 script = ExtResource("59_muuj4")

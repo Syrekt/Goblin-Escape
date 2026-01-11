@@ -7,7 +7,7 @@ var stunned := false
 func stun(time := 2.0):
 	stun_timer.start(time)
 	stunned = true
-	owner.state_node.state.finished.emit("stun")
+	owner.state_node.state.finished.emit(owner.stun_state)
 	var tween = create_tween().bind_node(self).set_loops(6)
 	tween.tween_property(owner.sprite, "offset", Vector2(-0.5, 0), 0.01)
 	tween.tween_property(owner.sprite, "offset", Vector2(0.5, 0), 0.01)

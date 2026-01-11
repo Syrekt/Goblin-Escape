@@ -78,7 +78,7 @@ tile_set = ExtResource("1_j42xc")
 spawn_point = NodePath("../Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(2157.2961, 341.2645)
+position = Vector2(894, 270)
 
 [node name="StairsLong" parent="." instance=ExtResource("3_xkbw6")]
 position = Vector2(984, 536)

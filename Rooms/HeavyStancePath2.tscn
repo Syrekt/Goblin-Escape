@@ -88,7 +88,7 @@ scale = Vector2(-1, 1)
 collision_layer = 2049
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(576.3626, 271.01596)
+position = Vector2(1797, 548)
 
 [node name="Statue" parent="." instance=ExtResource("5_t1jeh")]
 position = Vector2(1408, 368)

@@ -40,5 +40,9 @@ func physics_update(delta:float) -> void:
 	if progression_bar.value >= progression_bar.max_value: # Break free
 		player.break_grab()
 	elif progression_bar.value <= 0.0 || !player.stamina.has_enough(0.1): # Lose struggle
-		player.grabbed_by.state_node.state.finished.emit(player.grabbed_by.transition_state)
-		finished.emit(player.grabbed_by.transition_state)
+		if Options.adult_content_enabled:
+			player.grabbed_by.state_node.state.finished.emit(player.grabbed_by.transition_state)
+			finished.emit(player.grabbed_by.transition_state)
+		else:
+			player.grabbed_by.state_node.state.finished.emit("slash")
+			player.break_grab()

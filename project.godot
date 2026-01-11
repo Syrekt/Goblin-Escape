@@ -53,6 +53,7 @@ window/size/viewport_height=360
 window/size/borderless=true
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
+mouse_cursor/custom_image="uid://cgt44pesi45ub"
 
 [editor]
 

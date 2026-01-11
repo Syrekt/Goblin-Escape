@@ -167,6 +167,8 @@ var grabbed_by : Enemy
 var slash_cost	: float
 var stab_cost	: float
 var bash_cost 	: float
+
+var stun_state := "hurt_to_stun"
 #endregion
 #region Camera
 @onready var pcam_noise_emitter : PhantomCameraNoiseEmitter2D = find_child("PhantomCameraNoiseEmitter2D")
@@ -735,6 +737,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			else:
 				state.finished.emit("crouch")
 			grabbed_by = null
+		"hurt_to_stun":
+			state.finished.emit("stun")
 		"corner_climb", "corner_climb_quick":
 			#global_position += Vector2(26*facing, -35)
 			#await get_tree().physics_frame

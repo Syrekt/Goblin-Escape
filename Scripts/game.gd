@@ -79,7 +79,7 @@ signal world_refreshed
 
 
 func _ready() -> void:
-	# ChatGPT explanation for '%' here: This is a "string name" literal (newer Godot 4.x syntax). It’s like writing "singleton" but stored as an immutable, interned string (faster for comparisons and memory-efficient).
+	# ChatGPT explanation for '&' here: This is a "string name" literal (newer Godot 4.x syntax). It’s like writing "singleton" but stored as an immutable, interned string (faster for comparisons and memory-efficient).
 	get_script().set_meta(&"singleton", self)
 
 	MetSys.reset_state()
@@ -93,7 +93,7 @@ func _ready() -> void:
 	if MetSys.current_room && MetSys.current_room.spawn_point:
 		player.position = MetSys.current_room.spawn_point.position
 
-	# ^ replaces NodePath
+	# ^ replaces NodePath, don't think this is doint anything right now
 	var start := map.get_node_or_null(^"SavePoint")
 	if start && !custom_run:
 		player.position = start.position
