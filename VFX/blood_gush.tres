@@ -12,8 +12,8 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.120301, 0.938776), 0.0, 0.0, 0
 point_count = 4
 
 [sub_resource type="Curve" id="Curve_f3ndi"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.323308, 0.438776), 0.0, 0.0, 0, 0, Vector2(0.759398, 0.826531), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2688822, 0.375), 0.0, 0.0, 0, 0, Vector2(0.5438067, 0.8984375), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ohw6m"]
 curve_x = SubResource("Curve_ugron")
@@ -24,8 +24,8 @@ particle_flag_disable_z = true
 particle_flag_damping_as_friction = true
 emission_shape = 3
 emission_box_extents = Vector3(1, 12.23, 1)
-directional_velocity_min = 20.0
-directional_velocity_max = 289.13
+directional_velocity_min = -15.560016
+directional_velocity_max = 289.12997
 directional_velocity_curve = SubResource("CurveXYZTexture_ohw6m")
 radial_velocity_min = 15.0
 radial_velocity_max = 100.0

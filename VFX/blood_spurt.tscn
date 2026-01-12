@@ -9,6 +9,7 @@ z_index = -1
 emitting = false
 amount = 125
 texture = ExtResource("1_5i7ub")
+lifetime = 0.5
 one_shot = true
 explosiveness = 0.8
 local_coords = true
