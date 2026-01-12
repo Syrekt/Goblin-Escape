@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dasnov0bfbkrt" path="res://VFX/blood_spurt.gd" id="2_tlp13"]
 
 [node name="BloodSpurt" type="GPUParticles2D"]
-z_index = 10
+z_index = -1
 emitting = false
 amount = 375
 texture = ExtResource("1_ngmwh")
