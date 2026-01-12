@@ -2,7 +2,7 @@ class_name TunnelEntrance extends Interaction
 
 @export var can_spawn_goblin := true
 
-@export var target_entrance : TunnelEntrance
+@export var target_entrance : TunnelEntrance ## Target tunnel entrance
 @export var barricaded := false
 @export var barricade_health := 50
 

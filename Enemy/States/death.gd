@@ -1,10 +1,19 @@
 extends EnemyState
 
 func enter(previous_state_path: String, data := {}) -> void:
+	var loading = data.get("loading", false)
+	var anim = data.get("animation", "death")
+	var anim_player = enemy.animation_player
+
+	if loading:
+		anim_player.play(anim)
+		anim_player.seek(anim_player.current_animation_length, true)
+	else:
+		enemy.call_deferred("update_animation", data.get("animation", "death"))
+
 	enemy.set_collision_layer_value(4, false)
 	enemy.set_collision_mask_value(2, false)
 	enemy.set_collision_mask_value(4, false)
-	enemy.call_deferred("update_animation", data.get("animation", "death"))
 	enemy.states_locked = true
 	enemy.is_dead = true
 	enemy.velocity.x = 0

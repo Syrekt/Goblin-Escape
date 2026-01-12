@@ -5,6 +5,8 @@
 [node name="Abyss" type="Area2D"]
 collision_layer = 0
 collision_mask = 10
+monitoring = false
+monitorable = false
 script = ExtResource("1_t8otq")
 damage = 10
 
