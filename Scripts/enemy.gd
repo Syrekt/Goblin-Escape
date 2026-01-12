@@ -358,6 +358,8 @@ func play_chatter_emote() -> void:
 	var emote = animation_names[randi() % animation_names.size()]
 	emote_emitter.play(emote)
 func should_step_on_attack() -> bool:
+	if !chase_target: return false
+
 	return position.distance_to(chase_target.position) > 48
 #endregion
 #region Animation end
