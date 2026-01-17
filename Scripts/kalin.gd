@@ -145,7 +145,7 @@ const BASH_SWEAT_PER_STRENGTH	:= 0.06
 var had_sword := false ## Variable to track if player got a sword at any point
 @export var has_sword := false: ## False for release
 	set(value):
-		if !has_sword && value && Ge.show_tutorials:
+		if value && Ge.show_tutorials:
 			var tutorial = load("res://Tutorial/combat_tutorial.tscn").instantiate()
 			#get_tree().current_scene.add_child.call_deferred("tutorial")
 		has_sword = value

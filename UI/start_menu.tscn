@@ -107,6 +107,20 @@ texture_hover = ExtResource("13_skmd2")
 texture_disabled = ExtResource("11_df8u1")
 texture_focused = ExtResource("11_df8u1")
 
+[node name="Feedback" type="Button" parent="Control/NinePatchRect/TextureRect"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 168.0
+offset_right = 184.0
+offset_bottom = 195.0
+theme_override_colors/font_color = Color(0.94509804, 0.4117647, 0.3882353, 1)
+theme_override_colors/font_outline_color = Color(0.44592184, 0.43649966, 0.20255452, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("14_5vxt3")
+theme_override_font_sizes/font_size = 8
+text = "Give Feedback"
+flat = true
+
 [node name="LastVersion" type="Button" parent="Control/NinePatchRect/TextureRect"]
 layout_mode = 0
 offset_left = 30.0
@@ -127,4 +141,5 @@ flat = true
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/Steam" to="." method="_on_steam_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/Itch" to="." method="_on_itch_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/Discord" to="." method="_on_discord_pressed"]
+[connection signal="pressed" from="Control/NinePatchRect/TextureRect/Feedback" to="." method="_on_feedback_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/LastVersion" to="." method="_on_last_version_pressed"]

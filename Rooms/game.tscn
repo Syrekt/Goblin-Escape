@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c3ce8mt521wb5"]
+[gd_scene load_steps=13 format=3 uid="uid://c3ce8mt521wb5"]
 
 [ext_resource type="Script" uid="uid://ckr03m8hdsnts" path="res://Scripts/game.gd" id="1_dthpw"]
 [ext_resource type="PackedScene" uid="uid://d1ido0af5r23x" path="res://Objects/loading_screen.tscn" id="2_1cwbi"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://cdy3r2d5x6ydm" path="res://UI/minimap.tscn" id="8_fi0gx"]
 [ext_resource type="Script" uid="uid://c6l4itv8om7oy" path="res://Scripts/map_window.gd" id="9_j2sjr"]
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="10_3bxcb"]
-[ext_resource type="PackedScene" uid="uid://uvws5mlmgmab" path="res://Objects/Console.tscn" id="11_1cwbi"]
 [ext_resource type="PackedScene" uid="uid://bapa7gs5kak28" path="res://Objects/debug_panel.tscn" id="11_pt6lt"]
 [ext_resource type="PackedScene" uid="uid://cxq2cf5q7mqds" path="res://UI/start_menu.tscn" id="12_aks28"]
 
@@ -19,6 +18,8 @@ script/source = "extends Label
 
 func _ready() -> void:
 	text = ProjectSettings.get_setting(\"application/config/version\")
+	if Options.adult_build:
+		text += \"*\"
 "
 
 [node name="Game" type="Node2D"]
@@ -99,20 +100,19 @@ offset_bottom = 40.0
 
 [node name="VersionNumber" type="Label" parent="UI"]
 unique_name_in_owner = true
-anchors_preset = 2
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -40.0
 offset_top = -14.0
-offset_right = 40.0
+grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("10_3bxcb")
 theme_override_colors/font_color = Color(1, 1, 1, 0.1254902)
 text = "v: 0.0"
 script = SubResource("GDScript_h4fw4")
-
-[node name="Console" parent="." instance=ExtResource("11_1cwbi")]
-unique_name_in_owner = true
-visible = false
 
 [node name="FmodBankLoader" type="FmodBankLoader" parent="."]
 bank_paths = ["res://FModBank/Desktop/Master.bank", "res://FModBank/Desktop/SFX.bank", "res://FModBank/Desktop/AMB.bank"]

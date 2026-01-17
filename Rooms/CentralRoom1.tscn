@@ -285,5 +285,9 @@ drop_random_loot = true
 position = Vector2(1232, 1160)
 drop_random_loot = true
 
+[node name="ThoughtTrigger2" parent="." instance=ExtResource("13_gdxww")]
+position = Vector2(1542, 391)
+thougth = "This one has a shield, I should avoid fighting him for now."
+
 [editable path="PlatformCollider2"]
 [editable path="Torch16"]

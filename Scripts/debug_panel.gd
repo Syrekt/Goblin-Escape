@@ -60,7 +60,7 @@ func _process(delta: float) -> void:
 			get_tree().paused = false
 
 func _on_hide_version_toggled(toggled_on: bool) -> void:
-	%VersionNumber.visible = toggled_on
+	%VersionNumber.visible = !toggled_on
 
 
 func _on_deal_damage_pressed() -> void:

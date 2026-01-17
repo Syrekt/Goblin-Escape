@@ -4,7 +4,7 @@ var config_path := "user://options.ini"
 
 var fullscreen := false
 var borderless := false
-var pixel_perfect := false
+var pixel_perfect := true
 var window_size := Vector2(1280, 720)
 var window_pos := Vector2(0, 0)
 var window_screen := 0
@@ -12,7 +12,7 @@ var current_screen := 0
 var hud_scale := 2
 var shadow_intensity = 1.0
 var adult_content_enabled := true
-var adult_build := false #OS.has_feature("nsfw") || OS.is_debug_build()
+var adult_build := OS.has_feature("nsfw") || OS.is_debug_build()
 
 var master_volume := 0.5
 var bgm_volume := 1.0
@@ -160,7 +160,7 @@ func load_options() -> int:
 					InputMap.action_add_event(key, ev)
 		#endregion
 	else:
-		pass
+		FmodServer.set_global_parameter_by_name("MASTER_VOLUME", master_volume)
 	return err
 
 func _notification(what: int) -> void:

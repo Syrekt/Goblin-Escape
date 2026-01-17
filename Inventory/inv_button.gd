@@ -67,7 +67,8 @@ func _on_pressed() -> void:
 				owner.think("I shouldn't drink this too much.")
 				used = false
 			else:
-				owner.status_effect_container.add_status_effect("Minor Rejuvenation", 60.0, 0.1)
+				#owner.status_effect_container.add_status_effect("Minor Rejuvenation", 60.0, 0.1)
+				owner.status_effect_container.add_status_effect("Minor Rejuvenation", 0.0, 0.1)
 				owner.drink_sfx.play()
 		"Pher Potion":
 			print("Use Pher Potion")

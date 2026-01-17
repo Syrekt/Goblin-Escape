@@ -5,8 +5,12 @@ var ingame_menu = preload("res://UI/ingame_menu.tscn")
 var ingame_menu_inst : IngameMenu = null
 
 @onready var fmod_bgm_event: FmodEventEmitter2D = $"../FModBGMEvent"
+@onready var feedback: Button = $Control/NinePatchRect/TextureRect/Feedback
+@onready var last_version: Button = $Control/NinePatchRect/TextureRect/LastVersion
 
 func _ready() -> void:
+	if Options.adult_build:
+		last_version.queue_free()
 	return
 	if OS.is_debug_build():
 		queue_free()
@@ -59,3 +63,7 @@ func _on_ingame_menu_close_button_pressed() -> void:
 
 func _on_last_version_pressed() -> void:
 	OS.shell_open("https://www.patreon.com/psychoseel")
+
+
+func _on_feedback_pressed() -> void:
+	OS.shell_open("https://forms.gle/NtqqKGXcuoDEGdqw8")
