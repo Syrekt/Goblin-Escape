@@ -1,0 +1,114 @@
+[gd_scene load_steps=14 format=3 uid="uid://cxq2cf5q7mqds"]
+
+[ext_resource type="Script" uid="uid://ccf04o6quvok" path="res://Scripts/start_menu.gd" id="1_wd76h"]
+[ext_resource type="Theme" uid="uid://dsrglvwu5v23w" path="res://UI/start_menu_theme.tres" id="2_5vxt3"]
+[ext_resource type="Texture2D" uid="uid://ymsbhvfs54lv" path="res://UI/Start Menu/spr_mainui_tilable2.png" id="3_5ik5c"]
+[ext_resource type="Texture2D" uid="uid://c7wo7f6u3f4f7" path="res://UI/Start Menu/spr_mainui_scroll.png" id="4_wpq38"]
+[ext_resource type="Texture2D" uid="uid://c4c4btxek2f00" path="res://UI/Start Menu/spr_mainui_steam_normal.png" id="5_cocec"]
+[ext_resource type="Texture2D" uid="uid://bieu2g3hlb7b3" path="res://UI/Start Menu/spr_mainui_steam_pressed.png" id="6_fxmv5"]
+[ext_resource type="Texture2D" uid="uid://8go2xm2pey3m" path="res://UI/Start Menu/spr_mainui_steam_highlight.png" id="7_xq6qs"]
+[ext_resource type="Texture2D" uid="uid://f5hb1115vewu" path="res://UI/Start Menu/spr_mainui_itchio_normal.png" id="8_7oirk"]
+[ext_resource type="Texture2D" uid="uid://f74iavwx0vtl" path="res://UI/Start Menu/spr_mainui_itchio_pressed.png" id="9_kxx1e"]
+[ext_resource type="Texture2D" uid="uid://bavskhul6rmbp" path="res://UI/Start Menu/spr_mainui_itchio_highlight.png" id="10_jyr2n"]
+[ext_resource type="Texture2D" uid="uid://cudmnntkicgg7" path="res://UI/Start Menu/spr_mainui_discord_normal.png" id="11_df8u1"]
+[ext_resource type="Texture2D" uid="uid://d1lg1yhmaaidu" path="res://UI/Start Menu/spr_mainui_discord_pressed.png" id="12_aknqp"]
+[ext_resource type="Texture2D" uid="uid://b6hdjevt027ac" path="res://UI/Start Menu/spr_mainui_discord_highlight.png" id="13_skmd2"]
+
+[node name="StartMenu" type="CanvasLayer" groups=["FullscreenPanel"]]
+script = ExtResource("1_wd76h")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("2_5vxt3")
+texture = ExtResource("3_5ik5c")
+patch_margin_left = 144
+patch_margin_top = 128
+patch_margin_right = 144
+patch_margin_bottom = 128
+
+[node name="TextureRect" type="TextureRect" parent="Control/NinePatchRect"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 69.0
+offset_right = 129.0
+offset_bottom = 69.0
+texture = ExtResource("4_wpq38")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/NinePatchRect/TextureRect"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 77.0
+offset_right = 157.0
+offset_bottom = 166.0
+
+[node name="StartGame" type="Button" parent="Control/NinePatchRect/TextureRect/VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+flat = true
+
+[node name="Options" type="Button" parent="Control/NinePatchRect/TextureRect/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+flat = true
+
+[node name="Exit" type="Button" parent="Control/NinePatchRect/TextureRect/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+flat = true
+
+[node name="Steam" type="TextureButton" parent="Control/NinePatchRect/TextureRect"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 214.0
+offset_right = 69.0
+offset_bottom = 236.0
+texture_normal = ExtResource("5_cocec")
+texture_pressed = ExtResource("6_fxmv5")
+texture_hover = ExtResource("7_xq6qs")
+texture_disabled = ExtResource("5_cocec")
+texture_focused = ExtResource("7_xq6qs")
+
+[node name="Itch" type="TextureButton" parent="Control/NinePatchRect/TextureRect"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 214.0
+offset_right = 112.0
+offset_bottom = 236.0
+texture_normal = ExtResource("8_7oirk")
+texture_pressed = ExtResource("9_kxx1e")
+texture_hover = ExtResource("10_jyr2n")
+texture_disabled = ExtResource("8_7oirk")
+texture_focused = ExtResource("10_jyr2n")
+
+[node name="Discord" type="TextureButton" parent="Control/NinePatchRect/TextureRect"]
+layout_mode = 0
+offset_left = 138.0
+offset_top = 216.0
+offset_right = 158.0
+offset_bottom = 238.0
+texture_normal = ExtResource("11_df8u1")
+texture_pressed = ExtResource("12_aknqp")
+texture_hover = ExtResource("13_skmd2")
+texture_disabled = ExtResource("11_df8u1")
+texture_focused = ExtResource("11_df8u1")
+
+[connection signal="pressed" from="Control/NinePatchRect/TextureRect/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="Control/NinePatchRect/TextureRect/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Control/NinePatchRect/TextureRect/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Control/NinePatchRect/TextureRect/Steam" to="." method="_on_steam_pressed"]
+[connection signal="pressed" from="Control/NinePatchRect/TextureRect/Itch" to="." method="_on_itch_pressed"]
+[connection signal="pressed" from="Control/NinePatchRect/TextureRect/Discord" to="." method="_on_discord_pressed"]

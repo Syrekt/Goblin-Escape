@@ -7,6 +7,8 @@ var text_tween : Tween
 
 
 func _on_body_entered(body: Node2D) -> void:
+	if !Ge.show_hints: return
+
 	update_input()
 	if text_tween:
 		text_tween.kill()

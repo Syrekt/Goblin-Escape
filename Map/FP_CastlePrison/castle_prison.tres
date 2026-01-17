@@ -4134,7 +4134,6 @@ texture = ExtResource("3_usbtt")
 7:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 7:27/0 = 0
 7:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-33:28/0 = 0
 12:28/0 = 0
 12:28/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_lfspt")
 12:28/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)

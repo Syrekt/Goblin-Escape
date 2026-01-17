@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
 @onready var sprite := $Sprite2D
+@onready var anim_player := $AnimationPlayer
 
 var move_speed := 100 * 60
 var directional_speed := 0.0
 var laughing := false
 
+func _ready() -> void:
+	anim_player.play("idle")
 
 
 func move(dir:int) -> void:

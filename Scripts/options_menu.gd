@@ -292,7 +292,6 @@ func _on_switch_monitor_pressed() -> void:
 	print("current_screen: "+str(current_screen))
 	DisplayServer.window_set_current_screen((current_screen + 1) % display_count)
 	notification(NOTIFICATION_WM_SIZE_CHANGED)
-#endregion
 
 func _on_screenshake_toggled(toggled_on: bool) -> void:
 	Options.screenshake_enabled = toggled_on
@@ -304,3 +303,4 @@ func _on_reset_save_pressed() -> void:
 
 func _on_low_health_fx_toggled(toggled_on: bool) -> void:
 	Options.disable_low_health_effects_on_sex = toggled_on
+#endregion

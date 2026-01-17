@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c3ce8mt521wb5"]
+[gd_scene load_steps=14 format=3 uid="uid://c3ce8mt521wb5"]
 
 [ext_resource type="Script" uid="uid://ckr03m8hdsnts" path="res://Scripts/game.gd" id="1_dthpw"]
 [ext_resource type="PackedScene" uid="uid://d1ido0af5r23x" path="res://Objects/loading_screen.tscn" id="2_1cwbi"]
@@ -10,20 +10,8 @@
 [ext_resource type="Script" uid="uid://c6l4itv8om7oy" path="res://Scripts/map_window.gd" id="9_j2sjr"]
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="10_3bxcb"]
 [ext_resource type="PackedScene" uid="uid://uvws5mlmgmab" path="res://Objects/Console.tscn" id="11_1cwbi"]
-[ext_resource type="Script" uid="uid://ccf04o6quvok" path="res://Scripts/start_menu.gd" id="11_aks28"]
 [ext_resource type="PackedScene" uid="uid://bapa7gs5kak28" path="res://Objects/debug_panel.tscn" id="11_pt6lt"]
-[ext_resource type="Texture2D" uid="uid://ymsbhvfs54lv" path="res://UI/Start Menu/spr_mainui_tilable2.png" id="12_aks28"]
-[ext_resource type="Theme" uid="uid://dsrglvwu5v23w" path="res://UI/start_menu_theme.tres" id="12_t104e"]
-[ext_resource type="Texture2D" uid="uid://c7wo7f6u3f4f7" path="res://UI/Start Menu/spr_mainui_scroll.png" id="13_p4clm"]
-[ext_resource type="Texture2D" uid="uid://f5hb1115vewu" path="res://UI/Start Menu/spr_mainui_itchio_normal.png" id="14_3bxcb"]
-[ext_resource type="Texture2D" uid="uid://cudmnntkicgg7" path="res://UI/Start Menu/spr_mainui_discord_normal.png" id="14_fi0gx"]
-[ext_resource type="Texture2D" uid="uid://c4c4btxek2f00" path="res://UI/Start Menu/spr_mainui_steam_normal.png" id="14_kei8e"]
-[ext_resource type="Texture2D" uid="uid://f74iavwx0vtl" path="res://UI/Start Menu/spr_mainui_itchio_pressed.png" id="15_2yl7v"]
-[ext_resource type="Texture2D" uid="uid://d1lg1yhmaaidu" path="res://UI/Start Menu/spr_mainui_discord_pressed.png" id="15_j2sjr"]
-[ext_resource type="Texture2D" uid="uid://bieu2g3hlb7b3" path="res://UI/Start Menu/spr_mainui_steam_pressed.png" id="15_t104e"]
-[ext_resource type="Texture2D" uid="uid://b6hdjevt027ac" path="res://UI/Start Menu/spr_mainui_discord_highlight.png" id="16_3bxcb"]
-[ext_resource type="Texture2D" uid="uid://8go2xm2pey3m" path="res://UI/Start Menu/spr_mainui_steam_highlight.png" id="16_pt6lt"]
-[ext_resource type="Texture2D" uid="uid://bavskhul6rmbp" path="res://UI/Start Menu/spr_mainui_itchio_highlight.png" id="16_rhvko"]
+[ext_resource type="PackedScene" uid="uid://cxq2cf5q7mqds" path="res://UI/start_menu.tscn" id="12_aks28"]
 
 [sub_resource type="GDScript" id="GDScript_h4fw4"]
 resource_name = "version"
@@ -35,7 +23,6 @@ func _ready() -> void:
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_dthpw")
-starting_map = 16
 
 [node name="LoadingScreen" parent="." instance=ExtResource("2_1cwbi")]
 unique_name_in_owner = true
@@ -145,101 +132,4 @@ autoplay = true
 unique_name_in_owner = true
 visible = false
 
-[node name="StartMenu" type="CanvasLayer" parent="." groups=["FullscreenPanel"]]
-script = ExtResource("11_aks28")
-
-[node name="Control" type="Control" parent="StartMenu"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="NinePatchRect" type="NinePatchRect" parent="StartMenu/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme = ExtResource("12_t104e")
-texture = ExtResource("12_aks28")
-patch_margin_left = 144
-patch_margin_top = 128
-patch_margin_right = 144
-patch_margin_bottom = 128
-
-[node name="TextureRect" type="TextureRect" parent="StartMenu/Control/NinePatchRect"]
-layout_mode = 0
-offset_left = 33.0
-offset_top = 69.0
-offset_right = 129.0
-offset_bottom = 69.0
-texture = ExtResource("13_p4clm")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="StartMenu/Control/NinePatchRect/TextureRect"]
-layout_mode = 0
-offset_left = 56.0
-offset_top = 77.0
-offset_right = 157.0
-offset_bottom = 166.0
-
-[node name="StartGame" type="Button" parent="StartMenu/Control/NinePatchRect/TextureRect/VBoxContainer"]
-layout_mode = 2
-text = "Start Game"
-flat = true
-
-[node name="Options" type="Button" parent="StartMenu/Control/NinePatchRect/TextureRect/VBoxContainer"]
-layout_mode = 2
-text = "Options"
-flat = true
-
-[node name="Exit" type="Button" parent="StartMenu/Control/NinePatchRect/TextureRect/VBoxContainer"]
-layout_mode = 2
-text = "Exit"
-flat = true
-
-[node name="Steam" type="TextureButton" parent="StartMenu/Control/NinePatchRect/TextureRect"]
-layout_mode = 0
-offset_left = 43.0
-offset_top = 214.0
-offset_right = 69.0
-offset_bottom = 236.0
-texture_normal = ExtResource("14_kei8e")
-texture_pressed = ExtResource("15_t104e")
-texture_hover = ExtResource("16_pt6lt")
-texture_disabled = ExtResource("14_kei8e")
-texture_focused = ExtResource("16_pt6lt")
-
-[node name="Itch" type="TextureButton" parent="StartMenu/Control/NinePatchRect/TextureRect"]
-layout_mode = 0
-offset_left = 89.0
-offset_top = 214.0
-offset_right = 112.0
-offset_bottom = 236.0
-texture_normal = ExtResource("14_3bxcb")
-texture_pressed = ExtResource("15_2yl7v")
-texture_hover = ExtResource("16_rhvko")
-texture_disabled = ExtResource("14_3bxcb")
-texture_focused = ExtResource("16_rhvko")
-
-[node name="Discord" type="TextureButton" parent="StartMenu/Control/NinePatchRect/TextureRect"]
-layout_mode = 0
-offset_left = 138.0
-offset_top = 216.0
-offset_right = 158.0
-offset_bottom = 238.0
-texture_normal = ExtResource("14_fi0gx")
-texture_pressed = ExtResource("15_j2sjr")
-texture_hover = ExtResource("16_3bxcb")
-texture_disabled = ExtResource("14_fi0gx")
-texture_focused = ExtResource("14_fi0gx")
-
-[connection signal="pressed" from="StartMenu/Control/NinePatchRect/TextureRect/VBoxContainer/StartGame" to="StartMenu" method="_on_start_game_pressed"]
-[connection signal="pressed" from="StartMenu/Control/NinePatchRect/TextureRect/VBoxContainer/Options" to="StartMenu" method="_on_options_pressed"]
-[connection signal="pressed" from="StartMenu/Control/NinePatchRect/TextureRect/VBoxContainer/Exit" to="StartMenu" method="_on_exit_pressed"]
-[connection signal="pressed" from="StartMenu/Control/NinePatchRect/TextureRect/Steam" to="StartMenu" method="_on_steam_pressed"]
-[connection signal="pressed" from="StartMenu/Control/NinePatchRect/TextureRect/Itch" to="StartMenu" method="_on_itch_pressed"]
-[connection signal="pressed" from="StartMenu/Control/NinePatchRect/TextureRect/Discord" to="StartMenu" method="_on_discord_pressed"]
+[node name="StartMenu" parent="." instance=ExtResource("12_aks28")]

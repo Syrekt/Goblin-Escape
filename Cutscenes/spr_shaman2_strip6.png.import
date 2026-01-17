@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bg16tb8213vlk"
-path="res://.godot/imported/spr_evenon_outfit1_walk_strip12.png-10057dff7e5709bb16a6380067a94028.ctex"
+uid="uid://bwrery07crdni"
+path="res://.godot/imported/spr_shaman2_strip6.png-fa54346521e81cdae8620520ca52a6c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Cutscenes/spr_evenon_outfit1_walk_strip12.png"
-dest_files=["res://.godot/imported/spr_evenon_outfit1_walk_strip12.png-10057dff7e5709bb16a6380067a94028.ctex"]
+source_file="res://Cutscenes/spr_shaman2_strip6.png"
+dest_files=["res://.godot/imported/spr_shaman2_strip6.png-fa54346521e81cdae8620520ca52a6c5.ctex"]
 
 [params]
 

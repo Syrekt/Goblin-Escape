@@ -89,6 +89,7 @@ func update(delta: float) -> void:
 
 				player.controls_disabled = false
 				death_screen.hide()
+				player.on_resurrection.emit();
 				#player.ui.show()
 
 

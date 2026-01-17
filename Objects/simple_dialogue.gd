@@ -14,7 +14,6 @@ func _ready() -> void:
 	if Game.get_singleton().get_data_in_room(name):
 		queue_free()
 
-#region Methods
 func activate() -> void:
 	if active:
 		print("Activating dialogue while it's already active!")
@@ -24,6 +23,7 @@ func activate() -> void:
 	balloon.start(dialogue_resource, "title")
 
 	active = true;
+
 func update(player : Player) -> void:
 	if auto:
 		if !active && !waiting_player_exit:
@@ -32,12 +32,14 @@ func update(player : Player) -> void:
 	else:
 		if !active && Input.is_action_just_pressed("interact"):
 			activate()
-#endregion
-#region Signals
+
 func _on_dialogue_ended(resource: DialogueResource) -> void:
 	if active:
 		active = false
 		if !repeat:
 			Game.get_singleton().save_data_in_room(name, {"destroyed": true})
 			queue_free()
-#engregion
+
+
+func _on_body_exited(body: Node2D) -> void:
+	waiting_player_exit = false

@@ -191,6 +191,7 @@ var invisible := false ## Can't be seen in dark
 var current_tint : Color = Color(0.0, 0.0, 0.0, 1.0)
 var ladder : Area2D
 const ingame_menu = preload("res://UI/ingame_menu.tscn")
+const start_menu = preload("res://UI/start_menu.tscn")
 var corner_quick_climb := false
 var sex_participants : Array
 var light_source : Area2D
@@ -209,6 +210,7 @@ signal enter_abyss
 signal grabbed
 signal fullscreen_panel_opened
 signal fullscreen_panel_closed
+signal on_resurrection
 #endregion
 #region Save List
 #endregion
@@ -671,9 +673,9 @@ func toggle_pause_menu() -> void:
 		ui_nodes = get_tree().get_nodes_in_group("UIPanel")
 		for node in ui_nodes: if node.visible: return
 
-		var open_menu : CanvasLayer = get_tree().current_scene.get_node_or_null("IngameMenu")
+		var open_menu : CanvasLayer = get_tree().current_scene.get_node_or_null("StartMenu")
 		if !open_menu:
-			open_menu = ingame_menu.instantiate()
+			open_menu = start_menu.instantiate()
 			get_tree().current_scene.add_child(open_menu)
 func get_slash_damage(_str:=strength) -> float:
 	return SLASH_DAMAGE + _str * SLASH_DAMAGE_PER_STRENGTH
@@ -769,7 +771,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		"struggle_transition_goblin":
 			sex_begin([grabbed_by], "struggle_sex_goblin1")
 #endregion
-#region Init
+#region Ready
 func _ready() -> void:
 	#SentrySDK.add_breadcrumb(SentryBreadcrumb.create("Just about to welcome the World."))
 	#SentrySDK.capture_message("Hello, World!")
@@ -785,6 +787,7 @@ func _ready() -> void:
 	enter_shadow.connect(_on_enter_shadow)
 	leave_shadow.connect(_on_leave_shadow)
 	enter_abyss.connect(_on_abyss_entered)
+	on_resurrection.connect(_on_resurrection)
 	fullscreen_panel_opened.connect(_on_fullscreen_panel_opened)
 	fullscreen_panel_closed.connect(_on_fullscreen_panel_closed)
 	Ge.player = self
@@ -1071,16 +1074,19 @@ func _on_fullscreen_panel_opened() -> void:
 	print("Hide HUD")
 	for panel in huds:
 		panel.hide()
+	Game.get_singleton().fullscreen_panel_open = true
 func _on_fullscreen_panel_closed() -> void:
 	var huds = get_tree().get_nodes_in_group("HUD")
 	print("Show HUD")
 	for panel in huds:
 		panel.show()
+	Game.get_singleton().fullscreen_panel_open = false
 func _on_coyote_timer_timeout() -> void:
 	coyote = false
 	print("Coyote timer timeout")
 func _on_state_machine_state_changed(state:State) -> void:
 	if !pcam: return
+	if controls_disabled: return
 
 	if state.name == "death":
 		combat_target = null
@@ -1096,7 +1102,19 @@ func _on_state_machine_state_changed(state:State) -> void:
 		create_tween().tween_property(pcam, "zoom", Vector2(2, 2), 1.0)
 	else:
 		pcam.follow_mode = PhantomCamera2D.FollowMode.SIMPLE
-		create_tween().tween_property(pcam, "zoom", Vector2(1, 1), 1.0)
+		if OS.is_debug_build():
+			var _zoom = %DebugPanel.camera_zoom.value
+			create_tween().tween_property(pcam, "zoom", Vector2(_zoom, _zoom), 1.0)
+		else:
+			create_tween().tween_property(pcam, "zoom", Vector2(1, 1), 1.0)
+func _on_resurrection() -> void:
+	print("Run: _on_resurrection")
+	var persistent_values = Game.get_singleton().persistent_values
+	print("persistent_values: "+str(persistent_values))
+	if persistent_values.get("met_graktu"):
+		if !persistent_values.get("post_met_graktu"):
+			persistent_values.set("post_met_graktu", true)
+			Ge.one_shot_dialogue("This is the end of this version, thanks for playing! Feel free to share your thoughts on our Discord server and don't forget to wishlist the game!")
 #endregion
 func _unhandled_key_input(event: InputEvent) -> void:
 	if OS.is_debug_build() && event.is_pressed():

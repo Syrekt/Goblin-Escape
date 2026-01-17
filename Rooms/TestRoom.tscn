@@ -1,14 +1,25 @@
-[gd_scene load_steps=10 format=4 uid="uid://rrnk862o0mdw"]
+[gd_scene load_steps=21 format=4 uid="uid://rrnk862o0mdw"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="2_mubwj"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="8_m3pp0"]
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="9_m3pp0"]
 [ext_resource type="PackedScene" uid="uid://dejaaa7dsd8yv" path="res://Inventory/Pickup Objects/pickup_water.tscn" id="10_kgm4x"]
+[ext_resource type="PackedScene" uid="uid://dx4ougi4grdc2" path="res://Inventory/Pickup Objects/pickup_stenchbane.tscn" id="10_lyr0d"]
+[ext_resource type="PackedScene" uid="uid://sbe7n6eecpl2" path="res://Inventory/Pickup Objects/pickup_revenants_draught.tscn" id="11_lpws4"]
 [ext_resource type="Texture2D" uid="uid://wcoq7ay5eurm" path="res://UI/rpg_icon_pack.png" id="11_o0wdf"]
 [ext_resource type="PackedScene" uid="uid://cxu1p2ap15mlj" path="res://Inventory/Pickup Objects/skill_pickup.tscn" id="11_oqx7d"]
+[ext_resource type="PackedScene" uid="uid://cy0k8vepu16km" path="res://Inventory/Pickup Objects/pickup_pher_potion.tscn" id="12_2jy0p"]
 [ext_resource type="PackedScene" uid="uid://b4vewnv73flk4" path="res://Map/Props/Movable/statue.tscn" id="12_k6jnn"]
 [ext_resource type="PackedScene" uid="uid://b8rlvg8w53iwn" path="res://Objects/scroll.tscn" id="13_7vf4x"]
+[ext_resource type="PackedScene" uid="uid://b1sxvt550tr3y" path="res://Inventory/Pickup Objects/pickup_minor_rejuvenation_draught.tscn" id="13_ojdmx"]
+[ext_resource type="PackedScene" uid="uid://djk8oskwq3mdn" path="res://Inventory/Pickup Objects/pickup_health.tscn" id="14_k6jnn"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="14_mubwj"]
+[ext_resource type="PackedScene" uid="uid://dfeb5hvvlaltu" path="res://Inventory/Pickup Objects/pickup_feather_step.tscn" id="15_m0fwn"]
+[ext_resource type="PackedScene" uid="uid://dt3ny2raqplcf" path="res://Inventory/Pickup Objects/pickup_elixir_of_resilience.tscn" id="16_3bhwe"]
+[ext_resource type="PackedScene" uid="uid://b1apt5o7fktb3" path="res://Inventory/Pickup Objects/pickup_elixir_of_renewal.tscn" id="17_q8vje"]
+[ext_resource type="PackedScene" uid="uid://cqa1nagpe2ny6" path="res://Inventory/Pickup Objects/pickup_bandage.tscn" id="18_6rjl0"]
+[ext_resource type="PackedScene" uid="uid://cr37dk6lwgop6" path="res://Inventory/Pickup Objects/pickup_cheese.tscn" id="19_vitb2"]
+[ext_resource type="PackedScene" uid="uid://bp8dehh5gawrb" path="res://Inventory/Pickup Objects/pickup_bread.tscn" id="20_uec62"]
 
 [node name="TestRoom" type="Node2D"]
 
@@ -95,3 +106,39 @@ diary_page = 1
 position = Vector2(450, 223)
 diary_owner = "A"
 diary_page = 2
+
+[node name="PickupWater2" parent="." instance=ExtResource("10_kgm4x")]
+position = Vector2(162, 204)
+
+[node name="PickupStenchbane" parent="." instance=ExtResource("10_lyr0d")]
+position = Vector2(191, 196)
+
+[node name="PickupRevenantsDraught" parent="." instance=ExtResource("11_lpws4")]
+position = Vector2(220, 197)
+
+[node name="PickupPher" parent="." instance=ExtResource("12_2jy0p")]
+position = Vector2(250, 198)
+
+[node name="PickupMinorRejuvenationDraught" parent="." instance=ExtResource("13_ojdmx")]
+position = Vector2(275, 197)
+
+[node name="PickupHealth" parent="." instance=ExtResource("14_k6jnn")]
+position = Vector2(304, 201)
+
+[node name="PickupFeatherStep" parent="." instance=ExtResource("15_m0fwn")]
+position = Vector2(331, 197)
+
+[node name="PickupElixirOfResilience" parent="." instance=ExtResource("16_3bhwe")]
+position = Vector2(233, 198)
+
+[node name="PickupElixirOfRenewal" parent="." instance=ExtResource("17_q8vje")]
+position = Vector2(265, 197)
+
+[node name="PickupHealth2" parent="." instance=ExtResource("18_6rjl0")]
+position = Vector2(207, 201)
+
+[node name="PickupCheese" parent="." instance=ExtResource("19_vitb2")]
+position = Vector2(234, 198)
+
+[node name="PickupBread" parent="." instance=ExtResource("20_uec62")]
+position = Vector2(290, 204)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://bicetss7oaklb"]
+[gd_scene load_steps=20 format=3 uid="uid://bicetss7oaklb"]
 
 [ext_resource type="Script" uid="uid://c1oeyysdouoq" path="res://Scripts/balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Fonts/Ohrenstead.ttf" id="2_dyqgq"]
+[ext_resource type="Texture2D" uid="uid://cyn030mpxyxel" path="res://UI/spr_textbox.png" id="3_4a8w2"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="5_ot4ch"]
 [ext_resource type="Texture2D" uid="uid://cfwmxwk10j6i2" path="res://UI/Inventory/Inventory panel1_background.png" id="6_4a8w2"]
@@ -44,17 +45,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uy0d5"]
-bg_color = Color(0.397993, 0.116292, 0.11361, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.0537594, 0.0237743, 0, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4a8w2"]
 
 [sub_resource type="Theme" id="Theme_qq3yp"]
 Button/fonts/font = ExtResource("2_dyqgq")
@@ -66,7 +57,7 @@ MarginContainer/constants/margin_bottom = 15
 MarginContainer/constants/margin_left = 30
 MarginContainer/constants/margin_right = 30
 MarginContainer/constants/margin_top = 15
-Panel/styles/panel = SubResource("StyleBoxFlat_uy0d5")
+Panel/styles/panel = SubResource("StyleBoxTexture_4a8w2")
 RichTextLabel/fonts/normal_font = ExtResource("2_dyqgq")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_svash"]
@@ -110,6 +101,30 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
 
+[node name="Portrait" type="TextureRect" parent="Balloon/Panel"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -68.0
+offset_right = 81.0
+offset_bottom = 9.0
+stretch_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Balloon/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_4a8w2")
+region_rect = Rect2(58, 55, 124, 130)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
 [node name="Dialogue" type="MarginContainer" parent="Balloon/Panel"]
 layout_mode = 1
 anchors_preset = 15
@@ -118,17 +133,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HSplitContainer" parent="Balloon/Panel/Dialogue"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/Panel/Dialogue"]
 layout_mode = 2
 
-[node name="Portrait" type="TextureRect" parent="Balloon/Panel/Dialogue/HBoxContainer"]
-layout_mode = 2
-stretch_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/Panel/Dialogue/HBoxContainer"]
-layout_mode = 2
-
-[node name="CharacterLabel" type="RichTextLabel" parent="Balloon/Panel/Dialogue/HBoxContainer/VBoxContainer"]
+[node name="CharacterLabel" type="RichTextLabel" parent="Balloon/Panel/Dialogue/VBoxContainer"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
@@ -138,7 +146,7 @@ text = "Character"
 fit_content = true
 scroll_active = false
 
-[node name="DialogueLabel" parent="Balloon/Panel/Dialogue/HBoxContainer/VBoxContainer" instance=ExtResource("2_a8ve6")]
+[node name="DialogueLabel" parent="Balloon/Panel/Dialogue/VBoxContainer" instance=ExtResource("2_a8ve6")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3

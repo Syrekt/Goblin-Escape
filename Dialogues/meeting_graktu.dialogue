@@ -1,17 +1,23 @@
 ~ start
-
+do begin_scene()
 Graktu: I was curious who was causing all this ruckus, turns out it’s a sole female warrior. Can’t imagine worse fate than to be stuck with bunch of goblins in a dungeon for you. 
 do move_player(player_move_target1)
-Kalin: You... can talk?
-Graktu: It’s something we are keeping to ourselves for now, how about we make this a secret between us? It’s not like you’ll ever leave this dungeon alive, ke-ke-ke-ke
-Kalin: How... who did this to you? Is it magic?
-Graktu: I’ve been chosen to serve our Master, he gave me this power. By his powers, I’ve been reborn as a higher being from the rest of my kin. My intellect is equal to of an human. Considering how you entered this dungeon alone, it’s probably higher than yours, ke-ke-ke-ke
-Kalin: Cut the crap! I can butcher you all one-handedly! Get me to your master or I’ll cut your tiny dick and hang you until you bleed out!
-Graktu: Ke-ke-ke-ke, it seems we got really lucky with you, you’ll be invaluable once we broke you. You have the spirit and the willpower we need. 
-Graktu: Feel free to follow me if you want to meet our Master... if you can. *whistles*
-do move(shaman, shaman_move_target)
+Kalin: A goblin who can talk... What’s you deal, why aren’t you attacking me?
+Graktu: You judge poorly my dear, I might be a goblin but I’m no savage. My desires surpasses my kins primal urges.
+Kalin: So you can talk and you have a intellect higher than a bug. What’s your deal, are you leading other goblins?
+Graktu: You are underestimating me by asking this, but given our usual behavior I guess that’s to be expected. 
+Kalin: Cut the crap! You can yap all day, doesn’t change the fact that I’ll hand your sorry green ass to you! I can kill wild creatures and smart ones all the same!
+Graktu: Heh, you are really something, you are not like the others who are wandering in a dungeon they don’t know about mindlessly.. Others who ventured here can’t be compared to you, especially that poor girl who keeps coming here. I wonder if she was able to leave this time...
+Graktu: Well it doesn’t matter. I’ve been chosen to serve our Master, he gave me this power. By his powers, I’ve been reborn as a higher being from the rest of my kin. My intellect is equal to of an human, higher than the most. Come to think of it, considering how you entered this dungeon alone, it’s probably higher than yours, ke-ke-ke-ke!
+Kalin: You wish! Tell me about your master, is he a human, or magician maybe? Tell your master to find me before I find them, it won’t end well for them if I find them first!
+Graktu: Ke-ke-ke-ke, it seems we got really lucky with you, you’ll be invaluable once we broke you. You have the spirit and the willpower we need.
+Graktu: I’m very glad that we’ve met human, you’ve exceeded my expectations so far. I have to leave now, but I’m looking forward to our next encounter. I’ll be preparing all kinds of surprises for you and I hope you’ll be ready for them!
+do fade_out_shaman()
 Kalin: Wait!
 do move_player(player_move_target2)
+Kalin: Damn it, I can't crawl in these tunnels like they do! I need to find another way.
+Kalin: Wait, what's this sound?
 do spawn_goblins()
+do kalin_think("This isn't good.")
 do end_scene()
 => END

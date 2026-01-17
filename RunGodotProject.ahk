@@ -44,3 +44,12 @@ F13::
 
     Run "C:\Program Files\FMOD SoundSystem\FMOD Studio 2.03.11\FMOD Studio.exe"
 }
+F15::{
+    if WinExist("ahk_exe obs64.exe")
+    {
+        WinActivate
+        return
+    }
+
+    Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OBS Studio\OBS Studio (64bit).lnk"
+}

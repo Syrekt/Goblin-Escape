@@ -35,7 +35,7 @@ $ln;Dungeon
 [17,-6,0]
 0,1,-1,0|||Corridor2.tscn
 [17,-5,0]
--1,1,5,1|||Corridor3.tscn
+-1,1,1,1|||Corridor3.tscn
 [18,-5,0]
 1,1,-1,0|||Corridor3.tscn
 [19,-5,0]
@@ -88,9 +88,11 @@ $ln;Dungeon
 1,0,0,0||4|DefensiveStanceRoom.tscn
 [16,-3,0]
 1,-1,1,1|||DefensiveStancePath4.tscn
-[16,-5,0]
-5,0,0,0|||DemoLastRoom.tscn
 [18,-3,0]
 0,0,-1,1|||DefensiveStancePath3.tscn
 [17,-3,0]
 -1,0,1,0|||DefensiveStancePath3.tscn
+[15,-5,0]
+-1,0,0,0|||DemoLastRoom.tscn
+[16,-5,0]
+1,0,-1,0|||DemoLastRoom.tscn

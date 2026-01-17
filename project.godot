@@ -15,7 +15,7 @@ General/banks_path="res://FModBank/Desktop"
 [application]
 
 config/name="Goblin Escape"
-config/version="0.0.37b"
+config/version="0.0.37 Patreon Build"
 run/main_scene="uid://c3ce8mt521wb5"
 config/features=PackedStringArray("4.5", "Mobile")
 boot_splash/show_image=false

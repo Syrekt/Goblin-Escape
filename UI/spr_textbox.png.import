@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnnkjj8hqujiv"
-path="res://.godot/imported/spr_evenon_outfit1_idle1-sheet.png-186cd65542e55241144e52d923ecd4b5.ctex"
+uid="uid://cyn030mpxyxel"
+path="res://.godot/imported/spr_textbox.png-e903d1de3d1fbb7fcb6b5feea1da0f29.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Cutscenes/spr_evenon_outfit1_idle1-sheet.png"
-dest_files=["res://.godot/imported/spr_evenon_outfit1_idle1-sheet.png-186cd65542e55241144e52d923ecd4b5.ctex"]
+source_file="res://UI/spr_textbox.png"
+dest_files=["res://.godot/imported/spr_textbox.png-e903d1de3d1fbb7fcb6b5feea1da0f29.ctex"]
 
 [params]
 

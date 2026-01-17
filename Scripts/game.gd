@@ -74,6 +74,7 @@ var logs : Dictionary
 var checkpoint : Dictionary
 var experience_drop = preload("res://Objects/dropped_experience.tscn")
 var dropped_exp : Dictionary
+var fullscreen_panel_open := false
 
 signal world_refreshed
 

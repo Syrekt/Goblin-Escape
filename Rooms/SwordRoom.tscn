@@ -71,7 +71,10 @@ z_index = 2
 tile_set = ExtResource("1_y2f3n")
 
 [node name="RoomInstance" parent="." node_paths=PackedStringArray("spawn_point") instance=ExtResource("2_jadjv")]
-spawn_point = NodePath("../Marker2D2")
+spawn_point = NodePath("../SpawnPoint")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(1875, 161)
 
 [node name="Goblin" parent="." instance=ExtResource("4_t0jww")]
 position = Vector2(1968, 160)
@@ -139,9 +142,6 @@ scale = Vector2(0.664952, 1)
 
 [node name="Statue" parent="." instance=ExtResource("14_diob3")]
 position = Vector2(2512, 464)
-
-[node name="Marker2D2" type="Marker2D" parent="."]
-position = Vector2(2764, 302)
 
 [node name="Torch" parent="." instance=ExtResource("15_inj1l")]
 position = Vector2(368, 336)

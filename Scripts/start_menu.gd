@@ -7,6 +7,7 @@ var ingame_menu_inst : IngameMenu = null
 @onready var fmod_bgm_event: FmodEventEmitter2D = $"../FModBGMEvent"
 
 func _ready() -> void:
+	return
 	if OS.is_debug_build():
 		queue_free()
 
@@ -48,10 +49,10 @@ func _on_discord_pressed() -> void:
 
 
 func _on_exit_pressed() -> void:
-	print_stack()
 	get_tree().quit()
 
 
 
 func _on_ingame_menu_close_button_pressed() -> void:
+	print("Show start menu")
 	show()

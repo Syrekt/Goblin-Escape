@@ -26,6 +26,10 @@ func exit() -> void:
 
 
 func physics_update(delta:float) -> void:
+	if !player.grabbed_by:
+		finished.emit("idle")
+		return
+
 	player.stamina.spend(0.01)
 
 	progression_bar.value = move_toward(progression_bar.value, 0, 40 * delta)

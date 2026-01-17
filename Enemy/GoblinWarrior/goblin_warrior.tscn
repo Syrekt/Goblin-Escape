@@ -1471,7 +1471,6 @@ one_shot = true
 autostart = true
 
 [node name="ThreatCollider" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 256
 
@@ -1488,7 +1487,7 @@ collision_mask = 262144
 position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_btc06")
 
-[node name="SpikeWallCheck" type="Area2D" parent="."]
+[node name="SpikeWallCheck" type="Area2D" parent="." groups=["Flip"]]
 visible = false
 collision_layer = 0
 collision_mask = 131072

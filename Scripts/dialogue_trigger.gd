@@ -1,5 +1,6 @@
 extends Interaction
 
+
 @export var dialogue_resource : DialogueResource
 @export var dialogue_start := "start"
 @export var BALLOON = preload("res://Objects/balloon.tscn")
@@ -15,7 +16,6 @@ func _ready():
 	if Game.get_singleton().get_data_in_room(name):
 		queue_free()
 
-#region Methods
 func activate() -> void:
 	Ge.camera_focus = camera_focus
 	if active:
@@ -35,12 +35,13 @@ func update(player : Player) -> void:
 	else:
 		if !active && Input.is_action_just_pressed("interact"):
 			activate()
-#endregion
-#region Signals
+
 func _on_dialogue_ended(resource: DialogueResource) -> void:
 	if active:
 		active = false
 		if !repeat:
 			Game.get_singleton().save_data_in_room(name, {"destroyed": true})
 			queue_free()
-#engregion
+
+func _on_body_exited(body: Node2D) -> void:
+	waiting_player_exit = false

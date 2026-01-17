@@ -38,7 +38,9 @@ func update(_player: Player) -> void:
 
 
 	if Input.is_action_just_pressed("interact"):
-		if target_entrance.barricade && target_entrance.barricade.health >= 0:
+		if interaction_speech != "":
+			player.think(interaction_speech)
+		elif target_entrance.barricade && target_entrance.barricade.health >= 0:
 			var thoughts = [
 				"It's blocked on the other end.",
 				"I should clear it's exit first.",

@@ -31,6 +31,8 @@ var scenes : Array[String] = [
 @onready var map_selection: OptionButton = $Control/NinePatchRect/MarginContainer/VBoxContainer/MapSelection
 var map_selected := false ## We've selected map from debug panel so teleport player to spawn point in the next room
 
+@onready var camera_zoom: HSlider = $Control/NinePatchRect/MarginContainer/VBoxContainer/CameraZoom
+
 func _ready() -> void:
 	get_script().set_meta(&"singleton", self)
 	if OS.is_debug_build():
@@ -43,6 +45,7 @@ func _ready() -> void:
 	for i in range(scenes.size()):
 		print("i: "+str(i))
 		map_selection.set_item_text(i, scenes[i])
+
 		
 static func get_singleton() -> DebugPanel:
 	return (DebugPanel as Script).get_meta(&"singleton") as DebugPanel
@@ -50,6 +53,11 @@ static func get_singleton() -> DebugPanel:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("debug1"):
 		visible = !visible
+		camera_zoom.value = Game.get_singleton().player.pcam.zoom.x
+		if visible:
+			get_tree().paused = true
+		else:
+			get_tree().paused = false
 
 func _on_hide_version_toggled(toggled_on: bool) -> void:
 	%VersionNumber.visible = toggled_on
@@ -82,3 +90,8 @@ func _on_heal_kalin_pressed() -> void:
 
 func _on_give_exp_pressed() -> void:
 	Game.get_singleton().player.experience.add(1000)
+
+
+func _on_camera_zoom_value_changed(value: float) -> void:
+	var player = Game.get_singleton().player
+	player.pcam.zoom = Vector2(value, value)
