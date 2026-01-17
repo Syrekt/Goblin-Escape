@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cxq2cf5q7mqds"]
+[gd_scene load_steps=15 format=3 uid="uid://cxq2cf5q7mqds"]
 
 [ext_resource type="Script" uid="uid://ccf04o6quvok" path="res://Scripts/start_menu.gd" id="1_wd76h"]
 [ext_resource type="Theme" uid="uid://dsrglvwu5v23w" path="res://UI/start_menu_theme.tres" id="2_5vxt3"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cudmnntkicgg7" path="res://UI/Start Menu/spr_mainui_discord_normal.png" id="11_df8u1"]
 [ext_resource type="Texture2D" uid="uid://d1lg1yhmaaidu" path="res://UI/Start Menu/spr_mainui_discord_pressed.png" id="12_aknqp"]
 [ext_resource type="Texture2D" uid="uid://b6hdjevt027ac" path="res://UI/Start Menu/spr_mainui_discord_highlight.png" id="13_skmd2"]
+[ext_resource type="FontFile" uid="uid://d1arubnr4isbm" path="res://Fonts/High_Birth.ttf" id="14_5vxt3"]
 
 [node name="StartMenu" type="CanvasLayer" groups=["FullscreenPanel"]]
 script = ExtResource("1_wd76h")
@@ -106,9 +107,24 @@ texture_hover = ExtResource("13_skmd2")
 texture_disabled = ExtResource("11_df8u1")
 texture_focused = ExtResource("11_df8u1")
 
+[node name="LastVersion" type="Button" parent="Control/NinePatchRect/TextureRect"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 188.0
+offset_right = 184.0
+offset_bottom = 215.0
+theme_override_colors/font_color = Color(0.94509804, 0.4117647, 0.3882353, 1)
+theme_override_colors/font_outline_color = Color(0.44592184, 0.43649966, 0.20255452, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("14_5vxt3")
+theme_override_font_sizes/font_size = 8
+text = "Get Last Version!"
+flat = true
+
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/Steam" to="." method="_on_steam_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/Itch" to="." method="_on_itch_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/Discord" to="." method="_on_discord_pressed"]
+[connection signal="pressed" from="Control/NinePatchRect/TextureRect/LastVersion" to="." method="_on_last_version_pressed"]

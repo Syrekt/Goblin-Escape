@@ -12,6 +12,7 @@ var current_screen := 0
 var hud_scale := 2
 var shadow_intensity = 1.0
 var adult_content_enabled := true
+var adult_build := false #OS.has_feature("nsfw") || OS.is_debug_build()
 
 var master_volume := 0.5
 var bgm_volume := 1.0
@@ -25,6 +26,9 @@ func _set_window_position() -> void:
 	DisplayServer.window_set_position(window_pos)
 
 func _ready() -> void:
+	# Adult Content
+	if !adult_build:
+		adult_content_enabled = false
 	#region Setup display
 	#Load display
 	var options_loaded = load_options()
@@ -92,7 +96,8 @@ func save_options() -> void:
 	config.set_value("gameplay", "show_interaction_prompts", Ge.show_interaction_prompts)
 	config.set_value("gameplay", "hud_scale", hud_scale)
 	config.set_value("gameplay", "shadow_intensity", shadow_intensity)
-	config.set_value("gameplay", "adult_content_enabled", adult_content_enabled)
+	if adult_build:
+		config.set_value("gameplay", "adult_content_enabled", adult_content_enabled)
 	config.set_value("gameplay", "screenshake_enabled", screenshake_enabled)
 	config.set_value("gameplay", "disable_low_health_fx_on_sex", disable_low_health_effects_on_sex)
 	#endregion
@@ -133,7 +138,10 @@ func load_options() -> int:
 		Ge.show_interaction_prompts			= config.get_value("gameplay", "show_interaction_prompts", true)
 		hud_scale							= config.get_value("gameplay", "hud_scale", 1)
 		shadow_intensity					= config.get_value("gameplay", "shadow_intensity", 1.0)
-		adult_content_enabled				= config.get_value("gameplay", "adult_content_enabled", 1.0)
+		if adult_build:
+			adult_content_enabled = config.get_value("gameplay", "adult_content_enabled", 1.0)
+		else:
+			adult_content_enabled = false
 		screenshake_enabled					= config.get_value("gameplay", "screenshake_enabled", 1.0)
 		disable_low_health_effects_on_sex	= config.get_value("gameplay", "disable_low_health_effects_on_sex", 1.0)
 		#endregion

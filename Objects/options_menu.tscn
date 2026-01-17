@@ -52,10 +52,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 0
+current_tab = 4
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -421,7 +422,6 @@ max_value = 255.0
 ticks_position = 3
 
 [node name="Gameplay" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 

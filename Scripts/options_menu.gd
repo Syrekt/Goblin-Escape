@@ -99,9 +99,15 @@ func _ready() -> void:
 	var shadow_intensity = Options.shadow_intensity
 	shadow_intensity_slider.value = shadow_intensity
 
-	adult_content_toggle.set_pressed_no_signal(Options.adult_content_enabled)
 	screenshake_toggle.set_pressed_no_signal(Options.screenshake_enabled)
-	low_health_fx.set_pressed_no_signal(Options.disable_low_health_effects_on_sex)
+
+	# Adult Content
+	if !Options.adult_build:
+		adult_content_toggle.get_parent().queue_free()
+		low_health_fx.get_parent().queue_free()
+	else:
+		adult_content_toggle.set_pressed_no_signal(Options.adult_content_enabled)
+		low_health_fx.set_pressed_no_signal(Options.disable_low_health_effects_on_sex)
 
 
 

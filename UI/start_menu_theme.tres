@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dsrglvwu5v23w"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dsrglvwu5v23w"]
 
 [ext_resource type="FontFile" uid="uid://csqmycib1f50u" path="res://Fonts/antiquity-print.ttf" id="1_28yvy"]
+[ext_resource type="FontFile" uid="uid://d1arubnr4isbm" path="res://Fonts/High_Birth.ttf" id="2_m3e8f"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_28yvy"]
 
@@ -23,3 +24,8 @@ Button/styles/focus = SubResource("StyleBoxTexture_28yvy")
 Button/styles/hover = null
 Button/styles/normal = null
 Button/styles/pressed = null
+RichTextLabel/colors/default_color = Color(0.94405925, 0.41366786, 0.38666052, 1)
+RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+RichTextLabel/constants/outline_size = 5
+RichTextLabel/font_sizes/normal_font_size = 8
+RichTextLabel/fonts/normal_font = ExtResource("2_m3e8f")

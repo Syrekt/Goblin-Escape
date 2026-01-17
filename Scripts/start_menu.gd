@@ -54,5 +54,8 @@ func _on_exit_pressed() -> void:
 
 
 func _on_ingame_menu_close_button_pressed() -> void:
-	print("Show start menu")
 	show()
+
+
+func _on_last_version_pressed() -> void:
+	OS.shell_open("https://www.patreon.com/psychoseel")
