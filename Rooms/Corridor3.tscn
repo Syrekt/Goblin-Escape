@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://rcnqxi4vw2tp"]
+[gd_scene load_steps=13 format=4 uid="uid://rcnqxi4vw2tp"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_l7e5f"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_obk5u"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="9_ah6pm"]
 [ext_resource type="PackedScene" uid="uid://ly85t11hp5u3" path="res://Objects/thought_trigger.tscn" id="10_0ount"]
 [ext_resource type="PackedScene" uid="uid://2prh5eduxlje" path="res://Objects/condition_checker.tscn" id="11_k4164"]
+[ext_resource type="PackedScene" uid="uid://b1sxvt550tr3y" path="res://Inventory/Pickup Objects/pickup_minor_rejuvenation_draught.tscn" id="12_lauhu"]
 
 [node name="Corridor3" type="Node2D"]
 
@@ -77,6 +78,10 @@ position = Vector2(248, 440)
 position = Vector2(363, 488)
 scale = Vector2(-1, 1)
 
+[node name="Barricade3" parent="." instance=ExtResource("6_owk3j")]
+position = Vector2(288, 186)
+scale = Vector2(-1, 1)
+
 [node name="HidingSpot" parent="." instance=ExtResource("7_uvwha")]
 position = Vector2(1265, 343)
 
@@ -120,9 +125,11 @@ lit = false
 
 [node name="Crate1" parent="." instance=ExtResource("9_ah6pm")]
 position = Vector2(786, 296)
+drop_random_loot = true
 
 [node name="Crate2" parent="." instance=ExtResource("9_ah6pm")]
 position = Vector2(753, 296)
+drop_random_loot = true
 
 [node name="ThoughtTrigger" parent="." instance=ExtResource("10_0ount")]
 position = Vector2(1196, 361)
@@ -137,3 +144,10 @@ results = [false]
 [node name="ThoughtTrigger2" parent="ConditionChecker" instance=ExtResource("10_0ount")]
 position = Vector2(18.780273, -0.7741699)
 thougth = "I need to find a weapon to be able to break this barricade."
+
+[node name="Crate3" parent="." instance=ExtResource("9_ah6pm")]
+position = Vector2(369, 296)
+drop_random_loot = true
+
+[node name="PickupMinorRejuvenationDraught" parent="." instance=ExtResource("12_lauhu")]
+position = Vector2(221, 241)

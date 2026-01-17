@@ -10,7 +10,7 @@ var health_max		:= 0.0
 var health_cur 		:= 0.0
 
 @export_enum ("Wood") var material_type : String = "Wood"
-@export var persistent		:= false
+@export var persistent		:= false ## If it's broken, won't be fixed after RoD
 @export var destructable	:= false
 @export var collidable		:= false
 @export var drop_random_loot:= false

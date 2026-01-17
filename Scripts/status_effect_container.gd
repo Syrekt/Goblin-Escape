@@ -20,9 +20,9 @@ func add_status_effect(status_effect_name:String,lifetime:=0.0,tick_time:=0.0) -
 	match status_effect_name:
 		"Bleed":
 			status_effect.texture = load("res://UI/Buffs/se_bleed.png")
-			add_lifetime(lifetime, status_effect)
 			add_tick_timer(tick_time, status_effect, _on_bleed_tick)
 			status_effect.tooltip_text = "Losing health over time"
+			owner.think(["I'm bleeding!"].pick_random())
 		"Death's Door":
 			status_effect.texture		= load("res://UI/Buffs/se_death.png")
 			status_effect.tooltip_text	= "Can't resist death"
@@ -68,8 +68,8 @@ func rest() -> void:
 
 func add_lifetime(time:float,status_effect:StatusEffect) -> void:
 	var lifetime : Timer = Timer.new()
-	lifetime.name = "Lifetime"
 	status_effect.add_child(lifetime)
+	lifetime.name = "Lifetime"
 	lifetime.one_shot = true
 
 	lifetime.timeout.connect(_on_lifetime_timeout.bind(status_effect.name))
@@ -79,7 +79,7 @@ func add_lifetime(time:float,status_effect:StatusEffect) -> void:
 func add_tick_timer(time:float,status_effect:StatusEffect,signal_event:Callable) -> void:
 	var timer := Timer.new()
 	timer.name = status_effect.name + " Tick Timer"
-	timer.timeout.connect(signal_event)
+	timer.timeout.connect(signal_event.bind(status_effect))
 	status_effect.add_child(timer)
 	timer.start(time)
 
@@ -90,9 +90,14 @@ func _on_lifetime_timeout(_name) -> void:
 		if child.name == _name:
 			child.queue_free()
 
-func _on_bleed_tick() -> void:
+func _on_bleed_tick(status_effect:StatusEffect) -> void:
+	var lt = status_effect.get_node("Lifetime")
+	if lt && lt.time_left < lt.wait_time/2:
+		if !status_effect.half_time_ticked:
+			status_effect.half_time_ticked = true
+			owner.think(["I need bandages!", "I should patch myself up!"].pick_random())
 	owner.health.value -= 0.5
-func _on_minor_rejuvenation_tick() -> void:
+func _on_minor_rejuvenation_tick(status_effect:StatusEffect) -> void:
 	owner.health.value += 0.1
 
 func save(save_data:Dictionary) -> void:

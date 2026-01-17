@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://bwq6w3vi5prn2"]
+[gd_scene load_steps=18 format=4 uid="uid://bwq6w3vi5prn2"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_3tq1u"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_8jyxn"]
@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://llhantu0gpcf" path="res://SFX/Wind,Ext,Alley,Urban,Howl,Pronounced,Metal,Clinking.wav" id="13_pfgfl"]
 [ext_resource type="PackedScene" uid="uid://ly85t11hp5u3" path="res://Objects/thought_trigger.tscn" id="14_suqer"]
 [ext_resource type="PackedScene" uid="uid://cjjojn21p02vb" path="res://Objects/debris_amb.tscn" id="15_1h86h"]
+[ext_resource type="PackedScene" uid="uid://cqa1nagpe2ny6" path="res://Inventory/Pickup Objects/pickup_bandage.tscn" id="16_a4gys"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_secw8"]
 size = Vector2(1025.7107, 96.99994)
@@ -194,6 +195,9 @@ position = Vector2(668, 359)
 
 [node name="DebrisAmb3" parent="." instance=ExtResource("15_1h86h")]
 position = Vector2(1070, 796)
+
+[node name="PickupHealth2" parent="." instance=ExtResource("16_a4gys")]
+position = Vector2(213, 548)
 
 [editable path="Hint"]
 [editable path="KeyPrompt"]

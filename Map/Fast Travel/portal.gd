@@ -30,7 +30,8 @@ func update(player: Player) -> void:
 			if inert:
 				activate()
 			else:
-				teleport_menu.show()
+				player.think("Need to activate another portal first.")
+				#teleport_menu.show()
 		return
 
 	if teleport_menu.visible && Input.is_action_just_pressed("back"):

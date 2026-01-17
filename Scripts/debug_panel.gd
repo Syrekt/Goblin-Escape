@@ -31,7 +31,7 @@ var scenes : Array[String] = [
 @onready var map_selection: OptionButton = $Control/NinePatchRect/MarginContainer/VBoxContainer/MapSelection
 var map_selected := false ## We've selected map from debug panel so teleport player to spawn point in the next room
 
-@onready var camera_zoom: HSlider = $Control/NinePatchRect/MarginContainer/VBoxContainer/CameraZoom
+@onready var camera_zoom: HSlider = $Control/NinePatchRect/MarginContainer/VBoxContainer/HSplitContainer/CameraZoom
 
 func _ready() -> void:
 	get_script().set_meta(&"singleton", self)
@@ -95,3 +95,10 @@ func _on_give_exp_pressed() -> void:
 func _on_camera_zoom_value_changed(value: float) -> void:
 	var player = Game.get_singleton().player
 	player.pcam.zoom = Vector2(value, value)
+
+
+func _on_status_effect_item_selected(index: int) -> void:
+	var player = Game.get_singleton().player
+	match index:
+		0:
+			player.status_effect_container.add_status_effect("Bleed", 30.0, 0.5)
