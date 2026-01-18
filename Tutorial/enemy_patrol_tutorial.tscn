@@ -66,7 +66,9 @@ theme = ExtResource("3_8u5h7")
 bbcode_enabled = true
 text = "Seeing or hearing things can make enemies [color=red]aware[/color]. When an enemy becomes [color=red]aware[/color], they start patrolling the area. 
 
-Use this to your advantage to hide in the cavity while he's patrolling."
+Use this to your advantage to hide in the cavity while he's patrolling.
+
+Walls will stop most sounds but it won't stop sounds made by [color=red]heavy objects[/color] like statutes. Moving it will make a sound that will pass through the walls."
 
 [node name="Control" type="Control" parent="ColorControl"]
 anchors_preset = 0

@@ -2,23 +2,30 @@ extends Node
 
 var config_path := "user://options.ini"
 
-var fullscreen := false
-var borderless := false
-var pixel_perfect := true
-var window_size := Vector2(1280, 720)
-var window_pos := Vector2(0, 0)
-var window_screen := 0
-var current_screen := 0
-var hud_scale := 2
-var shadow_intensity = 1.0
-var adult_content_enabled := true
-var adult_build := OS.has_feature("nsfw") || OS.is_debug_build()
+var fullscreen				:= false
+var borderless 				:= false
+var pixel_perfect			:= true
+var window_size				:= Vector2(1280, 720)
+var window_pos				:= Vector2(0, 0)
+var window_screen			:= 0
+var current_screen			:= 0
+var hud_scale				:= 2
+var shadow_intensity		:= 1.0
+var adult_content_enabled	:= true
+var adult_build				:= OS.has_feature("nsfw") || OS.is_debug_build()
 
-var master_volume := 0.5
-var bgm_volume := 1.0
-var amb_volume := 1.0
-var sfx_volume := 1.0
-var footsounds_enabled := true # Not used
+var master_volume := 0.5:
+	set(value):
+		FmodServer.set_global_parameter_by_name("MASTER_VOLUME", value)
+var bgm_volume := 1.0:
+	set(value):
+		FmodServer.set_global_parameter_by_name("BGM_VOLUME", value)
+var amb_volume := 1.0:
+	set(value):
+		FmodServer.set_global_parameter_by_name("AMB_VOLUME", value)
+var sfx_volume := 1.0:
+	set(value):
+		FmodServer.set_global_parameter_by_name("SFX_VOLUME", value)
 var screenshake_enabled := true
 var disable_low_health_effects_on_sex := false
 
@@ -64,6 +71,7 @@ func _process(delta: float) -> void:
 
 
 
+#region Save Options
 func save_options() -> void:
 	print("Save options")
 	print_stack()
@@ -73,12 +81,12 @@ func save_options() -> void:
 
 	config.set_value("Game", "version", OS.get_version())
 	#region Save Display
-	config.set_value("window", "fullscreen",	fullscreen)
-	config.set_value("window", "borderless", 	borderless)
-	config.set_value("window", "pixel_perfect", pixel_perfect)
-	config.set_value("window", "window_pos",	DisplayServer.window_get_position())
-	config.set_value("window", "window_size",	DisplayServer.window_get_size())
-	config.set_value("window", "window_screen", DisplayServer.window_get_current_screen())
+	config.set_value("display", "fullscreen",	fullscreen)
+	config.set_value("display", "borderless", 	borderless)
+	config.set_value("display", "pixel_perfect", pixel_perfect)
+	config.set_value("display", "window_pos",	DisplayServer.window_get_position())
+	config.set_value("display", "window_size",	DisplayServer.window_get_size())
+	config.set_value("display", "window_screen", DisplayServer.window_get_current_screen())
 	#endregion
 	#region Save Audio
 	config.set_value("audio", "Master", master_volume)
@@ -102,18 +110,22 @@ func save_options() -> void:
 	config.set_value("gameplay", "disable_low_health_fx_on_sex", disable_low_health_effects_on_sex)
 	#endregion
 	
+	if config.has_section("window"):
+		config.erase_section("window")
 	config.save(config_path)
+#endregion
+#region Load Options
 func load_options() -> int:
 	var config = ConfigFile.new()
 	var err = config.load(config_path)
 	if err == OK:
 		#region Load Display
-		fullscreen		= config.get_value("window", "fullscreen", false)
-		borderless 		= config.get_value("window", "borderless", borderless)
-		pixel_perfect	= config.get_value("window", "pixel_perfect", pixel_perfect)
-		window_pos		= config.get_value("window", "window_pos", window_pos)
-		window_size		= config.get_value("window", "window_size", window_size)
-		window_screen   = config.get_value("window", "window_screen", window_screen)
+		fullscreen		= config.get_value("display", "fullscreen", false)
+		borderless 		= config.get_value("display", "borderless", borderless)
+		pixel_perfect	= config.get_value("display", "pixel_perfect", pixel_perfect)
+		window_pos		= config.get_value("display", "window_pos", window_pos)
+		window_size		= config.get_value("display", "window_size", window_size)
+		window_screen   = config.get_value("display", "window_screen", window_screen)
 		print("window_pos: "+str(window_pos))
 		print("window_size: "+str(window_size))
 		print("window_screen: "+str(window_screen))
@@ -162,6 +174,7 @@ func load_options() -> int:
 	else:
 		FmodServer.set_global_parameter_by_name("MASTER_VOLUME", master_volume)
 	return err
+#endregion
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_SIZE_CHANGED:

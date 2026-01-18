@@ -52,11 +52,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 4
+current_tab = 0
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -151,6 +150,10 @@ text = "Switch Monitor"
 layout_mode = 2
 text = "Center Window"
 
+[node name="ResetGraphics" type="Button" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Reset Graphics(Quits Game)"
+
 [node name="Audio" type="TabBar" parent="."]
 visible = false
 layout_mode = 2
@@ -229,6 +232,10 @@ layout_mode = 2
 max_value = 1.0
 step = 0.1
 value = 1.0
+
+[node name="ResetAudio" type="Button" parent="Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Reset Audio Settings"
 
 [node name="Controls" type="TabBar" parent="."]
 visible = false
@@ -422,6 +429,7 @@ max_value = 255.0
 ticks_position = 3
 
 [node name="Gameplay" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
@@ -707,10 +715,12 @@ tutorial_code = "Defensive Stance"
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/Borderless" to="." method="_on_borderless_toggled"]
 [connection signal="pressed" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SwitchMonitor" to="." method="_on_switch_monitor_pressed"]
 [connection signal="pressed" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/CenterWindow" to="." method="_on_center_window_pressed"]
+[connection signal="pressed" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/ResetGraphics" to="." method="_on_reset_graphics_pressed"]
 [connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/MasterVolumeContainer/MasterVolume" to="." method="_on_master_volume_value_changed"]
 [connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/BGMVolumeContainer/BGMVolume" to="." method="_on_bgm_volume_value_changed"]
 [connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/EFXVolumeContainer/AMBVolume" to="." method="_on_efx_volume_value_changed"]
 [connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/SFXVolumeContainer/SFXVolume" to="." method="_on_sfx_volume_value_changed"]
+[connection signal="pressed" from="Audio/MarginContainer/VBoxContainer/ResetAudio" to="." method="_on_reset_audio_pressed"]
 [connection signal="pressed" from="Controls/MarginContainer/HSplitContainer/VBoxContainer/ResetKeybindings" to="." method="_on_reset_keybindings_pressed"]
 [connection signal="toggled" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/NoiseToggle/NoiseToggleCheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="pressed" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer/ResetColor" to="." method="_on_reset_color_pressed"]

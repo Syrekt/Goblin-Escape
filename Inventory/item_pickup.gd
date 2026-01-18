@@ -12,10 +12,11 @@ func _ready() -> void:
 	if !instantiated:
 		var game = Game.get_singleton()
 		await game.room_loaded
-		if game.loading:
-			var save_data = game.get_data_in_room(name)
-			if save_data:
-				queue_free()
+		print("Load pickup item")
+		var save_data = game.get_data_in_room(name)
+		print("save_data: "+str(save_data))
+		if save_data:
+			queue_free()
 
 	item = ImportData.item_data.get(item_name)
 	print("item: "+str(item))

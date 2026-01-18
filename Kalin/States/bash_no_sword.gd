@@ -14,6 +14,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	bash_sfx.play()
 	enemy_ignore_list = []
 	player.set_collision_mask_value(4, true)
+	player.fatigue.perform("bash")
 
 func exit() -> void:
 	player.set_collision_mask_value(4, false)

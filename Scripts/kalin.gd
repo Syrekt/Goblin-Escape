@@ -120,8 +120,8 @@ const BASH_DAMAGE_PER_STRENGTH 	:= 1
 const SLASH_STAMINA_COST	:= 2
 const STAB_STAMINA_COST		:= 1
 const BASH_STAMINA_COST 	:= 2
-const SLASH_COST_PER_STRENGTH	:= 0.2
-const STAB_COST_PER_STRENGTH	:= 0.15
+const SLASH_COST_PER_STRENGTH	:= 0.1
+const STAB_COST_PER_STRENGTH	:= 0.05
 const BASH_COST_PER_STRENGTH	:= 0.15
 const SLASH_COST_PER_ENDURANCE	:= 0.1
 const STAB_COST_PER_ENDURANCE	:= 0.08
@@ -129,9 +129,9 @@ const BASH_COST_PER_ENDURANCE	:= 0.08
 const SLASH_SWEAT	:= 0.2
 const STAB_SWEAT	:= 0.1
 const BASH_SWEAT	:= 0.1
-const MAX_SLASH_FATIGUE	:= 2.0
-const MAX_STAB_FATIGUE	:= 1.5
-const MAX_BASH_FATIGUE	:= 2.0
+const MAX_SLASH_FATIGUE	:= 4.0
+const MAX_STAB_FATIGUE	:= 3.0
+const MAX_BASH_FATIGUE	:= 3.0
 const SLASH_FATIGUE_STRENGTH_MOD	:= 0.5
 const SLASH_FATIGUE_ENDURANCE_MOD	:= 0.8
 const STAB_FATIGUE_STRENGTH_MOD		:= 0.4
@@ -143,15 +143,13 @@ const STAB_SWEAT_PER_STRENGTH	:= 0.02
 const BASH_SWEAT_PER_STRENGTH	:= 0.06
 
 var had_sword := false ## Variable to track if player got a sword at any point
-@export var has_sword := false: ## False for release
+@export var has_sword := false: 
 	set(value):
-		if value && Ge.show_tutorials:
+		if value && !had_sword && Ge.show_tutorials:
 			var tutorial = load("res://Tutorial/combat_tutorial.tscn").instantiate()
 			#get_tree().current_scene.add_child.call_deferred("tutorial")
 		has_sword = value
 		if has_sword: had_sword = true
-	get:
-		return has_sword
 	
 var in_combat_state := false
 var combat_target	: CharacterBody2D = null
@@ -335,7 +333,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 		if state_name == "corner_climb":
 			global_position = climb_start_position
 
-		if has_sword:
+		if in_combat_state && has_sword:
 			state_node.state.finished.emit("hurt")
 		else:
 			state_node.state.finished.emit("hurt_no_sword")

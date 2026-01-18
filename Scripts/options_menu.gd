@@ -251,16 +251,12 @@ func _on_reset_keybindings_pressed() -> void:
 
 func _on_master_volume_value_changed(value: float) -> void:
 	Options.master_volume = value
-	FmodServer.set_global_parameter_by_name("MASTER_VOLUME", value)
 func _on_bgm_volume_value_changed(value: float) -> void:
 	Options.bgm_volume = value
-	FmodServer.set_global_parameter_by_name("BGM_VOLUME", value)
 func _on_amb_volume_value_changed(value: float) -> void:
 	Options.amb_volume = value
-	FmodServer.set_global_parameter_by_name("AMB_VOLUME", value)
 func _on_sfx_volume_value_changed(value: float) -> void:
 	Options.sfx_volume = value
-	FmodServer.set_global_parameter_by_name("SFX_VOLUME", value)
 
 func _on_show_tutorials_toggled(toggled_on: bool) -> void:
 	Ge.show_tutorials = toggled_on
@@ -309,4 +305,29 @@ func _on_reset_save_pressed() -> void:
 
 func _on_low_health_fx_toggled(toggled_on: bool) -> void:
 	Options.disable_low_health_effects_on_sex = toggled_on
+
+func _on_reset_graphics_pressed() -> void:
+	if FileAccess.file_exists(Options.config_path):
+		var config := ConfigFile.new()
+		var err = config.load(Options.config_path)
+		if err == OK:
+			if config.has_section("display"):
+				config.erase_section("display")
+			config.save(Options.config_path)
+		get_tree().quit()
+
+func _on_reset_audio_pressed() -> void:
+	if FileAccess.file_exists(Options.config_path):
+		var config := ConfigFile.new()
+		var err = config.load(Options.config_path)
+		if err == OK:
+			if config.has_section("audio"):
+				config.erase_section("audio")
+			config.save(Options.config_path)
+	Options.master_volume = 0.5
+	Options.bgm_volume = 1.0
+	Options.amb_volume = 1.0
+	Options.sfx_volume = 1.0
+	queue_free()
+	
 #endregion

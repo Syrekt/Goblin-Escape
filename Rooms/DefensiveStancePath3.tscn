@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://cfgeong3784bf"]
+[gd_scene load_steps=16 format=4 uid="uid://cfgeong3784bf"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_f04tq"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_8qh65"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://24ijy2g2jylp" path="res://Objects/hiding_spot.tscn" id="11_kcxmx"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="12_6cmcr"]
 [ext_resource type="PackedScene" uid="uid://dx4ougi4grdc2" path="res://Inventory/Pickup Objects/pickup_stenchbane.tscn" id="13_cqlwc"]
+[ext_resource type="PackedScene" uid="uid://cqa1nagpe2ny6" path="res://Inventory/Pickup Objects/pickup_bandage.tscn" id="14_6cmcr"]
 [ext_resource type="PackedScene" uid="uid://h6taionkkj78" path="res://Map/Fast Travel/tunnel_entrance.tscn" id="14_kcxmx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fdukx"]
@@ -156,3 +157,6 @@ target_entrance = NodePath("../TunnelEntrance")
 
 [node name="Goblin2" parent="." instance=ExtResource("9_8ybyu")]
 position = Vector2(240, 528)
+
+[node name="PickupBandage" parent="." instance=ExtResource("14_6cmcr")]
+position = Vector2(1841, 467)

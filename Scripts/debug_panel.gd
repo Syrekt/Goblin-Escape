@@ -43,7 +43,6 @@ func _ready() -> void:
 
 	map_selection.set_item_count(scenes.size())
 	for i in range(scenes.size()):
-		print("i: "+str(i))
 		map_selection.set_item_text(i, scenes[i])
 
 		

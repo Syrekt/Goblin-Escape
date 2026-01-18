@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://crwf8yrpxeibp"]
+[gd_scene load_steps=11 format=4 uid="uid://crwf8yrpxeibp"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_qkffn"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_apk2q"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="7_mart1"]
 [ext_resource type="PackedScene" uid="uid://cx6tcje3rwlkx" path="res://Map/Props/crate1.tscn" id="8_qnnt4"]
 [ext_resource type="PackedScene" uid="uid://cjjojn21p02vb" path="res://Objects/debris_amb.tscn" id="9_v8rj2"]
+[ext_resource type="PackedScene" uid="uid://b1apt5o7fktb3" path="res://Inventory/Pickup Objects/pickup_elixir_of_renewal.tscn" id="10_18lgg"]
 
 [node name="DefensiveStancePath4" type="Node2D"]
 
@@ -121,3 +122,6 @@ position = Vector2(840, 624)
 
 [node name="DebrisAmb" parent="DebrisAmb" instance=ExtResource("9_v8rj2")]
 position = Vector2(-526, -142)
+
+[node name="PickupElixirOfRenewal" parent="." instance=ExtResource("10_18lgg")]
+position = Vector2(1085, 1065)

@@ -50,12 +50,6 @@ func _ready() -> void:
 	show_stealth_tutorial.connect(_show_stealth_tutorial)
 	show_patrol_tutorial.connect(_show_patrol_tutorial)
 
-	assign_key("jump", "jump_key")
-	assign_key("attack", "attack_key")
-	assign_key("stance", "stance_key")
-	assign_key("down", "down_key")
-	assign_key("grab", "grab_key")
-	assign_key("run", "run_key")
 
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 
@@ -84,12 +78,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 #region Methods
-func assign_key(action: String, value: String) -> void:
-	var events = InputMap.action_get_events(action)
-	for event in events:
-		if event is InputEventKey:
-			set(value, OS.get_keycode_string(event.keycode).to_upper())
-			print(action + "_key: " + str(run_key))
 
 func _show_combat_tutorial():
 	print("Show combat tutorial")
@@ -265,7 +253,7 @@ func get_action_keycode(action:String,return_full_path := false) -> String:
 	var action_keycode
 	if action_events.size() > 0:
 		for event in action_events:
-			#print("event: "+str(event))
+			print("event: "+str(event))
 			if event is InputEventKey && last_input_type == "keyboard":
 				if event.keycode != 0:
 					action_keycode = OS.get_keycode_string(event.keycode)
@@ -296,8 +284,10 @@ func get_action_keycode(action:String,return_full_path := false) -> String:
 
 		if !ResourceLoader.exists(filepath):
 			printerr("Can't find input icon %s" % filepath)
+		print("Action keycode filepath found: " + str(action_keycode))
 		return filepath
 
+	print("Action keycode found: " + str(action_keycode))
 	return action_keycode
 #endregion
 func fmod_play_event(event_name:String) -> void:

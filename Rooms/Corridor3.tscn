@@ -151,3 +151,6 @@ drop_random_loot = true
 
 [node name="PickupMinorRejuvenationDraught" parent="." instance=ExtResource("12_lauhu")]
 position = Vector2(221, 241)
+
+[node name="PickupMinorRejuvenationDraught2" parent="." instance=ExtResource("12_lauhu")]
+position = Vector2(368, 261)

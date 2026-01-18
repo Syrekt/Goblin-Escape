@@ -74,7 +74,7 @@ position = Vector2(2512.5684, 344.37152)
 text = "You can grab and move some objects."
 
 [node name="Goblin" parent="." instance=ExtResource("8_r43xl")]
-position = Vector2(2715, 256)
+position = Vector2(2784, 256)
 patrolling = false
 
 [node name="HidingSpot" parent="." instance=ExtResource("9_ri75p")]

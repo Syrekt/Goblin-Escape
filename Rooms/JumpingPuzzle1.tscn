@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bwq6w3vi5prn2"]
+[gd_scene load_steps=19 format=4 uid="uid://bwq6w3vi5prn2"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_3tq1u"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_8jyxn"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://ly85t11hp5u3" path="res://Objects/thought_trigger.tscn" id="14_suqer"]
 [ext_resource type="PackedScene" uid="uid://cjjojn21p02vb" path="res://Objects/debris_amb.tscn" id="15_1h86h"]
 [ext_resource type="PackedScene" uid="uid://cqa1nagpe2ny6" path="res://Inventory/Pickup Objects/pickup_bandage.tscn" id="16_a4gys"]
+[ext_resource type="Texture2D" uid="uid://d2uhikpas8u7s" path="res://Others/light.png" id="17_v7pue"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_secw8"]
 size = Vector2(1025.7107, 96.99994)
@@ -198,6 +199,39 @@ position = Vector2(1070, 796)
 
 [node name="PickupHealth2" parent="." instance=ExtResource("16_a4gys")]
 position = Vector2(213, 548)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(2025, 1192)
+texture = ExtResource("17_v7pue")
+
+[node name="PointLight2D3" type="PointLight2D" parent="."]
+position = Vector2(987, 666.5)
+scale = Vector2(1, 3.5117188)
+texture = ExtResource("17_v7pue")
+
+[node name="PointLight2D4" type="PointLight2D" parent="."]
+position = Vector2(1136, 666.99994)
+scale = Vector2(1, 3.5117188)
+texture = ExtResource("17_v7pue")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(1911, 1190)
+texture = ExtResource("17_v7pue")
+
+[node name="PointLight2D5" type="PointLight2D" parent="."]
+position = Vector2(1006.5, 925)
+scale = Vector2(3.8242188, 1)
+texture = ExtResource("17_v7pue")
+
+[node name="PointLight2D6" type="PointLight2D" parent="."]
+position = Vector2(582.5, 358)
+scale = Vector2(4.1601567, 1)
+texture = ExtResource("17_v7pue")
+
+[node name="PointLight2D7" type="PointLight2D" parent="."]
+position = Vector2(287, 304.5)
+scale = Vector2(1.4140625, 1.6132813)
+texture = ExtResource("17_v7pue")
 
 [editable path="Hint"]
 [editable path="KeyPrompt"]

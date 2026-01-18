@@ -12,6 +12,7 @@ var ray : RayCast2D
 var player : Player
 
 func _ready() -> void:
+	load_self()
 	if !lit:
 		lit_area.scale = Vector2(0, 0)
 		point_light.scale = Vector2(0, 0)
@@ -47,7 +48,7 @@ func _physics_process(delta: float) -> void:
 func save() -> void:
 	Game.get_singleton().save_data_in_room(name, { "lit": lit, })
 
-func load() -> void:
+func load_self() -> void:
 	var save_data = Game.get_singleton().get_data_in_room(name)
 	if save_data:
 		lit = save_data.get("lit", lit)

@@ -2,16 +2,16 @@ extends PlayerState
 
 var charge_up := 10.0
 
-@onready var charge_fx : AnimatedSprite2D = $"../../SlashChargeupFX"
+#@onready var charge_fx : AnimatedSprite2D = $"../../SlashChargeupFX"
 
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
-	charge_fx.show()
-	charge_fx.play("charging")
+	#charge_fx.show()
+	#charge_fx.play("charging")
 
 func exit() -> void:
-	charge_fx.stop()
-	charge_fx.hide()
+	#charge_fx.stop()
+	#charge_fx.hide()
 	charge_up = 0
 
 func physics_update(delta: float) -> void:
@@ -20,9 +20,9 @@ func physics_update(delta: float) -> void:
 		charge_up = move_toward(charge_up, 100, 2)
 
 	if charge_up == 100:
-		if !charge_fx.visible:
-			charge_fx.show()
-			charge_fx.play("charged")
+		#if !charge_fx.visible:
+		#	charge_fx.show()
+		#	charge_fx.play("charged")
 		player.call_deferred("update_animation", "slash_charged")
 
 	if !player.is_on_floor():

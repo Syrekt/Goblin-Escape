@@ -124,7 +124,7 @@ position = Vector2(832.75995, 358.89383)
 text = "Press up to skip downstairs."
 
 [node name="KeyPrompt2" parent="." instance=ExtResource("9_2oolj")]
-position = Vector2(618, 538)
+position = Vector2(618, 559)
 text = "up"
 
 [node name="KeyPrompt3" parent="." instance=ExtResource("9_2oolj")]
@@ -137,3 +137,6 @@ thougth = "This dungeon is huge. There is no way I'm not gonna find something va
 
 [node name="DebrisAmb" parent="." instance=ExtResource("12_ng1ak")]
 position = Vector2(476, 454)
+
+[node name="Torch" parent="." instance=ExtResource("2_6b1vt")]
+position = Vector2(480, 402)

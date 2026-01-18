@@ -26,7 +26,7 @@ func add_status_effect(status_effect_name:String,lifetime:=0.0,tick_time:=0.0) -
 		"Death's Door":
 			status_effect.texture		= load("res://UI/Buffs/se_death.png")
 			status_effect.tooltip_text	= "Can't resist death"
-			#status_effect.persistent	= true
+			#status_effect.persistent	= true # Maybe later
 		"Minor Rejuvenation":
 			status_effect.texture = load("res://UI/Buffs/se_minor_rejuvenation.png")
 			add_tick_timer(tick_time, status_effect, _on_minor_rejuvenation_tick)
