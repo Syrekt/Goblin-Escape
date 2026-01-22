@@ -493,7 +493,6 @@ func _physics_process(delta: float) -> void:
 	move_speed = 0.0; # Reset move speed since, this needs setting each frame
 	var dir_x = get_movement_dir() if !direction_locked else facing
 
-	if health.value <= 0: cp.pushback_reset()
 	if cp.pushback_timer > 0:
 		velocity.x = lerpf(cp.pushback_vector.x, 0, cp.pushback_elapsed_time / cp.pushback_duration)
 

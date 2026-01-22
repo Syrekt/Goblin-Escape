@@ -1489,6 +1489,7 @@ shape = SubResource("RectangleShape2D_btc06")
 
 [node name="SpikeWallCheck" type="Area2D" parent="." groups=["Flip"]]
 visible = false
+z_index = 2
 collision_layer = 0
 collision_mask = 131072
 

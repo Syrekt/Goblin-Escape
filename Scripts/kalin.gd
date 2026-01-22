@@ -1085,6 +1085,7 @@ func _on_coyote_timer_timeout() -> void:
 func _on_state_machine_state_changed(state:State) -> void:
 	if !pcam: return
 	if controls_disabled: return
+	in_combat_state = state.is_in_group("combat_state")
 
 	if state.name == "death":
 		combat_target = null

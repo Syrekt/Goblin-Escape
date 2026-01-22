@@ -1121,6 +1121,7 @@ attack_time = 0.1
 script = ExtResource("27_su4u7")
 
 [node name="grab" type="Node2D" parent="StateMachine"]
+z_index = 2
 script = ExtResource("13_6vclp")
 
 [node name="GrabCollider" type="Area2D" parent="StateMachine/grab" groups=["Flip"]]

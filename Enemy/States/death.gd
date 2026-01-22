@@ -17,7 +17,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	enemy.states_locked = true
 	enemy.is_dead = true
 	enemy.velocity.x = 0
-	enemy.combat_properties.pushback_reset()
+	#enemy.combat_properties.pushback_reset()
 	var children = enemy.get_children()
 	for child in children:
 		if child is Area2D:

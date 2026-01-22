@@ -5210,6 +5210,7 @@ event_guid = "{f3d5c71b-4f19-4164-97e9-a62d815e7c7f}"
 
 [node name="StateMachine" parent="." groups=["Flip"] instance=ExtResource("9_ojhio")]
 visible = false
+z_index = 2
 position = Vector2(-4, 34)
 
 [node name="idle" type="Node" parent="StateMachine" groups=["position_reliable"]]
