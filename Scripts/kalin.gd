@@ -147,7 +147,7 @@ var had_sword := false ## Variable to track if player got a sword at any point
 	set(value):
 		if value && !had_sword && Ge.show_tutorials:
 			var tutorial = load("res://Tutorial/combat_tutorial.tscn").instantiate()
-			#get_tree().current_scene.add_child.call_deferred("tutorial")
+			get_tree().current_scene.add_child.call_deferred(tutorial)
 		has_sword = value
 		if has_sword: had_sword = true
 	
@@ -793,8 +793,8 @@ func _ready() -> void:
 		has_sword = true
 		has_heavy_stance = true
 		has_defensive_stance = true
-		state_node.state_changed.connect(_on_state_machine_state_changed)
-		pcam.set_follow_offset(Vector2(0, 0))
+	state_node.state_changed.connect(_on_state_machine_state_changed)
+	pcam.set_follow_offset(Vector2(0, 0))
 	#get_tree().current_scene.emit_signal("player_ready", self) #owner should be root node
 #endregion
 #region Physics
