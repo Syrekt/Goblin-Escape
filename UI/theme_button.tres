@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=24 format=3 uid="uid://crosqd2uoimhi"]
+[gd_resource type="Theme" load_steps=30 format=3 uid="uid://crosqd2uoimhi"]
 
 [ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Fonts/Ohrenstead.ttf" id="1_kgf2r"]
 [ext_resource type="Texture2D" uid="uid://bjowu5bqsapub" path="res://UI/button_hover.png" id="2_hv2ae"]
@@ -51,6 +51,30 @@ texture = ExtResource("3_sukla")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wu7ve"]
 texture = ExtResource("4_86jsb")
 
+[sub_resource type="DPITexture" id="DPITexture_3sudc"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#fff\" fill-opacity=\".75\" d=\"m1 3 2-2 5 5 5-5 2 2-5 5 5 5-2 2-5-5-5 5-2-2 5-5z\"/></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_58tpi"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"6\" fill=\"#fefffe\" fill-opacity=\".75\"/><path fill=\"none\" stroke=\"#1a1a1a\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".65\" stroke-width=\"2\" d=\"m9 5-3 3 3 3\"/></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_ultn6"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"6\" fill=\"#fefffe\"/><path fill=\"none\" stroke=\"#1a1a1a\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"m9 5-3 3 3 3\"/></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_1cmyi"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"32\"><path fill=\"#d3d3d3\" d=\"m5 1h6v30h-6z\"/></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_5tl16"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"6\" fill=\"#fefffe\" fill-opacity=\".75\"/><path fill=\"none\" stroke=\"#1a1a1a\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".65\" stroke-width=\"2\" d=\"m7 5 3 3-3 3\"/></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_5v6gi"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"6\" fill=\"#fefffe\"/><path fill=\"none\" stroke=\"#1a1a1a\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"m7 5 3 3-3 3\"/></svg>
+"
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3sudc"]
 texture = ExtResource("5_7biuq")
 texture_margin_left = 5.0
@@ -62,24 +86,27 @@ axis_stretch_vertical = 1
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1cmyi"]
 texture = ExtResource("6_58tpi")
+texture_margin_left = 2.0
+texture_margin_right = 2.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5v6gi"]
 texture = ExtResource("4_86jsb")
+texture_margin_left = 2.0
+texture_margin_right = 2.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i1f4t"]
 texture = ExtResource("2_hv2ae")
+texture_margin_left = 2.0
+texture_margin_right = 2.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h5g0m"]
 texture = ExtResource("7_ultn6")
 texture_margin_left = 2.0
-texture_margin_top = 2.0
 texture_margin_right = 2.0
-texture_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2x3wo"]
 texture = ExtResource("3_sukla")
 texture_margin_left = 2.0
-texture_margin_top = 2.0
 texture_margin_right = 2.0
 
 [resource]
@@ -99,7 +126,23 @@ MenuButton/styles/pressed = SubResource("StyleBoxTexture_wu7ve")
 OptionButton/fonts/font = ExtResource("1_kgf2r")
 PopupMenu/fonts/font = ExtResource("1_kgf2r")
 RichTextLabel/fonts/normal_font = ExtResource("1_kgf2r")
+TabBar/colors/drop_mark_color = Color(1, 1, 1, 1)
+TabBar/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+TabBar/colors/font_hovered_color = Color(0.95, 0.95, 0.95, 1)
+TabBar/colors/font_outline_color = Color(0, 0, 0, 1)
+TabBar/colors/font_selected_color = Color(0.95, 0.95, 0.95, 1)
+TabBar/colors/font_unselected_color = Color(0.7, 0.7, 0.7, 1)
+TabBar/constants/h_separation = 4
+TabBar/constants/icon_max_width = 0
+TabBar/constants/outline_size = 0
+TabBar/font_sizes/font_size = 16
 TabBar/fonts/font = ExtResource("1_kgf2r")
+TabBar/icons/close = SubResource("DPITexture_3sudc")
+TabBar/icons/decrement = SubResource("DPITexture_58tpi")
+TabBar/icons/decrement_highlight = SubResource("DPITexture_ultn6")
+TabBar/icons/drop_mark = SubResource("DPITexture_1cmyi")
+TabBar/icons/increment = SubResource("DPITexture_5tl16")
+TabBar/icons/increment_highlight = SubResource("DPITexture_5v6gi")
 TabContainer/fonts/font = ExtResource("1_kgf2r")
 TabContainer/styles/panel = SubResource("StyleBoxTexture_3sudc")
 TabContainer/styles/tab_disabled = SubResource("StyleBoxTexture_1cmyi")

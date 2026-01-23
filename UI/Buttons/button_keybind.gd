@@ -17,6 +17,15 @@ func _ready() -> void:
 	set_process_unhandled_key_input(false)
 	set_text_for_key()
 
+	if focus_neighbor_top:
+		button.focus_neighbor_top		= button.get_path_to(get_node(focus_neighbor_top))
+	if focus_neighbor_bottom:
+		button.focus_neighbor_bottom	= button.get_path_to(get_node(focus_neighbor_bottom))
+	if focus_neighbor_left:
+		button.focus_neighbor_left		= button.get_path_to(get_node(focus_neighbor_left))
+	if focus_neighbor_right:
+		button.focus_neighbor_right		= button.get_path_to(get_node(focus_neighbor_right))
+
 
 func set_action_name() -> void:
 	match action_name:
@@ -112,3 +121,7 @@ func rebind_action_key(event:InputEventKey) -> void:
 	set_process_unhandled_key_input(false)
 	set_text_for_key()
 	set_action_name()
+
+
+func _on_focus_entered() -> void:
+	button.grab_focus()

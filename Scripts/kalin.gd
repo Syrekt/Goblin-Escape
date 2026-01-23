@@ -790,6 +790,7 @@ func _ready() -> void:
 	fullscreen_panel_closed.connect(_on_fullscreen_panel_closed)
 	Ge.player = self
 	if OS.is_debug_build():
+		had_sword = true
 		has_sword = true
 		has_heavy_stance = true
 		has_defensive_stance = true

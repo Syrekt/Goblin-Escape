@@ -52,11 +52,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 0
+current_tab = 2
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
+focus_neighbor_top = NodePath("MarginContainer/ScrollContainer/VBoxContainer/ResetGraphics")
+focus_neighbor_bottom = NodePath("MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Fullscreen")
 metadata/_tab_index = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="Graphics"]
@@ -87,6 +90,8 @@ text = "Fullscreen"
 
 [node name="Fullscreen" type="CheckBox" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../ResetGraphics")
+focus_neighbor_bottom = NodePath("../../HBoxContainer2/Resolution")
 script = ExtResource("2_ucjbo")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
@@ -99,6 +104,8 @@ text = "Resolution"
 
 [node name="Resolution" type="OptionButton" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../HBoxContainer/Fullscreen")
+focus_neighbor_bottom = NodePath("../../HBoxContainer3/PixelPerfect")
 selected = 0
 item_count = 4
 popup/item_0/text = "640x360"
@@ -121,6 +128,8 @@ text = "Pixel Perfect"
 [node name="PixelPerfect" type="CheckBox" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 tooltip_text = "When disabled, increases viewport size to keep visuals pixel perfect. Enable if you are seeing distorted pixels."
+focus_neighbor_top = NodePath("../../HBoxContainer2/Resolution")
+focus_neighbor_bottom = NodePath("../../HBoxContainer4/Borderless")
 script = ExtResource("2_ucjbo")
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
@@ -133,6 +142,8 @@ text = "Borderless"
 
 [node name="Borderless" type="CheckBox" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../HBoxContainer3/PixelPerfect")
+focus_neighbor_bottom = NodePath("../../HBoxContainer5/SwitchMonitor")
 script = ExtResource("2_ucjbo")
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
@@ -144,19 +155,27 @@ layout_mode = 2
 
 [node name="SwitchMonitor" type="Button" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../HBoxContainer4/Borderless")
+focus_neighbor_bottom = NodePath("../../CenterWindow")
 text = "Switch Monitor"
 
 [node name="CenterWindow" type="Button" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../HBoxContainer5/SwitchMonitor")
+focus_neighbor_bottom = NodePath("../ResetGraphics")
 text = "Center Window"
 
 [node name="ResetGraphics" type="Button" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../CenterWindow")
+focus_neighbor_bottom = NodePath("../HBoxContainer/Fullscreen")
 text = "Reset Graphics(Quits Game)"
 
 [node name="Audio" type="TabBar" parent="."]
 visible = false
 layout_mode = 2
+focus_neighbor_top = NodePath("MarginContainer/VBoxContainer/ResetAudio")
+focus_neighbor_bottom = NodePath("MarginContainer/VBoxContainer/MasterVolumeContainer/MasterVolume")
 metadata/_tab_index = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Audio"]
@@ -187,6 +206,8 @@ text = "Master"
 
 [node name="MasterVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/MasterVolumeContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../ResetAudio")
+focus_neighbor_bottom = NodePath("../../BGMVolumeContainer/BGMVolume")
 max_value = 1.0
 step = 0.1
 value = 1.0
@@ -201,6 +222,8 @@ text = "Music"
 
 [node name="BGMVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/BGMVolumeContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../MasterVolumeContainer/MasterVolume")
+focus_neighbor_bottom = NodePath("../../EFXVolumeContainer/AMBVolume")
 max_value = 1.0
 step = 0.1
 value = 1.0
@@ -215,6 +238,8 @@ text = "Ambiance"
 
 [node name="AMBVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/EFXVolumeContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../BGMVolumeContainer/BGMVolume")
+focus_neighbor_bottom = NodePath("../../SFXVolumeContainer/SFXVolume")
 max_value = 1.0
 step = 0.1
 value = 1.0
@@ -229,17 +254,22 @@ text = "Effects"
 
 [node name="SFXVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/SFXVolumeContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../EFXVolumeContainer/AMBVolume")
+focus_neighbor_bottom = NodePath("../../ResetAudio")
 max_value = 1.0
 step = 0.1
 value = 1.0
 
 [node name="ResetAudio" type="Button" parent="Audio/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../SFXVolumeContainer/SFXVolume")
+focus_neighbor_bottom = NodePath("../MasterVolumeContainer/MasterVolume")
 text = "Reset Audio Settings"
 
 [node name="Controls" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
+focus_neighbor_top = NodePath("MarginContainer/HSplitContainer/VBoxContainer2/ButtonKeybind10")
+focus_neighbor_bottom = NodePath("MarginContainer/HSplitContainer/VBoxContainer/ButtonKeybind")
 metadata/_tab_index = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Controls"]
@@ -265,26 +295,44 @@ layout_mode = 2
 
 [node name="ButtonKeybind" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../ButtonKeybind9")
+focus_neighbor_right = NodePath("../../VBoxContainer2/ButtonKeybind2")
+focus_neighbor_bottom = NodePath("../ButtonKeybind3")
 action_name = "up"
 
 [node name="ButtonKeybind3" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../ButtonKeybind")
+focus_neighbor_right = NodePath("../../VBoxContainer2/ButtonKeybind4")
+focus_neighbor_bottom = NodePath("../ButtonKeybind6")
 action_name = "left"
 
 [node name="ButtonKeybind6" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../ButtonKeybind3")
+focus_neighbor_right = NodePath("../../VBoxContainer2/ButtonKeybind7")
+focus_neighbor_bottom = NodePath("../ButtonKeybind8")
 action_name = "attack"
 
 [node name="ButtonKeybind8" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../ButtonKeybind6")
+focus_neighbor_right = NodePath("../../VBoxContainer2/ButtonKeybind9")
+focus_neighbor_bottom = NodePath("../ButtonKeybind9")
 action_name = "stance"
 
 [node name="ButtonKeybind9" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../ButtonKeybind8")
+focus_neighbor_right = NodePath("../../VBoxContainer2/ButtonKeybind10")
+focus_neighbor_bottom = NodePath("../ResetKeybindings")
 action_name = "interact"
 
 [node name="ResetKeybindings" type="Button" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../ButtonKeybind9")
+focus_neighbor_right = NodePath("../../VBoxContainer2/ButtonKeybind10")
+focus_neighbor_bottom = NodePath("../ButtonKeybind")
 text = "Reset Keybindings"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Controls/MarginContainer/HSplitContainer"]
@@ -293,27 +341,44 @@ layout_mode = 2
 
 [node name="ButtonKeybind2" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" instance=ExtResource("3_iopgn")]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../VBoxContainer/ButtonKeybind")
+focus_neighbor_top = NodePath("../ButtonKeybind10")
+focus_neighbor_bottom = NodePath("../ButtonKeybind4")
 action_name = "down"
 
 [node name="ButtonKeybind4" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" instance=ExtResource("3_iopgn")]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../VBoxContainer/ButtonKeybind3")
+focus_neighbor_top = NodePath("../ButtonKeybind2")
+focus_neighbor_bottom = NodePath("../ButtonKeybind7")
 action_name = "right"
 
 [node name="ButtonKeybind7" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" instance=ExtResource("3_iopgn")]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../VBoxContainer/ButtonKeybind6")
+focus_neighbor_top = NodePath("../ButtonKeybind4")
+focus_neighbor_bottom = NodePath("../ButtonKeybind9")
 action_name = "sprint"
 
 [node name="ButtonKeybind9" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" instance=ExtResource("3_iopgn")]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../VBoxContainer/ButtonKeybind8")
+focus_neighbor_top = NodePath("../ButtonKeybind7")
+focus_neighbor_bottom = NodePath("../ButtonKeybind10")
 action_name = "walk"
 
 [node name="ButtonKeybind10" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" instance=ExtResource("3_iopgn")]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../VBoxContainer/ButtonKeybind9")
+focus_neighbor_top = NodePath("../ButtonKeybind9")
+focus_neighbor_bottom = NodePath("../../VBoxContainer/ResetKeybindings")
 action_name = "inventory"
 
 [node name="Noise Indicator" type="TabBar" parent="."]
 visible = false
 layout_mode = 2
+focus_neighbor_top = NodePath("MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Alpha/NoiseColorAlphaSlider")
+focus_neighbor_bottom = NodePath("MarginContainer/ScrollContainer/VBoxContainer/NoiseToggle/NoiseToggleCheckButton")
 metadata/_tab_index = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="Noise Indicator"]
@@ -344,6 +409,8 @@ text = "Enabled"
 
 [node name="NoiseToggleCheckButton" type="CheckBox" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/NoiseToggle"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../VBoxContainer/Alpha/NoiseColorAlphaSlider")
+focus_neighbor_bottom = NodePath("../../VBoxContainer/HBoxContainer/ResetColor")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -371,6 +438,8 @@ offset_bottom = 21.0
 
 [node name="ResetColor" type="Button" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../../NoiseToggle/NoiseToggleCheckButton")
+focus_neighbor_bottom = NodePath("../../Red/NoiseColorRedSlider")
 text = "Reset"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
@@ -386,6 +455,8 @@ text = "Red"
 
 [node name="NoiseColorRedSlider" type="HSlider" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Red"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../HBoxContainer/ResetColor")
+focus_neighbor_bottom = NodePath("../../Green/NoiseColorGreenSlider")
 max_value = 255.0
 ticks_position = 3
 
@@ -399,6 +470,8 @@ text = "Green"
 
 [node name="NoiseColorGreenSlider" type="HSlider" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Green"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../Red/NoiseColorRedSlider")
+focus_neighbor_bottom = NodePath("../../Blue/NoiseColorBlueSlider")
 max_value = 255.0
 ticks_position = 3
 
@@ -412,6 +485,8 @@ text = "Blue"
 
 [node name="NoiseColorBlueSlider" type="HSlider" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Blue"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../Green/NoiseColorGreenSlider")
+focus_neighbor_bottom = NodePath("../../Alpha/NoiseColorAlphaSlider")
 max_value = 255.0
 ticks_position = 3
 
@@ -425,12 +500,16 @@ text = "Alpha"
 
 [node name="NoiseColorAlphaSlider" type="HSlider" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Alpha"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../Blue/NoiseColorBlueSlider")
+focus_neighbor_bottom = NodePath("../../../NoiseToggle/NoiseToggleCheckButton")
 max_value = 255.0
 ticks_position = 3
 
 [node name="Gameplay" type="TabBar" parent="."]
 visible = false
 layout_mode = 2
+focus_neighbor_top = NodePath("MarginContainer/VBoxContainer/ResetSave")
+focus_neighbor_bottom = NodePath("MarginContainer/VBoxContainer/HSplitContainer6/AdultContent")
 metadata/_tab_index = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="Gameplay"]
@@ -461,6 +540,8 @@ text = "Adult Content"
 
 [node name="AdultContent" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer6"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../ResetSave")
+focus_neighbor_bottom = NodePath("../../HSplitContainer/ShowTutorials")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -474,6 +555,8 @@ text = "Show Tutorials"
 [node name="ShowTutorials" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer"]
 layout_mode = 2
 tooltip_text = "Disabling this will unlock all the available tutorials in 'Tutorials' section."
+focus_neighbor_top = NodePath("../../HSplitContainer6/AdultContent")
+focus_neighbor_bottom = NodePath("../../HSplitContainer7/Screenshake")
 
 [node name="HSplitContainer7" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -487,6 +570,8 @@ text = "Screenshake"
 [node name="Screenshake" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer7"]
 layout_mode = 2
 tooltip_text = "Disabling this will unlock all the available tutorials in 'Tutorials' section."
+focus_neighbor_top = NodePath("../../HSplitContainer/ShowTutorials")
+focus_neighbor_bottom = NodePath("../../HSplitContainer2/ShowHints")
 
 [node name="HSplitContainer2" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -500,6 +585,8 @@ text = "Show Hints"
 [node name="ShowHints" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2"]
 layout_mode = 2
 tooltip_text = "Show gameplay tips."
+focus_neighbor_top = NodePath("../../HSplitContainer7/Screenshake")
+focus_neighbor_bottom = NodePath("../../HSplitContainer3/ShowInteractionPrompts")
 
 [node name="HSplitContainer3" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -513,6 +600,8 @@ text = "Show Interaction Prompts"
 [node name="ShowInteractionPrompts" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer3"]
 layout_mode = 2
 tooltip_text = "Shows the interaction key above Kalin when in range of interactables."
+focus_neighbor_top = NodePath("../../HSplitContainer2/ShowHints")
+focus_neighbor_bottom = NodePath("../../HSplitContainer8/LowHealthFX")
 
 [node name="HSplitContainer8" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -526,6 +615,8 @@ text = "Disable Low Health FX on Sex"
 [node name="LowHealthFX" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer8"]
 layout_mode = 2
 tooltip_text = "Shows the interaction key above Kalin when in range of interactables."
+focus_neighbor_top = NodePath("../../HSplitContainer3/ShowInteractionPrompts")
+focus_neighbor_bottom = NodePath("../../HSplitContainer4/HudScaleOption")
 
 [node name="HSplitContainer4" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -538,6 +629,8 @@ text = "HUD Scale"
 
 [node name="HudScaleOption" type="OptionButton" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer4"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../HSplitContainer8/LowHealthFX")
+focus_neighbor_bottom = NodePath("../../HSplitContainer5/ShadowIntensity")
 selected = 0
 item_count = 2
 popup/item_0/text = "1x"
@@ -556,6 +649,8 @@ text = "Shadow Intensity"
 
 [node name="ShadowIntensity" type="HSlider" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer5"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../HSplitContainer4/HudScaleOption")
+focus_neighbor_bottom = NodePath("../../ResetSave")
 max_value = 1.0
 step = 0.1
 

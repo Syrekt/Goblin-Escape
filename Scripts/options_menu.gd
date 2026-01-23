@@ -61,6 +61,7 @@ func _ready() -> void:
 	print("options menu ready")
 	current_tab = 0
 	get_tree().paused = true
+	$Graphics.grab_focus()
 	var screen_size : Vector2 = DisplayServer.window_get_size()
 	match screen_size:
 		Vector2(640, 360):
@@ -123,11 +124,13 @@ func _process(delta: float) -> void:
 	slider_blue_label.text	= "Blue: " + str(int(noise_color_b.value))
 	slider_alpha_label.text	= "Alpha: " + str(int(noise_color_a.value))
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("next_tab"):
-		select_next_available()
-	elif event.is_action_pressed("previous_tab"):
+	if Input.is_action_just_pressed("ui_focus_prev"):
 		select_previous_available()
+		get_tab_control(current_tab).grab_focus()
+	elif Input.is_action_just_pressed("ui_focus_next"):
+		select_next_available()
+		get_tab_control(current_tab).grab_focus()
+
 
 func _exit_tree() -> void:
 	Options.save_options()
