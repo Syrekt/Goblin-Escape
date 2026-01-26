@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=91 format=3 uid="uid://tad7af6w5gxb"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://tad7af6w5gxb"]
 
 [ext_resource type="Texture2D" uid="uid://bwph1b63ujc3r" path="res://UI/buttons_keyboard.png" id="1_r6u0j"]
 [ext_resource type="Texture2D" uid="uid://dur7wi36882os" path="res://UI/buttons_playstation.png" id="2_lceue"]

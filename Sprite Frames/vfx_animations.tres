@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=29 format=3 uid="uid://bky3u0xkkxo12"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://bky3u0xkkxo12"]
 
 [ext_resource type="Texture2D" uid="uid://cpkkdwnkki37e" path="res://VFX/death_sheet_strip_15.png" id="1_su2bf"]
 [ext_resource type="Texture2D" uid="uid://csn057ioxvb43" path="res://Objects/dropped_experience.png" id="2_xoapr"]

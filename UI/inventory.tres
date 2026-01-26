@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=29 format=3 uid="uid://d3ajvsrrbu1s5"]
+[gd_resource type="Theme" format=3 uid="uid://d3ajvsrrbu1s5"]
 
 [ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Fonts/Ohrenstead.ttf" id="1_5s48r"]
 [ext_resource type="Texture2D" uid="uid://c21xmqiyf85ot" path="res://UI/Inventory/Inventory tile_press.png" id="2_cqags"]

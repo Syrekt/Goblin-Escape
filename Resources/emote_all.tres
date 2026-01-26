@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=82 format=3 uid="uid://dyi5wrq4d24kx"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://dyi5wrq4d24kx"]
 
 [ext_resource type="Texture2D" uid="uid://dqukuvfja2a0e" path="res://Emotes/exclamation_mark.png" id="1_lv3p4"]
 [ext_resource type="Texture2D" uid="uid://jbx8i2maongj" path="res://Emotes/emote_angry.png" id="2_7uhh5"]

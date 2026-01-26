@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=14 format=3 uid="uid://whcgauo3krnm"]
+[gd_resource type="Theme" format=3 uid="uid://whcgauo3krnm"]
 
 [ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Fonts/Ohrenstead.ttf" id="1_3t4tc"]
 [ext_resource type="FontFile" uid="uid://d1arubnr4isbm" path="res://Fonts/High_Birth.ttf" id="2_alhuw"]

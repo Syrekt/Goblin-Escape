@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=152 format=3 uid="uid://1quahlg1y22o"]
+[gd_resource type="TileSet" format=3 uid="uid://1quahlg1y22o"]
 
 [ext_resource type="Texture2D" uid="uid://bqtpx8ja2r3ni" path="res://Map/FP_CastlePrison/background_obj.png" id="1_leifh"]
 [ext_resource type="Texture2D" uid="uid://d46bcae481s6" path="res://Map/FP_CastlePrison/mainlevbuildB.png" id="2_qy7eu"]

@@ -1,4 +1,4 @@
-[gd_resource type="ParticleProcessMaterial" load_steps=6 format=3 uid="uid://dqx2arkdego3o"]
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://dqx2arkdego3o"]
 
 [sub_resource type="Curve" id="Curve_5i7ub"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.503759, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -15,9 +15,14 @@ point_count = 2
 _data = [Vector2(0.5075529, 0.1953125), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Curve" id="Curve_c0a3c"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ohw6m"]
 curve_x = SubResource("Curve_ugron")
 curve_y = SubResource("Curve_f3ndi")
+curve_z = SubResource("Curve_c0a3c")
 
 [resource]
 particle_flag_disable_z = true

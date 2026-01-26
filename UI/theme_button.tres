@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=30 format=3 uid="uid://crosqd2uoimhi"]
+[gd_resource type="Theme" format=3 uid="uid://crosqd2uoimhi"]
 
 [ext_resource type="FontFile" uid="uid://bmoddrn0g7wak" path="res://Fonts/Ohrenstead.ttf" id="1_kgf2r"]
 [ext_resource type="Texture2D" uid="uid://bjowu5bqsapub" path="res://UI/button_hover.png" id="2_hv2ae"]
