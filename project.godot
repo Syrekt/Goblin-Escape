@@ -12,12 +12,16 @@ config_version=5
 
 General/banks_path="res://FModBank/Desktop"
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Goblin Escape"
 config/version="0.0.40 Patreon Build"
 run/main_scene="uid://c3ce8mt521wb5"
-config/features=PackedStringArray("4.5", "Mobile")
+config/features=PackedStringArray("4.6", "Mobile")
 boot_splash/show_image=false
 config/icon="res://icon.svg"
 
@@ -25,10 +29,10 @@ config/icon="res://icon.svg"
 
 Debugger="*res://Objects/debugger.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-InputHelper="*res://addons/input_helper/input_helper.gd"
+InputHelper="*uid://cholww48njaeh"
 Combat="*res://Scripts/combat.gd"
 Ge="*res://Scripts/GE.gd"
-PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+PhantomCameraManager="*uid://duq6jhf6unyis"
 Options="*res://Scripts/options.gd"
 MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
 ImportData="*res://Inventory/ImportData.gd"
