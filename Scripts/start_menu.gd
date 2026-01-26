@@ -9,6 +9,7 @@ var ingame_menu_inst : IngameMenu = null
 @onready var last_version: Button = $Control/NinePatchRect/TextureRect/LastVersion
 
 func _ready() -> void:
+	$Control/NinePatchRect/TextureRect/VBoxContainer/StartGame.grab_focus()
 	if Options.adult_build:
 		last_version.queue_free()
 	return

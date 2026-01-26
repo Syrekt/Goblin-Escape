@@ -58,54 +58,24 @@ offset_bottom = 166.0
 
 [node name="StartGame" type="Button" parent="Control/NinePatchRect/TextureRect/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../Discord")
+focus_neighbor_bottom = NodePath("../Options")
 text = "Start Game"
 flat = true
 
 [node name="Options" type="Button" parent="Control/NinePatchRect/TextureRect/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../StartGame")
+focus_neighbor_bottom = NodePath("../Exit")
 text = "Options"
 flat = true
 
 [node name="Exit" type="Button" parent="Control/NinePatchRect/TextureRect/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Options")
+focus_neighbor_bottom = NodePath("../../Feedback")
 text = "Exit"
 flat = true
-
-[node name="Steam" type="TextureButton" parent="Control/NinePatchRect/TextureRect"]
-layout_mode = 0
-offset_left = 43.0
-offset_top = 214.0
-offset_right = 69.0
-offset_bottom = 236.0
-texture_normal = ExtResource("5_cocec")
-texture_pressed = ExtResource("6_fxmv5")
-texture_hover = ExtResource("7_xq6qs")
-texture_disabled = ExtResource("5_cocec")
-texture_focused = ExtResource("7_xq6qs")
-
-[node name="Itch" type="TextureButton" parent="Control/NinePatchRect/TextureRect"]
-layout_mode = 0
-offset_left = 89.0
-offset_top = 214.0
-offset_right = 112.0
-offset_bottom = 236.0
-texture_normal = ExtResource("8_7oirk")
-texture_pressed = ExtResource("9_kxx1e")
-texture_hover = ExtResource("10_jyr2n")
-texture_disabled = ExtResource("8_7oirk")
-texture_focused = ExtResource("10_jyr2n")
-
-[node name="Discord" type="TextureButton" parent="Control/NinePatchRect/TextureRect"]
-layout_mode = 0
-offset_left = 138.0
-offset_top = 216.0
-offset_right = 158.0
-offset_bottom = 238.0
-texture_normal = ExtResource("11_df8u1")
-texture_pressed = ExtResource("12_aknqp")
-texture_hover = ExtResource("13_skmd2")
-texture_disabled = ExtResource("11_df8u1")
-texture_focused = ExtResource("11_df8u1")
 
 [node name="Feedback" type="Button" parent="Control/NinePatchRect/TextureRect"]
 layout_mode = 0
@@ -113,6 +83,8 @@ offset_left = 30.0
 offset_top = 168.0
 offset_right = 184.0
 offset_bottom = 195.0
+focus_neighbor_top = NodePath("../VBoxContainer/Exit")
+focus_neighbor_bottom = NodePath("../LastVersion")
 theme_override_colors/font_color = Color(0.94509804, 0.4117647, 0.3882353, 1)
 theme_override_colors/font_outline_color = Color(0.44592184, 0.43649966, 0.20255452, 1)
 theme_override_constants/outline_size = 5
@@ -127,6 +99,8 @@ offset_left = 30.0
 offset_top = 188.0
 offset_right = 184.0
 offset_bottom = 215.0
+focus_neighbor_top = NodePath("../Feedback")
+focus_neighbor_bottom = NodePath("../Steam")
 theme_override_colors/font_color = Color(0.94509804, 0.4117647, 0.3882353, 1)
 theme_override_colors/font_outline_color = Color(0.44592184, 0.43649966, 0.20255452, 1)
 theme_override_constants/outline_size = 5
@@ -135,11 +109,53 @@ theme_override_font_sizes/font_size = 8
 text = "Get Last Version!"
 flat = true
 
+[node name="Steam" type="TextureButton" parent="Control/NinePatchRect/TextureRect"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 214.0
+offset_right = 69.0
+offset_bottom = 236.0
+focus_neighbor_top = NodePath("../LastVersion")
+focus_neighbor_bottom = NodePath("../Itch")
+texture_normal = ExtResource("5_cocec")
+texture_pressed = ExtResource("6_fxmv5")
+texture_hover = ExtResource("7_xq6qs")
+texture_disabled = ExtResource("5_cocec")
+texture_focused = ExtResource("7_xq6qs")
+
+[node name="Itch" type="TextureButton" parent="Control/NinePatchRect/TextureRect"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 214.0
+offset_right = 112.0
+offset_bottom = 236.0
+focus_neighbor_top = NodePath("../Steam")
+focus_neighbor_bottom = NodePath("../Discord")
+texture_normal = ExtResource("8_7oirk")
+texture_pressed = ExtResource("9_kxx1e")
+texture_hover = ExtResource("10_jyr2n")
+texture_disabled = ExtResource("8_7oirk")
+texture_focused = ExtResource("10_jyr2n")
+
+[node name="Discord" type="TextureButton" parent="Control/NinePatchRect/TextureRect"]
+layout_mode = 0
+offset_left = 138.0
+offset_top = 216.0
+offset_right = 158.0
+offset_bottom = 238.0
+focus_neighbor_top = NodePath("../Itch")
+focus_neighbor_bottom = NodePath("../VBoxContainer/StartGame")
+texture_normal = ExtResource("11_df8u1")
+texture_pressed = ExtResource("12_aknqp")
+texture_hover = ExtResource("13_skmd2")
+texture_disabled = ExtResource("11_df8u1")
+texture_focused = ExtResource("13_skmd2")
+
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Control/NinePatchRect/TextureRect/Feedback" to="." method="_on_feedback_pressed"]
+[connection signal="pressed" from="Control/NinePatchRect/TextureRect/LastVersion" to="." method="_on_last_version_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/Steam" to="." method="_on_steam_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/Itch" to="." method="_on_itch_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/Discord" to="." method="_on_discord_pressed"]
-[connection signal="pressed" from="Control/NinePatchRect/TextureRect/Feedback" to="." method="_on_feedback_pressed"]
-[connection signal="pressed" from="Control/NinePatchRect/TextureRect/LastVersion" to="." method="_on_last_version_pressed"]
