@@ -19,7 +19,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Goblin Escape"
-config/version="0.0.40 Patreon Build"
+config/version="0.0.41 Patreon Build"
 run/main_scene="uid://c3ce8mt521wb5"
 config/features=PackedStringArray("4.6", "Mobile")
 boot_splash/show_image=false

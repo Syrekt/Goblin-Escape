@@ -263,7 +263,7 @@ func get_action_keycode(action:String,return_full_path := false) -> String:
 			elif event is InputEventJoypadButton && last_input_type == "gamepad":
 				action_keycode = str(event.button_index)
 				break
-#region Log
+	#region Log
 	#var crumb := SentryBreadcrumb.create("Get action keycode")
 	#crumb.category = "Input"
 	#crumb.level = SentrySDK.LEVEL_INFO
@@ -274,6 +274,7 @@ func get_action_keycode(action:String,return_full_path := false) -> String:
 	#	"action_events": action_events,
 	#}
 	#SentrySDK.add_breadcrumb(crumb)
+	#endregion
 	if return_full_path:
 		#res://UI/Buttons/
 		var filepath := ""
@@ -289,7 +290,6 @@ func get_action_keycode(action:String,return_full_path := false) -> String:
 
 	print("Action keycode found: " + str(action_keycode))
 	return action_keycode
-#endregion
 func fmod_play_event(event_name:String) -> void:
 	FmodServer.play_one_shot("event:/" + event_name)
 	#var event : FmodEvent = FmodServer.create_event_instance("event:/" + event_name)

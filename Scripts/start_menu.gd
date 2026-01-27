@@ -10,8 +10,8 @@ var ingame_menu_inst : IngameMenu = null
 
 func _ready() -> void:
 	$Control/NinePatchRect/TextureRect/VBoxContainer/StartGame.grab_focus()
-	if Options.adult_build:
-		last_version.queue_free()
+	#if Options.adult_build:
+	#	last_version.queue_free()
 	return
 	if OS.is_debug_build():
 		queue_free()
@@ -68,3 +68,7 @@ func _on_last_version_pressed() -> void:
 
 func _on_feedback_pressed() -> void:
 	OS.shell_open("https://forms.gle/NtqqKGXcuoDEGdqw8")
+
+
+func _on_bug_report_pressed() -> void:
+	OS.shell_open("https://forms.gle/GMYr4ZYZbhsCgzFe8")
