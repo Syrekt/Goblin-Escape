@@ -10,8 +10,8 @@ var ingame_menu_inst : IngameMenu = null
 
 func _ready() -> void:
 	$Control/NinePatchRect/TextureRect/VBoxContainer/StartGame.grab_focus()
-	#if Options.adult_build:
-	#	last_version.queue_free()
+	if Options.adult_build:
+		last_version.queue_free()
 	return
 	if OS.is_debug_build():
 		queue_free()
