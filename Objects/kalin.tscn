@@ -1,4 +1,4 @@
-[gd_scene load_steps=257 format=3 uid="uid://h2hwfpjw4rte"]
+[gd_scene format=3 uid="uid://h2hwfpjw4rte"]
 
 [ext_resource type="Script" uid="uid://blbnh0ve0i73q" path="res://Scripts/kalin.gd" id="1_tpqnq"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_0bx81"]
@@ -4596,7 +4596,7 @@ radius = 61.16576
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n1k6j"]
 size = Vector2(14, 8)
 
-[node name="Kalin" type="CharacterBody2D" groups=["MapNode"]]
+[node name="Kalin" type="CharacterBody2D" unique_id=946959775 groups=["MapNode"]]
 z_index = 2
 collision_layer = 2
 collision_mask = 65545
@@ -4608,7 +4608,7 @@ slide_speed = 200.0
 snap_offset = Vector2(-17, 3)
 save_list = Array[String](["vitality", "strength", "endurance", "level", "has_sword", "experience_point", "has_heavy_stance", "has_defensive_stance"])
 
-[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+[node name="PhantomCamera2D" type="Node2D" parent="." unique_id=196574606 node_paths=PackedStringArray("follow_target")]
 top_level = true
 position = Vector2(-64, 0)
 script = ExtResource("2_y4shw")
@@ -4623,7 +4623,7 @@ _preview_noise = false
 noise_emitter_layer = 1
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=439654168]
 physics_interpolation_mode = 1
 position = Vector2(-64, 0)
 ignore_rotation = false
@@ -4632,14 +4632,14 @@ process_callback = 0
 editor_draw_limits = true
 script = ExtResource("2_0g2co")
 
-[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+[node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=472384667]
 process_mode = 3
 process_priority = 300
 process_physics_priority = 300
 script = ExtResource("2_0bx81")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
-[node name="PhantomCameraNoiseEmitter2D" type="Node2D" parent="Camera2D"]
+[node name="PhantomCameraNoiseEmitter2D" type="Node2D" parent="Camera2D" unique_id=1772103209]
 script = ExtResource("6_r14np")
 noise = ExtResource("7_r14np")
 growth_time = 0.01
@@ -4647,23 +4647,23 @@ duration = 0.05
 decay_time = 0.2
 metadata/_custom_type_script = "uid://bhd4nuiu23e7l"
 
-[node name="GoblinMarker" type="Sprite2D" parent="Camera2D"]
+[node name="GoblinMarker" type="Sprite2D" parent="Camera2D" unique_id=1815857711]
 visible = false
 z_index = 1
 material = SubResource("ShaderMaterial_ken0u")
 position = Vector2(54, 23)
 texture = ExtResource("6_aajsm")
 
-[node name="GoblinWarriorMarker" type="Sprite2D" parent="Camera2D"]
+[node name="GoblinWarriorMarker" type="Sprite2D" parent="Camera2D" unique_id=709390117]
 visible = false
 z_index = 1
 material = SubResource("ShaderMaterial_r14np")
 position = Vector2(54, 23)
 texture = ExtResource("7_ken0u")
 
-[node name="Overlays" type="CanvasLayer" parent="."]
+[node name="Overlays" type="CanvasLayer" parent="." unique_id=175929653]
 
-[node name="UIFocus" type="ColorRect" parent="Overlays"]
+[node name="UIFocus" type="ColorRect" parent="Overlays" unique_id=1534787254]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -4674,7 +4674,7 @@ color = Color(0.06, 0.06, 0.06, 0)
 script = ExtResource("44_8nsgr")
 transparency = 0.3
 
-[node name="StealthVignette" type="ColorRect" parent="Overlays"]
+[node name="StealthVignette" type="ColorRect" parent="Overlays" unique_id=192109247]
 material = SubResource("ShaderMaterial_47a0d")
 anchors_preset = 15
 anchor_right = 1.0
@@ -4682,8 +4682,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HealthVignette" type="ColorRect" parent="Overlays"]
-visible = false
+[node name="HealthVignette" type="ColorRect" parent="Overlays" unique_id=1744049185]
 material = SubResource("ShaderMaterial_lc2pc")
 anchors_preset = 15
 anchor_right = 1.0
@@ -4691,13 +4690,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1419489616]
 visible = false
 script = ExtResource("8_4oj65")
 
-[node name="UITint" type="CanvasModulate" parent="UI"]
+[node name="UITint" type="CanvasModulate" parent="UI" unique_id=1386159607]
 
-[node name="HUD" type="Control" parent="UI"]
+[node name="HUD" type="Control" parent="UI" unique_id=1459457322]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -4707,12 +4706,12 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("8_cv3n5")
 
-[node name="Scaled" type="Control" parent="UI/HUD"]
+[node name="Scaled" type="Control" parent="UI/HUD" unique_id=1909679938]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Health" type="TextureProgressBar" parent="UI/HUD/Scaled" groups=["HUD"]]
+[node name="Health" type="TextureProgressBar" parent="UI/HUD/Scaled" unique_id=1003385181 groups=["HUD"]]
 layout_mode = 0
 offset_left = 0.5
 offset_top = 7.0
@@ -4725,20 +4724,20 @@ texture_over = ExtResource("47_80r2e")
 texture_progress = ExtResource("48_rbk27")
 script = ExtResource("43_uhoyi")
 
-[node name="Heartbeat" type="FmodEventEmitter2D" parent="UI/HUD/Scaled/Health"]
+[node name="Heartbeat" type="FmodEventEmitter2D" parent="UI/HUD/Scaled/Health" unique_id=107361049]
 event_name = "event:/Heartbeat"
 event_guid = "{e3c15821-141c-474d-9cc4-5db7fe062ef1}"
 volume = 2.0
 
-[node name="UpdateHealthTimer" type="Timer" parent="UI/HUD/Scaled/Health"]
+[node name="UpdateHealthTimer" type="Timer" parent="UI/HUD/Scaled/Health" unique_id=1992453212]
 wait_time = 0.5
 autostart = true
 
-[node name="Exhaustion" type="FmodEventEmitter2D" parent="UI/HUD/Scaled/Health"]
+[node name="Exhaustion" type="FmodEventEmitter2D" parent="UI/HUD/Scaled/Health" unique_id=492726724]
 event_name = "event:/Kalin-Exhaustion"
 event_guid = "{507decb8-aa0f-459a-8e3d-bb0020423fc6}"
 
-[node name="Stamina" type="TextureProgressBar" parent="UI/HUD/Scaled" groups=["HUD"]]
+[node name="Stamina" type="TextureProgressBar" parent="UI/HUD/Scaled" unique_id=787435564 groups=["HUD"]]
 layout_mode = 0
 offset_left = 22.5
 offset_top = 28.0
@@ -4754,11 +4753,11 @@ tint_progress = Color(0.7372549, 0.5058824, 0.06666667, 1)
 script = ExtResource("60_2ksh1")
 fade_out_col = Color(0.7279944, 0.497293, 0.06500047, 1)
 
-[node name="Timer" type="Timer" parent="UI/HUD/Scaled/Stamina"]
+[node name="Timer" type="Timer" parent="UI/HUD/Scaled/Stamina" unique_id=117557129]
 one_shot = true
 autostart = true
 
-[node name="StatusEffectContainer" type="HBoxContainer" parent="UI/HUD/Scaled/Stamina"]
+[node name="StatusEffectContainer" type="HBoxContainer" parent="UI/HUD/Scaled/Stamina" unique_id=2120102941]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.028
@@ -4773,7 +4772,7 @@ scale = Vector2(0.5, 0.5)
 theme = ExtResource("72_qdj7c")
 script = ExtResource("23_r14np")
 
-[node name="Fatigue" type="TextureProgressBar" parent="UI/HUD/Scaled" groups=["HUD"]]
+[node name="Fatigue" type="TextureProgressBar" parent="UI/HUD/Scaled" unique_id=1500142500 groups=["HUD"]]
 layout_mode = 0
 offset_left = 21.0
 offset_top = 23.0
@@ -4785,7 +4784,7 @@ texture_progress = ExtResource("55_rbk27")
 tint_progress = Color(0, 0.81812185, 0, 1)
 script = ExtResource("21_sklaw")
 
-[node name="Arousal" type="TextureProgressBar" parent="UI/HUD/Scaled" groups=["HUD"]]
+[node name="Arousal" type="TextureProgressBar" parent="UI/HUD/Scaled" unique_id=2082475471 groups=["HUD"]]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 15.0
@@ -4796,7 +4795,7 @@ texture_progress = ExtResource("58_yofsr")
 tint_progress = Color(0.474366, 0.00173617, 0.698302, 1)
 script = ExtResource("48_yekxk")
 
-[node name="Smell" type="TextureProgressBar" parent="UI/HUD/Scaled" groups=["HUD"]]
+[node name="Smell" type="TextureProgressBar" parent="UI/HUD/Scaled" unique_id=57251985 groups=["HUD"]]
 layout_mode = 0
 offset_left = 51.0
 offset_top = 13.5
@@ -4806,7 +4805,7 @@ texture_progress = ExtResource("61_5atg1")
 tint_progress = Color(0.679805, 0.262423, 0, 1)
 script = ExtResource("55_h4isg")
 
-[node name="ExpTypeBox" type="PanelContainer" parent="UI/HUD" groups=["HUD"]]
+[node name="ExpTypeBox" type="PanelContainer" parent="UI/HUD" unique_id=364076211 groups=["HUD"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -4822,7 +4821,7 @@ grow_vertical = 0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_8gxoc")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="UI/HUD/ExpTypeBox"]
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/HUD/ExpTypeBox" unique_id=337897153]
 layout_mode = 2
 texture = ExtResource("34_s3ngn")
 patch_margin_left = 4
@@ -4832,7 +4831,7 @@ patch_margin_bottom = 4
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="Experience" type="Label" parent="UI/HUD/ExpTypeBox/NinePatchRect"]
+[node name="Experience" type="Label" parent="UI/HUD/ExpTypeBox/NinePatchRect" unique_id=176535339]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 4.0
@@ -4844,15 +4843,15 @@ vertical_alignment = 1
 clip_text = true
 script = ExtResource("50_083qx")
 
-[node name="Timer" type="Timer" parent="UI/HUD/ExpTypeBox/NinePatchRect/Experience"]
+[node name="Timer" type="Timer" parent="UI/HUD/ExpTypeBox/NinePatchRect/Experience" unique_id=1142365077]
 one_shot = true
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/HUD"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/HUD" unique_id=1316203439]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="InventoryPanel" type="PanelContainer" parent="UI" groups=["UIPanel"]]
+[node name="InventoryPanel" type="PanelContainer" parent="UI" unique_id=1439502452 groups=["UIPanel"]]
 custom_minimum_size = Vector2(122, 264)
 offset_top = 96.0
 offset_right = 172.0
@@ -4864,7 +4863,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_exvqe")
 script = ExtResource("73_ugwbb")
 inventory = ExtResource("29_y4shw")
 
-[node name="FG" type="NinePatchRect" parent="UI/InventoryPanel"]
+[node name="FG" type="NinePatchRect" parent="UI/InventoryPanel" unique_id=1808418504]
 layout_mode = 2
 texture = ExtResource("69_wl0wu")
 patch_margin_left = 24
@@ -4875,7 +4874,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="BG" type="NinePatchRect" parent="UI/InventoryPanel"]
+[node name="BG" type="NinePatchRect" parent="UI/InventoryPanel" unique_id=58503059]
 self_modulate = Color(1, 1, 1, 0.5)
 layout_mode = 2
 texture = ExtResource("31_nhuj2")
@@ -4885,14 +4884,14 @@ patch_margin_top = 24
 patch_margin_right = 24
 patch_margin_bottom = 24
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/InventoryPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/InventoryPanel" unique_id=1727658094]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_right = 6
 metadata/_edit_lock_ = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/InventoryPanel/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/InventoryPanel/MarginContainer" unique_id=227277319]
 layout_mode = 2
 focus_mode = 2
 theme = ExtResource("72_qdj7c")
@@ -4900,22 +4899,22 @@ follow_focus = true
 draw_focus_border = true
 horizontal_scroll_mode = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/InventoryPanel/MarginContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/InventoryPanel/MarginContainer/ScrollContainer" unique_id=1728131974]
 layout_mode = 2
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="ButtonContainer" type="VBoxContainer" parent="UI/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer"]
+[node name="ButtonContainer" type="VBoxContainer" parent="UI/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer" unique_id=650801778]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" parent="UI/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer/ButtonContainer" instance=ExtResource("32_fb5pj")]
+[node name="Button" parent="UI/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer/ButtonContainer" unique_id=1794059990 instance=ExtResource("32_fb5pj")]
 clip_contents = true
 layout_mode = 2
 text = "waterasdaasdasdsa"
 text_overrun_behavior = 3
 
-[node name="ExpAmountContainer" type="VBoxContainer" parent="UI" groups=["HUD"]]
+[node name="ExpAmountContainer" type="VBoxContainer" parent="UI" unique_id=1206844440 groups=["HUD"]]
 offset_left = 558.0
 offset_top = 266.0
 offset_right = 627.0
@@ -4923,10 +4922,10 @@ offset_bottom = 316.0
 mouse_filter = 2
 alignment = 2
 
-[node name="AmountLabel" parent="UI/ExpAmountContainer" instance=ExtResource("34_8gxoc")]
+[node name="AmountLabel" parent="UI/ExpAmountContainer" unique_id=877525159 instance=ExtResource("34_8gxoc")]
 layout_mode = 2
 
-[node name="DescriptionPanel" type="PanelContainer" parent="UI"]
+[node name="DescriptionPanel" type="PanelContainer" parent="UI" unique_id=221652894]
 custom_minimum_size = Vector2(224, 95)
 anchors_preset = 7
 anchor_left = 0.5
@@ -4942,7 +4941,7 @@ mouse_filter = 2
 theme = ExtResource("72_qdj7c")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_cbw7l")
 
-[node name="FG" type="NinePatchRect" parent="UI/DescriptionPanel"]
+[node name="FG" type="NinePatchRect" parent="UI/DescriptionPanel" unique_id=1650412195]
 layout_mode = 2
 texture = ExtResource("69_wl0wu")
 region_rect = Rect2(0, 0, 60, 60)
@@ -4954,7 +4953,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="BG" type="NinePatchRect" parent="UI/DescriptionPanel"]
+[node name="BG" type="NinePatchRect" parent="UI/DescriptionPanel" unique_id=1938127000]
 self_modulate = Color(1, 1, 1, 0.7)
 layout_mode = 2
 texture = ExtResource("31_nhuj2")
@@ -4964,16 +4963,16 @@ patch_margin_right = 24
 patch_margin_bottom = 24
 metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/DescriptionPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/DescriptionPanel" unique_id=729718043]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="DescriptionText" type="RichTextLabel" parent="UI/DescriptionPanel/MarginContainer"]
+[node name="DescriptionText" type="RichTextLabel" parent="UI/DescriptionPanel/MarginContainer" unique_id=511339899]
 layout_mode = 2
 bbcode_enabled = true
 text = "[color=red]This is the description text[/color]"
 
-[node name="CharacterPanel" type="HSplitContainer" parent="UI" groups=["UIPanel"]]
+[node name="CharacterPanel" type="HSplitContainer" parent="UI" unique_id=1737670424 groups=["UIPanel"]]
 visible = false
 offset_left = 5.0
 offset_top = 94.0
@@ -4984,11 +4983,11 @@ theme = ExtResource("56_ghu8e")
 dragging_enabled = false
 script = ExtResource("39_y4shw")
 
-[node name="Stats" type="PanelContainer" parent="UI/CharacterPanel"]
+[node name="Stats" type="PanelContainer" parent="UI/CharacterPanel" unique_id=373236242]
 layout_mode = 2
 theme = ExtResource("56_ghu8e")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="UI/CharacterPanel/Stats"]
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/CharacterPanel/Stats" unique_id=1041757832]
 layout_mode = 2
 texture = ExtResource("73_qdj7c")
 region_rect = Rect2(0, 0, 44, 44)
@@ -5000,20 +4999,20 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/CharacterPanel/Stats"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/CharacterPanel/Stats" unique_id=1714235278]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/CharacterPanel/Stats/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CharacterPanel/Stats/MarginContainer" unique_id=1899716431]
 custom_minimum_size = Vector2(144, 0)
 layout_mode = 2
 tooltip_text = "Level up using this panel"
 theme_override_constants/separation = 8
 
-[node name="Close" type="Button" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer"]
+[node name="Close" type="Button" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer" unique_id=1863805612]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("41_3pkug")
@@ -5024,22 +5023,22 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_3pkug")
 icon = ExtResource("40_as7pt")
 flat = true
 
-[node name="LevelLabel" type="Label" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer"]
+[node name="LevelLabel" type="Label" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer" unique_id=1209180858]
 layout_mode = 2
 text = "Level: "
 
-[node name="HSeparator" type="HSeparator" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer" unique_id=4322991]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_t42fh")
 
-[node name="Strength" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+[node name="Strength" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer" unique_id=1545653745 instance=ExtResource("48_t42fh")]
 layout_mode = 2
 size_flags_horizontal = 0
 tooltip_text = "- Adds damage but increases Fatigue over time.
 - Increases stamina cost of attacks
 "
 
-[node name="Endurance" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+[node name="Endurance" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer" unique_id=1761315450 instance=ExtResource("48_t42fh")]
 layout_mode = 2
 size_flags_horizontal = 0
 tooltip_text = "- Adds stamina and reduces Fatigue but increases smell build up.
@@ -5047,32 +5046,32 @@ tooltip_text = "- Adds stamina and reduces Fatigue but increases smell build up.
 - Decreases general stamina costs
 "
 
-[node name="Vitality" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer" instance=ExtResource("48_t42fh")]
+[node name="Vitality" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer" unique_id=1261320492 instance=ExtResource("48_t42fh")]
 layout_mode = 2
 size_flags_horizontal = 0
 tooltip_text = "- Increases health and stamina.
 "
 
-[node name="HSeparator2" type="HSeparator" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer" unique_id=1110209794]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_t42fh")
 
-[node name="ExpRequired" type="Label" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer"]
+[node name="ExpRequired" type="Label" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer" unique_id=202145079]
 layout_mode = 2
 text = "Required XP: "
 
-[node name="ExpAfterLevelUp" type="Label" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer"]
+[node name="ExpAfterLevelUp" type="Label" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer" unique_id=389435803]
 layout_mode = 2
 text = "XP Left:"
 
-[node name="Confirm" type="Button" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer"]
+[node name="Confirm" type="Button" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer" unique_id=1625638417]
 layout_mode = 2
 text = "Confirm"
 
-[node name="Details" type="PanelContainer" parent="UI/CharacterPanel"]
+[node name="Details" type="PanelContainer" parent="UI/CharacterPanel" unique_id=1344207758]
 layout_mode = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="UI/CharacterPanel/Details"]
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/CharacterPanel/Details" unique_id=691238157]
 layout_mode = 2
 texture = ExtResource("73_qdj7c")
 region_rect = Rect2(0, 0, 44, 44)
@@ -5084,24 +5083,24 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/CharacterPanel/Details"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/CharacterPanel/Details" unique_id=939221229]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/CharacterPanel/Details/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CharacterPanel/Details/MarginContainer" unique_id=1927343798]
 layout_mode = 2
 
-[node name="DetailsLabel" type="RichTextLabel" parent="UI/CharacterPanel/Details/MarginContainer/VBoxContainer"]
+[node name="DetailsLabel" type="RichTextLabel" parent="UI/CharacterPanel/Details/MarginContainer/VBoxContainer" unique_id=1581200098]
 custom_minimum_size = Vector2(0, 14)
 layout_mode = 2
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
 
-[node name="ThoughtContainer" type="VBoxContainer" parent="UI" groups=["HUD"]]
+[node name="ThoughtContainer" type="VBoxContainer" parent="UI" unique_id=1849938317 groups=["HUD"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -5112,7 +5111,7 @@ alignment = 2
 script = ExtResource("49_b2c13")
 metadata/_edit_lock_ = true
 
-[node name="StruggleProgressBar" type="TextureProgressBar" parent="."]
+[node name="StruggleProgressBar" type="TextureProgressBar" parent="." unique_id=1417936699]
 visible = false
 offset_left = -12.0
 offset_top = -27.0
@@ -5123,40 +5122,38 @@ value = 22.0
 texture_under = ExtResource("47_lc2pc")
 texture_progress = ExtResource("48_bve67")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="StruggleProgressBar"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="StruggleProgressBar" unique_id=308168991]
 position = Vector2(26, -11)
 sprite_frames = ExtResource("40_8epdb")
 animation = &"keyboard"
 script = ExtResource("72_rp7vf")
 
-[node name="Label" type="Label" parent="StruggleProgressBar/AnimatedSprite2D"]
+[node name="Label" type="Label" parent="StruggleProgressBar/AnimatedSprite2D" unique_id=225999362]
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="SlashChargeupFX" type="AnimatedSprite2D" parent="."]
+[node name="SlashChargeupFX" type="AnimatedSprite2D" parent="." unique_id=1009838230]
 visible = false
 sprite_frames = SubResource("SpriteFrames_ig3ls")
 animation = &"charged"
 frame = 8
 frame_progress = 0.14231513
 
-[node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1395855934 groups=["Flip"]]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_bs037")
 texture = ExtResource("3_b6tj0")
 hframes = 6
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=510072914]
 root_node = NodePath("../Sprite2D")
-libraries = {
-&"": SubResource("AnimationLibrary_cuohi")
-}
+libraries/ = SubResource("AnimationLibrary_cuohi")
 
-[node name="Audio" type="Node" parent="."]
+[node name="Audio" type="Node" parent="." unique_id=169775240]
 
-[node name="FmodListener2D" type="FmodListener2D" parent="Audio"]
+[node name="FmodListener2D" type="FmodListener2D" parent="Audio" unique_id=1399418816]
 
-[node name="HurtSFX" type="FmodEventEmitter2D" parent="Audio"]
+[node name="HurtSFX" type="FmodEventEmitter2D" parent="Audio" unique_id=1015601930]
 event_name = "event:/Kalin-Hurt"
 event_guid = "{1a106e74-bfff-4087-a3b1-066418bf4c4a}"
 attached = false
@@ -5165,7 +5162,7 @@ fmod_parameters/DamageType = "Fall"
 fmod_parameters/DamageType/labels = PackedStringArray("Fall", "EnemyAttack", "Spikes")
 fmod_parameters/DamageType/variant_type = 4
 
-[node name="BlockSFX" type="FmodEventEmitter2D" parent="Audio"]
+[node name="BlockSFX" type="FmodEventEmitter2D" parent="Audio" unique_id=985092201]
 event_name = "event:/Kalin-Block"
 event_guid = "{59e31288-e079-45e6-881e-7866bef7ed24}"
 attached = false
@@ -5174,55 +5171,55 @@ fmod_parameters/Block = "Success"
 fmod_parameters/Block/labels = PackedStringArray("Success", "Fail", "Parry", "Perfect Parry")
 fmod_parameters/Block/variant_type = 4
 
-[node name="ExperienceGain" type="FmodEventEmitter2D" parent="Audio"]
+[node name="ExperienceGain" type="FmodEventEmitter2D" parent="Audio" unique_id=581254285]
 event_name = "event:/ExperienceGain"
 event_guid = "{570e41a6-8bdd-4097-8cee-3649b416b958}"
 attached = false
 
-[node name="PickupSFX" type="FmodEventEmitter2D" parent="Audio"]
+[node name="PickupSFX" type="FmodEventEmitter2D" parent="Audio" unique_id=693390858]
 event_name = "event:/ItemPickup"
 event_guid = "{e6c1c945-f2be-4abc-adc4-456bf9bafe4c}"
 
-[node name="DrinkSFX" type="FmodEventEmitter2D" parent="Audio"]
+[node name="DrinkSFX" type="FmodEventEmitter2D" parent="Audio" unique_id=2124791271]
 event_name = "event:/Kalin-Drink"
 event_guid = "{cdfdb25f-9a62-4d3e-9915-7515bb4238ba}"
 
-[node name="EatSFX" type="FmodEventEmitter2D" parent="Audio"]
+[node name="EatSFX" type="FmodEventEmitter2D" parent="Audio" unique_id=1566417163]
 event_name = "event:/Kalin-Eat"
 event_guid = "{cf28a120-265f-417f-81b4-340051ceaef5}"
 
-[node name="TutorialSFX" type="FmodEventEmitter2D" parent="Audio"]
+[node name="TutorialSFX" type="FmodEventEmitter2D" parent="Audio" unique_id=1466039496]
 event_name = "event:/TutorialOpened"
 event_guid = "{d0561104-b8a1-4004-b1e1-37e6435d8cb9}"
 process_mode = 3
 
-[node name="SlideSFX" type="FmodEventEmitter2D" parent="Audio"]
+[node name="SlideSFX" type="FmodEventEmitter2D" parent="Audio" unique_id=606984204]
 event_name = "event:/Kalin-Slide"
 event_guid = "{3e8773ca-2c2a-4386-b1b9-eda7afb70fb4}"
 
-[node name="LandSFX" type="FmodEventEmitter2D" parent="Audio"]
+[node name="LandSFX" type="FmodEventEmitter2D" parent="Audio" unique_id=1508204892]
 event_name = "event:/Kalin-Land"
 event_guid = "{35f4280f-fe69-4277-8d2d-56b1e3560f59}"
 
-[node name="JournalPickupSFX" type="FmodEventEmitter2D" parent="Audio"]
+[node name="JournalPickupSFX" type="FmodEventEmitter2D" parent="Audio" unique_id=1416807579]
 event_name = "event:/PagePickup"
 event_guid = "{f3d5c71b-4f19-4164-97e9-a62d815e7c7f}"
 
-[node name="StateMachine" parent="." groups=["Flip"] instance=ExtResource("9_ojhio")]
+[node name="StateMachine" parent="." unique_id=740905076 groups=["Flip"] instance=ExtResource("9_ojhio")]
 visible = false
 z_index = 2
 position = Vector2(-4, 34)
 
-[node name="idle" type="Node" parent="StateMachine" groups=["position_reliable"]]
+[node name="idle" type="Node" parent="StateMachine" unique_id=1459971414 groups=["position_reliable"]]
 script = ExtResource("10_4yl4h")
 
-[node name="walk" type="Node" parent="StateMachine" groups=["position_reliable"]]
+[node name="walk" type="Node" parent="StateMachine" unique_id=592744765 groups=["position_reliable"]]
 script = ExtResource("28_1dko0")
 
-[node name="run" type="Node" parent="StateMachine" groups=["position_reliable"]]
+[node name="run" type="Node" parent="StateMachine" unique_id=1754708375 groups=["position_reliable"]]
 script = ExtResource("3_ejfka")
 
-[node name="Footsteps" type="FmodEventEmitter2D" parent="StateMachine/run"]
+[node name="Footsteps" type="FmodEventEmitter2D" parent="StateMachine/run" unique_id=529399394]
 event_name = "event:/Kalin-Footsteps"
 event_guid = "{4cbf6c16-7219-4e3a-a2ac-9fae2f0d6f4e}"
 attached = false
@@ -5234,74 +5231,74 @@ fmod_parameters/Type = "Running"
 fmod_parameters/Type/labels = PackedStringArray("Running", "Sprinting")
 fmod_parameters/Type/variant_type = 4
 
-[node name="run_stop" type="Node" parent="StateMachine"]
+[node name="run_stop" type="Node" parent="StateMachine" unique_id=1112966656]
 script = ExtResource("34_lbmmt")
 
-[node name="rise" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="rise" type="Node" parent="StateMachine" unique_id=1897740900 groups=["no_interaction"]]
 script = ExtResource("11_10o18")
 
-[node name="JumpSFX" type="FmodEventEmitter2D" parent="StateMachine/rise"]
+[node name="JumpSFX" type="FmodEventEmitter2D" parent="StateMachine/rise" unique_id=881621445]
 event_name = "event:/Kalin-Jump"
 event_guid = "{faa59753-3140-4b2b-b00f-54eca9c1c445}"
 
-[node name="fall" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="fall" type="Node" parent="StateMachine" unique_id=958789719 groups=["no_interaction"]]
 script = ExtResource("12_oysea")
 
-[node name="LandAnimationTimer" type="Timer" parent="StateMachine/fall"]
+[node name="LandAnimationTimer" type="Timer" parent="StateMachine/fall" unique_id=1998907184]
 one_shot = true
 
-[node name="GrabTimer" type="Timer" parent="StateMachine/fall"]
+[node name="GrabTimer" type="Timer" parent="StateMachine/fall" unique_id=635256841]
 one_shot = true
 
-[node name="land" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="land" type="Node" parent="StateMachine" unique_id=714644399 groups=["no_interaction"]]
 script = ExtResource("14_sgd03")
 
-[node name="land_hurt" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="land_hurt" type="Node" parent="StateMachine" unique_id=2047616731 groups=["no_interaction"]]
 script = ExtResource("37_xmisc")
 
-[node name="land_short" type="Node" parent="StateMachine"]
+[node name="land_short" type="Node" parent="StateMachine" unique_id=1761614499]
 script = ExtResource("59_n1k6j")
 
-[node name="crouch" type="Node" parent="StateMachine" groups=["position_reliable"]]
+[node name="crouch" type="Node" parent="StateMachine" unique_id=88290966 groups=["position_reliable"]]
 script = ExtResource("21_60gj1")
 
-[node name="crouch_walk" type="Node" parent="StateMachine" groups=["position_reliable"]]
+[node name="crouch_walk" type="Node" parent="StateMachine" unique_id=347396882 groups=["position_reliable"]]
 script = ExtResource("21_3t0vr")
 
-[node name="stance_heavy" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction", "position_reliable"]]
+[node name="stance_heavy" type="Node" parent="StateMachine" unique_id=1037322443 groups=["combat_state", "no_interaction", "position_reliable"]]
 script = ExtResource("36_uhi5y")
 
-[node name="slash_charge" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="slash_charge" type="Node" parent="StateMachine" unique_id=1920356119 groups=["no_interaction"]]
 script = ExtResource("54_jh2p4")
 
-[node name="stance_light" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction", "position_reliable"]]
+[node name="stance_light" type="Node" parent="StateMachine" unique_id=291728601 groups=["combat_state", "no_interaction", "position_reliable"]]
 script = ExtResource("33_ao24u")
 
-[node name="stance_defensive" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction", "position_reliable"]]
+[node name="stance_defensive" type="Node" parent="StateMachine" unique_id=1320537904 groups=["combat_state", "no_interaction", "position_reliable"]]
 script = ExtResource("38_823eb")
 
-[node name="ParryTimer" type="Timer" parent="StateMachine/stance_defensive"]
+[node name="ParryTimer" type="Timer" parent="StateMachine/stance_defensive" unique_id=773680383]
 wait_time = 0.5
 one_shot = true
 
-[node name="block" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction"]]
+[node name="block" type="Node" parent="StateMachine" unique_id=28521207 groups=["combat_state", "no_interaction"]]
 script = ExtResource("49_sprrr")
 
-[node name="stance_walk" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction", "position_reliable"]]
+[node name="stance_walk" type="Node" parent="StateMachine" unique_id=1939153226 groups=["combat_state", "no_interaction", "position_reliable"]]
 script = ExtResource("39_rgkp8")
 
-[node name="slash" type="Node2D" parent="StateMachine" groups=["combat_state", "no_interaction"]]
+[node name="slash" type="Node2D" parent="StateMachine" unique_id=396308135 groups=["combat_state", "no_interaction"]]
 script = ExtResource("39_af0aw")
 sfx_hit = ExtResource("81_lsbl4")
 sfx_whiff = ExtResource("82_8nsgr")
 
-[node name="SlashHitbox" parent="StateMachine/slash" instance=ExtResource("45_42hh8")]
+[node name="SlashHitbox" parent="StateMachine/slash" unique_id=1764828814 instance=ExtResource("45_42hh8")]
 position = Vector2(41, -37)
 scale = Vector2(2.84, 3.72)
 collision_mask = 32904
 monitorable = false
 
-[node name="SlashSFX" type="FmodEventEmitter2D" parent="StateMachine/slash"]
+[node name="SlashSFX" type="FmodEventEmitter2D" parent="StateMachine/slash" unique_id=740246684]
 event_name = "event:/Kalin-Slash"
 event_guid = "{40956996-6ef5-4cc2-b16f-699f3f17ef51}"
 attached = false
@@ -5310,19 +5307,19 @@ fmod_parameters/AttackResult = "Miss"
 fmod_parameters/AttackResult/labels = PackedStringArray("Miss", "Hit", "Blocked", "GuardBreak", "Critical", "HitOnWood", "Kill")
 fmod_parameters/AttackResult/variant_type = 4
 
-[node name="stab" type="Node2D" parent="StateMachine" groups=["combat_state", "no_interaction"]]
+[node name="stab" type="Node2D" parent="StateMachine" unique_id=493510687 groups=["combat_state", "no_interaction"]]
 script = ExtResource("41_sat24")
 sfx_hit = ExtResource("85_exvqe")
 sfx_whiff = ExtResource("86_cbw7l")
 pushback_force = 0
 
-[node name="StabHitbox" parent="StateMachine/stab" instance=ExtResource("45_42hh8")]
+[node name="StabHitbox" parent="StateMachine/stab" unique_id=1171824487 instance=ExtResource("45_42hh8")]
 position = Vector2(45, -41)
 scale = Vector2(3.2721, 0.904796)
 collision_mask = 32904
 monitorable = false
 
-[node name="StabSFX" type="FmodEventEmitter2D" parent="StateMachine/stab"]
+[node name="StabSFX" type="FmodEventEmitter2D" parent="StateMachine/stab" unique_id=1483162348]
 event_name = "event:/Kalin-Stab"
 event_guid = "{7009bef7-bcf1-426a-a7e9-68e1abb45ec7}"
 attached = false
@@ -5331,19 +5328,19 @@ fmod_parameters/AttackResult = "Miss"
 fmod_parameters/AttackResult/labels = PackedStringArray("Miss", "Hit", "Blocked", "GuardBreak", "Critical", "HitOnWood", "Kill")
 fmod_parameters/AttackResult/variant_type = 4
 
-[node name="bash" type="Node2D" parent="StateMachine" groups=["combat_state", "no_interaction"]]
+[node name="bash" type="Node2D" parent="StateMachine" unique_id=33500431 groups=["combat_state", "no_interaction"]]
 script = ExtResource("41_pdh0h")
 sfx_hit = ExtResource("91_cbw7l")
 sfx_whiff = ExtResource("89_586st")
 pushback_force = 300
 
-[node name="BashHitbox" parent="StateMachine/bash" instance=ExtResource("45_42hh8")]
+[node name="BashHitbox" parent="StateMachine/bash" unique_id=1136303453 instance=ExtResource("45_42hh8")]
 position = Vector2(12, -34)
 scale = Vector2(1.5, 2.5)
 collision_mask = 32904
 monitorable = false
 
-[node name="BashSFX" type="FmodEventEmitter2D" parent="StateMachine/bash"]
+[node name="BashSFX" type="FmodEventEmitter2D" parent="StateMachine/bash" unique_id=721798840]
 event_name = "event:/Kalin-Bash"
 event_guid = "{913d06e0-3242-4e5a-88d8-b5062c29af10}"
 attached = false
@@ -5352,7 +5349,7 @@ fmod_parameters/AttackResult = "Miss"
 fmod_parameters/AttackResult/labels = PackedStringArray("Miss", "Hit", "Blocked", "GuardBreak", "Critical", "HitOnWood", "Kill")
 fmod_parameters/AttackResult/variant_type = 4
 
-[node name="Footsteps" type="FmodEventEmitter2D" parent="StateMachine/bash"]
+[node name="Footsteps" type="FmodEventEmitter2D" parent="StateMachine/bash" unique_id=719322807]
 event_name = "event:/Kalin-Footsteps"
 event_guid = "{4cbf6c16-7219-4e3a-a2ac-9fae2f0d6f4e}"
 attached = false
@@ -5364,316 +5361,316 @@ fmod_parameters/Type = "Running"
 fmod_parameters/Type/labels = PackedStringArray("Running", "Sprinting")
 fmod_parameters/Type/variant_type = 4
 
-[node name="bash_no_sword" type="Node2D" parent="StateMachine" groups=["no_interaction"]]
+[node name="bash_no_sword" type="Node2D" parent="StateMachine" unique_id=1218179298 groups=["no_interaction"]]
 script = ExtResource("58_wl0wu")
 sfx_hit = ExtResource("91_cbw7l")
 sfx_whiff = ExtResource("89_586st")
 pushback_force = 300
 
-[node name="Hitbox" parent="StateMachine/bash_no_sword" instance=ExtResource("45_42hh8")]
+[node name="Hitbox" parent="StateMachine/bash_no_sword" unique_id=1577002223 instance=ExtResource("45_42hh8")]
 position = Vector2(12, -34)
 scale = Vector2(1.5, 2.5)
 collision_mask = 136
 
-[node name="hurt" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction"]]
+[node name="hurt" type="Node" parent="StateMachine" unique_id=1230807764 groups=["combat_state", "no_interaction"]]
 script = ExtResource("78_3pkug")
 
-[node name="hurt_no_sword" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="hurt_no_sword" type="Node" parent="StateMachine" unique_id=70776951 groups=["no_interaction"]]
 script = ExtResource("79_aajsm")
 
-[node name="death" type="Node2D" parent="StateMachine" groups=["combat_state", "no_interaction"]]
+[node name="death" type="Node2D" parent="StateMachine" unique_id=1929402686 groups=["combat_state", "no_interaction"]]
 script = ExtResource("50_1fn32")
 
-[node name="SexParticipantCollider" type="Area2D" parent="StateMachine/death"]
+[node name="SexParticipantCollider" type="Area2D" parent="StateMachine/death" unique_id=759087096]
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/death/SexParticipantCollider"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/death/SexParticipantCollider" unique_id=925242064]
 position = Vector2(16.5, -18)
 shape = SubResource("RectangleShape2D_cfvac")
 disabled = true
 
-[node name="RecoveryTimer" type="Timer" parent="StateMachine/death"]
+[node name="RecoveryTimer" type="Timer" parent="StateMachine/death" unique_id=902089498]
 wait_time = 4.0
 one_shot = true
 
-[node name="DeathTimer" type="Timer" parent="StateMachine/death"]
+[node name="DeathTimer" type="Timer" parent="StateMachine/death" unique_id=1805767455]
 one_shot = true
 
-[node name="SexTimer" type="Timer" parent="StateMachine/death"]
+[node name="SexTimer" type="Timer" parent="StateMachine/death" unique_id=1705191284]
 wait_time = 2.0
 one_shot = true
 
-[node name="recover" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="recover" type="Node" parent="StateMachine" unique_id=1315334290 groups=["no_interaction"]]
 script = ExtResource("74_k043l")
 
-[node name="push_idle" type="Node" parent="StateMachine" groups=["position_reliable"]]
+[node name="push_idle" type="Node" parent="StateMachine" unique_id=938339934 groups=["position_reliable"]]
 script = ExtResource("48_mwqkq")
 
-[node name="push" type="Node" parent="StateMachine" groups=["position_reliable"]]
+[node name="push" type="Node" parent="StateMachine" unique_id=1969896741 groups=["position_reliable"]]
 script = ExtResource("49_ujutq")
 
-[node name="pull" type="Node" parent="StateMachine" groups=["position_reliable"]]
+[node name="pull" type="Node" parent="StateMachine" unique_id=43264651 groups=["position_reliable"]]
 script = ExtResource("50_tcyto")
 
-[node name="corner_grab" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="corner_grab" type="Node" parent="StateMachine" unique_id=1060444679 groups=["no_interaction"]]
 script = ExtResource("51_t8vjn")
 
-[node name="corner_climb" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="corner_climb" type="Node" parent="StateMachine" unique_id=1614694989 groups=["no_interaction"]]
 script = ExtResource("52_4ckjm")
 
-[node name="corner_hang" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="corner_hang" type="Node" parent="StateMachine" unique_id=571394851 groups=["no_interaction"]]
 script = ExtResource("59_osr06")
 
-[node name="slide" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="slide" type="Node" parent="StateMachine" unique_id=1971021890 groups=["no_interaction"]]
 script = ExtResource("54_5dxkx")
 
-[node name="interacting" type="Node" parent="StateMachine"]
+[node name="interacting" type="Node" parent="StateMachine" unique_id=1235718010]
 script = ExtResource("55_5lcso")
 
-[node name="stun" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction"]]
+[node name="stun" type="Node" parent="StateMachine" unique_id=311406606 groups=["combat_state", "no_interaction"]]
 script = ExtResource("56_qqpcq")
 
-[node name="hurt_to_stun" type="Node" parent="StateMachine" groups=["combat_state", "no_interaction"]]
+[node name="hurt_to_stun" type="Node" parent="StateMachine" unique_id=436073833 groups=["combat_state", "no_interaction"]]
 script = ExtResource("40_xirjq")
 
-[node name="sex" type="Node" parent="StateMachine" groups=["no_interaction", "sex_state"]]
+[node name="sex" type="Node" parent="StateMachine" unique_id=800459553 groups=["no_interaction", "sex_state"]]
 script = ExtResource("59_muuj4")
 animation_counter_max = 8
 animation_counter_min = 5
 
-[node name="Moan" type="FmodEventEmitter2D" parent="StateMachine/sex"]
+[node name="Moan" type="FmodEventEmitter2D" parent="StateMachine/sex" unique_id=1803132931]
 event_name = "event:/Kalin-Moan"
 event_guid = "{3ad5e76f-95fd-46f9-bf51-6a2f20fd69f5}"
 
-[node name="Slap" type="FmodEventEmitter2D" parent="StateMachine/sex"]
+[node name="Slap" type="FmodEventEmitter2D" parent="StateMachine/sex" unique_id=1875172334]
 event_name = "event:/SexSlap"
 event_guid = "{3336952e-16a6-4eb5-bbc4-ddbf6e3a0ebf}"
 
-[node name="orgasm" type="Node" parent="StateMachine" groups=["no_interaction", "sex_state"]]
+[node name="orgasm" type="Node" parent="StateMachine" unique_id=2105256448 groups=["no_interaction", "sex_state"]]
 script = ExtResource("61_c6www")
 
-[node name="OrgasmGoblin" type="FmodEventEmitter2D" parent="StateMachine/orgasm"]
+[node name="OrgasmGoblin" type="FmodEventEmitter2D" parent="StateMachine/orgasm" unique_id=1566613642]
 event_name = "event:/OrgasmGoblin"
 event_guid = "{b0eef480-d826-4c36-8059-a45c8d5c3065}"
 
-[node name="Squish" type="FmodEventEmitter2D" parent="StateMachine/orgasm"]
+[node name="Squish" type="FmodEventEmitter2D" parent="StateMachine/orgasm" unique_id=462398410]
 event_name = "event:/SexSquish"
 event_guid = "{354e8c0a-937d-4e65-8bb3-361b78512142}"
 
-[node name="Moan" type="FmodEventEmitter2D" parent="StateMachine/orgasm"]
+[node name="Moan" type="FmodEventEmitter2D" parent="StateMachine/orgasm" unique_id=2113587823]
 event_name = "event:/Kalin-Moan"
 event_guid = "{3ad5e76f-95fd-46f9-bf51-6a2f20fd69f5}"
 
-[node name="PostSexSFX" type="FmodEventEmitter2D" parent="StateMachine/orgasm"]
+[node name="PostSexSFX" type="FmodEventEmitter2D" parent="StateMachine/orgasm" unique_id=88984611]
 event_name = "event:/Kalin-PostSex"
 event_guid = "{db03c105-eeee-4f46-ae2d-c733985d7802}"
 
-[node name="post_sex" type="Node" parent="StateMachine" groups=["no_interaction", "sex_state"]]
+[node name="post_sex" type="Node" parent="StateMachine" unique_id=1251855988 groups=["no_interaction", "sex_state"]]
 script = ExtResource("40_xirjq")
 
-[node name="hiding" type="Node" parent="StateMachine"]
+[node name="hiding" type="Node" parent="StateMachine" unique_id=175341561]
 script = ExtResource("68_y0qhg")
 
-[node name="hidden" type="Node" parent="StateMachine"]
+[node name="hidden" type="Node" parent="StateMachine" unique_id=1566954663]
 script = ExtResource("68_73qvi")
 
-[node name="unhide" type="Node" parent="StateMachine"]
+[node name="unhide" type="Node" parent="StateMachine" unique_id=1740500896]
 script = ExtResource("70_egy32")
 
-[node name="ladder_climb" type="Node" parent="StateMachine"]
+[node name="ladder_climb" type="Node" parent="StateMachine" unique_id=753002891]
 script = ExtResource("88_7e6uh")
 
-[node name="struggle_goblin" type="Node" parent="StateMachine" groups=["no_interaction", "struggle_state"]]
+[node name="struggle_goblin" type="Node" parent="StateMachine" unique_id=1186734224 groups=["no_interaction", "struggle_state"]]
 script = ExtResource("83_441gv")
 
-[node name="Timer" type="Timer" parent="StateMachine/struggle_goblin"]
+[node name="Timer" type="Timer" parent="StateMachine/struggle_goblin" unique_id=1984569453]
 wait_time = 5.0
 one_shot = true
 
-[node name="struggle_transition_goblin" type="Node" parent="StateMachine" groups=["no_interaction", "struggle_state"]]
+[node name="struggle_transition_goblin" type="Node" parent="StateMachine" unique_id=1244632402 groups=["no_interaction", "struggle_state"]]
 script = ExtResource("98_y4shw")
 
-[node name="grab_goblin" type="Node" parent="StateMachine" groups=["no_interaction", "struggle_state"]]
+[node name="grab_goblin" type="Node" parent="StateMachine" unique_id=559260610 groups=["no_interaction", "struggle_state"]]
 script = ExtResource("40_xirjq")
 
-[node name="break_free" type="Node" parent="StateMachine" groups=["no_interaction", "struggle_state"]]
+[node name="break_free" type="Node" parent="StateMachine" unique_id=1765293044 groups=["no_interaction", "struggle_state"]]
 script = ExtResource("87_6ykrs")
 
-[node name="crawl_in" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="crawl_in" type="Node" parent="StateMachine" unique_id=36490975 groups=["no_interaction"]]
 script = ExtResource("40_xirjq")
 
-[node name="crawl_out" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="crawl_out" type="Node" parent="StateMachine" unique_id=1668136898 groups=["no_interaction"]]
 script = ExtResource("40_xirjq")
 
-[node name="get_up" type="Node" parent="StateMachine" groups=["no_interaction"]]
+[node name="get_up" type="Node" parent="StateMachine" unique_id=1786598378 groups=["no_interaction"]]
 script = ExtResource("40_xirjq")
 
-[node name="InteractionPrompt" parent="." instance=ExtResource("99_y4shw")]
+[node name="InteractionPrompt" parent="." unique_id=1111561431 instance=ExtResource("99_y4shw")]
 position = Vector2(0, -41)
 
-[node name="CombatProperties" parent="." instance=ExtResource("2_yetl5")]
+[node name="CombatProperties" parent="." unique_id=1254410358 instance=ExtResource("2_yetl5")]
 
-[node name="SmellParticles" type="GPUParticles2D" parent="."]
+[node name="SmellParticles" type="GPUParticles2D" parent="." unique_id=1644457180]
 texture = ExtResource("44_3q7yy")
 lifetime = 5.0
 process_material = ExtResource("38_yofsr")
 
-[node name="Emote" parent="." instance=ExtResource("40_2d1nf")]
+[node name="Emote" parent="." unique_id=968304249 instance=ExtResource("40_2d1nf")]
 position = Vector2(0, -36)
 
-[node name="ColliderStanding" type="CollisionShape2D" parent="." groups=["Flip"]]
+[node name="ColliderStanding" type="CollisionShape2D" parent="." unique_id=339768618 groups=["Flip"]]
 visible = false
 position = Vector2(0, 5.5)
 scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_y6qte")
 
-[node name="MovableCheck" type="RayCast2D" parent="." groups=["Flip"]]
+[node name="MovableCheck" type="RayCast2D" parent="." unique_id=834389943 groups=["Flip"]]
 visible = false
 target_position = Vector2(17, 0)
 collision_mask = 32
 
-[node name="CornerGrabCheck" type="RayCast2D" parent="." groups=["Flip"]]
+[node name="CornerGrabCheck" type="RayCast2D" parent="." unique_id=1157476528 groups=["Flip"]]
 visible = false
 position = Vector2(8, -28)
 target_position = Vector2(0, 18)
 collision_mask = 65537
 
-[node name="CornerAutoClimb" type="RayCast2D" parent="." groups=["Flip"]]
+[node name="CornerAutoClimb" type="RayCast2D" parent="." unique_id=1803888109 groups=["Flip"]]
 visible = false
 target_position = Vector2(14, 1.90735e-06)
 collision_mask = 65537
 
-[node name="CellCheck" type="RayCast2D" parent="."]
+[node name="CellCheck" type="RayCast2D" parent="." unique_id=772741906]
 visible = false
 target_position = Vector2(0, 39)
 collision_mask = 2049
 
-[node name="RayUpstairsCheck" type="RayCast2D" parent="." groups=["Flip"]]
+[node name="RayUpstairsCheck" type="RayCast2D" parent="." unique_id=1423027651 groups=["Flip"]]
 visible = false
 position = Vector2(0, 23)
 target_position = Vector2(43, 0)
 collision_mask = 2048
 
-[node name="RayStairsPath" type="RayCast2D" parent="."]
+[node name="RayStairsPath" type="RayCast2D" parent="." unique_id=651943541]
 visible = false
 target_position = Vector2(0, 35)
 collision_mask = 8192
 
-[node name="ColBehind" type="Area2D" parent="." groups=["Flip"]]
+[node name="ColBehind" type="Area2D" parent="." unique_id=932448661 groups=["Flip"]]
 visible = false
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ColBehind"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColBehind" unique_id=688958181]
 position = Vector2(-10, 1.5)
 shape = SubResource("RectangleShape2D_cbw7l")
 
-[node name="StandCheck" type="Area2D" parent="." groups=["Flip"]]
+[node name="StandCheck" type="Area2D" parent="." unique_id=1483262925 groups=["Flip"]]
 visible = false
 position = Vector2(0, -4)
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StandCheck"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StandCheck" unique_id=990115233]
 position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_avh81")
 
-[node name="CornerGrabPrevent" type="Area2D" parent="." groups=["Flip"]]
+[node name="CornerGrabPrevent" type="Area2D" parent="." unique_id=2067162264 groups=["Flip"]]
 visible = false
 collision_layer = 0
 collision_mask = 65537
 
-[node name="TopCollider" type="CollisionShape2D" parent="CornerGrabPrevent"]
+[node name="TopCollider" type="CollisionShape2D" parent="CornerGrabPrevent" unique_id=1568108180]
 position = Vector2(10, -24.5)
 shape = SubResource("RectangleShape2D_lnkvj")
 
-[node name="QuickClimbPrevent" type="Area2D" parent="." groups=["Flip"]]
+[node name="QuickClimbPrevent" type="Area2D" parent="." unique_id=1480422081 groups=["Flip"]]
 visible = false
 scale = Vector2(1, 1.125)
 collision_layer = 0
 collision_mask = 65537
 
-[node name="QuickClimbCollider" type="CollisionShape2D" parent="QuickClimbPrevent"]
+[node name="QuickClimbCollider" type="CollisionShape2D" parent="QuickClimbPrevent" unique_id=2068453872]
 position = Vector2(8, -11.5556)
 shape = SubResource("RectangleShape2D_lnkvj")
 
-[node name="BottomAutoClimb" type="Area2D" parent="." groups=["Flip"]]
+[node name="BottomAutoClimb" type="Area2D" parent="." unique_id=688933325 groups=["Flip"]]
 visible = false
 collision_layer = 0
 
-[node name="BottomCollider" type="CollisionShape2D" parent="BottomAutoClimb"]
+[node name="BottomCollider" type="CollisionShape2D" parent="BottomAutoClimb" unique_id=1973467814]
 position = Vector2(0, 37.5)
 shape = SubResource("RectangleShape2D_8idp1")
 
-[node name="CornerClimbPrevent" type="Area2D" parent="." groups=["Flip"]]
+[node name="CornerClimbPrevent" type="Area2D" parent="." unique_id=1504139208 groups=["Flip"]]
 visible = false
 collision_layer = 0
 collision_mask = 65537
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerClimbPrevent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerClimbPrevent" unique_id=1740057914]
 position = Vector2(10, -52.5)
 shape = SubResource("RectangleShape2D_qqpcq")
 
-[node name="CornerHangCheck" type="Area2D" parent="." groups=["Flip"]]
+[node name="CornerHangCheck" type="Area2D" parent="." unique_id=1296378826 groups=["Flip"]]
 visible = false
 collision_layer = 0
 collision_mask = 75777
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerHangCheck"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerHangCheck" unique_id=6167670]
 position = Vector2(22, 61)
 shape = SubResource("RectangleShape2D_osr06")
 
-[node name="Interactor" type="Area2D" parent="." groups=["Flip"]]
+[node name="Interactor" type="Area2D" parent="." unique_id=2127350185 groups=["Flip"]]
 visible = false
 position = Vector2(0, 32)
 collision_layer = 0
 collision_mask = 64
 script = ExtResource("141_ws413")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor" unique_id=700468189]
 position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_1nk40")
 
-[node name="Cooldown" type="Timer" parent="Interactor"]
+[node name="Cooldown" type="Timer" parent="Interactor" unique_id=94741881]
 one_shot = true
 autostart = true
 
-[node name="ThreatCollider" type="Area2D" parent="."]
+[node name="ThreatCollider" type="Area2D" parent="." unique_id=1741084027]
 visible = false
 collision_layer = 0
 collision_mask = 393472
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ThreatCollider"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ThreatCollider" unique_id=2011573093]
 position = Vector2(0.5, 14)
 shape = SubResource("RectangleShape2D_586st")
 
-[node name="SmellCollider" type="Area2D" parent="."]
+[node name="SmellCollider" type="Area2D" parent="." unique_id=852911993]
 scale = Vector2(1e-05, 1e-05)
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SmellCollider"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmellCollider" unique_id=493647500]
 shape = SubResource("CircleShape2D_rbk27")
 
-[node name="CollectableCollider" type="Area2D" parent="."]
+[node name="CollectableCollider" type="Area2D" parent="." unique_id=1583610950]
 visible = false
 collision_layer = 0
 collision_mask = 16384
 script = ExtResource("142_u8fl4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableCollider"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableCollider" unique_id=1832770681]
 position = Vector2(0, 10.5)
 shape = SubResource("CircleShape2D_4jgp1")
 
-[node name="StairCheck" type="Area2D" parent="."]
+[node name="StairCheck" type="Area2D" parent="." unique_id=1270377456]
 visible = false
 position = Vector2(0, 36)
 collision_layer = 0
 collision_mask = 2048
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StairCheck"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StairCheck" unique_id=1894867945]
 shape = SubResource("RectangleShape2D_n1k6j")
 
-[node name="CoyoteTimer" type="Timer" parent="."]
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=578863149]
 wait_time = 0.1
 one_shot = true
 

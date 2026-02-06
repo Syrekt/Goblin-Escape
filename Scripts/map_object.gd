@@ -29,9 +29,9 @@ var falling := false
 
 func _ready() -> void:
 	if collidable:
-		set_collision_layer_value(1, true)
+		set_collision_layer_value.call_deferred(1, true)
 	if destructable:
-		set_collision_layer_value(8, true)
+		set_collision_layer_value.call_deferred(8, true)
 	health_max = health
 	health_cur = health
 
@@ -72,9 +72,9 @@ func take_damage(damage: int, source) -> void:
 			drop_loot()
 
 		if collidable:
-			set_collision_layer_value(1, false)
-		set_collision_layer_value(8, false)
-		set_collision_layer_value(13, false)
+			set_collision_layer_value.call_deferred(1, false)
+		set_collision_layer_value.call_deferred(8, false)
+		set_collision_layer_value.call_deferred(13, false)
 		for child in get_children():
 			if child is LightOccluder2D:
 				child.queue_free()
@@ -104,6 +104,6 @@ func load_data(data: Dictionary) -> void:
 	else:
 		sprite.frame	= data.get("frame", 0)
 	if collidable:
-		set_collision_layer_value(1, health_cur > 0)
-	set_collision_layer_value(8, health_cur > 0)
-	set_collision_layer_value(13, health_cur > 0)
+		set_collision_layer_value.call_deferred(1, health_cur > 0)
+	set_collision_layer_value.call_deferred(8, health_cur > 0)
+	set_collision_layer_value.call_deferred(13, health_cur > 0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c3ce8mt521wb5"]
+[gd_scene format=3 uid="uid://c3ce8mt521wb5"]
 
 [ext_resource type="Script" uid="uid://ckr03m8hdsnts" path="res://Scripts/game.gd" id="1_dthpw"]
 [ext_resource type="PackedScene" uid="uid://d1ido0af5r23x" path="res://Objects/loading_screen.tscn" id="2_1cwbi"]
@@ -22,33 +22,33 @@ func _ready() -> void:
 		text += \"*\"
 "
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" unique_id=1899477501]
 script = ExtResource("1_dthpw")
 
-[node name="LoadingScreen" parent="." instance=ExtResource("2_1cwbi")]
+[node name="LoadingScreen" parent="." unique_id=1398843392 instance=ExtResource("2_1cwbi")]
 unique_name_in_owner = true
 visible = false
 script = ExtResource("3_aks28")
 
-[node name="DeathScreen" parent="." instance=ExtResource("4_msigw")]
+[node name="DeathScreen" parent="." unique_id=918776716 instance=ExtResource("4_msigw")]
 unique_name_in_owner = true
 visible = false
 
-[node name="ScreenFade" parent="." instance=ExtResource("5_qrhvm")]
+[node name="ScreenFade" parent="." unique_id=1534588036 instance=ExtResource("5_qrhvm")]
 unique_name_in_owner = true
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=758135839]
 color = Color(0.6340837, 0.5231031, 0.999996, 1)
 
-[node name="Kalin" parent="." instance=ExtResource("7_p4clm")]
+[node name="Kalin" parent="." unique_id=301167986 instance=ExtResource("7_p4clm")]
 unique_name_in_owner = true
 position = Vector2(320, 181)
 save_list = Array[String](["vitality", "strength", "endurance", "level", "experience_point", "has_sword", "had_sword", "has_heavy_stance", "has_defensive_stance"])
 metadata/_edit_lock_ = true
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1331499912]
 
-[node name="Minimap" parent="UI" instance=ExtResource("8_fi0gx")]
+[node name="Minimap" parent="UI" unique_id=1045610975 instance=ExtResource("8_fi0gx")]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 1
@@ -58,7 +58,7 @@ offset_left = -144.0
 offset_right = 0.0
 grow_horizontal = 0
 
-[node name="Background" type="Panel" parent="UI/Minimap"]
+[node name="Background" type="Panel" parent="UI/Minimap" unique_id=1527958659]
 visible = false
 show_behind_parent = true
 layout_mode = 1
@@ -68,7 +68,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MapWindow" type="Panel" parent="UI"]
+[node name="MapWindow" type="Panel" parent="UI" unique_id=1781963179]
 unique_name_in_owner = true
 visible = false
 clip_contents = true
@@ -85,20 +85,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("9_j2sjr")
 
-[node name="Percent" type="Label" parent="UI/MapWindow"]
+[node name="Percent" type="Label" parent="UI/MapWindow" unique_id=156693214]
 visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "%0"
 
-[node name="TopDraw" type="Control" parent="UI/MapWindow"]
+[node name="TopDraw" type="Control" parent="UI/MapWindow" unique_id=1724546421]
 z_index = 5
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="VersionNumber" type="Label" parent="UI"]
+[node name="VersionNumber" type="Label" parent="UI" unique_id=1304310675]
 unique_name_in_owner = true
 anchors_preset = 3
 anchor_left = 1.0
@@ -114,22 +114,22 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.1254902)
 text = "v: 0.0"
 script = SubResource("GDScript_h4fw4")
 
-[node name="FmodBankLoader" type="FmodBankLoader" parent="."]
+[node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=463819486]
 bank_paths = ["res://FModBank/Desktop/Master.bank", "res://FModBank/Desktop/SFX.bank", "res://FModBank/Desktop/AMB.bank"]
 
-[node name="FModBGMEvent" type="FmodEventEmitter2D" parent="."]
+[node name="FModBGMEvent" type="FmodEventEmitter2D" parent="." unique_id=1870554807]
 event_name = "event:/BGM"
 event_guid = "{06ddf1fe-b6ad-4d95-a0e8-8fa130930846}"
 autoplay = true
 volume = 0.0
 
-[node name="FModAMBEvent" type="FmodEventEmitter2D" parent="."]
+[node name="FModAMBEvent" type="FmodEventEmitter2D" parent="." unique_id=1723827699]
 event_name = "event:/DungeonAmbience"
 event_guid = "{3230f691-db91-47e3-9e92-db100bdcc92e}"
 autoplay = true
 
-[node name="DebugPanel" parent="." instance=ExtResource("11_pt6lt")]
+[node name="DebugPanel" parent="." unique_id=775143864 instance=ExtResource("11_pt6lt")]
 unique_name_in_owner = true
 visible = false
 
-[node name="StartMenu" parent="." instance=ExtResource("12_aks28")]
+[node name="StartMenu" parent="." unique_id=592944173 instance=ExtResource("12_aks28")]

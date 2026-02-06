@@ -1,14 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://b23mtnfp7xuec"]
+[gd_scene format=3 uid="uid://b23mtnfp7xuec"]
 
 [ext_resource type="Script" uid="uid://1u5otdfgoj24" path="res://Scripts/emote.gd" id="1_m7kr5"]
 [ext_resource type="SpriteFrames" uid="uid://dyi5wrq4d24kx" path="res://Resources/emote_all.tres" id="2_wgnns"]
 
-[node name="Emote" type="Node2D"]
+[node name="Emote" type="Node2D" unique_id=615823316]
 visible = false
 script = ExtResource("1_m7kr5")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=777574921]
 sprite_frames = ExtResource("2_wgnns")
-animation = &"lewd"
+animation = &"triggered"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
