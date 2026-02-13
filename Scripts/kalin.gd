@@ -699,6 +699,36 @@ func get_stab_fatigue(_str:=strength,end:=endurance) -> float:
 	return (float(_str) / float(_str + end)) * MAX_STAB_FATIGUE
 func get_bash_fatigue(_str:=strength,end:=endurance) -> float:
 	return (float(_str) / float(_str + end)) * MAX_BASH_FATIGUE
+func attack_from_state(state:String,data:={}) -> void:
+	if Options.combat_assist && combat_target:
+		state_node.state.finished.emit(__combat_assist_get_move(), data)
+	else:
+		match state:
+			"stance_heavy":
+				state_node.state.finished.emit("slash", data)
+			"stance_light":
+				state_node.state.finished.emit("stab", data)
+			"stance_defensive":
+				state_node.state.finished.emit("bash", data)
+func __combat_assist_get_move() -> String:
+	if !combat_target:
+		printerr("No combat target!")
+
+	var target_stance = combat_target.state_node.state.name
+	var player_stamina = stamina.value
+
+	match target_stance:
+		"stance_heavy":
+			return "stab"
+		"stance_light":
+			if player_stamina > SLASH_STAMINA_COST:
+				return "slash"
+			else:
+				return "stab"
+		"stance_defensive":
+			return "slash"
+		_ :  return "stab"
+
 #endregion
 #region Animation Ending
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

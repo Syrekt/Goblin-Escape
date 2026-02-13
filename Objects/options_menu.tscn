@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://fgj6dmvmrowh"]
+[gd_scene format=3 uid="uid://fgj6dmvmrowh"]
 
 [ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://UI/theme_button.tres" id="1_ucjbo"]
 [ext_resource type="Script" uid="uid://bnymdbpnxf6a0" path="res://Scripts/options_menu.gd" id="2_iopgn"]
 [ext_resource type="Script" uid="uid://bfd22kixp4ppo" path="res://Scripts/toggle_button.gd" id="2_ucjbo"]
 [ext_resource type="PackedScene" uid="uid://hvdtjmpwq6ji" path="res://UI/Buttons/button_keybind.tscn" id="3_iopgn"]
+[ext_resource type="PackedScene" uid="uid://dq36xxxk272rk" path="res://UI/tooltip.tscn" id="5_2glep"]
 [ext_resource type="Texture2D" uid="uid://fyevcw0t8yc" path="res://UI/panel_bg.png" id="5_aqc70"]
 [ext_resource type="Script" uid="uid://cbsarrmo5l05n" path="res://Scripts/tutorial_button.gd" id="5_iopgn"]
 [ext_resource type="PackedScene" uid="uid://bfrfvr3f2ii41" path="res://Tutorial/stealth_tutorial.tscn" id="6_1amdw"]
@@ -41,7 +42,7 @@ func _on_no_pressed() -> void:
 	hide()
 "
 
-[node name="OptionsMenu" type="TabContainer"]
+[node name="OptionsMenu" type="TabContainer" unique_id=49901234]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,17 +53,17 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 2
+current_tab = 4
 script = ExtResource("2_iopgn")
 
-[node name="Graphics" type="TabBar" parent="."]
+[node name="Graphics" type="TabBar" parent="." unique_id=153179285]
 visible = false
 layout_mode = 2
 focus_neighbor_top = NodePath("MarginContainer/ScrollContainer/VBoxContainer/ResetGraphics")
 focus_neighbor_bottom = NodePath("MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Fullscreen")
 metadata/_tab_index = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="Graphics"]
+[node name="MarginContainer" type="MarginContainer" parent="Graphics" unique_id=510732933]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -74,35 +75,35 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Graphics/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Graphics/MarginContainer" unique_id=436612896]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Graphics/MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Graphics/MarginContainer/ScrollContainer" unique_id=184163655]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1281167824]
 layout_mode = 2
 
-[node name="Button" type="Label" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="Button" type="Label" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1280291065]
 custom_minimum_size = Vector2(86, 0)
 layout_mode = 2
 text = "Fullscreen"
 
-[node name="Fullscreen" type="CheckBox" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="Fullscreen" type="CheckBox" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=778842845]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../ResetGraphics")
 focus_neighbor_bottom = NodePath("../../HBoxContainer2/Resolution")
 script = ExtResource("2_ucjbo")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1309734599]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" unique_id=1380612117]
 custom_minimum_size = Vector2(86, 0)
 layout_mode = 2
 text = "Resolution"
 
-[node name="Resolution" type="OptionButton" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+[node name="Resolution" type="OptionButton" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" unique_id=1738443832]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../HBoxContainer/Fullscreen")
 focus_neighbor_bottom = NodePath("../../HBoxContainer3/PixelPerfect")
@@ -117,68 +118,68 @@ popup/item_2/id = 2
 popup/item_3/text = "2560x1440"
 popup/item_3/id = 3
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1793005137]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+[node name="Label" type="Label" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3" unique_id=2005285732]
 custom_minimum_size = Vector2(86, 0)
 layout_mode = 2
 text = "Pixel Perfect"
 
-[node name="PixelPerfect" type="CheckBox" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+[node name="PixelPerfect" type="CheckBox" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3" unique_id=1574867116]
 layout_mode = 2
 tooltip_text = "When disabled, increases viewport size to keep visuals pixel perfect. Enable if you are seeing distorted pixels."
 focus_neighbor_top = NodePath("../../HBoxContainer2/Resolution")
 focus_neighbor_bottom = NodePath("../../HBoxContainer4/Borderless")
 script = ExtResource("2_ucjbo")
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=788703813]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+[node name="Label" type="Label" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" unique_id=1939375788]
 custom_minimum_size = Vector2(86, 0)
 layout_mode = 2
 text = "Borderless"
 
-[node name="Borderless" type="CheckBox" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+[node name="Borderless" type="CheckBox" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" unique_id=573071846]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../HBoxContainer3/PixelPerfect")
 focus_neighbor_bottom = NodePath("../../HBoxContainer5/SwitchMonitor")
 script = ExtResource("2_ucjbo")
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=502285779]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5"]
+[node name="Label" type="Label" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" unique_id=1937251518]
 custom_minimum_size = Vector2(86, 0)
 layout_mode = 2
 
-[node name="SwitchMonitor" type="Button" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5"]
+[node name="SwitchMonitor" type="Button" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" unique_id=1944835136]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../HBoxContainer4/Borderless")
 focus_neighbor_bottom = NodePath("../../CenterWindow")
 text = "Switch Monitor"
 
-[node name="CenterWindow" type="Button" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="CenterWindow" type="Button" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1780305799]
 layout_mode = 2
 focus_neighbor_top = NodePath("../HBoxContainer5/SwitchMonitor")
 focus_neighbor_bottom = NodePath("../ResetGraphics")
 text = "Center Window"
 
-[node name="ResetGraphics" type="Button" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="ResetGraphics" type="Button" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=2091975274]
 layout_mode = 2
 focus_neighbor_top = NodePath("../CenterWindow")
 focus_neighbor_bottom = NodePath("../HBoxContainer/Fullscreen")
 text = "Reset Graphics(Quits Game)"
 
-[node name="Audio" type="TabBar" parent="."]
+[node name="Audio" type="TabBar" parent="." unique_id=1830229140]
 visible = false
 layout_mode = 2
 focus_neighbor_top = NodePath("MarginContainer/VBoxContainer/ResetAudio")
 focus_neighbor_bottom = NodePath("MarginContainer/VBoxContainer/MasterVolumeContainer/MasterVolume")
 metadata/_tab_index = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Audio"]
+[node name="MarginContainer" type="MarginContainer" parent="Audio" unique_id=452354976]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -190,21 +191,21 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Audio/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Audio/MarginContainer" unique_id=1836508812]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="MasterVolumeContainer" type="HSplitContainer" parent="Audio/MarginContainer/VBoxContainer"]
+[node name="MasterVolumeContainer" type="HSplitContainer" parent="Audio/MarginContainer/VBoxContainer" unique_id=1370166234]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/MasterVolumeContainer"]
+[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/MasterVolumeContainer" unique_id=737241719]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 text = "Master"
 
-[node name="MasterVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/MasterVolumeContainer"]
+[node name="MasterVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/MasterVolumeContainer" unique_id=1591177535]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../ResetAudio")
 focus_neighbor_bottom = NodePath("../../BGMVolumeContainer/BGMVolume")
@@ -212,15 +213,15 @@ max_value = 1.0
 step = 0.1
 value = 1.0
 
-[node name="BGMVolumeContainer" type="HSplitContainer" parent="Audio/MarginContainer/VBoxContainer"]
+[node name="BGMVolumeContainer" type="HSplitContainer" parent="Audio/MarginContainer/VBoxContainer" unique_id=221637608]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/BGMVolumeContainer"]
+[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/BGMVolumeContainer" unique_id=793572624]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 text = "Music"
 
-[node name="BGMVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/BGMVolumeContainer"]
+[node name="BGMVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/BGMVolumeContainer" unique_id=397650889]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../MasterVolumeContainer/MasterVolume")
 focus_neighbor_bottom = NodePath("../../EFXVolumeContainer/AMBVolume")
@@ -228,15 +229,15 @@ max_value = 1.0
 step = 0.1
 value = 1.0
 
-[node name="EFXVolumeContainer" type="HSplitContainer" parent="Audio/MarginContainer/VBoxContainer"]
+[node name="EFXVolumeContainer" type="HSplitContainer" parent="Audio/MarginContainer/VBoxContainer" unique_id=1230645631]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/EFXVolumeContainer"]
+[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/EFXVolumeContainer" unique_id=1587655566]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 text = "Ambiance"
 
-[node name="AMBVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/EFXVolumeContainer"]
+[node name="AMBVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/EFXVolumeContainer" unique_id=1228083597]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../BGMVolumeContainer/BGMVolume")
 focus_neighbor_bottom = NodePath("../../SFXVolumeContainer/SFXVolume")
@@ -244,15 +245,15 @@ max_value = 1.0
 step = 0.1
 value = 1.0
 
-[node name="SFXVolumeContainer" type="HSplitContainer" parent="Audio/MarginContainer/VBoxContainer"]
+[node name="SFXVolumeContainer" type="HSplitContainer" parent="Audio/MarginContainer/VBoxContainer" unique_id=45845268]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/SFXVolumeContainer"]
+[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/SFXVolumeContainer" unique_id=1293916662]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 text = "Effects"
 
-[node name="SFXVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/SFXVolumeContainer"]
+[node name="SFXVolume" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/SFXVolumeContainer" unique_id=1554397404]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../EFXVolumeContainer/AMBVolume")
 focus_neighbor_bottom = NodePath("../../ResetAudio")
@@ -260,19 +261,20 @@ max_value = 1.0
 step = 0.1
 value = 1.0
 
-[node name="ResetAudio" type="Button" parent="Audio/MarginContainer/VBoxContainer"]
+[node name="ResetAudio" type="Button" parent="Audio/MarginContainer/VBoxContainer" unique_id=1902030538]
 layout_mode = 2
 focus_neighbor_top = NodePath("../SFXVolumeContainer/SFXVolume")
 focus_neighbor_bottom = NodePath("../MasterVolumeContainer/MasterVolume")
 text = "Reset Audio Settings"
 
-[node name="Controls" type="TabBar" parent="."]
+[node name="Controls" type="TabBar" parent="." unique_id=119584133]
+visible = false
 layout_mode = 2
 focus_neighbor_top = NodePath("MarginContainer/HSplitContainer/VBoxContainer2/ButtonKeybind10")
 focus_neighbor_bottom = NodePath("MarginContainer/HSplitContainer/VBoxContainer/ButtonKeybind")
 metadata/_tab_index = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Controls"]
+[node name="MarginContainer" type="MarginContainer" parent="Controls" unique_id=1873168797]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -285,103 +287,103 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="HSplitContainer" type="HSplitContainer" parent="Controls/MarginContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="Controls/MarginContainer" unique_id=1452007584]
 layout_mode = 2
 dragging_enabled = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Controls/MarginContainer/HSplitContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/MarginContainer/HSplitContainer" unique_id=1763242924]
 custom_minimum_size = Vector2(152, 0)
 layout_mode = 2
 
-[node name="ButtonKeybind" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" unique_id=1956764113 instance=ExtResource("3_iopgn")]
 layout_mode = 2
 focus_neighbor_top = NodePath("../ButtonKeybind9")
 focus_neighbor_right = NodePath("../../VBoxContainer2/ButtonKeybind2")
 focus_neighbor_bottom = NodePath("../ButtonKeybind3")
 action_name = "up"
 
-[node name="ButtonKeybind3" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind3" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" unique_id=1248603459 instance=ExtResource("3_iopgn")]
 layout_mode = 2
 focus_neighbor_top = NodePath("../ButtonKeybind")
 focus_neighbor_right = NodePath("../../VBoxContainer2/ButtonKeybind4")
 focus_neighbor_bottom = NodePath("../ButtonKeybind6")
 action_name = "left"
 
-[node name="ButtonKeybind6" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind6" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" unique_id=718977038 instance=ExtResource("3_iopgn")]
 layout_mode = 2
 focus_neighbor_top = NodePath("../ButtonKeybind3")
 focus_neighbor_right = NodePath("../../VBoxContainer2/ButtonKeybind7")
 focus_neighbor_bottom = NodePath("../ButtonKeybind8")
 action_name = "attack"
 
-[node name="ButtonKeybind8" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind8" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" unique_id=1170050799 instance=ExtResource("3_iopgn")]
 layout_mode = 2
 focus_neighbor_top = NodePath("../ButtonKeybind6")
 focus_neighbor_right = NodePath("../../VBoxContainer2/ButtonKeybind9")
 focus_neighbor_bottom = NodePath("../ButtonKeybind9")
 action_name = "stance"
 
-[node name="ButtonKeybind9" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind9" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" unique_id=783146615 instance=ExtResource("3_iopgn")]
 layout_mode = 2
 focus_neighbor_top = NodePath("../ButtonKeybind8")
 focus_neighbor_right = NodePath("../../VBoxContainer2/ButtonKeybind10")
 focus_neighbor_bottom = NodePath("../ResetKeybindings")
 action_name = "interact"
 
-[node name="ResetKeybindings" type="Button" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer"]
+[node name="ResetKeybindings" type="Button" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" unique_id=1655228595]
 layout_mode = 2
 focus_neighbor_top = NodePath("../ButtonKeybind9")
 focus_neighbor_right = NodePath("../../VBoxContainer2/ButtonKeybind10")
 focus_neighbor_bottom = NodePath("../ButtonKeybind")
 text = "Reset Keybindings"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Controls/MarginContainer/HSplitContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Controls/MarginContainer/HSplitContainer" unique_id=1869178024]
 custom_minimum_size = Vector2(152, 0)
 layout_mode = 2
 
-[node name="ButtonKeybind2" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind2" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" unique_id=1668048183 instance=ExtResource("3_iopgn")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer/ButtonKeybind")
 focus_neighbor_top = NodePath("../ButtonKeybind10")
 focus_neighbor_bottom = NodePath("../ButtonKeybind4")
 action_name = "down"
 
-[node name="ButtonKeybind4" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind4" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" unique_id=97305569 instance=ExtResource("3_iopgn")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer/ButtonKeybind3")
 focus_neighbor_top = NodePath("../ButtonKeybind2")
 focus_neighbor_bottom = NodePath("../ButtonKeybind7")
 action_name = "right"
 
-[node name="ButtonKeybind7" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind7" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" unique_id=666100004 instance=ExtResource("3_iopgn")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer/ButtonKeybind6")
 focus_neighbor_top = NodePath("../ButtonKeybind4")
 focus_neighbor_bottom = NodePath("../ButtonKeybind9")
 action_name = "sprint"
 
-[node name="ButtonKeybind9" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind9" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" unique_id=2079675334 instance=ExtResource("3_iopgn")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer/ButtonKeybind8")
 focus_neighbor_top = NodePath("../ButtonKeybind7")
 focus_neighbor_bottom = NodePath("../ButtonKeybind10")
 action_name = "walk"
 
-[node name="ButtonKeybind10" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" instance=ExtResource("3_iopgn")]
+[node name="ButtonKeybind10" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer2" unique_id=1677759963 instance=ExtResource("3_iopgn")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer/ButtonKeybind9")
 focus_neighbor_top = NodePath("../ButtonKeybind9")
 focus_neighbor_bottom = NodePath("../../VBoxContainer/ResetKeybindings")
 action_name = "inventory"
 
-[node name="Noise Indicator" type="TabBar" parent="."]
+[node name="Noise Indicator" type="TabBar" parent="." unique_id=2097198137]
 visible = false
 layout_mode = 2
 focus_neighbor_top = NodePath("MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Alpha/NoiseColorAlphaSlider")
 focus_neighbor_bottom = NodePath("MarginContainer/ScrollContainer/VBoxContainer/NoiseToggle/NoiseToggleCheckButton")
 metadata/_tab_index = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Noise Indicator"]
+[node name="MarginContainer" type="MarginContainer" parent="Noise Indicator" unique_id=163479360]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -393,42 +395,42 @@ offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Noise Indicator/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Noise Indicator/MarginContainer" unique_id=190980468]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Noise Indicator/MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Noise Indicator/MarginContainer/ScrollContainer" unique_id=151172522]
 layout_mode = 2
 
-[node name="NoiseToggle" type="HSplitContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="NoiseToggle" type="HSplitContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer" unique_id=786878948]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/NoiseToggle"]
+[node name="Label" type="Label" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/NoiseToggle" unique_id=908451613]
 custom_minimum_size = Vector2(141, 0)
 layout_mode = 2
 text = "Enabled"
 
-[node name="NoiseToggleCheckButton" type="CheckBox" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/NoiseToggle"]
+[node name="NoiseToggleCheckButton" type="CheckBox" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/NoiseToggle" unique_id=772137027]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../VBoxContainer/Alpha/NoiseColorAlphaSlider")
 focus_neighbor_bottom = NodePath("../../VBoxContainer/HBoxContainer/ResetColor")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer" unique_id=708319798]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=2108095682]
 layout_mode = 2
 
-[node name="NoiseColorLabel" type="Label" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="NoiseColorLabel" type="Label" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1687937666]
 custom_minimum_size = Vector2(55, 0)
 layout_mode = 2
 text = "Noise Color"
 
-[node name="ColorRect" type="ColorRect" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1032518410]
 custom_minimum_size = Vector2(81, 0)
 layout_mode = 2
 color = Color(0, 0, 0, 1)
 
-[node name="NoiseColorRect" type="ColorRect" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer/ColorRect"]
+[node name="NoiseColorRect" type="ColorRect" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer/ColorRect" unique_id=1634490733]
 custom_minimum_size = Vector2(63, 0)
 layout_mode = 0
 offset_left = 1.0
@@ -436,83 +438,82 @@ offset_top = 1.0
 offset_right = 80.0
 offset_bottom = 21.0
 
-[node name="ResetColor" type="Button" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="ResetColor" type="Button" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1856714594]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../../NoiseToggle/NoiseToggleCheckButton")
 focus_neighbor_bottom = NodePath("../../Red/NoiseColorRedSlider")
 text = "Reset"
 
-[node name="HSplitContainer" type="HSplitContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=255272307]
 layout_mode = 2
 
-[node name="Red" type="HSplitContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+[node name="Red" type="HSplitContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=1861828301]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Red"]
+[node name="Label" type="Label" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Red" unique_id=944103838]
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 text = "Red"
 
-[node name="NoiseColorRedSlider" type="HSlider" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Red"]
+[node name="NoiseColorRedSlider" type="HSlider" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Red" unique_id=1890009193]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../HBoxContainer/ResetColor")
 focus_neighbor_bottom = NodePath("../../Green/NoiseColorGreenSlider")
 max_value = 255.0
 ticks_position = 3
 
-[node name="Green" type="HSplitContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+[node name="Green" type="HSplitContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=69927217]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Green"]
+[node name="Label" type="Label" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Green" unique_id=771741769]
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 text = "Green"
 
-[node name="NoiseColorGreenSlider" type="HSlider" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Green"]
+[node name="NoiseColorGreenSlider" type="HSlider" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Green" unique_id=2060409063]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../Red/NoiseColorRedSlider")
 focus_neighbor_bottom = NodePath("../../Blue/NoiseColorBlueSlider")
 max_value = 255.0
 ticks_position = 3
 
-[node name="Blue" type="HSplitContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+[node name="Blue" type="HSplitContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=710575669]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Blue"]
+[node name="Label" type="Label" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Blue" unique_id=2101260051]
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 text = "Blue"
 
-[node name="NoiseColorBlueSlider" type="HSlider" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Blue"]
+[node name="NoiseColorBlueSlider" type="HSlider" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Blue" unique_id=1846588043]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../Green/NoiseColorGreenSlider")
 focus_neighbor_bottom = NodePath("../../Alpha/NoiseColorAlphaSlider")
 max_value = 255.0
 ticks_position = 3
 
-[node name="Alpha" type="HSplitContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+[node name="Alpha" type="HSplitContainer" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=1935041734]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Alpha"]
+[node name="Label" type="Label" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Alpha" unique_id=196846990]
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 text = "Alpha"
 
-[node name="NoiseColorAlphaSlider" type="HSlider" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Alpha"]
+[node name="NoiseColorAlphaSlider" type="HSlider" parent="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Alpha" unique_id=1828016565]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../Blue/NoiseColorBlueSlider")
 focus_neighbor_bottom = NodePath("../../../NoiseToggle/NoiseToggleCheckButton")
 max_value = 255.0
 ticks_position = 3
 
-[node name="Gameplay" type="TabBar" parent="."]
-visible = false
+[node name="Gameplay" type="TabBar" parent="." unique_id=1770277552]
 layout_mode = 2
-focus_neighbor_top = NodePath("MarginContainer/VBoxContainer/ResetSave")
-focus_neighbor_bottom = NodePath("MarginContainer/VBoxContainer/HSplitContainer6/AdultContent")
+focus_neighbor_top = NodePath("MarginContainer/HSplitContainer/VBoxContainer/ResetSave")
+focus_neighbor_bottom = NodePath("MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer6/CombatAssist")
 metadata/_tab_index = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="Gameplay"]
+[node name="MarginContainer" type="MarginContainer" parent="Gameplay" unique_id=578606808]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -521,113 +522,131 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
+theme_override_constants/margin_right = 38
 theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Gameplay/MarginContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="Gameplay/MarginContainer" unique_id=841308163]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Gameplay/MarginContainer/HSplitContainer" unique_id=1711603514]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="HSplitContainer6" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
+[node name="HSplitContainer6" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer" unique_id=831837081]
 layout_mode = 2
 dragging_enabled = false
 
-[node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer6"]
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer6" unique_id=444912682]
 custom_minimum_size = Vector2(157, 0)
 layout_mode = 2
-text = "Adult Content"
+mouse_filter = 1
+text = "Combat Assist"
 
-[node name="AdultContent" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer6"]
+[node name="CombatAssist" type="CheckBox" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer6" unique_id=1911077629]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../ResetSave")
 focus_neighbor_bottom = NodePath("../../HSplitContainer/ShowTutorials")
 
-[node name="HSplitContainer" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
+[node name="HSplitContainer9" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer" unique_id=1258226329]
 layout_mode = 2
 dragging_enabled = false
 
-[node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer"]
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer9" unique_id=2036150953]
+custom_minimum_size = Vector2(157, 0)
+layout_mode = 2
+text = "Adult Content"
+
+[node name="AdultContent" type="CheckBox" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer9" unique_id=856276303]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../ResetSave")
+focus_neighbor_bottom = NodePath("../../HSplitContainer/ShowTutorials")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer" unique_id=1160327011]
+layout_mode = 2
+dragging_enabled = false
+
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer" unique_id=2099819242]
 custom_minimum_size = Vector2(157, 0)
 layout_mode = 2
 text = "Show Tutorials"
 
-[node name="ShowTutorials" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer"]
+[node name="ShowTutorials" type="CheckBox" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer" unique_id=319220376]
 layout_mode = 2
 tooltip_text = "Disabling this will unlock all the available tutorials in 'Tutorials' section."
-focus_neighbor_top = NodePath("../../HSplitContainer6/AdultContent")
+focus_neighbor_top = NodePath("../../HSplitContainer6/CombatAssist")
 focus_neighbor_bottom = NodePath("../../HSplitContainer7/Screenshake")
 
-[node name="HSplitContainer7" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
+[node name="HSplitContainer7" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer" unique_id=367633056]
 layout_mode = 2
 dragging_enabled = false
 
-[node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer7"]
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer7" unique_id=1488297087]
 custom_minimum_size = Vector2(157, 0)
 layout_mode = 2
 text = "Screenshake"
 
-[node name="Screenshake" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer7"]
+[node name="Screenshake" type="CheckBox" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer7" unique_id=643204802]
 layout_mode = 2
 tooltip_text = "Disabling this will unlock all the available tutorials in 'Tutorials' section."
 focus_neighbor_top = NodePath("../../HSplitContainer/ShowTutorials")
 focus_neighbor_bottom = NodePath("../../HSplitContainer2/ShowHints")
 
-[node name="HSplitContainer2" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
+[node name="HSplitContainer2" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer" unique_id=1627717711]
 layout_mode = 2
 dragging_enabled = false
 
-[node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2"]
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer2" unique_id=1812831454]
 custom_minimum_size = Vector2(157, 0)
 layout_mode = 2
 text = "Show Hints"
 
-[node name="ShowHints" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2"]
+[node name="ShowHints" type="CheckBox" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer2" unique_id=247284155]
 layout_mode = 2
 tooltip_text = "Show gameplay tips."
 focus_neighbor_top = NodePath("../../HSplitContainer7/Screenshake")
 focus_neighbor_bottom = NodePath("../../HSplitContainer3/ShowInteractionPrompts")
 
-[node name="HSplitContainer3" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
+[node name="HSplitContainer3" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer" unique_id=648127620]
 layout_mode = 2
 dragging_enabled = false
 
-[node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer3"]
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer3" unique_id=1977790472]
 custom_minimum_size = Vector2(157, 0)
 layout_mode = 2
 text = "Show Interaction Prompts"
 
-[node name="ShowInteractionPrompts" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer3"]
+[node name="ShowInteractionPrompts" type="CheckBox" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer3" unique_id=957513387]
 layout_mode = 2
 tooltip_text = "Shows the interaction key above Kalin when in range of interactables."
 focus_neighbor_top = NodePath("../../HSplitContainer2/ShowHints")
 focus_neighbor_bottom = NodePath("../../HSplitContainer8/LowHealthFX")
 
-[node name="HSplitContainer8" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
+[node name="HSplitContainer8" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer" unique_id=2024439339]
 layout_mode = 2
 dragging_enabled = false
 
-[node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer8"]
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer8" unique_id=1263282404]
 custom_minimum_size = Vector2(157, 0)
 layout_mode = 2
 text = "Disable Low Health FX on Sex"
 
-[node name="LowHealthFX" type="CheckBox" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer8"]
+[node name="LowHealthFX" type="CheckBox" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer8" unique_id=649367538]
 layout_mode = 2
 tooltip_text = "Shows the interaction key above Kalin when in range of interactables."
 focus_neighbor_top = NodePath("../../HSplitContainer3/ShowInteractionPrompts")
 focus_neighbor_bottom = NodePath("../../HSplitContainer4/HudScaleOption")
 
-[node name="HSplitContainer4" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
+[node name="HSplitContainer4" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer" unique_id=624337982]
 layout_mode = 2
 dragging_enabled = false
 
-[node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer4"]
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer4" unique_id=330779881]
 custom_minimum_size = Vector2(157, 0)
 layout_mode = 2
 text = "HUD Scale"
 
-[node name="HudScaleOption" type="OptionButton" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer4"]
+[node name="HudScaleOption" type="OptionButton" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer4" unique_id=638626495]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../HSplitContainer8/LowHealthFX")
 focus_neighbor_bottom = NodePath("../../HSplitContainer5/ShadowIntensity")
@@ -638,27 +657,27 @@ popup/item_0/id = 0
 popup/item_1/text = "2x"
 popup/item_1/id = 1
 
-[node name="HSplitContainer5" type="HSplitContainer" parent="Gameplay/MarginContainer/VBoxContainer"]
+[node name="HSplitContainer5" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer" unique_id=1716926814]
 layout_mode = 2
 dragging_enabled = false
 
-[node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer5"]
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer5" unique_id=98789432]
 custom_minimum_size = Vector2(76, 0)
 layout_mode = 2
 text = "Shadow Intensity"
 
-[node name="ShadowIntensity" type="HSlider" parent="Gameplay/MarginContainer/VBoxContainer/HSplitContainer5"]
+[node name="ShadowIntensity" type="HSlider" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer5" unique_id=2048006609]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../HSplitContainer4/HudScaleOption")
 focus_neighbor_bottom = NodePath("../../ResetSave")
 max_value = 1.0
 step = 0.1
 
-[node name="ResetSave" type="Button" parent="Gameplay/MarginContainer/VBoxContainer"]
+[node name="ResetSave" type="Button" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer" unique_id=1692553675]
 layout_mode = 2
 text = "Reset Save"
 
-[node name="ResetSaveConfirmation" type="NinePatchRect" parent="Gameplay/MarginContainer/VBoxContainer/ResetSave"]
+[node name="ResetSaveConfirmation" type="NinePatchRect" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/ResetSave" unique_id=1864745643]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -681,7 +700,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 script = SubResource("GDScript_aqc70")
 
-[node name="Label" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/ResetSave/ResetSaveConfirmation"]
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/ResetSave/ResetSaveConfirmation" unique_id=781449995]
 layout_mode = 0
 offset_left = 13.0
 offset_top = 8.0
@@ -691,7 +710,7 @@ text = "This will delete the save and quit the game, are you sure?"
 autowrap_mode = 2
 metadata/_edit_group_ = true
 
-[node name="Yes" type="Button" parent="Gameplay/MarginContainer/VBoxContainer/ResetSave/ResetSaveConfirmation"]
+[node name="Yes" type="Button" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/ResetSave/ResetSaveConfirmation" unique_id=228932337]
 layout_mode = 0
 offset_left = 29.0
 offset_top = 41.0
@@ -699,7 +718,7 @@ offset_right = 75.0
 offset_bottom = 63.0
 text = "Yes"
 
-[node name="No" type="Button" parent="Gameplay/MarginContainer/VBoxContainer/ResetSave/ResetSaveConfirmation"]
+[node name="No" type="Button" parent="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/ResetSave/ResetSaveConfirmation" unique_id=624171825]
 layout_mode = 0
 offset_left = 121.0
 offset_top = 41.0
@@ -707,12 +726,15 @@ offset_right = 170.0
 offset_bottom = 63.0
 text = "No"
 
-[node name="Tutorials" type="TabBar" parent="."]
+[node name="Tooltip" parent="Gameplay/MarginContainer/HSplitContainer" unique_id=2043883411 instance=ExtResource("5_2glep")]
+layout_mode = 2
+
+[node name="Tutorials" type="TabBar" parent="." unique_id=712202347]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="Tutorials"]
+[node name="MarginContainer" type="MarginContainer" parent="Tutorials" unique_id=777462875]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -724,10 +746,10 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Tutorials/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Tutorials/MarginContainer" unique_id=1715529611]
 layout_mode = 2
 
-[node name="TutorialInfo" type="RichTextLabel" parent="Tutorials/MarginContainer/VBoxContainer"]
+[node name="TutorialInfo" type="RichTextLabel" parent="Tutorials/MarginContainer/VBoxContainer" unique_id=145158837]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 bbcode_enabled = true
@@ -735,30 +757,30 @@ text = "Unlocked tutorials will be added here."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Tutorials/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Tutorials/MarginContainer/VBoxContainer" unique_id=616822019]
 layout_mode = 2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1496928493]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="StealthTutorial" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="StealthTutorial" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=797299870]
 layout_mode = 2
 text = "Stealth"
 script = ExtResource("5_iopgn")
 tutorial_scene = ExtResource("6_1amdw")
 tutorial_code = "Stealth"
 
-[node name="EnvironmentalKill" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="EnvironmentalKill" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1487430485]
 layout_mode = 2
 text = "Environmental Kill"
 script = ExtResource("5_iopgn")
 tutorial_scene = ExtResource("9_3hwek")
 tutorial_code = "Environmental Kill"
 
-[node name="EnemyPatrol" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="EnemyPatrol" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=917441021]
 layout_mode = 2
 text = "Enemy Patrol
 "
@@ -766,38 +788,38 @@ script = ExtResource("5_iopgn")
 tutorial_scene = ExtResource("10_845id")
 tutorial_code = "Enemy Patrol"
 
-[node name="Checkpoint" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Checkpoint" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1275038993]
 layout_mode = 2
 text = "Kalin's Status"
 script = ExtResource("5_iopgn")
 tutorial_scene = ExtResource("8_b20id")
 tutorial_code = "Kalin's Status"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1275725694]
 layout_mode = 2
 
-[node name="CombatTutorial" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="CombatTutorial" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1945633879]
 layout_mode = 2
 text = "Combat"
 script = ExtResource("5_iopgn")
 tutorial_scene = ExtResource("6_gicec")
 tutorial_code = "Combat"
 
-[node name="HeavyStance" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HeavyStance" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=558422013]
 layout_mode = 2
 text = "Heavy Stance"
 script = ExtResource("5_iopgn")
 tutorial_scene = ExtResource("7_dxxl1")
 tutorial_code = "Heavy Stance"
 
-[node name="LightStance" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="LightStance" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1263530318]
 layout_mode = 2
 text = "Light Stance"
 script = ExtResource("5_iopgn")
 tutorial_scene = ExtResource("8_3hwek")
 tutorial_code = "Light Stance"
 
-[node name="DefensiveStance" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="DefensiveStance" type="Button" parent="Tutorials/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1428475731]
 layout_mode = 2
 text = "Defensive Stance"
 script = ExtResource("5_iopgn")
@@ -827,14 +849,17 @@ tutorial_code = "Defensive Stance"
 [connection signal="value_changed" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Blue/NoiseColorBlueSlider" to="." method="_on_noise_color_blue_slider_value_changed"]
 [connection signal="drag_ended" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Alpha/NoiseColorAlphaSlider" to="." method="_on_noise_color_alpha_slider_drag_ended"]
 [connection signal="value_changed" from="Noise Indicator/MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/Alpha/NoiseColorAlphaSlider" to="." method="_on_noise_color_alpha_slider_value_changed"]
-[connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer6/AdultContent" to="." method="_on_adult_content_toggled"]
-[connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer/ShowTutorials" to="." method="_on_show_tutorials_toggled"]
-[connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer7/Screenshake" to="." method="_on_screenshake_toggled"]
-[connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer2/ShowHints" to="." method="_on_show_hints_toggled"]
-[connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer3/ShowInteractionPrompts" to="." method="_on_show_interaction_prompts_toggled"]
-[connection signal="toggled" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer8/LowHealthFX" to="." method="_on_low_health_fx_toggled"]
-[connection signal="item_selected" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer4/HudScaleOption" to="." method="_on_hud_scale_option_item_selected"]
-[connection signal="drag_ended" from="Gameplay/MarginContainer/VBoxContainer/HSplitContainer5/ShadowIntensity" to="." method="_on_shadow_intensity_drag_ended"]
-[connection signal="pressed" from="Gameplay/MarginContainer/VBoxContainer/ResetSave" to="." method="_on_reset_save_pressed"]
-[connection signal="pressed" from="Gameplay/MarginContainer/VBoxContainer/ResetSave/ResetSaveConfirmation/Yes" to="Gameplay/MarginContainer/VBoxContainer/ResetSave/ResetSaveConfirmation" method="_on_yes_pressed"]
-[connection signal="pressed" from="Gameplay/MarginContainer/VBoxContainer/ResetSave/ResetSaveConfirmation/No" to="Gameplay/MarginContainer/VBoxContainer/ResetSave/ResetSaveConfirmation" method="_on_no_pressed"]
+[connection signal="mouse_entered" from="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer6/CombatAssist" to="." method="_on_combat_assist_mouse_entered"]
+[connection signal="mouse_exited" from="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer6/CombatAssist" to="." method="_on_combat_assist_mouse_exited"]
+[connection signal="toggled" from="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer6/CombatAssist" to="." method="_on_combat_assist_toggled"]
+[connection signal="toggled" from="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer9/AdultContent" to="." method="_on_adult_content_toggled"]
+[connection signal="toggled" from="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer/ShowTutorials" to="." method="_on_show_tutorials_toggled"]
+[connection signal="toggled" from="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer7/Screenshake" to="." method="_on_screenshake_toggled"]
+[connection signal="toggled" from="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer2/ShowHints" to="." method="_on_show_hints_toggled"]
+[connection signal="toggled" from="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer3/ShowInteractionPrompts" to="." method="_on_show_interaction_prompts_toggled"]
+[connection signal="toggled" from="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer8/LowHealthFX" to="." method="_on_low_health_fx_toggled"]
+[connection signal="item_selected" from="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer4/HudScaleOption" to="." method="_on_hud_scale_option_item_selected"]
+[connection signal="drag_ended" from="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/HSplitContainer5/ShadowIntensity" to="." method="_on_shadow_intensity_drag_ended"]
+[connection signal="pressed" from="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/ResetSave" to="." method="_on_reset_save_pressed"]
+[connection signal="pressed" from="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/ResetSave/ResetSaveConfirmation/Yes" to="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/ResetSave/ResetSaveConfirmation" method="_on_yes_pressed"]
+[connection signal="pressed" from="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/ResetSave/ResetSaveConfirmation/No" to="Gameplay/MarginContainer/HSplitContainer/VBoxContainer/ResetSave/ResetSaveConfirmation" method="_on_no_pressed"]

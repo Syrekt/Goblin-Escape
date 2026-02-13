@@ -30,6 +30,7 @@ extends TabContainer
 @onready var amb_volume_slider 		: HSlider = find_child("AMBVolume")
 @onready var bgm_volume_slider 		: HSlider = find_child("BGMVolume")
 
+@onready var combat_assist_toggle		: CheckBox = find_child("CombatAssist")
 @onready var tutorial_toggle			: CheckBox = find_child("ShowTutorials")
 @onready var hint_toggle				: CheckBox = find_child("ShowHints")
 @onready var interaction_prompts_toggle	: CheckBox = find_child("ShowInteractionPrompts")
@@ -39,6 +40,7 @@ extends TabContainer
 @onready var screenshake_toggle			: CheckBox = find_child("Screenshake")
 @onready var low_health_fx				: CheckBox = find_child("LowHealthFX")
 
+@onready var tooltip: RichTextLabel = find_child("Tooltip")
 
 var open_tutorial : CanvasLayer
 
@@ -86,6 +88,7 @@ func _ready() -> void:
 	amb_volume_slider.value		= FmodServer.get_global_parameter_by_name("AMB_VOLUME")
 	sfx_volume_slider.value		= FmodServer.get_global_parameter_by_name("SFX_VOLUME")
 
+	combat_assist_toggle.set_pressed_no_signal(Options.combat_assist)
 	tutorial_toggle.set_pressed_no_signal(Ge.show_tutorials)
 	hint_toggle.set_pressed_no_signal(Ge.show_hints)
 	interaction_prompts_toggle.set_pressed_no_signal(Ge.show_interaction_prompts)
@@ -332,5 +335,15 @@ func _on_reset_audio_pressed() -> void:
 	Options.amb_volume = 1.0
 	Options.sfx_volume = 1.0
 	queue_free()
-	
+
+func _on_combat_assist_toggled(toggled_on: bool) -> void:
+	Options.combat_assist = toggled_on
 #endregion
+
+
+func _on_combat_assist_mouse_entered() -> void:
+	tooltip.show_tip("When enabled, Kalin will automatically choose the best available attack move against enemies. You'll still have to watch out your stamina and defend manually when needed.")
+
+
+func _on_combat_assist_mouse_exited() -> void:
+	tooltip.hide()

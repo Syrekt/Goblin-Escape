@@ -13,6 +13,7 @@ var hud_scale				:= 2
 var shadow_intensity		:= 1.0
 var adult_content_enabled	:= true
 var adult_build				:= OS.has_feature("nsfw") || OS.is_debug_build()
+var combat_assist			:= false
 
 var master_volume := 0.5:
 	set(value):
@@ -108,6 +109,7 @@ func save_options() -> void:
 		config.set_value("gameplay", "adult_content_enabled", adult_content_enabled)
 	config.set_value("gameplay", "screenshake_enabled", screenshake_enabled)
 	config.set_value("gameplay", "disable_low_health_fx_on_sex", disable_low_health_effects_on_sex)
+	config.set_value("gameplay", "combat_assist", combat_assist)
 	#endregion
 	
 	if config.has_section("window"):
@@ -156,6 +158,7 @@ func load_options() -> int:
 			adult_content_enabled = false
 		screenshake_enabled					= config.get_value("gameplay", "screenshake_enabled", 1.0)
 		disable_low_health_effects_on_sex	= config.get_value("gameplay", "disable_low_health_effects_on_sex", 1.0)
+		combat_assist						= config.get_value("gameplay", "combat_assist", false)
 		#endregion
 		#region Keybindings
 		if config.has_section("keyboard"):

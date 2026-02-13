@@ -21,7 +21,7 @@ func update(delta: float) -> void:
 	elif player.pressed("down") && player.has_defensive_stance:
 		finished.emit("stance_defensive")
 	elif player.pressed("attack") && player.stamina.spend(player.stab_cost, 1.0):
-		finished.emit("stab")
+		player.attack_from_state(name)
 	elif !is_equal_approx(player.get_movement_dir(), 0.0):
 		if player.pressed("sprint") && player.stamina.has_enough(1.0):
 			finished.emit("run")

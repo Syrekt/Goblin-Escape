@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dq36xxxk272rk"]
+
+[ext_resource type="Script" uid="uid://cekhhvpe4nsr3" path="res://UI/tooltip.gd" id="1_r4bus"]
+
+[node name="RichTextLabel" type="RichTextLabel" unique_id=1763400798]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 170.0
+offset_bottom = 56.0
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+script = ExtResource("1_r4bus")
