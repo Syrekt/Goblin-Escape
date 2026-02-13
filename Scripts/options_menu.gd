@@ -338,12 +338,10 @@ func _on_reset_audio_pressed() -> void:
 
 func _on_combat_assist_toggled(toggled_on: bool) -> void:
 	Options.combat_assist = toggled_on
+func _on_combat_assist_mouse_entered() -> void:
+	tooltip.show_tip("When enabled, Kalin will automatically choose the best available attack move against enemies. You'll still have to watch out your stamina and defend manually when needed.")
+func _on_combat_assist_mouse_exited() -> void:
+	tooltip.hide()
 #endregion
 
 
-func _on_combat_assist_mouse_entered() -> void:
-	tooltip.show_tip("When enabled, Kalin will automatically choose the best available attack move against enemies. You'll still have to watch out your stamina and defend manually when needed.")
-
-
-func _on_combat_assist_mouse_exited() -> void:
-	tooltip.hide()
