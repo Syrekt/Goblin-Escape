@@ -42,6 +42,8 @@ extends TabContainer
 @onready var difficulty_option			: OptionButton = find_child("Difficulty")
 @onready var analytics_toggle			: CheckBox = find_child("Analytics")
 
+@onready var gamepad_layout: TextureRect = find_child("GamepadLayout")
+
 
 var open_tutorial : CanvasLayer
 
@@ -138,6 +140,14 @@ func _process(delta: float) -> void:
 	elif Input.is_action_just_pressed("ui_focus_next"):
 		select_next_available()
 		get_tab_control(current_tab).grab_focus()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if gamepad_layout.visible:
+		gamepad_layout.hide()
+		var vbox1 = $Controls/MarginContainer/HSplitContainer/VBoxContainer
+		var vbox2 = $Controls/MarginContainer/HSplitContainer/VBoxContainer2
+		vbox1.show()
+		vbox2.show()
 
 
 func _exit_tree() -> void:
@@ -358,3 +368,11 @@ func _on_analytics_toggled(toggled_on: bool) -> void:
 	else:
 		Talo.players.clear_identity()
 #endregion
+
+
+func _on_gamepad_bindings_pressed() -> void:
+	gamepad_layout.show()
+	var vbox1 = $Controls/MarginContainer/HSplitContainer/VBoxContainer
+	var vbox2 = $Controls/MarginContainer/HSplitContainer/VBoxContainer2
+	vbox1.hide()
+	vbox2.hide()
