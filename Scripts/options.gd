@@ -16,6 +16,7 @@ var adult_build				:= OS.has_feature("nsfw") || OS.is_debug_build()
 var combat_assist			:= false
 enum DIFFICULTY {EASY, NORMAL, BRUTAL}
 var difficulty				:= DIFFICULTY.NORMAL
+var collect_analytics		:= true
 
 var master_volume := 0.5:
 	set(value):
@@ -113,6 +114,7 @@ func save_options() -> void:
 	config.set_value("gameplay", "disable_low_health_fx_on_sex", disable_low_health_effects_on_sex)
 	config.set_value("gameplay", "combat_assist", combat_assist)
 	config.set_value("gameplay", "difficulty", difficulty)
+	config.set_value("gameplay", "collect_analytics", collect_analytics)
 	#endregion
 	Talo.events.track("Settings saved", {
 		"fullscreen"			: str(fullscreen),
@@ -128,6 +130,7 @@ func save_options() -> void:
 		"adult_build"			: str(adult_build),
 		"combat_assist"			: str(combat_assist),
 		"difficulty"			: str(difficulty),
+		"collect_analytics"		: str(collect_analytics),
 	})
 	
 	if config.has_section("window"):
@@ -178,6 +181,7 @@ func load_options() -> int:
 		disable_low_health_effects_on_sex	= config.get_value("gameplay", "disable_low_health_effects_on_sex", 1.0)
 		combat_assist						= config.get_value("gameplay", "combat_assist", false)
 		difficulty							= config.get_value("gameplay", "difficulty", DIFFICULTY.NORMAL)
+		collect_analytics					= config.get_value("gameplay", "collect_analytics", collect_analytics)
 		#endregion
 		#region Keybindings
 		if config.has_section("keyboard"):

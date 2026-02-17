@@ -1,11 +1,9 @@
 [gd_scene format=3 uid="uid://fgj6dmvmrowh"]
 
 [ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://UI/theme_button.tres" id="1_ucjbo"]
-[ext_resource type="Script" uid="uid://bnymdbpnxf6a0" path="res://Scripts/options_menu.gd" id="2_iopgn"]
+[ext_resource type="Script" uid="uid://egf24uitxdlo" path="res://Scripts/options_menu.gd" id="2_iopgn"]
 [ext_resource type="Script" uid="uid://bfd22kixp4ppo" path="res://Scripts/toggle_button.gd" id="2_ucjbo"]
 [ext_resource type="PackedScene" uid="uid://hvdtjmpwq6ji" path="res://UI/Buttons/button_keybind.tscn" id="3_iopgn"]
-[ext_resource type="PackedScene" uid="uid://dq36xxxk272rk" path="res://UI/tooltip.tscn" id="5_2glep"]
-[ext_resource type="Script" uid="uid://dwpk0f2wypdc3" path="res://Scripts/auto_assign_tooltip.gd" id="5_a34tr"]
 [ext_resource type="Texture2D" uid="uid://fyevcw0t8yc" path="res://UI/panel_bg.png" id="5_aqc70"]
 [ext_resource type="Script" uid="uid://cbsarrmo5l05n" path="res://Scripts/tutorial_button.gd" id="5_iopgn"]
 [ext_resource type="PackedScene" uid="uid://bfrfvr3f2ii41" path="res://Tutorial/stealth_tutorial.tscn" id="6_1amdw"]
@@ -54,11 +52,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 4
+current_tab = 0
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="." unique_id=153179285]
-visible = false
 layout_mode = 2
 focus_neighbor_top = NodePath("MarginContainer/ScrollContainer/VBoxContainer/ResetGraphics")
 focus_neighbor_bottom = NodePath("MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Fullscreen")
@@ -147,6 +144,23 @@ layout_mode = 2
 focus_neighbor_top = NodePath("../../HBoxContainer3/PixelPerfect")
 focus_neighbor_bottom = NodePath("../../HBoxContainer5/SwitchMonitor")
 script = ExtResource("2_ucjbo")
+
+[node name="HSplitContainer5" type="HSplitContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1716926814]
+layout_mode = 2
+dragging_enabled = false
+
+[node name="Label" type="Label" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HSplitContainer5" unique_id=98789432]
+custom_minimum_size = Vector2(76, 0)
+layout_mode = 2
+text = "Shadow Intensity"
+
+[node name="ShadowIntensity" type="HSlider" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HSplitContainer5" unique_id=2048006609]
+layout_mode = 2
+tooltip_text = "Adjust the darkness effect when Kalin is in shadows."
+focus_neighbor_top = NodePath("../../../../../../Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer4/HudScaleOption")
+focus_neighbor_bottom = NodePath("../../../../../../Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/ResetSave")
+max_value = 1.0
+step = 0.1
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=502285779]
 layout_mode = 2
@@ -509,6 +523,7 @@ max_value = 255.0
 ticks_position = 3
 
 [node name="Gameplay" type="TabBar" parent="." unique_id=1770277552]
+visible = false
 layout_mode = 2
 focus_neighbor_top = NodePath("MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/ResetSave")
 focus_neighbor_bottom = NodePath("MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer6/CombatAssist")
@@ -560,7 +575,6 @@ layout_mode = 2
 tooltip_text = "When enabled, Kalin will automatically choose the best available attack move against enemies. You'll still have to watch out your stamina and defend manually when needed."
 focus_neighbor_top = NodePath("../../ResetSave")
 focus_neighbor_bottom = NodePath("../../HSplitContainer/ShowTutorials")
-script = ExtResource("5_a34tr")
 
 [node name="HSplitContainer10" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" unique_id=550528068]
 layout_mode = 2
@@ -584,7 +598,6 @@ popup/item_1/text = "Normal"
 popup/item_1/id = 1
 popup/item_2/text = "Brutal"
 popup/item_2/id = 2
-script = ExtResource("5_a34tr")
 
 [node name="HSplitContainer9" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" unique_id=1258226329]
 layout_mode = 2
@@ -599,7 +612,6 @@ text = "Adult Content"
 layout_mode = 2
 focus_neighbor_top = NodePath("../../ResetSave")
 focus_neighbor_bottom = NodePath("../../HSplitContainer/ShowTutorials")
-script = ExtResource("5_a34tr")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" unique_id=1160327011]
 layout_mode = 2
@@ -615,7 +627,6 @@ layout_mode = 2
 tooltip_text = "Disabling this will unlock all the available tutorials in 'Tutorials' section."
 focus_neighbor_top = NodePath("../../HSplitContainer6/CombatAssist")
 focus_neighbor_bottom = NodePath("../../HSplitContainer7/Screenshake")
-script = ExtResource("5_a34tr")
 
 [node name="HSplitContainer7" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" unique_id=367633056]
 layout_mode = 2
@@ -630,7 +641,6 @@ text = "Screenshake"
 layout_mode = 2
 focus_neighbor_top = NodePath("../../HSplitContainer/ShowTutorials")
 focus_neighbor_bottom = NodePath("../../HSplitContainer2/ShowHints")
-script = ExtResource("5_a34tr")
 
 [node name="HSplitContainer2" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" unique_id=1627717711]
 layout_mode = 2
@@ -646,7 +656,6 @@ layout_mode = 2
 tooltip_text = "Show gameplay tips."
 focus_neighbor_top = NodePath("../../HSplitContainer7/Screenshake")
 focus_neighbor_bottom = NodePath("../../HSplitContainer3/ShowInteractionPrompts")
-script = ExtResource("5_a34tr")
 
 [node name="HSplitContainer3" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" unique_id=648127620]
 layout_mode = 2
@@ -662,7 +671,6 @@ layout_mode = 2
 tooltip_text = "Shows the interaction key above Kalin when in range of interactables."
 focus_neighbor_top = NodePath("../../HSplitContainer2/ShowHints")
 focus_neighbor_bottom = NodePath("../../HSplitContainer8/LowHealthFX")
-script = ExtResource("5_a34tr")
 
 [node name="HSplitContainer8" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" unique_id=2024439339]
 layout_mode = 2
@@ -675,10 +683,9 @@ text = "Disable Low Health FX on Sex"
 
 [node name="LowHealthFX" type="CheckBox" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer8" unique_id=649367538]
 layout_mode = 2
-tooltip_text = "Disables audio filters and heartbeat sound effects playing when Kalin is low on health. "
+tooltip_text = "Disables audio filters and heartbeat sound effects playing when Kalin is low on health on sex scenes."
 focus_neighbor_top = NodePath("../../HSplitContainer3/ShowInteractionPrompts")
 focus_neighbor_bottom = NodePath("../../HSplitContainer4/HudScaleOption")
-script = ExtResource("5_a34tr")
 
 [node name="HSplitContainer4" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" unique_id=624337982]
 layout_mode = 2
@@ -692,31 +699,28 @@ text = "HUD Scale"
 [node name="HudScaleOption" type="OptionButton" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer4" unique_id=638626495]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../HSplitContainer8/LowHealthFX")
-focus_neighbor_bottom = NodePath("../../HSplitContainer5/ShadowIntensity")
+focus_neighbor_bottom = NodePath("../../../../../../../Graphics/MarginContainer/ScrollContainer/VBoxContainer/HSplitContainer5/ShadowIntensity")
 selected = 0
 item_count = 2
 popup/item_0/text = "1x"
 popup/item_0/id = 0
 popup/item_1/text = "2x"
 popup/item_1/id = 1
-script = ExtResource("5_a34tr")
 
-[node name="HSplitContainer5" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" unique_id=1716926814]
+[node name="HSplitContainer11" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" unique_id=303940489]
 layout_mode = 2
 dragging_enabled = false
 
-[node name="Label" type="Label" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer5" unique_id=98789432]
-custom_minimum_size = Vector2(76, 0)
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer11" unique_id=1074933264]
+custom_minimum_size = Vector2(157, 0)
 layout_mode = 2
-text = "Shadow Intensity"
+text = "Allow Analytics"
 
-[node name="ShadowIntensity" type="HSlider" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer5" unique_id=2048006609]
+[node name="Analytics" type="CheckBox" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer11" unique_id=1334707328]
 layout_mode = 2
-focus_neighbor_top = NodePath("../../HSplitContainer4/HudScaleOption")
-focus_neighbor_bottom = NodePath("../../ResetSave")
-max_value = 1.0
-step = 0.1
-script = ExtResource("5_a34tr")
+tooltip_text = "Enables/disables collection of anonymous gameplay data analytics used to improve the game."
+focus_neighbor_top = NodePath("../../HSplitContainer3/ShowInteractionPrompts")
+focus_neighbor_bottom = NodePath("../../HSplitContainer4/HudScaleOption")
 
 [node name="ResetSave" type="Button" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" unique_id=1692553675]
 layout_mode = 2
@@ -770,9 +774,6 @@ offset_top = 41.0
 offset_right = 170.0
 offset_bottom = 63.0
 text = "No"
-
-[node name="Tooltip" parent="Gameplay/MarginContainer/HSplitContainer" unique_id=2043883411 instance=ExtResource("5_2glep")]
-layout_mode = 2
 
 [node name="Tutorials" type="TabBar" parent="." unique_id=712202347]
 visible = false
@@ -875,6 +876,7 @@ tutorial_code = "Defensive Stance"
 [connection signal="item_selected" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/Resolution" to="." method="_on_option_button_item_selected"]
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/PixelPerfect" to="." method="_on_pixel_perfect_toggled"]
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/Borderless" to="." method="_on_borderless_toggled"]
+[connection signal="drag_ended" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HSplitContainer5/ShadowIntensity" to="." method="_on_shadow_intensity_drag_ended"]
 [connection signal="pressed" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SwitchMonitor" to="." method="_on_switch_monitor_pressed"]
 [connection signal="pressed" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/CenterWindow" to="." method="_on_center_window_pressed"]
 [connection signal="pressed" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/ResetGraphics" to="." method="_on_reset_graphics_pressed"]
@@ -903,7 +905,7 @@ tutorial_code = "Defensive Stance"
 [connection signal="toggled" from="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer3/ShowInteractionPrompts" to="." method="_on_show_interaction_prompts_toggled"]
 [connection signal="toggled" from="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer8/LowHealthFX" to="." method="_on_low_health_fx_toggled"]
 [connection signal="item_selected" from="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer4/HudScaleOption" to="." method="_on_hud_scale_option_item_selected"]
-[connection signal="drag_ended" from="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer5/ShadowIntensity" to="." method="_on_shadow_intensity_drag_ended"]
+[connection signal="toggled" from="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer11/Analytics" to="." method="_on_analytics_toggled"]
 [connection signal="pressed" from="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/ResetSave" to="." method="_on_reset_save_pressed"]
 [connection signal="pressed" from="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/ResetSave/ResetSaveConfirmation/Yes" to="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/ResetSave/ResetSaveConfirmation" method="_on_yes_pressed"]
 [connection signal="pressed" from="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/ResetSave/ResetSaveConfirmation/No" to="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/ResetSave/ResetSaveConfirmation" method="_on_no_pressed"]

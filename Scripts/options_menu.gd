@@ -40,8 +40,8 @@ extends TabContainer
 @onready var screenshake_toggle			: CheckBox = find_child("Screenshake")
 @onready var low_health_fx				: CheckBox = find_child("LowHealthFX")
 @onready var difficulty_option			: OptionButton = find_child("Difficulty")
+@onready var analytics_toggle			: CheckBox = find_child("Analytics")
 
-@onready var tooltip: RichTextLabel = find_child("Tooltip")
 
 var open_tutorial : CanvasLayer
 
@@ -116,6 +116,8 @@ func _ready() -> void:
 
 	var difficulty = Options.difficulty
 	difficulty_option.selected = difficulty
+	var collect_analytics = Options.collect_analytics
+	analytics_toggle.set_pressed_no_signal(collect_analytics)
 
 
 func _process(delta: float) -> void:
@@ -349,4 +351,6 @@ func _on_difficulty_item_selected(index: int) -> void:
 			Options.difficulty = Options.DIFFICULTY.NORMAL
 		2:
 			Options.difficulty = Options.DIFFICULTY.BRUTAL
+func _on_analytics_toggled(toggled_on: bool) -> void:
+	Options.collect_analytics = toggled_on
 #endregion

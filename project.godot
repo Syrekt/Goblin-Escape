@@ -38,6 +38,7 @@ MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
 ImportData="*res://Inventory/ImportData.gd"
 FmodManager="*res://addons/fmod/FmodManager.gd"
 Talo="*uid://cf5txmco4tia4"
+CustomTooltip="*uid://bnct2spvljbpg"
 
 [debug]
 

@@ -51,6 +51,8 @@ texture = ExtResource("3_sukla")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wu7ve"]
 texture = ExtResource("4_86jsb")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_58tpi"]
+
 [sub_resource type="DPITexture" id="DPITexture_3sudc"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#fff\" fill-opacity=\".75\" d=\"m1 3 2-2 5 5 5-5 2 2-5 5 5 5-2 2-5-5-5 5-2-2 5-5z\"/></svg>
 "
@@ -125,6 +127,7 @@ MenuButton/styles/normal = SubResource("StyleBoxTexture_g00hn")
 MenuButton/styles/pressed = SubResource("StyleBoxTexture_wu7ve")
 OptionButton/fonts/font = ExtResource("1_kgf2r")
 PopupMenu/fonts/font = ExtResource("1_kgf2r")
+PopupPanel/styles/panel = SubResource("StyleBoxEmpty_58tpi")
 RichTextLabel/fonts/normal_font = ExtResource("1_kgf2r")
 TabBar/colors/drop_mark_color = Color(1, 1, 1, 1)
 TabBar/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
