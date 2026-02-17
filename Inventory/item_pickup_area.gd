@@ -7,6 +7,9 @@ func update(player: Player) -> void:
 		Ge.popup_text(player.global_position, text)
 		player.pickup_sfx.set_parameter("LootType", owner.loot_type)
 		player.pickup_sfx.play()
+		Talo.events.track("Picked up item", {
+			"Item Name"		: str(owner.item.item_name),
+		})
 		# Save item pickup
 		if !owner.instantiated:
 			Game.get_singleton().save_data_in_room(owner.name, { "picked": true })

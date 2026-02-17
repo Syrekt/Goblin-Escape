@@ -22,10 +22,12 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 	player.status_effect_container.remove_status_effect("Death's Door")
 	if player.dead:
+		Talo.events.track("Died")
 		print("Dead")
 		death_timer.start()
 		print("death_timer.time_left: "+str(death_timer.time_left));
 	else:
+		Talo.events.track("Knocked Unconscious")
 		print("Unconscious")
 		player.unconscious = true
 		sex_timer.start()

@@ -24,6 +24,7 @@ func _ready() -> void:
 
 [node name="Game" type="Node2D" unique_id=1899477501]
 script = ExtResource("1_dthpw")
+starting_map = 0
 
 [node name="LoadingScreen" parent="." unique_id=1398843392 instance=ExtResource("2_1cwbi")]
 unique_name_in_owner = true

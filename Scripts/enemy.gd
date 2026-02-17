@@ -132,6 +132,7 @@ func take_damage(_damage : int, _source: Node2D = null, critical := false):
 		sfx_emitter.play()
 		state_node.state.finished.emit("hurt")
 	
+	var attack_type : String
 	if _source:
 		var incoming_dir = sign(_source.global_position.x - global_position.x)
 		print("critical: "+str(critical))
@@ -141,12 +142,21 @@ func take_damage(_damage : int, _source: Node2D = null, critical := false):
 			Ge.bleed_spurt(global_position, -incoming_dir)
 
 		if _source is Player:
-			var attack_type = _source.state_node.state.name
+			attack_type = _source.state_node.state.name
 			attack_type_taken.append(attack_type)
 			aware = true
 			assign_chase_target(_source)
 		if health.value > 0:
 			set_facing(incoming_dir)
+
+	Talo.events.track("Enemy took damage", {
+		"Damage"		: str(_damage),
+		"Health Left"	: str(health.value),
+		"Critical"		: str(critical),
+		"Aware"			: str(aware),
+		"Source"		: str(_source),
+		"Player Attack" : str(attack_type),
+	})
 func next_step_free(direction : int) -> bool:
 	if direction == 1:
 		var collider = $WallCheckRight.get_collider()

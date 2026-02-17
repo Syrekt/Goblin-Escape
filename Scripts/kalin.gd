@@ -245,6 +245,7 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 	var defending : bool = state_node.state.name == "stance_defensive"
 	var defended := false
 
+
 #region Damage has a source
 	#Parry
 	if _source:
@@ -288,15 +289,18 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 						if perfect_parry:
 							Ge.slow_mo(0.25, 0.50)
 							block_sfx.set_parameter("Block", "PerfectParry")
+							Talo.events.track("Perfect Parry")
 						else:
 							Ge.slow_mo(0.25, 0.25)
 							block_sfx.set_parameter("Block", "Parry")
+							Talo.events.track("Parry")
 						_source.combat_properties.stun(2.0)
 				"slash":
 					combat_properties.stun(2.0)
 					play_hurt_animation = false
 					defended = false
 					block_sfx.set_parameter("Block", "Fail")
+					Talo.events.track("Stunned while blocking")
 			block_sfx.play()
 #endregion
 	#Take damage (abort if dead)
@@ -327,7 +331,23 @@ func take_damage(_damage: int, _source: Node2D = null, play_hurt_animation := tr
 				_source.dealth_finishing_blow = true
 			hurt_sfx.play()
 			state_node.state.finished.emit("death", {"source" = _source})
+
+			Talo.events.track("Health depleted", {
+				"Damage": str(_damage),
+				"Source": str(_source),
+			})
+
 			return
+
+	Talo.events.track("Take Damage", {
+		"Damage"		: str(_damage),
+		"Source"		: str(_source),
+		"Defended"		: str(defended),
+		"Power Crush"	: str(power_crush),
+		"Health Left"	: str(health.value),
+		"Stamina Left"	: str(stamina.value),
+	})
+
 	#Play animation
 	if play_hurt_animation:
 		if state_name == "corner_climb":
@@ -402,6 +422,9 @@ func snap_to_corner(ledge_position: Vector2) -> void:
 func quick_climb() -> void:
 	state_node.state.finished.emit("corner_climb")
 func sex_begin(participants: Array, _position: String) -> void:
+	Talo.events.track("Sex Begin", {
+		"Participants"	: str(participants)
+	})
 	sex_participants = participants.duplicate()
 	print("sex_participants: "+str(sex_participants))
 	for participant in sex_participants:
@@ -796,7 +819,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 #endregion
 #region Ready
 func _ready() -> void:
-	Talo.players.identify("test", "Selim")
 	#SentrySDK.add_breadcrumb(SentryBreadcrumb.create("Just about to welcome the World."))
 	#SentrySDK.capture_message("Hello, World!")
 

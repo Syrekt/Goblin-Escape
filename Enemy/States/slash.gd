@@ -3,6 +3,7 @@ extends EnemyState
 @onready var hitbox : Area2D = get_child(0)
 
 func enter(previous_state_path: String, data := {}) -> void:
+	Talo.events.track("Enemy performed: Slash")
 	enemy.call_deferred("update_animation", name)
 	enemy.velocity.x = 0
 	if !enemy.chase_target: return

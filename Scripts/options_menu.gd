@@ -353,4 +353,8 @@ func _on_difficulty_item_selected(index: int) -> void:
 			Options.difficulty = Options.DIFFICULTY.BRUTAL
 func _on_analytics_toggled(toggled_on: bool) -> void:
 	Options.collect_analytics = toggled_on
+	if Options.collect_analytics:
+		Talo.players.identify("anonymous", OS.get_unique_id())
+	else:
+		Talo.players.clear_identity()
 #endregion

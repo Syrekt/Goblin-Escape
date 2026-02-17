@@ -27,17 +27,17 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Talo="*uid://cf5txmco4tia4"
 Debugger="*res://Objects/debugger.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 InputHelper="*uid://cholww48njaeh"
 Combat="*res://Scripts/combat.gd"
 Ge="*res://Scripts/GE.gd"
-PhantomCameraManager="*uid://duq6jhf6unyis"
 Options="*res://Scripts/options.gd"
+PhantomCameraManager="*uid://duq6jhf6unyis"
 MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
 ImportData="*res://Inventory/ImportData.gd"
 FmodManager="*res://addons/fmod/FmodManager.gd"
-Talo="*uid://cf5txmco4tia4"
 CustomTooltip="*uid://bnct2spvljbpg"
 
 [debug]

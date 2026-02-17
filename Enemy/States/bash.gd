@@ -1,6 +1,7 @@
 extends EnemyState
 
 func enter(previous_state_path: String, data := {}) -> void:
+	Talo.events.track("Enemy performed: Bash")
 	if enemy.counter_attack:
 		enemy.call_deferred("update_animation", name, 2)
 	else:

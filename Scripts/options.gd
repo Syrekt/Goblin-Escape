@@ -64,6 +64,8 @@ func _ready() -> void:
 		DisplayServer.window_set_position((DisplayServer.screen_get_size() - DisplayServer.window_get_size())/2)
 	#endregion
 
+	Talo.players.identify("anonymous", OS.get_unique_id())
+
 func _process(delta: float) -> void:
 	# Update current display
 	var screen := DisplayServer.window_get_current_screen()

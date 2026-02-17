@@ -3,6 +3,7 @@ extends EnemyState
 @onready var hitbox : Area2D = get_child(0)
 
 func enter(previous_state_path: String, data := {}) -> void:
+	Talo.events.track("Enemy performed: Stab")
 	if enemy.counter_attack:
 		enemy.call_deferred("update_animation", name, 2)
 		enemy.sfx_emitter.set_parameter("EnemySound", "CounterAttack")

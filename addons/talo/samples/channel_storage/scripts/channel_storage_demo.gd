@@ -15,7 +15,7 @@ func _ready() -> void:
 
 	prop_live_value_label.text = "Set a prop to see live updates"
 	prop_updated_label.text = "No prop key set"
-	await Talo.players.identify("temp_username", Talo.players.generate_identifier())
+	await Talo.players.identify("temp_username", OS.get_unique_id())
 
 	var get_options := Talo.channels.GetChannelsOptions.new()
 	get_options.prop_key = "channel-storage-demo"

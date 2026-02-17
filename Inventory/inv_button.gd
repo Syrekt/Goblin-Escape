@@ -106,5 +106,10 @@ func _on_pressed() -> void:
 			owner.drink_sfx.play()
 		"_":
 			print("This item has no use")
+
+	Talo.events.track("Use item", {
+		"Item Name"	: text,
+		"Used"		: str(used),
+	})
 	if used && use():
 		queue_free()

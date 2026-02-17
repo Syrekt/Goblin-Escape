@@ -13,6 +13,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	progression_bar.show()
 	struggle_prompt._show("attack")
 	progression_bar.value = progression_bar.max_value / 2
+	Talo.events.track("Struggle started")
 
 	tween = create_tween().bind_node(self).set_loops(-1)
 	var tween_speed = 0.1
@@ -51,3 +52,4 @@ func physics_update(delta:float) -> void:
 		else:
 			player.grabbed_by.state_node.state.finished.emit("slash")
 			player.break_grab()
+			Talo.events.track("Struggle succeded")

@@ -4,6 +4,7 @@ var tween : Tween = null
 
 func enter(previous_state_path: String, data := {}) -> void:
 	player.call_deferred("update_animation", name)
+	Talo.events.track("Took fall damage")
 	player.take_damage(data.fall_damage, null, false)
 	player.ignore_corners = false
 	player.velocity = Vector2.ZERO

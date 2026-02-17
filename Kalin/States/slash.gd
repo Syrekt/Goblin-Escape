@@ -33,6 +33,7 @@ func _on_attack_frame() -> void:
 				if defender_state == "stance_defensive":
 					defender.combat_properties.stun(2.0)
 					slash_emitter.set_parameter("AttackResult", "GuardBreak")
+					Talo.events.track("Slash attack inflicted stun on defending enemy")
 				else:
 					defender.take_damage(damage_dealt, player, true)
 					slash_emitter.set_parameter("AttackResult", "HitOrganic")
