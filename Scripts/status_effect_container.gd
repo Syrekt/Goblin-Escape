@@ -4,6 +4,9 @@ var status_effect_scene := preload("res://Objects/status_effect.tscn")
 
 func add_status_effect(status_effect_name:String,lifetime:=0.0,tick_time:=0.0) -> void:
 	print("Adding status effect: " + status_effect_name)
+	Talo.events.track("Add status effect to player", {
+		"Status Effect"		: status_effect_name,
+	})
 
 	var status_effect_found := false
 	for child in get_children():
