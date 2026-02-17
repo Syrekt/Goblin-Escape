@@ -37,6 +37,7 @@ Options="*res://Scripts/options.gd"
 MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
 ImportData="*res://Inventory/ImportData.gd"
 FmodManager="*res://addons/fmod/FmodManager.gd"
+Talo="*uid://cf5txmco4tia4"
 
 [debug]
 
@@ -67,7 +68,7 @@ movie_writer/movie_file="C:/Users/Administrator/Videos/Godot/gd.avi"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/MetroidvaniaSystem/EditorExtension/plugin.cfg", "res://addons/MetroidvaniaSystem/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/fmod/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg", "res://addons/MetroidvaniaSystem/EditorExtension/plugin.cfg", "res://addons/MetroidvaniaSystem/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/fmod/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/talo/plugin.cfg")
 
 [file_customization]
 

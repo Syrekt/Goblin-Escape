@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bapa7gs5kak28"]
+[gd_scene format=3 uid="uid://bapa7gs5kak28"]
 
 [ext_resource type="Script" uid="uid://4l57b3aw4op" path="res://Scripts/debug_panel.gd" id="1_vuomb"]
 [ext_resource type="Theme" uid="uid://crosqd2uoimhi" path="res://UI/theme_button.tres" id="2_by8bh"]
@@ -6,11 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://cw1yc3cfjvitp" path="res://UI/Buffs/se_bleed.png" id="4_3guvx"]
 [ext_resource type="Texture2D" uid="uid://b5orcurcmtjix" path="res://Inventory/Sprites/ Potions-export12.png" id="5_3s84j"]
 
-[node name="DebugPanel" type="CanvasLayer"]
+[node name="DebugPanel" type="CanvasLayer" unique_id=614596068]
 process_mode = 3
 script = ExtResource("1_vuomb")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1081269688]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,13 +19,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_by8bh")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Control"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Control" unique_id=1897013196]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -212.0
-offset_bottom = 216.0
+offset_bottom = 247.0
 grow_horizontal = 0
 texture = ExtResource("3_3guvx")
 patch_margin_left = 14
@@ -33,7 +33,7 @@ patch_margin_top = 14
 patch_margin_right = 14
 patch_margin_bottom = 14
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/NinePatchRect"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/NinePatchRect" unique_id=1877555567]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,42 +45,47 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/NinePatchRect/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/NinePatchRect/MarginContainer" unique_id=1339975651]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Control/NinePatchRect/MarginContainer/VBoxContainer" unique_id=1373892874]
 layout_mode = 2
 text = "Debug Panel"
 horizontal_alignment = 1
 
-[node name="HideVersion" type="CheckBox" parent="Control/NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="HideVersion" type="CheckBox" parent="Control/NinePatchRect/MarginContainer/VBoxContainer" unique_id=1269487048]
 layout_mode = 2
 button_pressed = true
 text = "Hide Version"
 
-[node name="DealDamage" type="Button" parent="Control/NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="Talo Flush" type="Button" parent="Control/NinePatchRect/MarginContainer/VBoxContainer" unique_id=213974559]
+layout_mode = 2
+text = "Talo Flush"
+alignment = 0
+
+[node name="DealDamage" type="Button" parent="Control/NinePatchRect/MarginContainer/VBoxContainer" unique_id=279722961]
 layout_mode = 2
 text = "Deal Damage"
 alignment = 0
 
-[node name="HealKalin" type="Button" parent="Control/NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="HealKalin" type="Button" parent="Control/NinePatchRect/MarginContainer/VBoxContainer" unique_id=478227004]
 layout_mode = 2
 text = "Heal Kalin
 "
 alignment = 0
 
-[node name="GiveExp" type="Button" parent="Control/NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="GiveExp" type="Button" parent="Control/NinePatchRect/MarginContainer/VBoxContainer" unique_id=1908042839]
 layout_mode = 2
 text = "Give Exp"
 alignment = 0
 
-[node name="MapSelection" type="OptionButton" parent="Control/NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="MapSelection" type="OptionButton" parent="Control/NinePatchRect/MarginContainer/VBoxContainer" unique_id=1780019319]
 layout_mode = 2
 allow_reselect = true
 item_count = 1
 popup/item_0/id = 0
 
-[node name="StatusEffect" type="OptionButton" parent="Control/NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="StatusEffect" type="OptionButton" parent="Control/NinePatchRect/MarginContainer/VBoxContainer" unique_id=333858856]
 layout_mode = 2
 allow_reselect = true
 item_count = 2
@@ -91,20 +96,21 @@ popup/item_1/text = "Poison"
 popup/item_1/icon = ExtResource("5_3s84j")
 popup/item_1/id = 1
 
-[node name="HSplitContainer" type="HSplitContainer" parent="Control/NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="Control/NinePatchRect/MarginContainer/VBoxContainer" unique_id=1758230359]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/NinePatchRect/MarginContainer/VBoxContainer/HSplitContainer"]
+[node name="Label" type="Label" parent="Control/NinePatchRect/MarginContainer/VBoxContainer/HSplitContainer" unique_id=1054666200]
 layout_mode = 2
 text = "Zoom"
 
-[node name="CameraZoom" type="HSlider" parent="Control/NinePatchRect/MarginContainer/VBoxContainer/HSplitContainer"]
+[node name="CameraZoom" type="HSlider" parent="Control/NinePatchRect/MarginContainer/VBoxContainer/HSplitContainer" unique_id=1090725846]
 layout_mode = 2
 min_value = 1.0
 max_value = 3.0
 value = 1.0
 
 [connection signal="toggled" from="Control/NinePatchRect/MarginContainer/VBoxContainer/HideVersion" to="." method="_on_hide_version_toggled"]
+[connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/Talo Flush" to="." method="_on_talo_flush_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/DealDamage" to="." method="_on_deal_damage_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/HealKalin" to="." method="_on_heal_kalin_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/GiveExp" to="." method="_on_give_exp_pressed"]

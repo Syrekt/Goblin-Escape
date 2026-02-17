@@ -591,12 +591,7 @@ func get_grabbed(enemy: Enemy, state: String) -> void:
 func break_grab() -> void:
 	state_node.state.finished.emit("break_free")
 	grabbed_by = null # Enemy will change it's state to 'shoved'
-func level_up() -> void:
-	experience_point -= experience_required
-	experience.lose(experience_required)
-	level += 1
-	experience_required = get_exp_required_for_level(level + 1)
-	print("Experience required for the next level: "+str(experience_required))
+	Talo.events.track("Struggle succeeded")
 func get_exp_required_for_level(_level:int) -> int:
 	print("Get level requiredment for %d" %_level)
 	var base_requirement := 100
@@ -801,6 +796,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 #endregion
 #region Ready
 func _ready() -> void:
+	Talo.players.identify("test", "Selim")
 	#SentrySDK.add_breadcrumb(SentryBreadcrumb.create("Just about to welcome the World."))
 	#SentrySDK.capture_message("Hello, World!")
 

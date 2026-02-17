@@ -47,6 +47,7 @@ func physics_update(delta:float) -> void:
 		if Options.adult_content_enabled:
 			player.grabbed_by.state_node.state.finished.emit(player.grabbed_by.transition_state)
 			finished.emit(player.grabbed_by.transition_state)
+			Talo.events.track("Struggle failed")
 		else:
 			player.grabbed_by.state_node.state.finished.emit("slash")
 			player.break_grab()

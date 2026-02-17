@@ -27,9 +27,17 @@ func open() -> void:
 
 
 func close() -> void:
+	print("Close character panel")
 	strength.close()
 	endurance.close()
 	vitality.close()
+	Talo.events.track("Level up", {
+		"New Level": str(owner.level),
+		"EXP Left" : str(owner.experience_point),
+		"Strength" : str(owner.strength),
+		"Endurance": str(owner.endurance),
+		"Vitality" : str(owner.vitality),
+	})
 	hide()
 
 

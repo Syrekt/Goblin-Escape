@@ -14,6 +14,8 @@ var shadow_intensity		:= 1.0
 var adult_content_enabled	:= true
 var adult_build				:= OS.has_feature("nsfw") || OS.is_debug_build()
 var combat_assist			:= false
+enum DIFFICULTY {EASY, NORMAL, BRUTAL}
+var difficulty				:= DIFFICULTY.NORMAL
 
 var master_volume := 0.5:
 	set(value):
@@ -110,7 +112,23 @@ func save_options() -> void:
 	config.set_value("gameplay", "screenshake_enabled", screenshake_enabled)
 	config.set_value("gameplay", "disable_low_health_fx_on_sex", disable_low_health_effects_on_sex)
 	config.set_value("gameplay", "combat_assist", combat_assist)
+	config.set_value("gameplay", "difficulty", difficulty)
 	#endregion
+	Talo.events.track("Settings saved", {
+		"fullscreen"			: str(fullscreen),
+		"borderless"			: str(borderless),
+		"pixel_perfect"			: str(pixel_perfect),
+		"window_size"			: str(window_size),
+		"window_pos"			: str(window_pos),
+		"window_screen"			: str(window_screen),
+		"current_screen"		: str(current_screen),
+		"hud_scale"				: str(hud_scale),
+		"shadow_intensity"		: str(shadow_intensity),
+		"adult_content_enabled"	: str(adult_content_enabled),
+		"adult_build"			: str(adult_build),
+		"combat_assist"			: str(combat_assist),
+		"difficulty"			: str(difficulty),
+	})
 	
 	if config.has_section("window"):
 		config.erase_section("window")
@@ -159,6 +177,7 @@ func load_options() -> int:
 		screenshake_enabled					= config.get_value("gameplay", "screenshake_enabled", 1.0)
 		disable_low_health_effects_on_sex	= config.get_value("gameplay", "disable_low_health_effects_on_sex", 1.0)
 		combat_assist						= config.get_value("gameplay", "combat_assist", false)
+		difficulty							= config.get_value("gameplay", "difficulty", DIFFICULTY.NORMAL)
 		#endregion
 		#region Keybindings
 		if config.has_section("keyboard"):

@@ -101,3 +101,7 @@ func _on_status_effect_item_selected(index: int) -> void:
 	match index:
 		0:
 			player.status_effect_container.add_status_effect("Bleed", 30.0, 0.5)
+
+func _on_talo_flush_pressed() -> void:
+	Talo.events.track("Flush talo manually")
+	Talo.events.flush()

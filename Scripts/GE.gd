@@ -253,7 +253,7 @@ func get_action_keycode(action:String,return_full_path := false) -> String:
 	var action_keycode
 	if action_events.size() > 0:
 		for event in action_events:
-			print("event: "+str(event))
+			#print("event: "+str(event))
 			if event is InputEventKey && last_input_type == "keyboard":
 				if event.keycode != 0:
 					action_keycode = OS.get_keycode_string(event.keycode)
@@ -288,7 +288,7 @@ func get_action_keycode(action:String,return_full_path := false) -> String:
 		print("Action keycode filepath found: " + str(action_keycode))
 		return filepath
 
-	print("Action keycode found: " + str(action_keycode))
+	#print("Action keycode found: " + str(action_keycode))
 	return action_keycode
 func fmod_play_event(event_name:String) -> void:
 	FmodServer.play_one_shot("event:/" + event_name)

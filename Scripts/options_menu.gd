@@ -39,6 +39,7 @@ extends TabContainer
 @onready var adult_content_toggle		: CheckBox = find_child("AdultContent")
 @onready var screenshake_toggle			: CheckBox = find_child("Screenshake")
 @onready var low_health_fx				: CheckBox = find_child("LowHealthFX")
+@onready var difficulty_option			: OptionButton = find_child("Difficulty")
 
 @onready var tooltip: RichTextLabel = find_child("Tooltip")
 
@@ -113,6 +114,8 @@ func _ready() -> void:
 		adult_content_toggle.set_pressed_no_signal(Options.adult_content_enabled)
 		low_health_fx.set_pressed_no_signal(Options.disable_low_health_effects_on_sex)
 
+	var difficulty = Options.difficulty
+	difficulty_option.selected = difficulty
 
 
 func _process(delta: float) -> void:
@@ -338,10 +341,12 @@ func _on_reset_audio_pressed() -> void:
 
 func _on_combat_assist_toggled(toggled_on: bool) -> void:
 	Options.combat_assist = toggled_on
-func _on_combat_assist_mouse_entered() -> void:
-	tooltip.show_tip("When enabled, Kalin will automatically choose the best available attack move against enemies. You'll still have to watch out your stamina and defend manually when needed.")
-func _on_combat_assist_mouse_exited() -> void:
-	tooltip.hide()
+func _on_difficulty_item_selected(index: int) -> void:
+	match index:
+		0:
+			Options.difficulty = Options.DIFFICULTY.EASY
+		1:
+			Options.difficulty = Options.DIFFICULTY.NORMAL
+		2:
+			Options.difficulty = Options.DIFFICULTY.BRUTAL
 #endregion
-
-
