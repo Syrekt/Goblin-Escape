@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bkj14myaccvt3" path="res://Tutorial/fatigue_smell_tutorial.tscn" id="8_b20id"]
 [ext_resource type="PackedScene" uid="uid://cg2vx6oh1c1lc" path="res://Tutorial/environmental_kill_tutorial.tscn" id="9_3hwek"]
 [ext_resource type="PackedScene" uid="uid://c8uuwyqh6p5lx" path="res://Tutorial/enemy_patrol_tutorial.tscn" id="10_845id"]
+[ext_resource type="Texture2D" uid="uid://bngcdkwrq22o" path="res://UI/Inventory/controller template.png" id="14_2glep"]
 
 [sub_resource type="GDScript" id="GDScript_aqc70"]
 script/source = "extends NinePatchRect
@@ -52,10 +53,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 0
+current_tab = 6
 script = ExtResource("2_iopgn")
 
 [node name="Graphics" type="TabBar" parent="." unique_id=153179285]
+visible = false
 layout_mode = 2
 focus_neighbor_top = NodePath("MarginContainer/ScrollContainer/VBoxContainer/ResetGraphics")
 focus_neighbor_bottom = NodePath("MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Fullscreen")
@@ -871,6 +873,25 @@ text = "Defensive Stance"
 script = ExtResource("5_iopgn")
 tutorial_scene = ExtResource("8_3hwek")
 tutorial_code = "Defensive Stance"
+
+[node name="TabBar" type="TabBar" parent="." unique_id=1388679761]
+layout_mode = 2
+metadata/_tab_index = 6
+
+[node name="TextureRect" type="TextureRect" parent="TabBar" unique_id=1101233380]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -135.0
+offset_right = 180.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_2glep")
 
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="item_selected" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/Resolution" to="." method="_on_option_button_item_selected"]

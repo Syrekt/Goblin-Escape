@@ -17,3 +17,8 @@ func _on_body_entered(body:Node2D) -> void:
 	elif body is Enemy:
 		body.state_node.state.finished.emit("death")
 		body.queue_free()
+
+func _process(delta: float) -> void:
+	if Input.is_key_pressed(KEY_K):
+		for child in get_children():
+			print(child.name)
