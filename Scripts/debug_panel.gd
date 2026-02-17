@@ -105,3 +105,7 @@ func _on_status_effect_item_selected(index: int) -> void:
 func _on_talo_flush_pressed() -> void:
 	Talo.events.track("Flush talo manually")
 	Talo.events.flush()
+
+
+func _on_get_live_config_pressed() -> void:
+	Talo.game_config.get_live_config()

@@ -25,7 +25,7 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -212.0
-offset_bottom = 247.0
+offset_bottom = 359.0
 grow_horizontal = 0
 texture = ExtResource("3_3guvx")
 patch_margin_left = 14
@@ -79,6 +79,11 @@ layout_mode = 2
 text = "Give Exp"
 alignment = 0
 
+[node name="GetLiveConfig" type="Button" parent="Control/NinePatchRect/MarginContainer/VBoxContainer" unique_id=728750980]
+layout_mode = 2
+text = "Get Live Config"
+alignment = 0
+
 [node name="MapSelection" type="OptionButton" parent="Control/NinePatchRect/MarginContainer/VBoxContainer" unique_id=1780019319]
 layout_mode = 2
 allow_reselect = true
@@ -114,6 +119,7 @@ value = 1.0
 [connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/DealDamage" to="." method="_on_deal_damage_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/HealKalin" to="." method="_on_heal_kalin_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/GiveExp" to="." method="_on_give_exp_pressed"]
+[connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/GetLiveConfig" to="." method="_on_get_live_config_pressed"]
 [connection signal="item_selected" from="Control/NinePatchRect/MarginContainer/VBoxContainer/MapSelection" to="." method="_on_map_selection_item_selected"]
 [connection signal="item_selected" from="Control/NinePatchRect/MarginContainer/VBoxContainer/StatusEffect" to="." method="_on_status_effect_item_selected"]
 [connection signal="value_changed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/HSplitContainer/CameraZoom" to="." method="_on_camera_zoom_value_changed"]

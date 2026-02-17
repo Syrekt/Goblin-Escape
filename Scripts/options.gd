@@ -33,6 +33,9 @@ var sfx_volume := 1.0:
 var screenshake_enabled := true
 var disable_low_health_effects_on_sex := false
 
+var update_available	: bool
+var update_link			: String
+
 func _set_window_position() -> void:
 	DisplayServer.window_set_position(window_pos)
 
@@ -65,6 +68,17 @@ func _ready() -> void:
 	#endregion
 
 	Talo.players.identify("anonymous", OS.get_unique_id())
+	Talo.game_config.live_config_loaded.connect(_on_live_config_loaded)
+	Talo.game_config.get_live_config()
+
+func _on_live_config_loaded(config: TaloLiveConfig) -> void:
+	print("Talo live config: "+str(config))
+	var latest_version = config.get_prop("Latest Version", "Unkown")
+	update_available = latest_version != ProjectSettings.get_setting("application/config/version")
+	update_link = config.get_prop("Last Version Link", "https://www.patreon.com/posts/goblin-escape-v0-149221995")
+	print("update_link: "+str(update_link))
+	print("latest_version: "+str(latest_version))
+	print("Current version: " + str(ProjectSettings.get_setting("application/config/version")))
 
 func _process(delta: float) -> void:
 	# Update current display

@@ -9,9 +9,12 @@ var ingame_menu_inst : IngameMenu = null
 @onready var last_version: Button = $Control/NinePatchRect/TextureRect/LastVersion
 
 func _ready() -> void:
+	Talo.game_config.get_live_config()
 	$Control/NinePatchRect/TextureRect/VBoxContainer/StartGame.grab_focus()
-	if Options.adult_build:
-		last_version.queue_free()
+	if Options.update_available:
+		last_version.text = "Update Available!"
+	else:
+		last_version.text = "Patreon"
 	return
 	if OS.is_debug_build():
 		queue_free()
@@ -63,7 +66,10 @@ func _on_ingame_menu_close_button_pressed() -> void:
 
 
 func _on_last_version_pressed() -> void:
-	OS.shell_open("https://www.patreon.com/psychoseel")
+	if Options.update_available:
+		OS.shell_open(Options.update_link)
+	else:
+		OS.shell_open("https://www.patreon.com/psychoseel")
 
 
 func _on_feedback_pressed() -> void:
