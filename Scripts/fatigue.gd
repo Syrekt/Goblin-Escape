@@ -10,9 +10,16 @@ func add(amount: float) -> void:
 		return
 	value += amount
 func perform(action: String) -> void:
-	var fatigue_buildup_mod := 1.0
+	var fatigue_buildup_mod : float
+	match Options.difficulty:
+		Options.DIFFICULTY.EASY:
+			fatigue_buildup_mod = 0.5
+		Options.DIFFICULTY.NORMAL:
+			fatigue_buildup_mod = 0.8
+		Options.DIFFICULTY.BRUTAL:
+			fatigue_buildup_mod = 1.0
 	if owner.status_effect_container.has_status_effect("Resilience"):
-		fatigue_buildup_mod = 0.5
+		fatigue_buildup_mod -= 0.5
 	print("fatigue_buildup_mod: "+str(fatigue_buildup_mod))
 	var p = owner
 	var fatigue_addup = float(p.strength) / float(p.strength + p.endurance)

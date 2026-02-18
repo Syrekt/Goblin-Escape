@@ -25,6 +25,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 		Talo.events.track("Died")
 		print("Dead")
 		death_timer.start()
+		player.status_effect_container.rest()
 		print("death_timer.time_left: "+str(death_timer.time_left));
 	else:
 		Talo.events.track("Knocked Unconscious")

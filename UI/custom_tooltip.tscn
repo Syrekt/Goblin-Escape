@@ -3,19 +3,21 @@
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="1_rghx0"]
 [ext_resource type="Texture2D" uid="uid://cbpnfnp2h80rh" path="res://UI/Inventory/alt_panel_with background.png" id="2_jop1r"]
 
-[node name="CustomTooltip" type="Control" unique_id=1184332545]
-custom_minimum_size = Vector2(266, 92)
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -366.0
-offset_bottom = -228.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Label" type="RichTextLabel" unique_id=23456315]
+z_index = 1
+custom_minimum_size = Vector2(256, 48)
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 266.0
+offset_bottom = 124.0
 theme = ExtResource("1_rghx0")
+bbcode_enabled = true
+text = "This is text"
+fit_content = true
+scroll_active = false
 
 [node name="ColorRect" type="NinePatchRect" parent="." unique_id=791140952]
+z_as_relative = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,27 +25,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_jop1r")
+region_rect = Rect2(3, 3, 44, 44)
 patch_margin_left = 4
 patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect" unique_id=56138388]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="Label" type="RichTextLabel" parent="ColorRect/MarginContainer" unique_id=23456315]
-layout_mode = 2
-bbcode_enabled = true
-text = "This is text"
-scroll_active = false

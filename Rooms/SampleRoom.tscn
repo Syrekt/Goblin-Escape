@@ -1,50 +1,52 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjjiopi3tjo35"]
+[gd_scene format=3 uid="uid://bjjiopi3tjo35"]
 
 [ext_resource type="TileSet" uid="uid://1quahlg1y22o" path="res://Map/FP_CastlePrison/castle_prison.tres" id="1_odkvd"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_xy0h5"]
 
-[node name="SampleRoom" type="Node2D"]
+[node name="SampleRoom" type="Node2D" unique_id=784174834]
 
-[node name="Tilemaps" type="Node2D" parent="."]
+[node name="Tilemaps" type="Node2D" parent="." unique_id=64818389]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="Tilemaps"]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Tilemaps" unique_id=1191410122]
 
-[node name="BG-6" type="TileMapLayer" parent="Tilemaps/ParallaxBackground"]
+[node name="BG-6" type="TileMapLayer" parent="Tilemaps/ParallaxBackground" unique_id=232299408]
 z_index = -6
 tile_set = ExtResource("1_odkvd")
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="Tilemaps/ParallaxBackground"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Tilemaps/ParallaxBackground" unique_id=1272491150]
+motion_scale = Vector2(1.02, 1.02)
 
-[node name="BG-5-Columns-Walls" type="TileMapLayer" parent="Tilemaps/ParallaxBackground/ParallaxLayer"]
+[node name="BG-5-Columns-Walls" type="TileMapLayer" parent="Tilemaps/ParallaxBackground/ParallaxLayer" unique_id=1385218328]
 z_index = -5
 tile_set = ExtResource("1_odkvd")
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="Tilemaps/ParallaxBackground"]
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Tilemaps/ParallaxBackground" unique_id=1462711017]
+motion_scale = Vector2(1.04, 1.04)
 
-[node name="BG-4-Paths" type="TileMapLayer" parent="Tilemaps/ParallaxBackground/ParallaxLayer2"]
+[node name="BG-4-Paths" type="TileMapLayer" parent="Tilemaps/ParallaxBackground/ParallaxLayer2" unique_id=1958336579]
 z_index = -4
 tile_set = ExtResource("1_odkvd")
 
-[node name="BG-3-Debris" type="TileMapLayer" parent="Tilemaps"]
+[node name="BG-3-Debris" type="TileMapLayer" parent="Tilemaps" unique_id=844034646]
 z_index = -3
 tile_set = ExtResource("1_odkvd")
 
-[node name="BG-2-Wall-Doors-Windows" type="TileMapLayer" parent="Tilemaps"]
+[node name="BG-2-Wall-Doors-Windows" type="TileMapLayer" parent="Tilemaps" unique_id=1461954590]
 z_index = -2
 tile_set = ExtResource("1_odkvd")
 
-[node name="BG-1-Columns-OnWall" type="TileMapLayer" parent="Tilemaps"]
+[node name="BG-1-Columns-OnWall" type="TileMapLayer" parent="Tilemaps" unique_id=382053450]
 z_index = -1
 tile_set = ExtResource("1_odkvd")
 
-[node name="Collision" type="TileMapLayer" parent="Tilemaps"]
+[node name="Collision" type="TileMapLayer" parent="Tilemaps" unique_id=1279407773]
 tile_set = ExtResource("1_odkvd")
 
-[node name="FG-1-Spikes-Chains" type="TileMapLayer" parent="Tilemaps"]
+[node name="FG-1-Spikes-Chains" type="TileMapLayer" parent="Tilemaps" unique_id=206767179]
 tile_set = ExtResource("1_odkvd")
 
-[node name="FG-2" type="TileMapLayer" parent="Tilemaps"]
+[node name="FG-2" type="TileMapLayer" parent="Tilemaps" unique_id=958489721]
 z_index = 2
 tile_set = ExtResource("1_odkvd")
 
-[node name="RoomInstance" parent="." instance=ExtResource("2_xy0h5")]
+[node name="RoomInstance" parent="." unique_id=1681506069 instance=ExtResource("2_xy0h5")]

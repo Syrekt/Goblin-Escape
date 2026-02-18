@@ -14,6 +14,8 @@ var level	: int
 var xp		: int
 var xp_required : int
 
+var has_unconfirmed_changes := false
+
 func open() -> void:
 	level = owner.level
 	xp = owner.experience_point
@@ -113,6 +115,14 @@ func _process(delta: float) -> void:
 	str_details += "\n" + bash_fatigue_text
 
 	details.text = str_details
+
+	has_unconfirmed_changes = false
+	if strength.value_temporary != strength.value_permanant:
+		has_unconfirmed_changes = true
+	if endurance.value_temporary != endurance.value_permanant:
+		has_unconfirmed_changes = true
+	if vitality.value_temporary != vitality.value_permanant:
+		has_unconfirmed_changes = true
 
 
 func _on_close_pressed() -> void:

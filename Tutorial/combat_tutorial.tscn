@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://vma4r5yyfdym"]
+[gd_scene format=3 uid="uid://vma4r5yyfdym"]
 
 [ext_resource type="Script" uid="uid://c7nq5lemywc53" path="res://Tutorial/tabbed_tutorial.gd" id="1_oxxag"]
 [ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="2_gg7pn"]
@@ -615,15 +615,15 @@ animations = [{
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kqsev"]
 
-[node name="Combat Tutorial" type="CanvasLayer" groups=["FullscreenPanel"]]
+[node name="Combat Tutorial" type="CanvasLayer" unique_id=1940974298 groups=["FullscreenPanel"]]
 process_mode = 2
 script = ExtResource("1_oxxag")
 code = "Combat"
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=488920791]
 one_shot = true
 
-[node name="ColorControl" type="Control" parent="."]
+[node name="ColorControl" type="Control" parent="." unique_id=1810999469]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -631,7 +631,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="ColorControl"]
+[node name="ColorRect" type="ColorRect" parent="ColorControl" unique_id=628548109]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -640,7 +640,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.16565639, 0.16565642, 0.16565636, 0.6745098)
 
-[node name="TabContainer" type="TabContainer" parent="ColorControl"]
+[node name="TabContainer" type="TabContainer" parent="ColorControl" unique_id=1406128632]
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -648,44 +648,45 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 1
+current_tab = 0
 tabs_visible = false
 
-[node name="Page1" type="Control" parent="ColorControl/TabContainer"]
-visible = false
+[node name="Page1" type="Control" parent="ColorControl/TabContainer" unique_id=101452008]
 layout_mode = 2
 theme = ExtResource("2_gg7pn")
 metadata/_tab_index = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="ColorControl/TabContainer/Page1"]
+[node name="Sprite2D" type="Sprite2D" parent="ColorControl/TabContainer/Page1" unique_id=541432594]
 visible = false
 position = Vector2(288, 304)
 scale = Vector2(2, 2)
 texture = ExtResource("3_7u3d5")
 hframes = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page1"]
-position = Vector2(128, 128)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page1" unique_id=1977451644]
+position = Vector2(310, 128)
 sprite_frames = SubResource("SpriteFrames_7a6fu")
 animation = &"stab"
 autoplay = "stab"
 frame_progress = 0.207933
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page1"]
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page1" unique_id=960897019]
+visible = false
 position = Vector2(304, 128)
 sprite_frames = SubResource("SpriteFrames_7a6fu")
 animation = &"slash"
 autoplay = "slash"
 frame_progress = 0.807532
 
-[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page1"]
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page1" unique_id=90942887]
+visible = false
 position = Vector2(512, 128)
 sprite_frames = SubResource("SpriteFrames_7a6fu")
 animation = &"bash"
 autoplay = "bash"
 frame_progress = 0.739916
 
-[node name="TextureRect5" type="TextureRect" parent="ColorControl/TabContainer/Page1"]
+[node name="TextureRect5" type="TextureRect" parent="ColorControl/TabContainer/Page1" unique_id=1102769355]
 visible = false
 layout_mode = 0
 offset_left = 1040.0
@@ -695,7 +696,7 @@ offset_bottom = 330.0
 scale = Vector2(2, 2)
 texture = ExtResource("6_tcodn")
 
-[node name="TextureRect6" type="TextureRect" parent="ColorControl/TabContainer/Page1"]
+[node name="TextureRect6" type="TextureRect" parent="ColorControl/TabContainer/Page1" unique_id=1093777764]
 visible = false
 layout_mode = 0
 offset_left = 592.0
@@ -705,7 +706,7 @@ offset_bottom = 302.0
 scale = Vector2(2, 2)
 texture = ExtResource("7_730mb")
 
-[node name="TextureRect7" type="TextureRect" parent="ColorControl/TabContainer/Page1"]
+[node name="TextureRect7" type="TextureRect" parent="ColorControl/TabContainer/Page1" unique_id=1367815374]
 visible = false
 layout_mode = 0
 offset_left = 96.0
@@ -715,7 +716,7 @@ offset_bottom = 312.0
 scale = Vector2(2, 2)
 texture = ExtResource("8_oxxag")
 
-[node name="RichTextLabel8" type="RichTextLabel" parent="ColorControl/TabContainer/Page1"]
+[node name="RichTextLabel8" type="RichTextLabel" parent="ColorControl/TabContainer/Page1" unique_id=2027116304]
 layout_mode = 0
 offset_left = 144.0
 offset_top = 32.0
@@ -724,20 +725,21 @@ offset_bottom = 96.0
 bbcode_enabled = true
 text = "To fight, press Stance or Attack key.
 To switch different between stances, use up and down keys.
-Each stance has different properties"
+Each stance has different properties. Currently you only have Light Stance, which is the default "
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ColorControl/TabContainer/Page1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorControl/TabContainer/Page1" unique_id=1240155760]
 layout_mode = 0
-offset_left = 48.0
+offset_left = 230.0
 offset_top = 176.0
-offset_right = 211.0
+offset_right = 393.0
 offset_bottom = 256.0
 bbcode_enabled = true
 text = "Light Stance(Default stance)
 - Fast and weak
-- Stab attack(costs 1 stamina)"
+- Stab attack(low stamina cost)"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="ColorControl/TabContainer/Page1"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="ColorControl/TabContainer/Page1" unique_id=1388128217]
+visible = false
 layout_mode = 0
 offset_left = 208.0
 offset_top = 176.0
@@ -751,7 +753,8 @@ text = "Heavy Stance(Up key)
 -- Slash breaks enemy guard
 -- Breaking enemy guard stuns them"
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="ColorControl/TabContainer/Page1"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="ColorControl/TabContainer/Page1" unique_id=791500555]
+visible = false
 layout_mode = 0
 offset_left = 416.0
 offset_top = 192.0
@@ -767,12 +770,13 @@ text = "Defensive Stance(Down key)
 
 "
 
-[node name="Page2" type="Control" parent="ColorControl/TabContainer"]
+[node name="Page2" type="Control" parent="ColorControl/TabContainer" unique_id=1243804846]
+visible = false
 layout_mode = 2
 theme = ExtResource("2_gg7pn")
 metadata/_tab_index = 1
 
-[node name="TextureRect2" type="TextureRect" parent="ColorControl/TabContainer/Page2"]
+[node name="TextureRect2" type="TextureRect" parent="ColorControl/TabContainer/Page2" unique_id=1280014518]
 visible = false
 layout_mode = 0
 offset_left = 224.0
@@ -782,7 +786,7 @@ offset_bottom = 336.0
 scale = Vector2(2, 2)
 texture = ExtResource("9_5q4r8")
 
-[node name="TextureRect3" type="TextureRect" parent="ColorControl/TabContainer/Page2"]
+[node name="TextureRect3" type="TextureRect" parent="ColorControl/TabContainer/Page2" unique_id=1680018259]
 visible = false
 layout_mode = 0
 offset_left = 656.0
@@ -792,7 +796,7 @@ offset_bottom = 336.0
 scale = Vector2(2, 2)
 texture = ExtResource("10_0ngsp")
 
-[node name="TextureRect4" type="TextureRect" parent="ColorControl/TabContainer/Page2"]
+[node name="TextureRect4" type="TextureRect" parent="ColorControl/TabContainer/Page2" unique_id=2009444401]
 visible = false
 layout_mode = 0
 offset_left = 464.0
@@ -802,7 +806,7 @@ offset_bottom = 336.0
 scale = Vector2(2, 2)
 texture = ExtResource("11_kgq1o")
 
-[node name="RichTextLabel4" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
+[node name="RichTextLabel4" type="RichTextLabel" parent="ColorControl/TabContainer/Page2" unique_id=257376908]
 layout_mode = 0
 offset_left = 160.0
 offset_top = 21.0
@@ -813,7 +817,7 @@ text = "Stances allow access to certain moves.
 Goblin's inital stance is [color=yellow]Light Stance[/color], which gives access to [color=red]Heavy Stance[/color], Light Attack and Grab.
 In normal difficulty, enemies flash certain colors when they take a stance."
 
-[node name="RichTextLabel5" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
+[node name="RichTextLabel5" type="RichTextLabel" parent="ColorControl/TabContainer/Page2" unique_id=1036268589]
 visible = false
 layout_mode = 0
 offset_left = 96.0
@@ -825,7 +829,7 @@ bbcode_enabled = true
 text = "[color=yellow]Light Stance"
 horizontal_alignment = 1
 
-[node name="RichTextLabel6" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
+[node name="RichTextLabel6" type="RichTextLabel" parent="ColorControl/TabContainer/Page2" unique_id=1269526896]
 visible = false
 layout_mode = 0
 offset_left = 288.0
@@ -835,7 +839,7 @@ offset_bottom = 192.0
 bbcode_enabled = true
 text = "[color=red]Heavy Stance[/color]"
 
-[node name="RichTextLabel7" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
+[node name="RichTextLabel7" type="RichTextLabel" parent="ColorControl/TabContainer/Page2" unique_id=1499791523]
 visible = false
 layout_mode = 0
 offset_left = 464.0
@@ -845,7 +849,7 @@ offset_bottom = 192.0
 bbcode_enabled = true
 text = "[color=blue]Defensive Stance[/color]"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page2"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page2" unique_id=237146365]
 position = Vector2(192, 117)
 sprite_frames = SubResource("SpriteFrames_kfrmu")
 animation = &"stab_no_shield"
@@ -853,7 +857,7 @@ autoplay = "stab_no_shield"
 frame = 8
 frame_progress = 0.0461678
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorControl/TabContainer/Page2" unique_id=1120901394]
 layout_mode = 0
 offset_left = 112.0
 offset_top = 165.0
@@ -866,13 +870,13 @@ text = "[color=yellow]Light Stance[/color](Default stance)
 - Can perform grab attack
 - Reacts to Kalin's heavy stance"
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page2"]
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page2" unique_id=1315078338]
 position = Vector2(464, 117)
 sprite_frames = SubResource("SpriteFrames_kfrmu")
 animation = &"slash_no_shield"
 autoplay = "slash_no_shield"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="ColorControl/TabContainer/Page2" unique_id=941659836]
 layout_mode = 0
 offset_left = 368.0
 offset_top = 165.0
@@ -884,7 +888,7 @@ text = "[color=red]Heavy Stance[/color]
 - Heavy Attack
 -- Heavy Attack breaks Kalin's guard and stuns her if she is guarding"
 
-[node name="RichTextLabel8" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
+[node name="RichTextLabel8" type="RichTextLabel" parent="ColorControl/TabContainer/Page2" unique_id=31019963]
 layout_mode = 0
 offset_left = 160.0
 offset_top = 263.0
@@ -894,7 +898,7 @@ bbcode_enabled = true
 text = "If you see enemy flash [color=yellow]yellow[/color], press down to defend.
 If you see enemy flashing [color=red]red[/color], perform light attack in light stance to interrupt it's move."
 
-[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page2"]
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="ColorControl/TabContainer/Page2" unique_id=1821239384]
 visible = false
 position = Vector2(512, 144)
 sprite_frames = SubResource("SpriteFrames_kfrmu")
@@ -902,7 +906,7 @@ animation = &"bash"
 autoplay = "bash"
 frame_progress = 0.393161
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="ColorControl/TabContainer/Page2"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="ColorControl/TabContainer/Page2" unique_id=1376051821]
 visible = false
 layout_mode = 0
 offset_left = 432.0
@@ -918,12 +922,12 @@ text = "[color=blue]Defensive Stance[/color]
 
 "
 
-[node name="Control" type="Control" parent="ColorControl"]
+[node name="Control" type="Control" parent="ColorControl" unique_id=1225173442]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Left" type="Button" parent="ColorControl/Control"]
+[node name="Left" type="Button" parent="ColorControl/Control" unique_id=1932971539]
 layout_mode = 0
 offset_left = 286.0
 offset_top = 323.0
@@ -933,7 +937,7 @@ theme = ExtResource("17_oxxag")
 icon = ExtResource("18_5q4r8")
 script = ExtResource("19_0ngsp")
 
-[node name="Right" type="Button" parent="ColorControl/Control"]
+[node name="Right" type="Button" parent="ColorControl/Control" unique_id=1933446142]
 layout_mode = 0
 offset_left = 326.0
 offset_top = 323.0
@@ -944,7 +948,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_kqsev")
 icon = ExtResource("20_kgq1o")
 script = ExtResource("19_0ngsp")
 
-[node name="Label" type="Label" parent="ColorControl/Control"]
+[node name="Label" type="Label" parent="ColorControl/Control" unique_id=1682492806]
 layout_mode = 0
 offset_left = 308.0
 offset_top = 322.0
@@ -953,5 +957,5 @@ offset_bottom = 336.0
 theme = ExtResource("2_gg7pn")
 text = "1/2"
 
-[node name="TutorialContinuePrompt" parent="." instance=ExtResource("22_5q4r8")]
+[node name="TutorialContinuePrompt" parent="." unique_id=472211771 instance=ExtResource("22_5q4r8")]
 visible = false

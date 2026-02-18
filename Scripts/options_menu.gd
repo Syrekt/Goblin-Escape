@@ -2,6 +2,7 @@ extends TabContainer
 
 
 @onready var resolution : OptionButton = find_child("Resolution")
+@onready var reset_save_confirmation: NinePatchRect = find_child("ResetSaveConfirmation")
 
 @onready var noise_color_r : HSlider = find_child("NoiseColorRedSlider")
 @onready var noise_color_g : HSlider = find_child("NoiseColorGreenSlider")
@@ -110,8 +111,8 @@ func _ready() -> void:
 
 	# Adult Content
 	if !Options.adult_build:
-		adult_content_toggle.get_parent().queue_free()
-		low_health_fx.get_parent().queue_free()
+		adult_content_toggle.get_parent().hide()
+		low_health_fx.get_parent().hide()
 	else:
 		adult_content_toggle.set_pressed_no_signal(Options.adult_content_enabled)
 		low_health_fx.set_pressed_no_signal(Options.disable_low_health_effects_on_sex)
@@ -141,14 +142,14 @@ func _process(delta: float) -> void:
 		select_next_available()
 		get_tab_control(current_tab).grab_focus()
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if gamepad_layout.visible:
 		gamepad_layout.hide()
 		var vbox1 = $Controls/MarginContainer/HSplitContainer/VBoxContainer
 		var vbox2 = $Controls/MarginContainer/HSplitContainer/VBoxContainer2
 		vbox1.show()
 		vbox2.show()
-
+		$Controls/MarginContainer/HSplitContainer/VBoxContainer2/HSplitContainer/GamepadBindings.grab_focus()
 
 func _exit_tree() -> void:
 	Options.save_options()
@@ -321,7 +322,7 @@ func _on_screenshake_toggled(toggled_on: bool) -> void:
 
 
 func _on_reset_save_pressed() -> void:
-	$Gameplay/MarginContainer/VBoxContainer/ResetSave/ResetSaveConfirmation.show()
+	reset_save_confirmation.show()
 
 
 func _on_low_health_fx_toggled(toggled_on: bool) -> void:

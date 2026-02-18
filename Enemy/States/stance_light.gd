@@ -24,7 +24,7 @@ func update(delta: float):
 		if in_combat_range:
 			if target_stunned:
 				finished.emit("slash")
-			elif target_state == "stance_heavy":
+			elif target_state == "stance_heavy" && Options.difficulty == Options.DIFFICULTY.BRUTAL:
 				enemy.counter_attack = true
 				finished.emit("stab")
 	else:

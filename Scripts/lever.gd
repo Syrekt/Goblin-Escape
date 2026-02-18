@@ -33,7 +33,6 @@ func activate() -> void:
 			sprite.play("closing")
 		else:
 			sprite.play("opening")
-	$AudioStreamPlayer2D.play()
 
 	Game.get_singleton().save_data_in_room(name, { "open": sprite.animation == "opening" })
 

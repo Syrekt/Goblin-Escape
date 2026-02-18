@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bicetss7oaklb"]
+[gd_scene format=3 uid="uid://bicetss7oaklb"]
 
 [ext_resource type="Script" uid="uid://c1oeyysdouoq" path="res://Scripts/balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
@@ -72,11 +72,11 @@ RichTextLabel/fonts/normal_font = ExtResource("2_dyqgq")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nd3wd"]
 
-[node name="ExampleBalloon" type="CanvasLayer" groups=["FullscreenPanel"]]
+[node name="ExampleBalloon" type="CanvasLayer" unique_id=1187674558 groups=["FullscreenPanel"]]
 layer = 100
 script = ExtResource("1_36de5")
 
-[node name="Balloon" type="Control" parent="."]
+[node name="Balloon" type="Control" parent="." unique_id=1119114238]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
@@ -86,7 +86,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_qq3yp")
 
-[node name="Panel" type="Panel" parent="Balloon"]
+[node name="Panel" type="Panel" parent="Balloon" unique_id=468337120]
 clip_children = 2
 layout_mode = 1
 anchors_preset = 12
@@ -101,7 +101,7 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
 
-[node name="Portrait" type="TextureRect" parent="Balloon/Panel"]
+[node name="Portrait" type="TextureRect" parent="Balloon/Panel" unique_id=1663969994]
 layout_mode = 0
 offset_left = 6.0
 offset_top = -68.0
@@ -109,7 +109,7 @@ offset_right = 81.0
 offset_bottom = 9.0
 stretch_mode = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Balloon/Panel"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Balloon/Panel" unique_id=762405583]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -125,7 +125,7 @@ patch_margin_bottom = 16
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="Dialogue" type="MarginContainer" parent="Balloon/Panel"]
+[node name="Dialogue" type="MarginContainer" parent="Balloon/Panel" unique_id=1277943159]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -133,10 +133,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/Panel/Dialogue"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/Panel/Dialogue" unique_id=1226621348]
 layout_mode = 2
 
-[node name="CharacterLabel" type="RichTextLabel" parent="Balloon/Panel/Dialogue/VBoxContainer"]
+[node name="CharacterLabel" type="RichTextLabel" parent="Balloon/Panel/Dialogue/VBoxContainer" unique_id=340780599]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
@@ -146,13 +146,13 @@ text = "Character"
 fit_content = true
 scroll_active = false
 
-[node name="DialogueLabel" parent="Balloon/Panel/Dialogue/VBoxContainer" instance=ExtResource("2_a8ve6")]
+[node name="DialogueLabel" parent="Balloon/Panel/Dialogue/VBoxContainer" unique_id=715883160 instance=ExtResource("2_a8ve6")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 text = "Dialogue..."
 
-[node name="Responses" type="MarginContainer" parent="Balloon"]
+[node name="Responses" type="MarginContainer" parent="Balloon" unique_id=62502616]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -166,7 +166,7 @@ offset_bottom = -116.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ResponsesMenu" type="VBoxContainer" parent="Balloon/Responses" node_paths=PackedStringArray("response_template")]
+[node name="ResponsesMenu" type="VBoxContainer" parent="Balloon/Responses" unique_id=162142200 node_paths=PackedStringArray("response_template")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
@@ -174,11 +174,11 @@ theme_override_constants/separation = 2
 script = ExtResource("3_72ixx")
 response_template = NodePath("ResponseExample")
 
-[node name="ResponseExample" type="Button" parent="Balloon/Responses/ResponsesMenu"]
+[node name="ResponseExample" type="Button" parent="Balloon/Responses/ResponsesMenu" unique_id=1480275853]
 layout_mode = 2
 text = "Response example"
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=524046670]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -191,7 +191,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 theme = ExtResource("5_ot4ch")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Control"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Control" unique_id=2123022243]
 visible = false
 show_behind_parent = true
 layout_mode = 1
@@ -208,7 +208,7 @@ patch_margin_bottom = 12
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/NinePatchRect"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/NinePatchRect" unique_id=1578161611]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -221,11 +221,11 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/NinePatchRect/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/NinePatchRect/MarginContainer" unique_id=611342481]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="CheckButton" type="CheckBox" parent="Control/NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="CheckButton" type="CheckBox" parent="Control/NinePatchRect/MarginContainer/VBoxContainer" unique_id=774367015]
 layout_mode = 2
 theme = ExtResource("5_ot4ch")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_svash")
@@ -237,7 +237,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_nd3wd")
 button_pressed = true
 text = "Show Future Tutorials"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Control" unique_id=1268280548]
 custom_minimum_size = Vector2(0, 16.015)
 layout_mode = 0
 offset_left = 96.0

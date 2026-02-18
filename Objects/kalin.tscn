@@ -210,6 +210,39 @@ shader_parameter/color = Color(0.46666667, 0, 0.05882353, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t42fh"]
 
+[sub_resource type="GDScript" id="GDScript_aajsm"]
+script/source = "extends NinePatchRect
+
+@onready var yes: Button = $Yes
+@onready var no: Button = $No 
+
+var checkpoint : Area2D
+
+signal yes_pressed
+
+func _ready() -> void:
+	var icon_no = Ge.get_action_keycode(\"ui_cancel\", true)
+	var icon_yes = Ge.get_action_keycode(\"ui_accept\", true)
+	no.icon = load(icon_no)
+	yes.icon = load(icon_yes)
+
+func _process(delta: float) -> void:
+	if !visible: return
+	
+	if Input.is_action_just_pressed(\"ui_accept\"):
+		_on_yes_pressed()
+	elif Input.is_action_just_pressed(\"ui_cancel\"):
+		_on_no_pressed()
+
+func _on_yes_pressed() -> void:
+	checkpoint.player.character_panel.hide()
+	checkpoint.rest_menu.hide()
+	hide()
+
+func _on_no_pressed() -> void:
+	hide()
+"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_go1w5"]
 atlas = ExtResource("132_elkpv")
 region = Rect2(0, 0, 51, 78)
@@ -4692,7 +4725,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1419489616]
-visible = false
 script = ExtResource("8_4oj65")
 
 [node name="UITint" type="CanvasModulate" parent="UI" unique_id=1386159607]
@@ -4981,7 +5013,9 @@ offset_right = 356.0
 offset_bottom = 312.0
 mouse_filter = 2
 theme = ExtResource("56_ghu8e")
+split_offsets = PackedInt32Array(168)
 dragging_enabled = false
+split_offset = 168
 script = ExtResource("39_y4shw")
 
 [node name="Stats" type="PanelContainer" parent="UI/CharacterPanel" unique_id=373236242]
@@ -5014,6 +5048,7 @@ tooltip_text = "Level up using this panel"
 theme_override_constants/separation = 8
 
 [node name="Close" type="Button" parent="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer" unique_id=1863805612]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("41_3pkug")
@@ -5100,6 +5135,53 @@ layout_mode = 2
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
+
+[node name="CloseConfirmation" type="NinePatchRect" parent="UI" unique_id=699266289]
+visible = false
+offset_left = 185.0
+offset_top = 94.0
+offset_right = 415.12766
+offset_bottom = 222.0
+theme = ExtResource("56_ghu8e")
+texture = ExtResource("73_qdj7c")
+region_rect = Rect2(0, 0, 46, 46)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = SubResource("GDScript_aajsm")
+
+[node name="Label" type="Label" parent="UI/CloseConfirmation" unique_id=1944047483]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 221.0
+offset_bottom = 57.0
+text = "You haven't confirmed your stats, leave without spending your stat points?"
+autowrap_mode = 2
+
+[node name="Yes" type="Button" parent="UI/CloseConfirmation" unique_id=707348019]
+custom_minimum_size = Vector2(69, 0)
+layout_mode = 0
+offset_left = 24.0
+offset_top = 75.0
+offset_right = 100.0
+offset_bottom = 102.0
+text = "Yes"
+flat = true
+alignment = 0
+
+[node name="No" type="Button" parent="UI/CloseConfirmation" unique_id=685194070]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 75.0
+offset_right = 206.0
+offset_bottom = 102.0
+text = "No"
+flat = true
+alignment = 0
 
 [node name="ThoughtContainer" type="VBoxContainer" parent="UI" unique_id=1849938317 groups=["HUD"]]
 anchors_preset = 15
@@ -5405,13 +5487,13 @@ one_shot = true
 [node name="recover" type="Node" parent="StateMachine" unique_id=1315334290 groups=["no_interaction"]]
 script = ExtResource("74_k043l")
 
-[node name="push_idle" type="Node" parent="StateMachine" unique_id=938339934 groups=["position_reliable"]]
+[node name="push_idle" type="Node" parent="StateMachine" unique_id=938339934 groups=["no_interaction", "position_reliable"]]
 script = ExtResource("48_mwqkq")
 
-[node name="push" type="Node" parent="StateMachine" unique_id=1969896741 groups=["position_reliable"]]
+[node name="push" type="Node" parent="StateMachine" unique_id=1969896741 groups=["no_interaction", "position_reliable"]]
 script = ExtResource("49_ujutq")
 
-[node name="pull" type="Node" parent="StateMachine" unique_id=43264651 groups=["position_reliable"]]
+[node name="pull" type="Node" parent="StateMachine" unique_id=43264651 groups=["no_interaction", "position_reliable"]]
 script = ExtResource("50_tcyto")
 
 [node name="corner_grab" type="Node" parent="StateMachine" unique_id=1060444679 groups=["no_interaction"]]
@@ -5675,12 +5757,19 @@ shape = SubResource("RectangleShape2D_n1k6j")
 wait_time = 0.1
 one_shot = true
 
+[node name="ThreatImmunityTimer" type="Timer" parent="." unique_id=1074790976]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
 [connection signal="value_changed" from="UI/HUD/Scaled/Health" to="UI" method="_on_health_value_changed"]
 [connection signal="timeout" from="UI/HUD/Scaled/Health/UpdateHealthTimer" to="UI" method="_on_update_health_timer_timeout"]
 [connection signal="timeout" from="UI/HUD/Scaled/Health/UpdateHealthTimer" to="UI/HUD/Scaled/Health" method="_on_update_health_timer_timeout"]
 [connection signal="value_changed" from="UI/HUD/Scaled/Arousal" to="UI/HUD/Scaled/Arousal" method="_on_value_changed"]
 [connection signal="pressed" from="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer/Close" to="UI/CharacterPanel/Stats" method="_on_close_pressed"]
 [connection signal="pressed" from="UI/CharacterPanel/Stats/MarginContainer/VBoxContainer/Confirm" to="UI/CharacterPanel" method="_on_confirm_pressed"]
+[connection signal="pressed" from="UI/CloseConfirmation/Yes" to="UI/CloseConfirmation" method="_on_yes_pressed"]
+[connection signal="pressed" from="UI/CloseConfirmation/No" to="UI/CloseConfirmation" method="_on_no_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="attack_frame" from="StateMachine/slash" to="StateMachine/slash" method="_on_attack_frame"]
 [connection signal="attack_frame" from="StateMachine/stab" to="StateMachine/stab" method="_on_attack_frame"]
@@ -5693,6 +5782,7 @@ one_shot = true
 [connection signal="body_entered" from="ThreatCollider" to="." method="_on_threat_collider_body_entered"]
 [connection signal="body_entered" from="SmellCollider" to="." method="_on_smell_collider_body_entered"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="ThreatImmunityTimer" to="." method="_on_threat_immunity_timer_timeout"]
 
 [editable path="UI/InventoryPanel/MarginContainer/ScrollContainer/MarginContainer/ButtonContainer/Button"]
 [editable path="StateMachine/slash/SlashHitbox"]

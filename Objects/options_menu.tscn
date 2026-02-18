@@ -33,9 +33,9 @@ func _process(delta: float) -> void:
 		_on_no_pressed()
 
 func _on_yes_pressed() -> void:
+	Talo.events.track(\"Delete save file\")
 	if FileAccess.file_exists(\"user://save1.ge\"):
 		DirAccess.remove_absolute(\"user://save1.ge\")
-	print_stack()
 	get_tree().quit()
 
 func _on_no_pressed() -> void:
@@ -49,17 +49,20 @@ process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme = ExtResource("1_ucjbo")
-current_tab = 1
+current_tab = 0
 script = ExtResource("2_iopgn")
 
 [node name="Gameplay" type="TabBar" parent="." unique_id=1770277552]
-visible = false
 layout_mode = 2
 focus_neighbor_top = NodePath("MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/ResetSave")
 focus_neighbor_bottom = NodePath("MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer6/CombatAssist")
@@ -110,7 +113,7 @@ text = "Combat Assist"
 layout_mode = 2
 tooltip_text = "When enabled, Kalin will automatically choose the best available attack move against enemies. You'll still have to watch out your stamina and defend manually when needed."
 focus_neighbor_top = NodePath("../../ResetSave")
-focus_neighbor_bottom = NodePath("../../HSplitContainer/ShowTutorials")
+focus_neighbor_bottom = NodePath("../../HSplitContainer10/Difficulty")
 
 [node name="HSplitContainer10" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" unique_id=550528068]
 layout_mode = 2
@@ -124,8 +127,11 @@ text = "Difficulty
 
 [node name="Difficulty" type="OptionButton" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer10" unique_id=978200757]
 layout_mode = 2
-focus_neighbor_top = NodePath("../../HSplitContainer4/HudScaleOption")
-focus_neighbor_bottom = NodePath("../../ResetSave")
+tooltip_text = "[color=cyan]Easy:[/color] Reduced combat difficulty and slower fatigue buildup. Enemies won't hear any noise Kalin makes. They'll still hear noise made by heavy objects.
+[color=green]Normal:[/color] Suitable for players who are experienced fighting games and soulslikes.
+[color=red]Brutal:[/color] Unforgiving combat and fast fatigue buildup."
+focus_neighbor_top = NodePath("../../HSplitContainer6/CombatAssist")
+focus_neighbor_bottom = NodePath("../../HSplitContainer9/AdultContent")
 allow_reselect = true
 item_count = 3
 popup/item_0/text = "Easy"
@@ -146,7 +152,7 @@ text = "Adult Content"
 
 [node name="AdultContent" type="CheckBox" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer9" unique_id=856276303]
 layout_mode = 2
-focus_neighbor_top = NodePath("../../ResetSave")
+focus_neighbor_top = NodePath("../../HSplitContainer10/Difficulty")
 focus_neighbor_bottom = NodePath("../../HSplitContainer/ShowTutorials")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" unique_id=1160327011]
@@ -156,12 +162,14 @@ dragging_enabled = false
 [node name="Label" type="Label" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer" unique_id=2099819242]
 custom_minimum_size = Vector2(157, 0)
 layout_mode = 2
+focus_neighbor_top = NodePath("../../HSplitContainer9/AdultContent")
+focus_neighbor_bottom = NodePath("../../HSplitContainer7/Screenshake")
 text = "Show Tutorials"
 
 [node name="ShowTutorials" type="CheckBox" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer" unique_id=319220376]
 layout_mode = 2
-tooltip_text = "Disabling this will unlock all the available tutorials in 'Tutorials' section."
-focus_neighbor_top = NodePath("../../HSplitContainer6/CombatAssist")
+tooltip_text = "Disabling this will unlock all the available tutorials in Tutorials section."
+focus_neighbor_top = NodePath("../../HSplitContainer9/AdultContent")
 focus_neighbor_bottom = NodePath("../../HSplitContainer7/Screenshake")
 
 [node name="HSplitContainer7" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" unique_id=367633056]
@@ -235,7 +243,7 @@ text = "HUD Scale"
 [node name="HudScaleOption" type="OptionButton" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer4" unique_id=638626495]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../HSplitContainer8/LowHealthFX")
-focus_neighbor_bottom = NodePath("../../../../../../../Graphics/MarginContainer/ScrollContainer/VBoxContainer/HSplitContainer5/ShadowIntensity")
+focus_neighbor_bottom = NodePath("../../HSplitContainer11/Analytics")
 selected = 0
 item_count = 2
 popup/item_0/text = "1x"
@@ -255,28 +263,18 @@ text = "Allow Analytics"
 [node name="Analytics" type="CheckBox" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer11" unique_id=1334707328]
 layout_mode = 2
 tooltip_text = "Enables/disables collection of anonymous gameplay data analytics used to improve the game."
-focus_neighbor_top = NodePath("../../HSplitContainer3/ShowInteractionPrompts")
-focus_neighbor_bottom = NodePath("../../HSplitContainer4/HudScaleOption")
+focus_neighbor_top = NodePath("../../HSplitContainer4/HudScaleOption")
+focus_neighbor_bottom = NodePath("../../ResetSave")
 
 [node name="ResetSave" type="Button" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" unique_id=1692553675]
 layout_mode = 2
 text = "Reset Save"
 
-[node name="ResetSaveConfirmation" type="NinePatchRect" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/ResetSave" unique_id=1864745643]
+[node name="ResetSaveConfirmation" type="NinePatchRect" parent="Gameplay/MarginContainer/HSplitContainer" unique_id=1864745643]
 visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 127.0
-offset_top = -80.0
-offset_right = 327.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 texture = ExtResource("5_aqc70")
+region_rect = Rect2(0, 0, 46, 46)
 patch_margin_left = 12
 patch_margin_top = 12
 patch_margin_right = 12
@@ -284,8 +282,9 @@ patch_margin_bottom = 12
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 script = SubResource("GDScript_aqc70")
+metadata/_edit_group_ = true
 
-[node name="Label" type="Label" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/ResetSave/ResetSaveConfirmation" unique_id=781449995]
+[node name="Label" type="Label" parent="Gameplay/MarginContainer/HSplitContainer/ResetSaveConfirmation" unique_id=781449995]
 layout_mode = 0
 offset_left = 13.0
 offset_top = 8.0
@@ -293,9 +292,8 @@ offset_right = 189.0
 offset_bottom = 39.0
 text = "This will delete the save and quit the game, are you sure?"
 autowrap_mode = 2
-metadata/_edit_group_ = true
 
-[node name="Yes" type="Button" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/ResetSave/ResetSaveConfirmation" unique_id=228932337]
+[node name="Yes" type="Button" parent="Gameplay/MarginContainer/HSplitContainer/ResetSaveConfirmation" unique_id=228932337]
 layout_mode = 0
 offset_left = 29.0
 offset_top = 41.0
@@ -303,7 +301,7 @@ offset_right = 75.0
 offset_bottom = 63.0
 text = "Yes"
 
-[node name="No" type="Button" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/ResetSave/ResetSaveConfirmation" unique_id=624171825]
+[node name="No" type="Button" parent="Gameplay/MarginContainer/HSplitContainer/ResetSaveConfirmation" unique_id=624171825]
 layout_mode = 0
 offset_left = 121.0
 offset_top = 41.0
@@ -312,6 +310,7 @@ offset_bottom = 63.0
 text = "No"
 
 [node name="Controls" type="TabBar" parent="." unique_id=119584133]
+visible = false
 layout_mode = 2
 focus_neighbor_top = NodePath("MarginContainer/HSplitContainer/VBoxContainer2/ButtonKeybind10")
 focus_neighbor_bottom = NodePath("MarginContainer/HSplitContainer/VBoxContainer/ButtonKeybind")
@@ -375,7 +374,7 @@ action_name = "interact"
 [node name="ResetKeybindings" type="Button" parent="Controls/MarginContainer/HSplitContainer/VBoxContainer" unique_id=1655228595]
 layout_mode = 2
 focus_neighbor_top = NodePath("../ButtonKeybind9")
-focus_neighbor_right = NodePath("../../VBoxContainer2/ButtonKeybind10")
+focus_neighbor_right = NodePath("../../VBoxContainer2/HSplitContainer/GamepadBindings")
 focus_neighbor_bottom = NodePath("../ButtonKeybind")
 text = "Reset Keybindings"
 
@@ -449,6 +448,14 @@ offset_bottom = 135.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("14_2glep")
+
+[node name="Label" type="Label" parent="Controls/GamepadLayout" unique_id=776758672]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 217.0
+offset_right = 355.0
+offset_bottom = 231.0
+text = "Press any key to close"
 
 [node name="Graphics" type="TabBar" parent="." unique_id=153179285]
 visible = false
@@ -917,8 +924,8 @@ tutorial_code = "Defensive Stance"
 [connection signal="item_selected" from="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer4/HudScaleOption" to="." method="_on_hud_scale_option_item_selected"]
 [connection signal="toggled" from="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/HSplitContainer11/Analytics" to="." method="_on_analytics_toggled"]
 [connection signal="pressed" from="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/ResetSave" to="." method="_on_reset_save_pressed"]
-[connection signal="pressed" from="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/ResetSave/ResetSaveConfirmation/Yes" to="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/ResetSave/ResetSaveConfirmation" method="_on_yes_pressed"]
-[connection signal="pressed" from="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/ResetSave/ResetSaveConfirmation/No" to="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer/ResetSave/ResetSaveConfirmation" method="_on_no_pressed"]
+[connection signal="pressed" from="Gameplay/MarginContainer/HSplitContainer/ResetSaveConfirmation/Yes" to="Gameplay/MarginContainer/HSplitContainer/ResetSaveConfirmation" method="_on_yes_pressed"]
+[connection signal="pressed" from="Gameplay/MarginContainer/HSplitContainer/ResetSaveConfirmation/No" to="Gameplay/MarginContainer/HSplitContainer/ResetSaveConfirmation" method="_on_no_pressed"]
 [connection signal="pressed" from="Controls/MarginContainer/HSplitContainer/VBoxContainer/ResetKeybindings" to="." method="_on_reset_keybindings_pressed"]
 [connection signal="pressed" from="Controls/MarginContainer/HSplitContainer/VBoxContainer2/HSplitContainer/GamepadBindings" to="." method="_on_gamepad_bindings_pressed"]
 [connection signal="toggled" from="Graphics/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]

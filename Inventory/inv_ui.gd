@@ -48,6 +48,7 @@ func open() -> void:
 			create_button(item)
 	if vbox.get_child_count() > 0:
 		vbox.get_child(0).grab_focus()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 func close() -> void:
 	visible = false
 	description_panel.visible = false
@@ -55,6 +56,7 @@ func close() -> void:
 	ui_focus.fade_out()
 	for child in vbox.get_children():
 		child.queue_free()
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 func create_button(item : InventoryItem) -> void:
 	var button : Button = button_scene.instantiate()
 	vbox.add_child(button)

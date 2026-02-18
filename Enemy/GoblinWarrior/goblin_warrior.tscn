@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://iuj1jg31a55f"]
+[gd_scene format=3 uid="uid://iuj1jg31a55f"]
 
 [ext_resource type="Script" uid="uid://ebjwqqd047wq" path="res://Enemy/GoblinWarrior/goblin_warrior.gd" id="1_nnmw3"]
 [ext_resource type="Shader" uid="uid://dgty7bsbniivw" path="res://Scripts/flash.gdshader" id="2_ec1cy"]
@@ -1210,7 +1210,7 @@ size = Vector2(84, 31.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ec1cy"]
 size = Vector2(31, 26)
 
-[node name="GoblinWarrior" type="CharacterBody2D" node_paths=PackedStringArray("main_stance") groups=["Enemy", "MapNode"]]
+[node name="GoblinWarrior" type="CharacterBody2D" unique_id=684889726 node_paths=PackedStringArray("main_stance") groups=["Enemy", "MapNode"]]
 z_index = 1
 collision_layer = 8
 collision_mask = 9
@@ -1224,309 +1224,307 @@ main_stance = NodePath("StateMachine/stance_light")
 struggle_state = "struggle_goblin"
 transition_state = "struggle_transition_goblin"
 
-[node name="Sprite2D" type="Sprite2D" parent="." groups=["Flip"]]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=528972171 groups=["Flip"]]
 material = SubResource("ShaderMaterial_xhuvx")
 position = Vector2(0, -16)
 texture = ExtResource("9_3g55t")
 hframes = 6
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1937481212]
 root_node = NodePath("../Sprite2D")
-libraries = {
-&"": SubResource("AnimationLibrary_uyvhu")
-}
+libraries/ = SubResource("AnimationLibrary_uyvhu")
 
-[node name="StateMachine" parent="." instance=ExtResource("17_n2jyc")]
+[node name="StateMachine" parent="." unique_id=1113350341 instance=ExtResource("17_n2jyc")]
 visible = false
 position = Vector2(0, 16)
 
-[node name="idle" type="Node" parent="StateMachine"]
+[node name="idle" type="Node" parent="StateMachine" unique_id=982375823]
 script = ExtResource("15_ywhtk")
 
-[node name="IdleTimer" type="Timer" parent="StateMachine/idle"]
+[node name="IdleTimer" type="Timer" parent="StateMachine/idle" unique_id=904203879]
 wait_time = 4.0
 one_shot = true
 
-[node name="patrol" type="Node" parent="StateMachine"]
+[node name="patrol" type="Node" parent="StateMachine" unique_id=1066557195]
 script = ExtResource("18_pn3ih")
 
-[node name="PatrolTimer" type="Timer" parent="StateMachine/patrol"]
+[node name="PatrolTimer" type="Timer" parent="StateMachine/patrol" unique_id=19379059]
 wait_time = 4.0
 one_shot = true
 
-[node name="triggered" type="Node" parent="StateMachine"]
+[node name="triggered" type="Node" parent="StateMachine" unique_id=454727338]
 script = ExtResource("16_vd4fl")
 
-[node name="DirectionTimer" type="Timer" parent="StateMachine/triggered"]
+[node name="DirectionTimer" type="Timer" parent="StateMachine/triggered" unique_id=321427431]
 wait_time = 2.0
 one_shot = true
 
-[node name="IgnoreTimer" type="Timer" parent="StateMachine/triggered"]
+[node name="IgnoreTimer" type="Timer" parent="StateMachine/triggered" unique_id=885472056]
 wait_time = 6.0
 one_shot = true
 
-[node name="hurt" type="Node" parent="StateMachine" groups=["CombatStance"]]
+[node name="hurt" type="Node" parent="StateMachine" unique_id=977750059 groups=["CombatStance"]]
 script = ExtResource("19_xl5vi")
 
-[node name="death" type="Node" parent="StateMachine"]
+[node name="death" type="Node" parent="StateMachine" unique_id=1282054719]
 script = ExtResource("20_4po4b")
 
-[node name="slash" type="Node2D" parent="StateMachine" groups=["CombatStance"]]
+[node name="slash" type="Node2D" parent="StateMachine" unique_id=1563164683 groups=["CombatStance"]]
 script = ExtResource("21_wgea4")
 
-[node name="SlashHitbox" parent="StateMachine/slash" groups=["Flip"] instance=ExtResource("21_oeh1l")]
+[node name="SlashHitbox" parent="StateMachine/slash" unique_id=1372978572 groups=["Flip"] instance=ExtResource("21_oeh1l")]
 collision_mask = 130
 
 [node name="Collider" parent="StateMachine/slash/SlashHitbox" index="0"]
 position = Vector2(20.045, -20)
 scale = Vector2(2, 1)
 
-[node name="stab" type="Node2D" parent="StateMachine" groups=["CombatStance"]]
+[node name="stab" type="Node2D" parent="StateMachine" unique_id=369466024 groups=["CombatStance"]]
 script = ExtResource("23_404n7")
 
-[node name="StabHitbox" parent="StateMachine/stab" groups=["Flip"] instance=ExtResource("21_oeh1l")]
+[node name="StabHitbox" parent="StateMachine/stab" unique_id=38310871 groups=["Flip"] instance=ExtResource("21_oeh1l")]
 collision_mask = 130
 
 [node name="Collider" parent="StateMachine/stab/StabHitbox" index="0"]
 position = Vector2(26.14, -24.45)
 scale = Vector2(2.632, 1.355)
 
-[node name="bash" type="Node2D" parent="StateMachine" groups=["CombatStance"]]
+[node name="bash" type="Node2D" parent="StateMachine" unique_id=438502587 groups=["CombatStance"]]
 script = ExtResource("17_ru5w7")
 
-[node name="BashHitbox" parent="StateMachine/bash" groups=["Flip"] instance=ExtResource("21_oeh1l")]
+[node name="BashHitbox" parent="StateMachine/bash" unique_id=1040558218 groups=["Flip"] instance=ExtResource("21_oeh1l")]
 collision_mask = 2
 
 [node name="Collider" parent="StateMachine/bash/BashHitbox" index="0"]
 position = Vector2(19.125, -20)
 scale = Vector2(1.905, 1)
 
-[node name="stance_heavy" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state") groups=["CombatStance"]]
+[node name="stance_heavy" type="Node" parent="StateMachine" unique_id=1061758120 node_paths=PackedStringArray("attack_state") groups=["CombatStance"]]
 script = ExtResource("22_7ej28")
 attack_state = [NodePath("../slash")]
 stance_time = 0.1
 
-[node name="stance_light" type="Node" parent="StateMachine" node_paths=PackedStringArray("transitions", "attack_state") groups=["CombatStance"]]
+[node name="stance_light" type="Node" parent="StateMachine" unique_id=468977303 node_paths=PackedStringArray("transitions", "attack_state") groups=["CombatStance"]]
 script = ExtResource("23_j8fla")
 transitions = [NodePath("../stance_heavy"), NodePath("../stance_defensive")]
-attack_state = [NodePath("../grab"), NodePath("../stab"), NodePath("../stab")]
+attack_state = [NodePath("../grab"), NodePath("../stab"), NodePath("../stab"), NodePath("../stab")]
 stance_time = 0.1
 
-[node name="stance_defensive" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state") groups=["CombatStance"]]
+[node name="stance_defensive" type="Node" parent="StateMachine" unique_id=1077963906 node_paths=PackedStringArray("attack_state") groups=["CombatStance"]]
 script = ExtResource("24_lox44")
 attack_state = [NodePath("../bash")]
 attack_time = 0.4
 
-[node name="stance_walk" type="Node" parent="StateMachine"]
+[node name="stance_walk" type="Node" parent="StateMachine" unique_id=911405815]
 script = ExtResource("30_ec1cy")
 
-[node name="grab" type="Node2D" parent="StateMachine"]
+[node name="grab" type="Node2D" parent="StateMachine" unique_id=915976426]
 script = ExtResource("15_ybwgh")
 
-[node name="GrabCollider" type="Area2D" parent="StateMachine/grab" groups=["Flip"]]
+[node name="GrabCollider" type="Area2D" parent="StateMachine/grab" unique_id=1598432995 groups=["Flip"]]
 position = Vector2(3, -26)
 collision_layer = 0
 collision_mask = 2
 
-[node name="Collider" type="CollisionShape2D" parent="StateMachine/grab/GrabCollider"]
+[node name="Collider" type="CollisionShape2D" parent="StateMachine/grab/GrabCollider" unique_id=320833930]
 position = Vector2(10.5, 1.5)
 shape = SubResource("RectangleShape2D_ybwgh")
 
-[node name="struggle_goblin" type="Node2D" parent="StateMachine"]
+[node name="struggle_goblin" type="Node2D" parent="StateMachine" unique_id=1431003761]
 script = ExtResource("16_n4d2d")
 
-[node name="StrugglePosition" type="Marker2D" parent="StateMachine/struggle_goblin"]
+[node name="StrugglePosition" type="Marker2D" parent="StateMachine/struggle_goblin" unique_id=1498750915]
 position = Vector2(23, -18)
 
-[node name="struggle_transition_goblin" type="Node" parent="StateMachine"]
+[node name="struggle_transition_goblin" type="Node" parent="StateMachine" unique_id=1891348172]
 script = ExtResource("39_n4d2d")
 
-[node name="stun" type="Node" parent="StateMachine"]
+[node name="stun" type="Node" parent="StateMachine" unique_id=1305983235]
 script = ExtResource("25_208af")
 
-[node name="chase" type="Node2D" parent="StateMachine" groups=["CombatStance"]]
+[node name="chase" type="Node2D" parent="StateMachine" unique_id=808800734 groups=["CombatStance"]]
 script = ExtResource("26_ug7pn")
 
-[node name="EmoteTimer" type="Timer" parent="StateMachine/chase"]
+[node name="EmoteTimer" type="Timer" parent="StateMachine/chase" unique_id=1959566202]
 one_shot = true
 
-[node name="sex" type="Node" parent="StateMachine"]
+[node name="sex" type="Node" parent="StateMachine" unique_id=1940471161]
 script = ExtResource("26_4po4b")
 
-[node name="laugh" type="Node" parent="StateMachine"]
+[node name="laugh" type="Node" parent="StateMachine" unique_id=1766342584]
 script = ExtResource("29_vd4fl")
 
-[node name="leave_player" type="Node" parent="StateMachine"]
+[node name="leave_player" type="Node" parent="StateMachine" unique_id=484462927]
 script = ExtResource("31_0glxa")
 
-[node name="Timer" type="Timer" parent="StateMachine/leave_player"]
+[node name="Timer" type="Timer" parent="StateMachine/leave_player" unique_id=905512005]
 wait_time = 4.0
 one_shot = true
 
-[node name="approach_player" type="Node" parent="StateMachine"]
+[node name="approach_player" type="Node" parent="StateMachine" unique_id=37164762]
 script = ExtResource("35_t74qs")
 
-[node name="chat_lead" type="Node" parent="StateMachine"]
+[node name="chat_lead" type="Node" parent="StateMachine" unique_id=1418043257]
 script = ExtResource("33_404n7")
 
-[node name="LeadTimer" type="Timer" parent="StateMachine/chat_lead"]
+[node name="LeadTimer" type="Timer" parent="StateMachine/chat_lead" unique_id=1695171392]
 wait_time = 4.0
 one_shot = true
 
-[node name="SecondaryTimer" type="Timer" parent="StateMachine/chat_lead"]
+[node name="SecondaryTimer" type="Timer" parent="StateMachine/chat_lead" unique_id=661797752]
 wait_time = 4.0
 one_shot = true
 
-[node name="chat_secondary" type="Node" parent="StateMachine"]
+[node name="chat_secondary" type="Node" parent="StateMachine" unique_id=82457310]
 
-[node name="smell" type="Node" parent="StateMachine"]
+[node name="smell" type="Node" parent="StateMachine" unique_id=346513231]
 script = ExtResource("36_cyoxu")
 
-[node name="Timer" type="Timer" parent="StateMachine/smell"]
+[node name="Timer" type="Timer" parent="StateMachine/smell" unique_id=1680644666]
 wait_time = 2.0
 one_shot = true
 
-[node name="shoved" type="Node" parent="StateMachine"]
+[node name="shoved" type="Node" parent="StateMachine" unique_id=119675646]
 script = ExtResource("39_n4d2d")
 
-[node name="Collider" type="CollisionShape2D" parent="." groups=["Flip"]]
+[node name="Collider" type="CollisionShape2D" parent="." unique_id=1392485493 groups=["Flip"]]
 visible = false
 position = Vector2(-1, -5.5)
 shape = SubResource("RectangleShape2D_cqw5a")
 
-[node name="PlayerProximity" type="Area2D" parent="."]
+[node name="PlayerProximity" type="Area2D" parent="." unique_id=1804991085]
 visible = false
 scale = Vector2(0.9, 1)
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerProximity"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerProximity" unique_id=1805843755]
 shape = SubResource("RectangleShape2D_lvv27")
 
-[node name="CombatProperties" parent="." instance=ExtResource("7_7ej0e")]
+[node name="CombatProperties" parent="." unique_id=1731478916 instance=ExtResource("7_7ej0e")]
 pushback_duration = 0.5
 
-[node name="FallCheckRight" type="RayCast2D" parent="."]
+[node name="FallCheckRight" type="RayCast2D" parent="." unique_id=1019645143]
 visible = false
 position = Vector2(0, -10)
 target_position = Vector2(9, 47)
 collision_mask = 393473
 
-[node name="FallCheckLeft" type="RayCast2D" parent="."]
+[node name="FallCheckLeft" type="RayCast2D" parent="." unique_id=1897066030]
 visible = false
 position = Vector2(0, -10)
 target_position = Vector2(-11, 47)
 collision_mask = 393473
 
-[node name="WallCheckRight" type="RayCast2D" parent="."]
+[node name="WallCheckRight" type="RayCast2D" parent="." unique_id=163739086]
 visible = false
 position = Vector2(0, 1)
 target_position = Vector2(20, 0)
 collision_mask = 393481
 
-[node name="WallCheckLeft" type="RayCast2D" parent="."]
+[node name="WallCheckLeft" type="RayCast2D" parent="." unique_id=456304068]
 visible = false
 position = Vector2(0, 1)
 target_position = Vector2(-20, 0)
 collision_mask = 393481
 
-[node name="ChaseDetector" type="Area2D" parent="." groups=["Flip"]]
+[node name="ChaseDetector" type="Area2D" parent="." unique_id=1184114195 groups=["Flip"]]
 visible = false
 position = Vector2(0, 16)
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseDetector" unique_id=2028607205]
 position = Vector2(127.999954, -16)
 scale = Vector2(10.4, 1.64)
 shape = SubResource("RectangleShape2D_qsl2l")
 
-[node name="NoiseIgnoreTimer" type="Timer" parent="."]
+[node name="NoiseIgnoreTimer" type="Timer" parent="." unique_id=1116765528]
 wait_time = 2.0
 one_shot = true
 
-[node name="EnemyHealth" parent="." instance=ExtResource("45_45d84")]
+[node name="EnemyHealth" parent="." unique_id=459904290 instance=ExtResource("45_45d84")]
 visible = false
 offset_left = -12.0
 offset_top = 17.0
 offset_right = 12.0
 offset_bottom = 20.0
 
-[node name="Emote" parent="." instance=ExtResource("30_tjqy8")]
+[node name="Emote" parent="." unique_id=1367349176 instance=ExtResource("30_tjqy8")]
 position = Vector2(2, -47)
 
-[node name="CrushCheck" type="Area2D" parent="."]
+[node name="CrushCheck" type="Area2D" parent="." unique_id=1596053372]
 visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CrushCheck"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrushCheck" unique_id=1372238744]
 position = Vector2(-1, -24)
 shape = SubResource("RectangleShape2D_wgea4")
 
-[node name="FaceMarker" type="Marker2D" parent="."]
+[node name="FaceMarker" type="Marker2D" parent="." unique_id=1534301510]
 visible = false
 position = Vector2(0, -22)
 
-[node name="AwarenessTimer" type="Timer" parent="."]
+[node name="AwarenessTimer" type="Timer" parent="." unique_id=2050428968]
 one_shot = true
 autostart = true
 
-[node name="ThreatCollider" type="Area2D" parent="."]
+[node name="ThreatCollider" type="Area2D" parent="." unique_id=263561472]
 collision_layer = 0
 collision_mask = 256
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ThreatCollider"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ThreatCollider" unique_id=719699125]
 position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_cyoxu")
 
-[node name="SpikeGroundCollider" type="Area2D" parent="."]
+[node name="SpikeGroundCollider" type="Area2D" parent="." unique_id=795574306]
 visible = false
 collision_layer = 0
 collision_mask = 262144
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SpikeGroundCollider"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpikeGroundCollider" unique_id=96564009]
 position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_btc06")
 
-[node name="SpikeWallCheck" type="Area2D" parent="." groups=["Flip"]]
+[node name="SpikeWallCheck" type="Area2D" parent="." unique_id=1302066702 groups=["Flip"]]
 visible = false
 z_index = 2
 collision_layer = 0
 collision_mask = 131072
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SpikeWallCheck"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpikeWallCheck" unique_id=56228907]
 position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_45d84")
 
-[node name="AttackDetector" type="Area2D" parent="."]
+[node name="AttackDetector" type="Area2D" parent="." unique_id=1301811353]
 visible = false
 position = Vector2(0, 16)
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDetector" unique_id=895046467]
 position = Vector2(0, -16)
 scale = Vector2(3.07, 1)
 shape = SubResource("RectangleShape2D_rha5u")
 
-[node name="EnemyProximity" type="Area2D" parent="." groups=["Flip"]]
+[node name="EnemyProximity" type="Area2D" parent="." unique_id=978027158 groups=["Flip"]]
 visible = false
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyProximity"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyProximity" unique_id=198749299]
 position = Vector2(42, -0.25)
 shape = SubResource("RectangleShape2D_u0j70")
 
-[node name="DestructableCollider" type="Area2D" parent="." groups=["Flip"]]
+[node name="DestructableCollider" type="Area2D" parent="." unique_id=1402793281 groups=["Flip"]]
 visible = false
 collision_layer = 0
 collision_mask = 128
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DestructableCollider"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DestructableCollider" unique_id=166279700]
 position = Vector2(15.5, 3)
 shape = SubResource("RectangleShape2D_ec1cy")
 
-[node name="SFXEmitter" type="FmodEventEmitter2D" parent="."]
+[node name="SFXEmitter" type="FmodEventEmitter2D" parent="." unique_id=1887196855]
 event_name = "event:/Goblin"
 event_guid = "{2c2521ce-50de-47b4-b780-a15da0ac037c}"
 fmod_parameters/EnemySound/id = 8432838190148965714

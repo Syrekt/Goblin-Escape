@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://hxoxl4bcalr3"]
+[gd_scene format=3 uid="uid://hxoxl4bcalr3"]
 
 [ext_resource type="Script" uid="uid://dtpikryi3n8ab" path="res://Scripts/lever.gd" id="1_ldvin"]
 [ext_resource type="Texture2D" uid="uid://o0lgckqd1cqs" path="res://Map/Props/spr_lever_strip5t.png" id="2_fl2ed"]
-[ext_resource type="AudioStream" uid="uid://dbtm20d8ydk48" path="res://SFX/sfx_lever1.wav" id="3_fl2ed"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b40rm"]
 atlas = ExtResource("2_fl2ed")
@@ -86,21 +85,22 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ldvin"]
 size = Vector2(13, 34)
 
-[node name="Lever" type="Area2D"]
+[node name="Lever" type="Area2D" unique_id=46850384]
 collision_layer = 64
 collision_mask = 0
 script = ExtResource("1_ldvin")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=736100705]
 sprite_frames = SubResource("SpriteFrames_vet6y")
 animation = &"closing"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=123512073]
 position = Vector2(3.5, 9)
 shape = SubResource("RectangleShape2D_ldvin")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_fl2ed")
+[node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="." unique_id=806932777]
+event_name = "event:/Lever"
+event_guid = "{06903dc1-9ce3-47d1-b48b-dc2d56e3ed10}"
 
 [connection signal="interacted" from="." to="." method="_on_interacted"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

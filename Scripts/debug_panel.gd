@@ -13,6 +13,7 @@ var scenes : Array[String] = [
 	"HeavyStancePath2",
 	"HeavyStancePath3",
 	"HeavyStancePath4",
+	"HeavyStancePathCheckpoint",
 	"DemoLastRoom",
 	"DefensiveStanceRoom",
 	"DefensiveStancePath1",
@@ -32,6 +33,7 @@ var scenes : Array[String] = [
 var map_selected := false ## We've selected map from debug panel so teleport player to spawn point in the next room
 
 @onready var camera_zoom: HSlider = $Control/NinePatchRect/MarginContainer/VBoxContainer/HSplitContainer/CameraZoom
+
 
 func _ready() -> void:
 	get_script().set_meta(&"singleton", self)
@@ -55,8 +57,10 @@ func _process(delta: float) -> void:
 		camera_zoom.value = Game.get_singleton().player.pcam.zoom.x
 		if visible:
 			get_tree().paused = true
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			get_tree().paused = false
+			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _on_hide_version_toggled(toggled_on: bool) -> void:
 	%VersionNumber.visible = !toggled_on
@@ -109,3 +113,12 @@ func _on_talo_flush_pressed() -> void:
 
 func _on_get_live_config_pressed() -> void:
 	Talo.game_config.get_live_config()
+
+
+func _on_unlock_stances_pressed() -> void:
+	var game = Game.get_singleton()
+	var kalin : Player = game.player
+	kalin.had_sword = true
+	kalin.has_sword = true
+	kalin.has_heavy_stance = true
+	kalin.has_defensive_stance = true

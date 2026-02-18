@@ -4,11 +4,10 @@ extends Node
 const SCRIPT_CONTENT = """
 extends {extend_class}
 
-func _make_custom_tooltip(_text:String) -> Control:
-	var tooltip = preload("res://UI/custom_tooltip.tscn").instantiate()
-	var label = tooltip.find_child("Label")
+func _make_custom_tooltip(_text:String) -> RichTextLabel:
+	var label = preload("res://UI/custom_tooltip.tscn").instantiate()
 	label.text = _text
-	return tooltip
+	return label
 """
 
 

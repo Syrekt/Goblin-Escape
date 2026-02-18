@@ -31,7 +31,11 @@ func physics_update(delta:float) -> void:
 		finished.emit("idle")
 		return
 
-	player.stamina.spend(0.01)
+	match Options.difficulty:
+		Options.DIFFICULTY.NORMAL:
+			player.stamina.spend(0.002)
+		Options.DIFFICULTY.BRUTAL:
+			player.stamina.spend(0.01)
 
 	progression_bar.value = move_toward(progression_bar.value, 0, 40 * delta)
 	# Make sure player is looking towards enemy

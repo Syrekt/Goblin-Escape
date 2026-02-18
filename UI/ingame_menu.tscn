@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://odampnuj1yqg"]
+[gd_scene format=3 uid="uid://odampnuj1yqg"]
 
 [ext_resource type="Script" uid="uid://br83n515qy8j2" path="res://Scripts/ingame_menu.gd" id="1_cv5li"]
 [ext_resource type="Texture2D" uid="uid://cx2kdkmk8hhg6" path="res://UI/Goblin Escape - Title.png" id="2_4kmue"]
@@ -15,11 +15,11 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qhtj3"]
 
-[node name="IngameMenu" type="CanvasLayer"]
+[node name="IngameMenu" type="CanvasLayer" unique_id=952693530]
 process_mode = 3
 script = ExtResource("1_cv5li")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1100231738]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -28,7 +28,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.5803922)
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1621353000]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,25 +42,18 @@ grow_vertical = 2
 texture = ExtResource("2_4kmue")
 expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 64
-theme_override_constants/margin_top = 34
-theme_override_constants/margin_right = 64
-theme_override_constants/margin_bottom = 34
+[node name="OptionsMenu" parent="." unique_id=1428008113 instance=ExtResource("4_aoygg")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 628.0
+offset_bottom = 348.0
 
-[node name="OptionsMenu" parent="MarginContainer" instance=ExtResource("4_aoygg")]
-layout_mode = 2
-
-[node name="Close" type="Button" parent="."]
-offset_left = 542.0
-offset_top = 60.0
-offset_right = 556.0
-offset_bottom = 74.0
+[node name="Close" type="Button" parent="." unique_id=1035537347]
+offset_left = 593.0
+offset_top = 42.0
+offset_right = 607.0
+offset_bottom = 56.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_41bdx")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_aoygg")
 theme_override_styles/hover = SubResource("StyleBoxTexture_woycq")

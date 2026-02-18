@@ -8,6 +8,11 @@ var ingame_menu_inst : IngameMenu = null
 @onready var feedback: Button = $Control/NinePatchRect/TextureRect/Feedback
 @onready var last_version: Button = $Control/NinePatchRect/TextureRect/LastVersion
 
+func _enter_tree() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+func _exit_tree() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
 func _ready() -> void:
 	Talo.game_config.get_live_config()
 	$Control/NinePatchRect/TextureRect/VBoxContainer/StartGame.grab_focus()
@@ -36,6 +41,7 @@ func _on_start_game_pressed() -> void:
 	fmod_bgm_event.volume = 1.0
 
 	queue_free()
+
 
 func _on_options_pressed() -> void:
 	ingame_menu_inst = ingame_menu.instantiate()

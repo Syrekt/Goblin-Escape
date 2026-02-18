@@ -63,12 +63,12 @@ func update(_player : Player) -> void:
 				tween.tween_property(node, "color", Color(0.25, 0.3, 0.66, 1.0), 1)
 
 		rest_menu.show()
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		#Play some VFX and reset enemies
 
 	if rest_menu.visible:
 		if Input.is_action_just_pressed("back"):
-			player.character_panel.hide()
-			rest_menu.hide()
+			_on_leave_pressed()
 
 
 #region Methods
@@ -87,6 +87,11 @@ func _on_level_up_pressed() -> void:
 	player.toggle_character_panel()
 
 func _on_leave_pressed() -> void:
-	player.character_panel.hide()
-	rest_menu.hide()
+	if player.character_panel.has_unconfirmed_changes:
+		player.lvl_close_confirmation.show()
+		player.lvl_close_confirmation.checkpoint = self
+	else:
+		player.character_panel.hide()
+		rest_menu.hide()
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 #endregion

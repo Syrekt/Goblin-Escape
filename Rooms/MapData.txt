@@ -53,7 +53,7 @@ $ln;Dungeon
 [21,-7,0]
 -1,0,1,0|||HeavyStancePath2.tscn
 [22,-7,0]
-0,1,-1,0|||HeavyStancePath2.tscn
+1,1,-1,0|||HeavyStancePath2.tscn
 [21,-5,0]
 -1,0,5,0|||HeavyStanceRoom.tscn
 [22,-5,0]
@@ -96,3 +96,5 @@ $ln;Dungeon
 -1,0,0,0|||DemoLastRoom.tscn
 [16,-5,0]
 1,0,-1,0|||DemoLastRoom.tscn
+[23,-7,0]
+0,0,1,0||0|HeavyStancePathCheckpoint.tscn

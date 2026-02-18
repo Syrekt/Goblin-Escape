@@ -85,6 +85,7 @@ var experience_required := 100
 @onready var camera : Camera2D = $Camera2D
 @onready var inventory_panel = find_child("InventoryPanel")
 @onready var character_panel = find_child("CharacterPanel")
+@onready var lvl_close_confirmation = find_child("CloseConfirmation")
 @onready var thought_container = find_child("ThoughtContainer")
 @onready var emote = $Emote
 @onready var parry_timer = $StateMachine/stance_defensive/ParryTimer
@@ -151,6 +152,7 @@ var had_sword := false ## Variable to track if player got a sword at any point
 		has_sword = value
 		if has_sword: had_sword = true
 	
+var no_interaction	:= false
 var in_combat_state := false
 var combat_target	: CharacterBody2D = null
 var buffered_state  : String
@@ -167,6 +169,8 @@ var stab_cost	: float
 var bash_cost 	: float
 
 var stun_state := "hurt_to_stun"
+
+var threat_immune := false
 #endregion
 #region Camera
 @onready var pcam_noise_emitter : PhantomCameraNoiseEmitter2D = find_child("PhantomCameraNoiseEmitter2D")
@@ -374,7 +378,7 @@ func check_movable():
 		state_node.state.finished.emit("push_idle")
 
 func check_interactable() -> void:
-	if !in_combat_state:
+	if !no_interaction:
 		var interactions = col_interaction.get_overlapping_areas()
 		if interactions.size() == 0:
 			interaction_prompt._hide()
@@ -837,11 +841,11 @@ func _ready() -> void:
 	fullscreen_panel_opened.connect(_on_fullscreen_panel_opened)
 	fullscreen_panel_closed.connect(_on_fullscreen_panel_closed)
 	Ge.player = self
-	if OS.is_debug_build():
-		had_sword = true
-		has_sword = true
-		has_heavy_stance = true
-		has_defensive_stance = true
+	#if OS.is_debug_build():
+	#	had_sword = true
+	#	has_sword = true
+	#	has_heavy_stance = true
+	#	has_defensive_stance = true
 	state_node.state_changed.connect(_on_state_machine_state_changed)
 	pcam.set_follow_offset(Vector2(0, 0))
 	#get_tree().current_scene.emit_signal("player_ready", self) #owner should be root node
@@ -1012,6 +1016,8 @@ func _physics_process(delta: float) -> void:
 #region Interactions
 	check_interactable()
 #endregion
+	if $ThreatCollider.monitoring && $ThreatCollider.has_overlapping_bodies():
+		_on_threat_collider_body_entered(null)
 #endregion
 #region Process
 func _process(delta: float) -> void:
@@ -1026,7 +1032,6 @@ func _process(delta: float) -> void:
 	#endregion
 	#region Movement and Interaction prompt
 	# Movement and control checks change interaction_prompt.supress value
-	var no_interaction = state_node.state.is_in_group("no_interaction")
 	interaction_prompt.supress = false
 	controls_disabled = check_controls_disabled()
 	movement_disabled = check_movement_disabled()
@@ -1095,6 +1100,8 @@ func _on_leave_shadow() -> void:
 	create_tween().bind_node(self).tween_property(%Sprite2D.material, "shader_parameter/tint_color", current_tint, 0.2)
 	create_tween().bind_node(self).tween_property(vignette.material, "shader_parameter/color", Color(0, 0, 0, 0), 0.2)
 func _on_threat_collider_body_entered(body:Node2D) -> void:
+	if threat_immune: return
+
 	if power_crush:
 		power_crush = false
 		print("Power crush disabled by threat")
@@ -1102,6 +1109,9 @@ func _on_threat_collider_body_entered(body:Node2D) -> void:
 	velocity.x = 0
 	move_speed = 0
 	think(["I should move carefully.", "I should move slow."].pick_random())
+
+	threat_immune = true
+	$ThreatImmunityTimer.start()
 func _on_smell_collider_body_entered(body: Node2D) -> void:
 	if !hiding && body is Enemy:
 		body.smell(self)
@@ -1135,6 +1145,8 @@ func _on_state_machine_state_changed(state:State) -> void:
 	if !pcam: return
 	if controls_disabled: return
 	in_combat_state = state.is_in_group("combat_state")
+	no_interaction = state.is_in_group("no_interaction")
+	print("no_interaction: "+str(no_interaction))
 
 	if state.name == "death":
 		combat_target = null
@@ -1163,14 +1175,12 @@ func _on_resurrection() -> void:
 		if !persistent_values.get("post_met_graktu"):
 			persistent_values.set("post_met_graktu", true)
 			Ge.one_shot_dialogue("This is the end of this version, thanks for playing! Feel free to share your thoughts on our Discord server and don't forget to wishlist the game!")
+func _on_threat_immunity_timer_timeout() -> void:
+	threat_immune = false
 #endregion
 func _unhandled_key_input(event: InputEvent) -> void:
 	if OS.is_debug_build() && event.is_pressed():
 		match event.keycode:
-			KEY_U:
-				toggle_character_panel()
-			KEY_O:
-				experience.add(9999)
 			KEY_V:
 				var items = inventory_panel.inventory.items
 				for item in items:
@@ -1180,3 +1190,5 @@ func _unhandled_key_input(event: InputEvent) -> void:
 					Engine.time_scale = 2.0
 				else:
 					Engine.time_scale = 1.0
+
+
