@@ -378,7 +378,7 @@ animations = [{
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bs037"]
 shader = ExtResource("34_wxg5w")
 shader_parameter/outline_color = Color(1, 1, 1, 0)
-shader_parameter/width = 1.5
+shader_parameter/width = 1.50000007125
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
@@ -5290,7 +5290,6 @@ event_name = "event:/PagePickup"
 event_guid = "{f3d5c71b-4f19-4164-97e9-a62d815e7c7f}"
 
 [node name="StateMachine" parent="." unique_id=740905076 groups=["Flip"] instance=ExtResource("9_ojhio")]
-visible = false
 z_index = 2
 position = Vector2(-4, 34)
 

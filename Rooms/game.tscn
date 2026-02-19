@@ -38,6 +38,7 @@ script = ExtResource("1_dthpw")
 
 [node name="LoadingScreen" parent="." unique_id=1398843392 instance=ExtResource("2_1cwbi")]
 unique_name_in_owner = true
+process_mode = 3
 visible = false
 script = ExtResource("3_aks28")
 
@@ -47,6 +48,7 @@ visible = false
 
 [node name="ScreenFade" parent="." unique_id=1534588036 instance=ExtResource("5_qrhvm")]
 unique_name_in_owner = true
+process_mode = 3
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=758135839]
 color = Color(0.6340837, 0.5231031, 0.999996, 1)

@@ -151,6 +151,7 @@ var had_sword := false ## Variable to track if player got a sword at any point
 			get_tree().current_scene.add_child.call_deferred(tutorial)
 		has_sword = value
 		if has_sword: had_sword = true
+		if value: Talo.events.track("Got sword")
 	
 var no_interaction	:= false
 var in_combat_state := false
@@ -672,6 +673,7 @@ func ignore_platforms() -> void:
 	set_collision_mask_value(14, true)
 func unlock_skill(_name: String) -> void:
 	print("Unlocked skill: %s" % _name)
+	Talo.events.track("Skill unlocked: " + _name)
 	set(_name, true)
 	match _name:
 		"has_heavy_stance":

@@ -78,7 +78,7 @@ flat = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../Options")
 focus_neighbor_bottom = NodePath("../../BugReport")
-text = "Exit"
+text = "Save & Quit"
 flat = true
 
 [node name="BugReport" type="TextureButton" parent="Control/NinePatchRect/TextureRect" unique_id=1956335021]

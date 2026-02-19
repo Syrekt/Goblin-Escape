@@ -6,9 +6,10 @@ var enemy_ignore_list := [] # Used for bash
 @onready var footstep_emitter : FmodEventEmitter2D = $"../bash/Footsteps"
 
 func enter(previous_state_path: String, data := {}) -> void:
-	_enter()
 	if previous_state_path == "run": # Override the animation set in _enter()
 		player.call_deferred("update_animation", "bash_running")
+	else:
+		_enter()
 
 	bash_sfx.set_parameter("AttackResult", "Miss")
 	bash_sfx.play()
@@ -46,7 +47,6 @@ func _on_hitbox_body_entered(defender: Node2D) -> void:
 			defender.combat_properties.stun(2.0)
 			bash_sfx.set_parameter("AttackResult", "HitOrganic")
 		elif !defender_state == "stance_defensive":
-			print("Deal damage in bash_no_sword")
 			defender.take_damage(10, player)
 			Ge.slow_mo(0, 0.05)
 			bash_sfx.set_parameter("AttackResult", "HitOrganic")

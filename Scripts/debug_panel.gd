@@ -122,3 +122,9 @@ func _on_unlock_stances_pressed() -> void:
 	kalin.has_sword = true
 	kalin.has_heavy_stance = true
 	kalin.has_defensive_stance = true
+
+
+func _on_remove_fatigue_pressed() -> void:
+	var game = Game.get_singleton()
+	var kalin : Player = game.player
+	kalin.fatigue.value = 0

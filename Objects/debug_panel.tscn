@@ -75,6 +75,11 @@ text = "Heal Kalin
 "
 alignment = 0
 
+[node name="Remove Fatigue" type="Button" parent="Control/NinePatchRect/MarginContainer/VBoxContainer" unique_id=1209498978]
+layout_mode = 2
+text = "Remove Fatigue"
+alignment = 0
+
 [node name="GiveExp" type="Button" parent="Control/NinePatchRect/MarginContainer/VBoxContainer" unique_id=1908042839]
 layout_mode = 2
 text = "Give Exp"
@@ -125,6 +130,7 @@ value = 1.0
 [connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/Talo Flush" to="." method="_on_talo_flush_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/DealDamage" to="." method="_on_deal_damage_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/HealKalin" to="." method="_on_heal_kalin_pressed"]
+[connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/Remove Fatigue" to="." method="_on_remove_fatigue_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/GiveExp" to="." method="_on_give_exp_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/UnlockStances" to="." method="_on_unlock_stances_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/MarginContainer/VBoxContainer/GetLiveConfig" to="." method="_on_get_live_config_pressed"]

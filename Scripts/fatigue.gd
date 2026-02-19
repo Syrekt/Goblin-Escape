@@ -1,6 +1,8 @@
 extends TextureProgressBar
 
 func _process(delta: float) -> void:
+	if Options.difficulty == Options.DIFFICULTY.EASY: return
+
 	if !owner.status_effect_container.has_status_effect("Resilience"):
 		value += 0.00001
 

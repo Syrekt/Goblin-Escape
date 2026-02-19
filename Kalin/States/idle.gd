@@ -17,7 +17,7 @@ func update(_delta: float) -> void:
 
 	if player.pressed("down"):
 		finished.emit("crouch")
-	elif player.pressed("jump"):
+	elif player.just_pressed("jump"):
 		finished.emit("rise")
 	elif player.pressed("attack") && player.stamina.spend(1.0):
 		finished.emit("bash_no_sword")

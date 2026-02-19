@@ -16,7 +16,7 @@ var max_cell := Vector2i.MIN
 var layer: int
 
 @export var spawn_point : Node2D
-@export_enum("Hostile:0", "Safe:1", "Silent:2") var area : int = 0
+@export_enum("Hostile:0", "Safe:1", "Silent:2") var area : int = 0 ## Used for FMOD and start menu
 
 signal previews_updated
 

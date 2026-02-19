@@ -10,16 +10,10 @@ var can_quit_via_escape := false
 @onready var feedback: Button = $Control/NinePatchRect/TextureRect/Feedback
 @onready var last_version: Button = $Control/NinePatchRect/TextureRect/LastVersion
 
-func _enter_tree() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	if !Ge.game_start:
-		get_tree().paused = true
-		var player = Game.get_singleton().player
-		if player: player._on_fullscreen_panel_opened()
-
 func _exit_tree() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	if !Ge.game_start:
+	var area = MetSys.get_current_room_instance().area
+	if area != 1:
 		get_tree().paused = false
 		var player = Game.get_singleton().player
 		if player: player._on_fullscreen_panel_closed()
@@ -32,12 +26,25 @@ func _ready() -> void:
 	if Options.update_available:
 		last_version.text = "Update Available!"
 	else:
-		last_version.text = "Patreon"
+		last_version.text = Options.update_site_name
+
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+	if Ge.game_start:
+		await Signals.room_ready
+	var area = MetSys.get_current_room_instance().area
+	print("start menu area: "+str(area))
+	if area != 1:
+		get_tree().paused = true
+		var player = Game.get_singleton().player
+		if player: player._on_fullscreen_panel_opened()
+
 	return
 	if OS.is_debug_build():
 		queue_free()
 
 func _process(delta: float) -> void:
+	last_version.text = Options.update_site_name
 	if Input.is_action_just_pressed("ui_cancel") && can_quit_via_escape:
 		_on_start_game_pressed()
 
@@ -80,6 +87,7 @@ func _on_discord_pressed() -> void:
 
 
 func _on_exit_pressed() -> void:
+	Game.get_singleton().save_game()
 	get_tree().quit()
 
 

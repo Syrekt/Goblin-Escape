@@ -114,8 +114,8 @@ func _ready() -> void:
 	world_refreshed.connect(_on_world_refreshed)
 
 
-	if !OS.is_debug_build():
-		load_game()
+	#if !OS.is_debug_build():
+	load_game()
 
 	FmodServer.set_global_parameter_by_name("Health", 1.0)
 
@@ -198,6 +198,7 @@ func load_game():
 			if not loaded_starting_map.is_empty(): # Some compatibility problem.
 				room = loaded_starting_map
 		await load_room(room)
+		Signals.room_ready.emit()
 		FmodServer.set_global_parameter_by_name("Area", MetSys.get_current_room_instance().area)
 
 
@@ -259,3 +260,7 @@ func get_data_in_room(_name:String) -> Variant:
 	var data = room.get(_name)
 	if !data: return null
 	return data
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		save_game()
