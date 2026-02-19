@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://2vutcocsttbq" path="res://UI/Start Menu/spr_bug_report_highlight.png" id="17_xq6qs"]
 
 [node name="StartMenu" type="CanvasLayer" unique_id=1000575202 groups=["FullscreenPanel"]]
+process_mode = 3
 script = ExtResource("1_wd76h")
 
 [node name="Control" type="Control" parent="." unique_id=2061020895]
@@ -172,6 +173,12 @@ texture_hover = ExtResource("13_skmd2")
 texture_disabled = ExtResource("11_df8u1")
 texture_focused = ExtResource("13_skmd2")
 
+[node name="BlockEscapeTimer" type="Timer" parent="." unique_id=780451369]
+wait_time = 0.1
+one_shot = true
+autostart = true
+ignore_time_scale = true
+
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
@@ -181,3 +188,4 @@ texture_focused = ExtResource("13_skmd2")
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/Steam" to="." method="_on_steam_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/Itch" to="." method="_on_itch_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TextureRect/Discord" to="." method="_on_discord_pressed"]
+[connection signal="timeout" from="BlockEscapeTimer" to="." method="_on_block_escape_timer_timeout"]

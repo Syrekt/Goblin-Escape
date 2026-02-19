@@ -5,6 +5,7 @@ const SaveManager = preload("res://addons/MetroidvaniaSystem/Template/Scripts/Sa
 const SAVE_PATH = "user://save1.ge"
 
 @onready var bgm_event : FmodEventEmitter2D = $FModBGMEvent
+@onready var notification: CanvasLayer = $Notification
 
 
 enum map_list {
@@ -124,6 +125,8 @@ func _process(delta: float) -> void:
 		if spawn_point: player.position = spawn_point.position
 	$CanvasModulate.color.r = 0.63 + 0.10 * Options.shadow_intensity
 	$CanvasModulate.color.g = 0.52 + 0.15 * Options.shadow_intensity
+	if OS.is_debug_build():
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 	#if OS.is_debug_build():
 	#	if Input.is_action_just_pressed("debug1"):

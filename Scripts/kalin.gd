@@ -440,6 +440,15 @@ func emit_noise(offset:Vector2, amount := 0.0) -> void:
 	# Muffle
 	var noise_muffle := 0.0
 
+	var difficulty = Options.difficulty
+	match difficulty:
+		Options.DIFFICULTY.EASY:
+			noise_muffle = 50.0
+		Options.DIFFICULTY.NORMAL:
+			noise_muffle = 20.0
+		Options.DIFFICULTY.BRUTAL:
+			pass
+
 	# Noise
 	if amount == 0.0:
 		match state_node.state.name:
@@ -1146,7 +1155,6 @@ func _on_state_machine_state_changed(state:State) -> void:
 	if controls_disabled: return
 	in_combat_state = state.is_in_group("combat_state")
 	no_interaction = state.is_in_group("no_interaction")
-	print("no_interaction: "+str(no_interaction))
 
 	if state.name == "death":
 		combat_target = null

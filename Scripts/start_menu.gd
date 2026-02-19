@@ -4,14 +4,27 @@ class_name StartMenu extends CanvasLayer
 var ingame_menu = preload("res://UI/ingame_menu.tscn")
 var ingame_menu_inst : IngameMenu = null
 
+var can_quit_via_escape := false
+
 @onready var fmod_bgm_event: FmodEventEmitter2D = $"../FModBGMEvent"
 @onready var feedback: Button = $Control/NinePatchRect/TextureRect/Feedback
 @onready var last_version: Button = $Control/NinePatchRect/TextureRect/LastVersion
 
 func _enter_tree() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if !Ge.game_start:
+		get_tree().paused = true
+		var player = Game.get_singleton().player
+		if player: player._on_fullscreen_panel_opened()
+
 func _exit_tree() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	if !Ge.game_start:
+		get_tree().paused = false
+		var player = Game.get_singleton().player
+		if player: player._on_fullscreen_panel_closed()
+	Ge.game_start = false
+
 
 func _ready() -> void:
 	Talo.game_config.get_live_config()
@@ -23,6 +36,10 @@ func _ready() -> void:
 	return
 	if OS.is_debug_build():
 		queue_free()
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_cancel") && can_quit_via_escape:
+		_on_start_game_pressed()
 
 func _on_start_game_pressed() -> void:
 	var player : Player = Game.get_singleton().player
@@ -84,3 +101,7 @@ func _on_feedback_pressed() -> void:
 
 func _on_bug_report_pressed() -> void:
 	OS.shell_open("https://forms.gle/GMYr4ZYZbhsCgzFe8")
+
+
+func _on_block_escape_timer_timeout() -> void:
+	can_quit_via_escape = true

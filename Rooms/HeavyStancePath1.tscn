@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://hxoxl4bcalr3" path="res://Map/Props/lever.tscn" id="9_iwd73"]
 [ext_resource type="PackedScene" uid="uid://bnf3rd1nfdher" path="res://Map/Props/iron_bars.tscn" id="10_ilr5h"]
 [ext_resource type="PackedScene" uid="uid://syjuc866so8k" path="res://Map/Props/torch.tscn" id="11_iwd73"]
-[ext_resource type="PackedScene" uid="uid://iuj1jg31a55f" path="res://Enemy/GoblinWarrior/goblin_warrior.tscn" id="12_7jvia"]
 [ext_resource type="PackedScene" uid="uid://cqa1nagpe2ny6" path="res://Inventory/Pickup Objects/pickup_bandage.tscn" id="13_uos01"]
 [ext_resource type="PackedScene" uid="uid://h6kdgfq4tnxx" path="res://Objects/hint.tscn" id="14_yu071"]
 
@@ -131,17 +130,6 @@ position = Vector2(448, 608)
 [node name="Torch6" parent="." unique_id=1972466160 instance=ExtResource("11_iwd73")]
 position = Vector2(736, 608)
 
-[node name="GoblinWarrior" parent="." unique_id=1297607522 node_paths=PackedStringArray("patrol_points") instance=ExtResource("12_7jvia")]
-position = Vector2(912, 1120)
-patrol_points = [NodePath("Marker2D"), NodePath("Marker2D2")]
-facing = 1
-
-[node name="Marker2D" type="Marker2D" parent="GoblinWarrior" unique_id=1173542336]
-position = Vector2(-160, 0)
-
-[node name="Marker2D2" type="Marker2D" parent="GoblinWarrior" unique_id=1167033496]
-position = Vector2(144, 0)
-
 [node name="Crate3" parent="." unique_id=707313779 instance=ExtResource("6_7j2q2")]
 position = Vector2(1056, 664)
 
@@ -159,5 +147,15 @@ drop_random_loot = true
 position = Vector2(1072, 953)
 
 [node name="Hint" parent="." unique_id=1906346399 instance=ExtResource("14_yu071")]
-position = Vector2(639, 941)
-text = "You can drop objects to kill enemies."
+position = Vector2(640, 1024)
+text = "You can push statues on top of enemies to kill them."
+
+[node name="Goblin3" parent="." unique_id=579828376 node_paths=PackedStringArray("patrol_points") instance=ExtResource("4_l0afd")]
+position = Vector2(912, 1120)
+patrol_points = [NodePath("Marker2D"), NodePath("Marker2D2")]
+
+[node name="Marker2D" type="Marker2D" parent="Goblin3" unique_id=1173542336]
+position = Vector2(-160, 0)
+
+[node name="Marker2D2" type="Marker2D" parent="Goblin3" unique_id=1167033496]
+position = Vector2(144, 0)

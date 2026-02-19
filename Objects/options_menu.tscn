@@ -232,6 +232,7 @@ focus_neighbor_top = NodePath("../../HSplitContainer3/ShowInteractionPrompts")
 focus_neighbor_bottom = NodePath("../../HSplitContainer4/HudScaleOption")
 
 [node name="HSplitContainer4" type="HSplitContainer" parent="Gameplay/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" unique_id=624337982]
+visible = false
 layout_mode = 2
 dragging_enabled = false
 

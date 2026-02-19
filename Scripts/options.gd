@@ -21,15 +21,19 @@ var collect_analytics		:= true
 var master_volume := 0.5:
 	set(value):
 		FmodServer.set_global_parameter_by_name("MASTER_VOLUME", value)
+		master_volume = value
 var bgm_volume := 1.0:
 	set(value):
 		FmodServer.set_global_parameter_by_name("BGM_VOLUME", value)
+		bgm_volume = value
 var amb_volume := 1.0:
 	set(value):
 		FmodServer.set_global_parameter_by_name("AMB_VOLUME", value)
+		amb_volume = value
 var sfx_volume := 1.0:
 	set(value):
 		FmodServer.set_global_parameter_by_name("SFX_VOLUME", value)
+		sfx_volume = value
 var screenshake_enabled := true
 var disable_low_health_effects_on_sex := false
 
@@ -88,6 +92,7 @@ func _process(delta: float) -> void:
 		current_screen = screen
 		notification(NOTIFICATION_WM_SIZE_CHANGED)
 		save_options()
+
 
 
 
@@ -170,7 +175,7 @@ func load_options() -> int:
 		print("window_screen: "+str(window_screen))
 		#endregion
 		#region Load Audio
-		master_volume	= config.get_value("audio", "Master", 1.0)
+		master_volume	= config.get_value("audio", "Master", 0.5)
 		bgm_volume		= config.get_value("audio", "BGM", 1.0)
 		amb_volume 		= config.get_value("audio", "AMB", 1.0)
 		sfx_volume 		= config.get_value("audio", "SFX", 1.0)

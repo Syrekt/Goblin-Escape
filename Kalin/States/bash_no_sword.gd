@@ -46,7 +46,8 @@ func _on_hitbox_body_entered(defender: Node2D) -> void:
 			defender.combat_properties.stun(2.0)
 			bash_sfx.set_parameter("AttackResult", "HitOrganic")
 		elif !defender_state == "stance_defensive":
-			defender.take_damage(1, player)
+			print("Deal damage in bash_no_sword")
+			defender.take_damage(10, player)
 			Ge.slow_mo(0, 0.05)
 			bash_sfx.set_parameter("AttackResult", "HitOrganic")
 		else:

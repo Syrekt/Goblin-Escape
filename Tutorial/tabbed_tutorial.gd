@@ -51,6 +51,8 @@ func _ready() -> void:
 	var button = $TutorialContinuePrompt/NinePatchRect/MarginContainer/VBoxContainer/Button
 	button.pressed.connect(_on_button_pressed)
 
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 
 
 func _process(delta: float) -> void:
@@ -65,6 +67,9 @@ func _process(delta: float) -> void:
 	if finished:
 		if Input.is_action_just_pressed("stance"): _on_button_pressed()
 		if !from_options_menu && Input.is_action_just_pressed("ui_cancel"): _on_button_pressed()
+
+	get_tree().root.set_input_as_handled()
+	
 
 func show_controls() -> void:
 	button_control.visible = true
@@ -91,3 +96,5 @@ func _on_button_pressed() -> void:
 
 func _exit_tree() -> void:
 	Game.get_singleton().persistent_values.set("Tutorial-" + code, true)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	Ge.notify("[color=red]" + code + "[/color] tutorial added to [color=red]Options[/color] menu.")

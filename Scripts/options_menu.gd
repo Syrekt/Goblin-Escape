@@ -67,7 +67,8 @@ func _ready() -> void:
 	print("options menu ready")
 	current_tab = 0
 	get_tree().paused = true
-	$Graphics.grab_focus()
+	current_tab = 0
+	$Gameplay.grab_focus()
 	var screen_size : Vector2 = DisplayServer.window_get_size()
 	match screen_size:
 		Vector2(640, 360):
@@ -153,7 +154,6 @@ func _input(event: InputEvent) -> void:
 
 func _exit_tree() -> void:
 	Options.save_options()
-	get_tree().paused = false
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_SIZE_CHANGED:

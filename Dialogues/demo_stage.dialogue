@@ -80,6 +80,14 @@ Kalin: Seems like this dungeon isn't abandoned after all. Though I didn't expect
 do Ge.set_camera_focus()
 Kalin: I don't have a sword yet so I should be careful.
 do Ge.reset_camera_focus()
+This part of the game introduces player to the stealth mechanics. Stealth is optional, you can play the game without depending on stealth mechanics.
+Would you like to skip stealth tutorial and get the sword?
+- Yes
+	do Ge.skip_stealth_tutorial()
+	Now that you have the sword, there is nothing more to do in this route so you can go back and discover other parts of the map.
+	Make sure to check combat tutorial from options menu.
+- No
+	Different difficulty options changes how stealth works. If it gets too hard, you can always lower the difficulty from [color=red]options[/color].
 => END
 
 ~ enemy_patrol

@@ -36,15 +36,12 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 	match Options.difficulty:
 		Options.DIFFICULTY.EASY:
-			print("Easy difficulty")
 			stance_time = 1.5
 			attack_time = 0.6
 		Options.DIFFICULTY.NORMAL:
-			print("Normal difficulty")
 			stance_time = 1.0
 			attack_time = 0.4
 		Options.DIFFICULTY.BRUTAL:
-			print("Brutal difficulty")
 			stance_time = 0.5
 			attack_time = 0.2
 

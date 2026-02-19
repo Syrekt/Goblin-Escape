@@ -11,6 +11,7 @@ var grab_key	: String
 var run_key		: String
 
 var loading := false
+var game_start := true ## First time opening start menu, don't pause the game
 
 var camera_focus : Node2D
 
@@ -300,5 +301,16 @@ func fmod_play_event_at(event_name:String,transform:Transform2D) -> void:
 	event.attached = true
 	event.set_2d_attributes(transform)
 	event.start()
-
+func skip_stealth_tutorial() -> void:
+	player.had_sword = true
+	player.has_sword = true
+	Game.get_singleton().persistent_values.set("Tutorial-Combat", true)
+func notify(text:String) -> void:
+	var _notification = Game.get_singleton().notification
+	_notification.label.text = text
+	_notification.timer.start()
+	#var balloon = preload("res://Objects/balloon.tscn").instantiate()
+	#get_tree().current_scene.add_child(balloon)
+	#var dialogue_resource = DialogueManager.create_resource_from_text("~ title\n" + "New tutorial added in options menu.")
+	#balloon.start(dialogue_resource, "title")
 #endregion

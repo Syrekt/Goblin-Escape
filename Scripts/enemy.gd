@@ -198,10 +198,9 @@ func update_animation(anim: String, speed := 1.0, from_end := false) -> void:
 		animation_player.play(anim, -1, speed, from_end)
 		animation_player.advance(0)
 func hear_noise(noise: Node2D) -> void:
-	var difficulty = Options.difficulty
-	print("difficulty: "+str(difficulty))
+	#var difficulty = Options.difficulty
 
-	if Options.difficulty == Options.DIFFICULTY.EASY: return
+	#if Options.difficulty == Options.DIFFICULTY.EASY: return
 
 	if !noise.loud:
 		var ray = RayCast2D.new()
