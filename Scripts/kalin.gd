@@ -1200,5 +1200,3 @@ func _unhandled_key_input(event: InputEvent) -> void:
 					Engine.time_scale = 2.0
 				else:
 					Engine.time_scale = 1.0
-
-

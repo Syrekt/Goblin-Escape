@@ -17,6 +17,7 @@ var combat_assist			:= false
 enum DIFFICULTY {EASY, NORMAL, BRUTAL}
 var difficulty				:= DIFFICULTY.NORMAL
 var collect_analytics		:= true
+var found_analytics_option_save_data := false
 
 var master_volume := 0.5:
 	set(value):
@@ -200,6 +201,8 @@ func load_options() -> int:
 		disable_low_health_effects_on_sex	= config.get_value("gameplay", "disable_low_health_effects_on_sex", 1.0)
 		combat_assist						= config.get_value("gameplay", "combat_assist", false)
 		difficulty							= config.get_value("gameplay", "difficulty", DIFFICULTY.NORMAL)
+		if config.has_section_key("gameplay", "collect_analytics"):
+			found_analytics_option_save_data = true
 		collect_analytics					= config.get_value("gameplay", "collect_analytics", collect_analytics)
 		#endregion
 		#region Keybindings

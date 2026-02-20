@@ -13,9 +13,32 @@ texture = ExtResource("3_qm5hq")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_431p2"]
 texture = ExtResource("2_cfsd7")
+texture_margin_left = 8.0
+texture_margin_right = 8.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ovyjt"]
 texture = ExtResource("4_5f78n")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cfsd7"]
+texture = ExtResource("3_qm5hq")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qm5hq"]
+texture = ExtResource("2_cfsd7")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5f78n"]
+texture = ExtResource("4_5f78n")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lmlv6"]
 
@@ -28,6 +51,9 @@ Button/styles/focus = SubResource("StyleBoxTexture_8wpuh")
 Button/styles/hover = SubResource("StyleBoxTexture_daddk")
 Button/styles/normal = SubResource("StyleBoxTexture_431p2")
 Button/styles/pressed = SubResource("StyleBoxTexture_ovyjt")
+CheckBox/styles/hover = SubResource("StyleBoxTexture_cfsd7")
+CheckBox/styles/normal = SubResource("StyleBoxTexture_qm5hq")
+CheckBox/styles/pressed = SubResource("StyleBoxTexture_5f78n")
 ItemList/fonts/font = ExtResource("1_21byg")
 ItemList/styles/panel = SubResource("StyleBoxEmpty_lmlv6")
 Label/font_sizes/font_size = 16

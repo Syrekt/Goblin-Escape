@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://fui8a0jf4ltq"]
+
+[ext_resource type="Theme" uid="uid://cvwjahm5f0aft" path="res://UI/main_theme.tres" id="1_2n474"]
+[ext_resource type="Texture2D" uid="uid://fyevcw0t8yc" path="res://UI/panel_bg.png" id="2_b8bwh"]
+
+[sub_resource type="GDScript" id="GDScript_qrhvm"]
+script/source = "extends CanvasLayer
+
+
+@onready var analytics_checkbox: CheckBox = $NinePatchRect/AnalyticsCheckbox
+@onready var button: Button = $NinePatchRect/Button
+
+func _ready() -> void:
+	if Options.found_analytics_option_save_data:
+		queue_free()
+	else:
+		analytics_checkbox.set_pressed_no_signal(Options.collect_analytics)	
+
+func _on_analytics_checkbox_toggled(toggled_on: bool) -> void:
+	Options.collect_analytics = toggled_on
+
+
+func _on_button_pressed() -> void:
+	queue_free()
+"
+
+[node name="AnalyticsWarning" type="CanvasLayer" unique_id=1197170499]
+visible = false
+script = SubResource("GDScript_qrhvm")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1457062690]
+offset_left = 224.0
+offset_top = 109.0
+offset_right = 410.0
+offset_bottom = 253.0
+theme = ExtResource("1_2n474")
+texture = ExtResource("2_b8bwh")
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Label" type="Label" parent="NinePatchRect" unique_id=882203941]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 176.0
+offset_bottom = 62.0
+text = "This game collects anonymous analytics data used to improve the game."
+autowrap_mode = 3
+
+[node name="AnalyticsCheckbox" type="CheckBox" parent="NinePatchRect" unique_id=1190192646]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 77.0
+offset_right = 177.0
+offset_bottom = 101.0
+text = "Allow anonymous analytics data"
+
+[node name="Button" type="Button" parent="NinePatchRect" unique_id=711317091]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 111.0
+offset_right = 117.0
+offset_bottom = 133.0
+text = "Confirm"
+
+[connection signal="toggled" from="NinePatchRect/AnalyticsCheckbox" to="." method="_on_analytics_checkbox_toggled"]
+[connection signal="pressed" from="NinePatchRect/Button" to="." method="_on_button_pressed"]
