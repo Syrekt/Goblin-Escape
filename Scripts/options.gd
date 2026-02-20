@@ -12,7 +12,7 @@ var current_screen			:= 0
 var hud_scale				:= 2
 var shadow_intensity		:= 1.0
 var adult_content_enabled	:= true
-var adult_build				:= false#OS.has_feature("nsfw") || OS.is_debug_build()
+var adult_build				:= OS.has_feature("nsfw") || OS.is_debug_build()
 var combat_assist			:= false
 enum DIFFICULTY {EASY, NORMAL, BRUTAL}
 var difficulty				:= DIFFICULTY.NORMAL

@@ -5290,6 +5290,7 @@ event_name = "event:/PagePickup"
 event_guid = "{f3d5c71b-4f19-4164-97e9-a62d815e7c7f}"
 
 [node name="StateMachine" parent="." unique_id=740905076 groups=["Flip"] instance=ExtResource("9_ojhio")]
+visible = false
 z_index = 2
 position = Vector2(-4, 34)
 
